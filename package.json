@@ -9,7 +9,7 @@
     "lint": "next lint",
     "tsc": "tsc",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
     "next": "13.0.5",

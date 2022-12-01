@@ -6,7 +6,6 @@ on:
   push:
     branches:
       - main
-      - develop
 
   workflow_dispatch:
 
@@ -17,9 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     # Job steps
     steps:
-      - uses: actions/checkout@v1
-        
+      - name: Checkout current commit (${{ github.sha }})
+        uses: actions/checkout@v1
+
+      - name: Build Storybook
+        run : yarn build-storybook
+
       - uses: chromaui/action@v1
         with:
           projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}
           token: ${{ secrets.GITHUB_TOKEN }}
+          storybookBuildDir: storybook-static

@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  pull_request:
+    branches:
+      - develop
+      - main
+  workflow_dispatch:
+
+jobs:
+  job-install:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout current commit (${{ github.sha }})
+        uses: actions/checkout@v3
+
+      - name: Run Lint
+        run: yarn lint
+
+      - name: Run Type Check
+        run: yarn tsc

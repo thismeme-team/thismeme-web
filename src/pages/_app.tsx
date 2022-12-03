@@ -1,13 +1,30 @@
 import "@/styles/globals.css";
 
 import type { AppProps } from "next/app";
+import type { ComponentProps } from "react";
+import { Suspense } from "react";
+
+import QueryClientProvider from "@/application/queryClient";
+import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../../mocks");
 }
 
-function MyApp({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+interface PageProps {
+  hydrateState: ComponentProps<typeof QueryClientProvider>["hydrateState"];
 }
 
-export default MyApp;
+function App({ Component, pageProps }: AppProps<PageProps>) {
+  return (
+    <QueryClientProvider hydrateState={pageProps.hydrateState}>
+      <QueryErrorBoundary>
+        <Suspense fallback={<>hello</>}>
+          <Component {...pageProps} />
+        </Suspense>
+      </QueryErrorBoundary>
+    </QueryClientProvider>
+  );
+}
+
+export default App;

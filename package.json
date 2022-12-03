@@ -12,9 +12,12 @@
     "build-storybook": "build-storybook -s public"
   },
   "dependencies": {
+    "@tanstack/react-query": "^4.19.1",
+    "axios": "^1.2.0",
     "next": "13.0.5",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-error-boundary": "^3.1.4"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
@@ -30,7 +33,7 @@
     "@storybook/testing-library": "^0.0.13",
     "@svgr/webpack": "^6.5.1",
     "@tanstack/eslint-plugin-query": "^4.15.1",
-    "@tanstack/react-query-devtools": "^4.18.0",
+    "@tanstack/react-query-devtools": "^4.19.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",

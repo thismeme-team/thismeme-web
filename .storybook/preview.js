@@ -1,6 +1,12 @@
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
+import { initialize, mswDecorator } from "msw-storybook-addon";
+import "@/styles/globals.css";
+import { handlers } from "../mocks/handlers";
 
-export const decorators = [(Story) => <Story />];
+// Initialize MSW
+initialize();
+
+export const decorators = [mswDecorator, (Story) => <Story />];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -14,4 +20,9 @@ export const parameters = {
     viewports: INITIAL_VIEWPORTS,
   },
   layout: "fullscreen",
+  msw: {
+    handlers: {
+      handlers,
+    },
+  },
 };

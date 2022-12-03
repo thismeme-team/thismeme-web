@@ -16,19 +16,31 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
   };
   return (
     <div>
-      <div className="border bg-green-200 p-4">tailwindcss 테스트입니다.</div>
-      <div className="bg-sky-700 px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3">
-        tailwindcss 테스트입니다.
-      </div>
       <button onClick={handleLogin}>Login(Click Me)</button>
+      <div className="text-header">tailwindcss 테스트입니다.</div>
+      <div className="text-title">tailwindcss 테스트입니다.</div>
+      <div className="text-tag">tailwindcss 테스트입니다.</div>
+      <div className="text-regular">tailwindcss 테스트입니다.</div>
+      <div className="text-semi-bold">tailwindcss 테스트입니다.</div>
+      <div className="text-label">tailwindcss 테스트입니다.</div>
+      <div className="text-sm">tailwindcss 테스트입니다.</div>
+
+      <div className="flex gap-2">
+        <div className="h-10 w-10 bg-light-gray-10"></div>
+        <div className="h-10 w-10 bg-light-gray-20"></div>
+        <div className="h-10 w-10 bg-light-gray-30"></div>
+        <div className="h-10 w-10 bg-gray-10"></div>
+        <div className="h-10 w-10 bg-gray-20"></div>
+        <div className="h-10 w-10 bg-dark-gray-10"></div>
+        <div className="h-10 w-10 bg-dark-gray-20"></div>
+        <div className="h-10 w-10 bg-black"></div>
+        <div className="h-10 w-10 bg-brand"></div>
+        <div className="h-10 w-10 bg-bookmark"></div>
+      </div>
       {posts && (
         <ul className="flex flex-col gap-4">
           {posts.map((post) => (
             <PostItem key={post.id} post={post} />
-            // <li key={post.id}>
-            //   <h1 className="font-bold">{post.title}</h1>
-            //   <p>{post.body}</p>
-            // </li>
           ))}
         </ul>
       )}

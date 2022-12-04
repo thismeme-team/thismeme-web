@@ -9,10 +9,9 @@ module.exports = {
   // Type check TypeScript files
   "**/*.ts?(x)": () => "yarn tsc",
 
-  // Lint TS and JS files
+  // Lint ts,tsx,js,jsx files
   "*.{js,jsx,ts,tsx}": [buildEslintCommand],
 
   // Prettier ts,tsx,js,jsx,md,json files
-  // Prettify only Markdown and JSON files
   "*.{ts,tsx,js,jsx,md,json}": "prettier --write",
 };

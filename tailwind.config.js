@@ -1,9 +1,12 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 /** @type {import('tailwindcss').Config} */
+const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
+
 module.exports = {
   content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      spacing: PX0_300,
       colors: {
         "light-gray-10": "#f6f6f6",
         "light-gray-20": "#eeeeee",

@@ -9,7 +9,8 @@
     "lint": "next lint",
     "tsc": "tsc",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "postinstall": "husky install"
   },
   "dependencies": {
     "@tanstack/react-query": "^4.19.1",

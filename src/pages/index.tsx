@@ -1,6 +1,7 @@
 import type { Post } from "mocks/types";
 import type { NextPage } from "next";
 
+import Navigation from "@/components/common/Navigation";
 import { PostItem } from "@/components/common/PostList/PostItem";
 
 type HomeProps = {
@@ -15,7 +16,9 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
       .then((user) => alert(`성공 !\n${user.nickname}, ${user.email}`));
   };
   return (
-    <div>
+    <Navigation page={"intro"}>
+      test test
+      <span>test</span>
       <button onClick={handleLogin}>Login(Click Me)</button>
       <div className="text-header">tailwindcss 테스트입니다.</div>
       <div className="text-title">tailwindcss 테스트입니다.</div>
@@ -24,7 +27,6 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
       <div className="text-semi-bold">tailwindcss 테스트입니다.</div>
       <div className="text-label">tailwindcss 테스트입니다.</div>
       <div className="text-sm">tailwindcss 테스트입니다.</div>
-
       <div className="flex gap-2">
         <div className="h-10 w-10 bg-light-gray-10"></div>
         <div className="h-10 w-10 bg-light-gray-20"></div>
@@ -44,7 +46,7 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
           ))}
         </ul>
       )}
-    </div>
+    </Navigation>
   );
 };
 

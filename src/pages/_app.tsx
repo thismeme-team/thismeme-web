@@ -4,9 +4,9 @@ import type { AppProps } from "next/app";
 import type { ComponentProps } from "react";
 import { Suspense } from "react";
 
-import ContextProvider from "@/application/context";
 import QueryClientProvider from "@/application/queryClient";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
+import Layout from "@/components/common/Layout";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../../mocks");
@@ -20,11 +20,11 @@ function App({ Component, pageProps }: AppProps<PageProps>) {
   return (
     <QueryClientProvider hydrateState={pageProps.hydrateState}>
       <QueryErrorBoundary>
-        <ContextProvider>
+        <Layout>
           <Suspense fallback={<>hello</>}>
             <Component {...pageProps} />
           </Suspense>
-        </ContextProvider>
+        </Layout>
       </QueryErrorBoundary>
     </QueryClientProvider>
   );

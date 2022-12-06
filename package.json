@@ -9,9 +9,11 @@
     "lint": "next lint",
     "tsc": "tsc",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "build-storybook": "build-storybook -s public",
+    "postinstall": "husky install"
   },
   "dependencies": {
+    "@next/font": "13.0.5",
     "@tanstack/react-query": "^4.19.1",
     "axios": "^1.2.0",
     "next": "13.0.5",

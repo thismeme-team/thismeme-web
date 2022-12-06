@@ -6,7 +6,7 @@
     "es2021": true
   },
   "parser": "@typescript-eslint/parser",
-  "parserOptions":  {
+  "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     },
@@ -23,11 +23,7 @@
     "plugin:import/typescript",
     "plugin:prettier/recommended"
   ],
-  "plugins": [
-    "simple-import-sort",
-    "@tanstack/query",
-    "prettier"
-  ],
+  "plugins": ["simple-import-sort", "@tanstack/query"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]
@@ -41,7 +37,8 @@
   "rules": {
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": [
-      "error", {
+      "error",
+      {
         "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
       }
     ],

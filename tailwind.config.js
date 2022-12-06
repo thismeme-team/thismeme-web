@@ -1,9 +1,14 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const defaultTheme = require("tailwindcss/defaultTheme");
+const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
+
 module.exports = {
   content: ["./src/pages/**/*.{js,ts,jsx,tsx}", "./src/components/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      spacing: PX0_300,
       colors: {
         "light-gray-10": "#f6f6f6",
         "light-gray-20": "#eeeeee",
@@ -17,53 +22,56 @@ module.exports = {
       },
       fontSize: {
         header: [
-          "18px",
+          "1.8rem",
           {
-            lineHeight: "18px",
+            lineHeight: "1.8rem",
             letterSpacing: "0em",
             fontWeight: "700",
           },
         ],
         title: [
-          "20px",
+          "2rem",
           {
-            lineHeight: "20px",
+            lineHeight: "2rem",
             letterSpacing: "0em",
             fontWeight: "700",
           },
         ],
         tag: [
-          "15px",
+          "1.5rem",
           {
-            lineHeight: "15px",
+            lineHeight: "1.5rem",
             letterSpacing: "0em",
             fontWeight: "600",
           },
         ],
         regular: [
-          "16px",
+          "1.6rem",
           {
-            lineHeight: "16px",
+            lineHeight: "1.6rem",
             letterSpacing: "0em",
             fontWeight: "400",
           },
         ],
         "semi-bold": [
-          "16px",
+          "1.6rem",
           {
-            lineHeight: "16px",
+            lineHeight: "1.6rem",
             letterSpacing: "0em",
             fontWeight: "600",
           },
         ],
         label: [
-          "12px",
+          "1.2rem",
           {
-            lineHeight: "12px",
+            lineHeight: "1.2rem",
             letterSpacing: "0em",
             fontWeight: "600",
           },
         ],
+      },
+      fontFamily: {
+        sans: ["var(--font-pretendardVariable)", ...defaultTheme.fontFamily.sans],
       },
     },
   },

@@ -1,5 +1,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 /** @type {import('tailwindcss').Config} */
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const defaultTheme = require("tailwindcss/defaultTheme");
 const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
 
 module.exports = {
@@ -67,6 +69,9 @@ module.exports = {
             fontWeight: "600",
           },
         ],
+      },
+      fontFamily: {
+        sans: ["var(--font-pretendardVariable)", ...defaultTheme.fontFamily.sans],
       },
     },
   },

@@ -1957,6 +1957,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@next/font@npm:13.0.5":
+  version: 13.0.5
+  resolution: "@next/font@npm:13.0.5"
+  checksum: 12304ac4a52be437f02a472a00e2183fc4dd49ca9b4583a2abde5249686c246346348d47231e74258659ccf54c8bca349811aec0d894c3e8824592316e78740c
+  languageName: node
+  linkType: hard
+
 "@next/swc-android-arm-eabi@npm:13.0.5":
   version: 13.0.5
   resolution: "@next/swc-android-arm-eabi@npm:13.0.5"
@@ -16615,6 +16622,7 @@ __metadata:
   resolution: "yapp-21st@workspace:."
   dependencies:
     "@babel/core": ^7.20.5
+    "@next/font": 13.0.5
     "@storybook/addon-actions": ^6.5.13
     "@storybook/addon-essentials": ^6.5.13
     "@storybook/addon-interactions": ^6.5.13

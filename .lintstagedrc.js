@@ -13,5 +13,5 @@ module.exports = {
   "*.{js,jsx,ts,tsx}": [buildEslintCommand],
 
   // Prettier ts,tsx,js,jsx,md,json files
-  "*.{ts,tsx,js,jsx,md,json}": "prettier --write",
+  "*.{md,json}": "prettier --write",
 };

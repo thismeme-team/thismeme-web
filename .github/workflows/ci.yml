@@ -8,8 +8,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  job-install:
-    name: Install dependencies
+  job-integrtions:
+    name: Integrtions
     runs-on: ubuntu-latest
 
     steps:

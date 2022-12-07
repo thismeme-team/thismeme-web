@@ -44,4 +44,6 @@ yarn-error.log*
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
-!.yarn/unplugged
+
+# storybook build artifacts
+/storybook-static

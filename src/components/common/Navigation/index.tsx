@@ -54,10 +54,10 @@ function Navigation({
   return (
     <nav className="sticky top-0 flex min-h-[5rem] w-full items-center justify-between gap-16 bg-white">
       <div className="flex grow items-center gap-16">{left}</div>
-      <span className="text-space absolute flex h-full w-full items-center justify-center text-regular">
+      <span className="absolute flex h-full w-full items-center justify-center text-header">
         {title}
       </span>
-      <div className="text flex w-fit items-center justify-center gap-8">{right}</div>
+      <div className="flex w-fit items-center justify-center gap-8">{right}</div>
     </nav>
   );
 }

@@ -16,7 +16,10 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
       .then((user) => alert(`성공 !\n${user.nickname}, ${user.email}`));
   };
   return (
-    <Navigation page={"intro"}>
+    <div>
+      <Navigation page="intro" />
+      <Navigation page="search" />
+      <Navigation page="result" />
       test test
       <span>test</span>
       <button onClick={handleLogin}>Login(Click Me)</button>
@@ -46,7 +49,7 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
           ))}
         </ul>
       )}
-    </Navigation>
+    </div>
   );
 };
 

@@ -9,7 +9,7 @@
     "lint": "next lint",
     "tsc": "tsc --noEmit",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook -s public",
+    "build-storybook": "build-storybook",
     "postinstall": "husky install"
   },
   "dependencies": {

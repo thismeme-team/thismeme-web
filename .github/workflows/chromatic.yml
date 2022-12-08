@@ -1,17 +1,19 @@
 # Workflow name
-name: 'Chromatic Deployment'
+name: "Chromatic Deployment"
 
 # Event for the workflow
 on:
   push:
     branches:
       - main
+      - develop
 
   workflow_dispatch:
 
 # List of jobs
 jobs:
-  test:
+  job-chromatic-build:
+    name: "Chromatic Build"
     # Operating System
     runs-on: ubuntu-latest
     # Job steps
@@ -19,8 +21,11 @@ jobs:
       - name: Checkout current commit (${{ github.sha }})
         uses: actions/checkout@v1
 
+      - name: Install Dependencies
+        run: yarn install --immutable --immutable-cache
+
       - name: Build Storybook
-        run : yarn build-storybook
+        run: yarn build-storybook
 
       - uses: chromaui/action@v1
         with:

@@ -1,4 +1,5 @@
 import "@/styles/globals.css";
+import "@/components/common/Chip/Chip.css";
 
 import type { AppProps } from "next/app";
 import type { ComponentProps } from "react";

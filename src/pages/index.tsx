@@ -1,13 +1,13 @@
 import type { Post } from "mocks/types";
 import type { NextPage } from "next";
 
+import { Chip } from "@/components/common/Chip";
 import Navigation from "@/components/common/Navigation";
 import { PostItem } from "@/components/common/PostList/PostItem";
 
 type HomeProps = {
   posts: Post[];
 };
-
 const Home: NextPage<HomeProps> = ({ posts }) => {
   const handleLogin = () => {
     // Client-side request are mocked by `mocks/browser.ts`.
@@ -17,6 +17,14 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
   };
   return (
     <div>
+      <Chip
+        label="무한도전"
+        type="recent"
+        size="medium"
+        onClick={() => {
+          console.log(2);
+        }}
+      />
       <Navigation page="intro" />
       <Navigation page="search" />
       <Navigation page="result" />

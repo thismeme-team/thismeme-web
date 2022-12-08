@@ -42,6 +42,12 @@
         "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
       }
     ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
 
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/naming-convention": [

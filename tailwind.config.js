@@ -40,7 +40,7 @@ module.exports = {
         tag: [
           "1.5rem",
           {
-            lineHeight: "1.5rem",
+            lineHeight: "1.8rem",
             letterSpacing: "0em",
             fontWeight: "600",
           },
@@ -64,7 +64,7 @@ module.exports = {
         label: [
           "1.2rem",
           {
-            lineHeight: "1.2rem",
+            lineHeight: "1.4rem",
             letterSpacing: "0em",
             fontWeight: "600",
           },

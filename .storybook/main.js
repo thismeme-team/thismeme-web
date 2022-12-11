@@ -33,6 +33,9 @@ module.exports = {
       test: /\.svg$/,
       enforce: "pre",
       loader: require.resolve("@svgr/webpack"),
+      options: {
+        svgo: false,
+      },
     });
 
     config.resolve.alias["@"] = path.resolve(__dirname, "../src/");

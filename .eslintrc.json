@@ -63,6 +63,12 @@
     ],
 
     "import/no-duplicates": "error",
+    "import/namespace": [
+      "error",
+      {
+        "allowComputed": true
+      }
+    ],
 
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"

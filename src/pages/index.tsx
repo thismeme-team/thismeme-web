@@ -1,9 +1,10 @@
 import type { Post } from "mocks/types";
 import type { NextPage } from "next";
 
-import { Chip } from "@/components/common/Chip";
+import Chip from "@/components/common/Chip";
 import Navigation from "@/components/common/Navigation";
 import { PostItem } from "@/components/common/PostList/PostItem";
+import SearchInput from "@/components/search/SearchInput";
 
 type HomeProps = {
   posts: Post[];
@@ -17,19 +18,12 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
   };
   return (
     <div>
-      <Chip
-        label="무한도전"
-        type="recent"
-        size="medium"
-        onClick={() => {
-          console.log(2);
-        }}
-      />
       <Navigation page="intro" />
       <Navigation page="search" />
       <Navigation page="result" />
       test test
       <span>test</span>
+      <SearchInput placeholder="ex) 네비게이션 검색바 테스트" />
       <button onClick={handleLogin}>Login(Click Me)</button>
       <div className="text-header">tailwindcss 테스트입니다.</div>
       <div className="text-title">tailwindcss 테스트입니다.</div>
@@ -57,6 +51,14 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
           ))}
         </ul>
       )}
+      <Chip
+        label="무한도전"
+        type="recent"
+        size="medium"
+        onClick={() => {
+          console.log(2);
+        }}
+      />
     </div>
   );
 };

@@ -9,7 +9,7 @@ import Profile from "/public/icon/mockProfile.svg";
 interface Props {
   page: "intro" | "search" | "result";
   left?: ReactNode;
-  title?: string;
+  title?: ReactNode | string;
   right?: ReactNode;
 }
 
@@ -29,12 +29,8 @@ const NAVIGATION_PROPS: { [key in Props["page"]]: Omit<Props, "page"> } = {
     right: <Delete />,
   },
   result: {
-    left: (
-      <>
-        <Back />
-        <div className={"w-full"}>search...</div>
-      </>
-    ),
+    left: <Back />,
+    title: "검색어 들어갈 곳",
     right: (
       <>
         <Profile />

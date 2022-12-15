@@ -56,7 +56,7 @@ module.exports = {
         "semi-bold": [
           "1.6rem",
           {
-            lineHeight: "1.6rem",
+            lineHeight: "1.9rem",
             letterSpacing: "0em",
             fontWeight: "600",
           },

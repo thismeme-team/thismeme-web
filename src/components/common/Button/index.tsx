@@ -12,8 +12,8 @@ import Icon from "@/components/common/Icon";
  */
 
 const style = {
-  large: "rounded-[1rem] py-11 px-15 text-semi-bold",
-  medium: "rounded-[0.5rem] py-8 px-13 text-tag",
+  large: "rounded-10 py-11 px-15 text-semi-bold",
+  medium: "rounded-5 py-8 px-13 text-tag",
   default: "",
 };
 

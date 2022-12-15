@@ -3,6 +3,7 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require("tailwindcss/defaultTheme");
 const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
+const PX0_50 = { ...Array.from(Array(51)).map((_, i) => `${i / 10}rem`) };
 
 module.exports = {
   content: [
@@ -13,11 +14,7 @@ module.exports = {
   theme: {
     extend: {
       spacing: PX0_300,
-      borderRadius: {
-        12: "1.2rem",
-        16: "1.6rem",
-        22: "2.2rem", //TODO: 일정한 디자인으로 추후 변경되어야 할 듯
-      },
+      borderRadius: PX0_50,
       colors: {
         "light-gray-10": "#f6f6f6",
         "light-gray-20": "#eeeeee",

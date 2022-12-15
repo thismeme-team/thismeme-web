@@ -11,16 +11,8 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => (
   <>
     <Button {...args} />
-    <Button
-      size="default"
-      icon="kakao"
-      className="h-[4.6rem] w-[4.6rem] rounded-[2rem] bg-amber-300"
-    />
-    <Button
-      size="default"
-      icon="download"
-      className="h-[4.6rem] w-[4.6rem] rounded-[2rem] bg-gray-100"
-    />
+    <Button size="default" icon="kakao" className="h-46 w-46 rounded-20 bg-amber-300" />
+    <Button size="default" icon="download" className="h-46 w-46 rounded-20 bg-gray-100" />
     <Button size="medium" className="border border-black">
       팔로우
     </Button>

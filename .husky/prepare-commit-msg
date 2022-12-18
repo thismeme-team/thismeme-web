@@ -14,5 +14,5 @@ if [ $? -ne 0 ]; then
 fi
 # issue key matched from branch prefix, prepend to commit message
 TEMP=`mktemp /tmp/commitmsg-XXXXX`
-(echo "$(cat  $1) [$ISSUE_KEY]") > $TEMP
+(echo "[$ISSUE_KEY] $(cat  $1)") > $TEMP
 cat $TEMP > $1

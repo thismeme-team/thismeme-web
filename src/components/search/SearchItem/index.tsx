@@ -10,7 +10,7 @@ interface SearchItemProps extends HTMLAttributes<HTMLDivElement> {
   majorType?: string;
 }
 
-export default function SearchItem({ searchText, tagName, majorType, ...rest }: SearchItemProps) {
+export function SearchItem({ searchText, tagName, majorType, ...rest }: SearchItemProps) {
   //FIX: 현재는 문자열 처리 로직을 간단하게 두었지만 확장성으로 고려하면 바뀔 수 있음
   const { ColoredText } = useColoredText({ tagName, searchText });
 

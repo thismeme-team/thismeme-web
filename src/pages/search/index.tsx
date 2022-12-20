@@ -1,7 +1,7 @@
 import useInput from "@/application/hooks/common/useInput";
 import Navigation from "@/components/common/Navigation";
-import SearchInput from "@/components/search/SearchInput";
-import SearchItem from "@/components/search/SearchItem";
+import { SearchInput } from "@/components/search/SearchInput";
+import { SearchItem } from "@/components/search/SearchItem";
 
 function SearchPage() {
   const inputProps = useInput();

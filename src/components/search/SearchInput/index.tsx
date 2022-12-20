@@ -7,7 +7,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onReset?: () => void;
 }
 
-function SearchInput({ onReset, ...rest }: Props) {
+export function SearchInput({ onReset, ...rest }: Props) {
   return (
     <div className="relative flex items-center justify-start">
       <InputBase
@@ -23,5 +23,3 @@ function SearchInput({ onReset, ...rest }: Props) {
     </div>
   );
 }
-
-export default SearchInput;

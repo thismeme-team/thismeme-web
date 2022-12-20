@@ -4,6 +4,7 @@ import type { NextPage } from "next";
 import Chip from "@/components/common/Chip";
 import Navigation from "@/components/common/Navigation";
 import { PostItem } from "@/components/common/PostList/PostItem";
+import SideBar from "@/components/common/SideBar";
 import SearchInput from "@/components/search/SearchInput";
 
 type HomeProps = {
@@ -21,8 +22,9 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
       <Navigation page="intro" />
       <Navigation page="search" />
       <Navigation page="result" />
-      test test
-      <span>test</span>
+
+      <SideBar />
+
       <SearchInput placeholder="ex) 네비게이션 검색바 테스트" />
       <button onClick={handleLogin}>Login(Click Me)</button>
       <div className="text-header">tailwindcss 테스트입니다.</div>

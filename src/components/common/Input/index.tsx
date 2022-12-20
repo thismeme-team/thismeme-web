@@ -6,7 +6,10 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 }
 
 //FIX : forwardRef 적용(추후에 autofocus 등을 위해 ref 사용 고려) , 나중에 Form 추가 고려
-const InputBase = forwardRef(function InputBase(props: Props, ref: ForwardedRef<HTMLInputElement>) {
+export const InputBase = forwardRef(function InputBase(
+  props: Props,
+  ref: ForwardedRef<HTMLInputElement>,
+) {
   const { endComponents, ...rest } = props;
 
   return (
@@ -16,5 +19,3 @@ const InputBase = forwardRef(function InputBase(props: Props, ref: ForwardedRef<
     </>
   );
 });
-
-export default InputBase;

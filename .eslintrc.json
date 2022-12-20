@@ -94,16 +94,6 @@
         "selector": "typeAlias"
       }
     ],
-    "@typescript-eslint/member-ordering": [
-      "error",
-      {
-        "default": {
-          "memberTypes": ["signature", "constructor", "field", "method"],
-          "order": "natural"
-        }
-      }
-    ],
-    "@typescript-eslint/method-signature-style": ["warn", "method"],
     "@typescript-eslint/no-empty-function": "warn",
     "import/no-duplicates": "error",
     "import/namespace": [
@@ -118,7 +108,7 @@
   "overrides": [
     {
       "files": ["*.tsx", "*.ts"],
-      "excludedFiles": ["*.stories.tsx", "src/pages/**/*.tsx"],
+      "excludedFiles": ["*.stories.tsx", "*.d.ts", "src/pages/**/*.tsx"],
       "rules": {
         "import/no-default-export": "error"
       }

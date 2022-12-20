@@ -1,7 +1,7 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 
-const useInput = () => {
+export const useInput = () => {
   const [value, setValue] = useState<string>("");
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -14,5 +14,3 @@ const useInput = () => {
 
   return { value, onChange, onReset };
 };
-
-export default useInput;

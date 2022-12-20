@@ -1,9 +1,9 @@
-import useInput from "@/application/hooks/common/useInput";
-import Navigation from "@/components/common/Navigation";
-import SearchInput from "@/components/search/SearchInput";
-import SearchItem from "@/components/search/SearchItem";
+import { useInput } from "@/application/hooks/common/useInput";
+import { Navigation } from "@/components/common/Navigation";
+import { SearchInput } from "@/components/search/SearchInput";
+import { SearchItem } from "@/components/search/SearchItem";
 
-function SearchPage() {
+const SearchPage = () => {
   const inputProps = useInput();
 
   return (
@@ -16,11 +16,11 @@ function SearchPage() {
         type="text"
         onReset={inputProps.onReset}
       />
-      <SearchItem searchText={inputProps.value} tagName="무한도전" majorType="예능별" />
-      <SearchItem searchText={inputProps.value} tagName="무한" majorType="예능별" />
+      <SearchItem majorType="예능별" searchText={inputProps.value} tagName="무한도전" />
+      <SearchItem majorType="예능별" searchText={inputProps.value} tagName="무한" />
       <SearchItem searchText={inputProps.value} tagName="무한한도도전전" />
     </>
   );
-}
+};
 
 export default SearchPage;

@@ -1,1 +1,1 @@
-export { default as QueryErrorBoundary } from "./QueryErrorBoundary";
+export * from "./QueryErrorBoundary";

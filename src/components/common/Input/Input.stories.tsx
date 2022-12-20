@@ -1,6 +1,6 @@
 import type { ComponentMeta } from "@storybook/react";
 
-import Input from ".";
+import { InputBase as Input } from ".";
 
 export default {
   title: "components/common/Input",

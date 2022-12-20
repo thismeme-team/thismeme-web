@@ -19,8 +19,9 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:storybook/recommended",
     "plugin:import/recommended",
-    "plugin:@tanstack/eslint-plugin-query/recommended",
+    "plugin:@tanstack/query/recommended",
     "plugin:import/typescript",
+    "plugin:jsx-a11y/recommended",
     "plugin:prettier/recommended"
   ],
   "plugins": ["simple-import-sort", "@tanstack/query"],
@@ -35,11 +36,35 @@
     }
   },
   "rules": {
+    "eqeqeq": [
+      "error",
+      "always",
+      {
+        "null": "ignore"
+      }
+    ],
+
     "react-hooks/rules-of-hooks": "error",
-    "react-hooks/exhaustive-deps": [
+    "react-hooks/exhaustive-deps": "error",
+    "react/function-component-definition": [
       "error",
       {
-        "additionalHooks": "(useRecoilCallback|useRecoilTransaction_UNSTABLE)"
+        "namedComponents": "arrow-function"
+      }
+    ],
+    "react/jsx-curly-brace-presence": [
+      "error",
+      {
+        "props": "never",
+        "children": "never"
+      }
+    ],
+    "react/jsx-sort-props": [
+      "error",
+      {
+        "callbacksLast": true,
+        "multiline": "last",
+        "shorthandFirst": true
       }
     ],
     "prettier/prettier": [
@@ -48,7 +73,6 @@
         "endOfLine": "auto"
       }
     ],
-
     "@typescript-eslint/consistent-type-imports": "error",
     "@typescript-eslint/naming-convention": [
       "error",
@@ -57,11 +81,20 @@
         "selector": "variable",
         "leadingUnderscore": "allow"
       },
-      { "format": ["camelCase", "PascalCase"], "selector": "function" },
-      { "format": ["PascalCase"], "selector": "interface" },
-      { "format": ["PascalCase"], "selector": "typeAlias" }
+      {
+        "format": ["camelCase", "PascalCase"],
+        "selector": "function"
+      },
+      {
+        "format": ["PascalCase"],
+        "selector": "interface"
+      },
+      {
+        "format": ["PascalCase"],
+        "selector": "typeAlias"
+      }
     ],
-
+    "@typescript-eslint/no-empty-function": "warn",
     "import/no-duplicates": "error",
     "import/namespace": [
       "error",
@@ -69,8 +102,16 @@
         "allowComputed": true
       }
     ],
-
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["*.tsx", "*.ts"],
+      "excludedFiles": ["*.stories.tsx", "*.d.ts", "src/pages/**/*.tsx"],
+      "rules": {
+        "import/no-default-export": "error"
+      }
+    }
+  ]
 }

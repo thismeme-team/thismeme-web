@@ -2,18 +2,18 @@ import { QueryErrorResetBoundary } from "@tanstack/react-query";
 import type { PropsWithChildren } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-const QueryErrorBoundary = ({ children }: PropsWithChildren) => {
+export const QueryErrorBoundary = ({ children }: PropsWithChildren) => {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
         <ErrorBoundary
-          onReset={reset}
           fallbackRender={({ resetErrorBoundary }) => (
             <div>
               There was an error!
               <button onClick={() => resetErrorBoundary()}>Try again</button>
             </div>
           )}
+          onReset={reset}
         >
           {children}
         </ErrorBoundary>
@@ -21,5 +21,3 @@ const QueryErrorBoundary = ({ children }: PropsWithChildren) => {
     </QueryErrorResetBoundary>
   );
 };
-
-export default QueryErrorBoundary;

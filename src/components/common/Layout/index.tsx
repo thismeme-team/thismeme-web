@@ -6,7 +6,7 @@ const myFont = localFont({
   variable: "--font-pretendardVariable",
 });
 
-const Layout = ({ children }: PropsWithChildren) => {
+export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div
       className={`${myFont.variable} flex h-screen w-screen justify-center bg-gray-100 font-sans`}
@@ -17,5 +17,3 @@ const Layout = ({ children }: PropsWithChildren) => {
     </div>
   );
 };
-
-export default Layout;

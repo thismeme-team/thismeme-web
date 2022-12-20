@@ -16,10 +16,8 @@ interface Props extends SVGProps<SVGSVGElement> {
   name: IconName;
   color?: keyof typeof colors;
 }
-const Icon = ({ name, color = "default", ...rest }: Props) => {
+export const Icon = ({ name, color = "default", ...rest }: Props) => {
   const Svg = Icons[name] as FC<SVGProps<SVGSVGElement>>;
 
   return <Svg className={colors[color]} {...rest} />;
 };
-
-export default Icon;

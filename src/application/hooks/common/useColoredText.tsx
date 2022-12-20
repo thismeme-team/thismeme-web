@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 
-import useValidation from "./useValidation";
+import { useValidation } from "./useValidation";
 
 interface Props {
   tagName: string;

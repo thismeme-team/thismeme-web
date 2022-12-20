@@ -1,10 +1,10 @@
 import type { Post } from "mocks/types";
 import type { NextPage } from "next";
 
-import Chip from "@/components/common/Chip";
-import Navigation from "@/components/common/Navigation";
+import { Chip } from "@/components/common/Chip";
+import { Navigation } from "@/components/common/Navigation";
 import { PostItem } from "@/components/common/PostList/PostItem";
-import SearchInput from "@/components/search/SearchInput";
+import { SearchInput } from "@/components/search";
 
 type HomeProps = {
   posts: Post[];
@@ -53,8 +53,8 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
       )}
       <Chip
         label="무한도전"
-        type="recent"
         size="medium"
+        type="recent"
         onClick={() => {
           console.log(2);
         }}

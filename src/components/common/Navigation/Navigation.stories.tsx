@@ -1,7 +1,7 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 
-import Navigation from ".";
+import { Navigation } from ".";
 
 export default {
   title: "components/common/Layout/Navigation",

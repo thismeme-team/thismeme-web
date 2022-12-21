@@ -10,3 +10,4 @@ export { default as menu } from "/public/icon/menu.svg";
 export { default as profile } from "/public/icon/profile.svg";
 export { default as search } from "/public/icon/search.svg";
 export { default as share } from "/public/icon/share.svg";
+export { default as warn } from "/public/icon/warn.svg";

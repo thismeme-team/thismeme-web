@@ -41,7 +41,7 @@ module.exports = {
         title: [
           "2rem",
           {
-            lineHeight: "2rem",
+            lineHeight: "2.4rem",
             letterSpacing: "0em",
             fontWeight: "700",
           },
@@ -57,7 +57,7 @@ module.exports = {
         regular: [
           "1.6rem",
           {
-            lineHeight: "1.6rem",
+            lineHeight: "1.9rem",
             letterSpacing: "0em",
             fontWeight: "400",
           },
@@ -73,9 +73,9 @@ module.exports = {
         label: [
           "1.2rem",
           {
-            lineHeight: "1.4rem", //TODO: label tag lineheight 디자인 체크
+            lineHeight: "1.4rem",
             letterSpacing: "0em",
-            fontWeight: "600",
+            fontWeight: "400",
           },
         ],
       },

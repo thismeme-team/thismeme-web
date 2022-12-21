@@ -3,11 +3,11 @@ import * as Accordion from "@radix-ui/react-accordion";
 import type { Ref } from "react";
 import { forwardRef } from "react";
 
-import Icon from "../Icon";
+import { Icon } from "../Icon";
 
 export const SideBar = () => {
   return (
-    <Accordion.Root className="w-full min-w-300" type="single" collapsible>
+    <Accordion.Root collapsible className="w-full min-w-300" type="single">
       <Accordion.Item className="bg-white" value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
@@ -61,10 +61,10 @@ const AccordionTrigger = forwardRef(
         <div className="h-24 w-24 rounded-full bg-light-gray-30"></div>
         <span className="flex-grow text-left">{children}</span>
         <Icon
-          name="chevronDown"
-          id="chevronDown"
-          className="transition-transform duration-300 ease-[cubic-bezier(0.87,0,0.13,1)]"
           aria-hidden
+          className="transition-transform duration-300 ease-[cubic-bezier(0.87,0,0.13,1)]"
+          id="chevronDown"
+          name="chevronDown"
         />
       </Accordion.Trigger>
     </Accordion.Header>

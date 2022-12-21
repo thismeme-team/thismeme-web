@@ -1,7 +1,7 @@
 export { default as back } from "/public/icon/back.svg";
 export { default as cancel } from "/public/icon/cancel.svg";
+export { default as chevronDown } from "/public/icon/chevronDown.svg";
 export { default as delete } from "/public/icon/delete.svg";
-export { default as downIcon } from "/public/icon/downIcon.svg";
 export { default as download } from "/public/icon/download.svg";
 export { default as kakao } from "/public/icon/kakao.svg";
 export { default as logo } from "/public/icon/logo.svg";

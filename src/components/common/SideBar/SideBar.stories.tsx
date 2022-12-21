@@ -1,6 +1,6 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import SideBar from ".";
+import { SideBar } from ".";
 
 export default {
   title: "components/common/SideBar",

@@ -15,6 +15,9 @@ module.exports = {
     extend: {
       spacing: PX0_300,
       borderRadius: PX0_50,
+      minWidth: PX0_300,
+      maxWidth: PX0_300,
+      minHeight: PX0_300,
       colors: {
         "light-gray-10": "#f6f6f6",
         "light-gray-20": "#eeeeee",
@@ -88,6 +91,10 @@ module.exports = {
           "0%": { height: "var(--radix-accordion-content-height)" },
           "100%": { height: 0 },
         },
+      },
+      animation: {
+        "slide-down": "slideDown 300ms cubic-bezier(0.87,0,0.13,1)",
+        "slide-up": "slideUp 300ms cubic-bezier(0.87,0,0.13,1)",
       },
     },
   },

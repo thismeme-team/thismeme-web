@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 
 import type { IconName } from "@/components/common/Icon";
-import Icon from "@/components/common/Icon";
+import { Icon } from "@/components/common/Icon";
 
 /**
  * FIX tailwind classname 우선순위 문제
@@ -18,19 +18,19 @@ const style = {
 };
 
 type Props<T extends ElementType> = {
+  as?: T;
   icon?: IconName;
   size: keyof typeof style;
-  as?: T;
 } & ComponentPropsWithoutRef<T>;
 
-function Button<T extends ElementType = "button">({
+export const Button = <T extends ElementType = "button">({
   as,
   children,
   icon,
   size,
   className,
   ...rest
-}: Props<T>) {
+}: Props<T>) => {
   const ButtonRoot = as || "button";
 
   return (
@@ -42,6 +42,4 @@ function Button<T extends ElementType = "button">({
       {children}
     </ButtonRoot>
   );
-}
-
-export default Button;
+};

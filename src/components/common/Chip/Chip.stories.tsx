@@ -1,6 +1,6 @@
 import type { ComponentMeta } from "@storybook/react";
 
-import Chip from ".";
+import { Chip } from ".";
 
 export default {
   title: "components/common/Chip",
@@ -11,8 +11,8 @@ export default {
 export const RecentSearchChip = () => (
   <Chip
     label="무한도전"
-    type="recent"
     size="medium"
+    type="recent"
     onClick={() => {
       console.log(2);
     }}
@@ -22,12 +22,12 @@ export const RecentSearchChip = () => (
 export const RecommendChip = () => (
   <Chip
     label="박명수"
-    type="recommend"
     size="medium"
+    type="recommend"
     onClick={() => {
       console.log(2);
     }}
   />
 );
 
-export const MajorTypeChip = () => <Chip label="박명수" type="major" size="small" />;
+export const MajorTypeChip = () => <Chip label="박명수" size="small" type="major" />;

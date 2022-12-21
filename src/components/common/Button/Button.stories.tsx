@@ -1,7 +1,7 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 
-import Button from ".";
+import { Button } from ".";
 
 export default {
   title: "Example/Button",
@@ -11,15 +11,15 @@ export default {
 const Template: ComponentStory<typeof Button> = (args) => (
   <>
     <Button {...args} />
-    <Button size="default" icon="kakao" className="h-46 w-46 rounded-20 bg-amber-300" />
-    <Button size="default" icon="download" className="h-46 w-46 rounded-20 bg-gray-100" />
-    <Button size="medium" className="border border-black">
+    <Button className="h-46 w-46 rounded-20 bg-amber-300" icon="kakao" size="default" />
+    <Button className="h-46 w-46 rounded-20 bg-gray-100" icon="download" size="default" />
+    <Button className="border border-black" size="medium">
       팔로우
     </Button>
-    <Button as="li" size="medium" className="w-fit border border-black bg-black text-white">
+    <Button as="li" className="w-fit border border-black bg-black text-white" size="medium">
       팔로우
     </Button>
-    <Button size="medium" as="a" href="#" className="border border-black">
+    <Button as="a" className="border border-black" href="#" size="medium">
       링크
     </Button>
   </>

@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 
-import { useColoredText } from "@/application/hooks/common/useColoredText";
+import { useColoredText } from "@/application/hooks";
 import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 

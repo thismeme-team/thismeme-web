@@ -1,63 +1,27 @@
 import type { NextPage } from "next";
-import Image from "next/image";
+import { useRouter } from "next/router";
 
-import { Icon } from "@/components/common/Icon";
 import { Navigation } from "@/components/common/Navigation";
+import { MemeDetail } from "@/components/meme/MemeDetail";
 
-const base64Blur =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
+const MemeDetailPage: NextPage = () => {
+  // FIXME useInternalRouter
+  const { query } = useRouter();
 
-// 서버 데이터 스키마에 따라 바뀔 예정
-interface Meme {
-  id: number;
-  src: string;
-  title: string;
-  description: string;
-  views: number;
-  date: string;
-}
-
-const MOCK_MEME: Meme = {
-  id: 1,
-  src: "https://picsum.photos/444/200",
-  title: "제목",
-  description: "밈 설명 밈 설명",
-  views: 1,
-  date: "2022.12.22",
-};
-
-const MemeDetail: NextPage = () => {
   return (
     <>
       <Navigation page="result" />
-      <div className="relative mt-16 max-h-[70vh] min-h-[25vh] w-full overflow-hidden rounded-15 [&>img]:!static">
-        <Image
-          fill
-          priority
-          alt="thumbnail"
-          blurDataURL={base64Blur}
-          placeholder="blur"
-          src={MOCK_MEME.src}
-          style={{
-            objectFit: "cover",
-          }}
-        />
-      </div>
-      <section className="mt-10 flex flex-col gap-10">
-        <div className="flex gap-14 text-label text-gray-10">
-          <span>조회수 {MOCK_MEME.views}</span>
-          {MOCK_MEME.date}
-        </div>
-        <div className="flex w-full items-center justify-between text-title">
-          {MOCK_MEME.title} <Icon name="warn" />
-        </div>
-        <div className="flex w-full items-center justify-between">
-          <p className="text-regular">{MOCK_MEME.description}</p>
-          <button className="text-label text-gray-10">...더보기</button>
-        </div>
-      </section>
+      {/**
+       * NOTE page 파일 내에서 Suspense fallback 렌더링이 되지 않음...왜일까?
+       * @see <MemeDetail />
+       *
+       * 해결 방법
+       * 1. 비동기 요청 컴포넌트를 dynamic import 하면 가능
+       * 2. page 파일이 아니라 다른 곳에서 Suspense를 wrapping 하면 가능
+       */}
+      {query.id && <MemeDetail id={query.id as string} />}
     </>
   );
 };
 
-export default MemeDetail;
+export default MemeDetailPage;

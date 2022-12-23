@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from ".";
 
 export default {
-  title: "Example/Button",
+  title: "components/common/Button",
   component: Button,
 } as ComponentMeta<typeof Button>;
 

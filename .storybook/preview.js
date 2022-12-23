@@ -7,7 +7,14 @@ import * as NextImage from "next/image";
 // Initialize MSW
 initialize();
 
-export const decorators = [mswDecorator, (Story) => <Story />];
+export const decorators = [
+  mswDecorator,
+  (Story) => (
+    <div className="font-sans" style={{ "--font-pretendardVariable": "Pretendard" }}>
+      <Story />
+    </div>
+  ),
+];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

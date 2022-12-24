@@ -9,7 +9,7 @@ export const getMemeDetail = rest.get(
         id: 1,
         src: "https://picsum.photos/444/200",
         title: "제목",
-        description: "밈 설명 밈 설명",
+        description: "밈 설명 밈 설명".repeat(10),
         views: 1,
         date: "2022.12.22",
       }),

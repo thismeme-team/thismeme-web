@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require("tailwindcss/defaultTheme");
 const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
@@ -11,6 +11,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/application/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [{ pattern: /line-clamp-/ }],
   theme: {
     extend: {
       spacing: PX0_300,
@@ -98,5 +99,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

@@ -1,6 +1,7 @@
 import { Suspense } from "react";
 
 import { useMemeDetailById } from "@/application/hooks/api/meme";
+import { useEllipsis } from "@/application/hooks/common/useEllipsis";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
@@ -10,6 +11,8 @@ interface Props {
 
 const MemeDetailView = ({ id }: Props) => {
   const { views, date, title, description, src } = useMemeDetailById(id);
+
+  const { ref, onToggle } = useEllipsis({ lineClamp: 1 });
 
   return (
     <>
@@ -23,8 +26,12 @@ const MemeDetailView = ({ id }: Props) => {
           {title} <Icon name="warn" />
         </div>
         <div className="flex w-full items-center justify-between">
-          <p className="text-regular">{description}</p>
-          <button className="text-label text-gray-10">...더보기</button>
+          <p className="text-regular" ref={ref}>
+            {description}
+          </p>
+          <button className="text-label text-gray-10" onClick={onToggle}>
+            ...더보기
+          </button>
         </div>
       </section>
     </>

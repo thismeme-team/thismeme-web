@@ -35,6 +35,7 @@
     "@storybook/react": "^6.5.13",
     "@storybook/testing-library": "^0.0.13",
     "@svgr/webpack": "^6.5.1",
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@tanstack/eslint-plugin-query": "^4.15.1",
     "@tanstack/react-query-devtools": "^4.19.1",
     "@types/node": "18.11.9",

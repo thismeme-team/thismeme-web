@@ -8,7 +8,7 @@ interface Props {
   id?: string;
 }
 
-export const MemeDetailView = ({ id }: Props) => {
+const MemeDetailView = ({ id }: Props) => {
   const { views, date, title, description, src } = useMemeDetailById(id);
 
   return (
@@ -31,8 +31,8 @@ export const MemeDetailView = ({ id }: Props) => {
   );
 };
 
+// FIXME replace spinner fallback
 export const MemeDetail = ({ id }: Props) => (
-  // FIXME replace spinner fallback
   <Suspense fallback={<span className="text-title">fallback</span>}>
     <MemeDetailView id={id} />
   </Suspense>

@@ -1,30 +1,36 @@
 import Image from "next/image";
-import type { ComponentProps } from "react";
+import type { ComponentProps, CSSProperties } from "react";
 
-interface Props extends ComponentProps<"img"> {
+interface Props extends Omit<ComponentProps<typeof Image>, "alt" | "src"> {
   src?: string;
 }
 
 const base64Blur =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
 
-const Photo = ({ src, className }: Props) => {
-  // FIXME classname utility function
-  // ex) classnames, cx
-  if (!src) return <div className={`bg-gray-200 ${className || ""}`} />;
+const Photo = ({ src = "", className, style, ...rest }: Props) => {
+  const styleProps: CSSProperties = { ...style, objectFit: "cover" };
 
+  /**
+   * FIXME
+   * storybook 환경에서 이미지가 min height 보다 작을 때
+   * cover 속성이 적용 안돼서 밑에 회색 빈 공간이 생김
+   * - 개발 페이지에선 정상 동작..
+   *
+   * 최선의 방법은 서버에서 이미지 너비, 높이를 내려주는 것이라고 생각
+   * - 스켈레톤 처리하기 용이
+   * - layout shift 방지
+   */
   return (
-    <div className={`relative overflow-hidden [&>img]:!static ${className || ""}`}>
+    <div className={`relative overflow-hidden bg-gray-300 [&>img]:!static ${className || ""}`}>
       <Image
         fill
-        priority
         alt="thumbnail"
         blurDataURL={base64Blur}
         placeholder="blur"
         src={src}
-        style={{
-          objectFit: "cover",
-        }}
+        style={styleProps}
+        {...rest}
       />
     </div>
   );

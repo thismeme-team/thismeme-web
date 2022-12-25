@@ -12,7 +12,7 @@ interface Props {
 const MemeDetailView = ({ id }: Props) => {
   const { views, date, title, description, src } = useMemeDetailById(id);
 
-  const { ref, onToggle } = useEllipsis({ lineClamp: 1 });
+  const { ref, onToggle, isExpanded } = useEllipsis({ lineClamp: 1 });
 
   return (
     <>
@@ -25,12 +25,12 @@ const MemeDetailView = ({ id }: Props) => {
         <div className="flex w-full items-center justify-between text-title">
           {title} <Icon name="warn" />
         </div>
-        <div className="flex w-full items-center justify-between">
+        <div className={`flex w-full ${isExpanded ? "flex-wrap" : ""} items-center justify-end`}>
           <p className="text-regular" ref={ref}>
             {description}
           </p>
-          <button className="text-label text-gray-10" onClick={onToggle}>
-            ...더보기
+          <button className="shrink-0 text-label text-gray-10" onClick={onToggle}>
+            {isExpanded ? "닫기" : "더보기"}
           </button>
         </div>
       </section>

@@ -11,3 +11,12 @@ export interface Post {
   title: string;
   body: string;
 }
+
+export interface Search {
+  tags: {
+    tagId: number;
+    name: string;
+    categoryName: string;
+    viewCount: number;
+  }[];
+}

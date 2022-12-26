@@ -1,7 +1,4 @@
-import { Suspense } from "react";
-
-import { useMemeDetailById } from "@/application/hooks/api/meme";
-import { useEllipsis } from "@/application/hooks/common/useEllipsis";
+import { useEllipsis, useMemeDetailById } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
@@ -9,7 +6,7 @@ interface Props {
   id?: string;
 }
 
-const MemeDetailView = ({ id }: Props) => {
+export const MemeDetail = ({ id }: Props) => {
   const { views, date, title, description, src } = useMemeDetailById(id);
 
   const { ref, onToggle, isExpanded } = useEllipsis({ lineClamp: 1 });
@@ -37,10 +34,3 @@ const MemeDetailView = ({ id }: Props) => {
     </>
   );
 };
-
-// FIXME replace spinner fallback
-export const MemeDetail = ({ id }: Props) => (
-  <Suspense fallback={<span className="text-title">fallback</span>}>
-    <MemeDetailView id={id} />
-  </Suspense>
-);

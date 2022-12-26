@@ -14,7 +14,7 @@ interface Props extends Omit<ComponentProps<"img">, "alt" | "placeholder" | "wid
 const base64Blur =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
 
-const Photo = ({ src = "", className, style, ...rest }: Props) => {
+const Photo = ({ src = "", className, ...rest }: Props) => {
   /**
    * FIXME
    * storybook 환경에서 이미지가 min height 보다 작을 때
@@ -33,7 +33,7 @@ const Photo = ({ src = "", className, style, ...rest }: Props) => {
         blurDataURL={base64Blur}
         placeholder="blur"
         src={src}
-        style={{ ...style, objectFit: "cover" }}
+        style={{ objectFit: "cover" }}
         {...rest}
       />
     </div>

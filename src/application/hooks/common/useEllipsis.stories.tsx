@@ -1,4 +1,4 @@
-import { useEllipsis } from "@/application/hooks/common/useEllipsis";
+import { useEllipsis } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 
 export default {

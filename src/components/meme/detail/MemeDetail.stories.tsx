@@ -7,4 +7,7 @@ export default {
   component: MemeDetail,
 } as ComponentMeta<typeof MemeDetail>;
 
-export const Default: ComponentStory<typeof MemeDetail> = (args) => <MemeDetail id="1" {...args} />;
+export const Default: ComponentStory<typeof MemeDetail> = (args) => <MemeDetail {...args} />;
+Default.args = {
+  id: "1",
+};

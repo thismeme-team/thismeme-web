@@ -3,7 +3,7 @@ import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
 interface Props {
-  id?: string;
+  id: string;
 }
 
 export const MemeDetail = ({ id }: Props) => {

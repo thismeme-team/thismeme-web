@@ -8055,7 +8055,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-plugin-jsx-a11y@npm:^6.5.1":
+"eslint-plugin-jsx-a11y@npm:^6.5.1, eslint-plugin-jsx-a11y@npm:^6.6.1":
   version: 6.6.1
   resolution: "eslint-plugin-jsx-a11y@npm:6.6.1"
   dependencies:
@@ -16834,6 +16834,7 @@ __metadata:
     eslint-config-prettier: ^8.5.0
     eslint-import-resolver-typescript: ^3.5.2
     eslint-plugin-import: ^2.26.0
+    eslint-plugin-jsx-a11y: ^6.6.1
     eslint-plugin-prettier: ^4.2.1
     eslint-plugin-simple-import-sort: ^8.0.0
     eslint-plugin-storybook: ^0.6.7

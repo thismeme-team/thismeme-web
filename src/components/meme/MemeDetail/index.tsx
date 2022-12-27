@@ -1,15 +1,15 @@
-import { useEllipsis, useMemeDetailById } from "@/application/hooks";
+import { useMemeDetailById } from "@/application/hooks";
+import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
+import { MemeShareList } from "@/components/meme/MemeShare";
 
 interface Props {
   id: string;
 }
 
 export const MemeDetail = ({ id }: Props) => {
-  const { views, date, title, description, src } = useMemeDetailById(id);
-
-  const { ref, onToggle, isExpanded } = useEllipsis({ lineClamp: 1 });
+  const { views, date, title, description, src, tags } = useMemeDetailById(id);
 
   return (
     <>
@@ -22,14 +22,16 @@ export const MemeDetail = ({ id }: Props) => {
         <div className="flex w-full items-center justify-between text-title">
           {title} <Icon name="warn" />
         </div>
-        <div className={`flex w-full ${isExpanded ? "flex-wrap" : ""} items-center justify-end`}>
-          <p className="text-regular" ref={ref}>
-            {description}
-          </p>
-          <button className="shrink-0 text-label text-gray-10" onClick={onToggle}>
-            {isExpanded ? "닫기" : "더보기"}
-          </button>
-        </div>
+        <p className="text-regular">{description}</p>
+      </section>
+      <MemeShareList className="w-full py-50" />
+      <section>
+        <span className="text-title">태그</span>
+        <ul className="mt-16 flex flex-wrap gap-8">
+          {tags?.map((tag, idx) => (
+            <Chip as="li" key={idx} label={tag} size="medium" type="recent" />
+          ))}
+        </ul>
       </section>
     </>
   );

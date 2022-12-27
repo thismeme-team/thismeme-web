@@ -75,6 +75,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:18.2.0"],\
             ["react-error-boundary", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:3.1.4"],\
+            ["storybook-addon-next-router", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.0.2"],\
             ["tailwindcss", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:3.2.4"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
             ["util", "npm:0.12.5"]\
@@ -20796,6 +20797,49 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["storybook-addon-next-router", [\
+        ["npm:4.0.2", {\
+          "packageLocation": "./.yarn/cache/storybook-addon-next-router-npm-4.0.2-4a37bf021d-5e3d1b2510.zip/node_modules/storybook-addon-next-router/",\
+          "packageDependencies": [\
+            ["storybook-addon-next-router", "npm:4.0.2"]\
+          ],\
+          "linkType": "SOFT"\
+        }],\
+        ["virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.0.2", {\
+          "packageLocation": "./.yarn/__virtual__/storybook-addon-next-router-virtual-7e3627fc08/0/cache/storybook-addon-next-router-npm-4.0.2-4a37bf021d-5e3d1b2510.zip/node_modules/storybook-addon-next-router/",\
+          "packageDependencies": [\
+            ["storybook-addon-next-router", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.0.2"],\
+            ["@storybook/addon-actions", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:6.5.13"],\
+            ["@storybook/addons", null],\
+            ["@storybook/client-api", null],\
+            ["@types/next", null],\
+            ["@types/react", "npm:18.0.25"],\
+            ["@types/react-dom", "npm:18.0.9"],\
+            ["@types/storybook__addon-actions", null],\
+            ["@types/storybook__addons", null],\
+            ["@types/storybook__client-api", null],\
+            ["next", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:13.0.5"],\
+            ["react", "npm:18.2.0"],\
+            ["react-dom", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:18.2.0"],\
+            ["tslib", "npm:2.4.0"]\
+          ],\
+          "packagePeers": [\
+            "@storybook/addon-actions",\
+            "@storybook/addons",\
+            "@storybook/client-api",\
+            "@types/next",\
+            "@types/react-dom",\
+            "@types/react",\
+            "@types/storybook__addon-actions",\
+            "@types/storybook__addons",\
+            "@types/storybook__client-api",\
+            "next",\
+            "react-dom",\
+            "react"\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["stream-browserify", [\
         ["npm:2.0.2", {\
           "packageLocation": "./.yarn/cache/stream-browserify-npm-2.0.2-145ceec889-8de7bcab55.zip/node_modules/stream-browserify/",\
@@ -21722,6 +21766,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/tslib-npm-1.14.1-102499115e-dbe628ef87.zip/node_modules/tslib/",\
           "packageDependencies": [\
             ["tslib", "npm:1.14.1"]\
+          ],\
+          "linkType": "HARD"\
+        }],\
+        ["npm:2.4.0", {\
+          "packageLocation": "./.yarn/cache/tslib-npm-2.4.0-9cb6dc5030-8c4aa6a3c5.zip/node_modules/tslib/",\
+          "packageDependencies": [\
+            ["tslib", "npm:2.4.0"]\
           ],\
           "linkType": "HARD"\
         }],\
@@ -23063,6 +23114,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react", "npm:18.2.0"],\
             ["react-dom", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:18.2.0"],\
             ["react-error-boundary", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:3.1.4"],\
+            ["storybook-addon-next-router", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.0.2"],\
             ["tailwindcss", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:3.2.4"],\
             ["typescript", "patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"],\
             ["util", "npm:0.12.5"]\

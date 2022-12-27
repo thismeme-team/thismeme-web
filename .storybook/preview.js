@@ -5,6 +5,7 @@ import { handlers } from "../mocks/handlers";
 import * as NextImage from "next/image";
 import { QueryClientProvider } from "../src/application/queryClient";
 import { Suspense } from "react";
+import { RouterContext } from "next/dist/shared/lib/router-context";
 
 // Initialize MSW
 initialize();
@@ -35,9 +36,10 @@ export const parameters = {
   },
   layout: "fullscreen",
   msw: {
-    handlers: {
-      handlers,
-    },
+    handlers,
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
 };
 

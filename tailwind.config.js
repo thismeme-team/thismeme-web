@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-/** @type {import('tailwindcss').Config} */
+/** @type {import("tailwindcss").Config} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require("tailwindcss/defaultTheme");
 const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
@@ -11,6 +11,7 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx}",
     "./src/application/**/*.{js,ts,jsx,tsx}",
   ],
+  safelist: [{ pattern: /line-clamp-/ }],
   theme: {
     extend: {
       spacing: PX0_300,
@@ -41,7 +42,7 @@ module.exports = {
         title: [
           "2rem",
           {
-            lineHeight: "2rem",
+            lineHeight: "2.4rem",
             letterSpacing: "0em",
             fontWeight: "700",
           },
@@ -57,7 +58,7 @@ module.exports = {
         regular: [
           "1.6rem",
           {
-            lineHeight: "1.6rem",
+            lineHeight: "1.9rem",
             letterSpacing: "0em",
             fontWeight: "400",
           },
@@ -73,9 +74,9 @@ module.exports = {
         label: [
           "1.2rem",
           {
-            lineHeight: "1.4rem", //TODO: label tag lineheight 디자인 체크
+            lineHeight: "1.4rem",
             letterSpacing: "0em",
-            fontWeight: "600",
+            fontWeight: "400",
           },
         ],
       },
@@ -98,5 +99,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };

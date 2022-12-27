@@ -41,5 +41,13 @@ module.exports = {
     config.resolve.alias["@"] = path.resolve(__dirname, "../src/");
     return config;
   },
+  babel: async (options) => {
+    return {
+      ...options,
+      plugins: options.plugins.filter(
+        (x) => !(typeof x === "string" && x.includes("plugin-transform-classes")),
+      ),
+    };
+  },
   staticDirs: ["../public"],
 };

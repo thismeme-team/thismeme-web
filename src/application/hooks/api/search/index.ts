@@ -1,18 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
-import { useDeferredValue } from "react";
 
-import { getRecentSearch } from "@/infra/api/search";
+import { useDebounce } from "@/application/hooks";
+import { api } from "@/infra/api";
 import type { SearchResult } from "@/types";
 
-import { useDebounce } from "../../common";
-
 export const useSearchResult = (value: string) => {
-  const debouncedQuery = useDebounce(value);
-  const deferredQuery = useDeferredValue(debouncedQuery);
+  const debouncedValue = useDebounce(value);
 
   const { data, ...rest } = useQuery<{ tags: SearchResult[] }>({
-    queryKey: ["search", deferredQuery],
-    queryFn: async () => await getRecentSearch(deferredQuery),
+    queryKey: ["search", debouncedValue],
+    queryFn: () => api.search.getRecentSearch(debouncedValue),
+    keepPreviousData: true,
+    enabled: !!debouncedValue,
   });
-  return { searchResults: data?.tags };
+  return { searchResults: data?.tags, ...rest };
 };

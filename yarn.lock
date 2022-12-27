@@ -3949,6 +3949,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@tailwindcss/line-clamp@npm:^0.4.2":
+  version: 0.4.2
+  resolution: "@tailwindcss/line-clamp@npm:0.4.2"
+  peerDependencies:
+    tailwindcss: ">=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1"
+  checksum: 26b8135df24fff51c3d3790ae795bdc12bc4a7113fa22dcab80568ae6ee00710e2ed4154048958c472bb654061f0f1573b7ac5e004ae6222cbd5ac6fcf199478
+  languageName: node
+  linkType: hard
+
 "@tanstack/eslint-plugin-query@npm:^4.15.1":
   version: 4.15.1
   resolution: "@tanstack/eslint-plugin-query@npm:4.15.1"
@@ -16807,6 +16816,7 @@ __metadata:
     "@storybook/react": ^6.5.13
     "@storybook/testing-library": ^0.0.13
     "@svgr/webpack": ^6.5.1
+    "@tailwindcss/line-clamp": ^0.4.2
     "@tanstack/eslint-plugin-query": ^4.15.1
     "@tanstack/react-query": ^4.19.1
     "@tanstack/react-query-devtools": ^4.19.1

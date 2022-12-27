@@ -3,11 +3,21 @@ import { initialize, mswDecorator } from "msw-storybook-addon";
 import "@/styles/globals.css";
 import { handlers } from "../mocks/handlers";
 import * as NextImage from "next/image";
+import { QueryClientProvider } from "../src/application/queryClient";
 
 // Initialize MSW
 initialize();
 
-export const decorators = [mswDecorator, (Story) => <Story />];
+export const decorators = [
+  mswDecorator,
+  (Story) => (
+    <QueryClientProvider>
+      <div className="font-sans" style={{ "--font-pretendardVariable": "Pretendard" }}>
+        <Story />
+      </div>
+    </QueryClientProvider>
+  ),
+];
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },

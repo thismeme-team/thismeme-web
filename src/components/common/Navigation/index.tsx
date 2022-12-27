@@ -48,7 +48,7 @@ export const Navigation = ({
   title = NAVIGATION_PROPS[page].title,
 }: Props) => {
   return (
-    <nav className="sticky top-0 flex min-h-[5rem] w-full items-center justify-between gap-16 bg-white">
+    <nav className="sticky top-0 z-[1000] flex min-h-[5rem] w-full items-center justify-between gap-16 bg-white">
       <div className="flex grow items-center gap-16">{left}</div>
       <span className="absolute flex h-full w-full items-center justify-center text-header">
         {title}

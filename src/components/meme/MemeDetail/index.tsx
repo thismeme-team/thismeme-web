@@ -14,19 +14,19 @@ export const MemeDetail = ({ id }: Props) => {
   return (
     <>
       <Photo className="mt-16 max-h-[70vh] min-h-[25vh] w-full rounded-15" src={src} />
-      <section className="mt-10 flex flex-col gap-10">
-        <div className="flex gap-14 text-label text-gray-10">
-          <span>조회수 {views}</span>
-          {date}
+      <section className="mt-10 flex flex-col gap-8">
+        <div className="flex items-center gap-14 text-12-regular-160 text-gray-10">
+          <span>{`조희수 ${views}`}</span>
+          <span>{date}</span>
         </div>
-        <div className="flex w-full items-center justify-between text-title">
+        <div className="flex w-full items-center justify-between text-20-bold-140">
           {title} <Icon name="warn" />
         </div>
-        <p className="text-regular">{description}</p>
+        <p className="text-16-regular-130">{description}</p>
       </section>
       <MemeShareList className="w-full py-50" />
       <section>
-        <span className="text-title">태그</span>
+        <span className="text-16-semibold-130">태그</span>
         <ul className="mt-16 flex flex-wrap gap-8">
           {tags?.map((tag, idx) => (
             <Chip as="li" key={idx} label={tag} size="medium" type="recent" />

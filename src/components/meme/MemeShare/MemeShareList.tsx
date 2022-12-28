@@ -20,7 +20,7 @@ export const MemeShareList = ({ className }: Props) => {
           <Button className="h-46 w-46 rounded-20 bg-amber-300" icon="kakao" size="default" />
         </li>
       </ul>
-      <span className="text-label">친구에게 밈을 공유해 보세요</span>
+      <span className="text-16-semibold-130 text-dark-gray-20">친구에게 밈을 공유해 보세요</span>
     </div>
   );
 };

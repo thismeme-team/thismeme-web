@@ -99,7 +99,7 @@ export const MemeList = (props: MemeListProps) => {
   //   const { memeList } = useFetchMemeList();
 
   return (
-    <ul className="columns-3xs gap-x-16">
+    <ul className="my-16 columns-3xs gap-x-16">
       {memeList.map((meme) => (
         <MemeItem key={meme.id} meme={meme} />
       ))}

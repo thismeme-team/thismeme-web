@@ -54,9 +54,9 @@ const Home: NextPage<HomeProps> = ({ posts }) => {
         </ul>
       )}
       <Chip
+        color="white"
         label="무한도전"
         size="medium"
-        type="recent"
         onClick={() => {
           console.log(2);
         }}

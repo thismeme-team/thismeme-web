@@ -29,7 +29,7 @@ export const MemeDetail = ({ id }: Props) => {
         <span className="text-16-semibold-130">태그</span>
         <ul className="mt-16 flex flex-wrap gap-8">
           {tags?.map((tag, idx) => (
-            <Chip as="li" key={idx} label={tag} size="medium" type="recent" />
+            <Chip as="li" color="lightGray" key={idx} label={tag} size="medium" />
           ))}
         </ul>
       </section>

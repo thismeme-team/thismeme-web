@@ -10,22 +10,3 @@ html {
   font-size: 62.5%;
 }
 
-@layer components {
-  .small {
-    @apply h-24 w-fit rounded-12 pl-7 pr-7 pt-5 pb-5 text-label;
-  }
-  .medium {
-    @apply h-34 w-fit rounded-16 pl-13 pr-13 pt-8 pb-8 text-tag;
-  }
-
-  .recent {
-    @apply border-[1px] border-gray-10 bg-white text-gray-20;
-  }
-  .recommend {
-    @apply bg-dark-gray-10 text-white;
-  }
-  .major {
-    @apply bg-black text-white;
-  }
-  /* ... */
-}

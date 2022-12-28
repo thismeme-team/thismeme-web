@@ -1,4 +1,4 @@
-import { Button } from "@/components/common/Button";
+import { IconButton } from "@/components/common/Button/IconButton";
 
 interface Props {
   className: string;
@@ -8,16 +8,16 @@ export const MemeShareList = ({ className }: Props) => {
     <div className={"flex flex-col items-center gap-16 " + className}>
       <ul className="flex gap-10">
         <li>
-          <Button className="h-46 w-46 rounded-20 bg-amber-300" icon="kakao" size="default" />
+          <IconButton className="bg-[#FFE812]" icon="kakao" size="medium" />
         </li>
         <li>
-          <Button className="h-46 w-46 rounded-20 bg-amber-300" icon="kakao" size="default" />
+          <IconButton className="bg-light-gray-10" icon="download" size="medium" />
         </li>
         <li>
-          <Button className="h-46 w-46 rounded-20 bg-amber-300" icon="kakao" size="default" />
+          <IconButton className="bg-light-gray-10" icon="share" size="medium" />
         </li>
         <li>
-          <Button className="h-46 w-46 rounded-20 bg-amber-300" icon="kakao" size="default" />
+          <IconButton className="bg-light-gray-10" icon="meatball" size="medium" />
         </li>
       </ul>
       <span className="text-16-semibold-130 text-dark-gray-20">친구에게 밈을 공유해 보세요</span>

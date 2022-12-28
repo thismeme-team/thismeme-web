@@ -1,6 +1,6 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { MemeDetail } from "@/components/meme/MemeDetail/index";
+import { MemeDetail } from "@/components/meme/MemeDetail";
 
 export default {
   title: "components/meme/MemeDetail",

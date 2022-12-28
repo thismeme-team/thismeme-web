@@ -27,14 +27,16 @@ module.exports = {
         "gray-20": "#666666",
         "dark-gray-10": "#383838",
         "dark-gray-20": "#242424",
-        brand: "#a0c3d2",
-        bookmark: "#ffc564",
+        brand: "#a0c3d2", // Deprecated
+        primary: "#0d24fb",
+        bookmark: "#ffc564", // Deprecated
       },
       fontSize: {
+        // Deprecated
         header: [
           "1.8rem",
           {
-            lineHeight: "1.8rem",
+            lineHeight: "140%",
             letterSpacing: "0em",
             fontWeight: "700",
           },
@@ -42,7 +44,7 @@ module.exports = {
         title: [
           "2rem",
           {
-            lineHeight: "2.4rem",
+            lineHeight: "140%",
             letterSpacing: "0em",
             fontWeight: "700",
           },
@@ -50,7 +52,7 @@ module.exports = {
         tag: [
           "1.5rem",
           {
-            lineHeight: "1.8rem",
+            lineHeight: "130%",
             letterSpacing: "0em",
             fontWeight: "600",
           },
@@ -58,7 +60,7 @@ module.exports = {
         regular: [
           "1.6rem",
           {
-            lineHeight: "1.9rem",
+            lineHeight: "130%",
             letterSpacing: "0em",
             fontWeight: "400",
           },
@@ -66,7 +68,7 @@ module.exports = {
         "semi-bold": [
           "1.6rem",
           {
-            lineHeight: "1.9rem",
+            lineHeight: "130%",
             letterSpacing: "0em",
             fontWeight: "600",
           },
@@ -74,7 +76,65 @@ module.exports = {
         label: [
           "1.2rem",
           {
-            lineHeight: "1.4rem",
+            lineHeight: "130%",
+            letterSpacing: "0em",
+            fontWeight: "400",
+          },
+        ],
+
+        // New className
+        "20-bold-140": [
+          "2rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "700",
+          },
+        ],
+        "18-bold-140": [
+          "1.8rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "700",
+          },
+        ],
+        "16-semibold-130": [
+          "1.6rem",
+          {
+            lineHeight: "130%",
+            letterSpacing: "0em",
+            fontWeight: "600",
+          },
+        ],
+        "16-regular-130": [
+          "1.6rem",
+          {
+            lineHeight: "130%",
+            letterSpacing: "0em",
+            fontWeight: "400",
+          },
+        ],
+        "15-semibold-130": [
+          "1.5rem",
+          {
+            lineHeight: "130%",
+            letterSpacing: "0em",
+            fontWeight: "600",
+          },
+        ],
+        "12-bold-160": [
+          "1.2rem",
+          {
+            lineHeight: "160%",
+            letterSpacing: "0em",
+            fontWeight: "700",
+          },
+        ],
+        "12-regular-160": [
+          "1.2rem",
+          {
+            lineHeight: "160%",
             letterSpacing: "0em",
             fontWeight: "400",
           },

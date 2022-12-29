@@ -1,8 +1,5 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 
-import type { IconName } from "@/components/common/Icon";
-import { Icon } from "@/components/common/Icon";
-
 /**
  * FIX tailwind classname 우선순위 문제
  * https://fe-developers.kakaoent.com/2022/220303-tailwind-tips/#tailwind-class-%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84-%EC%B2%98%EB%A6%AC-%EB%B0%A9%EC%95%88
@@ -14,31 +11,28 @@ import { Icon } from "@/components/common/Icon";
 const style = {
   large: "rounded-10 py-11 px-15 text-semi-bold",
   medium: "rounded-5 py-8 px-13 text-tag",
-  default: "",
+  custom: "",
 };
 
 type Props<T extends ElementType> = {
   as?: T;
-  icon?: IconName;
-  size: keyof typeof style;
+  size?: keyof typeof style;
 } & ComponentPropsWithoutRef<T>;
 
 export const Button = <T extends ElementType = "button">({
   as,
   children,
-  icon,
-  size,
-  className,
+  size = "custom",
+  className = "",
   ...rest
 }: Props<T>) => {
   const ButtonRoot = as || "button";
 
   return (
     <ButtonRoot
-      className={`flex items-center justify-center ${style[size]} ${className || ""}`}
+      className={`flex items-center justify-center ${style[size]} ${className}`}
       {...rest}
     >
-      {icon && <Icon name={icon} />}
       {children}
     </ButtonRoot>
   );

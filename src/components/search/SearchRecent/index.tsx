@@ -22,7 +22,7 @@ export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
       </div>
       <div className="flex flex-wrap align-middle">
         {keywords.map((keyword) => (
-          <Chip className="m-4" key={keyword.id} label={keyword.text} size="medium" type="recent" />
+          <Chip className="m-4" color="white" key={keyword.id} label={keyword.text} size="medium" />
         ))}
       </div>
     </>

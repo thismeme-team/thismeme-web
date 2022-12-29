@@ -16,21 +16,21 @@ const style = {
 
 type Props<T extends ElementType> = {
   as?: T;
-  size: keyof typeof style;
+  size?: keyof typeof style;
 } & ComponentPropsWithoutRef<T>;
 
 export const Button = <T extends ElementType = "button">({
   as,
   children,
-  size,
-  className,
+  size = "custom",
+  className = "",
   ...rest
 }: Props<T>) => {
   const ButtonRoot = as || "button";
 
   return (
     <ButtonRoot
-      className={`flex items-center justify-center ${style[size]} ${className || ""}`}
+      className={`flex items-center justify-center ${style[size]} ${className}`}
       {...rest}
     >
       {children}

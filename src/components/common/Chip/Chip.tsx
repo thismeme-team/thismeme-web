@@ -9,8 +9,8 @@ type Props<T extends ElementType> = {
 } & ComponentPropsWithoutRef<T>;
 
 const sizes = {
-  small: "h-24 w-fit rounded-12 pl-7 pr-7 pt-5 pb-5 text-label",
-  medium: "h-34 w-fit rounded-16 pl-13 pr-13 pt-8 pb-8 text-tag",
+  small: "h-24 w-fit rounded-12 pl-7 pr-7 pt-5 pb-5 text-label", // small chip이 dev2 에 없어진듯..?
+  medium: "h-34 w-fit rounded-16 pl-13 pr-13 pt-8 pb-8 text-15-semibold-130",
 };
 
 const colors = {
@@ -24,7 +24,7 @@ export const Chip = <T extends ElementType>({
   as,
   size,
   color,
-  className,
+  className = "",
   label,
   ...rest
 }: Props<T>) => {

@@ -16,7 +16,7 @@ export const MemeDetail = ({ id }: Props) => {
       <Photo className="mt-16 max-h-[70vh] min-h-[25vh] w-full rounded-15" src={src} />
       <section className="mt-10 flex flex-col gap-8">
         <div className="flex items-center gap-14 text-12-regular-160 text-gray-10">
-          <span>{`조희수 ${views}`}</span>
+          <span>{`조회수 ${views}`}</span>
           <span>{date}</span>
         </div>
         <div className="flex w-full items-center justify-between text-20-bold-140">

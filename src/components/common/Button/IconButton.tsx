@@ -1,4 +1,4 @@
-import type { ComponentProps } from "react";
+import type { ComponentProps, ElementType } from "react";
 
 import { Button } from "@/components/common/Button/Button";
 import type { IconName } from "@/components/common/Icon";
@@ -9,13 +9,19 @@ const sizes = {
   medium: "h-46 w-46 rounded-20",
 };
 
-interface Props extends ComponentProps<"button"> {
+type Props<T extends ElementType> = {
   icon: IconName;
   size: keyof typeof sizes;
-}
-export const IconButton = ({ icon, size, className, ...rest }: Props) => {
+} & ComponentProps<typeof Button<T>>;
+
+export const IconButton = <T extends ElementType = "button">({
+  icon,
+  size,
+  className,
+  ...rest
+}: Props<T>) => {
   return (
-    <Button className={`${sizes[size]} ${className}`} size="custom" {...rest}>
+    <Button className={`${sizes[size]} ${className}`} {...rest}>
       <Icon name={icon} />
     </Button>
   );

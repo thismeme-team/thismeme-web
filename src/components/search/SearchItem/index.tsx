@@ -19,7 +19,7 @@ export const SearchItem = ({ searchText, tagName, majorType, ...rest }: SearchIt
       <Icon className="mr-10" name="search" />
       {ColoredText}
       {majorType && (
-        <Chip className="absolute right-6" color="white" label={majorType} size="small" />
+        <Chip className="absolute right-6" color="black" label={majorType} size="small" />
       )}
     </div>
   );

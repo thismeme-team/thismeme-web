@@ -1,6 +1,6 @@
 import { useSearchResult } from "@/application/hooks";
 
-import { SearchItem } from "../SearchItem";
+import { SearchItem } from "../SearchItem/SearchItem";
 
 interface Prop {
   value: string;
@@ -8,7 +8,7 @@ interface Prop {
 }
 
 export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
-  const { searchResults } = useSearchResult(value);
+  const { searchResults } = useSearchResult(value.trim());
 
   if (!value || searchResults?.length === 0) {
     return null;

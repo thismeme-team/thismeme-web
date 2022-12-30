@@ -12,7 +12,7 @@ export const SearchInput = ({ onReset, onClickAddKeyword, value, ...rest }: Prop
   return (
     <div className="relative flex items-center justify-start">
       <InputBase
-        className="h-43 w-full rounded-22 bg-light-gray-10 pl-22 text-semi-bold text-dark-gray-10 outline-none placeholder:text-gray-10"
+        className="h-43 w-full rounded-22 bg-light-gray-10 pl-22 text-16-semibold-130 text-dark-gray-10 outline-none placeholder:text-gray-10"
         value={value}
         {...rest}
         endComponents={

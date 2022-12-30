@@ -1,4 +1,4 @@
-export interface SearchResult {
+export interface Tag {
   tagId: number;
   name: string;
   categoryName: string;

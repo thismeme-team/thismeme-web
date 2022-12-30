@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { QueryClientProvider } from "@/application/queryClient";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
+import { ToastContainer, ToastProvider } from "@/components/common/Toast";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   require("../../mocks");
@@ -20,11 +21,14 @@ const App = ({ Component, pageProps }: AppProps<PageProps>) => {
   return (
     <QueryClientProvider hydrateState={pageProps.hydrateState}>
       <QueryErrorBoundary>
-        <Layout>
-          <Suspense fallback={<>hello</>}>
-            <Component {...pageProps} />
-          </Suspense>
-        </Layout>
+        <ToastProvider>
+          <Layout>
+            <Suspense fallback={<>hello</>}>
+              <ToastContainer />
+              <Component {...pageProps} />
+            </Suspense>
+          </Layout>
+        </ToastProvider>
       </QueryErrorBoundary>
     </QueryClientProvider>
   );

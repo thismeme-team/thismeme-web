@@ -1,5 +1,9 @@
 import type { AxiosInstance } from "axios";
 
+/**
+ * FIX
+ * API마다 Response, Request 타입 관리
+ */
 export class SearchApi {
   constructor(private api: AxiosInstance) {}
 
@@ -16,5 +20,24 @@ export class SearchApi {
       throw new Error("No Query");
     }
     return this.api.get(`/tags/search?word=${value}`).then((response) => response.data);
+  };
+
+  getSearchResultsByKeyword = ({
+    keyword,
+    offset,
+    limit,
+  }: {
+    keyword: string;
+    offset: number;
+    limit: number;
+  }) => {
+    return this.api
+      .get(`/search?keyword=${keyword}`, {
+        params: {
+          offset,
+          limit,
+        },
+      })
+      .then((response) => response.data);
   };
 }

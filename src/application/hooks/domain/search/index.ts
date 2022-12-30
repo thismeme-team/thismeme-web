@@ -8,10 +8,15 @@ export const useRecentSearch = () => {
   });
 
   const onClickAddKeyword = (text: string) => {
+    if (!text.trim()) {
+      return;
+    }
+
     const newKeyword = {
       id: Date.now(),
       text: text,
     };
+
     setKeywords((keywords) => [newKeyword, ...keywords.filter((keyword) => keyword.text !== text)]); //중복된 검색어 필터링
   };
 

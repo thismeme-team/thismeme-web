@@ -1,4 +1,4 @@
-export interface SearchResult {
+export interface Tag {
   tagId: number;
   name: string;
   categoryName: string;
@@ -30,4 +30,7 @@ export interface Meme {
   description: string;
   views: number;
   date: string;
+  tags: string[];
+  author: string;
+  share: number;
 }

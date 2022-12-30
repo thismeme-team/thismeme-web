@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { Navigation } from "@/components/common/Navigation";
-import { MemeDetail } from "@/components/meme/detail";
+import { MemeDetail } from "@/components/meme/MemeDetail";
 
 const MemeDetailPage: NextPage = () => {
   const { query } = useRouter();

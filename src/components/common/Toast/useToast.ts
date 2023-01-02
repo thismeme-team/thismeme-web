@@ -4,34 +4,39 @@ import { delay } from "@/application/util";
 import { useSetToastContext } from "@/components/common/Toast/context";
 import type { Toast, ToastOption, ToastType } from "@/components/common/Toast/types";
 
-const DEFAULT_TOAST_DELAY = 1000;
+const DEFAULT_TOAST_DELAY = 1500;
+const ANIMATION_EXPIRE_DELAY = 1000;
 
 const toastFactory = (type: ToastType, message: Toast["message"], option?: ToastOption): Toast => ({
   type,
-  message,
-  ...option,
   id: Date.now(),
+  message,
+  visible: true,
+  ...option,
 });
 
 export const useToast = () => {
   const dispatch = useSetToastContext();
+  const close = useCallback(
+    async ({ id, duration }: Pick<Toast, "id" | "duration">) => {
+      await delay(duration || DEFAULT_TOAST_DELAY);
+      dispatch({ type: "dismiss", id });
 
-  const remove = useCallback(
-    (id: number) => {
+      await delay(ANIMATION_EXPIRE_DELAY);
       dispatch({ type: "remove", id });
     },
     [dispatch],
   );
 
-  const success = useCallback(
+  const show = useCallback(
     (message: Toast["message"], option?: ToastOption) => {
       const toast = toastFactory("success", message, option);
       dispatch({ type: "add", toast });
 
-      return delay(DEFAULT_TOAST_DELAY || 1000).then(() => remove(toast.id));
+      return close({ id: toast.id, duration: option?.duration });
     },
-    [dispatch, remove],
+    [close, dispatch],
   );
 
-  return { success };
+  return { show };
 };

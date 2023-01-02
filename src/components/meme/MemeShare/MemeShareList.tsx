@@ -5,7 +5,7 @@ interface Props {
   className: string;
 }
 export const MemeShareList = ({ className = "" }: Props) => {
-  const { success } = useToast();
+  const { show } = useToast();
 
   return (
     <div className={`flex flex-col items-center gap-16 ${className}`}>
@@ -16,7 +16,7 @@ export const MemeShareList = ({ className = "" }: Props) => {
           icon="kakao"
           size="medium"
           onClick={() =>
-            success((id) => <span>Render Props Test {id}</span>, {
+            show((id) => <span>Render Props Test {id}</span>, {
               color: "white",
             })
           }
@@ -26,14 +26,14 @@ export const MemeShareList = ({ className = "" }: Props) => {
           className="bg-light-gray-10"
           icon="download"
           size="medium"
-          onClick={() => success("앨범에 저장했습니다", { icon: "share" })}
+          onClick={() => show("앨범에 저장했습니다", { icon: "cake" })}
         />
         <IconButton
           as="li"
           className="bg-light-gray-10"
           icon="share"
           size="medium"
-          onClick={() => success("링크를 복사했습니다", { icon: "share" })}
+          onClick={() => show("링크를 복사했습니다", { icon: "share" })}
         />
         <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
       </ul>

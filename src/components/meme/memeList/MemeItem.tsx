@@ -4,10 +4,14 @@ import type { LiHTMLAttributes } from "react";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
-interface MemeItemProps extends LiHTMLAttributes<HTMLLIElement> {
+/**
+ * FIX
+ * 1. Props 인터페이스 타입 명확하게 지정
+ */
+interface Props extends LiHTMLAttributes<HTMLLIElement> {
   meme: any;
 }
-export const MemeItem = ({ meme }: MemeItemProps) => {
+export const MemeItem = ({ meme }: Props) => {
   return (
     <li>
       <Link className="mb-9 flex break-inside-avoid flex-col gap-6" href={`/meme/${meme.id}`}>

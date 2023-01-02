@@ -1,17 +1,16 @@
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { useMemo } from "react";
 
 import { useGetSearchResultsByKeyword, useIntersect } from "@/application/hooks";
 import { Navigation } from "@/components/common/Navigation";
-import { MemeList } from "@/components/meme/memeList";
-import { MemeItem } from "@/components/meme/memeList/MemeItem";
+import { MemeItem, MemeList } from "@/components/meme/MemeList";
 
-const ExploreWordsPage = () => {
+const ExploreWordsPage: NextPage = () => {
   const { query } = useRouter();
   /**
    * FIX
-   * 1. data 타입추론
-   * 2. query.q가 string일 때만 memeList을 불러올 수 있도록 방어코드 작성해야함(현재는 타입단언으로 타입 에러만 안나도록 해두었음)
+   * 1. query.q가 string일 때만 memeList을 불러올 수 있도록 방어코드 작성해야함(현재는 타입단언으로 타입 에러만 안나도록 해두었음)
    */
   const { data, hasNextPage, isFetching, fetchNextPage } = useGetSearchResultsByKeyword(
     query.q as string,
@@ -33,7 +32,7 @@ const ExploreWordsPage = () => {
         {memeList.map((meme) => (
           <MemeItem key={meme.id} meme={meme} />
         ))}
-        <div className="h-1" ref={ref} />
+        <div className="h-[1px]" ref={ref} />
       </MemeList>
       {isFetching && <div>loading...</div>}
     </>

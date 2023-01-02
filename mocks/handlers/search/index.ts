@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-import type { SearchResultsByKeyword } from "@/types";
+import type { PaginationResponse, SearchResultByKeyword, SearchResultByTag } from "@/types";
 
 export const getSearch = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/search`,
@@ -76,7 +76,7 @@ const sampleImages = [
   "https://picsum.photos/500/200",
 ];
 
-const searchResultsByKeyword = Array.from(Array(1024).keys()).map((id) => ({
+const searchResults = Array.from(Array(1024).keys()).map((id) => ({
   id,
   title: "무난한도전",
   image_url: sampleImages[Math.floor(Math.random() * 4)],
@@ -89,13 +89,6 @@ const searchResultsByKeyword = Array.from(Array(1024).keys()).map((id) => ({
   modified_date: new Date().toString(),
 }));
 
-interface PaginationResponse<T> {
-  data: T[];
-  pageNumber: number;
-  pageSize: number;
-  isLastPage: boolean;
-  isFirstPage: boolean;
-}
 export const getSearchResultsByKeyword = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/search`,
   (req, res, ctx) => {
@@ -103,16 +96,39 @@ export const getSearchResultsByKeyword = rest.get(
     const query = searchParams.get("keyword");
     const offset = Number(searchParams.get("offset"));
     const limit = Number(searchParams.get("limit"));
-    const data = searchResultsByKeyword.slice(offset * limit, (offset + 1) * limit);
+    const data = searchResults.slice(offset * limit, (offset + 1) * limit);
 
     return res(
       ctx.status(200),
-      ctx.json<PaginationResponse<SearchResultsByKeyword>>({
+      ctx.json<PaginationResponse<SearchResultByKeyword>>({
         data,
         pageNumber: offset,
         pageSize: limit,
         isLastPage: data.length < limit,
         isFirstPage: offset === 0,
+      }),
+      ctx.delay(500),
+    );
+  },
+);
+
+export const getSearchResultsByTag = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/search/tags`,
+  (req, res, ctx) => {
+    const { searchParams } = req.url;
+    const query = searchParams.get("tag");
+    const page = Number(searchParams.get("page"));
+    const size = Number(searchParams.get("size"));
+    const data = searchResults.slice(page * size, (page + 1) * size);
+
+    return res(
+      ctx.status(200),
+      ctx.json<PaginationResponse<SearchResultByTag>>({
+        data,
+        pageNumber: page,
+        pageSize: size,
+        isLastPage: data.length < size,
+        isFirstPage: page === 0,
       }),
       ctx.delay(500),
     );

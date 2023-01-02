@@ -32,10 +32,23 @@ export class SearchApi {
     limit: number;
   }) => {
     return this.api
-      .get(`/search?keyword=${keyword}`, {
+      .get("/search", {
         params: {
+          keyword,
           offset,
           limit,
+        },
+      })
+      .then((response) => response.data);
+  };
+
+  getSearchResultsByTag = ({ tag, page, size }: { tag: string; page: number; size: number }) => {
+    return this.api
+      .get("/search/tags", {
+        params: {
+          tag,
+          page,
+          size,
         },
       })
       .then((response) => response.data);

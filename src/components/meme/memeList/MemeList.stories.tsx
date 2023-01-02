@@ -1,6 +1,6 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { MemeList } from ".";
+import { MemeList } from "./MemeList";
 
 export default {
   title: "components/common/MemeList",

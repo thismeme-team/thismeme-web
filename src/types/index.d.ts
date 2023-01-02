@@ -10,7 +10,27 @@ export interface SearchKeyword {
   text: string;
 }
 
-export interface SearchResultsByKeyword {
+export interface PaginationResponse<T> {
+  data: T[];
+  pageNumber: number;
+  pageSize: number;
+  isLastPage: boolean;
+  isFirstPage: boolean;
+}
+export interface SearchResultByKeyword {
+  id: number;
+  title: string;
+  image_url: string;
+  image_width: number;
+  image_height: number;
+  tags: string[];
+  view_count: number;
+  share_count: number;
+  create_date: string;
+  modified_date: string;
+}
+
+export interface SearchResultByTag {
   id: number;
   title: string;
   image_url: string;

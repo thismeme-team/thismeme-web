@@ -16,7 +16,7 @@ export const ToastContainer = () => {
   return (
     <Portal id="toast-portal">
       <aside
-        className="pointer-events-none fixed inset-x-0 z-10 grid justify-center justify-items-center"
+        className="pointer-events-none fixed inset-18 z-10 grid place-content-center place-items-center gap-6"
         ref={ref}
       >
         {toasts.map((t) => (

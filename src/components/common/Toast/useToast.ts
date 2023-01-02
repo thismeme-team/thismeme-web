@@ -1,18 +1,17 @@
 import { useCallback } from "react";
 
+import { delay } from "@/application/util";
 import { useSetToastContext } from "@/components/common/Toast/context";
-import type { Toast, ToastType } from "@/components/common/Toast/types";
+import type { Toast, ToastOption, ToastType } from "@/components/common/Toast/types";
 
-const toastFactory = (
-  (id) =>
-  (type: ToastType, message: Toast["message"]): Toast => ({
-    type,
-    message,
-    id: id++,
-  })
-)(1);
+const DEFAULT_TOAST_DELAY = 1000;
 
-const delay = (duration: number) => new Promise((r) => setTimeout(r, duration));
+const toastFactory = (type: ToastType, message: Toast["message"], option?: ToastOption): Toast => ({
+  type,
+  message,
+  ...option,
+  id: Date.now(),
+});
 
 export const useToast = () => {
   const dispatch = useSetToastContext();
@@ -25,11 +24,11 @@ export const useToast = () => {
   );
 
   const success = useCallback(
-    (message: Toast["message"], option?: { icon?: string; duration?: number }) => {
-      const toast = toastFactory("success", message);
+    (message: Toast["message"], option?: ToastOption) => {
+      const toast = toastFactory("success", message, option);
       dispatch({ type: "add", toast });
 
-      return delay(1000).then(() => remove(toast.id));
+      return delay(DEFAULT_TOAST_DELAY || 1000).then(() => remove(toast.id));
     },
     [dispatch, remove],
   );

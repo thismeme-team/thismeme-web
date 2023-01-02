@@ -15,13 +15,26 @@ export const MemeShareList = ({ className = "" }: Props) => {
           className="bg-[#FFE812]"
           icon="kakao"
           size="medium"
-          onClick={(
-            (id) => () =>
-              success("hello!!" + id++).then(() => console.log("complete"))
-          )(1)}
+          onClick={() =>
+            success((id) => <span>Render Props Test {id}</span>, {
+              color: "white",
+            })
+          }
         />
-        <IconButton as="li" className="bg-light-gray-10" icon="download" size="medium" />
-        <IconButton as="li" className="bg-light-gray-10" icon="share" size="medium" />
+        <IconButton
+          as="li"
+          className="bg-light-gray-10"
+          icon="download"
+          size="medium"
+          onClick={() => success("앨범에 저장했습니다", { icon: "share" })}
+        />
+        <IconButton
+          as="li"
+          className="bg-light-gray-10"
+          icon="share"
+          size="medium"
+          onClick={() => success("링크를 복사했습니다", { icon: "share" })}
+        />
         <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
       </ul>
       <span className="text-16-semibold-130 text-dark-gray-20">친구에게 밈을 공유해 보세요</span>

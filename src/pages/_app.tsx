@@ -10,7 +10,7 @@ import { Layout } from "@/components/common/Layout";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
-  require("../../mocks");
+  await import("../../mocks");
 }
 
 interface PageProps {

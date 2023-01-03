@@ -1,5 +1,6 @@
-import { useLayoutEffect, useRef } from "react";
+import { useRef } from "react";
 
+import { useIsomorphicLayoutEffect } from "@/application/hooks";
 import { Portal } from "@/components/common/Portal";
 import { useToastContext } from "@/components/common/Toast/context";
 import { Toast } from "@/components/common/Toast/Toast";
@@ -16,7 +17,7 @@ export const ToastContainer = () => {
    * NOTE FLIP Animation
    *  @link https://web.dev/building-a-toast-component/#managing-one-or-many-toasts
    */
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (ref.current) {
       const currentHeight = ref.current.getBoundingClientRect().height;
 

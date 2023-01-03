@@ -1590,15 +1590,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@cfcs/core@npm:^0.0.5":
-  version: 0.0.5
-  resolution: "@cfcs/core@npm:0.0.5"
-  dependencies:
-    "@egjs/component": ^3.0.2
-  checksum: 4c2043e15f3330461de2519acc64581310e1078923034e27565a64938df9b9ff8e1066137ebba635ea16e937daace76154770b17fd44913156e078b1bf5ad6f0
-  languageName: node
-  linkType: hard
-
 "@cnakazawa/watch@npm:^1.0.3":
   version: 1.0.4
   resolution: "@cnakazawa/watch@npm:1.0.4"
@@ -1688,71 +1679,6 @@ __metadata:
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
   checksum: 2176d301cc258ea5c2324402997cf8134ebb212469c0d397591636cea8d3c02f2b3cf9fd58dcb748c7a0dade77ebdc1b10284fa63e608c033a1db52fddc69918
-  languageName: node
-  linkType: hard
-
-"@egjs/children-differ@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "@egjs/children-differ@npm:1.0.1"
-  dependencies:
-    "@egjs/list-differ": ^1.0.0
-  checksum: 087f286822a93cc5ac2ba0beb9f332f3828a8870fea0e9d0a177078c96fc265ce74979be827a78dab674a833e3a22d4fe60636112a1aae93252e0a38f58ff754
-  languageName: node
-  linkType: hard
-
-"@egjs/component@npm:^3.0.0, @egjs/component@npm:^3.0.1, @egjs/component@npm:^3.0.2":
-  version: 3.0.4
-  resolution: "@egjs/component@npm:3.0.4"
-  checksum: d41371ee868015021bf4148d6229ba17c8ad8be9246b2138bea6d2d03aaff789caef88e2593e2e03f065609e53ebcba00bde3fa2649fad4a3832f7c01eb17a64
-  languageName: node
-  linkType: hard
-
-"@egjs/grid@npm:~1.11.0":
-  version: 1.11.2
-  resolution: "@egjs/grid@npm:1.11.2"
-  dependencies:
-    "@egjs/children-differ": ^1.0.1
-    "@egjs/component": ^3.0.0
-    "@egjs/imready": ^1.3.0
-  checksum: d720d5604751803fafd4f8fd3d00071595651a654214a9be54e39c951ce00244a5644f1e6a9dd2f55203621b2f9372cc499d54809ed8064d3257de3a124c963c
-  languageName: node
-  linkType: hard
-
-"@egjs/imready@npm:^1.3.0":
-  version: 1.3.1
-  resolution: "@egjs/imready@npm:1.3.1"
-  dependencies:
-    "@egjs/component": ^3.0.1
-  checksum: e0b125867a53d4942dee55a642dfebaae394b9d5db6382b18f3a9f6b988dc34cf57ef6ac4a9d4857c09d4b67b19ff587e3ec3366362cc696bfde50d1b203b56a
-  languageName: node
-  linkType: hard
-
-"@egjs/infinitegrid@npm:~4.7.1":
-  version: 4.7.1
-  resolution: "@egjs/infinitegrid@npm:4.7.1"
-  dependencies:
-    "@cfcs/core": ^0.0.5
-    "@egjs/children-differ": ^1.0.1
-    "@egjs/component": ^3.0.0
-    "@egjs/grid": ~1.11.0
-    "@egjs/list-differ": ^1.0.0
-  checksum: 99a66a0356128ef96126d38107ae261885b2feccc5865089f15269a888668ca6ca3b4274973b1f1735dfa405d9de4923c3013708b148398a0e51fe5e91eb2cd1
-  languageName: node
-  linkType: hard
-
-"@egjs/list-differ@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "@egjs/list-differ@npm:1.0.0"
-  checksum: d1827d134ddab12a024358367cb8a3b70d2ba0f286e5beb6ce2a6bbd021594f26b02c38b2d8b3d1dfd76bd7d1fcda54de3b40decaa9b4fc939230f6e7d531d0c
-  languageName: node
-  linkType: hard
-
-"@egjs/react-infinitegrid@npm:^4.7.1":
-  version: 4.7.1
-  resolution: "@egjs/react-infinitegrid@npm:4.7.1"
-  dependencies:
-    "@egjs/infinitegrid": ~4.7.1
-  checksum: e03bbd3154ec43da6111b989d534f696a30c8ddbf8ed6c7ffc186e33495d1f45fed9652d31315917ff52c0a167ac737130dc2535c47c10d10b3f75f06017de84
   languageName: node
   linkType: hard
 
@@ -5742,7 +5668,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-macros@npm:^3.0.1":
+"babel-plugin-macros@npm:^3.0.1, babel-plugin-macros@npm:^3.1.0":
   version: 3.1.0
   resolution: "babel-plugin-macros@npm:3.1.0"
   dependencies:
@@ -6423,6 +6349,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:4.1.2, chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
+  version: 4.1.2
+  resolution: "chalk@npm:4.1.2"
+  dependencies:
+    ansi-styles: ^4.1.0
+    supports-color: ^7.1.0
+  checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
+  languageName: node
+  linkType: hard
+
 "chalk@npm:^2.0.0, chalk@npm:^2.4.1":
   version: 2.4.2
   resolution: "chalk@npm:2.4.2"
@@ -6431,16 +6367,6 @@ __metadata:
     escape-string-regexp: ^1.0.5
     supports-color: ^5.3.0
   checksum: ec3661d38fe77f681200f878edbd9448821924e0f93a9cefc0e26a33b145f1027a2084bf19967160d11e1f03bfe4eaffcabf5493b89098b2782c3fe0b03d80c2
-  languageName: node
-  linkType: hard
-
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
-  version: 4.1.2
-  resolution: "chalk@npm:4.1.2"
-  dependencies:
-    ansi-styles: ^4.1.0
-    supports-color: ^7.1.0
-  checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
   languageName: node
   linkType: hard
 
@@ -11259,6 +11185,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lodash.get@npm:^4.4.2":
+  version: 4.4.2
+  resolution: "lodash.get@npm:4.4.2"
+  checksum: e403047ddb03181c9d0e92df9556570e2b67e0f0a930fcbbbd779370972368f5568e914f913e93f3b08f6d492abc71e14d4e9b7a18916c31fa04bd2306efe545
+  languageName: node
+  linkType: hard
+
 "lodash.merge@npm:^4.6.2":
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
@@ -15837,6 +15770,22 @@ __metadata:
   languageName: node
   linkType: hard
 
+"twin.macro@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "twin.macro@npm:3.1.0"
+  dependencies:
+    "@babel/template": ^7.18.10
+    babel-plugin-macros: ^3.1.0
+    chalk: 4.1.2
+    lodash.get: ^4.4.2
+    lodash.merge: ^4.6.2
+    postcss-selector-parser: ^6.0.10
+  peerDependencies:
+    tailwindcss: ^3.2.4
+  checksum: 716695be03456adb023dea016044d56fa7bc84d86654153b410748cdcd15b285471191251f8c2354d930499a42fd4d520336c882c81974f55962939f634f06e0
+  languageName: node
+  linkType: hard
+
 "type-check@npm:^0.4.0, type-check@npm:~0.4.0":
   version: 0.4.0
   resolution: "type-check@npm:0.4.0"
@@ -16900,7 +16849,6 @@ __metadata:
   resolution: "yapp-21st@workspace:."
   dependencies:
     "@babel/core": ^7.20.5
-    "@egjs/react-infinitegrid": ^4.7.1
     "@next/font": 13.0.5
     "@radix-ui/react-accordion": ^1.0.1
     "@storybook/addon-actions": ^6.5.13
@@ -16949,6 +16897,7 @@ __metadata:
     react-error-boundary: ^3.1.4
     storybook-addon-next-router: ^4.0.2
     tailwindcss: ^3.2.4
+    twin.macro: ^3.1.0
     typescript: 4.9.3
     util: ^0.12.5
   languageName: unknown

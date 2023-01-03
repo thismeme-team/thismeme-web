@@ -6,6 +6,7 @@ import * as NextImage from "next/image";
 import { QueryClientProvider } from "../src/application/queryClient";
 import { Suspense } from "react";
 import { RouterContext } from "next/dist/shared/lib/router-context";
+import { ToastContainer, ToastProvider } from "../src/components/common/Toast";
 
 // Initialize MSW
 initialize();
@@ -14,11 +15,14 @@ export const decorators = [
   mswDecorator,
   (Story) => (
     <QueryClientProvider>
-      <Suspense fallback="loading...">
-        <div className="font-sans" style={{ "--font-pretendardVariable": "Pretendard" }}>
-          <Story />
-        </div>
-      </Suspense>
+      <ToastProvider>
+        <Suspense fallback="loading...">
+          <div className="font-sans" style={{ "--font-pretendardVariable": "Pretendard" }}>
+            <ToastContainer />
+            <Story />
+          </div>
+        </Suspense>
+      </ToastProvider>
     </QueryClientProvider>
   ),
 ];

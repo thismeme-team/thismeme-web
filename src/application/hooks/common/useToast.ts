@@ -4,7 +4,7 @@ import { delay } from "@/application/util";
 import { useSetToastContext } from "@/components/common/Toast/context";
 import type { Toast, ToastOption, ToastType } from "@/components/common/Toast/types";
 
-const DEFAULT_TOAST_DELAY = 1500;
+const DEFAULT_TOAST_DELAY = 1000;
 const ANIMATION_EXPIRE_DELAY = 1000;
 
 const toastFactory = (type: ToastType, message: Toast["message"], option?: ToastOption): Toast => ({
@@ -30,7 +30,7 @@ export const useToast = () => {
 
   const show = useCallback(
     (message: Toast["message"], option?: ToastOption) => {
-      const toast = toastFactory("success", message, option);
+      const toast = toastFactory("custom", message, option);
       dispatch({ type: "add", toast });
 
       return close({ id: toast.id, duration: option?.duration });

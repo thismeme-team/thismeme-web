@@ -1,5 +1,5 @@
+import { useToast } from "@/application/hooks/common";
 import { IconButton } from "@/components/common/Button/IconButton";
-import { useToast } from "@/components/common/Toast";
 
 interface Props {
   className: string;

@@ -42,8 +42,8 @@ export const ToastContainer = () => {
         className="pointer-events-none fixed inset-x-18 bottom-18 z-10 grid place-items-center content-end gap-6"
         ref={ref}
       >
-        {toasts.map((t) => (
-          <Toast key={t.id} {...t} />
+        {toasts.map((toast) => (
+          <Toast key={toast.id} {...toast} />
         ))}
       </aside>
     </Portal>

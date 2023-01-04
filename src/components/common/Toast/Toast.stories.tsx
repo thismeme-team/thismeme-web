@@ -1,6 +1,6 @@
+import { useToast } from "@/application/hooks/common";
 import { Button } from "@/components/common/Button";
 import type { Toast } from "@/components/common/Toast/types";
-import { useToast } from "@/components/common/Toast/useToast";
 
 export default {
   title: "components/common/Toast",

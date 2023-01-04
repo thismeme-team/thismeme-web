@@ -1,8 +1,10 @@
-import { useMemeDetailById } from "@/application/hooks";
+import { useMemeDetailById, useToast } from "@/application/hooks";
+import { CURRENT_URL } from "@/application/util/url";
+import { IconButton } from "@/components/common/Button";
 import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
-import { MemeShareList } from "@/components/meme/MemeShare";
+import { ClipboardCopyButton, MemeShareList } from "@/components/meme/MemeShare";
 
 interface Props {
   id: string;
@@ -10,6 +12,7 @@ interface Props {
 
 export const MemeDetail = ({ id }: Props) => {
   const { views, date, title, description, src, tags } = useMemeDetailById(id);
+  const { show } = useToast();
 
   return (
     <>
@@ -24,7 +27,28 @@ export const MemeDetail = ({ id }: Props) => {
         </div>
         <p className="text-16-regular-130">{description}</p>
       </section>
-      <MemeShareList className="w-full py-50" />
+      <MemeShareList className="w-full py-50">
+        <IconButton
+          as="li"
+          className="bg-[#FFE812]"
+          icon="kakao"
+          size="medium"
+          onClick={() =>
+            show((id) => <span>Render Props Test {id}</span>, {
+              color: "white",
+            })
+          }
+        />
+        <IconButton
+          as="li"
+          className="bg-light-gray-10"
+          icon="download"
+          size="medium"
+          onClick={() => show("앨범에 저장했습니다", { icon: "cake" })}
+        />
+        <ClipboardCopyButton target={CURRENT_URL} />
+        <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
+      </MemeShareList>
       <section>
         <span className="text-16-semibold-130">태그</span>
         <ul className="mt-16 flex flex-wrap gap-8">

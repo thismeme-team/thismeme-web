@@ -7,6 +7,7 @@ const colors = {
   black: "[&_*]:fill-black [&_*]:stroke-black",
   brand: "[&_*]:fill-brand [&_*]:stroke-brand",
   bookmark: "[&_*]:fill-bookmark [&_*]:stroke-bookmark",
+  white: "[&_*]:fill-white [&_*]:stroke-white",
   default: "",
 };
 

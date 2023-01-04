@@ -1,4 +1,5 @@
 export { default as back } from "/public/icon/back.svg";
+export { default as cake } from "/public/icon/cake.svg";
 export { default as cancel } from "/public/icon/cancel.svg";
 export { default as chevronDown } from "/public/icon/chevronDown.svg";
 export { default as delete } from "/public/icon/delete.svg";

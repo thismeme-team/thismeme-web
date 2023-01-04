@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { useMemo } from "react";
 
 import { useGetSearchResultsByKeyword, useIntersect } from "@/application/hooks";
+import { Masonry } from "@/components/common/Masonry";
 import { Navigation } from "@/components/common/Navigation";
-import { MemeItem, MemeList } from "@/components/meme/MemeList";
+import { MemeItem } from "@/components/meme/MemeItem";
 
 const ExploreWordsPage: NextPage = () => {
   const { query } = useRouter();
@@ -28,12 +29,12 @@ const ExploreWordsPage: NextPage = () => {
   return (
     <>
       <Navigation page="result" title={query.q} />
-      <MemeList>
-        {memeList.map((meme) => (
-          <MemeItem key={meme.id} meme={meme} />
-        ))}
-        <div className="h-[1px]" ref={ref} />
-      </MemeList>
+      <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
+        {memeList.map((meme) => {
+          return <MemeItem key={meme.id} meme={meme} />;
+        })}
+        <div className="h-10" ref={ref}></div>
+      </Masonry>
       {isFetching && <div>loading...</div>}
     </>
   );

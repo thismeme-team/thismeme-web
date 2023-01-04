@@ -4,8 +4,9 @@ import { useMemo } from "react";
 
 import { useGetSearchResultsByTag, useIntersect } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
+import { Masonry } from "@/components/common/Masonry";
 import { Navigation } from "@/components/common/Navigation";
-import { MemeItem, MemeList } from "@/components/meme/MemeList";
+import { MemeItem } from "@/components/meme/MemeItem";
 
 const ExploreTagsPage: NextPage = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const ExploreTagsPage: NextPage = () => {
       fetchNextPage();
     }
   });
+
   return (
     <>
       <Navigation page="result" title={`#${query.q}`} />
@@ -32,12 +34,12 @@ const ExploreTagsPage: NextPage = () => {
         <span className="text-black/[.3]">100개의 밈</span>
         <Button size="large">태그 즐겨찾기</Button>
       </div>
-      <MemeList>
-        {memeList.map((meme) => (
-          <MemeItem key={meme.id} meme={meme} />
-        ))}
-        <div className="h-[1px]" ref={ref} />
-      </MemeList>
+      <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
+        {memeList.map((meme) => {
+          return <MemeItem key={meme.id} meme={meme} />;
+        })}
+        <div className="h-10" ref={ref}></div>
+      </Masonry>
       {isFetching && <div>loading...</div>}
     </>
   );

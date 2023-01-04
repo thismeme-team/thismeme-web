@@ -3,20 +3,28 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
+import { useModal } from "@/application/hooks/common";
+import { SampleModal } from "@/components/common/Modal";
 import { Navigation } from "@/components/common/Navigation";
 import { HomePopular } from "@/components/home";
 import { SearchInput } from "@/components/search";
 
-import Avatar from "../../public/img/Avatar.png";
-
 const Home: NextPage = () => {
   const router = useRouter();
+  const { modalOpen, onOpen, onClose } = useModal();
+
   return (
     <>
       <Navigation page="intro" />
-      <div className="flex justify-center">
-        <Image alt="brandimage" placeholder="blur" src={Avatar} />
-      </div>
+      <button onClick={onOpen}>Open Modal</button>
+      {modalOpen && <SampleModal onClose={onClose} />}
+      <Image
+        alt="brandimage"
+        className="m-auto my-10"
+        height={190}
+        src="/img/brandimage.png"
+        width={230}
+      />
       <SearchInput
         placeholder="당신이 찾는 밈 여기 있다."
         onClick={() => {

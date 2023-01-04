@@ -18,6 +18,11 @@ const nextConfig = {
     const { dev, isServer } = options;
     config.module = config.module || {};
     config.module.rules = config.module.rules || [];
+    config.experiments = {
+      ...config.experiments,
+      topLevelAwait: true,
+    };
+
     config.module.rules.push({
       test: /.svg$/,
       use: [

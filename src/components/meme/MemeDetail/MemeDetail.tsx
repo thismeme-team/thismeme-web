@@ -1,10 +1,15 @@
 import { useMemeDetailById, useToast } from "@/application/hooks";
-import { CURRENT_URL } from "@/application/util/url";
+import { PAGE_URL } from "@/application/util";
 import { IconButton } from "@/components/common/Button";
 import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
-import { ClipboardCopyButton, MemeShareList } from "@/components/meme/MemeShare";
+import {
+  ClipboardCopyButton,
+  DownloadButton,
+  KakaoShareButton,
+  MemeShareList,
+} from "@/components/meme/MemeShare";
 
 interface Props {
   id: string;
@@ -13,6 +18,10 @@ interface Props {
 export const MemeDetail = ({ id }: Props) => {
   const { views, date, title, description, src, tags } = useMemeDetailById(id);
   const { show } = useToast();
+
+  const handleShare = () => show("카카오톡 공유");
+  const handleClipboardCopy = () => show("링크가 복사되었습니다", { icon: "share" });
+  const handleDownload = () => show("앨범에 저장하였습니다", { icon: "cake" });
 
   return (
     <>
@@ -28,25 +37,9 @@ export const MemeDetail = ({ id }: Props) => {
         <p className="text-16-regular-130">{description}</p>
       </section>
       <MemeShareList className="w-full py-50">
-        <IconButton
-          as="li"
-          className="bg-[#FFE812]"
-          icon="kakao"
-          size="medium"
-          onClick={() =>
-            show((id) => <span>Render Props Test {id}</span>, {
-              color: "white",
-            })
-          }
-        />
-        <IconButton
-          as="li"
-          className="bg-light-gray-10"
-          icon="download"
-          size="medium"
-          onClick={() => show("앨범에 저장했습니다", { icon: "cake" })}
-        />
-        <ClipboardCopyButton target={CURRENT_URL} />
+        <KakaoShareButton target={PAGE_URL} onSuccess={handleShare} />
+        <DownloadButton onSuccess={handleDownload} />
+        <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
         <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
       </MemeShareList>
       <section>

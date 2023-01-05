@@ -1,14 +1,13 @@
-import { useToast } from "@/application/hooks";
-import { clipboard } from "@/application/util";
+import { useClipboard } from "@/application/hooks";
 import { IconButton } from "@/components/common/Button";
 
 interface Props {
   target: string;
+  onSuccess?: () => void;
 }
-export const ClipboardCopyButton = ({ target }: Props) => {
-  const { show } = useToast();
-  const handleClick = () =>
-    clipboard.writeText(target).then(() => show("링크를 복사했습니다", { icon: "share" }));
+export const ClipboardCopyButton = ({ target, onSuccess }: Props) => {
+  const { writeText } = useClipboard();
+  const handleClick = () => writeText(target, { onSuccess });
 
   return (
     <IconButton

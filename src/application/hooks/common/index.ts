@@ -1,4 +1,5 @@
 export * from "./useClickOutside";
+export * from "./useClipboard";
 export * from "./useColoredText";
 export * from "./useDebounce";
 export * from "./useEllipsis";

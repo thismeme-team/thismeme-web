@@ -38,14 +38,14 @@ export const MemeDetail = ({ id }: Props) => {
       </section>
       <MemeShareList className="w-full py-50">
         <KakaoShareButton target={PAGE_URL} onSuccess={handleShare} />
-        <DownloadButton onSuccess={handleDownload} />
+        <DownloadButton name={title} target={src} onSuccess={handleDownload} />
         <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
         <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
       </MemeShareList>
       <section>
         <span className="text-16-semibold-130">태그</span>
         <ul className="mt-16 flex flex-wrap gap-8">
-          {tags?.map((tag, idx) => (
+          {tags.map((tag, idx) => (
             <Chip as="li" color="lightGray" key={idx} label={tag} size="medium" />
           ))}
         </ul>

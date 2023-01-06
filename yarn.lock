@@ -4218,6 +4218,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/kakao-js-sdk@npm:^1.39.1":
+  version: 1.39.1
+  resolution: "@types/kakao-js-sdk@npm:1.39.1"
+  checksum: e64c68a3c5554fa312a7f59f0068f720c5513eff56ed8fbb225820d300b922911eab4c01bd3027fd5712a65d776fd12241405869bcc640f7087ab81269a666bd
+  languageName: node
+  linkType: hard
+
 "@types/lodash@npm:^4.14.167":
   version: 4.14.190
   resolution: "@types/lodash@npm:4.14.190"
@@ -16843,6 +16850,7 @@ __metadata:
     "@tanstack/eslint-plugin-query": ^4.15.1
     "@tanstack/react-query": ^4.19.1
     "@tanstack/react-query-devtools": ^4.19.1
+    "@types/kakao-js-sdk": ^1.39.1
     "@types/node": 18.11.9
     "@types/react": 18.0.25
     "@types/react-dom": 18.0.9

@@ -38,6 +38,7 @@
     "@tailwindcss/line-clamp": "^0.4.2",
     "@tanstack/eslint-plugin-query": "^4.15.1",
     "@tanstack/react-query-devtools": "^4.19.1",
+    "@types/kakao-js-sdk": "^1.39.1",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",

@@ -24,32 +24,7 @@ export function useSuspendedQuery<
     queryFn: QueryFunction<TQueryFnData, TQueryKey>;
   } & Omit<SuspendedUseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, "enabled">,
 ): SuspendedUseQueryResultOnSuccess<TData>;
-export function useSuspendedQuery<
-  TQueryFnData = unknown,
-  TError = unknown,
-  TData = TQueryFnData,
-  TQueryKey extends QueryKey = QueryKey,
->(
-  args: {
-    queryKey: TQueryKey;
-    queryFn: QueryFunction<TQueryFnData, TQueryKey>;
-  } & Omit<SuspendedUseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, "enabled"> & {
-      enabled?: true;
-    },
-): SuspendedUseQueryResultOnSuccess<TData>;
-export function useSuspendedQuery<
-  TQueryFnData = unknown,
-  TError = unknown,
-  TData = TQueryFnData,
-  TQueryKey extends QueryKey = QueryKey,
->(
-  args: {
-    queryKey: TQueryKey;
-    queryFn: QueryFunction<TQueryFnData, TQueryKey>;
-  } & Omit<SuspendedUseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, "enabled"> & {
-      enabled: false; // NOTE data undefined
-    },
-): SuspendedUseQueryResultOnIdle<undefined>;
+
 export function useSuspendedQuery<
   TQueryFnData = unknown,
   TError = unknown,
@@ -61,6 +36,7 @@ export function useSuspendedQuery<
     queryFn: QueryFunction<TQueryFnData, TQueryKey>;
   } & SuspendedUseQueryOptions<TQueryFnData, TError, TData, TQueryKey>,
 ): SuspendedUseQueryResultOnSuccess<TData> | SuspendedUseQueryResultOnIdle<undefined>;
+
 export function useSuspendedQuery<
   TQueryFnData = unknown,
   TError = unknown,

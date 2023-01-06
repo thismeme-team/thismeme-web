@@ -2,6 +2,7 @@ export * from "./useClickOutside";
 export * from "./useClipboard";
 export * from "./useColoredText";
 export * from "./useDebounce";
+export * from "./useDownload";
 export * from "./useEllipsis";
 export * from "./useInput";
 export * from "./useIsMount";

@@ -1,9 +1,14 @@
+import { useDownload } from "@/application/hooks";
 import { IconButton } from "@/components/common/Button";
 
 interface Props {
+  target: string;
+  name?: string;
   onSuccess?: () => void;
 }
-export const DownloadButton = ({ onSuccess }: Props) => {
+
+export const DownloadButton = ({ target, name = "download", onSuccess }: Props) => {
+  const { download } = useDownload();
   return (
     <IconButton
       as="li"
@@ -11,8 +16,7 @@ export const DownloadButton = ({ onSuccess }: Props) => {
       icon="download"
       size="medium"
       onClick={() => {
-        // 다운로드 로직..
-        onSuccess?.();
+        download({ target, name, onSuccess });
       }}
     />
   );

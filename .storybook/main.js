@@ -26,7 +26,8 @@ module.exports = {
   core: {
     builder: "@storybook/builder-webpack5",
   },
-  webpackFinal: async (config) => {
+  webpackFinal: async (config, options) => {
+    const { dev } = options;
     const fileLoaderRule = config.module.rules.find((rule) => rule.test && rule.test.test(".svg"));
     fileLoaderRule.exclude = /\.svg$/;
 
@@ -38,7 +39,20 @@ module.exports = {
         svgo: false,
       },
     });
-
+    config.module.rules.push({
+      test: /\.(ts|tsx)$/,
+      loader: require.resolve("babel-loader"),
+      options: {
+        sourceMaps: dev,
+        presets: [
+          ["@babel/preset-react", { runtime: "automatic", importSource: "@emotion/react" }],
+        ],
+        plugins: [
+          require.resolve("babel-plugin-macros"),
+          [require.resolve("@babel/plugin-syntax-typescript"), { isTSX: true }],
+        ],
+      },
+    });
     config.resolve.alias["@"] = path.resolve(__dirname, "../src/");
     return config;
   },

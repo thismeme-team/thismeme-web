@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-import type { PaginationResponse, SearchResultByKeyword, SearchResultByTag } from "@/types";
+import type { PaginationResponse, SearchResult } from "@/types";
 
 export const getSearch = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/search`,
@@ -105,9 +105,12 @@ export const getSearchResultsByKeyword = rest.get(
     const limit = Number(searchParams.get("limit"));
     const data = searchResults.slice(offset * limit, (offset + 1) * limit);
 
+    if (!query || !query.trim()) {
+      return res(ctx.status(400));
+    }
     return res(
       ctx.status(200),
-      ctx.json<PaginationResponse<SearchResultByKeyword>>({
+      ctx.json<PaginationResponse<SearchResult>>({
         data,
         pageNumber: offset,
         pageSize: limit,
@@ -120,22 +123,25 @@ export const getSearchResultsByKeyword = rest.get(
 );
 
 export const getSearchResultsByTag = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/search/tags`,
+  `${process.env.NEXT_PUBLIC_API_URL}/search/tag`,
   (req, res, ctx) => {
     const { searchParams } = req.url;
-    const query = searchParams.get("tag");
-    const page = Number(searchParams.get("page"));
-    const size = Number(searchParams.get("size"));
-    const data = searchResults.slice(page * size, (page + 1) * size);
+    const query = searchParams.get("keyword");
+    const offset = Number(searchParams.get("offset"));
+    const limit = Number(searchParams.get("limit"));
+    const data = searchResults.slice(offset * limit, (offset + 1) * limit);
 
+    if (!query || !query.trim()) {
+      return res(ctx.status(400));
+    }
     return res(
       ctx.status(200),
-      ctx.json<PaginationResponse<SearchResultByTag>>({
+      ctx.json<PaginationResponse<SearchResult>>({
         data,
-        pageNumber: page,
-        pageSize: size,
-        isLastPage: data.length < size,
-        isFirstPage: page === 0,
+        pageNumber: offset,
+        pageSize: limit,
+        isLastPage: data.length < limit,
+        isFirstPage: offset === 0,
       }),
       ctx.delay(500),
     );

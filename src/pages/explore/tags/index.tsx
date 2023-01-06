@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useMemo } from "react";
+import { useCallback, useMemo } from "react";
 
 import { useGetSearchResultsByTag, useIntersect } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
@@ -11,21 +11,15 @@ import { MemeItem } from "@/components/meme/MemeItem";
 const ExploreTagsPage: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  /**
-   * FIX
-   * 1. query.q가 string일 때만 memeList을 불러올 수 있도록 방어코드 작성해야함(현재는 타입단언으로 타입 에러만 안나도록 해두었음)
-   */
   const { data, hasNextPage, isFetching, fetchNextPage } = useGetSearchResultsByTag(
     query.q as string,
   );
   const memeList = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
-  const ref = useIntersect(async (entry, observer) => {
-    observer.unobserve(entry.target);
-    if (hasNextPage && !isFetching) {
-      fetchNextPage();
-    }
-  });
+  const onIntersect = useCallback(async () => {
+    fetchNextPage();
+  }, [fetchNextPage]);
+  const ref = useIntersect(onIntersect);
 
   return (
     <>

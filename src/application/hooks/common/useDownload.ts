@@ -20,6 +20,13 @@ export const useDownload = () => {
       try {
         setIsDownloading(true);
 
+        /**
+         * NOTE Optimistic UI
+         * 로딩, 실패 케이스도 고려해야 한다면
+         * react-hot-toast의 promise 버전 toast를 구현해야 함
+         */
+        onSuccess?.();
+
         const blob = await fetch(target).then((response) => response.blob());
         const blobURL = URL.createObjectURL(blob);
 
@@ -31,8 +38,6 @@ export const useDownload = () => {
         a.click();
 
         URL.revokeObjectURL(blobURL);
-
-        onSuccess?.();
 
         setIsDownloading(false);
       } catch (e) {

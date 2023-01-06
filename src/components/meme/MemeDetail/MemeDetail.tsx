@@ -37,7 +37,10 @@ export const MemeDetail = ({ id }: Props) => {
         <p className="text-16-regular-130">{description}</p>
       </section>
       <MemeShareList className="w-full py-50">
-        <KakaoShareButton target={PAGE_URL} onSuccess={handleShare} />
+        <KakaoShareButton
+          resource={{ url: PAGE_URL, imageUrl: src, title, description }}
+          onSuccess={handleShare}
+        />
         <DownloadButton name={title} target={src} onSuccess={handleDownload} />
         <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
         <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />

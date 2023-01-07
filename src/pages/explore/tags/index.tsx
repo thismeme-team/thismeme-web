@@ -11,14 +11,12 @@ import { MemeItem } from "@/components/meme/MemeItem";
 const ExploreTagsPage: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  const { data, hasNextPage, isFetching, fetchNextPage } = useGetSearchResultsByTag(
-    query.q as string,
-  );
+  const { data, fetchNextPage } = useGetSearchResultsByTag(query.q as string);
   const memeList = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
   const onIntersect = useCallback(async () => {
-    fetchNextPage();
-  }, [fetchNextPage]);
+    if (query.q) fetchNextPage();
+  }, [query, fetchNextPage]);
   const ref = useIntersect(onIntersect);
 
   return (
@@ -32,9 +30,8 @@ const ExploreTagsPage: NextPage = () => {
         {memeList.map((meme) => {
           return <MemeItem key={meme.id} meme={meme} />;
         })}
-        <div className="h-10" ref={ref}></div>
       </Masonry>
-      {isFetching && <div>loading...</div>}
+      <div className="m-10" ref={ref}></div>
     </>
   );
 };

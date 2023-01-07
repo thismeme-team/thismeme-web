@@ -8,16 +8,16 @@ import { Navigation } from "@/components/common/Navigation";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 const ExploreWordsPage: NextPage = () => {
-  const { query } = useRouter();
-  const { data, hasNextPage, isFetching, fetchNextPage } = useGetSearchResultsByKeyword(
-    query.q as string,
-  );
+  const router = useRouter();
+  const { query } = router;
+  const { data, fetchNextPage } = useGetSearchResultsByKeyword(query.q as string);
 
   const memeList = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
   const onIntersect = useCallback(async () => {
-    fetchNextPage();
-  }, [fetchNextPage]);
+    if (query.q) fetchNextPage();
+  }, [query, fetchNextPage]);
+
   const ref = useIntersect(onIntersect);
 
   return (
@@ -27,9 +27,8 @@ const ExploreWordsPage: NextPage = () => {
         {memeList.map((meme) => {
           return <MemeItem key={meme.id} meme={meme} />;
         })}
-        <div className="h-10" ref={ref}></div>
       </Masonry>
-      {isFetching && <div>loading...</div>}
+      <div className="m-10" ref={ref}></div>
     </>
   );
 };

@@ -28,7 +28,8 @@ export const useGetSearchResultsByKeyword = (keyword: string) =>
     queryKey: ["getSearchResultsByKeyword", keyword],
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getSearchResultsByKeyword({ keyword, offset: pageParam, limit: 20 }),
-    enabled: typeof keyword === "string",
+    suspense: false,
+    enabled: !!keyword,
     getNextPageParam: (lastPage) => {
       const { isLastPage, pageNumber } = lastPage;
       return isLastPage ? undefined : pageNumber + 1;
@@ -46,7 +47,8 @@ export const useGetSearchResultsByTag = (tag: string) =>
     queryKey: ["getSearchResultsByTag", tag],
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getSearchResultsByTag({ keyword: tag, offset: pageParam, limit: 20 }),
-    enabled: typeof tag === "string",
+    suspense: false,
+    enabled: !!tag,
     getNextPageParam: (lastPage) => {
       const { isLastPage, pageNumber } = lastPage;
       return isLastPage ? undefined : pageNumber + 1;

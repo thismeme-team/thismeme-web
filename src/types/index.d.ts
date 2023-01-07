@@ -10,6 +10,29 @@ export interface SearchKeyword {
   text: string;
 }
 
+export interface PaginationResponse<T> {
+  data: T[];
+  pageNumber: number;
+  pageSize: number;
+  isLastPage: boolean;
+  isFirstPage: boolean;
+}
+/**
+ * FIX camel-case로 변환하는 API 스키마 필요
+ */
+export interface SearchResult {
+  id: number;
+  title: string;
+  image_url: string;
+  image_width: number;
+  image_height: number;
+  tags: string[];
+  view_count: number;
+  share_count: number;
+  create_date: string;
+  modified_date: string;
+}
+
 export interface Meme {
   id: number;
   src: string;

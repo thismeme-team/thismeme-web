@@ -27,11 +27,13 @@ const SearchPage = () => {
         <p className="my-16 px-14 text-12-regular-160 text-gray-10">
           밈 제목,태그 설명을 입력하세요
         </p>
-        <Suspense fallback={<div>loading...</div>}>
-          <div className="absolute w-full bg-white">
-            <SearchResultList value={inputProps.value} onClickAddKeyword={onClickAddKeyword} />
-          </div>
-        </Suspense>
+        {inputProps.value && (
+          <Suspense fallback={<div>loading...</div>}>
+            <div className="absolute h-full w-full bg-white">
+              <SearchResultList value={inputProps.value} onClickAddKeyword={onClickAddKeyword} />
+            </div>
+          </Suspense>
+        )}
         <Suspense fallback={<div className="text-20-bold-140">로딩중중</div>}>
           <div className="px-14">
             <SearchRecent keywords={keywords} onClickDeleteKeyword={onClickDeleteKeyword} />

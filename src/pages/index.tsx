@@ -3,21 +3,16 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { useModal } from "@/application/hooks/common";
-import { SampleModal } from "@/components/common/Modal";
 import { Navigation } from "@/components/common/Navigation";
 import { HomePopular } from "@/components/home";
 import { SearchInput } from "@/components/search";
 
 const Home: NextPage = () => {
   const router = useRouter();
-  const { modalOpen, onOpen, onClose } = useModal();
 
   return (
     <>
       <Navigation page="intro" />
-      <button onClick={onOpen}>Open Modal</button>
-      {modalOpen && <SampleModal onClose={onClose} />}
       <Image
         alt="brandimage"
         className="m-auto my-10"
@@ -33,7 +28,7 @@ const Home: NextPage = () => {
       />
 
       <div className="mt-60 mb-13 text-center text-16-regular-130">인기검색어</div>
-      <Suspense fallback={<div className="text-title">loading</div>}>
+      <Suspense fallback={<div className="text-20-bold-140">loading</div>}>
         <ul className="flex flex-row flex-wrap justify-center px-36">
           <HomePopular />
         </ul>

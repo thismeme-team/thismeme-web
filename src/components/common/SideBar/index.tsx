@@ -11,7 +11,7 @@ export const SideBar = () => {
       <Accordion.Item className="bg-white" value="item-1">
         <AccordionTrigger>Is it accessible?</AccordionTrigger>
         <AccordionContent>
-          <ul className="flex flex-col gap-16 py-16 px-50 text-semi-bold">
+          <ul className="flex flex-col gap-16 py-16 px-50 text-16-semibold-130">
             <li>hihihihihihihi</li>
             <li>hihihihihihihi</li>
             <li>hihihihihihihi</li>
@@ -23,7 +23,7 @@ export const SideBar = () => {
       <Accordion.Item className="bg-white" value="item-2">
         <AccordionTrigger>Is it unstyled?</AccordionTrigger>
         <AccordionContent>
-          <ul className="flex flex-col gap-16 py-16 px-50 text-semi-bold">
+          <ul className="flex flex-col gap-16 py-16 px-50 text-16-semibold-130">
             <li>hihihihihihihi</li>
             <li>hihihihihihihi</li>
             <li>hihihihihihihi</li>
@@ -35,7 +35,7 @@ export const SideBar = () => {
       <Accordion.Item className="bg-white" value="item-3">
         <AccordionTrigger>Can it be animated?</AccordionTrigger>
         <AccordionContent>
-          <ul className="flex flex-col gap-16 py-16 px-50 text-semi-bold">
+          <ul className="flex flex-col gap-16 py-16 px-50 text-16-semibold-130">
             <li>hihihihihihihi</li>
             <li>hihihihihihihi</li>
             <li>hihihihihihihi</li>
@@ -55,7 +55,7 @@ const AccordionTrigger = forwardRef(
     <Accordion.Header>
       <Accordion.Trigger
         {...props}
-        className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-semi-bold hover:bg-light-gray-20 data-[state=open]:bg-light-gray-10 [&>#chevronDown]:data-[state=open]:rotate-180"
+        className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-light-gray-20 data-[state=open]:bg-light-gray-10 [&>#chevronDown]:data-[state=open]:rotate-180"
         ref={forwardedRef}
       >
         <div className="h-24 w-24 rounded-full bg-light-gray-30"></div>

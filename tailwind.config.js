@@ -27,62 +27,9 @@ module.exports = {
         "gray-20": "#666666",
         "dark-gray-10": "#383838",
         "dark-gray-20": "#242424",
-        brand: "#a0c3d2", // Deprecated
         primary: "#0d24fb",
-        bookmark: "#ffc564", // Deprecated
       },
       fontSize: {
-        // Deprecated
-        header: [
-          "1.8rem",
-          {
-            lineHeight: "140%",
-            letterSpacing: "0em",
-            fontWeight: "700",
-          },
-        ],
-        title: [
-          "2rem",
-          {
-            lineHeight: "140%",
-            letterSpacing: "0em",
-            fontWeight: "700",
-          },
-        ],
-        tag: [
-          "1.5rem",
-          {
-            lineHeight: "130%",
-            letterSpacing: "0em",
-            fontWeight: "600",
-          },
-        ],
-        regular: [
-          "1.6rem",
-          {
-            lineHeight: "130%",
-            letterSpacing: "0em",
-            fontWeight: "400",
-          },
-        ],
-        "semi-bold": [
-          "1.6rem",
-          {
-            lineHeight: "130%",
-            letterSpacing: "0em",
-            fontWeight: "600",
-          },
-        ],
-        label: [
-          "1.2rem",
-          {
-            lineHeight: "130%",
-            letterSpacing: "0em",
-            fontWeight: "400",
-          },
-        ],
-
-        // New className
         "20-bold-140": [
           "2rem",
           {

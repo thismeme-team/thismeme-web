@@ -4,7 +4,6 @@ const Document = () => {
   return (
     <Html>
       <Head>
-        <title>JJM</title>
         <meta content="네가 찾던 ‘그 밈’ 그 집이 내 집이였어야 해" name="description" />
         <link href="/public/favicon.ico" rel="icon" />
         <script

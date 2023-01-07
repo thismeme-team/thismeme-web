@@ -4,12 +4,9 @@ import { IconButton } from "@/components/common/Button";
 import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
-import {
-  ClipboardCopyButton,
-  DownloadButton,
-  KakaoShareButton,
-  MemeShareList,
-} from "@/components/meme/MemeShare";
+import { ClipboardCopyButton } from "@/components/meme/MemeDetail/ClipboardCopyButton";
+import { DownloadButton } from "@/components/meme/MemeDetail/DownloadButton";
+import { KakaoShareButton } from "@/components/meme/MemeDetail/KakaoShareButton";
 
 interface Props {
   id: string;
@@ -36,15 +33,19 @@ export const MemeDetail = ({ id }: Props) => {
         </div>
         <p className="text-16-regular-130">{description}</p>
       </section>
-      <MemeShareList className="w-full py-50">
-        <KakaoShareButton
-          resource={{ url: PAGE_URL, imageUrl: src, title, description }}
-          onSuccess={handleShare}
-        />
-        <DownloadButton name={title} target={src} onSuccess={handleDownload} />
-        <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
-        <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
-      </MemeShareList>
+
+      <div className="flex w-full flex-col items-center gap-16 py-50">
+        <ul className="flex gap-10">
+          <KakaoShareButton
+            resource={{ url: PAGE_URL, imageUrl: src, title, description }}
+            onSuccess={handleShare}
+          />
+          <DownloadButton name={title} target={src} onSuccess={handleDownload} />
+          <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
+          <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
+        </ul>
+        <span className="text-16-semibold-130 text-dark-gray-20">친구에게 밈을 공유해 보세요</span>
+      </div>
       <section>
         <span className="text-16-semibold-130">태그</span>
         <ul className="mt-16 flex flex-wrap gap-8">

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { memo } from "react";
 
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
@@ -10,7 +11,7 @@ import { Photo } from "@/components/common/Photo";
 interface Props {
   meme: any;
 }
-export const MemeItem = ({ meme }: Props) => {
+export const MemeItem = memo(({ meme }: Props) => {
   return (
     <Link className="flex flex-col gap-6" href={`/meme/${meme.id}`}>
       <Photo className="rounded-15" src={meme.image_url} />
@@ -23,4 +24,6 @@ export const MemeItem = ({ meme }: Props) => {
       </div>
     </Link>
   );
-};
+});
+
+MemeItem.displayName = "MemeItem";

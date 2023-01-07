@@ -15,7 +15,10 @@ export const SearchItem = ({ searchText, tagName, majorType, ...rest }: SearchIt
   const { ColoredText } = useColoredText({ tagName, searchText });
 
   return (
-    <div className="relative flex h-50 w-full items-center pl-11 pr-6 text-semi-bold" {...rest}>
+    <div
+      className="relative flex h-50 w-full items-center pl-11 pr-6 text-16-semibold-130"
+      {...rest}
+    >
       <Icon className="mr-10" name="search" />
       {ColoredText}
       {majorType && (

@@ -9,8 +9,8 @@ import type { ComponentPropsWithoutRef, ElementType } from "react";
  */
 
 const style = {
-  large: "rounded-10 py-11 px-15 text-semi-bold",
-  medium: "rounded-5 py-8 px-13 text-tag",
+  large: "rounded-10 py-11 px-15 text-16-semibold-130",
+  medium: "rounded-5 py-8 px-13 text-15-semibold-130",
   custom: "",
 };
 

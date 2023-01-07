@@ -28,7 +28,7 @@ const Home: NextPage = () => {
       />
 
       <div className="mt-60 mb-13 text-center text-16-regular-130">인기검색어</div>
-      <Suspense fallback={<div className="text-title">loading</div>}>
+      <Suspense fallback={<div className="text-20-bold-140">loading</div>}>
         <ul className="flex flex-row flex-wrap justify-center px-36">
           <HomePopular />
         </ul>

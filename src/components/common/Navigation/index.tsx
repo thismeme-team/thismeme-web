@@ -52,7 +52,7 @@ export const Navigation = ({
     <nav className="sticky top-0 flex min-h-[5rem] w-full items-center justify-between gap-16 bg-white">
       <div className="flex grow items-center gap-16">{left}</div>
       {title && (
-        <span className="absolute flex h-full w-full items-center justify-center text-header">
+        <span className="text-header absolute flex h-full w-full items-center justify-center">
           {title}
         </span>
       )}

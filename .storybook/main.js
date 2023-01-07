@@ -54,6 +54,10 @@ module.exports = {
       },
     });
     config.resolve.alias["@"] = path.resolve(__dirname, "../src/");
+
+    // nextjs mock module
+    config.resolve.alias["next/link"] = require.resolve("./__mocks__/next/link.js");
+
     return config;
   },
   babel: async (options) => {

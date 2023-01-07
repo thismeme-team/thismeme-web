@@ -39,7 +39,7 @@ const sampleArray = Array.from(Array(100).keys()).map((id) => {
 
 const Template: ComponentStory<typeof Masonry> = (args) => (
   <>
-    <Masonry>
+    <Masonry {...args}>
       {sampleArray.map((item) => {
         return <MemeItem key={item.id} meme={item} />;
       })}
@@ -48,3 +48,25 @@ const Template: ComponentStory<typeof Masonry> = (args) => (
 );
 
 export const Default = Template.bind({});
+Default.args = {
+  spacing: 8,
+  columns: 4,
+};
+Default.argTypes = {
+  spacing: {
+    control: {
+      type: "range",
+      min: 0,
+      max: 30,
+      step: 1,
+    },
+  },
+  columns: {
+    control: {
+      type: "range",
+      min: 1,
+      max: 8,
+      step: 1,
+    },
+  },
+};

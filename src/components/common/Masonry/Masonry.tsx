@@ -1,10 +1,41 @@
 import type { ComponentPropsWithoutRef, ElementType } from "react";
 import { useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
-import tw from "twin.macro";
+import type { TwStyle } from "twin.macro";
 
 export const parseToNumber = (val: string) => {
   return Number(val.replace("px", ""));
+};
+
+interface OwnerState {
+  spacing: number;
+  columns: number;
+  maxColumnHeight?: number;
+  defaultColumns?: number;
+  defaultHeight?: number;
+  defaultSpacing?: number;
+  isSSR: boolean | 0 | undefined;
+}
+const getStyle = ({ ownerState }: { ownerState: OwnerState }): TwStyle => {
+  const styles = {
+    width: "100%",
+    display: "flex",
+    flexFlow: "column wrap",
+    alignContent: "flex-start",
+    boxSizing: "border-box",
+    "& > *": {
+      boxSizing: "border-box",
+    },
+  };
+
+  return {
+    ...styles,
+    ...(ownerState.maxColumnHeight && { height: ownerState.maxColumnHeight }),
+    "& > *": {
+      margin: `calc(${ownerState.spacing}px / 2)`,
+      width: `calc(${(100 / ownerState.columns).toFixed(2)}% - ${ownerState.spacing}px)`,
+    },
+  };
 };
 
 type Props<T extends ElementType> = {
@@ -16,17 +47,18 @@ type Props<T extends ElementType> = {
   defaultHeight?: number;
 } & ComponentPropsWithoutRef<T>;
 
-export const Masonry = <T extends ElementType = "div">({
-  as,
-  children,
-  spacing = 8,
-  columns = 4,
-  defaultSpacing,
-  defaultColumns,
-  defaultHeight,
-  className = "",
-  ...rest
-}: Props<T>) => {
+export const Masonry = <T extends ElementType = "div">(props: Props<T>) => {
+  const {
+    as,
+    children,
+    spacing = 8,
+    columns = 4,
+    defaultSpacing,
+    defaultColumns,
+    defaultHeight,
+    ...rest
+  } = props;
+
   const [maxColumnHeight, setMaxColumnHeight] = useState<number>();
   const isSSR =
     !maxColumnHeight &&
@@ -129,28 +161,25 @@ export const Masonry = <T extends ElementType = "div">({
       <span
         data-class="line-break"
         key={index}
-        style={{ margin: 0, width: 0, flexFlow: "column wrap", padding: 0, order: index + 1 }}
+        style={{ margin: 0, width: 0, flexBasis: "100%", padding: 0, order: index + 1 }}
       />
     ));
 
   const MasonryRoot = as || ("div" as ElementType);
 
+  const ownerState = {
+    ...props,
+    spacing,
+    columns,
+    maxColumnHeight,
+    defaultColumns,
+    defaultHeight,
+    defaultSpacing,
+    isSSR,
+  };
+
   return (
-    <MasonryRoot
-      ref={masonryRef}
-      css={[
-        tw`box-border flex w-full flex-col flex-wrap content-start`,
-        {
-          ...(maxColumnHeight && { height: maxColumnHeight }),
-          margin: `calc(0px - (${spacing} / 2))`,
-          "& > *": {
-            margin: `calc(${spacing}px / 2)`,
-            width: `calc(${(100 / columns).toFixed(2)}% - ${spacing}px)`,
-          },
-        },
-      ]}
-      {...rest}
-    >
+    <MasonryRoot css={[getStyle({ ownerState })]} ref={masonryRef} {...rest}>
       {children}
       {lineBreaks}
     </MasonryRoot>

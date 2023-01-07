@@ -52,6 +52,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tanstack/eslint-plugin-query", "npm:4.15.1"],\
             ["@tanstack/react-query", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.19.1"],\
             ["@tanstack/react-query-devtools", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.19.1"],\
+            ["@types/kakao-js-sdk", "npm:1.39.1"],\
             ["@types/node", "npm:18.11.9"],\
             ["@types/react", "npm:18.0.25"],\
             ["@types/react-dom", "npm:18.0.9"],\
@@ -8361,6 +8362,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-json5-npm-0.0.29-f63a7916bd-e60b153664.zip/node_modules/@types/json5/",\
           "packageDependencies": [\
             ["@types/json5", "npm:0.0.29"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
+      ["@types/kakao-js-sdk", [\
+        ["npm:1.39.1", {\
+          "packageLocation": "./.yarn/cache/@types-kakao-js-sdk-npm-1.39.1-baf2c0cd08-e64c68a3c5.zip/node_modules/@types/kakao-js-sdk/",\
+          "packageDependencies": [\
+            ["@types/kakao-js-sdk", "npm:1.39.1"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -23573,6 +23583,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@tanstack/eslint-plugin-query", "npm:4.15.1"],\
             ["@tanstack/react-query", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.19.1"],\
             ["@tanstack/react-query-devtools", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:4.19.1"],\
+            ["@types/kakao-js-sdk", "npm:1.39.1"],\
             ["@types/node", "npm:18.11.9"],\
             ["@types/react", "npm:18.0.25"],\
             ["@types/react-dom", "npm:18.0.9"],\

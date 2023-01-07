@@ -20,9 +20,11 @@ export const useSetToastContext = () => useContext(SetToastContext);
 const reducer = (state: Toast[], action: SetToastAction) => {
   switch (action.type) {
     case "add":
-      return state.concat(action.toast);
+      return state.concat({ ...action.toast });
     case "dismiss":
-      return state.map((toast) => (toast.id === action.id ? { ...toast, visible: false } : toast));
+      return state.map((toast) =>
+        toast.id === action.id ? { ...toast, visible: false } : { ...toast },
+      );
     case "remove":
       return state.filter((toast) => toast.id !== action.id);
   }

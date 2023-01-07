@@ -17,7 +17,7 @@ export const SignUpModal = ({ onClose }: Props) => {
         </div>
         <Image
           alt="signup"
-          className="m-auto my-10"
+          className="m-auto my-10 h-auto w-auto"
           height={150}
           src="/img/signup.png"
           width={160}

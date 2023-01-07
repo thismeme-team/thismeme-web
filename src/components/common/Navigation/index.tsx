@@ -4,7 +4,8 @@ import Back from "/public/icon/back.svg";
 import Delete from "/public/icon/cancel.svg";
 import Logo from "/public/icon/logo.svg";
 import SideMenu from "/public/icon/menu.svg";
-import Profile from "/public/icon/mockProfile.svg";
+
+import { Profile } from "./Profile";
 
 interface Props {
   page: "intro" | "search" | "result";
@@ -50,9 +51,11 @@ export const Navigation = ({
   return (
     <nav className="sticky top-0 flex min-h-[5rem] w-full items-center justify-between gap-16 bg-white">
       <div className="flex grow items-center gap-16">{left}</div>
-      <span className="absolute flex h-full w-full items-center justify-center text-header">
-        {title}
-      </span>
+      {title && (
+        <span className="absolute flex h-full w-full items-center justify-center text-header">
+          {title}
+        </span>
+      )}
       <div className="flex w-fit items-center justify-center gap-8">{right}</div>
     </nav>
   );

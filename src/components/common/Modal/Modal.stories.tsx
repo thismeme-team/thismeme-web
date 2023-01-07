@@ -1,16 +1,16 @@
 import type { ComponentMeta } from "@storybook/react";
 
-import { SampleModal } from "./SampleModal";
+import { SignUpModal } from "./SignUpModal";
 
 export default {
   title: "components/common/Modal",
-  component: SampleModal,
-} as ComponentMeta<typeof SampleModal>;
+  component: SignUpModal,
+} as ComponentMeta<typeof SignUpModal>;
 
-export const SignUpModal = () => {
+export const SignUp = () => {
   return (
     <>
-      <SampleModal onClose={() => {}} />
+      <SignUpModal onClose={() => {}} />
     </>
   );
 };

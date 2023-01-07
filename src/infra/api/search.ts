@@ -19,7 +19,7 @@ export class SearchApi {
        */
       throw new Error("No Query");
     }
-    return this.api.get(`/tags/search?word=${value}`).then((response) => response.data);
+    return this.api.get(`tags/search?word=${value}`).then((response) => response.data);
   };
 
   getSearchResultsByKeyword = ({

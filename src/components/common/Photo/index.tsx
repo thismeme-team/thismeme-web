@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import Image from "next/image";
 import type { ComponentProps } from "react";
 
@@ -9,12 +10,14 @@ import type { ComponentProps } from "react";
  */
 interface Props extends Omit<ComponentProps<"img">, "alt" | "placeholder" | "width" | "height"> {
   src?: string;
+  width?: number;
+  height?: number;
 }
 
 const base64Blur =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
 
-const Photo = ({ src = "", className = "", ...rest }: Props) => {
+const Photo = ({ src = "", className = "", width, height, ...rest }: Props) => {
   /**
    * FIXME
    * storybook 환경에서 이미지가 min height 보다 작을 때
@@ -26,7 +29,16 @@ const Photo = ({ src = "", className = "", ...rest }: Props) => {
    * - layout shift 방지
    */
   return (
-    <div className={`relative overflow-hidden bg-gray-300 [&>img]:!static ${className}`}>
+    <div
+      className={`relative overflow-hidden bg-gray-100 [&>img]:!static ${className}`}
+      css={
+        width &&
+        height &&
+        css`
+          aspect-ratio: ${width / height};
+        `
+      }
+    >
       <Image
         fill
         alt="thumbnail"

@@ -38,10 +38,10 @@ export const useDownload = () => {
         a.click();
 
         URL.revokeObjectURL(blobURL);
-
-        setIsDownloading(false);
       } catch (e) {
         onError?.();
+      } finally {
+        setIsDownloading(false);
       }
     },
     [isDownloading],

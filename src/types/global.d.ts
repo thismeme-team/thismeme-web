@@ -3,6 +3,7 @@ declare namespace NodeJS {
     NEXT_PUBLIC_KAKAO_SDK: string;
     NEXT_PUBLIC_API_MOCKING: string;
     NEXT_PUBLIC_API_URL: string;
+    NEXT_PUBLIC_SEARCH_API_URL: string;
   }
 }
 

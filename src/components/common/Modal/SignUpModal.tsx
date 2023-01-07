@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { useRouter } from "next/router";
 
 import { Button } from "../Button";
 import { Icon } from "../Icon";
@@ -10,8 +9,6 @@ interface Props {
 }
 
 export const SignUpModal = ({ onClose }: Props) => {
-  const router = useRouter();
-
   return (
     <ModalBase onClose={onClose}>
       <div className="m-auto h-[38rem] w-[34rem] rounded-10 bg-white px-25">
@@ -36,7 +33,7 @@ export const SignUpModal = ({ onClose }: Props) => {
           className="mt-8 w-290 bg-[#FEE500] text-16-regular-130"
           size="large"
           onClick={() =>
-            (window.location.href = `${process.env.NEXT_PUBLIC_API_KAKAO}/oauth2/authorization/kakao`)
+            (window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao`)
           }
         >
           <Icon className="mr-6" name="kakao2" />

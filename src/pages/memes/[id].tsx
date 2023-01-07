@@ -10,9 +10,9 @@ const MemeDetailPage: NextPage = () => {
 
   return (
     <>
-      <Navigation page="result" />
+      <Navigation page="detail" />
       {query.id && (
-        <Suspense fallback={<div className="text-20-bold-140 text-red-600">fallback test</div>}>
+        <Suspense>
           <MemeDetail id={query.id as string} />
         </Suspense>
       )}

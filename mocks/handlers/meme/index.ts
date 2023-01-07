@@ -8,15 +8,25 @@ export const getMemeDetail = rest.get(
     return res(
       ctx.status(200),
       ctx.json<Meme>({
-        id: 1,
-        src: "https://picsum.photos/444/200",
-        title: "제목",
+        memeId: 0,
+        name: "제목",
         description: "밈 설명 밈 설명".repeat(10),
-        views: 1,
-        date: "2022.12.22",
-        tags: ["대분류태그", "관련인물태그", "관련감정태그", "관련주제태그"],
-        author: "작성자",
-        share: 0,
+        viewCount: 1,
+        shareCount: 1,
+        createDate: "2023.01.08",
+        modifiedDate: "2023.01.09",
+        image: {
+          images: [
+            {
+              imageId: 2,
+              imageUrl:
+                "https://user-images.githubusercontent.com/62461857/210932649-cc578130-3689-4b78-941b-d42828127b79.png",
+              width: 517,
+              height: 706,
+            },
+          ],
+          count: 0,
+        },
       }),
     );
   },

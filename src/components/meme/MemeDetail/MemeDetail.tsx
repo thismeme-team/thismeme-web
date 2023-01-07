@@ -13,23 +13,37 @@ interface Props {
 }
 
 export const MemeDetail = ({ id }: Props) => {
-  const { views, date, title, description, src, tags } = useMemeDetailById(id);
+  const {
+    viewCount,
+    createDate,
+    name,
+    description,
+    image: { images },
+    tags,
+  } = useMemeDetailById(id);
   const { show } = useToast();
 
-  const handleShare = () => show("카카오톡 공유");
+  const { imageUrl: src, width, height } = images[0];
+
+  const handleShare = () => show("카카오톡 공유가 완료되었습니다", { icon: "kakao2" });
   const handleClipboardCopy = () => show("링크가 복사되었습니다", { icon: "share" });
   const handleDownload = () => show("앨범에 저장하였습니다", { icon: "cake" });
 
   return (
     <>
-      <Photo className="mt-16 max-h-[70vh] min-h-[25vh] w-full rounded-15" src={src} />
+      <Photo
+        className="mt-16 max-h-[70vh] min-h-[25vh] w-full rounded-15"
+        height={height}
+        src={src}
+        width={width}
+      />
       <section className="mt-10 flex flex-col gap-8">
         <div className="flex items-center gap-14 text-12-regular-160 text-gray-10">
-          <span>{`조회수 ${views}`}</span>
-          <span>{date}</span>
+          <span>{`조회수 ${viewCount}`}</span>
+          <span>{createDate}</span>
         </div>
         <div className="flex w-full items-center justify-between text-20-bold-140">
-          {title} <Icon name="warn" />
+          {name} <Icon name="warn" />
         </div>
         <p className="text-16-regular-130">{description}</p>
       </section>
@@ -37,23 +51,26 @@ export const MemeDetail = ({ id }: Props) => {
       <div className="flex w-full flex-col items-center gap-16 py-50">
         <ul className="flex gap-10">
           <KakaoShareButton
-            resource={{ url: PAGE_URL, imageUrl: src, title, description }}
+            resource={{ url: PAGE_URL, imageUrl: src, title: name, description }}
             onSuccess={handleShare}
           />
-          <DownloadButton name={title} target={src} onSuccess={handleDownload} />
+          <DownloadButton name={name} target={src} onSuccess={handleDownload} />
           <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
           <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
         </ul>
         <span className="text-16-semibold-130 text-dark-gray-20">친구에게 밈을 공유해 보세요</span>
       </div>
-      <section>
-        <span className="text-16-semibold-130">태그</span>
-        <ul className="mt-16 flex flex-wrap gap-8">
-          {tags.map((tag, idx) => (
-            <Chip as="li" color="lightGray" key={idx} label={tag} size="medium" />
-          ))}
-        </ul>
-      </section>
+
+      {tags && tags.length ? (
+        <section>
+          <span className="text-16-semibold-130">태그</span>
+          <ul className="mt-16 flex flex-wrap gap-8">
+            {tags.map((tag, idx) => (
+              <Chip as="li" color="lightGray" key={idx} label={tag} size="medium" />
+            ))}
+          </ul>
+        </section>
+      ) : null}
     </>
   );
 };

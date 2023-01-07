@@ -34,13 +34,26 @@ export interface SearchResult {
 }
 
 export interface Meme {
-  id: number;
-  src: string;
-  title: string;
+  memeId: number;
+  name: string;
   description: string;
-  views: number;
-  date: string;
-  tags: string[];
-  author: string;
-  share: number;
+  viewCount: number;
+  shareCount: number;
+
+  createDate: string;
+  modifiedDate: string;
+
+  // TODO Image interface 정의 필요
+  image: {
+    images: {
+      imageId: number;
+      imageUrl: string;
+      width: number;
+      height: number;
+    }[];
+    count: number;
+  };
+
+  tags?: string[];
+  author?: string;
 }

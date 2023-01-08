@@ -14,8 +14,9 @@ const Home: NextPage = () => {
     <>
       <Navigation page="intro" />
       <Image
+        priority
         alt="brandimage"
-        className="m-auto my-10"
+        className="m-auto my-10 h-auto w-auto"
         height={190}
         src="/img/brandimage.png"
         width={230}

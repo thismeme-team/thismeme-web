@@ -14,7 +14,7 @@ export const ModalBase = ({ children, onClose, ...rest }: PropsWithChildren<Prop
   return (
     <Portal id="modal-portal">
       <div
-        className="absolute z-[1000] flex h-full w-full items-center overflow-auto bg-[#00000099]"
+        className="absolute z-[1300] flex h-full w-full items-center overflow-auto bg-[#00000099]"
         ref={ref}
       >
         {children}

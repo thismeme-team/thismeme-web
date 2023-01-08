@@ -8,7 +8,7 @@ import SideMenu from "/public/icon/menu.svg";
 import { Profile } from "./Profile";
 
 interface Props {
-  page: "intro" | "search" | "result";
+  page: "intro" | "search" | "result" | "detail";
   left?: ReactNode;
   title?: ReactNode | string;
   right?: ReactNode;
@@ -32,6 +32,15 @@ const NAVIGATION_PROPS: { [key in Props["page"]]: Omit<Props, "page"> } = {
   result: {
     left: <Back />,
     title: "검색어 들어갈 곳",
+    right: (
+      <>
+        <Profile />
+        <SideMenu />
+      </>
+    ),
+  },
+  detail: {
+    left: <Back />,
     right: (
       <>
         <Profile />

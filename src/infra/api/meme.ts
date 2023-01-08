@@ -6,6 +6,6 @@ export class MemeApi {
   constructor(private api: AxiosInstance) {}
 
   getMemeDetailById = (id: string) => {
-    return this.api.get<Meme>(`/meme/${id}`).then(({ data }) => data);
+    return this.api.get<Meme>(`/memes/${id}`).then(({ data }) => data);
   };
 }

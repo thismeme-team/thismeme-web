@@ -18,7 +18,8 @@
     "paths": {
       "@/mocks": ["mocks/*"],
       "@/*": ["src/*"]
-    }
+    },
+    "types": ["kakao-js-sdk", "@emotion/react/types/css-prop"]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]

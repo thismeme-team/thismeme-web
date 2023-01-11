@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import type { PropsWithChildren, ReactElement } from "react";
 import { cloneElement } from "react";
 
@@ -40,12 +41,34 @@ const DrawerTrigger = ({ open, close }: DrawerTriggerProps) => {
     : cloneElement(open, { onClick: () => setIsOpen(true), className });
 };
 
-const DrawerContent = ({ children }: PropsWithChildren) => {
+const DrawerContent = ({ children, className }: PropsWithChildren<{ className?: string }>) => {
   const isOpen = useDrawerContext();
 
-  // TODO transform : translateX 이용한 애니메이션
-  // DOM 노드 사라지지 않게
-  return <aside className={`fixed left-0 ${isOpen ? "visible" : "invisible"}`}>{children}</aside>;
+  return (
+    <aside
+      className={className}
+      css={[
+        css`
+          visibility: hidden;
+          transform: translateX(-110%);
+          will-change: transform;
+          transition: transform 0.4s ease, visibility 0s ease 0.4s;
+          position: absolute;
+          inset: 0;
+          height: 100vh;
+          background: white;
+        `,
+        isOpen &&
+          css`
+            visibility: visible;
+            transform: translateX(0);
+            transition: transform 0.4s ease;
+          `,
+      ]}
+    >
+      {children}
+    </aside>
+  );
 };
 
 Drawer.Trigger = DrawerTrigger;

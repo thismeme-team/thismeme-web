@@ -11,7 +11,7 @@ export const Profile = () => {
   const loginState = safeLocalStorage.get("loginState");
 
   return (
-    <div>
+    <div className="cursor-pointer">
       {loginState ? (
         <Icon name="loginprofile" />
       ) : (

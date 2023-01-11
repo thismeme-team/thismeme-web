@@ -6,10 +6,14 @@ import { Navigation } from ".";
 export default {
   title: "components/common/Layout/Navigation",
   component: Navigation,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
+  args: {
+    page: "intro",
+  },
 } as ComponentMeta<typeof Navigation>;
 
-export const IntroNavigation: ComponentStory<typeof Navigation> = () => <Navigation page="intro" />;
+export const IntroNavigation: ComponentStory<typeof Navigation> = (args) => (
+  <Navigation {...args} />
+);
 export const SearchNavigation: ComponentStory<typeof Navigation> = () => (
   <Navigation page="search" />
 );

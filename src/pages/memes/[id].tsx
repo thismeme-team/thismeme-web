@@ -10,7 +10,7 @@ const MemeDetailPage: NextPage = () => {
 
   return (
     <>
-      <Navigation page="detail" />
+      <Navigation page="result" />
       {query.id && (
         <Suspense>
           <MemeDetail id={query.id as string} />

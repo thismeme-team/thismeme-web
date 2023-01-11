@@ -16,7 +16,7 @@ const SearchPage = () => {
   return (
     <>
       <Navigation page="search" />
-      <div className="relative">
+      <div className="relative mt-8">
         <SearchInput
           {...inputProps}
           placeholder="당신이 찾는 밈, 여기 있다."

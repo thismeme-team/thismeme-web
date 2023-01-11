@@ -1,8 +1,13 @@
-import { axiosBasic } from "@/infra/api/client";
+import axios from "axios";
+
 import { MemeApi } from "@/infra/api/meme";
 
 import { SearchApi } from "./search";
 import { TagApi } from "./tags";
+
+export const axiosBasic = axios.create({
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+});
 
 /**
  * NOTE
@@ -12,8 +17,7 @@ import { TagApi } from "./tags";
  *
  * TODO
  *  1. 요청 데이터를 검증하는 방법과 위치 및 에러 핸들링
- *  2. 응답 데이터를 가공하는 방법과 위치
- *  3. 응답 에러 핸들링
+ *  2. 응답 에러 핸들링
  */
 export const api = {
   search: new SearchApi(axiosBasic),

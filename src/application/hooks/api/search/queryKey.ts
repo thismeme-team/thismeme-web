@@ -1,4 +1,4 @@
 export const QUERY_KEYS = {
-  getSearchResultsByKeyword: (keyword: string) => ["getSearchResultsByKeyword", keyword],
-  getSearchResultsByTag: (tag: string) => ["getSearchResultsByTag", tag],
+  getMemesByKeyword: (keyword: string) => ["getMemesByKeyword", keyword],
+  getMemesByTag: (tag: string) => ["getMemesByTag", tag],
 } as const;

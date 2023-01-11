@@ -2,42 +2,45 @@ import type { QueryFunctionContext } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
-import type { PaginationResponse, SearchResult } from "@/types";
 
 import { QUERY_KEYS } from "./queryKey";
 
+const PAGE_SIZE = 20;
+
 /**
- * FIX
- * 1. pageParam 타입추론
- * 2. getSearchResultsByKeyword 비동기 API에 대해 서버에서 받아온 데이터에 대한 스키마 필요(프론트에 필요한 데이터로 가공해야함)
+ * keyword 밈 검색 API
+ * @param keyword 검색할 keyword
+ * @returns UseInfiniteQueryResult - useInfiniteQuery의 반환값
  */
-export const useGetSearchResultsByKeyword = (keyword: string) =>
-  useInfiniteQuery<PaginationResponse<SearchResult>>({
-    queryKey: QUERY_KEYS.getSearchResultsByKeyword(keyword),
+export const useGetMemesByKeyword = (keyword: string) => {
+  return useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesByKeyword(keyword),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.search.getSearchResultsByKeyword({ keyword, offset: pageParam, limit: 20 }),
+      api.search.getMemesByKeyword({ keyword, offset: pageParam, limit: PAGE_SIZE }),
     suspense: false,
     enabled: !!keyword,
     getNextPageParam: (lastPage) => {
-      const { isLastPage, pageNumber } = lastPage;
-      return isLastPage ? undefined : pageNumber + 1;
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
     },
   });
+};
 
 /**
- * FIX
- * 1. pageParam 타입추론
- * 2. getSearchResultsByTag 비동기 API에 대해 서버에서 받아온 데이터에 대한 스키마 필요(프론트에 필요한 데이터로 가공해야함)
+ * tag 밈 검색 API
+ * @param tag 검색할 tag
+ * @returns UseInfiniteQueryResult - useInfiniteQuery의 반환값
  */
-export const useGetSearchResultsByTag = (tag: string) =>
-  useInfiniteQuery<PaginationResponse<SearchResult>>({
-    queryKey: QUERY_KEYS.getSearchResultsByTag(tag),
+export const useGetMemesByTag = (tag: string) => {
+  return useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesByTag(tag),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.search.getSearchResultsByTag({ keyword: tag, offset: pageParam, limit: 20 }),
+      api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
     suspense: false,
     enabled: !!tag,
     getNextPageParam: (lastPage) => {
-      const { isLastPage, pageNumber } = lastPage;
-      return isLastPage ? undefined : pageNumber + 1;
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
     },
   });
+};

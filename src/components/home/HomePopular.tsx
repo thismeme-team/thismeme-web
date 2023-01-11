@@ -1,10 +1,10 @@
-import { usePopularTag } from "@/application/hooks";
+import { useGetPopularTags } from "@/application/hooks";
 import type { Tag } from "@/types";
 
 import { Chip } from "../common/Chip";
 
 export const HomePopular = () => {
-  const { tags } = usePopularTag();
+  const { tags } = useGetPopularTags();
 
   return (
     <>

@@ -1,10 +1,10 @@
-import { usePopularTag } from "@/application/hooks";
+import { useGetPopularTags } from "@/application/hooks";
 import type { Tag } from "@/types";
 
 import { SearchPopularItem } from "./SearchPopularItem";
 
 export const SearchPopularList = () => {
-  const { tags } = usePopularTag();
+  const { tags } = useGetPopularTags();
 
   return (
     <ul>

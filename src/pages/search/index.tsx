@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
-import { Navigation } from "@/components/common/Navigation";
+import { SearchPageNavigation } from "@/components/common/Navigation/SearchPageNavigation";
 import {
   SearchInput,
   SearchPopularList,
@@ -15,7 +15,7 @@ const SearchPage = () => {
 
   return (
     <>
-      <Navigation page="search" />
+      <SearchPageNavigation />
       <div className="relative mt-8">
         <SearchInput
           {...inputProps}

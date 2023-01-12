@@ -1,7 +1,7 @@
 import { rest } from "msw";
 
 export const getPopularTag = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/tags/popular`,
+  `${process.env.NEXT_PUBLIC_API_URL}/tags`,
   async (req, res, ctx) => {
     return res(
       ctx.delay(),
@@ -87,6 +87,21 @@ export const getCategoryWithTag = rest.get(
                 tagId: 3,
                 name: "시험기간",
                 viewCount: 34,
+              },
+              {
+                tagId: 12,
+                name: "무전",
+                viewCount: 18,
+              },
+              {
+                tagId: 13,
+                name: "무한전",
+                viewCount: 8,
+              },
+              {
+                tagId: 14,
+                name: "무도전",
+                viewCount: 2,
               },
             ],
           },

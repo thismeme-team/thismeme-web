@@ -17,7 +17,6 @@ export const useGetMemesByKeyword = (keyword: string) => {
     queryKey: QUERY_KEYS.getMemesByKeyword(keyword),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesByKeyword({ keyword, offset: pageParam, limit: PAGE_SIZE }),
-    suspense: false,
     enabled: !!keyword,
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;
@@ -36,7 +35,6 @@ export const useGetMemesByTag = (tag: string) => {
     queryKey: QUERY_KEYS.getMemesByTag(tag),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
-    suspense: false,
     enabled: !!tag,
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;

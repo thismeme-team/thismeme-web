@@ -19,7 +19,6 @@ export class TagApi {
     return this.api.get(`/tags/search?word=${value}`).then((response) => response.data);
   };
 
-  //NOTE : 태그의 개수 유동적으로 가져오는 것인지 check
   getPopularTags = () => {
     return this.api.get(`/tags?size=5&sort=viewCount,desc`).then((response) => response.data);
   };

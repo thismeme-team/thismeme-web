@@ -1,7 +1,6 @@
 import axios from "axios";
 
-import { MemeApi } from "@/infra/api/meme";
-
+import { MemeApi } from "./meme";
 import { SearchApi } from "./search";
 import { TagApi } from "./tags";
 

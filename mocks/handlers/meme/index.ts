@@ -1,13 +1,13 @@
 import { rest } from "msw";
 
-import type { Meme } from "@/infra/api/meme/types";
+import type { GetMemeDetailByIdResponse } from "@/infra/api/meme/types";
 
 export const getMemeDetail = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/memes/:id`,
   async (req, res, ctx) => {
     return res(
       ctx.status(200),
-      ctx.json<Meme>({
+      ctx.json<GetMemeDetailByIdResponse>({
         memeId: 0,
         name: "제목",
         description: "밈 설명 밈 설명".repeat(10),

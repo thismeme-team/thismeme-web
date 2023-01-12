@@ -1,6 +1,6 @@
-import type { Meme } from "../meme/types";
+import type { Meme } from "@/types";
 
-export interface MemesResponse {
+export interface GetMemesResponse {
   memes: Meme[];
   /**
    * memes의 개수

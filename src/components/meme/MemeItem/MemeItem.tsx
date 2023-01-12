@@ -3,7 +3,7 @@ import { memo } from "react";
 
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
-import type { Meme } from "@/infra/api/meme/types";
+import type { Meme } from "@/types";
 
 interface Props {
   meme: Meme;

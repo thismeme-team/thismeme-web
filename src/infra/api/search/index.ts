@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 
-import type { MemesResponse, PaginationResponse } from "./types";
+import type { GetMemesResponse, PaginationResponse } from "./types";
 
 export class SearchApi {
   constructor(private api: AxiosInstance) {}
@@ -13,8 +13,8 @@ export class SearchApi {
     keyword: string;
     offset: number;
     limit: number;
-  }): Promise<PaginationResponse<MemesResponse["memes"]>> => {
-    const { data } = await this.api.get<MemesResponse>("/search", {
+  }): Promise<PaginationResponse<GetMemesResponse["memes"]>> => {
+    const { data } = await this.api.get<GetMemesResponse>("/search", {
       params: {
         keyword,
         offset,
@@ -39,8 +39,8 @@ export class SearchApi {
     keyword: string;
     offset: number;
     limit: number;
-  }): Promise<PaginationResponse<MemesResponse["memes"]>> => {
-    const { data } = await this.api.get<MemesResponse>("/search/tag", {
+  }): Promise<PaginationResponse<GetMemesResponse["memes"]>> => {
+    const { data } = await this.api.get<GetMemesResponse>("/search/tag", {
       params: {
         keyword,
         offset,

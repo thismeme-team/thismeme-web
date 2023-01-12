@@ -1,24 +1,3 @@
-export interface Meme {
-  memeId: number;
-  name: string;
-  description: string;
-  viewCount: number;
-  shareCount: number;
+import type { Meme } from "@/types";
 
-  createdDate: string;
-  modifiedDate: string;
-
-  // TODO Image interface 정의 필요
-  image: {
-    images: {
-      imageId: number;
-      imageUrl: string;
-      imageWidth: number;
-      imageHeight: number;
-    }[];
-    count: number;
-  };
-
-  tags?: string[];
-  author?: string;
-}
+export type GetMemeDetailByIdResponse = Meme;

@@ -7,11 +7,3 @@ export interface GetMemesResponse {
    */
   count: number;
 }
-
-export interface PaginationResponse<T> {
-  data: T;
-  offset: number;
-  limit: number;
-  isLastPage: boolean;
-  isFirstPage: boolean;
-}

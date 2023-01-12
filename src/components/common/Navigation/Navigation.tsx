@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import Delete from "/public/icon/cancel.svg";
 import Logo from "/public/icon/logo.svg";
 import { BackButton } from "@/components/common/Navigation/BackButton";
-import { Menu } from "@/components/common/Navigation/Menu";
+import { SideBar } from "@/components/common/Navigation/SideBar";
 
 import { Profile } from "./Profile";
 
@@ -21,14 +21,14 @@ const NAVIGATION_PROPS: { [key in Props["page"]]: Omit<Props, "page"> } = {
     right: (
       <>
         <Profile />
-        <Menu />
+        <SideBar />
       </>
     ),
   },
   search: {
     title: "밈 찾기",
     right: (
-      <Link className="block cursor-pointer" href="/">
+      <Link className="block" href="/">
         <Delete />
       </Link>
     ),
@@ -38,7 +38,7 @@ const NAVIGATION_PROPS: { [key in Props["page"]]: Omit<Props, "page"> } = {
     right: (
       <>
         <Profile />
-        <Menu />
+        <SideBar />
       </>
     ),
   },
@@ -51,7 +51,7 @@ export const Navigation = ({
   title = NAVIGATION_PROPS[page].title,
 }: Props) => {
   return (
-    <header className="sticky top-0 z-[1000] flex h-50 w-full items-center justify-between gap-16 bg-white">
+    <header className="sticky top-0 z-[1000] flex h-50 w-full shrink-0 items-center justify-between gap-16 bg-white">
       <div className="grid auto-cols-[3.2rem] grid-flow-col place-items-center">{left}</div>
       {title && (
         <span className="pointer-events-none absolute flex h-full w-full items-center justify-center text-18-bold-140">

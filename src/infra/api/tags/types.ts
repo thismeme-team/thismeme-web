@@ -13,3 +13,12 @@ export interface GetPopularTagsResponse {
 export interface GetTagSearchResponse {
   tags: Pick<Tag, "tagId" | "name" | "viewCount">[];
 }
+
+export interface GetCategoryByTagResponse {
+  categories: {
+    categoryId: number;
+    name: string;
+    priority: number;
+    tags: Pick<Tag, "tagId" | "name" | "viewCount">[];
+  }[];
+}

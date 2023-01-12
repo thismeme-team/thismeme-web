@@ -1,5 +1,7 @@
 import type { AxiosInstance } from "axios";
 
+import type { GetCategoryByTagResponse } from "@/infra/api/tags/types";
+
 export class TagApi {
   constructor(private api: AxiosInstance) {}
 
@@ -22,4 +24,7 @@ export class TagApi {
   getPopularTags = () => {
     return this.api.get(`/tags?size=5&sort=viewCount,desc`).then((response) => response.data);
   };
+
+  getCategoryWithTags = () =>
+    this.api.get<GetCategoryByTagResponse>("/tags/categories").then((res) => res.data);
 }

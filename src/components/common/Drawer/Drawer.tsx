@@ -21,7 +21,7 @@ import {
 export const Drawer = ({ children }: PropsWithChildren) => {
   return (
     <DrawerContextProvider>
-      <nav>{children}</nav>
+      <aside>{children}</aside>
     </DrawerContextProvider>
   );
 };
@@ -45,7 +45,7 @@ const DrawerContent = ({ children, className }: PropsWithChildren<{ className?: 
   const isOpen = useDrawerContext();
 
   return (
-    <aside
+    <section
       className={className}
       css={[
         css`
@@ -67,7 +67,7 @@ const DrawerContent = ({ children, className }: PropsWithChildren<{ className?: 
       ]}
     >
       {children}
-    </aside>
+    </section>
   );
 };
 

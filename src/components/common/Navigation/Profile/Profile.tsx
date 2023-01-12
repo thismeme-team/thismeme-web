@@ -1,8 +1,7 @@
 import { useIsMount, useModal } from "@/application/hooks";
 import { safeLocalStorage } from "@/application/util";
-
-import { Icon } from "../Icon";
-import { SignUpModal } from "../Modal";
+import { Icon } from "@/components/common/Icon";
+import { SignUpModal } from "@/components/common/Modal";
 
 export const Profile = () => {
   const { modalOpen, onOpen, onClose } = useModal();

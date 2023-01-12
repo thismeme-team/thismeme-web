@@ -1,22 +1,21 @@
-import type { ComponentMeta, ComponentStory } from "@storybook/react";
+import type { ComponentStory } from "@storybook/react";
 import React from "react";
 
-import { Navigation } from ".";
+import { ExplorePageNavigation } from "@/components/common/Navigation/ExplorePageNavigation";
+import { IntroPageNavigation } from "@/components/common/Navigation/IntroPageNavigation";
+import { SearchPageNavigation } from "@/components/common/Navigation/SearchPageNavigation";
 
 export default {
   title: "components/common/Navigation",
-  component: Navigation,
-  args: {
-    page: "intro",
-  },
-} as ComponentMeta<typeof Navigation>;
+  component: null,
+};
 
-export const IntroNavigation: ComponentStory<typeof Navigation> = (args) => (
-  <Navigation {...args} />
+export const IntroNavigation: ComponentStory<typeof IntroPageNavigation> = () => (
+  <IntroPageNavigation />
 );
-export const SearchNavigation: ComponentStory<typeof Navigation> = () => (
-  <Navigation page="search" />
+export const SearchNavigation: ComponentStory<typeof SearchPageNavigation> = () => (
+  <SearchPageNavigation />
 );
-export const ResultNavigation: ComponentStory<typeof Navigation> = () => (
-  <Navigation page="result" />
+export const ExploreNavigation: ComponentStory<typeof ExplorePageNavigation> = () => (
+  <ExplorePageNavigation />
 );

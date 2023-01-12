@@ -55,7 +55,7 @@ const DrawerContent = ({ children, className }: PropsWithChildren<{ className?: 
           transition: transform 0.4s ease, visibility 0s ease 0.4s;
           position: absolute;
           inset: 0;
-          height: 100vh;
+          height: calc(100vh - 5rem);
           background: white;
         `,
         isOpen &&

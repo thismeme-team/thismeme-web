@@ -15,7 +15,7 @@ interface Props {
 export const MemeDetail = ({ id }: Props) => {
   const {
     viewCount,
-    createDate,
+    createdDate,
     name,
     description,
     image: { images },
@@ -23,7 +23,7 @@ export const MemeDetail = ({ id }: Props) => {
   } = useMemeDetailById(id);
   const { show } = useToast();
 
-  const { imageUrl: src, width, height } = images[0];
+  const { imageUrl: src, imageWidth: width, imageHeight: height } = images[0];
 
   const handleShare = () => show("카카오톡 공유가 완료되었습니다", { icon: "kakao2" });
   const handleClipboardCopy = () => show("링크가 복사되었습니다", { icon: "share" });
@@ -40,7 +40,7 @@ export const MemeDetail = ({ id }: Props) => {
       <section className="mt-10 flex flex-col gap-8">
         <div className="flex items-center gap-14 text-12-regular-160 text-gray-10">
           <span>{`조회수 ${viewCount}`}</span>
-          <span>{createDate}</span>
+          <span>{createdDate}</span>
         </div>
         <div className="flex w-full items-center justify-between text-20-bold-140">
           {name} <Icon name="warn" />

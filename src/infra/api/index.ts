@@ -1,8 +1,21 @@
-import { axiosBasic } from "@/infra/api/client";
-import { MemeApi } from "@/infra/api/meme";
+import axios from "axios";
 
+import { MemeApi } from "./meme";
 import { SearchApi } from "./search";
 import { TagApi } from "./tags";
+
+export const axiosBasic = axios.create({
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+});
+
+/**
+ * FIX
+ * 검색 API만 서버 endpoint가 다름.
+ * 추후에 다른 API와 endpoint 통일될 예정.
+ */
+export const axiosSearchBasic = axios.create({
+  baseURL: `${process.env.NEXT_PUBLIC_SEARCH_API_URL}`,
+});
 
 /**
  * NOTE
@@ -12,11 +25,10 @@ import { TagApi } from "./tags";
  *
  * TODO
  *  1. 요청 데이터를 검증하는 방법과 위치 및 에러 핸들링
- *  2. 응답 데이터를 가공하는 방법과 위치
- *  3. 응답 에러 핸들링
+ *  2. 응답 에러 핸들링
  */
 export const api = {
-  search: new SearchApi(axiosBasic),
+  search: new SearchApi(axiosSearchBasic),
   meme: new MemeApi(axiosBasic),
   tags: new TagApi(axiosBasic),
 };

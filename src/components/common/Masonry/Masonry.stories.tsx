@@ -20,28 +20,37 @@ const sampleImages = [
   { url: "https://picsum.photos/236/354", width: 236, height: 354 },
 ];
 
-const sampleArray = Array.from(Array(100).keys()).map((id) => {
+const memes = Array.from(Array(1024).keys()).map((id) => {
   const randomIndex = Math.floor(Math.random() * sampleImages.length);
   const { url, width, height } = sampleImages[randomIndex];
   return {
-    id,
-    title: "무난한도전",
-    image_url: url,
-    image_width: width,
-    image_height: height,
+    memeId: id,
+    name: "무난한도전",
+    description: "무난한도전 무난한도전 무난한 무난한도전 무난한도전",
+    viewCount: 132,
+    shareCount: 1000,
+    createdDate: new Date().toString(),
+    modifiedDate: new Date().toString(),
+    image: {
+      images: [
+        {
+          imageId: 1,
+          imageUrl: url,
+          imageWidth: width,
+          imageHeight: height,
+        },
+      ],
+      count: 1,
+    },
     tags: ["무한도전", "박명수"],
-    view_count: 10,
-    share_count: 132,
-    create_date: new Date().toString(),
-    modified_date: new Date().toString(),
   };
 });
 
 const Template: ComponentStory<typeof Masonry> = (args) => (
   <>
     <Masonry {...args}>
-      {sampleArray.map((item) => {
-        return <MemeItem key={item.id} meme={item} />;
+      {memes.map((meme) => {
+        return <MemeItem key={meme.memeId} meme={meme} />;
       })}
     </Masonry>
   </>

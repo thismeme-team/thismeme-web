@@ -4,7 +4,7 @@ import React from "react";
 import { Navigation } from ".";
 
 export default {
-  title: "components/common/Layout/Navigation",
+  title: "components/common/Navigation",
   component: Navigation,
   args: {
     page: "intro",

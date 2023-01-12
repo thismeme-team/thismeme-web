@@ -1,15 +1,15 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { SideBar } from ".";
+import { Accordion } from ".";
 
 export default {
   title: "components/common/SideBar",
-  component: SideBar,
-} as ComponentMeta<typeof SideBar>;
+  component: Accordion,
+} as ComponentMeta<typeof Accordion>;
 
-const Template: ComponentStory<typeof SideBar> = () => (
+const Template: ComponentStory<typeof Accordion> = () => (
   <>
-    <SideBar />
+    <Accordion items={[]} />
   </>
 );
 

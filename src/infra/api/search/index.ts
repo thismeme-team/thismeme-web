@@ -25,7 +25,7 @@ export class SearchApi {
       data: data.memes,
       offset: offset,
       limit: limit,
-      isLastPage: data.count < limit,
+      isLastPage: data.memes.length < limit,
       isFirstPage: offset >= 0 && offset < limit,
     };
     return result;
@@ -51,8 +51,8 @@ export class SearchApi {
       data: data.memes,
       offset: offset,
       limit: limit,
-      isLastPage: data.count < limit,
-      isFirstPage: offset === 0,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
     };
     return result;
   };

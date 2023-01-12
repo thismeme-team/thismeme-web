@@ -3,7 +3,7 @@ import { rest } from "msw";
 import type { Meme } from "@/infra/api/meme/types";
 
 export const getMemeDetail = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/meme/:id`,
+  `${process.env.NEXT_PUBLIC_API_URL}/memes/:id`,
   async (req, res, ctx) => {
     return res(
       ctx.status(200),

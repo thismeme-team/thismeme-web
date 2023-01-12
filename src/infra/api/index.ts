@@ -10,6 +10,15 @@ export const axiosBasic = axios.create({
 });
 
 /**
+ * FIX
+ * 검색 API만 서버 endpoint가 다름.
+ * 추후에 다른 API와 endpoint 통일될 예정.
+ */
+export const axiosSearchBasic = axios.create({
+  baseURL: `${process.env.NEXT_PUBLIC_SEARCH_API_URL}`,
+});
+
+/**
  * NOTE
  *  통신 클라이언트(axios) 의존성 주입
  *  private/public 으로 api 요청 정책이 분리될 가능성을 위함
@@ -20,7 +29,7 @@ export const axiosBasic = axios.create({
  *  2. 응답 에러 핸들링
  */
 export const api = {
-  search: new SearchApi(axiosBasic),
+  search: new SearchApi(axiosSearchBasic),
   meme: new MemeApi(axiosBasic),
   tags: new TagApi(axiosBasic),
 };

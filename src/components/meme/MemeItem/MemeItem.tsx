@@ -10,8 +10,13 @@ interface Props {
 }
 export const MemeItem = memo(({ meme }: Props) => {
   return (
-    <Link className="flex flex-col gap-6" href={`/meme/${meme.memeId}`}>
-      <Photo className="rounded-15" src={meme.image.images[0].imageUrl} />
+    <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
+      <Photo
+        className="rounded-15"
+        height={meme.image.images[0].imageHeight}
+        src={meme.image.images[0].imageUrl}
+        width={meme.image.images[0].imageWidth}
+      />
       <div className="flex items-center justify-between">
         <span className="text-12-bold-160">{meme.name}</span>
         <span className="flex items-center text-12-regular-160">

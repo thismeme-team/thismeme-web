@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import Image from "next/image";
 import type { ComponentProps } from "react";
 
@@ -8,10 +7,8 @@ import type { ComponentProps } from "react";
  * storybook jsdoc parse 오류 발생
  * - interface 내부에 @deprecated 어노테이션이 있으면 문제 생기는 듯 보임
  */
-interface Props extends Omit<ComponentProps<"img">, "alt" | "placeholder" | "width" | "height"> {
+interface Props extends Omit<ComponentProps<"img">, "alt" | "placeholder"> {
   src?: string;
-  width?: number;
-  height?: number;
 }
 
 const base64Blur =
@@ -31,13 +28,7 @@ const Photo = ({ src = "", className = "", width, height, ...rest }: Props) => {
   return (
     <div
       className={`relative overflow-hidden bg-gray-100 [&>img]:!static ${className}`}
-      css={
-        width &&
-        height &&
-        css`
-          aspect-ratio: ${width / height};
-        `
-      }
+      css={[width && height && { aspectRatio: `calc(${width} / ${height})` }]}
     >
       <Image
         fill

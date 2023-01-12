@@ -1,7 +1,6 @@
 import { rest } from "msw";
 
-import type { Meme } from "@/infra/api/meme/types";
-import type { PaginationResponse } from "@/infra/api/search/types";
+import type { MemesResponse } from "@/infra/api/search/types";
 
 import * as MOCK_DATA from "./data";
 
@@ -24,25 +23,22 @@ export const getSearch = rest.get(
 );
 
 export const getSearchResultsByKeyword = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/search`,
+  `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search`,
   (req, res, ctx) => {
     const { searchParams } = req.url;
     const query = searchParams.get("keyword");
     const offset = Number(searchParams.get("offset"));
     const limit = Number(searchParams.get("limit"));
-    const data = MOCK_DATA.memes.slice(offset * limit, (offset + 1) * limit);
+    const data = MOCK_DATA.memes.slice(offset, offset + limit);
 
     if (!query || !query.trim()) {
       return res(ctx.status(400));
     }
     return res(
       ctx.status(200),
-      ctx.json<PaginationResponse<Meme[]>>({
-        data,
-        offset,
-        limit,
-        isLastPage: data.length < limit,
-        isFirstPage: offset === 0,
+      ctx.json<MemesResponse>({
+        memes: data,
+        count: data.length,
       }),
       ctx.delay(500),
     );
@@ -50,25 +46,22 @@ export const getSearchResultsByKeyword = rest.get(
 );
 
 export const getSearchResultsByTag = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/search/tag`,
+  `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search/tag`,
   (req, res, ctx) => {
     const { searchParams } = req.url;
     const query = searchParams.get("keyword");
     const offset = Number(searchParams.get("offset"));
     const limit = Number(searchParams.get("limit"));
-    const data = MOCK_DATA.memes.slice(offset * limit, (offset + 1) * limit);
+    const data = MOCK_DATA.memes.slice(offset, offset + limit);
 
     if (!query || !query.trim()) {
       return res(ctx.status(400));
     }
     return res(
       ctx.status(200),
-      ctx.json<PaginationResponse<Meme[]>>({
-        data,
-        offset,
-        limit,
-        isLastPage: data.length < limit,
-        isFirstPage: offset === 0,
+      ctx.json<MemesResponse>({
+        memes: data,
+        count: data.length,
       }),
       ctx.delay(500),
     );

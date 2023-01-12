@@ -1,4 +1,5 @@
-import { useSearchResult } from "@/application/hooks";
+import { useGetTagSearch } from "@/application/hooks";
+import { Chip } from "@/components/common/Chip";
 
 import { SearchItem } from "../SearchItem/SearchItem";
 
@@ -8,21 +9,23 @@ interface Prop {
 }
 
 export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
-  const { searchResults } = useSearchResult(value.trim());
+  const { autoCompletedTags } = useGetTagSearch(value.trim());
 
-  if (!value || searchResults?.length === 0) {
+  if (!value || autoCompletedTags?.length === 0) {
     return null;
   }
   return (
     <ul>
-      {searchResults?.map((searchResult) => (
-        <li key={searchResult.tagId}>
+      {autoCompletedTags?.map((tag) => (
+        <li key={tag.tagId}>
           <SearchItem
-            majorType={searchResult.categoryName}
             searchText={value}
-            tagName={searchResult.name}
+            tagName={tag.name}
+            right={
+              <Chip className="absolute right-6" color="black" label="무한도전" size="small" />
+            }
             onClick={() => {
-              onClickAddKeyword(searchResult.name);
+              onClickAddKeyword(tag.name);
             }}
           />
         </li>

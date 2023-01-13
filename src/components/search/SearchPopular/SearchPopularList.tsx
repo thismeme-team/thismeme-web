@@ -1,16 +1,15 @@
 import Link from "next/link";
 
-import { usePopularTag } from "@/application/hooks";
-import type { Tag } from "@/types";
+import { useGetPopularTags } from "@/application/hooks";
 
 import { SearchPopularItem } from "./SearchPopularItem";
 
 export const SearchPopularList = () => {
-  const { tags } = usePopularTag();
+  const { tags } = useGetPopularTags();
 
   return (
     <ul>
-      {tags?.map((tag: Tag, index) => (
+      {tags?.map((tag, index) => (
         <li key={tag.tagId}>
           <Link href={`explore/keywords?q=${tag.name}`}>
             <SearchPopularItem index={index} name={tag.name} />

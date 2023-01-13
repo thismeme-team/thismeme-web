@@ -1,56 +1,46 @@
 import type { QueryFunctionContext } from "@tanstack/react-query";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { useDebounce } from "@/application/hooks";
 import { api } from "@/infra/api";
-import type { PaginationResponse, SearchResult, Tag } from "@/types";
 
-export const useSearchResult = (value: string) => {
-  const debouncedValue = useDebounce(value);
+import { QUERY_KEYS } from "./queryKey";
 
-  const { data, ...rest } = useQuery<{ tags: Tag[] }>({
-    queryKey: ["search", debouncedValue],
-    queryFn: () => api.search.getRecentSearch(debouncedValue),
-    keepPreviousData: true,
-    enabled: !!debouncedValue,
-  });
-  return { searchResults: data?.tags, ...rest };
-};
+const PAGE_SIZE = 20;
 
 /**
- * FIX
- * 1. query key관리
- * 2. pageParam 타입추론
- * 3. getSearchResultsByKeyword 비동기 API에 대해 서버에서 받아온 데이터에 대한 스키마 필요(프론트에 필요한 데이터로 가공해야함)
+ * keyword 밈 검색 API
+ * @param keyword 검색할 keyword
+ * @returns UseInfiniteQueryResult - useInfiniteQuery의 반환값
  */
-export const useGetSearchResultsByKeyword = (keyword: string) =>
-  useInfiniteQuery<PaginationResponse<SearchResult>>({
-    queryKey: ["getSearchResultsByKeyword", keyword],
+export const useGetMemesByKeyword = (keyword: string) => {
+  return useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesByKeyword(keyword),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.search.getSearchResultsByKeyword({ keyword, offset: pageParam, limit: 20 }),
+      api.search.getMemesByKeyword({ keyword, offset: pageParam, limit: PAGE_SIZE }),
     suspense: false,
     enabled: !!keyword,
     getNextPageParam: (lastPage) => {
-      const { isLastPage, pageNumber } = lastPage;
-      return isLastPage ? undefined : pageNumber + 1;
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
     },
   });
+};
 
 /**
- * FIX
- * 1. query key관리
- * 2. pageParam 타입추론
- * 3. getSearchResultsByTag 비동기 API에 대해 서버에서 받아온 데이터에 대한 스키마 필요(프론트에 필요한 데이터로 가공해야함)
+ * tag 밈 검색 API
+ * @param tag 검색할 tag
+ * @returns UseInfiniteQueryResult - useInfiniteQuery의 반환값
  */
-export const useGetSearchResultsByTag = (tag: string) =>
-  useInfiniteQuery<PaginationResponse<SearchResult>>({
-    queryKey: ["getSearchResultsByTag", tag],
+export const useGetMemesByTag = (tag: string) => {
+  return useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesByTag(tag),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.search.getSearchResultsByTag({ keyword: tag, offset: pageParam, limit: 20 }),
+      api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
     suspense: false,
     enabled: !!tag,
     getNextPageParam: (lastPage) => {
-      const { isLastPage, pageNumber } = lastPage;
-      return isLastPage ? undefined : pageNumber + 1;
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
     },
   });
+};

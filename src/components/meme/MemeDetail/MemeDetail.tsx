@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { useGetMemeTagsById, useMemeDetailById, useToast } from "@/application/hooks";
 import { PAGE_URL } from "@/application/util";
 import { IconButton } from "@/components/common/Button";
@@ -66,7 +68,9 @@ export const MemeDetail = ({ id }: Props) => {
           <span className="text-16-semibold-130">태그</span>
           <ul className="mt-16 flex flex-wrap gap-8">
             {tags.map((tag) => (
-              <Chip as="li" color="lightGray" key={tag.tagId} label={tag.name} size="medium" />
+              <Link href={`/explore/tags?q=${tag.name}`} key={tag.tagId}>
+                <Chip as="li" color="lightGray" label={tag.name} size="medium" />
+              </Link>
             ))}
           </ul>
         </section>

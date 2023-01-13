@@ -2,13 +2,13 @@ import Link from "next/link";
 
 import { useGetMemeTagsById, useMemeDetailById, useToast } from "@/application/hooks";
 import { PAGE_URL } from "@/application/util";
-import { IconButton } from "@/components/common/Button";
 import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 import { ClipboardCopyButton } from "@/components/meme/MemeDetail/ClipboardCopyButton";
 import { DownloadButton } from "@/components/meme/MemeDetail/DownloadButton";
 import { KakaoShareButton } from "@/components/meme/MemeDetail/KakaoShareButton";
+import { NativeShareButton } from "@/components/meme/MemeDetail/NativeShareButton";
 
 interface Props {
   id: string;
@@ -27,9 +27,10 @@ export const MemeDetail = ({ id }: Props) => {
 
   const { imageUrl: src, imageWidth: width, imageHeight: height } = images[0];
 
-  const handleShare = () => show("카카오톡 공유가 완료되었습니다", { icon: "kakao2" });
+  const handleKakaoShare = () => show("카카오톡 공유가 완료되었습니다", { icon: "kakao2" });
   const handleClipboardCopy = () => show("링크가 복사되었습니다", { icon: "share" });
   const handleDownload = () => show("앨범에 저장하였습니다", { icon: "cake" });
+  const handleNativeShare = () => show("공유가 완료되었습니다", { icon: "cake" });
 
   return (
     <article>
@@ -54,11 +55,16 @@ export const MemeDetail = ({ id }: Props) => {
         <ul className="flex gap-10">
           <KakaoShareButton
             resource={{ url: PAGE_URL, imageUrl: src, title: name, description }}
-            onSuccess={handleShare}
+            onSuccess={handleKakaoShare}
           />
           <DownloadButton name={name} target={src} onSuccess={handleDownload} />
           <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
-          <IconButton as="li" className="bg-light-gray-10" icon="meatball" size="medium" />
+          <NativeShareButton
+            text={description}
+            title={name}
+            url={PAGE_URL}
+            onSuccess={handleNativeShare}
+          />
         </ul>
         <span className="text-16-semibold-130 text-dark-gray-20">친구에게 밈을 공유해 보세요</span>
       </div>

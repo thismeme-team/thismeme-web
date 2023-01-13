@@ -1,4 +1,4 @@
-import { useMemeDetailById, useToast } from "@/application/hooks";
+import { useGetMemeTagsById, useMemeDetailById, useToast } from "@/application/hooks";
 import { PAGE_URL } from "@/application/util";
 import { IconButton } from "@/components/common/Button";
 import { Chip } from "@/components/common/Chip";
@@ -19,8 +19,8 @@ export const MemeDetail = ({ id }: Props) => {
     name,
     description,
     image: { images },
-    tags,
   } = useMemeDetailById(id);
+  const { tags } = useGetMemeTagsById(id);
   const { show } = useToast();
 
   const { imageUrl: src, imageWidth: width, imageHeight: height } = images[0];
@@ -30,7 +30,7 @@ export const MemeDetail = ({ id }: Props) => {
   const handleDownload = () => show("앨범에 저장하였습니다", { icon: "cake" });
 
   return (
-    <>
+    <article>
       <Photo
         className="mt-16 max-h-[70vh] min-h-[25vh] w-full rounded-15"
         height={height}
@@ -40,7 +40,7 @@ export const MemeDetail = ({ id }: Props) => {
       <section className="mt-10 flex flex-col gap-8">
         <div className="flex items-center gap-14 text-12-regular-160 text-gray-10">
           <span>{`조회수 ${viewCount}`}</span>
-          <span>{createdDate}</span>
+          <span>{createdDate.split("T")[0]}</span>
         </div>
         <div className="flex w-full items-center justify-between text-20-bold-140">
           {name} <Icon name="warn" />
@@ -62,15 +62,15 @@ export const MemeDetail = ({ id }: Props) => {
       </div>
 
       {tags && tags.length ? (
-        <section>
+        <section className="mb-50">
           <span className="text-16-semibold-130">태그</span>
           <ul className="mt-16 flex flex-wrap gap-8">
-            {tags.map((tag, idx) => (
-              <Chip as="li" color="lightGray" key={idx} label={tag} size="medium" />
+            {tags.map((tag) => (
+              <Chip as="li" color="lightGray" key={tag.tagId} label={tag.name} size="medium" />
             ))}
           </ul>
         </section>
       ) : null}
-    </>
+    </article>
   );
 };

@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { useSearchResult } from "@/application/hooks";
 
 import { SearchItem } from "../SearchItem/SearchItem";
@@ -17,14 +19,16 @@ export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
     <ul>
       {searchResults?.map((searchResult) => (
         <li key={searchResult.tagId}>
-          <SearchItem
-            majorType={searchResult.categoryName}
-            searchText={value}
-            tagName={searchResult.name}
-            onClick={() => {
-              onClickAddKeyword(searchResult.name);
-            }}
-          />
+          <Link href={`explore/tags?q=${searchResult.name}`}>
+            <SearchItem
+              majorType={searchResult.categoryName}
+              searchText={value}
+              tagName={searchResult.name}
+              onClick={() => {
+                onClickAddKeyword(searchResult.name);
+              }}
+            />
+          </Link>
         </li>
       ))}
     </ul>

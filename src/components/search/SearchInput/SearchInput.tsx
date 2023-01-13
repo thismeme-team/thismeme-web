@@ -10,7 +10,13 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 
 export const SearchInput = ({ onReset, onClickAddKeyword, value, ...rest }: Props) => {
   return (
-    <div className="relative flex items-center justify-start">
+    <form
+      className="relative flex items-center justify-start"
+      onSubmit={(e) => {
+        e.preventDefault();
+        onClickAddKeyword?.(value as string);
+      }}
+    >
       <InputBase
         className="h-43 w-full rounded-22 bg-light-gray-10 pl-22 text-16-semibold-130 text-dark-gray-10 outline-none placeholder:text-gray-10"
         value={value}
@@ -28,6 +34,6 @@ export const SearchInput = ({ onReset, onClickAddKeyword, value, ...rest }: Prop
           </>
         }
       />
-    </div>
+    </form>
   );
 };

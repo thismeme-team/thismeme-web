@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Chip } from "@/components/common/Chip";
 import type { SearchKeyword } from "@/types";
 
@@ -19,7 +21,9 @@ export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
       </div>
       <div className="flex flex-wrap align-middle">
         {keywords.map((keyword) => (
-          <Chip className="m-4" color="white" key={keyword.id} label={keyword.text} size="medium" />
+          <Link href={`explore/keywords?q=${keyword.text}`} key={keyword.id}>
+            <Chip className="m-4" color="white" label={keyword.text} size="medium" />
+          </Link>
         ))}
       </div>
     </div>

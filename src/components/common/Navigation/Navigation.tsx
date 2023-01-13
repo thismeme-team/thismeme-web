@@ -2,9 +2,11 @@ import type { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<{ className?: string }>;
 
-export const Navigation = ({ children }: Props) => {
+export const Navigation = ({ children, className = "" }: Props) => {
   return (
-    <header className="sticky top-0 z-[1000] flex h-50 w-full shrink-0 items-center justify-between bg-white">
+    <header
+      className={`sticky top-0 z-[1000] flex h-50 w-full shrink-0 items-center justify-between bg-white ${className}`}
+    >
       {children}
     </header>
   );
@@ -22,9 +24,7 @@ const NavigationRight = ({ children, className = "" }: Props) => (
 );
 
 const NavigationTitle = ({ children, className = "" }: Props) => (
-  <span
-    className={`pointer-events-none absolute left-1/2 mx-auto block -translate-x-2/4 text-18-bold-140 ${className}`}
-  >
+  <span className={`absolute left-1/2 -translate-x-2/4 text-18-bold-140 ${className}`}>
     {children}
   </span>
 );

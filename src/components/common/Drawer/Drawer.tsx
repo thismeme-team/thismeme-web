@@ -1,6 +1,6 @@
-import { css } from "@emotion/react";
 import type { PropsWithChildren, ReactElement } from "react";
 import { cloneElement } from "react";
+import { css } from "twin.macro";
 
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./context";
 

@@ -5,7 +5,7 @@ import { useCallback, useMemo } from "react";
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Masonry } from "@/components/common/Masonry";
-import { ExplorePageNavigation } from "@/components/common/Navigation/ExplorePageNavigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 const ExploreTagsPage: NextPage = () => {

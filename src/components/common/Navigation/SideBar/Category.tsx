@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 
 import { useGetCategoryWithTag } from "@/application/hooks";
 import { Accordion } from "@/components/common/Accordion";
-import { useSetDrawerContext } from "@/components/common/Drawer/context";
-import { useGlobalScrollContext } from "@/components/common/Layout/context";
+import { useSetDrawerContext } from "@/components/common/Drawer";
+import { useGlobalScrollContext } from "@/components/common/Layout";
 
 export const Category = () => {
   const { data } = useGetCategoryWithTag();

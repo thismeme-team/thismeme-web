@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 
-import type { GetCategoryByTagResponse } from "@/infra/api/tags/types";
+import type { GetCategoryByTagResponse } from "./types";
 
 export class TagApi {
   constructor(private api: AxiosInstance) {}

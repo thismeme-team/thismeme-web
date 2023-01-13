@@ -1,7 +1,7 @@
-import { BackButton } from "@/components/common/Navigation/BackButton";
-import { Navigation } from "@/components/common/Navigation/Navigation";
-import { Profile } from "@/components/common/Navigation/Profile";
-import { SideBar } from "@/components/common/Navigation/SideBar";
+import { BackButton } from "./BackButton";
+import { Navigation } from "./Navigation";
+import { Profile } from "./Profile";
+import { SideBar } from "./SideBar";
 
 interface Props {
   title?: string;

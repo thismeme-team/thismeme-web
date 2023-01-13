@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
-import { SearchPageNavigation } from "@/components/common/Navigation/SearchPageNavigation";
+import { SearchPageNavigation } from "@/components/common/Navigation";
 import {
   SearchInput,
   SearchPopularList,

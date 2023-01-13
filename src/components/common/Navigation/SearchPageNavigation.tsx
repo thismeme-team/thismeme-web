@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import Delete from "/public/icon/cancel.svg";
-import { Navigation } from "@/components/common/Navigation/Navigation";
+
+import { Navigation } from "./Navigation";
 
 export const SearchPageNavigation = () => {
   return (

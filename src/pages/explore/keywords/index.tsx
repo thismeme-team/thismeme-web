@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 
 import { useGetMemesByKeyword, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
-import { ExplorePageNavigation } from "@/components/common/Navigation/ExplorePageNavigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 const ExploreWordsPage: NextPage = () => {

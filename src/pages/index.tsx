@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { IntroPageNavigation } from "@/components/common/Navigation/IntroPageNavigation";
+import { IntroPageNavigation } from "@/components/common/Navigation";
 import { HomePopular } from "@/components/home";
 import { SearchInput } from "@/components/search";
 

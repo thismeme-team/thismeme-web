@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { ExplorePageNavigation } from "@/components/common/Navigation/ExplorePageNavigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { MemeDetail } from "@/components/meme/MemeDetail";
 
 const MemeDetailPage: NextPage = () => {

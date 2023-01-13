@@ -1,9 +1,9 @@
 import type { ComponentStory } from "@storybook/react";
 import React from "react";
 
-import { ExplorePageNavigation } from "@/components/common/Navigation/ExplorePageNavigation";
-import { IntroPageNavigation } from "@/components/common/Navigation/IntroPageNavigation";
-import { SearchPageNavigation } from "@/components/common/Navigation/SearchPageNavigation";
+import { ExplorePageNavigation } from "./ExplorePageNavigation";
+import { IntroPageNavigation } from "./IntroPageNavigation";
+import { SearchPageNavigation } from "./SearchPageNavigation";
 
 export default {
   title: "components/common/Navigation",

@@ -1,7 +1,8 @@
 import Logo from "/public/icon/logo.svg";
-import { Navigation } from "@/components/common/Navigation/Navigation";
-import { Profile } from "@/components/common/Navigation/Profile";
-import { SideBar } from "@/components/common/Navigation/SideBar";
+
+import { Navigation } from "./Navigation";
+import { Profile } from "./Profile";
+import { SideBar } from "./SideBar";
 
 export const IntroPageNavigation = () => {
   return (

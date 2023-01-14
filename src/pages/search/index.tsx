@@ -16,7 +16,7 @@ const SearchPage = () => {
 
   const router = useRouter();
 
-  const handleSearchByKeyword = () => {
+  const onSearchByKeyword = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
 
     onClickAddKeyword(inputProps.value);
@@ -28,10 +28,10 @@ const SearchPage = () => {
       <div className="relative">
         <SearchInput
           {...inputProps}
-          handleSearchByKeyword={handleSearchByKeyword}
           placeholder="당신이 찾는 밈, 여기 있다."
           spellCheck={false}
           type="text"
+          onSearchByKeyWord={onSearchByKeyword}
         />
         <p className="my-16 px-14 text-12-regular-160 text-gray-10">
           밈 제목,태그 설명을 입력하세요

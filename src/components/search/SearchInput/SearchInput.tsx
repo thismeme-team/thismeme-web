@@ -5,16 +5,16 @@ import { InputBase } from "@/components/common/Input";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onReset?: () => void;
-  handleSearchByKeyword?: () => void;
+  onSearchByKeyWord?: () => void;
 }
 
-export const SearchInput = ({ onReset, handleSearchByKeyword, value, ...rest }: Props) => {
+export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Props) => {
   return (
     <form
       className="relative flex items-center justify-start"
       onSubmit={(e) => {
         e.preventDefault();
-        handleSearchByKeyword?.();
+        onSearchByKeyWord?.();
       }}
     >
       <InputBase
@@ -23,12 +23,12 @@ export const SearchInput = ({ onReset, handleSearchByKeyword, value, ...rest }: 
         {...rest}
         endComponents={
           <>
-            <Icon className="absolute right-46" name="delete" onClick={onReset} />
+            <Icon className="absolute right-46 cursor-pointer" name="delete" onClick={onReset} />
             <Icon
-              className="absolute right-16"
+              className="absolute right-16 cursor-pointer"
               name="search"
               onClick={() => {
-                handleSearchByKeyword?.();
+                onSearchByKeyWord?.();
               }}
             />
           </>

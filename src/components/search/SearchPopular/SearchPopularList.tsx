@@ -11,7 +11,7 @@ export const SearchPopularList = () => {
     <ul>
       {tags?.map((tag, index) => (
         <li key={tag.tagId}>
-          <Link href={`explore/keywords?q=${tag.name}`}>
+          <Link href={`explore/tags?q=${tag.name}`}>
             <SearchPopularItem index={index} name={tag.name} />
           </Link>
         </li>

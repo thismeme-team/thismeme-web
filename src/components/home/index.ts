@@ -1,1 +1,1 @@
-export * from "./HomePopular";
+export * from "./PopularTag";

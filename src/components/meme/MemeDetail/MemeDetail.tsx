@@ -5,10 +5,8 @@ import { PAGE_URL } from "@/application/util";
 import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
-import { ClipboardCopyButton } from "@/components/meme/MemeDetail/ClipboardCopyButton";
-import { DownloadButton } from "@/components/meme/MemeDetail/DownloadButton";
-import { KakaoShareButton } from "@/components/meme/MemeDetail/KakaoShareButton";
-import { NativeShareButton } from "@/components/meme/MemeDetail/NativeShareButton";
+
+import { ClipboardCopyButton, DownloadButton, KakaoShareButton, NativeShareButton } from "./Button";
 
 interface Props {
   id: string;
@@ -22,8 +20,8 @@ export const MemeDetail = ({ id }: Props) => {
     description,
     image: { images },
   } = useMemeDetailById(id);
-  const { tags } = useGetMemeTagsById(id);
   const { show } = useToast();
+  const { tags } = useGetMemeTagsById(id);
 
   const { imageUrl: src, imageWidth: width, imageHeight: height } = images[0];
 
@@ -69,18 +67,16 @@ export const MemeDetail = ({ id }: Props) => {
         <span className="text-16-semibold-130 text-dark-gray-20">친구에게 밈을 공유해 보세요</span>
       </div>
 
-      {tags && tags.length ? (
-        <section className="mb-50">
-          <span className="text-16-semibold-130">태그</span>
-          <ul className="mt-16 flex flex-wrap gap-8">
-            {tags.map((tag) => (
-              <Link href={`/explore/tags?q=${tag.name}`} key={tag.tagId}>
-                <Chip as="li" color="lightGray" label={tag.name} size="medium" />
-              </Link>
-            ))}
-          </ul>
-        </section>
-      ) : null}
+      <section className="mb-50">
+        <span className="text-16-semibold-130">태그</span>
+        <ul className="mt-16 flex flex-wrap gap-8">
+          {tags.map((tag) => (
+            <Link href={`/explore/tags?q=${tag.name}`} key={tag.tagId}>
+              <Chip as="li" color="lightGray" label={tag.name} size="medium" />
+            </Link>
+          ))}
+        </ul>
+      </section>
     </article>
   );
 };

@@ -10,7 +10,7 @@ export const SideBar = () => {
   return (
     <Drawer>
       <Drawer.Trigger close={<Icon name="cancel" />} open={<Icon name="menu" />} />
-      <Drawer.Content className="mt-50">
+      <Drawer.Content className="mt-50" direction="right">
         <Link className="mb-8 block py-12" href="/search">
           <SearchInput placeholder="당신이 찾는 밈, 여기 있다." />
         </Link>

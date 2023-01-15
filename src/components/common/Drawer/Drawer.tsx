@@ -1,4 +1,4 @@
-import type { PropsWithChildren, ReactElement } from "react";
+import type { PropsWithChildren, ReactElement, ReactNode } from "react";
 import { cloneElement } from "react";
 import { css } from "twin.macro";
 
@@ -37,7 +37,12 @@ const DrawerTrigger = ({ open, close }: DrawerTriggerProps) => {
     : cloneElement(open, { onClick: () => setIsOpen(true), className });
 };
 
-const DrawerContent = ({ children, className }: PropsWithChildren<{ className?: string }>) => {
+interface DrawerContentProps {
+  className: string;
+  children: ReactNode;
+  direction: "left" | "right";
+}
+const DrawerContent = ({ children, className, direction }: DrawerContentProps) => {
   const isOpen = useDrawerContext();
 
   return (
@@ -46,7 +51,7 @@ const DrawerContent = ({ children, className }: PropsWithChildren<{ className?: 
       css={[
         css`
           visibility: hidden;
-          transform: translateX(-110%);
+          transform: translateX(${direction === "left" ? "-110%" : "110%"});
           will-change: transform;
           transition: transform 0.4s ease, visibility 0s ease 0.4s;
           position: absolute;

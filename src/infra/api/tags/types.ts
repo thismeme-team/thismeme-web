@@ -17,3 +17,12 @@ export interface GetTagSearchResponse {
 export interface GetMemeTagsByIdResponse {
   tags: Tag[];
 }
+
+export interface GetCategoryByTagResponse {
+  categories: {
+    categoryId: number;
+    name: string;
+    priority: number;
+    tags: Pick<Tag, "tagId" | "name" | "viewCount">[];
+  }[];
+}

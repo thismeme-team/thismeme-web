@@ -1,7 +1,7 @@
 import type { Dispatch, PropsWithChildren } from "react";
 import { createContext, useContext, useReducer } from "react";
 
-import type { Toast } from "@/components/common/Toast/types";
+import type { Toast } from "./types";
 
 const ToastContext = createContext<Toast[]>([]);
 const SetToastContext = createContext<Dispatch<SetToastAction>>(() => null);

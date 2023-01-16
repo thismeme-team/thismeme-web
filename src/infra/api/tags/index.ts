@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 
-import type { GetMemeTagsByIdResponse } from "@/infra/api/tags/types";
+import type { GetCategoryByTagResponse, GetMemeTagsByIdResponse } from "./types";
 
 export class TagApi {
   constructor(private api: AxiosInstance) {}
@@ -30,4 +30,7 @@ export class TagApi {
       .get<GetMemeTagsByIdResponse>(`/tags/memes/${id}`)
       .then((response) => response.data);
   };
+
+  getCategoryWithTags = () =>
+    this.api.get<GetCategoryByTagResponse>("/tags/categories").then((response) => response.data);
 }

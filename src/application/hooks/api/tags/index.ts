@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 
+import { useSuspendedQuery } from "@/application/hooks/api/core";
 import { api } from "@/infra/api";
 import type { GetPopularTagsResponse, GetTagSearchResponse } from "@/infra/api/tags/types";
 
@@ -33,3 +34,22 @@ export const useGetTagSearch = (value: string) => {
   });
   return { autoCompletedTags: data?.tags, ...rest };
 };
+
+/**
+ * @desc
+ * Navigation Drawer (SideBar) 카테고리/태그
+ *
+ * @todo
+ * select option을 외부에서 주입받고 싶었지만 타입체크가 어려워 현 상태 유지함
+ */
+export const useGetCategoryWithTag = () =>
+  useSuspendedQuery({
+    queryKey: QUERY_KEYS.getCategoryWithTags,
+    queryFn: api.tags.getCategoryWithTags,
+    select: ({ categories }) =>
+      categories.map((category) => ({
+        name: category.name,
+        id: String(category.categoryId),
+        children: category.tags.map((tag) => tag.name),
+      })),
+  });

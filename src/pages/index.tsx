@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { Navigation } from "@/components/common/Navigation";
+import { IntroNavigation } from "@/components/common/Navigation/Navigation.stories";
 import { Photo } from "@/components/common/Photo";
 import { PopularMemeList, PopularTagList } from "@/components/home";
 import { SearchInput } from "@/components/search";
@@ -12,7 +12,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <Navigation page="intro" />
+      <IntroNavigation />
       <Photo className="m-auto my-10 h-190 w-230 overflow-visible" src="/img/brandimage.png" />
       <SearchInput
         placeholder="당신이 찾는 밈 여기 있다."

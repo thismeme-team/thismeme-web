@@ -10,3 +10,6 @@ html {
   font-size: 62.5%;
 }
 
+a, button {
+  cursor: pointer;
+}

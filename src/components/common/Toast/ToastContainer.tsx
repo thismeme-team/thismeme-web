@@ -2,8 +2,9 @@ import { useRef } from "react";
 
 import { useIsomorphicLayoutEffect } from "@/application/hooks";
 import { Portal } from "@/components/common/Portal";
-import { useToastContext } from "@/components/common/Toast/context";
 import { Toast } from "@/components/common/Toast/Toast";
+
+import { useToastContext } from "./context";
 
 let prevHeight = 0;
 const EXPAND_DELAY = 230;

@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 import { delay } from "@/application/util";
-import { useSetToastContext } from "@/components/common/Toast/context";
+import { useSetToastContext } from "@/components/common/Toast";
 import type { Toast, ToastOption, ToastType } from "@/components/common/Toast/types";
 
 const DEFAULT_TOAST_DELAY = 1000;

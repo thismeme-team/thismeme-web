@@ -26,13 +26,7 @@ export class MemeApi {
     limit: number;
   }) => {
     const { data } = await this.api.get<GetMemesResponse>(
-      `/memes?page=${currentpage}&size=3&sort=viewCount,desc`,
-      {
-        params: {
-          offset,
-          limit,
-        },
-      },
+      `/memes?page=${currentpage}&size=${limit}&sort=viewCount,desc`,
     );
     const result = {
       data: data.memes,

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 import { Navigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
-import { PopularTagList } from "@/components/home";
+import { PopularMemeList, PopularTagList } from "@/components/home";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
@@ -13,7 +13,7 @@ const HomePage: NextPage = () => {
   return (
     <>
       <Navigation page="intro" />
-      <Photo className="m-auto my-10 h-190 w-230" src="/img/brandimage.png" />
+      <Photo className="m-auto my-10 h-190 w-230 overflow-visible" src="/img/brandimage.png" />
       <SearchInput
         placeholder="당신이 찾는 밈 여기 있다."
         onClick={() => {
@@ -28,6 +28,7 @@ const HomePage: NextPage = () => {
         </ul>
       </Suspense>
       <div className="text-center text-20-bold-140">어쩌면 당신이 찾았을 밈</div>
+      <PopularMemeList />
     </>
   );
 };

@@ -1,18 +1,7 @@
-import type { PropsWithChildren, ReactElement, ReactNode } from "react";
-import { cloneElement } from "react";
+import type { PropsWithChildren, ReactNode } from "react";
 import { css } from "twin.macro";
 
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./context";
-
-/**
- * @example
- * <Drawer>
- *   <Drawer.Trigger open={<Icon/>} close={<Icon/>}/>
- *   <Drawer.Content>
- *     <SideBar />
- *   </Drawer.Content>
- * </Drawer>
- */
 
 export const Drawer = ({ children }: PropsWithChildren) => {
   return (
@@ -23,18 +12,13 @@ export const Drawer = ({ children }: PropsWithChildren) => {
 };
 
 interface DrawerTriggerProps {
-  open: ReactElement;
-  close: ReactElement;
+  children: ({ isOpen }: { isOpen: boolean }) => ReactNode;
 }
-const DrawerTrigger = ({ open, close }: DrawerTriggerProps) => {
+const DrawerTrigger = ({ children }: DrawerTriggerProps) => {
   const isOpen = useDrawerContext();
   const setIsOpen = useSetDrawerContext();
 
-  const className = "cursor-pointer";
-
-  return isOpen
-    ? cloneElement(close, { onClick: () => setIsOpen(false), className })
-    : cloneElement(open, { onClick: () => setIsOpen(true), className });
+  return <button onClick={() => setIsOpen((prev) => !prev)}>{children({ isOpen })}</button>;
 };
 
 interface DrawerContentProps {

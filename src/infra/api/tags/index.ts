@@ -26,5 +26,5 @@ export class TagApi {
   };
 
   getCategoryWithTags = () =>
-    this.api.get<GetCategoryByTagResponse>("/tags/categories").then((res) => res.data);
+    this.api.get<GetCategoryByTagResponse>("/tags/categories").then((response) => response.data);
 }

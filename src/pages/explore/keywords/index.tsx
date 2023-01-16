@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 
 import { useGetMemesByKeyword, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
-import { Navigation } from "@/components/common/Navigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
 import { MemeItem } from "@/components/meme/MemeItem";
 
@@ -26,7 +26,7 @@ const ExploreWordsPage: NextPage = () => {
 
   return (
     <>
-      <Navigation page="result" title={query.q} />
+      <ExplorePageNavigation title={query.q as string} />
       {isEmpty && (
         <div className="flex h-full w-full flex-col items-center justify-center">
           <Photo className="w-200" src="/img/emptyAvatar.png" />

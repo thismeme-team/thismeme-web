@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { Navigation } from "@/components/common/Navigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { MemeDetail } from "@/components/meme/MemeDetail";
 
 const MemeDetailPage: NextPage = () => {
@@ -10,7 +10,7 @@ const MemeDetailPage: NextPage = () => {
 
   return (
     <>
-      <Navigation page="detail" />
+      <ExplorePageNavigation />
       {query.id && (
         <Suspense>
           <MemeDetail id={query.id as string} />

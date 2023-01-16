@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
-import { Navigation } from "@/components/common/Navigation";
+import { SearchPageNavigation } from "@/components/common/Navigation";
 import {
   SearchInput,
   SearchPopularList,
@@ -15,8 +15,8 @@ const SearchPage = () => {
 
   return (
     <>
-      <Navigation page="search" />
-      <div className="relative">
+      <SearchPageNavigation />
+      <div className="relative mt-8">
         <SearchInput
           {...inputProps}
           placeholder="당신이 찾는 밈, 여기 있다."

@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 
 import { useGetMemesByKeyword, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
-import { Navigation } from "@/components/common/Navigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 const ExploreWordsPage: NextPage = () => {
@@ -22,7 +22,7 @@ const ExploreWordsPage: NextPage = () => {
 
   return (
     <>
-      <Navigation page="result" title={query.q} />
+      <ExplorePageNavigation title={query.q as string} />
       <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
         {memeList.map((meme) => {
           return <MemeItem key={meme.memeId} meme={meme} />;

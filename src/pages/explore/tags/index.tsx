@@ -5,7 +5,7 @@ import { useCallback, useMemo } from "react";
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Masonry } from "@/components/common/Masonry";
-import { Navigation } from "@/components/common/Navigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 const ExploreTagsPage: NextPage = () => {
@@ -21,7 +21,7 @@ const ExploreTagsPage: NextPage = () => {
 
   return (
     <>
-      <Navigation page="result" title={`#${query.q}`} />
+      <ExplorePageNavigation title={`#${query.q}`} />
       <div className="flex flex-col items-center bg-white pt-16">
         <span className="text-black/[.3]">100개의 밈</span>
         <Button size="large">태그 즐겨찾기</Button>

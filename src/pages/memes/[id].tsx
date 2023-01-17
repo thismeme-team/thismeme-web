@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { MemeDetail } from "@/components/meme/MemeDetail";
+import { MemeTagList } from "@/components/meme/MemeDetail/MemeTagList";
 
 const MemeDetailPage: NextPage = () => {
   const { query } = useRouter();
@@ -14,6 +15,7 @@ const MemeDetailPage: NextPage = () => {
       {query.id && (
         <Suspense>
           <MemeDetail id={query.id as string} />
+          <MemeTagList id={query.id as string} />
         </Suspense>
       )}
     </>

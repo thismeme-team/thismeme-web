@@ -47,7 +47,7 @@ export const getCategoryWithTag = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/categories`,
   async (req, res, ctx) => {
     return res(
-      ctx.delay(),
+      ctx.delay(300),
       ctx.status(200),
       ctx.json({
         categories: [
@@ -105,6 +105,22 @@ export const getCategoryWithTag = rest.get(
               },
             ],
           },
+        ],
+      }),
+    );
+  },
+);
+export const getMemeTagsById = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/memes/:id`,
+  async (req, res, ctx) => {
+    return res(
+      ctx.delay(500),
+      ctx.status(200),
+      ctx.json({
+        tags: [
+          { tagId: 2, name: "에브리타임", viewCount: 49, categoryId: 6, categoryName: "기타" },
+          { tagId: 3, name: "시험기간", viewCount: 34, categoryId: 6, categoryName: "기타" },
+          { tagId: 5, name: "유머", viewCount: 140, categoryId: 6, categoryName: "기타" },
         ],
       }),
     );

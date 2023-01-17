@@ -37,8 +37,7 @@ export const getSearchResultsByKeyword = rest.get(
     return res(
       ctx.status(200),
       ctx.json<GetMemesResponse>({
-        // memes: data,
-        memes: [],
+        memes: data,
         count: data.length,
       }),
       ctx.delay(500),
@@ -61,7 +60,6 @@ export const getSearchResultsByTag = rest.get(
     return res(
       ctx.status(200),
       ctx.json<GetMemesResponse>({
-        // memes: data,
         memes: [],
         count: data.length,
       }),

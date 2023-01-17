@@ -22,10 +22,6 @@ const ExploreTagsPage: NextPage = () => {
   return (
     <>
       <ExplorePageNavigation title={`#${query.q}`} />
-      <div className="flex flex-col items-center bg-white pt-16">
-        <span className="text-black/[.3]">100개의 밈</span>
-        <Button size="large">태그 즐겨찾기</Button>
-      </div>
       {isEmpty && (
         <div className="flex h-full w-full flex-col items-center justify-center">
           <Photo className="w-200" src="/img/emptyAvatar.png" />
@@ -34,6 +30,12 @@ const ExploreTagsPage: NextPage = () => {
       )}
       {!isEmpty && (
         <>
+          <div className="flex flex-col items-center gap-8 bg-white py-16">
+            <span className="text-black/[.3]">100개의 밈</span>
+            <Button className="rounded-full bg-black px-24 py-10 text-15-semibold-130 text-white">
+              태그 즐겨찾기
+            </Button>
+          </div>
           <Masonry
             columns={2}
             defaultColumns={2}

@@ -60,7 +60,7 @@ export const getSearchResultsByTag = rest.get(
     return res(
       ctx.status(200),
       ctx.json<GetMemesResponse>({
-        memes: [],
+        memes: data,
         count: data.length,
       }),
       ctx.delay(500),

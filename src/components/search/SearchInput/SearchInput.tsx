@@ -23,7 +23,9 @@ export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Prop
         {...rest}
         endComponents={
           <>
-            <Icon className="absolute right-46 cursor-pointer" name="delete" onClick={onReset} />
+            {value && (
+              <Icon className="absolute right-46 cursor-pointer" name="delete" onClick={onReset} />
+            )}
             <button className="absolute right-16">
               <Icon name="search" />
             </button>

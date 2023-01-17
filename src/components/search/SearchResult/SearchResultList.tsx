@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { useGetTagSearch } from "@/application/hooks";
 import { Chip } from "@/components/common/Chip";
 
@@ -18,16 +20,18 @@ export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
     <ul>
       {autoCompletedTags?.map((tag) => (
         <li key={tag.tagId}>
-          <SearchItem
-            searchText={value}
-            tagName={tag.name}
-            right={
-              <Chip className="absolute right-6" color="black" label="무한도전" size="small" />
-            }
-            onClick={() => {
-              onClickAddKeyword(tag.name);
-            }}
-          />
+          <Link href={`explore/tags?q=${tag.name}`}>
+            <SearchItem
+              searchText={value}
+              tagName={tag.name}
+              right={
+                <Chip className="absolute right-6" color="black" label="무한도전" size="small" />
+              }
+              onClick={() => {
+                onClickAddKeyword(tag.name);
+              }}
+            />
+          </Link>
         </li>
       ))}
     </ul>

@@ -20,13 +20,12 @@ export const useMemeDetailById = (id: string) => {
 
 /**
  * 인기 밈 리스트 API
- * currentpage 를 fetch할때마다 1씩 더해주기 위해(pageParm/3)
  */
 export const useGetPopularMeme = () => {
   return useInfiniteQuery({
     queryKey: QUERY_KEYS.getPopularMemes,
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getPopularMemes({ currentpage: pageParam / 3, offset: pageParam, limit: 3 }),
+      api.meme.getPopularMemes({ offset: pageParam, limit: 3 }),
     suspense: false,
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;

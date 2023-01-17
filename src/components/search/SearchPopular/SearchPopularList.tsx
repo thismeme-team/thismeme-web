@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { useGetPopularTags } from "@/application/hooks";
 
 import { SearchPopularItem } from "./SearchPopularItem";
@@ -9,7 +11,9 @@ export const SearchPopularList = () => {
     <ul>
       {tags?.map((tag, index) => (
         <li key={tag.tagId}>
-          <SearchPopularItem index={index} name={tag.name} />
+          <Link href={`explore/tags?q=${tag.name}`}>
+            <SearchPopularItem index={index} name={tag.name} />
+          </Link>
         </li>
       ))}
     </ul>

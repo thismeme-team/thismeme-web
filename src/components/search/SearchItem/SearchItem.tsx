@@ -10,7 +10,6 @@ interface SearchItemProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export const SearchItem = ({ searchText, tagName, right, ...rest }: SearchItemProps) => {
-  //FIX: 현재는 문자열 처리 로직을 간단하게 두었지만 확장성으로 고려하면 바뀔 수 있음
   const { ColoredText } = useColoredText({ tagName, searchText });
 
   return (

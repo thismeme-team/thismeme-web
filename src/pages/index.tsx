@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { Navigation } from "@/components/common/Navigation";
+import { IntroPageNavigation } from "@/components/common/Navigation";
 import { HomePopular } from "@/components/home";
 import { SearchInput } from "@/components/search";
 
@@ -12,7 +12,7 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Navigation page="intro" />
+      <IntroPageNavigation />
       <Image
         priority
         alt="brandimage"

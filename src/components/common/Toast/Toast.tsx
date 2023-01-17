@@ -1,6 +1,7 @@
 import { Icon } from "@/components/common/Icon";
-import type { Toast as Props } from "@/components/common/Toast/types";
-import { toastColor, toastIconColor } from "@/components/common/Toast/types";
+
+import type { Toast as Props } from "./types";
+import { toastColor, toastIconColor } from "./types";
 
 export const Toast = ({ message, className = "", icon, id, color = "black", visible }: Props) => {
   return (

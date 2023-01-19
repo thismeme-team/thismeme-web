@@ -1,6 +1,5 @@
 import type { QueryFunctionContext } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
-import { useMemo } from "react";
 
 import { api } from "@/infra/api";
 
@@ -26,11 +25,9 @@ export const useGetMemesByKeyword = (keyword: string) => {
       return isLastPage ? undefined : offset + limit;
     },
   });
-  const memeList = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
-  const isEmpty = useMemo(
-    () => data?.pages[0].isFirstPage && data.pages[0].data.length === 0,
-    [data],
-  );
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].isFirstPage && data.pages[0].data.length === 0;
+
   return { data: memeList, isEmpty, ...rest };
 };
 
@@ -52,10 +49,8 @@ export const useGetMemesByTag = (tag: string) => {
       return isLastPage ? undefined : offset + limit;
     },
   });
-  const memeList = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
-  const isEmpty = useMemo(
-    () => data?.pages[0].isFirstPage && data.pages[0].data.length === 0,
-    [data],
-  );
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].isFirstPage && data.pages[0].data.length === 0;
+
   return { data: memeList, isEmpty, ...rest };
 };

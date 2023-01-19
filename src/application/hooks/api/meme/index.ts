@@ -21,15 +21,16 @@ export const useMemeDetailById = (id: string) => {
 /**
  * 인기 밈 리스트 API
  */
-export const useGetPopularMeme = () => {
-  return useInfiniteQuery({
+export const useGetPopularMemes = () => {
+  const { data, ...rest } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getPopularMemes,
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.meme.getPopularMemes({ offset: pageParam, limit: 3 }),
-    suspense: false,
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;
       return isLastPage ? undefined : offset + limit;
     },
   });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  return { data: memeList, ...rest };
 };

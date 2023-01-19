@@ -26,7 +26,7 @@ export const useGetMemesByKeyword = (keyword: string) => {
     },
   });
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  const isEmpty = data?.pages[0].isFirstPage && data.pages[0].data.length === 0;
+  const isEmpty = data?.pages[0].data.length === 0;
 
   return { data: memeList, isEmpty, ...rest };
 };
@@ -50,7 +50,7 @@ export const useGetMemesByTag = (tag: string) => {
     },
   });
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  const isEmpty = data?.pages[0].isFirstPage && data.pages[0].data.length === 0;
+  const isEmpty = data?.pages[0].data.length === 0;
 
   return { data: memeList, isEmpty, ...rest };
 };

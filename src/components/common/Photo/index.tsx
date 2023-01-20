@@ -27,7 +27,7 @@ const Photo = ({ src = "", className = "", width, height, ...rest }: Props) => {
    */
   return (
     <div
-      className={`relative overflow-hidden bg-gray-100 [&>img]:!static ${className}`}
+      className={`relative overflow-hidden [&>img]:!static ${className}`}
       css={[width && height && { aspectRatio: `calc(${width} / ${height})` }]}
     >
       <Image

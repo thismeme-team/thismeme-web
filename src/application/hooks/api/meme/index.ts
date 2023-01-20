@@ -15,11 +15,3 @@ export const useMemeDetailById = (id: string) => {
 
   return { ...data, ...rest };
 };
-
-export const useGetMemeTagsById = (id: string) => {
-  const { data, ...rest } = useSuspendedQuery({
-    queryKey: QUERY_KEYS.getMemeTagsById(id),
-    queryFn: () => api.tags.getMemeTagsById(id),
-  });
-  return { ...data, ...rest };
-};

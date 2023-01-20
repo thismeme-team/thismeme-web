@@ -7,6 +7,7 @@ export const getMemeDetail = rest.get(
   async (req, res, ctx) => {
     return res(
       ctx.status(200),
+      ctx.delay(300),
       ctx.json<GetMemeDetailByIdResponse>({
         memeId: 0,
         name: "제목",

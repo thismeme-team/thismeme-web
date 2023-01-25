@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useGetMemesByKeyword, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
@@ -14,11 +14,9 @@ const ExploreWordsPage: NextPage = () => {
 
   const memeList = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
-  const onIntersect = useCallback(async () => {
+  const ref = useIntersect(async () => {
     if (query.q) fetchNextPage();
-  }, [query, fetchNextPage]);
-
-  const ref = useIntersect(onIntersect);
+  });
 
   return (
     <>

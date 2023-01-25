@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useCallback, useMemo } from "react";
+import { useMemo } from "react";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
@@ -14,10 +14,9 @@ const ExploreTagsPage: NextPage = () => {
   const { data, fetchNextPage } = useGetMemesByTag(query.q as string);
   const memeList = useMemo(() => (data ? data.pages.flatMap(({ data }) => data) : []), [data]);
 
-  const onIntersect = useCallback(async () => {
+  const ref = useIntersect(async () => {
     if (query.q) fetchNextPage();
-  }, [query, fetchNextPage]);
-  const ref = useIntersect(onIntersect);
+  });
 
   return (
     <>

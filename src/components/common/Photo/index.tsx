@@ -35,6 +35,7 @@ const Photo = ({ src = "", className = "", width, height, ...rest }: Props) => {
         alt="thumbnail"
         blurDataURL={base64Blur}
         placeholder="blur"
+        sizes=" "
         src={src}
         style={{ objectFit: "cover" }}
         {...rest}

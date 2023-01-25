@@ -1,1 +1,2 @@
-export * from "./HomePopular";
+export * from "./PopularMeme";
+export * from "./PopularTag";

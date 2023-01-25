@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useCallback } from "react";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
@@ -14,10 +13,9 @@ const ExploreByTagPage: NextPage = () => {
   const { query } = router;
   const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByTag(query.q as string);
 
-  const onIntersect = useCallback(async () => {
+  const ref = useIntersect(async () => {
     if (query.q) fetchNextPage();
-  }, [query, fetchNextPage]);
-  const ref = useIntersect(onIntersect);
+  });
 
   if (isEmpty) {
     return (

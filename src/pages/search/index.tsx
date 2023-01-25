@@ -1,3 +1,4 @@
+import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
@@ -10,7 +11,7 @@ import {
   SearchResultList,
 } from "@/components/search";
 
-const SearchPage = () => {
+const SearchPage: NextPage = () => {
   const inputProps = useInput();
   const { keywords, onClickDeleteKeyword, onClickAddKeyword } = useRecentSearch();
 

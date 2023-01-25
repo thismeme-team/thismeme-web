@@ -53,3 +53,11 @@ export const useGetCategoryWithTag = () =>
         children: category.tags.map((tag) => tag.name),
       })),
   });
+
+export const useGetMemeTagsById = (id: string) => {
+  const { data, ...rest } = useSuspendedQuery({
+    queryKey: QUERY_KEYS.getMemeTagsById(id),
+    queryFn: () => api.tags.getMemeTagsById(id),
+  });
+  return { ...data, ...rest };
+};

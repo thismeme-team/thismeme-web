@@ -14,6 +14,10 @@ export interface GetTagSearchResponse {
   tags: Pick<Tag, "tagId" | "name" | "viewCount">[];
 }
 
+export interface GetMemeTagsByIdResponse {
+  tags: Tag[];
+}
+
 export interface GetCategoryByTagResponse {
   categories: {
     categoryId: number;

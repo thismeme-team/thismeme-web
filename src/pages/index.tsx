@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
+import { DropDown } from "@/components/common/DropDown";
 import { IntroNavigation } from "@/components/common/Navigation/Navigation.stories";
 import { Photo } from "@/components/common/Photo";
 import { PopularMemeList, PopularTagList } from "@/components/home";
@@ -27,7 +28,7 @@ const HomePage: NextPage = () => {
           <PopularTagList />
         </ul>
       </Suspense>
-      <div className="text-center text-20-bold-140">어쩌면 당신이 찾았을 밈</div>
+      <DropDown />
       <PopularMemeList />
     </>
   );

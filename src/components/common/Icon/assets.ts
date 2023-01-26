@@ -2,6 +2,7 @@ export { default as back } from "/public/icon/back.svg";
 export { default as cake } from "/public/icon/cake.svg";
 export { default as cancel } from "/public/icon/cancel.svg";
 export { default as chevronDown } from "/public/icon/chevronDown.svg";
+export { default as chevronDown2 } from "/public/icon/chevronDown2.svg";
 export { default as delete } from "/public/icon/delete.svg";
 export { default as download } from "/public/icon/download.svg";
 export { default as google } from "/public/icon/google.svg";

@@ -17,7 +17,13 @@ export const decorators = [
     <QueryClientProvider>
       <ToastProvider>
         <Suspense fallback="loading...">
-          <div className="font-sans" style={{ "--font-pretendardVariable": "Pretendard" }}>
+          <div
+            className="font-pretendard"
+            style={{
+              "--font-pretendardVariable": "Pretendard Variable",
+              "--font-suitVariable": "SUIT Variable",
+            }}
+          >
             <ToastContainer />
             <Story />
           </div>

@@ -20,6 +20,10 @@ module.exports = {
       maxWidth: PX0_300,
       minHeight: PX0_300,
       colors: {
+        /**
+         * ################################
+         * @deprecated
+         */
         "light-gray-10": "#f6f6f6",
         "light-gray-20": "#eeeeee",
         "light-gray-30": "#d9d9d9",
@@ -27,19 +31,55 @@ module.exports = {
         "gray-20": "#666666",
         "dark-gray-10": "#383838",
         "dark-gray-20": "#242424",
-        primary: "#0d24fb",
+        /**
+         * ################################
+         */
+
+        gray: {
+          100: "#f3f4f8",
+          200: "#eaebf1",
+          300: "#e1e1e7",
+          400: "#d7d7dd",
+          500: "#c1c2c9",
+          600: "#aeaeb0",
+          700: "#636368",
+          800: "#37373d",
+          900: "#262528",
+        },
+
+        primary: {
+          100: "#edefff",
+          200: "#e4e7ff",
+          300: "#dbdeff",
+          400: "#b9c0fe",
+          500: "#a1aafe",
+          600: "#8893fd",
+          700: "#6b79fd",
+          800: "#4c5dfc",
+          900: "#3044fc",
+          1000: "#0d24fb",
+        },
+
+        secondary: {
+          100: "#ffefeb",
+          200: "#ffe8e1",
+          300: "#ffd9cd",
+          400: "#fdbfac",
+          500: "#fcac95",
+          600: "#fb9c80",
+          700: "#fa8e6e",
+          800: "#f97b56",
+          900: "#f86b41",
+          1000: "#f65221",
+        },
       },
       fontSize: {
+        /**
+         * ################################
+         * @deprecated
+         */
         "20-bold-140": [
           "2rem",
-          {
-            lineHeight: "140%",
-            letterSpacing: "0em",
-            fontWeight: "700",
-          },
-        ],
-        "18-bold-140": [
-          "1.8rem",
           {
             lineHeight: "140%",
             letterSpacing: "0em",
@@ -70,6 +110,58 @@ module.exports = {
             fontWeight: "600",
           },
         ],
+        /**
+         * ################################
+         */
+
+        "32-bold-140": [
+          "3.2rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "700",
+          },
+        ],
+        "22-bold-140": [
+          "2.2rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "700",
+          },
+        ],
+        "18-bold-140": [
+          "1.8rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "700",
+          },
+        ],
+        "16-semibold-140": [
+          "1.6rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "600",
+          },
+        ],
+        "16-regular-140": [
+          "1.6rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "400",
+          },
+        ],
+        "14-semibold-140": [
+          "1.4rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "600",
+          },
+        ],
         "12-bold-160": [
           "1.2rem",
           {
@@ -88,7 +180,8 @@ module.exports = {
         ],
       },
       fontFamily: {
-        sans: ["var(--font-pretendardVariable)", ...defaultTheme.fontFamily.sans],
+        pretendard: ["var(--font-pretendardVariable)", ...defaultTheme.fontFamily.sans],
+        suit: ["var(--font-suitVariable)", ...defaultTheme.fontFamily.serif],
       },
       keyframes: {
         slideDown: {

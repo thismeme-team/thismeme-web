@@ -21,7 +21,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <GlobalScrollContext.Provider value={ref}>
       <div
-        className={`${pretendard.variable} ${suit.variable} flex h-screen w-screen justify-center bg-gray-100`}
+        className={`${pretendard.variable} ${suit.variable} flex h-screen w-screen justify-center bg-gray-100 font-pretendard`}
       >
         <main
           className="relative flex w-full max-w-[48rem] flex-col overflow-y-auto overflow-x-hidden bg-white px-18 shadow-lg"

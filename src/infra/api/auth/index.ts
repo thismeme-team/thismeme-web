@@ -1,4 +1,5 @@
-import type { AxiosInstance } from "axios";
+import type { AxiosInstance, AxiosRequestConfig } from "axios";
+import { isAxiosError } from "axios";
 
 import { IS_CSR, safeLocalStorage } from "@/application/util";
 import type { RefreshResponse } from "@/infra/api/auth/types";
@@ -11,6 +12,21 @@ export class AuthApi {
 
     const token = safeLocalStorage.get(ACCESS_TOKEN_KEY);
     if (token) this.setAccessToken(token);
+
+    this.api.interceptors.response.use(null, async (error) => {
+      if (!isAxiosError(error)) return Promise.reject(error);
+
+      const status = error.response?.status;
+      const origin = error.config as AxiosRequestConfig;
+
+      if (Number(status) !== 401 || origin.headers?.retry) return Promise.reject(error);
+
+      const token = await this.refresh();
+      return this.api({
+        ...origin,
+        headers: { ...origin.headers, authorization: `Bearer ${token}`, retry: true },
+      });
+    });
   }
 
   getAccessToken = () => safeLocalStorage.get(ACCESS_TOKEN_KEY);
@@ -31,11 +47,16 @@ export class AuthApi {
     return this.api.post(`/token/blacklist`, { accessToken }).then(this.deleteAccessToken);
   };
 
-  refresh = () => {
+  refresh = async () => {
     const accessToken = this.getAccessToken();
 
-    return this.api
-      .post<RefreshResponse>(`/token/refresh`, { accessToken }, { withCredentials: true })
-      .then((res) => this.setAccessToken(res.data.accessToken));
+    const { data } = await this.api.post<RefreshResponse>(
+      `/token/refresh`,
+      { accessToken },
+      { withCredentials: true },
+    );
+
+    this.setAccessToken(data.accessToken);
+    return data.accessToken;
   };
 }

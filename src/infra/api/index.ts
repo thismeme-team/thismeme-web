@@ -1,21 +1,9 @@
-import axios from "axios";
+import { AuthApi } from "@/infra/api/auth";
 
+import { axiosBasic, axiosSearchBasic } from "./instance";
 import { MemeApi } from "./meme";
 import { SearchApi } from "./search";
 import { TagApi } from "./tags";
-
-export const axiosBasic = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
-});
-
-/**
- * FIX
- * 검색 API만 서버 endpoint가 다름.
- * 추후에 다른 API와 endpoint 통일될 예정.
- */
-export const axiosSearchBasic = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_SEARCH_API_URL}`,
-});
 
 /**
  * NOTE
@@ -28,6 +16,7 @@ export const axiosSearchBasic = axios.create({
  *  2. 응답 에러 핸들링
  */
 export const api = {
+  auth: new AuthApi(axiosBasic),
   search: new SearchApi(axiosSearchBasic),
   meme: new MemeApi(axiosBasic),
   tags: new TagApi(axiosBasic),

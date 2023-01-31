@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
-import { Button } from "@/components/common/Button";
 import { Masonry } from "@/components/common/Masonry";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
@@ -32,19 +31,16 @@ const ExploreByTagPage: NextPage = () => {
     <>
       <ExplorePageNavigation title={`#${query.q}`} />
 
-      <div className="flex flex-col items-center gap-8 bg-white py-16">
-        <span className="text-black/[.3]">100개의 밈</span>
-        <Button className="rounded-full bg-black px-24 py-10 text-15-semibold-130 text-white">
-          태그 즐겨찾기
-        </Button>
-      </div>
-
       <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
         {memeList.map((meme) => (
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
       <div className="m-10" ref={ref}></div>
+
+      <button className="fixed bottom-32 right-18 rounded-full bg-gray-700 p-13 font-tossface text-4xl">
+        ⭐️
+      </button>
     </>
   );
 };

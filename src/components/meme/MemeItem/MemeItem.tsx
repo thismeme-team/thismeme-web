@@ -17,11 +17,11 @@ export const MemeItem = memo(({ meme }: Props) => {
         src={meme.image.images[0].imageUrl}
         width={meme.image.images[0].imageWidth}
       />
-      <div className="flex items-center justify-between">
-        <span className="text-12-bold-160">{meme.name}</span>
-        <span className="flex items-center text-12-regular-160">
-          <Icon name="memeShare" />
-          {meme.shareCount}
+      <div className="flex items-center justify-between font-suit text-14-semibold-140">
+        <span>{meme.name}</span>
+        <span className="flex items-center">
+          <Icon height={16} name="memeShare" width={16} />
+          <span className="text-gray-600">{meme.shareCount}</span>
         </span>
       </div>
     </Link>

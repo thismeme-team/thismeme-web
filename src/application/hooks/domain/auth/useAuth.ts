@@ -1,16 +1,13 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { useLocalStorage } from "@/application/hooks";
 import { api } from "@/infra/api";
-
-const ACCESS_TOKEN_KEY = "accessToken";
 
 /**
  * @description
  *
  * useAuth
  * 1. method: login, logout
- * 2. property: user, isLogin
+ * 2. property: user, isLogin (SSR false)
  *
  * withAuth hoc
  *   useAuth isLogin == false, return LoginModal
@@ -23,26 +20,28 @@ const ACCESS_TOKEN_KEY = "accessToken";
  */
 
 export const useAuth = () => {
-  const [token, setToken] = useLocalStorage<string>(ACCESS_TOKEN_KEY, { defaultValue: "" });
+  const [isLogin, setIsLogin] = useState(false);
 
-  const logout = useCallback(() => api.auth.logout().then(() => setToken("")), [setToken]);
-  const login = useCallback(
-    (token: string) => {
-      setToken(token);
+  const logout = useCallback(() => api.auth.logout().then(() => setIsLogin(false)), []);
+  const login = useCallback((token: string) => {
+    api.auth.setAccessToken(token);
+    setIsLogin(true);
 
-      /**
-       * @todo
-       *   request getUserInfo API
-       *   set user context
-       */
-    },
-    [setToken],
-  );
+    /**
+     * @todo
+     *   request getUserInfo API
+     *   set user context
+     */
+  }, []);
+
+  useEffect(() => {
+    setIsLogin(Boolean(api.auth.getAccessToken()));
+  }, []);
 
   return {
     logout,
     login,
-    isLogin: !!token,
+    isLogin,
     user: null,
   };
 };

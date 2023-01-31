@@ -1,5 +1,5 @@
-import type { KakaoShareOptions } from "@/application/hooks/domain/share";
-import { useKakaoShare } from "@/application/hooks/domain/share";
+import type { KakaoShareOptions } from "@/application/hooks";
+import { useKakaoShare } from "@/application/hooks";
 import { IconButton } from "@/components/common/Button";
 
 interface Props {

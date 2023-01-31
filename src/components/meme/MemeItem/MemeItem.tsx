@@ -11,7 +11,7 @@ interface Props {
   meme: Meme;
 }
 export const MemeItem = memo(({ meme }: Props) => {
-  const { modalOpen, onOpen, onClose } = useModal();
+  const { open, onOpen, onClose } = useModal();
 
   const callBack = useCallback(() => {
     onOpen();
@@ -23,7 +23,7 @@ export const MemeItem = memo(({ meme }: Props) => {
 
   return (
     <div {...longPress()}>
-      {modalOpen && <MemeLongPress onClose={onClose} />}
+      {open && <MemeLongPress onClose={onClose} />}
       <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
         <Photo
           className="rounded-15"

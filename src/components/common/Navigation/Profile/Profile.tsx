@@ -4,7 +4,7 @@ import { Icon } from "@/components/common/Icon";
 import { SignUpModal } from "@/components/common/Modal";
 
 export const Profile = () => {
-  const { modalOpen, onOpen, onClose } = useModal();
+  const { open, onOpen, onClose } = useModal();
   const isMount = useIsMount();
   if (!isMount) return null;
   const loginState = safeLocalStorage.get("loginState");
@@ -16,7 +16,7 @@ export const Profile = () => {
       ) : (
         <>
           <Icon name="notloginprofile" onClick={onOpen} />
-          {modalOpen && <SignUpModal onClose={onClose} />}
+          {open && <SignUpModal onClose={onClose} />}
         </>
       )}
     </div>

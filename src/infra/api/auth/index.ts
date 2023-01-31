@@ -13,6 +13,14 @@ export class AuthApi {
     const token = safeLocalStorage.get(ACCESS_TOKEN_KEY);
     if (token) this.setAccessToken(token);
 
+    /**
+     * @desc
+     *  401 에러 시 토큰 갱신 후 이전 api 재요청 합니다
+     *  401 제외 상태코드 또는 이미 재요청 한 api일 경우 오류를 반환합니다
+     *
+     *  refresh api가 401을 반환하면 재로그인을 해야 합니다
+     *  - AT 삭제 후 페이지 강제 리로드로 일단 처리
+     */
     this.api.interceptors.response.use(null, async (error) => {
       if (!isAxiosError(error)) return Promise.reject(error);
 
@@ -20,6 +28,12 @@ export class AuthApi {
       const origin = error.config as AxiosRequestConfig;
 
       if (Number(status) !== 401 || origin.headers?.retry) return Promise.reject(error);
+
+      if (origin.url === "/token/refresh") {
+        this.deleteAccessToken();
+        location.reload();
+        return Promise.reject(error);
+      }
 
       const token = await this.refresh();
       return this.api({
@@ -59,4 +73,6 @@ export class AuthApi {
     this.setAccessToken(data.accessToken);
     return data.accessToken;
   };
+
+  // requestAgainTest = () => this.api.post("/token/requestAgainTest");
 }

@@ -1,6 +1,4 @@
-import { useCallback } from "react";
-
-import { delay } from "@/application/util";
+import { useDelay } from "@/application/hooks/common/useDelay";
 
 import { ListDropDown } from "../DropDown/ListDropDown";
 import { LongPressBase } from "./LongPressBase";
@@ -10,10 +8,7 @@ interface Props {
 }
 
 export const MemeLongPress = ({ onClose }: Props) => {
-  const delayClose = useCallback(async () => {
-    await delay(650);
-    onClose();
-  }, [onClose]);
+  const delayClose = useDelay({ event: onClose, time: 650 });
 
   return (
     <LongPressBase onClose={onClose}>

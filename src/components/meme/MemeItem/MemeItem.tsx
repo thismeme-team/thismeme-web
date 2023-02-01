@@ -14,6 +14,7 @@ export const MemeItem = memo(({ meme }: Props) => {
   const { open, onOpen, onClose } = useModal();
 
   const callBack = useCallback(() => {
+    window.navigator.vibrate(200);
     onOpen();
   }, [onOpen]);
 

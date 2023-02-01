@@ -2,21 +2,23 @@ import type { MouseEvent, PointerEvent } from "react";
 import { useCallback, useState } from "react";
 
 import { useModal } from "@/application/hooks";
+import { useDelay } from "@/application/hooks/common/useDelay";
 import { Icon } from "@/components/common/Icon";
 
-import { DropDownBase } from "../../DropDownBase";
-import { ListDropDown } from "../ListDropDown";
+import { DropDownBase } from "../DropDownBase";
+import { ListDropDown } from "./ListDropDown";
 
 export const HomeDropDown = () => {
   const [menu, setMenu] = useState<string>("@nickname이 찾는 밈");
   const { open, onOpen, onClose } = useModal();
+  const delayClose = useDelay({ event: onClose, time: 650 });
 
   const handleDropMenu = useCallback(
     (e: MouseEvent<HTMLLIElement>) => {
       setMenu((e.target as HTMLElement).innerText);
-      onClose();
+      delayClose();
     },
-    [onClose],
+    [delayClose],
   );
 
   return (
@@ -31,7 +33,7 @@ export const HomeDropDown = () => {
         />
       </div>
       {open && (
-        <DropDownBase>
+        <DropDownBase top="50">
           <ListDropDown.Container width="34">
             <ListDropDown.Content
               text="@nickname 이 찾는 메뉴"

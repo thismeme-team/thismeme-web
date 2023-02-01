@@ -1,9 +1,25 @@
 import type { PropsWithChildren } from "react";
+import { css } from "twin.macro";
 
-export const DropDownBase = ({ children, ...rest }: PropsWithChildren) => {
+interface Props {
+  left?: string;
+  top?: string;
+}
+
+export const DropDownBase = ({ children, left, top }: PropsWithChildren<Props>) => {
   return (
-    <>
-      <div className="absolute z-[900] mt-[50rem] block">{children}</div>
-    </>
+    <div
+      css={[
+        css`
+          position: absolute;
+          z-index: 900;
+          left: ${left}rem;
+          top: ${top}rem;
+          display: block;
+        `,
+      ]}
+    >
+      {children}
+    </div>
   );
 };

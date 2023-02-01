@@ -4,9 +4,16 @@ import { useRef } from "react";
 
 import { GlobalScrollContext } from "./context";
 
-const myFont = localFont({
+const pretendard = localFont({
   src: "../../../styles/fonts/PretendardVariable.woff2",
   variable: "--font-pretendardVariable",
+  weight: "100 900",
+});
+
+const suit = localFont({
+  src: "../../../styles/fonts/SUIT-Variable.woff2",
+  variable: "--font-suitVariable",
+  weight: "100 900",
 });
 
 export const Layout = ({ children }: PropsWithChildren) => {
@@ -14,7 +21,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <GlobalScrollContext.Provider value={ref}>
       <div
-        className={`${myFont.variable} flex h-screen w-screen justify-center bg-gray-100 font-sans`}
+        className={`${pretendard.variable} ${suit.variable} flex h-screen w-screen justify-center bg-gray-100 font-pretendard`}
       >
         <main
           className="relative flex w-full max-w-[48rem] flex-col overflow-y-auto overflow-x-hidden bg-white px-18 shadow-lg"

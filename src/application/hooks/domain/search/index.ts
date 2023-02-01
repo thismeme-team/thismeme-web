@@ -20,8 +20,8 @@ export const useRecentSearch = () => {
     setKeywords((keywords) => [newKeyword, ...keywords.filter((keyword) => keyword.text !== text)]); //중복된 검색어 필터링
   };
 
-  const onClickDeleteKeyword = () => {
-    setKeywords([]);
+  const onClickDeleteKeyword = (text: string) => {
+    setKeywords((keywords) => [...keywords.filter((keyword) => keyword.text !== text)]);
   };
 
   return { keywords, onClickAddKeyword, onClickDeleteKeyword };

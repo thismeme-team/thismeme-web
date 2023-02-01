@@ -1,8 +1,8 @@
 import type { LiHTMLAttributes, PropsWithChildren } from "react";
 import { css, theme } from "twin.macro";
-export const ListDropDown = () => {
-  return <></>;
-};
+
+import { DropDown } from "../DropDown";
+
 interface ContainerProps {
   width?: string;
 }
@@ -16,6 +16,7 @@ const ListDropDownContainer = ({ children, width }: PropsWithChildren<ContainerP
         border-radius: 10px;
         border: solid 1px ${theme`colors.gray.400`};
         background: white;
+        transition: transform 0.4s ease, visibility 0s ease 0.4s;
       `}
     >
       {children}
@@ -29,14 +30,18 @@ interface ContentProps extends LiHTMLAttributes<HTMLLIElement> {
 
 const ListDropDownContent = ({ text, ...rest }: ContentProps) => {
   return (
-    <li
-      className="flex h-56 items-center px-12 py-16 font-suit text-18-bold-140 hover:bg-primary-100"
-      {...rest}
-    >
-      {text}
-    </li>
+    <DropDown.Content>
+      <li
+        className="flex h-56 items-center px-12 py-16 font-suit text-18-bold-140 hover:bg-primary-100"
+        {...rest}
+      >
+        {text}
+      </li>
+    </DropDown.Content>
   );
 };
 
-ListDropDown.Container = ListDropDownContainer;
-ListDropDown.Content = ListDropDownContent;
+export const ListDropDown = Object.assign([], {
+  Container: ListDropDownContainer,
+  Content: ListDropDownContent,
+});

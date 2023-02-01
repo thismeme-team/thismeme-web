@@ -8,7 +8,7 @@ interface Props {
   onClose?: () => void;
 }
 
-export const LongPressBase = ({ children, onClose, ...rest }: PropsWithChildren<Props>) => {
+export const LongPress = ({ children, onClose, ...rest }: PropsWithChildren<Props>) => {
   const ref = useClickOutside({ onClose });
 
   return (

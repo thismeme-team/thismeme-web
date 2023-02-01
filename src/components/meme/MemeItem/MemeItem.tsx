@@ -3,9 +3,10 @@ import { memo, useCallback } from "react";
 
 import { useLongPress, useModal } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
-import { MemeLongPress } from "@/components/common/LongPress";
 import { Photo } from "@/components/common/Photo";
 import type { Meme } from "@/types";
+
+import { MemeLongPress } from "../MemeLongPress";
 
 interface Props {
   meme: Meme;
@@ -14,8 +15,8 @@ export const MemeItem = memo(({ meme }: Props) => {
   const { open, onOpen, onClose } = useModal();
 
   const callBack = useCallback(() => {
-    window.navigator.vibrate(200);
     onOpen();
+    window.navigator.vibrate(2000);
   }, [onOpen]);
 
   const longPress = useLongPress(callBack, {

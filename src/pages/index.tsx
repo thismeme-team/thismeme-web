@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { HomeDropDown } from "@/components/common/DropDown";
 import { IntroNavigation } from "@/components/common/Navigation/Navigation.stories";
 import { Photo } from "@/components/common/Photo";
 import { MemeList, PopularTagList } from "@/components/home";
+import { HomeDropDown } from "@/components/home/DropDown";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {

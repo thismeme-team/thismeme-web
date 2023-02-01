@@ -1,1 +1,1 @@
-export * from "./MemeLongPress";
+export * from "./LongPress";

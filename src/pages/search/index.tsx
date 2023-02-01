@@ -14,7 +14,6 @@ import {
 const SearchPage: NextPage = () => {
   const inputProps = useInput();
   const { keywords, onClickDeleteKeyword, onClickAddKeyword } = useRecentSearch();
-
   const router = useRouter();
 
   const onSearchByKeyword = () => {
@@ -23,6 +22,7 @@ const SearchPage: NextPage = () => {
     onClickAddKeyword(inputProps.value);
     router.push(`explore/keywords?q=${inputProps.value}`);
   };
+
   return (
     <>
       <SearchPageNavigation />
@@ -34,7 +34,7 @@ const SearchPage: NextPage = () => {
           type="text"
           onSearchByKeyWord={onSearchByKeyword}
         />
-        <p className="my-16 px-14 text-12-regular-160 text-gray-10">
+        <p className="my-16 px-14 text-12-regular-160 text-gray-500">
           밈 제목,태그 설명을 입력하세요
         </p>
         {inputProps.value && (
@@ -45,9 +45,8 @@ const SearchPage: NextPage = () => {
           </Suspense>
         )}
         <Suspense fallback={<div className="text-20-bold-140">로딩</div>}>
+          <SearchRecent keywords={keywords} onClickDeleteKeyword={onClickDeleteKeyword} />
           <div className="px-14">
-            <SearchRecent keywords={keywords} onClickDeleteKeyword={onClickDeleteKeyword} />
-            <div className="mb-8 text-15-semibold-130 text-dark-gray-10">인기 검색어</div>
             <SearchPopularList />
           </div>
         </Suspense>

@@ -14,7 +14,7 @@ export const SearchItem = ({ searchText, tagName, right, ...rest }: SearchItemPr
 
   return (
     <div
-      className="relative flex h-50 w-full items-center pl-11 pr-6 text-16-semibold-130"
+      className="flex h-50 w-full items-center pl-11 pr-6 font-suit text-16-semibold-140"
       {...rest}
     >
       <Icon className="mr-10" name="search" />

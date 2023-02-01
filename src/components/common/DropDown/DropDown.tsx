@@ -1,6 +1,6 @@
 import type { PropsWithChildren, ReactNode } from "react";
 
-import { useDelay } from "@/application/hooks/common/useDelay";
+import { withDelay } from "@/application/util/delay";
 
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "../Drawer";
 
@@ -22,7 +22,7 @@ const DropDownContainer = ({ children }: PropsWithChildren) => {
 
 const DropDownContent = ({ children, ...rest }: PropsWithChildren) => {
   const setIsOpen = useSetDrawerContext();
-  const delayClose = useDelay({ event: () => setIsOpen(false), time: 650 });
+  const delayClose = withDelay(() => setIsOpen(false), 650);
   return (
     <div
       {...rest}

@@ -1,4 +1,4 @@
-import { useDelay } from "@/application/hooks/common/useDelay";
+import { withDelay } from "@/application/util/delay";
 import { ListDropDown } from "@/components/common/DropDown";
 import { LongPress } from "@/components/common/LongPress";
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const MemeLongPress = ({ onClose }: Props) => {
-  const delayClose = useDelay({ event: onClose, time: 650 });
+  const delayClose = withDelay(() => onClose(), 650);
 
   return (
     <LongPress onClose={onClose}>

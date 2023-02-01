@@ -1,5 +1,6 @@
 import axios from "axios";
 
+import { AccountApi } from "@/infra/api/account";
 import { AuthApi } from "@/infra/api/auth";
 
 import { MemeApi } from "./meme";
@@ -32,6 +33,7 @@ export const axiosSearchBasic = axios.create({
  */
 export const api = {
   auth: new AuthApi(axiosBasic),
+  account: new AccountApi(axiosBasic),
   search: new SearchApi(axiosSearchBasic),
   meme: new MemeApi(axiosBasic),
   tags: new TagApi(axiosBasic),

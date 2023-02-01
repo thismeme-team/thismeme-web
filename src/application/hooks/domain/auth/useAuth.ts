@@ -1,5 +1,7 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback } from "react";
 
+import { useGetMyAccount, useLocalStorage } from "@/application/hooks";
+import { LOCAL_STORAGE_KEY } from "@/application/util";
 import { api } from "@/infra/api";
 
 /**
@@ -20,28 +22,24 @@ import { api } from "@/infra/api";
  */
 
 export const useAuth = () => {
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLogin, setIsLogin] = useLocalStorage<boolean>(LOCAL_STORAGE_KEY.isLogin, {
+    defaultValue: false,
+  });
+  const { data } = useGetMyAccount({ enabled: isLogin });
 
-  const logout = useCallback(() => api.auth.logout().then(() => setIsLogin(false)), []);
-  const login = useCallback((token: string) => {
-    api.auth.setAccessToken(token);
-    setIsLogin(true);
-
-    /**
-     * @todo
-     *   request getUserInfo API
-     *   set user context
-     */
-  }, []);
-
-  useEffect(() => {
-    setIsLogin(Boolean(api.auth.getAccessToken()));
-  }, []);
+  const logout = useCallback(() => api.auth.logout().then(() => setIsLogin(false)), [setIsLogin]);
+  const login = useCallback(
+    (token: string) => {
+      api.auth.setAccessToken(token);
+      setIsLogin(true);
+    },
+    [setIsLogin],
+  );
 
   return {
     logout,
     login,
     isLogin,
-    user: null,
+    user: data,
   };
 };

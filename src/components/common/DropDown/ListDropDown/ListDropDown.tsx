@@ -1,6 +1,5 @@
 import type { LiHTMLAttributes, PropsWithChildren } from "react";
-import { css } from "twin.macro";
-
+import { css, theme } from "twin.macro";
 export const ListDropDown = () => {
   return <></>;
 };
@@ -15,7 +14,7 @@ const ListDropDownContainer = ({ children, width }: PropsWithChildren<ContainerP
         width: ${width}rem;
         overflow: hidden;
         border-radius: 10px;
-        border: solid 1px #d7d7dd;
+        border: solid 1px ${theme`colors.gray.400`};
         background: white;
       `}
     >
@@ -31,7 +30,7 @@ interface ContentProps extends LiHTMLAttributes<HTMLLIElement> {
 const ListDropDownContent = ({ text, ...rest }: ContentProps) => {
   return (
     <li
-      className="flex h-56 items-center px-12 py-16 text-18-bold-140 hover:bg-[#EDEFFF]"
+      className="flex h-56 items-center px-12 py-16 font-suit text-18-bold-140 hover:bg-primary-100"
       {...rest}
     >
       {text}

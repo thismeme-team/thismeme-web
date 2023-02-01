@@ -24,7 +24,7 @@ export const HomeDropDown = () => {
   return (
     <>
       <div className="flex">
-        <header className="text-18-bold-140">{menu}</header>
+        <header className="font-suit text-22-bold-140">{menu}</header>
         <Icon
           className="cursor-pointer overflow-visible transition-transform duration-300 ease-[cubic-bezier(0.87,0,0.13,1)]"
           css={{ transform: open ? "rotate(180deg)" : "" }}
@@ -33,7 +33,7 @@ export const HomeDropDown = () => {
         />
       </div>
       {open && (
-        <DropDownBase top="50">
+        <DropDownBase top="51">
           <ListDropDown.Container width="34">
             <ListDropDown.Content
               text="@nickname 이 찾는 메뉴"

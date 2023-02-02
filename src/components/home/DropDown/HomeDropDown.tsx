@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import type { PointerEvent } from "react";
 import { useState } from "react";
 import { css } from "twin.macro";
 
@@ -8,7 +8,7 @@ import { Icon } from "@/components/common/Icon";
 export const HomeDropDown = () => {
   const [menu, setMenu] = useState<string>("@nickname이 찾는 밈");
 
-  const handleDropMenu = (e: MouseEvent<HTMLLIElement>) => {
+  const handleDropMenu = (e: PointerEvent<HTMLLIElement>) => {
     setMenu((e.target as HTMLElement).innerText);
   };
 
@@ -35,23 +35,29 @@ export const HomeDropDown = () => {
         </DropDown.Trigger>
       </div>
       <DropDown.Contents width="34">
-        <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onPointerDown={handleDropMenu}
-        >
-          @nickname 이 찾는 메뉴
+        <DropDown.Content>
+          <li
+            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+            onPointerDown={handleDropMenu}
+          >
+            @nickname 이 찾는 그 밈
+          </li>
         </DropDown.Content>
-        <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onPointerDown={handleDropMenu}
-        >
-          공유가 많이 된 그 밈
+        <DropDown.Content>
+          <li
+            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+            onPointerDown={handleDropMenu}
+          >
+            공유가 많이 된 그 밈
+          </li>
         </DropDown.Content>
-        <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onPointerDown={handleDropMenu}
-        >
-          최신 업로드가 된 밈
+        <DropDown.Content>
+          <li
+            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+            onPointerDown={handleDropMenu}
+          >
+            최신업로드가 된 밈
+          </li>
         </DropDown.Content>
       </DropDown.Contents>
     </DropDown>

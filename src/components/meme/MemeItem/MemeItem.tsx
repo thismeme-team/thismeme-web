@@ -16,7 +16,6 @@ export const MemeItem = memo(({ meme }: Props) => {
 
   const callBack = useCallback(() => {
     onOpen();
-    window.navigator.vibrate(2000);
   }, [onOpen]);
 
   const longPress = useLongPress(callBack, {

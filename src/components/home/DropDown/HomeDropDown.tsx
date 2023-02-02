@@ -56,7 +56,7 @@ export const HomeDropDown = () => {
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onPointerDown={handleDropMenu}
           >
-            최신업로드가 된 밈
+            최신 업로드 된 밈
           </li>
         </DropDown.Content>
       </DropDown.Contents>

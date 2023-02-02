@@ -1,10 +1,4 @@
-import type {
-  Dispatch,
-  LiHTMLAttributes,
-  PropsWithChildren,
-  ReactNode,
-  SetStateAction,
-} from "react";
+import type { Dispatch, PropsWithChildren, ReactNode, SetStateAction } from "react";
 import { createContext, useContext, useState } from "react";
 import { css, theme } from "twin.macro";
 
@@ -65,17 +59,14 @@ const DropDownContents = ({ children, width }: PropsWithChildren<{ width: string
   );
 };
 
-interface ContentProps extends LiHTMLAttributes<HTMLLIElement> {
-  text?: string;
-}
-const DropDownContent = ({ children, ...rest }: PropsWithChildren<ContentProps>) => {
+const DropDownContent = ({ children, ...rest }: PropsWithChildren) => {
   const setIsOpen = useContext(DropDownSetContext);
 
   const delayClose = withDelay(() => setIsOpen(false), 200);
   return (
-    <li {...rest} onPointerDown={delayClose}>
+    <div onPointerDown={delayClose} {...rest}>
       {children}
-    </li>
+    </div>
   );
 };
 

@@ -24,7 +24,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
         className={`${pretendard.variable} ${suit.variable} flex h-screen w-screen justify-center bg-gray-100 font-pretendard`}
       >
         <main
-          className="relative flex w-full max-w-[48rem] flex-col overflow-y-auto overflow-x-hidden bg-white px-18 shadow-lg"
+          className="relative flex w-full max-w-[48rem] flex-col overflow-auto bg-white px-18 shadow-lg"
           ref={ref}
         >
           {children}

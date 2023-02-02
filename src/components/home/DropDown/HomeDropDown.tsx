@@ -1,8 +1,7 @@
-import type { MouseEvent, PointerEvent } from "react";
+import type { MouseEvent } from "react";
 import { useState } from "react";
 import { css } from "twin.macro";
 
-import { DropDownBase, ListDropDown } from "@/components/common/DropDown";
 import { DropDown } from "@/components/common/DropDown/DropDown";
 import { Icon } from "@/components/common/Icon";
 
@@ -14,50 +13,47 @@ export const HomeDropDown = () => {
   };
 
   return (
-    <>
-      <DropDown>
-        <div className="flex">
-          <header className="font-suit text-22-bold-140">{menu}</header>
-          <DropDown.Trigger>
-            {({ isOpen }) => (
+    <DropDown>
+      <div className="flex items-center py-16">
+        <header className="font-suit text-22-bold-140">{menu}</header>
+        <DropDown.Trigger>
+          {({ isOpen }) => (
+            <span className="flex h-40 w-40">
               <Icon
                 name="chevronDown2"
                 css={css`
                   cursor: pointer;
                   overflow: visible;
+                  margin: auto;
                   transition-duration: 300ms;
                   transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
                   ${isOpen && "transform: rotate(180deg)"}
                 `}
               />
-            )}
-          </DropDown.Trigger>
-        </div>
-        <DropDownBase top="51">
-          <DropDown.Container>
-            <ListDropDown.Container width="34">
-              <ListDropDown.Content
-                text="@nickname 이 찾는 메뉴"
-                onPointerDown={(e: PointerEvent<HTMLLIElement>) => {
-                  handleDropMenu(e);
-                }}
-              />
-              <ListDropDown.Content
-                text="공유가 많이 된 그 밈"
-                onPointerDown={(e: PointerEvent<HTMLLIElement>) => {
-                  handleDropMenu(e);
-                }}
-              />
-              <ListDropDown.Content
-                text="최신 업로드가 된 밈"
-                onPointerDown={(e: PointerEvent<HTMLLIElement>) => {
-                  handleDropMenu(e);
-                }}
-              />
-            </ListDropDown.Container>
-          </DropDown.Container>
-        </DropDownBase>
-      </DropDown>
-    </>
+            </span>
+          )}
+        </DropDown.Trigger>
+      </div>
+      <DropDown.Contents width="34">
+        <DropDown.Content
+          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+          onPointerDown={handleDropMenu}
+        >
+          @nickname 이 찾는 메뉴
+        </DropDown.Content>
+        <DropDown.Content
+          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+          onPointerDown={handleDropMenu}
+        >
+          공유가 많이 된 그 밈
+        </DropDown.Content>
+        <DropDown.Content
+          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+          onPointerDown={handleDropMenu}
+        >
+          최신 업로드가 된 밈
+        </DropDown.Content>
+      </DropDown.Contents>
+    </DropDown>
   );
 };

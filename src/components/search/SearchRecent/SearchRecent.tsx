@@ -24,14 +24,15 @@ export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
             tagName={keyword.text}
             right={
               <Icon
+                className="absolute right-6"
                 name="delete2"
-                onClick={(e) => {
+                onPointerDown={(e) => {
                   e.stopPropagation();
                   onClickDeleteKeyword(keyword.text);
                 }}
               />
             }
-            onClick={() => {
+            onPointerDown={() => {
               router.push(`explore/keywords?q=${keyword.text}`);
             }}
           />

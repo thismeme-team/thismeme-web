@@ -15,7 +15,7 @@ const SearchPage: NextPage = () => {
   const inputProps = useInput();
   const { keywords, onClickDeleteKeyword, onClickAddKeyword } = useRecentSearch();
   const router = useRouter();
-  const [isClick, setClick] = useState(false);
+  const [focus, setFocus] = useState(false);
 
   const onSearchByKeyword = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
@@ -24,7 +24,6 @@ const SearchPage: NextPage = () => {
     router.push(`explore/keywords?q=${inputProps.value}`);
   };
 
-  console.log(isClick);
   return (
     <>
       <SearchPageNavigation />
@@ -35,11 +34,14 @@ const SearchPage: NextPage = () => {
           spellCheck={false}
           type="text"
           onSearchByKeyWord={onSearchByKeyword}
+          onBlur={() => {
+            setFocus(false);
+          }}
           onFocus={() => {
-            setClick(true);
+            setFocus(true);
           }}
         />
-        <p className="my-16 px-14 text-12-regular-160 text-gray-500">
+        <p className="mt-9 mb-24 px-14 text-12-regular-160 text-gray-500">
           밈 제목,태그 설명을 입력하세요
         </p>
         {inputProps.value && (
@@ -50,10 +52,10 @@ const SearchPage: NextPage = () => {
           </Suspense>
         )}
         <Suspense fallback={<div></div>}>
-          {isClick && (
+          {!inputProps.value && focus && (
             <SearchRecent keywords={keywords} onClickDeleteKeyword={onClickDeleteKeyword} />
           )}
-          {!isClick && (
+          {!focus && (
             <div className="px-14">
               <SearchPopularList />
             </div>

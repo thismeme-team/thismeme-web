@@ -8,22 +8,23 @@ import type { ComponentProps } from "react";
  * - interface 내부에 @deprecated 어노테이션이 있으면 문제 생기는 듯 보임
  */
 interface Props extends Omit<ComponentProps<"img">, "alt" | "placeholder"> {
+  unoptimized?: boolean;
   src?: string;
 }
 
 const base64Blur =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
 
-const Photo = ({ src = "", className = "", width, height, ...rest }: Props) => {
+const Photo = ({ src = "", className = "", width, height, unoptimized, ...rest }: Props) => {
   /**
-   * FIXME
+   * FIX
    * storybook 환경에서 이미지가 min height 보다 작을 때
    * cover 속성이 적용 안돼서 밑에 회색 빈 공간이 생김
    * - 개발 페이지에선 정상 동작
    *
-   * 최선의 방법은 서버에서 이미지 너비, 높이를 내려주는 것이라고 생각
-   * - 스켈레톤 처리하기 용이
-   * - layout shift 방지
+   * NOTE
+   * unoptimized 옵션 추가한 이유: 이미지 uri에 마침표(.)같은 인코딩 불가능한 문자가 포함된 경우 /_next 경로에서 이미지를 불러올 수 없는 이슈 때문
+   * 서버에서 이미지 경로에 마침표같은 특수문자를 안쓰면 unoptimized 옵션 빼도됨
    */
   return (
     <div
@@ -38,6 +39,7 @@ const Photo = ({ src = "", className = "", width, height, ...rest }: Props) => {
         sizes=" "
         src={src}
         style={{ objectFit: "cover" }}
+        unoptimized={unoptimized}
         {...rest}
       />
     </div>

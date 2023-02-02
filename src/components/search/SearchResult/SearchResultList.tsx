@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { useGetTagSearch } from "@/application/hooks";
+import { PATH } from "@/application/util";
 import { Chip } from "@/components/common/Chip";
 
 import { SearchItem } from "../SearchItem/SearchItem";
@@ -20,7 +21,7 @@ export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
     <ul>
       {autoCompletedTags?.map((tag) => (
         <li key={tag.tagId}>
-          <Link href={`explore/tags?q=${tag.name}`}>
+          <Link href={PATH.getExploreByTagPath(tag.name)}>
             <SearchItem
               searchText={value}
               tagName={tag.name}

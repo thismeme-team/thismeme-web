@@ -27,16 +27,17 @@ export const MemeItem = memo(({ meme }: Props) => {
       {open && <MemeLongPress onClose={onClose} />}
       <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
         <Photo
+          unoptimized
           className="rounded-15"
           height={meme.image.images[0].imageHeight}
           src={meme.image.images[0].imageUrl}
           width={meme.image.images[0].imageWidth}
         />
-        <div className="flex items-center justify-between">
-          <span className="text-12-bold-160">{meme.name}</span>
-          <span className="flex items-center text-12-regular-160">
-            <Icon name="memeShare" />
-            {meme.shareCount}
+        <div className="flex items-center justify-between font-suit text-14-semibold-140">
+          <span>{meme.name}</span>
+          <span className="flex items-center">
+            <Icon height={16} name="memeShare" width={16} />
+            <span className="text-gray-600">{meme.shareCount}</span>
           </span>
         </div>
       </Link>

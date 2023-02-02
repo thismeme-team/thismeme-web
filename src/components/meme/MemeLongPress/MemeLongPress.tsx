@@ -1,7 +1,7 @@
 import { css, theme } from "twin.macro";
 
 import { withDelay } from "@/application/util/delay";
-import { LongPress } from "@/components/common/LongPress/LongPress";
+import { LongPress } from "@/components/common/LongPress";
 
 interface Props {
   onClose: () => void;

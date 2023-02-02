@@ -36,26 +36,24 @@ const DropDownContents = ({ children, width }: PropsWithChildren<{ width: string
   const isOpen = useContext(DropDownContext);
 
   return (
-    <>
-      {isOpen && (
-        <ul
-          css={[
-            css`
-              position: absolute;
-              z-index: 10;
-              width: ${width}rem;
-              border-radius: 10px;
-              border: solid 1px ${theme`colors.gray.400`};
-              background: white;
-              overflow: hidden;
-              transition: transform 0.4s ease, opacity 0.2s ease-in-out;
-            `,
-          ]}
-        >
-          {children}
-        </ul>
-      )}
-    </>
+    <ul
+      css={[
+        css`
+          position: absolute;
+          z-index: 10;
+          width: ${width}rem;
+          border-radius: 10px;
+          border: solid 1px ${theme`colors.gray.400`};
+          background: white;
+          overflow: hidden;
+          transition: transform 0.4s ease, opacity 0.2s ease-in-out;
+          ${!isOpen && "pointer-events: none;"}
+        `,
+        { opacity: isOpen ? 1 : 0 },
+      ]}
+    >
+      {children}
+    </ul>
   );
 };
 

@@ -1,3 +1,3 @@
 export * from "./constant";
+export * from "./delay";
 export * from "./storage";
-export * from "./time";

@@ -1,23 +1,22 @@
+import { useClickOutside } from "@/application/hooks";
 import { withDelay } from "@/application/util/delay";
 import { ListDropDown } from "@/components/common/DropDown";
-import { LongPress } from "@/components/common/LongPress";
 
 interface Props {
   onClose: () => void;
 }
 
 export const MemeLongPress = ({ onClose }: Props) => {
-  const delayClose = withDelay(() => onClose(), 650);
+  const delayClose = withDelay(onClose, 200);
+  const ref = useClickOutside({ onClose: delayClose });
 
   return (
-    <LongPress onClose={onClose}>
-      <div className="m-auto">
-        <ListDropDown.Container width="24">
-          <ListDropDown.Content text="콜렉션에 저장하기" onPointerDown={delayClose} />
-          <ListDropDown.Content text="이미지 다운로드" onPointerDown={delayClose} />
-          <ListDropDown.Content text="공유하기" onPointerDown={delayClose} />
-        </ListDropDown.Container>
-      </div>
-    </LongPress>
+    <div className="absolute z-10 m-auto" ref={ref}>
+      <ListDropDown.Container width="24">
+        <ListDropDown.Content text="콜렉션에 저장하기" onPointerDown={delayClose} />
+        <ListDropDown.Content text="이미지 다운로드" onPointerDown={delayClose} />
+        <ListDropDown.Content text="공유하기" onPointerDown={delayClose} />
+      </ListDropDown.Container>
+    </div>
   );
 };

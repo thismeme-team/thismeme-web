@@ -30,7 +30,7 @@ const SearchPage: NextPage = () => {
       <div className="relative mt-8">
         <SearchInput
           {...inputProps}
-          placeholder="당신이 찾는 밈, 여기 있다."
+          placeholder="당신이 생각한 '그 밈' 검색하기"
           spellCheck={false}
           type="text"
           onSearchByKeyWord={onSearchByKeyword}
@@ -42,7 +42,7 @@ const SearchPage: NextPage = () => {
           }}
         />
         <p className="mt-9 mb-24 px-14 text-12-regular-160 text-gray-500">
-          밈 제목,태그 설명을 입력하세요
+          밈 제목,태그를 입력하세요
         </p>
         {inputProps.value && (
           <Suspense fallback={<div></div>}>

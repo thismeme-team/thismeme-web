@@ -10,7 +10,7 @@ export const PATH = {
   },
   /**
    * 태그 검색 결과 페이지
-   * @param keyword - 태그
+   * @param tag - 태그
    * @return /explore/tags?q={encoded 태그}
    */
   getExploreByTagPath: (tag: string) => {

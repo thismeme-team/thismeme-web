@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
-import { getExploreByKeywordPath } from "@/application/util";
+import { PATH } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
 import {
   SearchInput,
@@ -22,7 +22,7 @@ const SearchPage: NextPage = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
 
     onClickAddKeyword(inputProps.value);
-    router.push(getExploreByKeywordPath(inputProps.value));
+    router.push(PATH.getExploreByKeywordPath(inputProps.value));
   };
   return (
     <>

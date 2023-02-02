@@ -1,5 +1,4 @@
 export * from "./constant";
-export * from "./getExploreByKeywordPath";
-export * from "./getExploreByTagPath";
+export * from "./path";
 export * from "./storage";
 export * from "./time";

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 
 import { useGetCategoryWithTag } from "@/application/hooks";
-import { getExploreByTagPath } from "@/application/util";
+import { PATH } from "@/application/util";
 import { Accordion } from "@/components/common/Accordion";
 import { useSetDrawerContext } from "@/components/common/Drawer";
 import { useGlobalScrollContext } from "@/components/common/Layout";
@@ -15,7 +15,7 @@ export const Category = () => {
   const onClickItem = (tagName: string) => {
     setDrawerOpen(false);
     router
-      .push(getExploreByTagPath(tagName))
+      .push(PATH.getExploreByTagPath(tagName))
       .then(() => ref.current?.scrollTo({ top: 0, behavior: "smooth" }));
   };
 

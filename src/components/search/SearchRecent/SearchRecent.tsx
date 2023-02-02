@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { getExploreByKeywordPath } from "@/application/util";
+import { PATH } from "@/application/util";
 import { Chip } from "@/components/common/Chip";
 import type { SearchKeyword } from "@/types";
 
@@ -22,7 +22,7 @@ export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
       </div>
       <div className="flex flex-wrap align-middle">
         {keywords.map((keyword) => (
-          <Link href={getExploreByKeywordPath(keyword.text)} key={keyword.id}>
+          <Link href={PATH.getExploreByKeywordPath(keyword.text)} key={keyword.id}>
             <Chip className="m-4" color="white" label={keyword.text} size="medium" />
           </Link>
         ))}

@@ -6,14 +6,15 @@ import { Masonry } from "@/components/common/Masonry";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
 import { MemeItem } from "@/components/meme/MemeItem";
+import { TagFavoriteButton } from "@/components/tags";
 
 const ExploreByTagPage: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByTag(query.q as string);
+  const { data: memeList, isEmpty, isLoading, fetchNextPage } = useGetMemesByTag(query.q as string);
 
   const ref = useIntersect(async () => {
-    if (query.q) fetchNextPage();
+    fetchNextPage();
   });
 
   if (isEmpty) {
@@ -36,11 +37,9 @@ const ExploreByTagPage: NextPage = () => {
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
-      <div className="m-10" ref={ref}></div>
+      <div className={`m-10 ${isLoading ? "hidden" : ""}`} ref={ref}></div>
 
-      <button className="fixed bottom-32 right-18 rounded-full bg-gray-700 p-13 font-tossface text-4xl">
-        ⭐️
-      </button>
+      <TagFavoriteButton />
     </>
   );
 };

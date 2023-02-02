@@ -12,6 +12,7 @@ export const MemeItem = memo(({ meme }: Props) => {
   return (
     <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
       <Photo
+        unoptimized
         className="rounded-15"
         height={meme.image.images[0].imageHeight}
         src={meme.image.images[0].imageUrl}

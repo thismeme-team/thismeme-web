@@ -22,10 +22,12 @@ export const MemeDetail = ({ id }: Props) => {
 
   const { imageUrl: src, imageWidth: width, imageHeight: height } = images[0];
 
-  const handleKakaoShare = () => show("카카오톡 공유가 완료되었습니다", { icon: "kakao2" });
-  const handleClipboardCopy = () => show("링크가 복사되었습니다", { icon: "share" });
-  const handleDownload = () => show("앨범에 저장하였습니다", { icon: "cake" });
-  const handleNativeShare = () => show("공유가 완료되었습니다", { icon: "cake" });
+  const handleKakaoShare = () => show("카카오톡 공유를 완료했습니다!");
+  const handleClipboardCopy = () => show("링크를 복사했습니다!");
+  const handleDownload = () => show("이미지를 다운로드 했습니다!");
+
+  // TODO 따로 공유 토스트는 없는 듯? 담기 핸들러로 대체 예정
+  const handleNativeShare = () => show("콜렉션에 저장했습니다!");
 
   return (
     <article>

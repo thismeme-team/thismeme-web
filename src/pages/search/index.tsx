@@ -1,8 +1,10 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
+import { TITLE } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
 import {
   SearchInput,
@@ -25,6 +27,12 @@ const SearchPage: NextPage = () => {
   };
   return (
     <>
+      <Head>
+        <title>{TITLE.getSearchPageTitle}</title>
+        <meta content={TITLE.getSearchPageTitle} property="og:title" />
+        <meta content={TITLE.getSearchPageTitle} property="og:description" />
+      </Head>
+
       <SearchPageNavigation />
       <div className="relative mt-8">
         <SearchInput

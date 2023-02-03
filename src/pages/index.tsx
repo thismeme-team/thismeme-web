@@ -1,8 +1,10 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { IntroNavigation } from "@/components/common/Navigation/Navigation.stories";
+import { TITLE } from "@/application/util";
+import { IntroPageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
 import { PopularMemeList, PopularTagList } from "@/components/home";
 import { SearchInput } from "@/components/search";
@@ -12,7 +14,13 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <IntroNavigation />
+      <Head>
+        <title>{TITLE.getHomePageTitle}</title>
+        <meta content={TITLE.getHomePageTitle} property="og:title" />
+        <meta content={TITLE.getHomePageTitle} property="og:description" />
+      </Head>
+
+      <IntroPageNavigation />
       <Photo className="m-auto my-10 h-190 w-230 overflow-visible" src="/img/brandimage.png" />
       <SearchInput
         placeholder="당신이 찾는 밈 여기 있다."

@@ -1,7 +1,9 @@
 import type { NextPage } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
+import { TITLE } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { Masonry } from "@/components/common/Masonry";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
@@ -20,6 +22,12 @@ const ExploreByTagPage: NextPage = () => {
   if (isEmpty) {
     return (
       <>
+        <Head>
+          <title>{TITLE.getExploreByTagPageTitle(query.q as string)}</title>
+          <meta content={TITLE.getExploreByTagPageTitle(query.q as string)} property="og:title" />
+          <meta content={`${query.q} 밈 모음`} property="og:description" />
+        </Head>
+
         <ExplorePageNavigation title={`#${query.q}`} />
         <div className="flex h-full w-full flex-col items-center justify-center">
           <Photo className="w-200" src="/img/emptyAvatar.png" />
@@ -30,6 +38,12 @@ const ExploreByTagPage: NextPage = () => {
   }
   return (
     <>
+      <Head>
+        <title>{TITLE.getExploreByTagPageTitle(query.q as string)}</title>
+        <meta content={TITLE.getExploreByTagPageTitle(query.q as string)} property="og:title" />
+        <meta content={`${query.q} 밈 모음`} property="og:description" />
+      </Head>
+
       <ExplorePageNavigation title={`#${query.q}`} />
 
       <div className="flex flex-col items-center gap-8 bg-white py-16">

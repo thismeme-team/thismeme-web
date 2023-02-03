@@ -5,7 +5,7 @@ import { css } from "twin.macro";
 import { DropDown } from "@/components/common/DropDown/DropDown";
 import { Icon } from "@/components/common/Icon";
 
-export const HomeDropDown = () => {
+export const MemeSortDropDown = () => {
   const [menu, setMenu] = useState<string>("@nickname이 찾는 밈");
 
   const handleDropMenu = (e: MouseEvent<HTMLLIElement>) => {

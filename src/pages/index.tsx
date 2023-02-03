@@ -2,10 +2,10 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { IntroNavigation } from "@/components/common/Navigation/Navigation.stories";
+import { IntroPageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
 import { MemeList, PopularTagList } from "@/components/home";
-import { HomeDropDown } from "@/components/home/DropDown";
+import { MemeSortDropDown } from "@/components/home/DropDown";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
@@ -13,7 +13,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <IntroNavigation />
+      <IntroPageNavigation />
       <Photo className="m-auto my-10 h-190 w-230 overflow-visible" src="/img/brandimage.png" />
       <SearchInput
         placeholder="당신이 찾는 밈 여기 있다."
@@ -28,7 +28,7 @@ const HomePage: NextPage = () => {
           <PopularTagList />
         </ul>
       </Suspense>
-      <HomeDropDown />
+      <MemeSortDropDown />
       <MemeList />
     </>
   );

@@ -1,6 +1,6 @@
 import { useToast } from "@/application/hooks";
-import { CollectionSaveButton } from "@/components/meme/MemeDetail/Button/CollectionSaveButton";
-import { MemeShareModal } from "@/components/meme/MemeDetail/Modal";
+import { CollectionSaveButton } from "@/components/meme/MemeInfo/Button/CollectionSaveButton";
+import { MemeShareModal } from "@/components/meme/MemeInfo/Modal";
 
 interface Props {
   id: string;

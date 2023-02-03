@@ -1,3 +1,5 @@
+import { css } from "twin.macro";
+
 import { useMemeDetailById, useModal, useToast } from "@/application/hooks";
 import { PAGE_URL } from "@/application/util";
 import { Button } from "@/components/common/Button";
@@ -8,7 +10,7 @@ import {
   ClipboardCopyButton,
   KakaoShareButton,
   NativeShareButton,
-} from "@/components/meme/MemeDetail/Button";
+} from "@/components/meme/MemeInfo/Button";
 
 interface Props {
   id: string;
@@ -32,7 +34,14 @@ export const MemeShareModal = ({ id }: Props) => {
   if (!open)
     return (
       <Button className="h-52 w-52 shrink-0 rounded-10 bg-gray-900" onClick={onOpen}>
-        <Icon name="memeShare" />
+        <Icon
+          name="memeShare"
+          css={css`
+            path {
+              stroke: white;
+            }
+          `}
+        />
       </Button>
     );
 

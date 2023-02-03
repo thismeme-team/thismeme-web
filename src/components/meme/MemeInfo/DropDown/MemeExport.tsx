@@ -34,7 +34,7 @@ export const MemeExport = ({ id }: Props) => {
   return (
     <DropDown>
       <DropDown.Trigger>
-        <span className="flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(0,0,0,0.3)]">
+        <span className="mb-4 flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
           <Icon color="white" name="meatball" />
         </span>
       </DropDown.Trigger>

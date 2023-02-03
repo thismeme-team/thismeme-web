@@ -1,6 +1,6 @@
 import { useMemeDetailById } from "@/application/hooks";
 import { Photo } from "@/components/common/Photo";
-import { MemeExport } from "@/components/meme/MemeDetail/DropDown/MemeExport";
+import { MemeExport } from "@/components/meme/MemeInfo/DropDown/MemeExport";
 
 interface Props {
   id: string;

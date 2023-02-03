@@ -1,4 +1,4 @@
-import { BackButton } from "./BackButton";
+import { CloseButton } from "./CloseButton";
 import { Navigation } from "./Navigation";
 
 export const SearchPageNavigation = () => {
@@ -7,7 +7,7 @@ export const SearchPageNavigation = () => {
       <Navigation.Left></Navigation.Left>
       <Navigation.Title>밈 찾기</Navigation.Title>
       <Navigation.Right>
-        <BackButton />
+        <CloseButton />
       </Navigation.Right>
     </Navigation>
   );

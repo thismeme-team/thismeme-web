@@ -7,7 +7,7 @@ import { Toast } from "@/components/common/Toast/Toast";
 import { useToastContext } from "./context";
 
 let prevHeight = 0;
-const EXPAND_DELAY = 230;
+const EXPAND_DELAY = 200;
 
 export const ToastContainer = () => {
   const toasts = useToastContext();

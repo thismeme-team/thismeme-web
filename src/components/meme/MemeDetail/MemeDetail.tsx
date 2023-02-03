@@ -1,5 +1,6 @@
 import { useMemeDetailById } from "@/application/hooks";
 import { Photo } from "@/components/common/Photo";
+import { MemeExport } from "@/components/meme/MemeDetail/DropDown/MemeExport";
 
 interface Props {
   id: string;
@@ -19,13 +20,16 @@ export const MemeDetail = ({ id }: Props) => {
 
   return (
     <article>
-      <section className="mt-10 flex flex-col gap-8">
+      <section className="relative mt-10 flex flex-col gap-8">
         <Photo
           className="mt-16 max-h-[70vh] min-h-[25vh] w-full rounded-15"
           height={imageHeight}
           src={imageUrl}
           width={imageWidth}
         />
+        <div className="absolute right-16 top-26">
+          <MemeExport id={id} />
+        </div>
         <div className="flex items-center justify-between pt-4 pb-16 text-12-bold-160 text-gray-500">
           <span>{createdDate.split("T")[0]}</span>
           <span className="flex gap-15">

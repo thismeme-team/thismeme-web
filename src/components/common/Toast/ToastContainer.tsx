@@ -37,10 +37,11 @@ export const ToastContainer = () => {
     }
   }, [toasts]);
 
+  // TODO z-index 관리
   return (
     <Portal id="toast-portal">
       <aside
-        className="pointer-events-none fixed inset-x-0 bottom-32 z-10 m-auto grid w-full max-w-[48rem] place-items-center content-end gap-6 px-18"
+        className="pointer-events-none fixed inset-x-0 bottom-32 z-[1300] m-auto grid w-full max-w-[48rem] place-items-center content-end gap-6 px-18"
         ref={ref}
       >
         {toasts.map((toast) => (

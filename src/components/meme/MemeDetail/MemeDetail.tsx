@@ -26,13 +26,13 @@ export const MemeDetail = ({ id }: Props) => {
           src={imageUrl}
           width={imageWidth}
         />
-        <caption className="flex items-center justify-between pt-4 pb-16 text-12-bold-160 text-gray-500">
+        <div className="flex items-center justify-between pt-4 pb-16 text-12-bold-160 text-gray-500">
           <span>{createdDate.split("T")[0]}</span>
           <span className="flex gap-15">
             <span>{`조회수 ${viewCount}`}</span>
             <span>{`공유 ${shareCount}`}</span>
           </span>
-        </caption>
+        </div>
       </section>
       <section className="mb-16 font-suit">
         {name && <h1 className="py-16 text-22-bold-140">{name}</h1>}

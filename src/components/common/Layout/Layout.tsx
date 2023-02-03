@@ -4,19 +4,20 @@ import { useRef } from "react";
 
 import { GlobalScrollContext } from "./context";
 
-const pretendard = localFont({
+// TODO 폰트 파일 따로 관리하기
+export const pretendard = localFont({
   src: "../../../styles/fonts/PretendardVariable.woff2",
   variable: "--font-pretendardVariable",
   weight: "100 900",
 });
 
-const suit = localFont({
+export const suit = localFont({
   src: "../../../styles/fonts/SUIT-Variable.woff2",
   variable: "--font-suitVariable",
   weight: "100 900",
 });
 
-const tossface = localFont({
+export const tossface = localFont({
   src: "../../../styles/fonts/TossFaceFontMac.ttf",
   variable: "--font-tossfaceVariable",
 });

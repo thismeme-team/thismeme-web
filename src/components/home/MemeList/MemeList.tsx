@@ -2,9 +2,8 @@ import { useGetPopularMemes, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
-export const PopularMemeList = () => {
+export const MemeList = () => {
   const { data: memeList, fetchNextPage } = useGetPopularMemes();
-
   const ref = useIntersect(async () => {
     fetchNextPage();
   });

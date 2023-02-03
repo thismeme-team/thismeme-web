@@ -13,17 +13,21 @@ export const Navigation = ({ children, className = "" }: Props) => {
 };
 
 const NavigationLeft = ({ children, className = "" }: Props) => (
-  <div className={`grid auto-cols-[3.2rem] grid-flow-col place-items-center ${className}`}>
+  <div
+    className={`grid auto-cols-[minmax(3.2rem,auto)] grid-flow-col place-items-center gap-8 ${className}`}
+  >
     {children}
   </div>
 );
 const NavigationRight = ({ children, className = "" }: Props) => (
-  <div className={`grid auto-cols-[3.2rem] grid-flow-col place-items-center gap-8 ${className}`}>
+  <div
+    className={`grid auto-cols-[minmax(3.2rem,auto)] grid-flow-col place-items-center gap-8 ${className}`}
+  >
     {children}
   </div>
 );
 
-const NavigationTitle = ({ children, className = "" }: Props) => (
+const NavigationCenter = ({ children, className = "" }: Props) => (
   <span className={`absolute left-1/2 -translate-x-2/4 text-18-bold-140 ${className}`}>
     {children}
   </span>
@@ -31,4 +35,4 @@ const NavigationTitle = ({ children, className = "" }: Props) => (
 
 Navigation.Left = NavigationLeft;
 Navigation.Right = NavigationRight;
-Navigation.Title = NavigationTitle;
+Navigation.Center = NavigationCenter;

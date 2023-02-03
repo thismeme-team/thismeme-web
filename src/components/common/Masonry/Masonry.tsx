@@ -30,7 +30,9 @@ const getStyle = ({ ownerState }: { ownerState: OwnerState }): TwStyle => {
 
   return {
     ...styles,
-    ...(ownerState.maxColumnHeight && { height: ownerState.maxColumnHeight }),
+    ...(ownerState.maxColumnHeight && {
+      minHeight: ownerState.maxColumnHeight + ownerState.spacing,
+    }),
     "& > *": {
       margin: `calc(${ownerState.spacing}px / 2)`,
       width: `calc(${(100 / ownerState.columns).toFixed(2)}% - ${ownerState.spacing}px)`,
@@ -51,7 +53,7 @@ export const Masonry = <T extends ElementType = "div">(props: Props<T>) => {
   const {
     as,
     children,
-    spacing = 8,
+    spacing = 1,
     columns = 4,
     defaultSpacing,
     defaultColumns,

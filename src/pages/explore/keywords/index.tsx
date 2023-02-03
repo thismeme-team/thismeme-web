@@ -10,10 +10,15 @@ import { MemeItem } from "@/components/meme/MemeItem";
 const ExploreByKeywordPage: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByKeyword(query.q as string);
+  const {
+    data: memeList,
+    isEmpty,
+    isLoading,
+    fetchNextPage,
+  } = useGetMemesByKeyword(query.q as string);
 
   const ref = useIntersect(async () => {
-    if (query.q) fetchNextPage();
+    fetchNextPage();
   });
 
   if (isEmpty) {
@@ -35,7 +40,7 @@ const ExploreByKeywordPage: NextPage = () => {
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
-      <div className="m-10" ref={ref}></div>
+      <div className={`m-10 ${isLoading ? "hidden" : ""}`} ref={ref}></div>
     </>
   );
 };

@@ -1,22 +1,13 @@
 import Link from "next/link";
-import { css } from "twin.macro";
 
+import { PATH } from "@/application/util";
 import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
-export const SharedMeme = () => {
+export const SharedMemeItem = () => {
   return (
-    <>
-      <div className="my-16 flex justify-between font-suit text-22-bold-140">
-        @nickname 이 공유했던 밈
-        <Icon
-          name="chevronDown"
-          css={css`
-            transform: rotate(-90deg);
-          `}
-        />
-      </div>
+    <div className="mr-20 min-w-[44rem]">
       <div>
         <Photo
           unoptimized
@@ -35,11 +26,11 @@ export const SharedMeme = () => {
       </section>
       <section className="flex">
         {["상위태그", "상위태그", "상위태그"].map((tag, i) => (
-          <Link href={`explore/tags?q=${tag}`} key={i}>
+          <Link href={`${PATH.getExploreByTagPath(tag)}`} key={i}>
             <Chip as="button" className="mt-8 mr-8" color="white" label={tag} size="medium" />
           </Link>
         ))}
       </section>
-    </>
+    </div>
   );
 };

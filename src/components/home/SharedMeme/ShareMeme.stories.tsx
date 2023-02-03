@@ -1,10 +1,10 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { SharedMeme } from "./SharedMeme";
+import { SharedMemeItem } from "./SharedMemeItem";
 
 export default {
   title: "components/home/ShareMeme",
-  component: SharedMeme,
-} as ComponentMeta<typeof SharedMeme>;
+  component: SharedMemeItem,
+} as ComponentMeta<typeof SharedMemeItem>;
 
-export const Default: ComponentStory<typeof SharedMeme> = () => <SharedMeme />;
+export const Default: ComponentStory<typeof SharedMemeItem> = () => <SharedMemeItem />;

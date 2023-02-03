@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { IntroPageNavigation } from "@/components/common/Navigation";
-import { MemeList, PopularTagList, SharedMeme } from "@/components/home";
+import { MemeList, PopularTagList, SharedMemeList } from "@/components/home";
 import { MemeSortDropDown } from "@/components/home/DropDown";
 import { SearchInput } from "@/components/search";
 
@@ -19,10 +19,8 @@ const HomePage: NextPage = () => {
           router.push("/search");
         }}
       />
-      <ul className="flex overflow-x-visible pt-8 pb-40">
-        <PopularTagList />
-      </ul>
-      <SharedMeme />
+      <PopularTagList />
+      <SharedMemeList />
       <MemeSortDropDown />
       <MemeList />
     </>

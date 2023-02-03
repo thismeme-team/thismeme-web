@@ -7,7 +7,7 @@ export const SearchPageNavigation = () => {
       <Navigation.Left>
         <BackButton />
       </Navigation.Left>
-      <Navigation.Title>밈 찾기</Navigation.Title>
+      <Navigation.Center>밈 찾기</Navigation.Center>
     </Navigation>
   );
 };

@@ -6,7 +6,8 @@ import { Suspense } from "react";
 import { TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
-import { PopularMemeList, PopularTagList } from "@/components/home";
+import { MemeList, PopularTagList } from "@/components/home";
+import { MemeSortDropDown } from "@/components/home/DropDown";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
@@ -35,8 +36,8 @@ const HomePage: NextPage = () => {
           <PopularTagList />
         </ul>
       </Suspense>
-      <div className="text-center text-20-bold-140">어쩌면 당신이 찾았을 밈</div>
-      <PopularMemeList />
+      <MemeSortDropDown />
+      <MemeList />
     </>
   );
 };

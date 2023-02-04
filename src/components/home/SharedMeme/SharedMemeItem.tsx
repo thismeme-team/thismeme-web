@@ -7,7 +7,7 @@ import { Photo } from "@/components/common/Photo";
 
 export const SharedMemeItem = () => {
   return (
-    <div className="mr-20 min-w-[44rem]">
+    <li className="mr-10 min-w-[44rem]">
       <div>
         <Photo
           unoptimized
@@ -31,6 +31,6 @@ export const SharedMemeItem = () => {
           </Link>
         ))}
       </section>
-    </div>
+    </li>
   );
 };

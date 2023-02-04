@@ -37,8 +37,8 @@ export const MemeShareModal = ({ id }: Props) => {
       </Modal.Trigger>
       <Modal.Header />
       <Photo className="h-187 w-300 py-24" src={src} />
-      <div className="mb-32 flex w-full flex-col items-center gap-16">
-        <ul className="flex gap-10">
+      <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
+        <li className="relative flex flex-col items-center gap-8">
           <KakaoShareButton
             resource={{
               url: PAGE_URL,
@@ -48,16 +48,22 @@ export const MemeShareModal = ({ id }: Props) => {
             }}
             onSuccess={handleKakaoShare}
           />
+          <span className="absolute bottom-0  font-suit text-12-bold-160">카카오로 공유</span>
+        </li>
+        <li className="relative flex flex-col items-center gap-8">
           <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
+          <span className="absolute bottom-0 font-suit text-12-bold-160">링크 복사</span>
+        </li>
+        <li className="relative flex flex-col items-center gap-8">
           <NativeShareButton
             text={description}
             title={name}
             url={PAGE_URL}
             onSuccess={handleNativeShare}
           />
-        </ul>
-        <span className="font-suit text-16-semibold-140 text-gray-900">Share this meme!</span>
-      </div>
+          <span className="absolute  bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>
+        </li>
+      </ul>
     </Modal>
   );
 };

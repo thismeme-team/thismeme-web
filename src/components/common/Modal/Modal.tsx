@@ -38,7 +38,7 @@ export const Modal = ({ children }: PropsWithChildren) => {
 const ModalHeader = () => {
   const { onClose } = useContext(ModalContext);
   return (
-    <header className="relative flex h-72 items-center justify-between">
+    <header className="relative flex h-72 items-center justify-between px-8">
       <Icon name="modalLogo" />
       <button onClick={onClose}>
         <Icon name="cancel" />

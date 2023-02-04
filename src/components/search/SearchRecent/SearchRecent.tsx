@@ -1,15 +1,15 @@
 import { useRouter } from "next/router";
 
+import type { RecentSearch } from "@/application/hooks";
+import { isTagType } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
-import type { SearchKeyword } from "@/types";
 
 import { SearchItem } from "../SearchItem";
 
 interface Props {
-  keywords: SearchKeyword[];
-  onClickDeleteKeyword: (text: string) => void;
+  keywords: RecentSearch[];
+  onClickDeleteKeyword: (recentSearch: RecentSearch) => void;
 }
 
 export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
@@ -17,29 +17,35 @@ export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
   if (keywords.length === 0) return null;
 
   return (
-    <div className="flex justify-between">
-      <div className="align-middle">
-        {keywords.map((keyword) => (
+    <div className="flex flex-col justify-between">
+      {keywords.map((item) => {
+        const { id, value, type } = item;
+        return (
           <SearchItem
-            key={keyword.id}
+            key={id}
+            left={<Icon className="min-w-24" name={`${isTagType(type) ? "pound" : "search"}`} />}
             searchText=""
-            tagName={keyword.text}
+            tagName={value}
             right={
               <Icon
                 className="absolute right-6"
                 name="delete2"
                 onPointerDown={(e) => {
                   e.stopPropagation();
-                  onClickDeleteKeyword(keyword.text);
+                  onClickDeleteKeyword(item);
                 }}
               />
             }
             onPointerDown={() => {
-              router.push(`${PATH.getExploreByKeywordPath(keyword.text)}`);
+              if (isTagType(type)) {
+                router.push(`${PATH.getExploreByTagPath(value)}`);
+                return;
+              }
+              router.push(`${PATH.getExploreByKeywordPath(value)}`);
             }}
           />
-        ))}
-      </div>
+        );
+      })}
     </div>
   );
 };

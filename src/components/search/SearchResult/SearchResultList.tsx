@@ -2,15 +2,16 @@ import Link from "next/link";
 
 import { useGetTagSearch } from "@/application/hooks";
 import { PATH } from "@/application/util";
+import { Icon } from "@/components/common/Icon";
 
 import { SearchItem } from "../SearchItem/SearchItem";
 
 interface Prop {
   value: string;
-  onClickAddKeyword: (text: string) => void;
+  onClickAddTag: (text: string) => void;
 }
 
-export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
+export const SearchResultList = ({ value, onClickAddTag }: Prop) => {
   const { autoCompletedTags } = useGetTagSearch(value.trim());
 
   if (!value || autoCompletedTags?.length === 0) {
@@ -22,10 +23,11 @@ export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
         <li key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.name)}>
             <SearchItem
+              left={<Icon name="pound" />}
               searchText={value}
               tagName={tag.name}
               onClick={() => {
-                onClickAddKeyword(tag.name);
+                onClickAddTag(tag.name);
               }}
             />
           </Link>

@@ -14,7 +14,7 @@ import {
 
 const SearchPage: NextPage = () => {
   const inputProps = useInput();
-  const { keywords, onClickDeleteKeyword, onClickAddKeyword } = useRecentSearch();
+  const { keywords, onClickDeleteKeyword, onClickAddKeyword, onClickAddTag } = useRecentSearch();
   const router = useRouter();
   const [focus, setFocus] = useState(false);
 
@@ -48,7 +48,7 @@ const SearchPage: NextPage = () => {
         {inputProps.value && (
           <Suspense fallback={<div></div>}>
             <div className="absolute h-full w-full bg-white">
-              <SearchResultList value={inputProps.value} onClickAddKeyword={onClickAddKeyword} />
+              <SearchResultList value={inputProps.value} onClickAddTag={onClickAddTag} />
             </div>
           </Suspense>
         )}

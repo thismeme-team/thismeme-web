@@ -11,7 +11,7 @@ export const SignUpModal = ({ onClose }: Props) => {
     <ModalBase onClose={onClose}>
       <div className="m-auto h-[38rem] w-[34rem] rounded-24 bg-white p-24">
         <section className="flex justify-between pb-24">
-          <Icon name="logo2" />
+          <Icon name="logo" />
           <Icon name="cancel" onClick={onClose} />
         </section>
         <section className="align-left mt-36 mb-10 text-left font-suit text-32-bold-140">

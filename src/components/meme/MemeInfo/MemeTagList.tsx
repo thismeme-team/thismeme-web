@@ -9,11 +9,13 @@ interface Props {
 export const MemeTagList = ({ id }: Props) => {
   const { tags } = useGetMemeTagsById(id);
 
+  if (!tags.length) return null;
+
   return (
     <section>
       <h2 className="py-16 font-suit text-22-bold-140">Tags</h2>
       <ul className="flex flex-wrap gap-8">
-        {tags?.map((tag) => (
+        {tags.map((tag) => (
           <li
             className="rounded-20 border border-primary-300 bg-gray-100 py-8 px-16 font-suit text-14-semibold-140 active:bg-gray-400"
             key={tag.tagId}

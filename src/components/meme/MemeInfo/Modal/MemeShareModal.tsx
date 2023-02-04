@@ -24,9 +24,9 @@ export const MemeShareModal = ({ id }: Props) => {
 
   const src = images[0].imageUrl;
 
-  const handleKakaoShare = () => show("카카오톡 공유를 완료했습니다!");
-  const handleClipboardCopy = () => show("링크를 복사했습니다!");
-  const handleNativeShare = () => show("공유를 완료했습니다!");
+  const showKakaoShareToast = () => show("카카오톡 공유를 완료했습니다!");
+  const showClipboardCopyToast = () => show("링크를 복사했습니다!");
+  const showNativeShareToast = () => show("공유를 완료했습니다!");
 
   return (
     <Modal>
@@ -36,34 +36,46 @@ export const MemeShareModal = ({ id }: Props) => {
         </Button>
       </Modal.Trigger>
       <Modal.Header />
-      <Photo className="h-187 w-300 py-24" src={src} />
-      <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
-        <li className="relative flex flex-col items-center gap-8">
-          <KakaoShareButton
-            resource={{
-              url: PAGE_URL,
-              imageUrl: src,
-              title: name,
-              description,
-            }}
-            onSuccess={handleKakaoShare}
-          />
-          <span className="absolute bottom-0  font-suit text-12-bold-160">카카오로 공유</span>
-        </li>
-        <li className="relative flex flex-col items-center gap-8">
-          <ClipboardCopyButton target={PAGE_URL} onSuccess={handleClipboardCopy} />
-          <span className="absolute bottom-0 font-suit text-12-bold-160">링크 복사</span>
-        </li>
-        <li className="relative flex flex-col items-center gap-8">
-          <NativeShareButton
-            text={description}
-            title={name}
-            url={PAGE_URL}
-            onSuccess={handleNativeShare}
-          />
-          <span className="absolute  bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>
-        </li>
-      </ul>
+      <Modal.Content>
+        {({ onClose }) => (
+          <>
+            <Photo className="h-187 w-300 py-24" src={src} />
+            <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
+              <li className="relative flex flex-col items-center gap-8">
+                <KakaoShareButton
+                  resource={{
+                    url: PAGE_URL,
+                    imageUrl: src,
+                    title: name,
+                    description,
+                  }}
+                  onSuccess={showKakaoShareToast}
+                />
+                <span className="absolute bottom-0 font-suit text-12-bold-160">카카오로 공유</span>
+              </li>
+              <li className="relative flex flex-col items-center gap-8">
+                <ClipboardCopyButton
+                  target={PAGE_URL}
+                  onSuccess={() => {
+                    onClose();
+                    showClipboardCopyToast();
+                  }}
+                />
+                <span className="absolute bottom-0 font-suit text-12-bold-160">링크 복사</span>
+              </li>
+              <li className="relative flex flex-col items-center gap-8">
+                <NativeShareButton
+                  text={description}
+                  title={name}
+                  url={PAGE_URL}
+                  onSuccess={showNativeShareToast}
+                />
+                <span className="absolute bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>
+              </li>
+            </ul>
+          </>
+        )}
+      </Modal.Content>
     </Modal>
   );
 };

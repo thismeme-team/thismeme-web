@@ -18,7 +18,13 @@ export class TagApi {
       throw new Error("No Query");
     }
     //NOTE : api response에 categoryName 없음 check
-    return this.api.get(`/tags/search?word=${value}`).then((response) => response.data);
+    return this.api
+      .get("/tags/search", {
+        params: {
+          word: value,
+        },
+      })
+      .then((response) => response.data);
   };
 
   getPopularTags = () => {

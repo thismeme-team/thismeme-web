@@ -1,5 +1,7 @@
 import { useRouter } from "next/router";
 
+import { PATH } from "@/application/util";
+import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import type { SearchKeyword } from "@/types";
 
@@ -33,7 +35,7 @@ export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
               />
             }
             onPointerDown={() => {
-              router.push(`explore/keywords?q=${keyword.text}`);
+              router.push(`${PATH.getExploreByKeywordPath(keyword.text)}`);
             }}
           />
         ))}

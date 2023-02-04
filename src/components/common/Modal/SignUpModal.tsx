@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { Photo } from "../Photo";

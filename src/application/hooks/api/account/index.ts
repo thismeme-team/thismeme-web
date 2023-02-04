@@ -7,7 +7,9 @@ import { QUERY_KEYS } from "./queryKey";
 
 export const useGetMyAccount = ({ enabled }: UseQueryOptions) =>
   useQuery({
+    suspense: false,
     queryKey: QUERY_KEYS.getMyAccount,
     queryFn: api.account.getMyAccount,
     enabled,
+    staleTime: Infinity,
   });

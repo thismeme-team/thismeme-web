@@ -28,7 +28,6 @@ export const MemeExport = ({ id }: Props) => {
   const handleNaviteShare = async () => {
     if (!navigator.share) return;
     await navigator.share({ title: name, text: description, url });
-    show("공유를 완료했습니다!");
   };
 
   return (

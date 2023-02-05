@@ -24,9 +24,7 @@ export const MemeShareModal = ({ id }: Props) => {
 
   const src = images[0].imageUrl;
 
-  const showKakaoShareToast = () => show("카카오톡 공유를 완료했습니다!");
   const showClipboardCopyToast = () => show("링크를 복사했습니다!");
-  const showNativeShareToast = () => show("공유를 완료했습니다!");
 
   return (
     <Modal>
@@ -49,7 +47,6 @@ export const MemeShareModal = ({ id }: Props) => {
                     title: name,
                     description,
                   }}
-                  onSuccess={showKakaoShareToast}
                 />
                 <span className="absolute bottom-0 font-suit text-12-bold-160">카카오로 공유</span>
               </li>
@@ -64,12 +61,7 @@ export const MemeShareModal = ({ id }: Props) => {
                 <span className="absolute bottom-0 font-suit text-12-bold-160">링크 복사</span>
               </li>
               <li className="relative flex flex-col items-center gap-8">
-                <NativeShareButton
-                  text={description}
-                  title={name}
-                  url={PAGE_URL}
-                  onSuccess={showNativeShareToast}
-                />
+                <NativeShareButton text={description} title={name} url={PAGE_URL} />
                 <span className="absolute bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>
               </li>
             </ul>

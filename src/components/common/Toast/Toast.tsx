@@ -1,17 +1,14 @@
+import { slideUpDown } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
 
+import { defaultToastStyle, toastColors, toastIconColors } from "./style";
 import type { Toast as Props } from "./types";
-import { toastColor, toastIconColor } from "./types";
 
-export const Toast = ({ message, className = "", icon, id, color = "black", visible }: Props) => {
+export const Toast = ({ message, icon, id, color = "black", visible, ...rest }: Props) => {
   return (
-    <output
-      className={`flex h-48 w-full items-center gap-4 rounded-10 px-16 font-suit text-16-semibold-140 will-change-transform ${
-        visible ? "animate-enter" : "animate-exit"
-      } ${toastColor[color]} ${className}`}
-    >
+    <output css={[defaultToastStyle, toastColors[color], slideUpDown(visible)]} {...rest}>
       {typeof icon === "string" ? (
-        <Icon color={toastIconColor[color]} height={24} name={icon} width={24} />
+        <Icon color={toastIconColors[color]} height={24} name={icon} width={24} />
       ) : (
         icon
       )}

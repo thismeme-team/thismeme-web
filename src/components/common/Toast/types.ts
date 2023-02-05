@@ -1,27 +1,22 @@
+import type { CSSInterpolation } from "@emotion/serialize";
 import type { ReactElement } from "react";
 
 import type { IconName } from "@/components/common/Icon";
 
-export type ToastType = "success" | "custom";
+import type { toastColors } from "./style";
 
-export const toastColor = {
-  black: "bg-gray-800 text-white",
-  white: "border-black border bg-white/70 text-black", // sample color
-};
-export const toastIconColor = {
-  black: "white",
-  white: "black",
-} as const;
+export type ToastType = "success" | "custom";
 
 export interface Toast {
   type: ToastType;
   id: number;
   message: ReactElement | string | ((id: number) => ReactElement | string);
   visible: boolean;
-  color?: keyof typeof toastColor;
+  color?: keyof typeof toastColors;
   icon?: ReactElement | IconName;
   duration?: number;
   className?: string;
+  css?: CSSInterpolation;
 }
 
 export type ToastOption = Omit<Toast, "type" | "id" | "message" | "visible">;

@@ -9,7 +9,7 @@ import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
   const router = useRouter();
-  const { isLogin } = useAuth();
+  const { isLogin, user } = useAuth();
 
   return (
     <>
@@ -22,7 +22,7 @@ const HomePage: NextPage = () => {
         }}
       />
       <PopularTagList />
-      {isLogin && <SharedMemeList />}
+      {isLogin && <SharedMemeList name={user?.name} />}
       <MemeSortDropDown />
       <MemeList />
     </>

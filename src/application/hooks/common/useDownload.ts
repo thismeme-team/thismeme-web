@@ -27,7 +27,7 @@ export const useDownload = () => {
          */
         onSuccess?.();
 
-        const blob = await fetch(target).then((response) => response.blob());
+        const blob = await fetch(target, { mode: "no-cors" }).then((response) => response.blob());
         const blobURL = URL.createObjectURL(blob);
 
         const a = document.createElement("a");

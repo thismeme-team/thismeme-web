@@ -7,6 +7,7 @@ const colors = {
   black: "[&_*]:fill-black [&_*]:stroke-black",
   primary: "[&_*]:fill-primary [&_*]:stroke-primary",
   white: "[&_*]:fill-white [&_*]:stroke-white",
+  "stroke-white": "[&_*]:stroke-white",
   default: "",
 };
 

@@ -1,7 +1,7 @@
 import { useAuth, useIsMount } from "@/application/hooks";
-import { Icon } from "@/components/common/Icon";
 
 import { SignUpModal } from "../../Modal";
+import { ProfileModal } from "../../Modal/ProfileModal";
 
 export const Profile = () => {
   const { isLogin } = useAuth();
@@ -12,7 +12,9 @@ export const Profile = () => {
   return (
     <div className="cursor-pointer">
       {isLogin ? (
-        <Icon name="loginprofile" />
+        <div>
+          <ProfileModal />
+        </div>
       ) : (
         <>
           <SignUpModal />

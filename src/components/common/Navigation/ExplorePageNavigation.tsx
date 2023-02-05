@@ -11,8 +11,8 @@ export const ExplorePageNavigation = ({ title }: Props) => {
     <Navigation>
       <Navigation.Left>
         <BackButton />
+        <div className="font-suit text-18-bold-140">{title}</div>
       </Navigation.Left>
-      <Navigation.Title>{title}</Navigation.Title>
       <Navigation.Right>
         <Profile />
         <SideBar />

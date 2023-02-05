@@ -182,6 +182,7 @@ module.exports = {
       fontFamily: {
         pretendard: ["var(--font-pretendardVariable)", ...defaultTheme.fontFamily.sans],
         suit: ["var(--font-suitVariable)", ...defaultTheme.fontFamily.serif],
+        tossface: ["var(--font-tossfaceVariable)", ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
         slideDown: {

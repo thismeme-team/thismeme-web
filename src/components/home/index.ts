@@ -1,2 +1,2 @@
-export * from "./PopularMeme";
+export * from "./MemeList";
 export * from "./PopularTag";

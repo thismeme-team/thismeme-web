@@ -7,8 +7,8 @@ const KaKaoRedirect = () => {
   const { login } = useAuth();
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    login(params.get("accessToken") || "TEST");
+    const token = new URLSearchParams(location.search).get("accessToken");
+    if (token) login(token);
     Router.push("/");
   }, [login]);
 

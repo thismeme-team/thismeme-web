@@ -1,17 +1,17 @@
-import { useIsMount, useModal } from "@/application/hooks";
-import { safeLocalStorage } from "@/application/util";
+import { useAuth, useIsMount, useModal } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 import { SignUpModal } from "@/components/common/Modal";
 
 export const Profile = () => {
   const { open, onOpen, onClose } = useModal();
+  const { isLogin } = useAuth();
+
   const isMount = useIsMount();
   if (!isMount) return null;
-  const loginState = safeLocalStorage.get("loginState");
 
   return (
     <div className="cursor-pointer">
-      {loginState ? (
+      {isLogin ? (
         <Icon name="loginprofile" />
       ) : (
         <>

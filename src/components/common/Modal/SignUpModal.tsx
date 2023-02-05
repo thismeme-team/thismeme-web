@@ -23,11 +23,10 @@ export const SignUpModal = ({ onClose }: Props) => {
           구글 계정으로 시작하기
         </Button>
         <Button
+          as="a"
           className="mt-8 w-290 bg-[#FEE500] text-16-regular-130"
+          href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao`}
           size="large"
-          onClick={() =>
-            (window.location.href = `${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao`)
-          }
         >
           <Icon className="mr-6" name="kakao2" />
           카카오로 3초 만에 시작하기

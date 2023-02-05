@@ -16,7 +16,7 @@ export const SharedMemeList = () => {
           `}
         />
       </div>
-      <ul className="flex h-[60rem] overflow-x-scroll">
+      <ul className="mb-24 flex overflow-x-scroll">
         <SharedMemeItem />
         <SharedMemeItem />
         <SharedMemeItem />

@@ -13,7 +13,7 @@ export const PopularTagList = () => {
       {tags?.map((tag) => (
         <li className="shrink-0" key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.name)}>
-            <Chip className="ml-8 mb-8" color="black" label={tag.name} size="medium" />
+            <Chip className="ml-8" color="black" label={tag.name} size="medium" />
           </Link>
         </li>
       ))}

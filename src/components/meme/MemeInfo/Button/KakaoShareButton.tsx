@@ -1,6 +1,7 @@
 import type { KakaoShareOptions } from "@/application/hooks/domain/share";
 import { useKakaoShare } from "@/application/hooks/domain/share";
-import { IconButton } from "@/components/common/Button";
+import { Button } from "@/components/common/Button";
+import { Icon } from "@/components/common/Icon";
 
 interface Props {
   onSuccess?: () => void;
@@ -9,16 +10,14 @@ interface Props {
 export const KakaoShareButton = ({ onSuccess, resource }: Props) => {
   const { share } = useKakaoShare();
   return (
-    <IconButton
-      as="li"
-      className="bg-[#FFE812]"
-      icon="kakao"
-      size="medium"
+    <Button
+      className="flex h-50 w-50 gap-8 rounded-10 bg-gray-900"
       onClick={() => {
-        // 카카오 공유 로직
         share(resource);
         onSuccess?.();
       }}
-    />
+    >
+      <Icon name="whiteKakao" />
+    </Button>
   );
 };

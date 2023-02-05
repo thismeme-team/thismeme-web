@@ -1,25 +1,9 @@
-import localFont from "@next/font/local";
 import type { PropsWithChildren } from "react";
 import { useRef } from "react";
 
+import { pretendard, suit, tossface } from "@/styles/fonts";
+
 import { GlobalScrollContext } from "./context";
-
-const pretendard = localFont({
-  src: "../../../styles/fonts/PretendardVariable.woff2",
-  variable: "--font-pretendardVariable",
-  weight: "100 900",
-});
-
-const suit = localFont({
-  src: "../../../styles/fonts/SUIT-Variable.woff2",
-  variable: "--font-suitVariable",
-  weight: "100 900",
-});
-
-const tossface = localFont({
-  src: "../../../styles/fonts/TossFaceFontMac.ttf",
-  variable: "--font-tossfaceVariable",
-});
 
 export const Layout = ({ children }: PropsWithChildren) => {
   const ref = useRef<HTMLElement>(null);

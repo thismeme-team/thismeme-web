@@ -1,17 +1,18 @@
 import Router from "next/router";
 import React, { useEffect } from "react";
 
-import { useLocalStorage } from "@/application/hooks";
+import { useAuth } from "@/application/hooks";
 
 const KaKaoRedirect = () => {
-  const [login, setLogin] = useLocalStorage<boolean>("loginState", { defaultValue: false });
+  const { login } = useAuth();
 
   useEffect(() => {
-    setLogin(true);
+    const token = new URLSearchParams(location.search).get("accessToken");
+    if (token) login(token);
     Router.push("/");
-  }, [setLogin]);
+  }, [login]);
 
-  return <div>Spinner</div>;
+  return <div></div>;
 };
 
 export default KaKaoRedirect;

@@ -1,4 +1,5 @@
-import { IconButton } from "@/components/common/Button";
+import { Button } from "@/components/common/Button";
+import { Icon } from "@/components/common/Icon";
 
 interface Props {
   title: string;
@@ -24,12 +25,8 @@ export const NativeShareButton = ({ title, text, url, onSuccess, onError }: Prop
   };
 
   return (
-    <IconButton
-      as="li"
-      className="bg-light-gray-10"
-      icon="meatball"
-      size="medium"
-      onClick={handleClick}
-    />
+    <Button className="flex h-50 w-50 gap-8 rounded-10 bg-gray-900" onClick={handleClick}>
+      <Icon color="white" name="meatball" />
+    </Button>
   );
 };

@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
+import { useAuth } from "@/application/hooks";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { MemeList, PopularTagList, SharedMemeList } from "@/components/home";
 import { MemeSortDropDown } from "@/components/home/DropDown";
@@ -8,6 +9,7 @@ import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
   const router = useRouter();
+  const { isLogin } = useAuth();
 
   return (
     <>
@@ -20,7 +22,7 @@ const HomePage: NextPage = () => {
         }}
       />
       <PopularTagList />
-      <SharedMemeList />
+      {isLogin && <SharedMemeList />}
       <MemeSortDropDown />
       <MemeList />
     </>

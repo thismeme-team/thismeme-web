@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { ExplorePageNavigation } from "@/components/common/Navigation";
-import { MemeDetail, MemeTagList } from "@/components/meme/MemeDetail";
+import { MemeCTAList, MemeDetail, MemeTagList, RelativeMemeList } from "@/components/meme/MemeInfo";
 
 const MemeDetailPage: NextPage = () => {
   const { query } = useRouter();
@@ -15,6 +15,10 @@ const MemeDetailPage: NextPage = () => {
         <Suspense>
           <MemeDetail id={query.id as string} />
           <MemeTagList id={query.id as string} />
+          <MemeCTAList id={query.id as string} />
+          <Suspense>
+            <RelativeMemeList />
+          </Suspense>
         </Suspense>
       )}
     </>

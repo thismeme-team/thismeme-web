@@ -2,7 +2,7 @@ import type { PropsWithChildren } from "react";
 import { createPortal } from "react-dom";
 
 import { useIsMount } from "@/application/hooks";
-import { pretendard, suit, tossface } from "@/components/common/Layout";
+import { pretendard, suit, tossface } from "@/styles/fonts";
 
 interface Props {
   id: string;

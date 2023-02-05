@@ -43,7 +43,7 @@ const ModalHeader = () => {
   const { onClose } = useContext(ModalContext);
   return (
     <header className="relative flex h-72 items-center justify-between px-8">
-      <Icon name="modalLogo" />
+      <Icon name="logo" />
       <button onClick={onClose}>
         <Icon name="cancel" />
       </button>

@@ -17872,14 +17872,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageDependencies": [\
             ["next-sitemap", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:3.1.49"],\
             ["@corex/deepmerge", "npm:4.0.37"],\
-            ["@next/env", null],\
+            ["@next/env", "npm:13.0.5"],\
             ["@types/next", null],\
             ["@types/next__env", null],\
             ["minimist", "npm:1.2.7"],\
             ["next", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:13.0.5"]\
           ],\
           "packagePeers": [\
-            "@next/env",\
             "@types/next",\
             "@types/next__env",\
             "next"\

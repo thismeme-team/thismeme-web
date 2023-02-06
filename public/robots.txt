@@ -1,9 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /search
-Allow: /explore/tags?q=*
-Allow: /explore/keywords?q=*
-Allow: /memes/*
-Disallow: /oauth2/redirect
-
-Sitemap: https://app.thismeme.me/sitemap.xml

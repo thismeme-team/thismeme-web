@@ -60,7 +60,7 @@ const SearchPage: NextPage = () => {
         {!inputProps.value && focus && (
           <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
         )}
-        {!focus && (
+        {!inputProps.value && !focus && (
           <Suspense>
             <SearchPopularList />
           </Suspense>

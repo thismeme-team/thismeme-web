@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { TITLE } from "@/application/util";
 import { Masonry } from "@/components/common/Masonry";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import { Photo } from "@/components/common/Photo";
 import { MemeItem } from "@/components/meme/MemeItem";
 import { TagFavoriteButton } from "@/components/tags";
@@ -22,11 +22,7 @@ const ExploreByTagPage: NextPage = () => {
   if (isEmpty) {
     return (
       <>
-        <Head>
-          <title>{TITLE.getExploreByTagPageTitle(query.q as string)}</title>
-          <meta content={TITLE.getExploreByTagPageTitle(query.q as string)} property="og:title" />
-          <meta content={`${query.q} 밈 모음`} property="og:description" />
-        </Head>
+        <NextSeo description={`${query.q} 밈 모음`} title={TITLE.exploreByTag(query.q as string)} />
 
         <ExplorePageNavigation title={`#${query.q}`} />
         <div className="flex h-full w-full flex-col items-center justify-center">
@@ -38,11 +34,7 @@ const ExploreByTagPage: NextPage = () => {
   }
   return (
     <>
-      <Head>
-        <title>{TITLE.getExploreByTagPageTitle(query.q as string)}</title>
-        <meta content={TITLE.getExploreByTagPageTitle(query.q as string)} property="og:title" />
-        <meta content={`${query.q} 밈 모음`} property="og:description" />
-      </Head>
+      <NextSeo description={`${query.q} 밈 모음`} title={TITLE.exploreByTag(query.q as string)} />
 
       <ExplorePageNavigation title={`#${query.q}`} />
 

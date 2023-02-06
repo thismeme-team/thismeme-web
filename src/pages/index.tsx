@@ -1,10 +1,10 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { TITLE } from "@/application/util";
+import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import { Photo } from "@/components/common/Photo";
 import { MemeList, PopularTagList } from "@/components/home";
 import { MemeSortDropDown } from "@/components/home/DropDown";
@@ -15,11 +15,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <Head>
-        <title>{TITLE.getHomePageTitle}</title>
-        <meta content={TITLE.getHomePageTitle} property="og:title" />
-        <meta content={TITLE.getHomePageTitle} property="og:description" />
-      </Head>
+      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
 
       <IntroPageNavigation />
       <Photo className="m-auto my-10 h-190 w-230 overflow-visible" src="/img/brandimage.png" />

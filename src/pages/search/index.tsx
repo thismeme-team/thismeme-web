@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
-import { PATH, TITLE } from "@/application/util";
+import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import {
   SearchInput,
   SearchPopularList,
@@ -27,11 +27,7 @@ const SearchPage: NextPage = () => {
   };
   return (
     <>
-      <Head>
-        <title>{TITLE.getSearchPageTitle}</title>
-        <meta content={TITLE.getSearchPageTitle} property="og:title" />
-        <meta content={TITLE.getSearchPageTitle} property="og:description" />
-      </Head>
+      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.search} />
 
       <SearchPageNavigation />
       <div className="relative mt-8">

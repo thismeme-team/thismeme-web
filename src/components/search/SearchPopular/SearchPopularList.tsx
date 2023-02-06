@@ -9,7 +9,7 @@ export const SearchPopularList = () => {
   const { tags } = useGetPopularTags();
 
   return (
-    <ul>
+    <ul className="px-14">
       {tags?.map((tag, index) => (
         <li key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.name)}>

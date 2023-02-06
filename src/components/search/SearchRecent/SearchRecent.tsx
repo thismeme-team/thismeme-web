@@ -1,32 +1,59 @@
-import Link from "next/link";
+import { useRouter } from "next/router";
 
+import type { RecentSearch } from "@/application/hooks";
+import { isTagType } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { Chip } from "@/components/common/Chip";
-import type { SearchKeyword } from "@/types";
+import { Icon } from "@/components/common/Icon";
+
+import { SearchItem } from "../SearchItem";
 
 interface Props {
-  keywords: SearchKeyword[];
-  onClickDeleteKeyword: () => void;
+  items: RecentSearch[];
+  onAddItem: ({ value, type }: Omit<RecentSearch, "id">) => void;
+  onDelete: (id: RecentSearch["id"]) => void;
 }
 
-export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
-  if (keywords.length === 0) return null;
+export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
+  const router = useRouter();
+  if (items.length === 0) return null;
 
   return (
-    <div className="mb-31">
-      <div className="flex justify-between">
-        <span className="text-15-semibold-130 text-dark-gray-10">최근 검색어</span>
-        <button className="text-15-semibold-130 text-gray-10" onClick={onClickDeleteKeyword}>
-          지우기
-        </button>
-      </div>
-      <div className="flex flex-wrap align-middle">
-        {keywords.map((keyword) => (
-          <Link href={PATH.getExploreByKeywordPath(keyword.text)} key={keyword.id}>
-            <Chip className="m-4" color="white" label={keyword.text} size="medium" />
-          </Link>
-        ))}
-      </div>
+    <div className="flex flex-col justify-between">
+      {items.map((item) => {
+        const { id, value, type } = item;
+        return (
+          <SearchItem
+            key={id}
+            tagName={value}
+            endComponent={
+              <Icon
+                className="absolute right-6"
+                name="delete2"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  onDelete(id);
+                }}
+              />
+            }
+            startComponent={
+              <Icon className="min-w-24" name={isTagType(type) ? "pound" : "search"} />
+            }
+            onClick={() => {
+              onAddItem({ value, type });
+
+              if (isTagType(type)) {
+                router.push(`${PATH.getExploreByTagPath(value)}`);
+                return;
+              }
+              router.push(`${PATH.getExploreByKeywordPath(value)}`);
+            }}
+            onMouseDown={(e) => {
+              // Prevent input blur
+              e.preventDefault();
+            }}
+          />
+        );
+      })}
     </div>
   );
 };

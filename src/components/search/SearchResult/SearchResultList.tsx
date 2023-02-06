@@ -1,35 +1,34 @@
 import Link from "next/link";
 
+import type { RecentSearch } from "@/application/hooks";
 import { useGetTagSearch } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { Chip } from "@/components/common/Chip";
+import { Icon } from "@/components/common/Icon";
 
 import { SearchItem } from "../SearchItem/SearchItem";
 
 interface Prop {
   value: string;
-  onClickAddKeyword: (text: string) => void;
+  onAddItem: ({ value, type }: Omit<RecentSearch, "id">) => void;
 }
 
-export const SearchResultList = ({ value, onClickAddKeyword }: Prop) => {
+export const SearchResultList = ({ value, onAddItem }: Prop) => {
   const { autoCompletedTags } = useGetTagSearch(value.trim());
 
   if (!value || autoCompletedTags?.length === 0) {
     return null;
   }
   return (
-    <ul>
+    <ul className="absolute w-full bg-white">
       {autoCompletedTags?.map((tag) => (
         <li key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.name)}>
             <SearchItem
               searchText={value}
+              startComponent={<Icon name="pound" />}
               tagName={tag.name}
-              right={
-                <Chip className="absolute right-6" color="black" label="무한도전" size="small" />
-              }
               onClick={() => {
-                onClickAddKeyword(tag.name);
+                onAddItem({ value: tag.name, type: "tag" });
               }}
             />
           </Link>

@@ -19,7 +19,7 @@ export const SharedMemeList = ({ name }: Props) => {
           `}
         />
       </div>
-      <ul className="mb-24 flex overflow-x-scroll">
+      <ul className="mb-24 flex snap-x snap-mandatory gap-10 overflow-x-scroll">
         <SharedMemeItem />
         <SharedMemeItem />
         <SharedMemeItem />

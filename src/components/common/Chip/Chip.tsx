@@ -13,10 +13,8 @@ const sizes = {
 };
 
 const colors = {
-  white: "border-[1px] border-gray-10 bg-white text-gray-20",
-  darkGray: "bg-dark-gray-10 text-white",
+  white: "border-[1px] border-gray-200 bg-white text-gray-700",
   black: "bg-black text-white",
-  lightGray: "bg-light-gray-10 text-dark-gray-10",
 };
 
 export const Chip = <T extends ElementType>({

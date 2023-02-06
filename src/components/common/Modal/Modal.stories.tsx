@@ -10,7 +10,7 @@ export default {
 export const SignUp = () => {
   return (
     <>
-      <SignUpModal onClose={() => {}} />
+      <SignUpModal />
     </>
   );
 };

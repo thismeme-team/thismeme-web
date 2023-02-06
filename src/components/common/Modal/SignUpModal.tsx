@@ -1,37 +1,48 @@
 import { Button } from "../Button";
 import { Icon } from "../Icon";
-import { Photo } from "../Photo";
-import { ModalBase } from "./ModalBase";
+import { Modal } from "./Modal";
 
-interface Props {
-  onClose: () => void;
-}
-
-export const SignUpModal = ({ onClose }: Props) => {
+export const SignUpModal = () => {
   return (
-    <ModalBase onClose={onClose}>
-      <div className="m-auto h-[38rem] w-[34rem] rounded-10 bg-white px-25">
-        <div className="pt-28 text-center align-middle text-20-bold-140">
-          자주 찾는 태그를 북마크하면, 엄청 재밌을 걸요
-        </div>
-        <Photo className="m-auto my-10 h-150 w-160" src="/img/signup.png" />
-        <Button
-          className="mt-8 w-290 border border-solid border-light-gray-30 text-16-regular-130"
-          size="large"
-        >
-          <Icon className="mr-6" name="google" />
-          구글 계정으로 시작하기
-        </Button>
-        <Button
-          as="a"
-          className="mt-8 w-290 bg-[#FEE500] text-16-regular-130"
-          href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao`}
-          size="large"
-        >
-          <Icon className="mr-6" name="kakao2" />
-          카카오로 3초 만에 시작하기
-        </Button>
-      </div>
-    </ModalBase>
+    <>
+      <Modal>
+        <Modal.Trigger>
+          <Button className="h-32 w-32">
+            <Icon name="notloginprofile" />
+          </Button>
+        </Modal.Trigger>
+        <Modal.Header />
+        <Modal.Content>
+          {() => (
+            <div className="m-auto w-300 rounded-24 px-8 pb-24">
+              <section className="align-left mt-36 mb-10 text-left font-suit text-32-bold-140">
+                <div>
+                  킹 받는
+                  <span>밈</span>을
+                </div>
+                <div>바로 찾아서</div>
+                <div>보낼 수 있어요!</div>
+              </section>
+              <span className="font-suit text-16-semibold-140 text-gray-800">
+                This meme 에 오신 걸 환영합니다
+              </span>
+              <section className="m-auto flex w-116 justify-between pt-32">
+                <Button className="h-50 w-50 rounded-10 border border-solid border-light-gray-30">
+                  <Icon name="google" />
+                </Button>
+                <Button
+                  as="a"
+                  className="h-50 w-50 rounded-10 bg-[#FEE500]"
+                  href={`${process.env.NEXT_PUBLIC_API_URL}/oauth2/authorization/kakao`}
+                  size="large"
+                >
+                  <Icon name="kakao2" />
+                </Button>
+              </section>
+            </div>
+          )}
+        </Modal.Content>
+      </Modal>
+    </>
   );
 };

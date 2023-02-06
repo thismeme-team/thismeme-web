@@ -8,14 +8,14 @@ export const PopularTagList = () => {
   const { tags } = useGetPopularTags();
 
   return (
-    <>
+    <ul className="mt-8 mb-40 flex gap-8 overflow-x-scroll pb-36">
       {tags?.map((tag) => (
-        <li key={tag.tagId}>
+        <li className="shrink-0" key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.name)}>
-            <Chip className="ml-8 mb-8" color="darkGray" label={tag.name} size="medium" />
+            <Chip color="black" label={tag.name} size="medium" />
           </Link>
         </li>
       ))}
-    </>
+    </ul>
   );
 };

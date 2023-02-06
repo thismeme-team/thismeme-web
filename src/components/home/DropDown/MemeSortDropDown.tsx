@@ -1,12 +1,16 @@
 import type { MouseEvent } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { css } from "twin.macro";
 
+import { useAuth } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown/DropDown";
 import { Icon } from "@/components/common/Icon";
 
 export const MemeSortDropDown = () => {
-  const [menu, setMenu] = useState<string>("@nickname이 찾는 밈");
+  const { isLogin, user } = useAuth();
+  const [menu, setMenu] = useState<string>(
+    user?.name ? `@${user?.name}이 찾는 밈` : `공유가 많이 된 밈`,
+  );
 
   const handleDropMenu = (e: MouseEvent<HTMLLIElement>) => {
     setMenu((e.target as HTMLElement).innerText);
@@ -35,12 +39,14 @@ export const MemeSortDropDown = () => {
         </DropDown.Trigger>
       </div>
       <DropDown.Contents width="34">
-        <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={handleDropMenu}
-        >
-          @nickname이 찾는 그 밈
-        </DropDown.Content>
+        {isLogin && (
+          <DropDown.Content
+            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+            onClick={handleDropMenu}
+          >
+            {`@${user?.name}이 찾는 그 밈`}
+          </DropDown.Content>
+        )}
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
           onClick={handleDropMenu}

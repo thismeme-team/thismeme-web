@@ -9,17 +9,5 @@ export const Profile = () => {
   const isMount = useIsMount();
   if (!isMount) return null;
 
-  return (
-    <div className="cursor-pointer">
-      {isLogin ? (
-        <div>
-          <ProfileModal />
-        </div>
-      ) : (
-        <>
-          <SignUpModal />
-        </>
-      )}
-    </div>
-  );
+  return <>{isLogin ? <ProfileModal /> : <SignUpModal />}</>;
 };

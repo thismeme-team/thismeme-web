@@ -10,7 +10,6 @@ export const SharedMemeItem = () => {
     <li className="mr-10 min-w-[44rem]">
       <div>
         <Photo
-          unoptimized
           className="m-auto mb-8 rounded-15"
           height={44}
           src="https://picsum.photos/100/200"

@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { Suspense } from "react";
 
 import { useAuth } from "@/application/hooks";
 import { IntroPageNavigation } from "@/components/common/Navigation";
@@ -21,10 +22,14 @@ const HomePage: NextPage = () => {
           router.push("/search");
         }}
       />
-      <PopularTagList />
+      <Suspense>
+        <PopularTagList />
+      </Suspense>
       {isLogin && <SharedMemeList name={user?.name} />}
       <MemeSortDropDown />
-      <MemeList />
+      <Suspense>
+        <MemeList />
+      </Suspense>
     </>
   );
 };

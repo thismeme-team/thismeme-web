@@ -10,7 +10,7 @@ export const SearchPopularItem = ({ name, index }: Props) => {
         <div className="mr-10 flex h-16 w-16 justify-center rounded-full border border-black bg-black text-white">
           {index + 1}
         </div>
-        <div className="text-15-semibold-130">{name}</div>
+        <div className="font-suit text-16-regular-140">{name}</div>
       </div>
     </>
   );

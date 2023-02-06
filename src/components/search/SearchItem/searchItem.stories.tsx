@@ -11,7 +11,7 @@ export default {
 
 export const MajoreSearch = () => (
   <SearchItem
-    right={<Chip className="absolute right-6" color="black" label="예능별" size="medium" />}
+    endComponent={<Chip className="absolute right-6" color="black" label="예능별" size="medium" />}
     searchText="축구"
     tagName="무한도전축구짤"
   />

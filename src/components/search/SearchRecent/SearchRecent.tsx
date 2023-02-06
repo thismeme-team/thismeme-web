@@ -8,40 +8,48 @@ import { Icon } from "@/components/common/Icon";
 import { SearchItem } from "../SearchItem";
 
 interface Props {
-  keywords: RecentSearch[];
-  onClickDeleteKeyword: (recentSearch: RecentSearch) => void;
+  items: RecentSearch[];
+  onAddItem: ({ value, type }: Omit<RecentSearch, "id">) => void;
+  onDelete: (id: RecentSearch["id"]) => void;
 }
 
-export const SearchRecent = ({ keywords, onClickDeleteKeyword }: Props) => {
+export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
   const router = useRouter();
-  if (keywords.length === 0) return null;
+  if (items.length === 0) return null;
 
   return (
     <div className="flex flex-col justify-between">
-      {keywords.map((item) => {
+      {items.map((item) => {
         const { id, value, type } = item;
         return (
           <SearchItem
             key={id}
-            left={<Icon className="min-w-24" name={`${isTagType(type) ? "pound" : "search"}`} />}
-            searchText=""
             tagName={value}
-            right={
+            endComponent={
               <Icon
                 className="absolute right-6"
                 name="delete2"
-                onPointerDown={(e) => {
+                onClick={(e) => {
                   e.stopPropagation();
-                  onClickDeleteKeyword(item);
+                  onDelete(id);
                 }}
               />
             }
-            onPointerDown={() => {
+            startComponent={
+              <Icon className="min-w-24" name={isTagType(type) ? "pound" : "search"} />
+            }
+            onClick={() => {
+              onAddItem({ value, type });
+
               if (isTagType(type)) {
                 router.push(`${PATH.getExploreByTagPath(value)}`);
                 return;
               }
               router.push(`${PATH.getExploreByKeywordPath(value)}`);
+            }}
+            onMouseDown={(e) => {
+              // Prevent input blur
+              e.preventDefault();
             }}
           />
         );

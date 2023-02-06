@@ -9,60 +9,34 @@ const createRecentSearch = ({ value, type }: Omit<RecentSearch, "id">): RecentSe
 });
 
 export const useRecentSearch = () => {
-  const [keywords, setKeywords] = useLocalStorage<RecentSearch[]>("recentSearch", {
+  const [items, setItems] = useLocalStorage<RecentSearch[]>("recentSearch", {
     defaultValue: [],
   });
 
-  const onClickAddKeyword = (value: string) => {
+  const onAddItem = ({ value, type }: Omit<RecentSearch, "id">) => {
     if (!value.trim()) {
       return;
     }
 
-    const newValue = createRecentSearch({ value, type: "keyword" });
+    const newItem = createRecentSearch({ value, type });
 
-    setKeywords((keywords) => [
-      newValue,
-      ...keywords.filter((keyword) => {
-        const isSameValue = keyword.value === value;
-        if (isSameValue) {
-          return newValue.type !== keyword.type;
-        }
-        return !isSameValue;
-      }),
-    ]);
-  };
+    setItems((prevItems) => [
+      newItem,
+      ...prevItems.filter((item) => {
+        const isDifferentValue = item.value !== newItem.value;
+        if (isDifferentValue) return true;
 
-  const onClickAddTag = (value: string) => {
-    if (!value.trim()) {
-      return;
-    }
+        const isDifferentType = newItem.type !== item.type;
+        if (isDifferentType) return true;
 
-    const newValue = createRecentSearch({ value, type: "tag" });
-
-    setKeywords((keywords) => [
-      newValue,
-      ...keywords.filter((keyword) => {
-        const isSameValue = keyword.value === value;
-        if (isSameValue) {
-          return newValue.type !== keyword.type;
-        }
-        return !isSameValue;
-      }),
-    ]);
-  };
-
-  const onClickDeleteKeyword = (recentSearch: RecentSearch) => {
-    const { value, type } = recentSearch;
-    setKeywords((keywords) => [
-      ...keywords.filter((keyword) => {
-        const isSameValue = keyword.value === value;
-        if (isSameValue) {
-          return keyword.type === type;
-        }
         return false;
       }),
     ]);
   };
 
-  return { keywords, onClickAddKeyword, onClickAddTag, onClickDeleteKeyword };
+  const onDeleteItem = (id: RecentSearch["id"]) => {
+    setItems((prevItems) => [...prevItems.filter((item) => item.id !== id)]);
+  };
+
+  return { items, onAddItem, onDeleteItem };
 };

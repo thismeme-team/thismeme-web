@@ -12,16 +12,23 @@ import {
   SearchResultList,
 } from "@/components/search";
 
+/**
+ * FIX
+ * - SearchInput, SearchResult, SearchRecent 구조 개선(컴포넌트 상태관리)
+ *   - solution: input과 list(최근 검색어 or 검색 결과 리스트)을 하나의 컴포넌트(ex. SearchBar 컴포넌트)와 context API로 추상화
+ *   - {@link https://mui.com/material-ui/react-autocomplete/ AutoComplete}
+ *   - {@link https://github.com/mui/material-ui/blob/master/packages/mui-material/src/Autocomplete/Autocomplete.js AutoComplete source code}
+ */
 const SearchPage: NextPage = () => {
   const inputProps = useInput();
-  const { keywords, onClickDeleteKeyword, onClickAddKeyword, onClickAddTag } = useRecentSearch();
+  const { items, onDeleteItem, onAddItem } = useRecentSearch();
   const router = useRouter();
   const [focus, setFocus] = useState(false);
 
   const onSearchByKeyword = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
 
-    onClickAddKeyword(inputProps.value);
+    onAddItem({ value: inputProps.value, type: "keyword" });
     router.push(PATH.getExploreByKeywordPath(inputProps.value));
   };
 
@@ -46,22 +53,18 @@ const SearchPage: NextPage = () => {
           밈 제목,태그를 입력하세요
         </p>
         {inputProps.value && (
-          <Suspense fallback={<div></div>}>
-            <div className="absolute h-full w-full bg-white">
-              <SearchResultList value={inputProps.value} onClickAddTag={onClickAddTag} />
-            </div>
+          <Suspense>
+            <SearchResultList value={inputProps.value} onAddItem={onAddItem} />
           </Suspense>
         )}
-        <Suspense fallback={<div></div>}>
-          {!inputProps.value && focus && (
-            <SearchRecent keywords={keywords} onClickDeleteKeyword={onClickDeleteKeyword} />
-          )}
-          {!focus && (
-            <div className="px-14">
-              <SearchPopularList />
-            </div>
-          )}
-        </Suspense>
+        {!inputProps.value && focus && (
+          <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
+        )}
+        {!focus && (
+          <Suspense>
+            <SearchPopularList />
+          </Suspense>
+        )}
       </div>
     </>
   );

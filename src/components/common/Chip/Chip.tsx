@@ -9,15 +9,12 @@ type Props<T extends ElementType> = {
 } & ComponentPropsWithoutRef<T>;
 
 const sizes = {
-  small: "h-24 w-fit rounded-12 pl-7 pr-7 pt-5 pb-5 text-12-regular-160", // small chip이 dev2 에 없어진듯..?
   medium: "h-34 w-fit rounded-16 pl-13 pr-13 pt-8 pb-8 text-15-semibold-130",
 };
 
 const colors = {
-  white: "border-[1px] border-gray-10 bg-white text-gray-20",
-  darkGray: "bg-dark-gray-10 text-white",
+  white: "border-[1px] border-gray-200 bg-white text-gray-700",
   black: "bg-black text-white",
-  lightGray: "bg-light-gray-10 text-dark-gray-10",
 };
 
 export const Chip = <T extends ElementType>({

@@ -38,6 +38,18 @@ export const getPopularTag = rest.get(
             categoryName: "sample",
             viewCount: 3,
           },
+          {
+            tagId: 6,
+            name: "무한도전전전전전전전전",
+            categoryName: "sample",
+            viewCount: 3,
+          },
+          {
+            tagId: 7,
+            name: "무한도전전전전전전전전",
+            categoryName: "sample",
+            viewCount: 3,
+          },
         ],
       }),
     );

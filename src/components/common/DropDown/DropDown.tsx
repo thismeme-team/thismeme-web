@@ -1,3 +1,4 @@
+import type { CSSInterpolation } from "@emotion/serialize";
 import type {
   Dispatch,
   LiHTMLAttributes,
@@ -28,19 +29,31 @@ export const DropDown = ({ children }: PropsWithChildren) => {
 };
 
 interface TriggerProps {
-  children: ({ isOpen }: { isOpen: boolean }) => ReactNode;
+  children: (({ isOpen }: { isOpen: boolean }) => ReactNode) | ReactNode;
 }
 
 const DropDownTrigger = ({ children }: TriggerProps) => {
   const isOpen = useContext(DropDownContext);
   const setIsOpen = useContext(DropDownSetContext);
 
-  return <button onClick={() => setIsOpen((prev) => !prev)}>{children({ isOpen })}</button>;
+  return (
+    <button onClick={() => setIsOpen((prev) => !prev)}>
+      {typeof children === "function" ? children({ isOpen }) : children}
+    </button>
+  );
 };
 
-const DropDownContents = ({ children, width }: PropsWithChildren<{ width: string }>) => {
+/**
+ * @desc
+ *  외부에서 스타일(css props)을 지정해 주기 위해
+ *  className(...rest)을 추가로 설정해 주어야 함
+ */
+const DropDownContents = ({
+  children,
+  width,
+  ...rest
+}: PropsWithChildren<{ width: string; css?: CSSInterpolation }>) => {
   const isOpen = useContext(DropDownContext);
-
   return (
     <ul
       css={[
@@ -57,6 +70,7 @@ const DropDownContents = ({ children, width }: PropsWithChildren<{ width: string
         `,
         { opacity: isOpen ? 1 : 0 },
       ]}
+      {...rest}
     >
       {children}
     </ul>

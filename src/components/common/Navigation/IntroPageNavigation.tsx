@@ -1,5 +1,4 @@
-import Logo from "/public/icon/logo.svg";
-
+import { Logo } from "./Logo";
 import { Navigation } from "./Navigation";
 import { Profile } from "./Profile";
 import { SideBar } from "./SideBar";

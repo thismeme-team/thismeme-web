@@ -19,7 +19,9 @@ export const useColoredText = ({ tagName, searchText }: Props) => {
       {checkValidation && index !== -1 ? (
         <div>
           <span>{tagName.slice(0, tagName.search(searchText))}</span>
-          <span className="text-primary">{tagName.slice(index, index + searchText.length)}</span>
+          <span className="text-secondary-1000">
+            {tagName.slice(index, index + searchText.length)}
+          </span>
           <span>{tagName.slice(index + searchText.length)}</span>
         </div>
       ) : (

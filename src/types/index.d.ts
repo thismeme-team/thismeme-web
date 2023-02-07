@@ -1,8 +1,3 @@
-export interface SearchKeyword {
-  id: number;
-  text: string;
-}
-
 export interface Meme {
   memeId: number;
   name: string;

@@ -1,11 +1,15 @@
 import axios from "axios";
 
+import { AccountApi } from "@/infra/api/account";
+import { AuthApi } from "@/infra/api/auth";
+
 import { MemeApi } from "./meme";
 import { SearchApi } from "./search";
 import { TagApi } from "./tags";
 
 export const axiosBasic = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,
+  withCredentials: true,
 });
 
 /**
@@ -28,6 +32,8 @@ export const axiosSearchBasic = axios.create({
  *  2. 응답 에러 핸들링
  */
 export const api = {
+  auth: new AuthApi(axiosBasic),
+  account: new AccountApi(axiosBasic),
   search: new SearchApi(axiosSearchBasic),
   meme: new MemeApi(axiosBasic),
   tags: new TagApi(axiosBasic),

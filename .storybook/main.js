@@ -57,6 +57,7 @@ module.exports = {
 
     // nextjs mock module
     config.resolve.alias["next/link"] = require.resolve("./__mocks__/next/link.js");
+    config.resolve.alias["@next/font/local"] = require.resolve("./__mocks__/@next/font.js");
 
     return config;
   },
@@ -68,5 +69,5 @@ module.exports = {
       ),
     };
   },
-  staticDirs: ["../public"],
+  staticDirs: ["../public", "../src/styles/fonts"],
 };

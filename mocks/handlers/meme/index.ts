@@ -20,10 +20,9 @@ export const getMemeDetail = rest.get(
           images: [
             {
               imageId: 2,
-              imageUrl:
-                "https://user-images.githubusercontent.com/62461857/210932649-cc578130-3689-4b78-941b-d42828127b79.png",
-              imageWidth: 517,
-              imageHeight: 706,
+              imageUrl: "https://yappmemebucket.s3.ap-northeast-2.amazonaws.com/memes/images/7.png",
+              imageWidth: 390,
+              imageHeight: 390,
             },
           ],
           count: 0,

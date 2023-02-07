@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Suspense } from "react";
+import { Suspense, useState } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
@@ -13,18 +13,26 @@ import {
   SearchResultList,
 } from "@/components/search";
 
+/**
+ * FIX
+ * - SearchInput, SearchResult, SearchRecent 구조 개선(컴포넌트 상태관리)
+ *   - solution: input과 list(최근 검색어 or 검색 결과 리스트)을 하나의 컴포넌트(ex. SearchBar 컴포넌트)와 context API로 추상화
+ *   - {@link https://mui.com/material-ui/react-autocomplete/ AutoComplete}
+ *   - {@link https://github.com/mui/material-ui/blob/master/packages/mui-material/src/Autocomplete/Autocomplete.js AutoComplete source code}
+ */
 const SearchPage: NextPage = () => {
   const inputProps = useInput();
-  const { keywords, onClickDeleteKeyword, onClickAddKeyword } = useRecentSearch();
-
+  const { items, onDeleteItem, onAddItem } = useRecentSearch();
   const router = useRouter();
+  const [focus, setFocus] = useState(false);
 
   const onSearchByKeyword = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
 
-    onClickAddKeyword(inputProps.value);
+    onAddItem({ value: inputProps.value, type: "keyword" });
     router.push(PATH.getExploreByKeywordPath(inputProps.value));
   };
+
   return (
     <>
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.search} />
@@ -33,28 +41,33 @@ const SearchPage: NextPage = () => {
       <div className="relative mt-8">
         <SearchInput
           {...inputProps}
-          placeholder="당신이 찾는 밈, 여기 있다."
+          placeholder="당신이 생각한 '그 밈' 검색하기"
           spellCheck={false}
           type="text"
           onSearchByKeyWord={onSearchByKeyword}
+          onBlur={() => {
+            setFocus(false);
+          }}
+          onFocus={() => {
+            setFocus(true);
+          }}
         />
-        <p className="my-16 px-14 text-12-regular-160 text-gray-10">
-          밈 제목,태그 설명을 입력하세요
+        <p className="mt-9 mb-24 px-14 text-12-regular-160 text-gray-500">
+          밈 제목,태그를 입력하세요
         </p>
         {inputProps.value && (
-          <Suspense fallback={<div>loading...</div>}>
-            <div className="absolute h-full w-full bg-white">
-              <SearchResultList value={inputProps.value} onClickAddKeyword={onClickAddKeyword} />
-            </div>
+          <Suspense>
+            <SearchResultList value={inputProps.value} onAddItem={onAddItem} />
           </Suspense>
         )}
-        <Suspense fallback={<div className="text-20-bold-140">로딩</div>}>
-          <div className="px-14">
-            <SearchRecent keywords={keywords} onClickDeleteKeyword={onClickDeleteKeyword} />
-            <div className="mb-8 text-15-semibold-130 text-dark-gray-10">인기 검색어</div>
+        {!inputProps.value && focus && (
+          <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
+        )}
+        {!inputProps.value && !focus && (
+          <Suspense>
             <SearchPopularList />
-          </div>
-        </Suspense>
+          </Suspense>
+        )}
       </div>
     </>
   );

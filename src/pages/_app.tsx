@@ -1,36 +1,29 @@
 import "@/styles/globals.css";
 
 import type { AppProps } from "next/app";
-import type { ComponentProps } from "react";
-import { Suspense } from "react";
 
 import { QueryClientProvider } from "@/application/queryClient";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
+import type { DefaultPageProps } from "@/types";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   await import("../../mocks");
 }
 
-interface PageProps {
-  hydrateState: ComponentProps<typeof QueryClientProvider>["hydrateState"];
-}
-
-const App = ({ Component, pageProps }: AppProps<PageProps>) => {
+const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
   return (
-    <QueryClientProvider hydrateState={pageProps.hydrateState}>
-      <QueryErrorBoundary>
+    <QueryErrorBoundary>
+      <QueryClientProvider hydrateState={pageProps.hydrateState}>
         <ToastProvider>
           <Layout>
-            <Suspense fallback={<>hello</>}>
-              <ToastContainer />
-              <Component {...pageProps} />
-            </Suspense>
+            <ToastContainer />
+            <Component {...pageProps} />
           </Layout>
         </ToastProvider>
-      </QueryErrorBoundary>
-    </QueryClientProvider>
+      </QueryClientProvider>
+    </QueryErrorBoundary>
   );
 };
 

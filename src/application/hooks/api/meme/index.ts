@@ -1,4 +1,4 @@
-import type { QueryFunctionContext } from "@tanstack/react-query";
+import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { useSuspendedQuery } from "@/application/hooks/api/core";
@@ -17,6 +17,8 @@ export const useMemeDetailById = (id: string) => {
 
   return { ...data, ...rest };
 };
+export const prefetchMemeDetailById = (id: string, queryClient: QueryClient) =>
+  queryClient.prefetchQuery(QUERY_KEYS.getMemeDetailById(id), () => api.meme.getMemeDetailById(id));
 
 /**
  * 인기 밈 리스트 API

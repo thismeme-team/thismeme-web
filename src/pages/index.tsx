@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { useAuth } from "@/application/hooks";
+import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import { MemeList, PopularTagList, SharedMemeList } from "@/components/home";
 import { MemeSortDropDown } from "@/components/home/DropDown";
 import { SearchInput } from "@/components/search";
@@ -14,6 +16,8 @@ const HomePage: NextPage = () => {
 
   return (
     <>
+      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
+
       <IntroPageNavigation />
       <section className="pt-16" />
       <SearchInput

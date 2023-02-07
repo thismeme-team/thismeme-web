@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { Suspense, useState } from "react";
 
 import { useInput, useRecentSearch } from "@/application/hooks";
-import { PATH } from "@/application/util";
+import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import {
   SearchInput,
   SearchPopularList,
@@ -34,6 +35,8 @@ const SearchPage: NextPage = () => {
 
   return (
     <>
+      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.search} />
+
       <SearchPageNavigation />
       <div className="relative mt-8">
         <SearchInput

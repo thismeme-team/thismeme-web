@@ -2,8 +2,10 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useGetMemesByKeyword, useIntersect } from "@/application/hooks";
+import { TITLE } from "@/application/util";
 import { Masonry } from "@/components/common/Masonry";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import { Photo } from "@/components/common/Photo";
 import { MemeItem } from "@/components/meme/MemeItem";
 
@@ -24,6 +26,11 @@ const ExploreByKeywordPage: NextPage = () => {
   if (isEmpty) {
     return (
       <>
+        <NextSeo
+          description={`${query.q} 밈 모음`}
+          title={TITLE.exploreByKeyword(query.q as string)}
+        />
+
         <ExplorePageNavigation title={query.q as string} />
         <div className="flex h-full w-full flex-col items-center justify-center">
           <Photo className="w-200" src="/img/emptyAvatar.png" />
@@ -34,6 +41,11 @@ const ExploreByKeywordPage: NextPage = () => {
   }
   return (
     <>
+      <NextSeo
+        description={`${query.q} 밈 모음`}
+        title={TITLE.exploreByKeyword(query.q as string)}
+      />
+
       <ExplorePageNavigation title={query.q as string} />
       <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
         {memeList.map((meme) => (

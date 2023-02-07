@@ -2,8 +2,10 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
+import { TITLE } from "@/application/util";
 import { Masonry } from "@/components/common/Masonry";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import { Photo } from "@/components/common/Photo";
 import { MemeItem } from "@/components/meme/MemeItem";
 import { TagFavoriteButton } from "@/components/tags";
@@ -20,6 +22,8 @@ const ExploreByTagPage: NextPage = () => {
   if (isEmpty) {
     return (
       <>
+        <NextSeo description={`${query.q} 밈 모음`} title={TITLE.exploreByTag(query.q as string)} />
+
         <ExplorePageNavigation title={`#${query.q}`} />
         <div className="flex h-full w-full flex-col items-center justify-center">
           <Photo className="w-200" src="/img/emptyAvatar.png" />
@@ -30,6 +34,8 @@ const ExploreByTagPage: NextPage = () => {
   }
   return (
     <>
+      <NextSeo description={`${query.q} 밈 모음`} title={TITLE.exploreByTag(query.q as string)} />
+
       <ExplorePageNavigation title={`#${query.q}`} />
 
       <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>

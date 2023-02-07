@@ -2,22 +2,23 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
-import { prefetchMemeDetailById } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { fetchMemeDetailById } from "@/application/hooks";
+import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeCTAList, MemeDetail, MemeTagList, RelativeMemeList } from "@/components/meme/MemeInfo";
-import type { DefaultPageProps } from "@/types";
+import type { DefaultPageProps, Meme } from "@/types";
 
 interface Props {
   id: string;
+  meme: Pick<Meme, "name" | "description">;
 }
 
-const MemeDetailPage: NextPage<Props> = ({ id }) => {
+const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) => {
   return (
     <>
-      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.memeDetail} />
+      <NextSeo description={description} title={TITLE.memeDetail(name)} />
       <ExplorePageNavigation />
       <Suspense>
         <MemeDetail id={id} />
@@ -39,9 +40,10 @@ export const getStaticPaths: GetStaticPaths = () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<DefaultPageProps & Props, Partial<Props>> = async ({
-  params,
-}) => {
+export const getStaticProps: GetStaticProps<
+  DefaultPageProps & Props,
+  Partial<Pick<Props, "id">>
+> = async ({ params }) => {
   const id = params?.id;
   const queryClient = new QueryClient();
 
@@ -58,12 +60,16 @@ export const getStaticProps: GetStaticProps<DefaultPageProps & Props, Partial<Pr
       notFound: true,
     };
 
-  await prefetchMemeDetailById(id, queryClient);
+  const { description, name } = await fetchMemeDetailById(id, queryClient);
 
   return {
     props: {
       hydrateState: dehydrate(queryClient),
       id,
+      meme: {
+        description,
+        name,
+      },
     },
   };
 };

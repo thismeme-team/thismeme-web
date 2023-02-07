@@ -17,8 +17,8 @@ export const useMemeDetailById = (id: string) => {
 
   return { ...data, ...rest };
 };
-export const prefetchMemeDetailById = (id: string, queryClient: QueryClient) =>
-  queryClient.prefetchQuery(QUERY_KEYS.getMemeDetailById(id), () => api.meme.getMemeDetailById(id));
+export const fetchMemeDetailById = (id: string, queryClient: QueryClient) =>
+  queryClient.fetchQuery(QUERY_KEYS.getMemeDetailById(id), () => api.meme.getMemeDetailById(id));
 
 /**
  * 인기 밈 리스트 API

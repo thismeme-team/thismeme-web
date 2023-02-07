@@ -16,7 +16,6 @@ export interface Meme {
   createdDate: string;
   modifiedDate: string;
 
-  // TODO Image interface 정의 필요
   image: {
     images: {
       imageId: number;
@@ -27,6 +26,5 @@ export interface Meme {
     count: number;
   };
 
-  tags?: string[];
   author?: string;
 }

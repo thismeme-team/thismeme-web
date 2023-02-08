@@ -37,6 +37,7 @@ const ExploreByTagPage: NextPage = () => {
       <NextSeo description={`${query.q} 밈 모음`} title={TITLE.exploreByTag(query.q as string)} />
 
       <ExplorePageNavigation title={`#${query.q}`} />
+      <span className="pt-12" />
 
       <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
         {memeList.map((meme) => (

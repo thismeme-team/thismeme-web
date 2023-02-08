@@ -20,7 +20,7 @@ export const MemeDetail = ({ id }: Props) => {
 
   return (
     <article>
-      <section className="relative mt-10 flex flex-col gap-8">
+      <section className="relative mt-16 flex flex-col gap-8">
         <Photo
           className="max-h-[70vh] min-h-[25vh] w-full rounded-15"
           height={imageHeight}

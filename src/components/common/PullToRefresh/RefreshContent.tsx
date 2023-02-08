@@ -7,18 +7,22 @@ export const RefreshContent = () => {
   const logoContainer = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const refreshAnimation: any = lottie.loadAnimation({
+    const refreshAnimation = lottie.loadAnimation({
       container: logoContainer.current as HTMLDivElement,
       renderer: "svg",
-      loop: false,
+      loop: true,
       autoplay: true,
       animationData: refresh,
     });
+
+    return () => {
+      refreshAnimation?.destroy();
+    };
   }, []);
 
   return (
     <div className="m-auto w-60">
-      <div className="w-60" ref={logoContainer} />
+      <div className="h-80 w-80" ref={logoContainer} />
     </div>
   );
 };

@@ -25,7 +25,7 @@ export const useGetPopularMemes = () => {
   const { data, ...rest } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getPopularMemes,
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getPopularMemes({ offset: pageParam, limit: 3 }),
+      api.meme.getPopularMemes({ offset: pageParam, limit: 5 }),
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;
       return isLastPage ? undefined : offset + limit;

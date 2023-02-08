@@ -6,7 +6,8 @@ import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./
 export const Drawer = ({ children }: PropsWithChildren) => {
   return (
     <DrawerContextProvider>
-      <aside>{children}</aside>
+      {/* NOTE: 공백 문자 제거 */}
+      <section css={{ fontSize: 0 }}>{children}</section>
     </DrawerContextProvider>
   );
 };
@@ -40,7 +41,8 @@ const DrawerContent = ({ children, className, direction }: DrawerContentProps) =
           transition: transform 0.4s ease, visibility 0s ease 0.4s;
           position: absolute;
           inset: 0;
-          height: calc(100vh - 5rem);
+          padding-inline: 1.8rem;
+          height: calc(100vh - 5.4rem);
           background: white;
         `,
         isOpen &&

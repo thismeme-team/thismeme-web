@@ -20,16 +20,16 @@ interface PageProps {
 const App = ({ Component, pageProps }: AppProps<PageProps>) => {
   return (
     <QueryClientProvider hydrateState={pageProps.hydrateState}>
-      <QueryErrorBoundary>
-        <ToastProvider>
-          <Layout>
+      <ToastProvider>
+        <Layout>
+          <QueryErrorBoundary>
             <Suspense fallback={<>hello</>}>
               <ToastContainer />
               <Component {...pageProps} />
             </Suspense>
-          </Layout>
-        </ToastProvider>
-      </QueryErrorBoundary>
+          </QueryErrorBoundary>
+        </Layout>
+      </ToastProvider>
     </QueryClientProvider>
   );
 };

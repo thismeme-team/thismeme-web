@@ -1,6 +1,8 @@
 import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
+import { android } from "@/application/util";
+
 interface Props {
   open: boolean;
   onClose: () => void;
@@ -13,34 +15,38 @@ export const LongPress = ({ open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
+              color: ${!android && "#007aff"};
             `}
             onClick={onClose}
           >
-            <span className="text-ios-primary">콜렉션 모아보기</span>
+            콜렉션에 저장하기
           </ActionsButton>
           <ActionsButton
             css={css`
               height: 48px;
+              color: ${!android && "#007aff"};
             `}
             onClick={onClose}
           >
-            <span className="text-ios-primary">이미지 저장하기</span>
+            이미지 다운로드
           </ActionsButton>
           <ActionsButton
             css={css`
               height: 48px;
+              color: ${!android && "#007aff"};
             `}
             onClick={onClose}
           >
-            <span className="text-ios-primary">공유하기</span>
+            공유하기
           </ActionsButton>
           <ActionsButton
             css={css`
               height: 48px;
+              color: ${!android && "#007aff"};
             `}
             onClick={onClose}
           >
-            <span className="text-ios-primary">취소하기</span>
+            취소하기
           </ActionsButton>
         </ActionsGroup>
       </Actions>

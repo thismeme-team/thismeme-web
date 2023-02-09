@@ -10,7 +10,11 @@ html {
   font-size: 62.5%;
   -webkit-touch-callout: none;
 }
+body{
+  overscroll-behavior-y: contain;
+}
 
-a, button {
+a,
+button {
   cursor: pointer;
 }

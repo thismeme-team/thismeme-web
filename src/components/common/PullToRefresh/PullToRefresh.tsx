@@ -12,19 +12,20 @@ export const PullToRefresh = ({ children }: PropsWithChildren) => {
   const [animation, setAnimation] = useState(false);
 
   const MAX_HEIGHT = 60;
+  const MIN_HEIGHT = 20;
 
   const handleTouchStart = (e: TouchEvent) => {
     if (!ref.current || ref.current.scrollTop !== 0) return;
-    touchStartY.current = e.changedTouches[0].screenY;
+    touchStartY.current = e.changedTouches[0].clientY;
     const el = document.createElement("div");
     ref.current.append(el); // 스크롤되는 요소의 최상단에 추가해준다.
     loading.current = el;
   };
   const handleTouchMove = (e: any) => {
     if (loading.current) {
-      const screenY = e.changedTouches[0].screenY;
-      const height = Math.floor((screenY - touchStartY.current) * 0.3);
-      if (height >= 0) {
+      const clientY = e.changedTouches[0].clientY;
+      const height = Math.floor((clientY - touchStartY.current) * 0.3);
+      if (height > MIN_HEIGHT) {
         loadingHeight.current = height;
         setAnimation(true);
       }

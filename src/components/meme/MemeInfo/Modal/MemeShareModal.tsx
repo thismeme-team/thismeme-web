@@ -37,7 +37,7 @@ export const MemeShareModal = ({ id }: Props) => {
       <Modal.Content>
         {({ onClose }) => (
           <>
-            <Photo className="h-187 w-300 py-24" src={src} />
+            <Photo className="my-24 h-187 w-300 rounded-15" src={src} />
             <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
               <li className="relative flex flex-col items-center gap-8">
                 <KakaoShareButton

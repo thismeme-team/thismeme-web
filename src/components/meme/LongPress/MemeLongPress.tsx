@@ -2,6 +2,7 @@ import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
 import { useDownload, useMemeDetailById, useToast } from "@/application/hooks";
+import { android } from "@/application/util";
 
 interface Props {
   id: string;
@@ -41,7 +42,8 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: "#007aff";
+              color: ${!android && "#007aff"};
+              font-size: ${android ? "1.65" : "2"}rem;
             `}
             onClick={() => {
               onClose();
@@ -53,7 +55,8 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: "#007aff";
+              color: ${!android && "#007aff"};
+              font-size: ${android ? "1.65" : "2"}rem;
             `}
             onClick={() => {
               onClose();
@@ -65,7 +68,8 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: "#007aff";
+              color: ${!android && "#007aff"};
+              font-size: ${android ? "1.65" : "2"}rem;
             `}
             onClick={() => {
               onClose();
@@ -77,7 +81,8 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: "#007aff";
+              color: ${!android && "#007aff"};
+              font-size: ${android ? "1.65" : "2"}rem;
             `}
             onClick={onClose}
           >

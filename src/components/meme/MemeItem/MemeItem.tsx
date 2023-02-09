@@ -4,6 +4,7 @@ import { memo, useCallback } from "react";
 import { useLongPress, useModal } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
+import { SSRSuspense } from "@/components/common/Suspense";
 import type { Meme } from "@/types";
 
 import { MemeLongPress } from "../LongPress";
@@ -24,7 +25,9 @@ export const MemeItem = memo(({ meme }: Props) => {
 
   return (
     <div {...longPress()}>
-      <MemeLongPress id={String(meme.memeId)} open={open} onClose={onClose} />
+      <SSRSuspense>
+        <MemeLongPress id={String(meme.memeId)} open={open} onClose={onClose} />
+      </SSRSuspense>
       <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
         <Photo
           unoptimized

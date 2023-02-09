@@ -6,6 +6,7 @@ import type { ComponentProps } from "react";
 import { Suspense } from "react";
 
 import { QueryClientProvider } from "@/application/queryClient";
+import { android } from "@/application/util";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
@@ -23,7 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
     <QueryClientProvider hydrateState={pageProps.hydrateState}>
       <QueryErrorBoundary>
         <ToastProvider>
-          <App dark={false} theme="ios">
+          <App dark={false} theme={android ? "material" : "ios"}>
             <Layout>
               <Suspense fallback={<>hello</>}>
                 <ToastContainer />

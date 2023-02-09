@@ -14,16 +14,16 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 
 const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
   return (
-    <QueryErrorBoundary>
-      <QueryClientProvider hydrateState={pageProps.hydrateState}>
-        <ToastProvider>
-          <Layout>
+    <QueryClientProvider hydrateState={pageProps.hydrateState}>
+      <ToastProvider>
+        <Layout>
+          <QueryErrorBoundary>
             <ToastContainer />
             <Component {...pageProps} />
-          </Layout>
-        </ToastProvider>
-      </QueryClientProvider>
-    </QueryErrorBoundary>
+          </QueryErrorBoundary>
+        </Layout>
+      </ToastProvider>
+    </QueryClientProvider>
   );
 };
 

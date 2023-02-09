@@ -25,6 +25,7 @@ export const MemeShareModal = ({ id }: Props) => {
   const src = images[0].imageUrl;
 
   const showClipboardCopyToast = () => show("링크를 복사했습니다!");
+  const showNativeShareErrorToast = () => show("공유하기가 지원되지 않습니다.");
 
   return (
     <Modal>
@@ -61,7 +62,15 @@ export const MemeShareModal = ({ id }: Props) => {
                 <span className="absolute bottom-0 font-suit text-12-bold-160">링크 복사</span>
               </li>
               <li className="relative flex flex-col items-center gap-8">
-                <NativeShareButton text={description} title={name} url={PAGE_URL} />
+                <NativeShareButton
+                  text={description}
+                  title={name}
+                  url={PAGE_URL}
+                  onError={() => {
+                    onClose();
+                    showNativeShareErrorToast();
+                  }}
+                />
                 <span className="absolute bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>
               </li>
             </ul>

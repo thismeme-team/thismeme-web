@@ -24,7 +24,7 @@ const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
     <QueryClientProvider hydrateState={pageProps.hydrateState}>
       <QueryErrorBoundary>
         <ToastProvider>
-          <App dark={false} theme={android ? "material" : "ios"}>
+          <App theme={android ? "material" : "ios"}>
             <Layout>
               <Suspense fallback={<>hello</>}>
                 <ToastContainer />

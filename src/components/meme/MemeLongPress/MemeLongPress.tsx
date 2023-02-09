@@ -14,7 +14,7 @@ export const MemeLongPress = ({ onClose }: Props) => {
     <LongPress onClose={delayClose}>
       <ul
         css={css`
-          width: 24rem;
+          width: 34rem;
           overflow: hidden;
           border-radius: 10px;
           border: solid 1px ${theme`colors.gray.400`};

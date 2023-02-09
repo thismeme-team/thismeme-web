@@ -6,7 +6,7 @@ import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 import type { Meme } from "@/types";
 
-import { MemeLongPress } from "../MemeLongPress";
+import { LongPress } from "../LongPress";
 
 interface Props {
   meme: Meme;
@@ -24,7 +24,7 @@ export const MemeItem = memo(({ meme }: Props) => {
 
   return (
     <div {...longPress()}>
-      {open && <MemeLongPress onClose={onClose} />}
+      <LongPress open={open} onClose={onClose} />
       <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
         <Photo
           unoptimized

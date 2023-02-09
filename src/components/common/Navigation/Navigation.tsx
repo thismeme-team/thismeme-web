@@ -5,7 +5,7 @@ type Props = PropsWithChildren<{ className?: string }>;
 export const Navigation = ({ children, className = "" }: Props) => {
   return (
     <header
-      className={`sticky top-0 z-[1000] flex h-50 w-full shrink-0 items-center justify-between bg-white ${className}`}
+      className={`sticky top-0 z-40 flex h-50 w-full shrink-0 items-center justify-between bg-white ${className}`}
     >
       {children}
     </header>

@@ -2,7 +2,7 @@ import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
 import { useDownload, useMemeDetailById, useToast } from "@/application/hooks";
-import { android } from "@/application/util";
+
 interface Props {
   id: string;
   open: boolean;
@@ -41,7 +41,7 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: ${!android && "#007aff"};
+              color: "#007aff";
             `}
             onClick={() => {
               onClose();
@@ -53,7 +53,7 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: ${!android && "#007aff"};
+              color: "#007aff";
             `}
             onClick={() => {
               onClose();
@@ -65,7 +65,7 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: ${!android && "#007aff"};
+              color: "#007aff";
             `}
             onClick={() => {
               onClose();
@@ -77,7 +77,7 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           <ActionsButton
             css={css`
               height: 48px;
-              color: ${!android && "#007aff"};
+              color: "#007aff";
             `}
             onClick={onClose}
           >

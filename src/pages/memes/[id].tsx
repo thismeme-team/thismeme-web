@@ -44,34 +44,26 @@ export const getStaticProps: GetStaticProps<
   DefaultPageProps & Props,
   Partial<Pick<Props, "id">>
 > = async ({ params }) => {
-  const id = params?.id;
+  const id = params?.id as string;
   const queryClient = new QueryClient();
 
-  /**
-   * @todo
-   *  1. 숫자 형식이 아닌 :id 요청 시 404 페이지로 이동
-   *  2. 데이터가 없는 페이지 요청 시 404 페이지로 이동
-   *    - id 값의 범위를 알아야 함
-   *    - 관련 api 필요
-   *    - try catch로 처리해 볼려 했으나, axios 500 에러를 제대로 catch 하지 못하는 이슈가 있어 실패
-   */
-  if (!id || isNaN(Number(id)))
+  try {
+    const { description, name } = await fetchMemeDetailById(id, queryClient);
+    return {
+      props: {
+        hydrateState: dehydrate(queryClient),
+        id,
+        meme: {
+          description,
+          name,
+        },
+      },
+    };
+  } catch (e) {
     return {
       notFound: true,
     };
-
-  const { description, name } = await fetchMemeDetailById(id, queryClient);
-
-  return {
-    props: {
-      hydrateState: dehydrate(queryClient),
-      id,
-      meme: {
-        description,
-        name,
-      },
-    },
-  };
+  }
 };
 
 export default MemeDetailPage;

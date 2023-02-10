@@ -1,6 +1,5 @@
-import { css, keyframes } from "@emotion/react";
 import type { ElementType, HTMLAttributes } from "react";
-import { theme } from "twin.macro";
+import tw, { css, keyframes } from "twin.macro";
 
 interface Props<T extends ElementType> extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -53,6 +52,44 @@ const waveKeyframe = keyframes`
   }
 `;
 
+const variants = {
+  rectangular: css``,
+  circular: tw`rounded-full`,
+  rounded: tw`rounded-[4px]`,
+  text: css`
+    margin-top: 0;
+    margin-bottom: 0;
+    height: "auto";
+    transform-origin: "0 55%";
+    transform: "scale(1; 0.60)";
+    border-radius: "4px / 6.7px";
+    &:empty:before: {
+      content: '"\\00a0"';
+    },
+  `,
+};
+
+const animations = {
+  pulse: css`
+    animation: ${pulseKeyframe} 1.5s ease-in-out 0.5s infinite;
+  `,
+  wave: css`
+    position: relative;
+    overflow: hidden;
+    &::after {
+      animation: ${waveKeyframe} 1.6s linear 0.5s infinite;
+      background: linear-gradient(90deg, transparent, #ddd, transparent);
+      content: "";
+      position: absolute;
+      transform: translateX(-100%); /* Avoid flash during server-side hydration */
+      bottom: 0;
+      left: 0;
+      right: 0;
+      top: 0;
+    }
+  `,
+};
+
 export const Skeleton = <T extends ElementType = "span">({
   as,
   width,
@@ -70,44 +107,12 @@ export const Skeleton = <T extends ElementType = "span">({
       css={[
         css`
           display: block;
-          background-color: ${theme`colors.gray.200`};
+          background-color: ${tw`bg-gray-200`};
           height: 1.2em;
-          ${variant === "circular" && { borderRadius: "50%" }}
-          ${variant === "rounded" && { borderRadius: "4px" }}
-          ${variant === "text" && {
-            marginTop: 0,
-            marginBottom: 0,
-            height: "auto",
-            transformOrigin: "0 55%",
-            transform: "scale(1, 0.60)",
-            borderRadius: "4px / 6.7px",
-            "&:empty:before": {
-              content: '"\\00a0"',
-            },
-          }}
+          ${variants[variant]};
         `,
         css`
-          ${animation === "pulse" &&
-          css`
-            animation: ${pulseKeyframe} 1.5s ease-in-out 0.5s infinite;
-          `}
-          ${animation === "wave" &&
-          css`
-            position: relative;
-            overflow: hidden;
-
-            &::after {
-              animation: ${waveKeyframe} 1.6s linear 0.5s infinite;
-              background: linear-gradient(90deg, transparent, #ddd, transparent);
-              content: "";
-              position: absolute;
-              transform: translateX(-100%); /* Avoid flash during server-side hydration */
-              bottom: 0;
-              left: 0;
-              right: 0;
-              top: 0;
-            }
-          `}
+          ${animation && animations[animation]}
         `,
       ]}
       {...rest}

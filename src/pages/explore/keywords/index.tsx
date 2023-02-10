@@ -59,7 +59,14 @@ const ExploreByKeywordPage: NextPage = () => {
       />
 
       <ExplorePageNavigation title={query.q as string} />
-      <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
+      <Masonry
+        className="mt-12"
+        columns={2}
+        defaultColumns={2}
+        defaultHeight={450}
+        defaultSpacing={9}
+        spacing={9}
+      >
         {memeList.map((meme) => (
           <MemeItem key={meme.memeId} meme={meme} />
         ))}

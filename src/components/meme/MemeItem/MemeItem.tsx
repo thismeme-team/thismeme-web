@@ -26,7 +26,13 @@ export const MemeItem = memo(({ meme }: Props) => {
   return (
     <div {...longPress()}>
       <SSRSuspense>
-        <MemeLongPress id={String(meme.memeId)} open={open} onClose={onClose} />
+        <MemeLongPress
+          description={meme.description}
+          image={meme.image}
+          name={meme.name}
+          open={open}
+          onClose={onClose}
+        />
       </SSRSuspense>
       <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
         <Photo

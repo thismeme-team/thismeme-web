@@ -1,25 +1,23 @@
 import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
-import { useDownload, useMemeDetailById, useToast } from "@/application/hooks";
+import { useDownload, useToast } from "@/application/hooks";
 import { android } from "@/application/util";
+import type { Image } from "@/types";
 
 interface Props {
-  id: string;
+  name: string;
+  description: string;
+  image: Image;
   open: boolean;
   onClose: () => void;
 }
 
-export const MemeLongPress = ({ id, open, onClose }: Props) => {
-  const {
-    name,
-    description,
-    image: { images },
-  } = useMemeDetailById(id);
+export const MemeLongPress = ({ name, description, image, open, onClose }: Props) => {
   const { download } = useDownload();
   const { show } = useToast();
 
-  const url = images[0].imageUrl;
+  const url = image.images[0].imageUrl;
 
   const handleImageDownload = () =>
     download({

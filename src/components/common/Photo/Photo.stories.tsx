@@ -17,5 +17,8 @@ export const Default = () => (
     <hr />
     <h2>width: 100, height: 200</h2>
     <Photo className="h-200 w-100" src={IMAGE_SRC} />
+    <hr />
+    <h2>Render fallback image(Wrong image src)</h2>
+    <Photo className="h-200 w-100" src="" />
   </>
 );

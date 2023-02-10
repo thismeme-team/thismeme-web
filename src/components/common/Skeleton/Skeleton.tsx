@@ -1,5 +1,6 @@
+import { keyframes } from "@emotion/react";
 import type { ElementType, HTMLAttributes } from "react";
-import tw, { css, keyframes } from "twin.macro";
+import tw, { css, theme } from "twin.macro";
 
 interface Props<T extends ElementType> extends HTMLAttributes<HTMLSpanElement> {
   /**
@@ -59,12 +60,12 @@ const variants = {
   text: css`
     margin-top: 0;
     margin-bottom: 0;
-    height: "auto";
-    transform-origin: "0 55%";
-    transform: "scale(1; 0.60)";
-    border-radius: "4px / 6.7px";
-    &:empty:before: {
-      content: '"\\00a0"';
+    height: auto;
+    transform-origin: 0 55%;
+    transform: scale(1; 0.60);
+    border-radius: 4px / 6.7px;
+    &:empty::before {
+      content: "\\00a0";
     },
   `,
 };
@@ -107,13 +108,11 @@ export const Skeleton = <T extends ElementType = "span">({
       css={[
         css`
           display: block;
-          background-color: ${tw`bg-gray-200`};
+          background-color: ${theme`colors.gray.200`};
           height: 1.2em;
-          ${variants[variant]};
         `,
-        css`
-          ${animation && animations[animation]}
-        `,
+        variants[variant],
+        animation && animations[animation],
       ]}
       {...rest}
     />

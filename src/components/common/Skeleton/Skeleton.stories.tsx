@@ -75,6 +75,6 @@ Default.argTypes = {
   },
   animation: {
     control: { type: "select" },
-    options: ["pulse", "wave"],
+    options: ["pulse", "wave", false],
   },
 };

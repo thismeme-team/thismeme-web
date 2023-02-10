@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import { App } from "konsta/react";
+import { App as KonstaStyle } from "konsta/react";
 import type { AppProps } from "next/app";
 import type { ComponentProps } from "react";
 import { Suspense } from "react";
@@ -24,14 +24,14 @@ const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
     <QueryClientProvider hydrateState={pageProps.hydrateState}>
       <QueryErrorBoundary>
         <ToastProvider>
-          <App theme={android ? "material" : "ios"}>
+          <KonstaStyle theme={android ? "material" : "ios"}>
             <Layout>
               <Suspense fallback={<>hello</>}>
                 <ToastContainer />
                 <Component {...pageProps} />
               </Suspense>
             </Layout>
-          </App>
+          </KonstaStyle>
         </ToastProvider>
       </QueryErrorBoundary>
     </QueryClientProvider>

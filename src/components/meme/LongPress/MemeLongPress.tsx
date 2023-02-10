@@ -31,17 +31,33 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
   const handleCollectionSave = () => show("콜렉션에 저장했습니다!");
 
   const handleNaviteShare = async () => {
-    if (!navigator.share) return;
+    if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
     await navigator.share({ title: name, text: description, url });
   };
 
   return (
     <>
-      <Actions opened={open} onBackdropClick={onClose}>
+      <Actions
+        opened={open}
+        css={[
+          !android &&
+            css`
+              max-width: calc(min(48rem, 100%) - 3.6rem);
+              padding-bottom: 4rem;
+            `,
+          android &&
+            css`
+              max-width: calc(min(48rem, 100%));
+              border-radius: 0 0 1.3rem 1.3rem;
+            `,
+        ]}
+        onBackdropClick={onClose}
+      >
         <ActionsGroup>
           <ActionsButton
             css={css`
-              height: 48px;
+              height: 6.2rem;
+              padding-inline: 1.8rem;
               color: ${!android && "#007aff"};
               font-size: ${android ? "1.65" : "2"}rem;
             `}
@@ -54,7 +70,8 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           </ActionsButton>
           <ActionsButton
             css={css`
-              height: 48px;
+              height: 6.2rem;
+              padding-inline: 1.8rem;
               color: ${!android && "#007aff"};
               font-size: ${android ? "1.65" : "2"}rem;
             `}
@@ -67,7 +84,8 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           </ActionsButton>
           <ActionsButton
             css={css`
-              height: 48px;
+              height: 6.2rem;
+              padding-inline: 1.8rem;
               color: ${!android && "#007aff"};
               font-size: ${android ? "1.65" : "2"}rem;
             `}
@@ -80,8 +98,9 @@ export const MemeLongPress = ({ id, open, onClose }: Props) => {
           </ActionsButton>
           <ActionsButton
             css={css`
-              height: 48px;
-              color: ${!android && "#007aff"};
+              height: 6.2rem;
+              padding-inline: 1.8rem;
+              color: #eb4e3d;
               font-size: ${android ? "1.65" : "2"}rem;
             `}
             onClick={onClose}

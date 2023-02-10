@@ -20,7 +20,10 @@ export const NativeShareButton = ({ title, text, url, onSuccess, onError }: Prop
    */
 
   const handleClick = () => {
-    if (!navigator.share) return;
+    if (!navigator.share) {
+      onError?.();
+      return;
+    }
     navigator.share({ title, text, url }).then(onSuccess).catch(onError);
   };
 

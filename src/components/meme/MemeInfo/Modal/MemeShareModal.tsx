@@ -25,6 +25,7 @@ export const MemeShareModal = ({ id }: Props) => {
   const src = images[0].imageUrl;
 
   const showClipboardCopyToast = () => show("링크를 복사했습니다!");
+  const showNativeShareErrorToast = () => show("공유하기가 지원되지 않습니다.");
 
   return (
     <Modal>
@@ -37,7 +38,7 @@ export const MemeShareModal = ({ id }: Props) => {
       <Modal.Content>
         {({ onClose }) => (
           <>
-            <Photo className="h-187 w-300 py-24" src={src} />
+            <Photo className="my-24 h-187 w-300 rounded-15" src={src} />
             <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
               <li className="relative flex flex-col items-center gap-8">
                 <KakaoShareButton
@@ -62,9 +63,13 @@ export const MemeShareModal = ({ id }: Props) => {
               </li>
               <li className="relative flex flex-col items-center gap-8">
                 <NativeShareButton
-                  text={description as string}
-                  title={name as string}
+                  text={description}
+                  title={name}
                   url={PAGE_URL}
+                  onError={() => {
+                    onClose();
+                    showNativeShareErrorToast();
+                  }}
                 />
                 <span className="absolute bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>
               </li>

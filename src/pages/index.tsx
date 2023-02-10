@@ -20,7 +20,7 @@ const HomePage: NextPage = () => {
       <IntroPageNavigation />
       <section className="pt-16" />
       <SearchInput
-        placeholder="당신이 찾는 밈 여기 있다."
+        placeholder="당신이 생각한 '그 밈' 검색하기"
         onClick={() => {
           router.push("/search");
         }}

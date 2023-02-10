@@ -26,14 +26,16 @@ export const MemeExport = ({ id }: Props) => {
   const handleCollectionSave = () => show("콜렉션에 저장했습니다!");
 
   const handleNaviteShare = async () => {
-    if (!navigator.share) return;
+    if (!navigator.share) {
+      return show("공유하기가 지원되지 않습니다.");
+    }
     await navigator.share({ title: name, text: description, url });
   };
 
   return (
     <DropDown>
       <DropDown.Trigger>
-        <span className="mb-4 flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+        <span className="mb-16 flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
           <Icon color="white" name="meatball" />
         </span>
       </DropDown.Trigger>

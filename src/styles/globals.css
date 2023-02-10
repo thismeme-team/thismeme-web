@@ -19,6 +19,7 @@ html {
 
 body{
   color: black;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 a, button {

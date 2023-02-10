@@ -38,7 +38,7 @@ const SearchPage: NextPage = () => {
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.search} />
 
       <SearchPageNavigation />
-      <div className="relative mt-8">
+      <div className="relative mt-16">
         <SearchInput
           {...inputProps}
           placeholder="당신이 생각한 '그 밈' 검색하기"

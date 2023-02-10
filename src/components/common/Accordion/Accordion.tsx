@@ -43,7 +43,7 @@ const AccordionTrigger = forwardRef(
     <RadixAccordion.Header>
       <RadixAccordion.Trigger
         {...props}
-        className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-light-gray-20 data-[state=open]:bg-light-gray-10 [&>#chevronDown]:data-[state=open]:rotate-180"
+        className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-gray-100 data-[state=open]:bg-gray-100 [&>#chevronDown]:data-[state=open]:rotate-180"
         ref={forwardedRef}
       >
         <div className="h-24 w-24 rounded-full bg-light-gray-30"></div>

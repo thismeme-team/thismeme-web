@@ -22,18 +22,18 @@ interface PageProps {
 const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
   return (
     <QueryClientProvider hydrateState={pageProps.hydrateState}>
-      <QueryErrorBoundary>
-        <ToastProvider>
-          <KonstaStyle theme={android ? "material" : "ios"}>
-            <Layout>
+      <ToastProvider>
+        <KonstaStyle theme={android ? "material" : "ios"}>
+          <Layout>
+            <QueryErrorBoundary>
               <Suspense fallback={<>hello</>}>
                 <ToastContainer />
                 <Component {...pageProps} />
               </Suspense>
-            </Layout>
-          </KonstaStyle>
-        </ToastProvider>
-      </QueryErrorBoundary>
+            </QueryErrorBoundary>
+          </Layout>
+        </KonstaStyle>
+      </ToastProvider>
     </QueryClientProvider>
   );
 };

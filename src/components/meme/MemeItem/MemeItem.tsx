@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { memo, useCallback } from "react";
+import { memo } from "react";
 
 import { useLongPress, useModal } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
@@ -15,11 +15,7 @@ interface Props {
 export const MemeItem = memo(({ meme }: Props) => {
   const { open, onOpen, onClose } = useModal();
 
-  const callBack = useCallback(() => {
-    onOpen();
-  }, [onOpen]);
-
-  const longPress = useLongPress(callBack, {
+  const longPress = useLongPress(onOpen, {
     threshold: 1300,
   });
 

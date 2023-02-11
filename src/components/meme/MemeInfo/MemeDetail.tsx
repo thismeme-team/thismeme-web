@@ -14,6 +14,7 @@ export const MemeDetail = ({ id }: Props) => {
     name,
     description,
     image: { images },
+    isFetchedAfterMount,
   } = useMemeDetailById(id);
 
   const { imageUrl, imageWidth, imageHeight } = images[0];
@@ -33,10 +34,12 @@ export const MemeDetail = ({ id }: Props) => {
         </div>
         <div className="flex items-center justify-between pt-4 pb-16 font-suit text-12-bold-160 text-gray-500">
           <span>{createdDate.split("T")[0].replaceAll("-", ".")}</span>
-          <span className="flex gap-15">
-            <span>{`조회수 ${viewCount}`}</span>
-            <span>{`공유 ${shareCount}`}</span>
-          </span>
+          {isFetchedAfterMount && (
+            <span className="flex gap-15">
+              <span>{`조회수 ${viewCount}`}</span>
+              <span>{`공유 ${shareCount}`}</span>
+            </span>
+          )}
         </div>
       </section>
       <section className="mb-16 font-suit">

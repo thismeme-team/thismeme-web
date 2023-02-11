@@ -6,7 +6,8 @@ import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./
 export const Drawer = ({ children }: PropsWithChildren) => {
   return (
     <DrawerContextProvider>
-      <aside>{children}</aside>
+      {/* NOTE: 공백 문자 제거 */}
+      <section css={{ fontSize: 0 }}>{children}</section>
     </DrawerContextProvider>
   );
 };
@@ -30,29 +31,39 @@ const DrawerContent = ({ children, className, direction }: DrawerContentProps) =
   const isOpen = useDrawerContext();
 
   return (
-    <section
+    <div
       className={className}
-      css={[
-        css`
-          visibility: hidden;
-          transform: translateX(${direction === "left" ? "-110%" : "110%"});
-          will-change: transform;
-          transition: transform 0.4s ease, visibility 0s ease 0.4s;
-          position: absolute;
-          inset: 0;
-          height: calc(100vh - 5rem);
-          background: white;
-        `,
-        isOpen &&
-          css`
-            visibility: visible;
-            transform: translateX(0);
-            transition: transform 0.4s ease;
-          `,
-      ]}
+      css={css`
+        position: fixed;
+        pointer-events: ${isOpen ? "auto" : "none"};
+        min-height: calc(100vh - 5.4rem);
+        inset: 0;
+        overflow: hidden;
+      `}
     >
-      {children}
-    </section>
+      <section
+        css={[
+          css`
+            visibility: hidden;
+            transform: translateX(${direction === "left" ? "-110%" : "110%"});
+            will-change: transform;
+            transition: transform 0.4s ease, visibility 0s ease 0.4s;
+            overflow: auto;
+            padding-inline: 1.8rem;
+            height: 100%;
+            background: white;
+          `,
+          isOpen &&
+            css`
+              visibility: visible;
+              transform: translateX(0);
+              transition: transform 0.4s ease;
+            `,
+        ]}
+      >
+        {children}
+      </section>
+    </div>
   );
 };
 

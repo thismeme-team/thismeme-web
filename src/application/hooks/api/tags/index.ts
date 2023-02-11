@@ -1,3 +1,4 @@
+import type { QueryClient } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 
 import { useSuspendedQuery } from "@/application/hooks/api/core";
@@ -58,6 +59,10 @@ export const useGetMemeTagsById = (id: string) => {
   const { data, ...rest } = useSuspendedQuery({
     queryKey: QUERY_KEYS.getMemeTagsById(id),
     queryFn: () => api.tags.getMemeTagsById(id),
+    staleTime: Infinity,
   });
   return { ...data, ...rest };
 };
+
+export const fetchMemeTagsById = (id: string, queryClient: QueryClient) =>
+  queryClient.fetchQuery(QUERY_KEYS.getMemeTagsById(id), () => api.tags.getMemeTagsById(id));

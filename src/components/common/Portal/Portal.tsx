@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { useIsMount } from "@/application/hooks";
@@ -10,16 +11,27 @@ interface Props {
 
 export const Portal = ({ id, children }: PropsWithChildren<Props>) => {
   const isMount = useIsMount();
+  const ref = useRef<HTMLDivElement>();
+
+  useEffect(
+    () => () => {
+      ref.current?.parentElement?.removeChild(ref.current);
+    },
+    [id],
+  );
+
   if (!isMount) return null;
 
-  let root = document.getElementById(id);
-  if (!root) {
-    root = document.createElement("div");
-    root.className = `${pretendard.variable} ${suit.variable} ${tossface.variable}`;
-    root.id = id;
+  let element = document.getElementById(id);
+  if (!element) {
+    element = document.createElement("div");
+    element.className = `${pretendard.variable} ${suit.variable} ${tossface.variable}`;
+    element.id = id;
 
-    document.body.prepend(root);
+    document.body.prepend(element);
   }
 
-  return createPortal(<>{children}</>, root);
+  ref.current = element as HTMLDivElement;
+
+  return createPortal(<>{children}</>, ref.current);
 };

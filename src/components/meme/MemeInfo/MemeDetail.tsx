@@ -14,14 +14,16 @@ export const MemeDetail = ({ id }: Props) => {
     name,
     description,
     image: { images },
+    isFetchedAfterMount,
   } = useMemeDetailById(id);
 
   const { imageUrl, imageWidth, imageHeight } = images[0];
 
   return (
     <article>
-      <section className="relative mt-10 flex flex-col gap-8">
+      <section className="relative mt-16 flex flex-col">
         <Photo
+          priority
           className="max-h-[70vh] min-h-[25vh] w-full rounded-15"
           height={imageHeight}
           src={imageUrl}
@@ -30,12 +32,14 @@ export const MemeDetail = ({ id }: Props) => {
         <div className="absolute right-16 top-16">
           <MemeExport id={id} />
         </div>
-        <div className="flex items-center justify-between pt-4 pb-16 text-12-bold-160 text-gray-500">
-          <span>{createdDate.split("T")[0]}</span>
-          <span className="flex gap-15">
-            <span>{`조회수 ${viewCount}`}</span>
-            <span>{`공유 ${shareCount}`}</span>
-          </span>
+        <div className="flex items-center justify-between pt-4 pb-16 font-suit text-12-bold-160 text-gray-500">
+          <span>{createdDate.split("T")[0].replaceAll("-", ".")}</span>
+          {isFetchedAfterMount && (
+            <span className="flex gap-15">
+              <span>{`조회수 ${viewCount}`}</span>
+              <span>{`공유 ${shareCount}`}</span>
+            </span>
+          )}
         </div>
       </section>
       <section className="mb-16 font-suit">

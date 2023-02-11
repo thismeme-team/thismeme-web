@@ -3,8 +3,6 @@ import type { ComponentProps } from "react";
 import { useEffect, useState } from "react";
 import { ErrorBoundary } from "react-error-boundary";
 
-import { Fallback } from "./Fallback";
-
 /**
  * NOTE
  * ComponentProps<typeof Image> 으로 타입 선언하면
@@ -45,19 +43,27 @@ export const Photo = ({
   }, [src]);
 
   return (
-    <ErrorBoundary
-      fallback={
-        // NOTE: encoding 오류와 같이 Image 컴포넌트 자체에서 나는 오류 잡음
-        <Fallback className={className} height={height} src={fallbackSrc} width={width} />
-      }
+    <div
+      className={`relative overflow-hidden [&>img]:!static ${className}`}
+      css={[width && height && { aspectRatio: `calc(${width} / ${height})` }]}
     >
-      <div
-        className={`relative overflow-hidden [&>img]:!static ${className}`}
-        css={[width && height && { aspectRatio: `calc(${width} / ${height})` }]}
+      <ErrorBoundary
+        fallback={
+          // NOTE: encoding 오류와 같이 Image 컴포넌트 자체에서 나는 오류 잡음
+          <Image
+            fill
+            alt="fallback"
+            blurDataURL={base64Blur}
+            placeholder="blur"
+            sizes=" "
+            src={fallbackSrc}
+            style={{ objectFit: "cover" }}
+            {...rest}
+          />
+        }
       >
         <Image
           fill
-          priority
           alt={alt}
           blurDataURL={base64Blur}
           placeholder="blur"
@@ -67,7 +73,7 @@ export const Photo = ({
           onError={setIsFailLoading}
           {...rest}
         />
-      </div>
-    </ErrorBoundary>
+      </ErrorBoundary>
+    </div>
   );
 };

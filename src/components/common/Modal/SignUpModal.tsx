@@ -1,5 +1,6 @@
 import { Button } from "../Button";
 import { Icon } from "../Icon";
+import { RandomImage } from "../RandomImge";
 import { Modal } from "./Modal";
 
 export const SignUpModal = () => {
@@ -16,9 +17,9 @@ export const SignUpModal = () => {
           {() => (
             <div className="m-auto w-300 rounded-24 px-8 pb-24">
               <section className="align-left mt-36 mb-10 text-left font-suit text-32-bold-140">
-                <div>
+                <div className="flex items-center">
                   킹 받는
-                  <span>밈</span>을
+                  <RandomImage className="inline-block h-32 w-32 rounded-8" />을
                 </div>
                 <div>바로 찾아서</div>
                 <div>보낼 수 있어요!</div>

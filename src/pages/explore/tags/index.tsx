@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
+import { css } from "twin.macro";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { TITLE } from "@/application/util";
@@ -36,19 +37,28 @@ const ExploreByTagPage: NextPage = () => {
 
       <ExplorePageNavigation title={`#${query.q}`} />
 
-      <Masonry
-        className="mt-12"
-        columns={2}
-        defaultColumns={2}
-        defaultHeight={450}
-        defaultSpacing={9}
-        spacing={9}
+      <div
+        css={[
+          css`
+            width: 100%;
+            min-height: 450px;
+          `,
+        ]}
       >
-        {memeList.map((meme) => (
-          <MemeItem key={meme.memeId} meme={meme} />
-        ))}
-      </Masonry>
-      <div className={`m-10 ${isLoading ? "hidden" : ""}`} ref={ref}></div>
+        <Masonry
+          className="mt-12"
+          columns={2}
+          defaultColumns={2}
+          defaultHeight={450}
+          defaultSpacing={9}
+          spacing={9}
+        >
+          {memeList.map((meme) => (
+            <MemeItem key={meme.memeId} meme={meme} />
+          ))}
+        </Masonry>
+        <div className={`m-10 ${isLoading ? "hidden" : ""}`} ref={ref}></div>
+      </div>
 
       <TagFavoriteButton />
     </>

@@ -22,8 +22,7 @@ export const getScrollParent = (
     if (node === document.body) {
       return root;
     }
-    const styles =
-      typeof window !== "undefined" ? window.getComputedStyle(node) : { overflowY: "" };
+    const styles = IS_CSR ? window.getComputedStyle(node) : { overflowY: "" };
     const overflowY = styles.overflowY;
     if (overflowStylePatterns.includes(overflowY) && node.scrollHeight > node.clientHeight) {
       return node;

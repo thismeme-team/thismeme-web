@@ -21,11 +21,6 @@
     },
     "types": ["kakao-js-sdk"]
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src/components/common/PullToRefresh/PullToRefresh2"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

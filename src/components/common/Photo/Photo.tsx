@@ -11,6 +11,7 @@ import { ErrorBoundary } from "react-error-boundary";
  */
 interface Props extends Omit<ComponentProps<"img">, "placeholder"> {
   fallbackSrc?: string;
+  priority?: boolean;
 }
 
 const base64Blur =

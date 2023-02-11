@@ -21,8 +21,8 @@ export const RefreshContent = () => {
   }, []);
 
   return (
-    <div className="m-auto w-60">
-      <div className="h-80 w-80" ref={logoContainer} />
+    <div>
+      <div className="m-auto h-80 w-80" ref={logoContainer} />
     </div>
   );
 };

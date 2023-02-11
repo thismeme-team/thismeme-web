@@ -3,7 +3,6 @@ import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { useAuth } from "@/application/hooks";
-import { withDelay } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { MemeList, PopularTagList, SharedMemeList } from "@/components/home";

@@ -13,6 +13,7 @@ export const useMemeDetailById = (id: string) => {
   const { data, ...rest } = useSuspendedQuery({
     queryKey: QUERY_KEYS.getMemeDetailById(id),
     queryFn: () => api.meme.getMemeDetailById(id),
+    staleTime: Infinity,
   });
 
   return { ...data, ...rest };

@@ -25,7 +25,7 @@ export const MemeItem = memo(({ meme }: Props) => {
   return (
     <div {...longPress()}>
       {open && <MemeLongPress onClose={onClose} />}
-      <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
+      <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`} prefetch={false}>
         <Photo
           unoptimized
           className="rounded-15"

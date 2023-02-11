@@ -1,9 +1,11 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import { Suspense } from "react";
+import Router from "next/router";
+import { useEffect } from "react";
 
-import { fetchMemeDetailById } from "@/application/hooks";
+import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
 import { TITLE } from "@/application/util";
+import { useGlobalScrollContext } from "@/components/common/Layout";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -16,15 +18,22 @@ interface Props {
 }
 
 const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) => {
+  const scrollRef = useGlobalScrollContext();
+
+  useEffect(() => {
+    const handleScrollTop = () => scrollRef.current?.scrollTo({ top: 0 });
+    Router.events.on("routeChangeComplete", handleScrollTop);
+
+    return () => Router.events.off("routeChangeComplete", handleScrollTop);
+  }, [scrollRef]);
+
   return (
     <>
       <NextSeo description={description} title={TITLE.memeDetail(name)} />
       <ExplorePageNavigation />
-      <Suspense>
-        <MemeDetail id={id} />
-        <MemeTagList id={id} />
-        <MemeCTAList id={id} />
-      </Suspense>
+      <MemeDetail id={id} />
+      <MemeTagList id={id} />
+      <MemeCTAList id={id} />
       <SSRSuspense>
         {/* NOTE: 클라이언트 사이드에서만 렌더링 */}
         <RelativeMemeList />
@@ -48,7 +57,11 @@ export const getStaticProps: GetStaticProps<
   const queryClient = new QueryClient();
 
   try {
-    const { description, name } = await fetchMemeDetailById(id, queryClient);
+    const [{ description, name }] = await Promise.all([
+      fetchMemeDetailById(id, queryClient),
+      fetchMemeTagsById(id, queryClient),
+    ]);
+
     return {
       props: {
         hydrateState: dehydrate(queryClient),
@@ -58,6 +71,7 @@ export const getStaticProps: GetStaticProps<
           name,
         },
       },
+      revalidate: 60 * 10, // 10분
     };
   } catch (e) {
     return {

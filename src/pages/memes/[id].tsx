@@ -1,11 +1,8 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
-import Router from "next/router";
-import { useEffect } from "react";
 
 import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
 import { TITLE } from "@/application/util";
-import { useGlobalScrollContext } from "@/components/common/Layout";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -18,15 +15,6 @@ interface Props {
 }
 
 const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) => {
-  const scrollRef = useGlobalScrollContext();
-
-  useEffect(() => {
-    const handleScrollTop = () => scrollRef.current?.scrollTo({ top: 0 });
-    Router.events.on("routeChangeComplete", handleScrollTop);
-
-    return () => Router.events.off("routeChangeComplete", handleScrollTop);
-  }, [scrollRef]);
-
   return (
     <>
       <NextSeo description={description} title={TITLE.memeDetail(name)} />

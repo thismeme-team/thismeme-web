@@ -22,6 +22,7 @@ export const MemeDetail = ({ id }: Props) => {
     <article>
       <section className="relative mt-16 flex flex-col">
         <Photo
+          priority
           className="max-h-[70vh] min-h-[25vh] w-full rounded-15"
           height={imageHeight}
           src={imageUrl}

@@ -10,6 +10,7 @@ import type { ComponentProps } from "react";
 interface Props extends Omit<ComponentProps<"img">, "alt" | "placeholder"> {
   unoptimized?: boolean;
   src?: string;
+  priority?: boolean;
 }
 
 const base64Blur =

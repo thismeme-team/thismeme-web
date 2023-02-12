@@ -15,7 +15,7 @@ export const MemeList = () => {
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
-      <div className="m-10" ref={ref}></div>
+      <div className="h-10" ref={ref}></div>
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { useDrag } from "@use-gesture/react";
-import type { ReactNode } from "react";
+import type { PropsWithChildren } from "react";
 import { useRef, useState } from "react";
 import { css } from "twin.macro";
 
@@ -13,7 +13,6 @@ interface Props {
   headHeight?: number;
   threshold?: number;
   disabled?: boolean;
-  children?: ReactNode;
 }
 
 type PullStatus = "pulling" | "canRelease" | "refreshing" | "complete";
@@ -26,7 +25,7 @@ export const PullToRefresh = ({
   disabled = false,
   completeDelay = 500,
   children,
-}: Props) => {
+}: PropsWithChildren<Props>) => {
   const [status, setStatus] = useState<PullStatus>("pulling");
   const elementRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -133,7 +132,7 @@ export const PullToRefresh = ({
     <div className="overscroll-y-contain" ref={elementRef}>
       <div
         css={css`
-          margin-top: 0.8rem;
+          padding-top: 0.8rem;
           height: ${headHeight}px;
           position: absolute;
           top: 5.4rem;

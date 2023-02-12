@@ -19,12 +19,12 @@ export const MemeList = () => {
         `,
       ]}
     >
-      <Masonry columns={2} defaultColumns={2} defaultHeight={450} defaultSpacing={9} spacing={9}>
+      <Masonry columns={2} spacing={9}>
         {memeList.map((meme) => (
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
-      <div className={`m-10 ${isFetching ? "invisible" : ""}`} ref={ref}></div>
+      {!isFetching ? <div className="h-20" ref={ref}></div> : <div className="h-20"></div>}
     </div>
   );
 };

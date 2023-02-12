@@ -1,3 +1,11 @@
+import type { ComponentProps } from "react";
+
+import type { QueryClientProvider } from "@/application/queryClient";
+
+export interface DefaultPageProps {
+  hydrateState: ComponentProps<typeof QueryClientProvider>["hydrateState"];
+}
+
 export interface Meme {
   memeId: number;
   name: string;
@@ -8,7 +16,6 @@ export interface Meme {
   createdDate: string;
   modifiedDate: string;
 
-  // TODO Image interface 정의 필요
   image: {
     images: {
       imageId: number;
@@ -19,6 +26,5 @@ export interface Meme {
     count: number;
   };
 
-  tags?: string[];
   author?: string;
 }

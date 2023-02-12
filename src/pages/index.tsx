@@ -3,7 +3,9 @@ import { useRouter } from "next/router";
 import { Suspense } from "react";
 
 import { useAuth } from "@/application/hooks";
+import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { MemeList, PopularTagList, SharedMemeList } from "@/components/home";
 import { MemeSortDropDown } from "@/components/home/DropDown";
@@ -15,11 +17,13 @@ const HomePage: NextPage = () => {
 
   return (
     <>
+      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
+
       <IntroPageNavigation />
       <PullToRefresh>
         <section className="pt-16" />
         <SearchInput
-          placeholder="당신이 찾는 밈 여기 있다."
+          placeholder="당신이 생각한 '그 밈' 검색하기"
           onClick={() => {
             router.push("/search");
           }}

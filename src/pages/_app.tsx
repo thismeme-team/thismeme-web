@@ -2,40 +2,53 @@ import "@/styles/globals.css";
 
 import { App as KonstaStyle } from "konsta/react";
 import type { AppProps } from "next/app";
-import type { ComponentProps } from "react";
-import { Suspense } from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 import { QueryClientProvider } from "@/application/queryClient";
 import { android } from "@/application/util";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
+import type { DefaultPageProps } from "@/types";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   await import("../../mocks");
 }
 
-interface PageProps {
-  hydrateState: ComponentProps<typeof QueryClientProvider>["hydrateState"];
-}
+const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
+  const router = useRouter();
 
-const MyApp = ({ Component, pageProps }: AppProps<PageProps>) => {
+  useEffect(() => {
+    router.beforePopState((state) => {
+      state.options.scroll = false;
+      return true;
+    });
+  }, [router]);
+
   return (
-    <QueryClientProvider hydrateState={pageProps.hydrateState}>
-      <ToastProvider>
-        <KonstaStyle theme={android ? "material" : "ios"}>
-          <Layout>
-            <QueryErrorBoundary>
-              <Suspense fallback={<>hello</>}>
+    <>
+      <Head>
+        <meta
+          content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=yes"
+          name="viewport"
+        />
+      </Head>
+      <QueryClientProvider hydrateState={pageProps.hydrateState}>
+        <ToastProvider>
+          <KonstaStyle theme={android ? "material" : "ios"}>
+            <Layout>
+              <QueryErrorBoundary>
                 <ToastContainer />
                 <Component {...pageProps} />
-              </Suspense>
-            </QueryErrorBoundary>
-          </Layout>
-        </KonstaStyle>
-      </ToastProvider>
-    </QueryClientProvider>
+              </QueryErrorBoundary>
+            </Layout>
+          </KonstaStyle>
+        </ToastProvider>
+      </QueryClientProvider>
+    </>
   );
 };
 
-export default MyApp;
+export default App;

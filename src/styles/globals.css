@@ -19,6 +19,7 @@ html {
 
 body{
   color: black;
+  background: #f3f4f8 !important;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 

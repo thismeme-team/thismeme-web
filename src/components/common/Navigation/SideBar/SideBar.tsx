@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { Suspense } from "react";
 
 import { Drawer } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 import { Category } from "@/components/common/Navigation/SideBar/Category";
+import { SSRSuspense } from "@/components/common/Suspense";
 import { SearchInput } from "@/components/search";
 
 export const SideBar = () => {
@@ -16,11 +16,11 @@ export const SideBar = () => {
         <Link className="mt-8 mb-4 block py-8" href="/search">
           <SearchInput placeholder="당신이 생각한 '그 밈' 검색하기" />
         </Link>
-        <Suspense>
+        <SSRSuspense>
           <div className="px-14">
             <Category />
           </div>
-        </Suspense>
+        </SSRSuspense>
       </Drawer.Content>
     </Drawer>
   );

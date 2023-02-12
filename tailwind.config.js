@@ -1,8 +1,6 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 /** @type {import("tailwindcss").Config} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-/** @type {import("konsta").Config} */
-// eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require("tailwindcss/defaultTheme");
 const konstaConfig = require("konsta/config");
 const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };

@@ -21,5 +21,5 @@ export const TITLE = {
    * 검색페이지(/search)
    */
   search: `밈찾기 | ${APP_NAME}`,
-  memeDetail: `밈 상세 페이지`,
+  memeDetail: (title: string) => `${title} | ${APP_NAME}`,
 } as const;

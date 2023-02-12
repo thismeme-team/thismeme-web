@@ -1,12 +1,12 @@
 import { useDrag } from "@use-gesture/react";
 import type { ReactNode } from "react";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { css } from "twin.macro";
 
-import { delay, withDelay } from "@/application/util";
+import { delay } from "@/application/util";
 
 import { RefreshContent } from "./RefreshContent";
-import { getScrollParent } from "./utils";
+import { getScrollParent, getScrollTop } from "./utils";
 
 interface Props {
   completeDelay?: number;
@@ -21,84 +21,51 @@ type PullStatus = "pulling" | "canRelease" | "refreshing" | "complete";
 //https://codesandbox.io/s/pulltorefresh-b0mi3p?from-embed=&file=/src/pullToRefresh/PullToRefresh.tsx
 
 export const PullToRefresh = ({
-  headHeight = 50,
+  headHeight = 54,
   threshold = 60,
   disabled = false,
   completeDelay = 500,
   children,
 }: Props) => {
   const [status, setStatus] = useState<PullStatus>("pulling");
-  const requestRef = useRef<number>(0);
   const elementRef = useRef<HTMLDivElement>(null);
-  const headRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
   const pullingRef = useRef(false);
 
-  const handleRefresh = withDelay(() => {}, 1000);
+  const setContentTopOffset = (offset: number) => {
+    contentRef.current!.style.transform = `translateY(${offset}px)`;
+  };
 
-  useEffect(() => {
-    return () => {
-      cancelAnimationFrame(requestRef.current);
-    };
-  }, []);
-
-  const slideDown = (height: number, cb?: () => void) => {
+  const slide = (height: number, { cb, threshold }: { cb?: () => void; threshold?: number }) => {
     requestAnimationFrame(function animate() {
-      const currentHeight = headRef.current!.clientHeight;
-      if (currentHeight > height) {
-        const decreasing = currentHeight - height > 20 ? 5 : 1;
-        headRef.current!.style.height = `${currentHeight - decreasing}px`;
-        requestRef.current = requestAnimationFrame(animate);
-      }
+      const currentHeight =
+        contentRef.current!.getBoundingClientRect().top - contentRef.current!.offsetTop;
 
-      if (currentHeight === height) {
-        if (cb) {
-          cb();
-        }
-      }
+      const decreasing = threshold ?? currentHeight - height > 20 ? 5 : 1;
+
+      if (currentHeight > height) {
+        setContentTopOffset(currentHeight - decreasing);
+        requestAnimationFrame(animate);
+      } else if (currentHeight <= height) cb?.();
     });
   };
 
-  const slideUp = (height: number, cb?: () => void) => {
-    requestAnimationFrame(function animate() {
-      const currentHeight = headRef.current!.clientHeight;
-      if (currentHeight > height) {
-        headRef.current!.style.height = `${currentHeight - 1}px`;
-        requestRef.current = requestAnimationFrame(animate);
-      }
-
-      if (currentHeight === height) {
-        if (cb) {
-          cb();
-        }
-      }
-    });
-  };
-
-  const getScrollTop = (element: Window | Element) => {
-    return "scrollTop" in element ? element.scrollTop : element.scrollY;
-  };
-
-  const doRefresh = async () => {
-    slideDown(headHeight);
+  const doRefresh = () => {
     setStatus("refreshing");
-    try {
-      await handleRefresh?.();
-      setStatus("complete");
-    } catch (e) {
-      slideDown(0, () => {
-        setStatus("pulling");
-      });
-      setStatus("pulling");
-      throw e;
-    }
-    if (completeDelay > 0) {
-      await delay(completeDelay);
-    }
 
-    slideDown(0, () => {
-      setStatus("pulling");
+    slide(headHeight, {
+      cb: async () => {
+        await delay(1000);
+
+        // TODO refresh 로직 처리
+        setStatus("complete");
+
+        await delay(completeDelay);
+
+        setStatus("pulling");
+        slide(0, { threshold: 2 });
+      },
     });
-    setStatus("pulling");
   };
 
   //https://mobile.ant.design/components/pull-to-refresh
@@ -114,7 +81,7 @@ export const PullToRefresh = ({
         if (status === "canRelease") {
           doRefresh();
         } else {
-          slideUp(0);
+          slide(0, { threshold: 2 });
         }
         return;
       }
@@ -125,17 +92,15 @@ export const PullToRefresh = ({
       if (state.first && y > 0) {
         const { target } = state.event;
         if (!target || !(target instanceof Element)) return;
+
         let scrollParent = getScrollParent(target);
         while (true) {
           // for 중첩 스크롤 영역
           if (!scrollParent) return;
           const scrollTop = getScrollTop(scrollParent);
-          if (scrollTop > 0) {
-            return;
-          }
-          if (scrollParent instanceof Window) {
-            break;
-          }
+          if (scrollTop > 0) return;
+          if (scrollParent instanceof Window) break;
+
           scrollParent = getScrollParent(scrollParent.parentNode as Element);
         }
         pullingRef.current = true;
@@ -149,9 +114,9 @@ export const PullToRefresh = ({
       event.stopPropagation();
 
       if (y < headHeight) {
-        headRef.current!.style.height = `${y}px`;
+        setContentTopOffset(y);
       } else {
-        headRef.current!.style.height = `${headHeight + (y - headHeight) * 0.25}px`;
+        setContentTopOffset(headHeight + (y - headHeight) * 0.25);
       }
       setStatus(y > threshold ? "canRelease" : "pulling");
     },
@@ -165,21 +130,19 @@ export const PullToRefresh = ({
   );
 
   return (
-    <div className="contents" ref={elementRef}>
-      <div ref={headRef}>
+    <div className="overscroll-y-contain" ref={elementRef}>
+      <div
+        css={css`
+          margin-top: 0.8rem;
+          height: ${headHeight}px;
+          position: absolute;
+          top: 5.4rem;
+          inset-inline: 0;
+        `}
+      >
         {status !== "pulling" && <RefreshContent />}
-
-        {headRef.current ? (
-          <div
-            css={css`
-              height: ${headHeight}px;
-            `}
-          ></div>
-        ) : (
-          <></>
-        )}
       </div>
-      <>{children}</>
+      <div ref={contentRef}>{children}</div>
     </div>
   );
 };

@@ -31,3 +31,7 @@ export const getScrollParent = (
   }
   return root;
 };
+
+export const getScrollTop = (element: Window | Element) => {
+  return "scrollTop" in element ? element.scrollTop : element.scrollY;
+};

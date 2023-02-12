@@ -31,7 +31,7 @@ const getStyle = ({ ownerState }: { ownerState: OwnerState }): TwStyle => {
   return {
     ...styles,
     ...(ownerState.maxColumnHeight && {
-      minHeight: ownerState.maxColumnHeight + ownerState.spacing,
+      height: ownerState.maxColumnHeight + ownerState.spacing,
     }),
     "& > *": {
       margin: `calc(${ownerState.spacing}px / 2)`,

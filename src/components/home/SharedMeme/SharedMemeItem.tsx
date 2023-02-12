@@ -19,9 +19,9 @@ export const SharedMemeItem = () => {
         </div>
         <section className="mb-8 flex items-center justify-between font-suit text-18-bold-140">
           밈 제목
-          <span className="flex items-center">
-            00
+          <span className="flex items-center gap-8 text-gray-600">
             <Icon className="ml-8" name="memeShare" />
+            00
           </span>
         </section>
       </Link>

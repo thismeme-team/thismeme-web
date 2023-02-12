@@ -1,21 +1,32 @@
 import { css } from "twin.macro";
 
-import { useGetPopularMemes, useIntersect } from "@/application/hooks";
+import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
-export const MemeList = () => {
-  const { data: memeList, fetchNextPage } = useGetPopularMemes();
+import { EmptyMemesView } from "../EmptyMemesView";
+
+interface Props {
+  searchQuery: string;
+}
+export const MemesByTag = ({ searchQuery }: Props) => {
+  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByTag(searchQuery);
+
   const ref = useIntersect(async () => {
     fetchNextPage();
   });
+
+  if (isEmpty) {
+    return <EmptyMemesView />;
+  }
 
   return (
     <div
       css={[
         css`
           width: 100%;
-          min-height: 300px;
+          min-height: 450px;
+          margin-top: 1.2rem;
         `,
       ]}
     >

@@ -24,7 +24,7 @@ export const MemeList = () => {
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
-      <div className={`m-10 ${isFetching ? "hidden" : ""}`} ref={ref}></div>
+      <div className={`m-10 ${isFetching ? "invisible" : ""}`} ref={ref}></div>
     </div>
   );
 };

@@ -14,7 +14,12 @@ import { TagFavoriteButton } from "@/components/tags";
 const ExploreByTagPage: NextPage = () => {
   const router = useRouter();
   const { query } = router;
-  const { data: memeList, isEmpty, isLoading, fetchNextPage } = useGetMemesByTag(query.q as string);
+  const {
+    data: memeList,
+    isEmpty,
+    isFetching,
+    fetchNextPage,
+  } = useGetMemesByTag(query.q as string);
 
   const ref = useIntersect(async () => {
     fetchNextPage();
@@ -42,6 +47,7 @@ const ExploreByTagPage: NextPage = () => {
           css`
             width: 100%;
             min-height: 450px;
+            margin-top: 12rem;
           `,
         ]}
       >
@@ -57,7 +63,7 @@ const ExploreByTagPage: NextPage = () => {
             <MemeItem key={meme.memeId} meme={meme} />
           ))}
         </Masonry>
-        <div className={`m-10 ${isLoading ? "hidden" : ""}`} ref={ref}></div>
+        <div className={`m-10 ${isFetching ? "hidden" : ""}`} ref={ref}></div>
       </div>
 
       <TagFavoriteButton />

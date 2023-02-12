@@ -16,7 +16,7 @@ const ExploreByKeywordPage: NextPage = () => {
   const {
     data: memeList,
     isEmpty,
-    isLoading,
+    isFetching,
     fetchNextPage,
   } = useGetMemesByKeyword(query.q as string);
 
@@ -51,6 +51,7 @@ const ExploreByKeywordPage: NextPage = () => {
           css`
             width: 100%;
             min-height: 300px;
+            margin-top: 12rem;
           `,
         ]}
       >
@@ -66,7 +67,7 @@ const ExploreByKeywordPage: NextPage = () => {
             <MemeItem key={meme.memeId} meme={meme} />
           ))}
         </Masonry>
-        <div className={`m-10 ${isLoading ? "hidden" : ""}`} ref={ref}></div>
+        <div className={`m-10 ${isFetching ? "hidden" : ""}`} ref={ref}></div>
       </div>
     </>
   );

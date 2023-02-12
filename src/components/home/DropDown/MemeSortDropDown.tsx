@@ -1,16 +1,20 @@
 import type { MouseEvent } from "react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { css } from "twin.macro";
 
 import { useAuth } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown/DropDown";
 import { Icon } from "@/components/common/Icon";
 
+import { useSetMemeContext } from "../MemeContext/MemeContext";
+
 export const MemeSortDropDown = () => {
   const { isLogin, user } = useAuth();
   const [menu, setMenu] = useState<string>(
     user?.name ? `@${user?.name}이 찾는 밈` : `공유가 많이 된 밈`,
   );
+
+  const setMeme = useSetMemeContext();
 
   const handleDropMenu = (e: MouseEvent<HTMLLIElement>) => {
     setMenu((e.target as HTMLElement).innerText);
@@ -42,20 +46,29 @@ export const MemeSortDropDown = () => {
         {isLogin && (
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={handleDropMenu}
+            onClick={(e) => {
+              handleDropMenu(e);
+              setMeme("user");
+            }}
           >
             {`@${user?.name}이 찾는 그 밈`}
           </DropDown.Content>
         )}
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={handleDropMenu}
+          onClick={(e) => {
+            handleDropMenu(e);
+            setMeme("share");
+          }}
         >
           공유가 많이 된 그 밈
         </DropDown.Content>
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={handleDropMenu}
+          onClick={(e) => {
+            handleDropMenu(e);
+            setMeme("recent");
+          }}
         >
           최신 업로드 된 그 밈
         </DropDown.Content>

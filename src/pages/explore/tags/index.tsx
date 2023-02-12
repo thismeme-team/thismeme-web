@@ -1,74 +1,47 @@
-import type { NextPage } from "next";
-import { useRouter } from "next/router";
-import { css } from "twin.macro";
+import type { GetServerSideProps, NextPage } from "next";
 
-import { useGetMemesByTag, useIntersect } from "@/application/hooks";
 import { TITLE } from "@/application/util";
-import { Masonry } from "@/components/common/Masonry";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
-import { EmptyMemesView } from "@/components/explore";
-import { MemeItem } from "@/components/meme/MemeItem";
+import { SSRSuspense } from "@/components/common/Suspense";
+import { MemesByTag } from "@/components/explore";
 import { TagFavoriteButton } from "@/components/tags";
 
-const ExploreByTagPage: NextPage = () => {
-  const router = useRouter();
-  const { query } = router;
-  const {
-    data: memeList,
-    isEmpty,
-    isFetching,
-    fetchNextPage,
-  } = useGetMemesByTag(query.q as string);
+interface Props {
+  searchQuery: string;
+}
 
-  const ref = useIntersect(async () => {
-    fetchNextPage();
-  });
-
-  if (isEmpty) {
-    return (
-      <>
-        <NextSeo description={`${query.q} 밈 모음`} title={TITLE.exploreByTag(query.q as string)} />
-
-        <ExplorePageNavigation title={`#${query.q}`} />
-
-        <EmptyMemesView />
-      </>
-    );
-  }
+const ExploreByTagPage: NextPage<Props> = ({ searchQuery }) => {
   return (
     <>
-      <NextSeo description={`${query.q} 밈 모음`} title={TITLE.exploreByTag(query.q as string)} />
+      <NextSeo description={`${searchQuery} 밈 모음`} title={TITLE.exploreByKeyword(searchQuery)} />
 
-      <ExplorePageNavigation title={`#${query.q}`} />
+      <ExplorePageNavigation title={searchQuery} />
 
-      <div
-        css={[
-          css`
-            width: 100%;
-            min-height: 450px;
-            margin-top: 12rem;
-          `,
-        ]}
-      >
-        <Masonry
-          className="mt-12"
-          columns={2}
-          defaultColumns={2}
-          defaultHeight={450}
-          defaultSpacing={9}
-          spacing={9}
-        >
-          {memeList.map((meme) => (
-            <MemeItem key={meme.memeId} meme={meme} />
-          ))}
-        </Masonry>
-        <div className={`m-10 ${isFetching ? "hidden" : ""}`} ref={ref}></div>
-      </div>
+      <SSRSuspense>
+        <MemesByTag searchQuery={searchQuery} />
+      </SSRSuspense>
 
       <TagFavoriteButton />
     </>
   );
 };
 
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  /**
+   * @description
+   * query.q 타입 검사
+   * 문자열이 아니면 404 로 이동
+   */
+  if (!query.q || typeof query.q !== "string") {
+    return {
+      notFound: true,
+    };
+  }
+  return {
+    props: {
+      searchQuery: query?.q,
+    },
+  };
+};
 export default ExploreByTagPage;

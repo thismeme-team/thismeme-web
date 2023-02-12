@@ -5,7 +5,7 @@ import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 export const MemeList = () => {
-  const { data: memeList, isFetching, fetchNextPage } = useGetPopularMemes();
+  const { data: memeList, fetchNextPage } = useGetPopularMemes();
   const ref = useIntersect(async () => {
     fetchNextPage();
   });
@@ -24,7 +24,7 @@ export const MemeList = () => {
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
-      {!isFetching ? <div className="h-20" ref={ref}></div> : <div className="h-20"></div>}
+      <div className="h-20" ref={ref} />
     </div>
   );
 };

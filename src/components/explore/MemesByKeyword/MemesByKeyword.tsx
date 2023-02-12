@@ -10,7 +10,7 @@ interface Props {
   searchQuery: string;
 }
 export const MemesByKeyword = ({ searchQuery }: Props) => {
-  const { data: memeList, isEmpty, isFetching, fetchNextPage } = useGetMemesByKeyword(searchQuery);
+  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByKeyword(searchQuery);
 
   const ref = useIntersect(async () => {
     fetchNextPage();
@@ -35,7 +35,7 @@ export const MemesByKeyword = ({ searchQuery }: Props) => {
           <MemeItem key={meme.memeId} meme={meme} />
         ))}
       </Masonry>
-      {!isFetching ? <div className="h-20" ref={ref}></div> : <div className="h-20"></div>}
+      <div className="h-20" ref={ref} />
     </div>
   );
 };

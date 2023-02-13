@@ -1,5 +1,5 @@
 import type { QueryClient } from "@tanstack/react-query";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 import { useDebounce } from "@/application/hooks";
 import { useSuspendedQuery } from "@/application/hooks/api/core";
@@ -65,3 +65,5 @@ export const useGetMemeTagsById = (id: string) => {
 
 export const fetchMemeTagsById = (id: string, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getMemeTagsById(id), () => api.tags.getMemeTagsById(id));
+
+export const useDeleteFavoriteTag = () => useMutation(api.tags.deleteFavoriteTag);

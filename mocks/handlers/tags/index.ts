@@ -146,3 +146,10 @@ export const getMemeTagsById = rest.get(
     );
   },
 );
+
+export const deleteFavoriteTag = rest.delete(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/:id/fav`,
+  async (req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(200));
+  },
+);

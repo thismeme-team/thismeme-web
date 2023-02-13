@@ -1,7 +1,7 @@
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
 
-import { useGetCategoryWithTag } from "@/application/hooks";
+import { useDeleteFavoriteTag, useGetCategoryWithTag } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
@@ -27,6 +27,8 @@ export const Category = () => {
     },
   });
 
+  const { mutate } = useDeleteFavoriteTag();
+
   const setDrawerOpen = useSetDrawerContext();
   const router = useRouter();
 
@@ -37,6 +39,7 @@ export const Category = () => {
 
   const handleDeleteItem = (tagId: number) => {
     // TODO mutation
+    mutate(tagId);
   };
 
   return (

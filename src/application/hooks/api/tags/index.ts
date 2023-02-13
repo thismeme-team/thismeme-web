@@ -1,11 +1,11 @@
 import type { QueryClient } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 
+import { useDebounce } from "@/application/hooks";
 import { useSuspendedQuery } from "@/application/hooks/api/core";
 import { api } from "@/infra/api";
 import type { GetPopularTagsResponse, GetTagSearchResponse } from "@/infra/api/tags/types";
 
-import { useDebounce } from "../../common";
 import { QUERY_KEYS } from "./queryKey";
 
 /**
@@ -43,16 +43,15 @@ export const useGetTagSearch = (value: string) => {
  * @todo
  * select option을 외부에서 주입받고 싶었지만 타입체크가 어려워 현 상태 유지함
  */
-export const useGetCategoryWithTag = () =>
+export const useGetCategoryWithTag = <T>({
+  select,
+}: {
+  select: (data: Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>) => T;
+}) =>
   useSuspendedQuery({
     queryKey: QUERY_KEYS.getCategoryWithTags,
     queryFn: api.tags.getCategoryWithTags,
-    select: ({ categories }) =>
-      categories.map((category) => ({
-        name: category.name,
-        id: String(category.categoryId),
-        children: category.tags.map((tag) => tag.name),
-      })),
+    select,
   });
 
 export const useGetMemeTagsById = (id: string) => {

@@ -12,11 +12,17 @@ interface Props {
     children: string[];
   }[];
   onClickItem?: (value: string) => void;
+  defaultValue?: string;
 }
 
-export const Accordion = ({ items, onClickItem }: Props) => {
+export const Accordion = ({ items, onClickItem, defaultValue }: Props) => {
   return (
-    <RadixAccordion.Root collapsible className="w-full min-w-300" type="single">
+    <RadixAccordion.Root
+      collapsible
+      className="w-full min-w-300"
+      defaultValue={defaultValue}
+      type="single"
+    >
       {items.map((item) => (
         <RadixAccordion.Item key={item.id} value={item.id}>
           <AccordionTrigger>{item.name}</AccordionTrigger>

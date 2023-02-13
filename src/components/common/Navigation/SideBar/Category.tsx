@@ -1,12 +1,11 @@
 import { useRouter } from "next/router";
-import type { ComponentProps } from "react";
 
 import { useGetCategoryWithTag } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { Accordion } from "@/components/common/Accordion";
 import { useSetDrawerContext } from "@/components/common/Drawer";
+import { Icon } from "@/components/common/Icon";
 
-type AccordionItem = ComponentProps<typeof Accordion>["items"] extends (infer I)[] ? I : never;
 const FAVORITE_ID = "즐겨찾기";
 
 export const Category = () => {
@@ -20,19 +19,13 @@ export const Category = () => {
           .flat(),
       };
 
-      const accordionItems = categories.map(
-        (category) =>
-          ({
-            name: category.name,
-            id: String(category.categoryId),
-            children: category.tags.filter((tag) => !tag.isFav).map((tag) => tag.name),
-          } as AccordionItem), // NOTE: webstorm이 아직 satisfies 키워드를 지원하지 않음
-      );
+      const restItem = categories.map((category) => ({
+        name: category.name,
+        id: String(category.categoryId),
+        children: category.tags.filter((tag) => !tag.isFav).map((tag) => tag.name),
+      }));
 
-      // 즐겨찾기 한 태그가 있을 때만 아코디언에 추가
-      if (favoriteItem.children.length) accordionItems.unshift(favoriteItem);
-
-      return accordionItems;
+      return [favoriteItem, ...restItem];
     },
   });
 
@@ -44,5 +37,28 @@ export const Category = () => {
     router.push(PATH.getExploreByTagPath(tagName));
   };
 
-  return <Accordion defaultValue={FAVORITE_ID} items={data} onClickItem={onClickItem} />;
+  const handleDeleteItem = (tagName: string) => {
+    // TODO mutation
+  };
+
+  return (
+    <Accordion
+      defaultValue={FAVORITE_ID}
+      items={data}
+      render={(item) => (
+        <ul className="flex flex-col px-50 font-suit text-16-semibold-140">
+          {item.children.map((child) => (
+            <li className="flex w-fit gap-6 py-8 [&>#remove]:hover:visible" key={child}>
+              <button onClick={() => onClickItem(child)}>{child}</button>
+              {item.id === FAVORITE_ID && (
+                <button className="invisible" id="remove" onClick={() => handleDeleteItem(child)}>
+                  <Icon height={24} name="cancel" width={24} />
+                </button>
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
+    />
+  );
 };

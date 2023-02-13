@@ -1,21 +1,24 @@
 import type { AccordionContentProps, AccordionTriggerProps } from "@radix-ui/react-accordion";
 import * as RadixAccordion from "@radix-ui/react-accordion";
-import type { Ref } from "react";
+import type { ReactElement, Ref } from "react";
 import { forwardRef } from "react";
 
 import { Icon } from "../Icon";
 
+type AccordionItem = {
+  id: string;
+  name: string;
+  children: string[];
+};
+
 interface Props {
-  items: {
-    id: string;
-    name: string;
-    children: string[];
-  }[];
+  items: AccordionItem[];
+  render?: (item: AccordionItem) => ReactElement;
   onClickItem?: (value: string) => void;
   defaultValue?: string;
 }
 
-export const Accordion = ({ items, onClickItem, defaultValue }: Props) => {
+export const Accordion = ({ items, onClickItem, defaultValue, render }: Props) => {
   return (
     <RadixAccordion.Root
       collapsible
@@ -27,13 +30,17 @@ export const Accordion = ({ items, onClickItem, defaultValue }: Props) => {
         <RadixAccordion.Item key={item.id} value={item.id}>
           <AccordionTrigger>{item.name}</AccordionTrigger>
           <AccordionContent>
-            <ul className="flex flex-col gap-16 py-16 px-50 text-16-semibold-130">
-              {item.children.map((child) => (
-                <li key={child}>
-                  <button onClick={() => onClickItem?.(child)}>{child}</button>
-                </li>
-              ))}
-            </ul>
+            {typeof render === "function" ? (
+              render(item)
+            ) : (
+              <ul className="flex flex-col gap-16 py-16 px-50 text-16-semibold-130">
+                {item.children.map((child) => (
+                  <li key={child}>
+                    <button onClick={() => onClickItem?.(child)}>{child}</button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </AccordionContent>
         </RadixAccordion.Item>
       ))}
@@ -41,12 +48,12 @@ export const Accordion = ({ items, onClickItem, defaultValue }: Props) => {
   );
 };
 
-const AccordionTrigger = forwardRef(
+export const AccordionTrigger = forwardRef(
   (
     { children, ...props }: AccordionTriggerProps,
     forwardedRef: Ref<HTMLButtonElement> | undefined,
   ) => (
-    <RadixAccordion.Header>
+    <RadixAccordion.Header className="py-4">
       <RadixAccordion.Trigger
         {...props}
         className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-gray-100 data-[state=open]:bg-gray-100 [&>#chevronDown]:data-[state=open]:rotate-180"
@@ -66,7 +73,7 @@ const AccordionTrigger = forwardRef(
 );
 AccordionTrigger.displayName = "AccordionTrigger";
 
-const AccordionContent = forwardRef(
+export const AccordionContent = forwardRef(
   (
     { children, ...props }: AccordionContentProps,
     forwardedRef: Ref<HTMLDivElement> | undefined,

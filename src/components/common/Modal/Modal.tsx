@@ -27,7 +27,7 @@ export const Modal = ({ children }: PropsWithChildren) => {
       {trigger}
       <Portal id="modal-portal">
         <div
-          className="fixed inset-0 z-[1300] flex touch-none items-center bg-black/50"
+          className="fixed inset-0 z-[1300] flex items-center bg-black/50 touch-none"
           css={fadeInOut(open)}
           onTouchEnd={(event) => {
             if (event.target === event.currentTarget) event.preventDefault();

@@ -5,6 +5,7 @@ import { useDeleteFavoriteTag, useGetCategoryWithTag, useToast } from "@/applica
 import { PATH } from "@/application/util";
 import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
+import { Photo } from "@/components/common/Photo";
 
 const FAVORITE_ID = "즐겨찾기";
 
@@ -18,12 +19,14 @@ export const Category = () => {
       const favoriteItem = {
         name: FAVORITE_ID,
         id: FAVORITE_ID,
+        icon: "", // TODO: svg url 연동 필요
         tags: categories.map((category) => category.tags.filter((tag) => tag.isFav)).flat(),
       };
 
       const restItem = categories.map((category) => ({
         name: category.name,
         id: String(category.categoryId),
+        icon: "",
         tags: category.tags.filter((tag) => !tag.isFav),
       }));
 
@@ -49,7 +52,7 @@ export const Category = () => {
         <Item key={item.id} value={item.id}>
           <Header className="py-4">
             <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-gray-100 data-[state=open]:bg-gray-100 [&>#chevronDown]:data-[state=open]:rotate-180">
-              <div className="h-24 w-24 rounded-full bg-light-gray-30"></div>
+              <Photo className="h-24 w-24" src={item.icon} />
               <span className="flex-grow text-left">{item.name}</span>
               <Icon
                 aria-hidden
@@ -62,14 +65,13 @@ export const Category = () => {
           <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
             <ul className="flex flex-col px-50 font-suit text-16-semibold-140">
               {item.tags.map((tag) => (
-                <li className="flex w-fit gap-6 py-8 [&>#remove]:hover:visible" key={tag.tagId}>
+                <li
+                  className="flex w-fit gap-6 py-8 [&>#remove_*]:stroke-gray-600 [&>#remove_*]:hover:stroke-black"
+                  key={tag.tagId}
+                >
                   <button onClick={() => onClickItem(tag.name)}>{tag.name}</button>
                   {item.id === FAVORITE_ID && (
-                    <button
-                      className="invisible"
-                      id="remove"
-                      onClick={() => handleDeleteItem(tag.tagId)}
-                    >
+                    <button id="remove" onClick={() => handleDeleteItem(tag.tagId)}>
                       <Icon height={24} name="cancel" width={24} />
                     </button>
                   )}

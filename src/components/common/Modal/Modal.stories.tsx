@@ -1,5 +1,7 @@
 import type { ComponentMeta } from "@storybook/react";
 
+import { useModal } from "@/application/hooks";
+
 import { SignUpModal } from "./SignUpModal";
 
 export default {
@@ -8,9 +10,11 @@ export default {
 } as ComponentMeta<typeof SignUpModal>;
 
 export const SignUp = () => {
+  const modalProps = useModal();
   return (
     <>
-      <SignUpModal />
+      <button onClick={modalProps.onOpen}>open button</button>
+      <SignUpModal {...modalProps} />
     </>
   );
 };

@@ -28,3 +28,13 @@ export interface Meme {
 
   author?: string;
 }
+
+export interface Image {
+  images: {
+    imageId: number;
+    imageUrl: string;
+    imageWidth: number;
+    imageHeight: number;
+  }[];
+  count: number;
+}

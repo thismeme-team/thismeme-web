@@ -35,32 +35,36 @@ export const PullToRefresh = ({
     contentRef.current!.style.transform = `translateY(${offset}px)`;
   };
 
-  const slide = (height: number, { cb, threshold }: { cb?: () => void; threshold?: number }) => {
-    requestAnimationFrame(function animate() {
-      const currentHeight =
-        contentRef.current!.getBoundingClientRect().top - contentRef.current!.offsetTop;
+  const slide = (height: number, options?: { threshold: number }) => {
+    const offsetTop = contentRef.current!.offsetTop;
+    let prevHeight = contentRef.current!.getBoundingClientRect().top - offsetTop;
+    const decreasing = options?.threshold ?? prevHeight - height > 20 ? 5 : 1;
 
-      const decreasing = threshold ?? currentHeight - height > 20 ? 5 : 1;
-      if (currentHeight > height) {
-        setContentTopOffset(currentHeight - decreasing);
-        requestAnimationFrame(animate);
-      } else if (currentHeight <= height) cb?.();
-    });
+    return new Promise<void>((res) =>
+      requestAnimationFrame(function animate() {
+        const currentHeight = prevHeight;
+
+        if (currentHeight > height) {
+          prevHeight = currentHeight - decreasing;
+          setContentTopOffset(currentHeight - decreasing);
+          requestAnimationFrame(animate);
+        } else res();
+      }),
+    );
   };
 
-  const doRefresh = () => {
+  const doRefresh = async () => {
     setStatus("refreshing");
-    slide(headHeight, {
-      cb: async () => {
-        await delay(1000);
+    await slide(headHeight);
+    await delay(1000);
 
-        // TODO refresh 로직 처리
-        setStatus("complete");
-        await delay(completeDelay);
+    setStatus("complete");
 
-        setStatus("pulling");
-        slide(0, { threshold: 2 });
-      },
+    await delay(completeDelay);
+
+    setStatus("pulling");
+    await slide(0, { threshold: 2 }).then(() => {
+      /*TODO Refresh 로직*/
     });
   };
 
@@ -83,8 +87,6 @@ export const PullToRefresh = ({
       }
 
       const [, y] = state.movement;
-      // 첫 이벤트 시점에 pullToRefresh 발동이 가능한지 체크한다.
-      // 스크롤이 최상단에 존재해야만(scrollTop=0) pullToRefresh 의 발동 조건이다.
       if (state.first && y > 0) {
         const { target } = state.event;
         if (!target || !(target instanceof Element)) return;

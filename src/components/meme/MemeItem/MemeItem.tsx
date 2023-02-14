@@ -20,6 +20,7 @@ export const MemeItem = memo(({ meme }: Props) => {
 
   const longPress = useLongPress(callBack, {
     threshold: 1300,
+    cancelOnMovement: true,
   });
 
   return (

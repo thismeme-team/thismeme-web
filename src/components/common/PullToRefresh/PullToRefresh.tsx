@@ -1,6 +1,6 @@
 import { useDrag } from "@use-gesture/react";
 import type { PropsWithChildren } from "react";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { css } from "twin.macro";
 
 import { delay } from "@/application/util";
@@ -41,7 +41,7 @@ export const PullToRefresh = ({
         contentRef.current!.getBoundingClientRect().top - contentRef.current!.offsetTop;
 
       const decreasing = threshold ?? currentHeight - height > 20 ? 5 : 1;
-
+      //contentRef.current?.classList.add("pointer-events-none");
       if (currentHeight > height) {
         setContentTopOffset(currentHeight - decreasing);
         requestAnimationFrame(animate);
@@ -51,14 +51,13 @@ export const PullToRefresh = ({
 
   const doRefresh = () => {
     setStatus("refreshing");
-
     slide(headHeight, {
       cb: async () => {
         await delay(1000);
 
         // TODO refresh 로직 처리
         setStatus("complete");
-
+        //contentRef.current?.classList.remove("pointer-events-none");
         await delay(completeDelay);
 
         setStatus("pulling");
@@ -128,6 +127,7 @@ export const PullToRefresh = ({
     },
   );
 
+  console.log(status);
   return (
     <div className="overscroll-y-contain" ref={elementRef}>
       <div

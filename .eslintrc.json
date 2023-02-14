@@ -74,7 +74,6 @@
       }
     ],
     "@typescript-eslint/consistent-type-imports": "error",
-    "@typescript-eslint/no-var-requires": "off",
     "@typescript-eslint/naming-convention": [
       "error",
       {

@@ -1,8 +1,8 @@
 import { css } from "twin.macro";
 
 import { useGetSharedMemes, useIntersect } from "@/application/hooks";
-import { Masonry } from "@/components/common/Masonry";
-import { MemeItem } from "@/components/meme/MemeItem";
+
+import { MemeList } from "./MemeList";
 
 export const SharedMemeList = () => {
   const { data: memeList, fetchNextPage } = useGetSharedMemes();
@@ -20,11 +20,7 @@ export const SharedMemeList = () => {
         `,
       ]}
     >
-      <Masonry columns={2} spacing={9}>
-        {memeList.map((meme) => (
-          <MemeItem key={meme.memeId} meme={meme} />
-        ))}
-      </Masonry>
+      <MemeList memeList={memeList} />
       <div className="h-20" ref={ref} />
     </div>
   );

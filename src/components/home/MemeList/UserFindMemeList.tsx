@@ -5,7 +5,8 @@ import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 export const UserFindMemeList = () => {
-  const { data: memeList, fetchNextPage } = useGetPopularMemes(); //NOTE 회원이 찾는 밈 인기 밈으로 대체 / 수정 예정
+  const { data: memeList, fetchNextPage } = useGetPopularMemes();
+  //NOTE 회원이 찾는 밈 인기 밈으로 대체 / 수정 예정
 
   const ref = useIntersect(async () => {
     fetchNextPage();

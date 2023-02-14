@@ -1,3 +1,3 @@
 export * from "./MemeList";
 export * from "./PopularTag";
-export * from "./SharedMeme";
+export * from "./UserSharedMeme";

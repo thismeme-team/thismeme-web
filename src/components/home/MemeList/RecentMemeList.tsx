@@ -1,14 +1,11 @@
 import { css } from "twin.macro";
 
-import { useGetMemesByType, useIntersect } from "@/application/hooks";
+import { useGetRecentMemes, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
-import { useMemeContext } from "../MemeContext";
-
-export const MemeList = () => {
-  const meme = useMemeContext();
-  const { data: memeList, fetchNextPage } = useGetMemesByType(meme);
+export const RecentMemeList = () => {
+  const { data: memeList, fetchNextPage } = useGetRecentMemes();
 
   const ref = useIntersect(async () => {
     fetchNextPage();

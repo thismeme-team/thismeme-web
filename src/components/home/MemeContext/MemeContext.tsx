@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react";
 import { SSRSuspense } from "@/components/common/Suspense";
 
 import { MemeSortDropDown } from "../DropDown";
-import { MemeList } from "../MemeList";
+import { RecentMemeList, SharedMemeList } from "../MemeList";
 
 type Meme = "user" | "share" | "recent";
 export const MenuContext = createContext<Meme>("share");
@@ -12,14 +12,13 @@ export const MenuSetContext = createContext<Dispatch<SetStateAction<Meme>>>(() =
 
 export const MemeContext = () => {
   const [meme, setMeme] = useState<Meme>("share");
+  console.log(meme);
 
   return (
     <MenuContext.Provider value={meme}>
       <MenuSetContext.Provider value={setMeme}>
         <MemeSortDropDown />
-        <SSRSuspense>
-          <MemeList />
-        </SSRSuspense>
+        <SSRSuspense>{meme === "share" ? <SharedMemeList /> : <RecentMemeList />}</SSRSuspense>
       </MenuSetContext.Provider>
     </MenuContext.Provider>
   );

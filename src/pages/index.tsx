@@ -6,8 +6,7 @@ import { useAuth } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
-import { MemeList, PopularTagList, SharedMemeList } from "@/components/home";
-import { MemeSortDropDown } from "@/components/home/DropDown";
+import { PopularTagList, SharedMemeList } from "@/components/home";
 import { MemeContext } from "@/components/home/MemeContext";
 import { SearchInput } from "@/components/search";
 

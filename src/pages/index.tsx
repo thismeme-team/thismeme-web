@@ -20,7 +20,7 @@ const HomePage: NextPage = () => {
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
 
       <IntroPageNavigation />
-      <section className="pt-16" />
+      <section className="pt-8" />
       <SearchInput
         placeholder="당신이 생각한 '그 밈' 검색하기"
         onClick={() => {

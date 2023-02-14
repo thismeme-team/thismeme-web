@@ -13,7 +13,7 @@ export const SideBar = () => {
         {({ isOpen }) => (isOpen ? <Icon name="cancel" /> : <Icon name="menu" />)}
       </Drawer.Trigger>
       <Drawer.Content className="mt-54" direction="right">
-        <Link className="mt-8 mb-4 block py-8" href="/search">
+        <Link className="mt-8 mb-4 block" href="/search">
           <SearchInput placeholder="당신이 생각한 '그 밈' 검색하기" />
         </Link>
         <SSRSuspense>

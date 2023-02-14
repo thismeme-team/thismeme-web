@@ -38,7 +38,7 @@ const SearchPage: NextPage = () => {
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.search} />
 
       <SearchPageNavigation />
-      <div className="relative mt-16">
+      <div className="relative mt-8">
         <SearchInput
           {...inputProps}
           placeholder="당신이 생각한 '그 밈' 검색하기"
@@ -52,9 +52,7 @@ const SearchPage: NextPage = () => {
             setFocus(true);
           }}
         />
-        <p className="mt-9 mb-24 px-14 text-12-regular-160 text-gray-500">
-          밈 제목,태그를 입력하세요
-        </p>
+        <p className="mb-24 px-14 text-12-regular-160 text-gray-500">밈 제목,태그를 입력하세요</p>
         {inputProps.value && (
           <Suspense>
             <SearchResultList value={inputProps.value} onAddItem={onAddItem} />

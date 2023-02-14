@@ -64,7 +64,11 @@ export const PullToRefresh = ({
 
     setStatus("pulling");
     await slide(0, { threshold: 2 }).then(() => {
-      /*TODO Refresh 로직*/
+      /**
+       * TODO
+       * - Refresh 로직(ex - 페이지 reload)
+       */
+      location.reload();
     });
   };
 

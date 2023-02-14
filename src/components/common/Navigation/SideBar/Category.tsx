@@ -1,7 +1,7 @@
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
 
-import { useDeleteFavoriteTag, useGetCategoryWithTag } from "@/application/hooks";
+import { useDeleteFavoriteTag, useGetCategoryWithTag, useToast } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
@@ -9,6 +9,10 @@ import { Icon } from "@/components/common/Icon";
 const FAVORITE_ID = "즐겨찾기";
 
 export const Category = () => {
+  const router = useRouter();
+  const setDrawerOpen = useSetDrawerContext();
+  const { show } = useToast();
+
   const { data } = useGetCategoryWithTag({
     select: ({ categories }) => {
       const favoriteItem = {
@@ -23,14 +27,12 @@ export const Category = () => {
         tags: category.tags.filter((tag) => !tag.isFav),
       }));
 
-      return [favoriteItem, ...restItem];
+      if (favoriteItem.tags.length) restItem.unshift(favoriteItem);
+
+      return restItem;
     },
   });
-
-  const { mutate } = useDeleteFavoriteTag();
-
-  const setDrawerOpen = useSetDrawerContext();
-  const router = useRouter();
+  const { mutate: deleteFavoriteTag } = useDeleteFavoriteTag();
 
   const onClickItem = (tagName: string) => {
     setDrawerOpen(false);
@@ -38,8 +40,7 @@ export const Category = () => {
   };
 
   const handleDeleteItem = (tagId: number) => {
-    // TODO mutation
-    mutate(tagId);
+    deleteFavoriteTag(tagId, { onError: () => show("즐겨찾기 삭제가 실패했습니다") });
   };
 
   return (

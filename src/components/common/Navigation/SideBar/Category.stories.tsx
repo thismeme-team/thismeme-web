@@ -3,10 +3,8 @@ import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Category } from "./Category";
 
 export default {
-  title: "components/common/Accordion",
+  title: "components/common/Navigation/Category",
   component: Category,
 } as ComponentMeta<typeof Category>;
 
-const Template: ComponentStory<typeof Category> = () => <Category />;
-
-export const Default = Template.bind({});
+export const Default: ComponentStory<typeof Category> = () => <Category />;

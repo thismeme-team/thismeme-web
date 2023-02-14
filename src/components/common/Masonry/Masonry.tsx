@@ -6,7 +6,6 @@ import type { TwStyle } from "twin.macro";
 export const parseToNumber = (val: string) => {
   return Number(val.replace("px", ""));
 };
-
 interface OwnerState {
   spacing: number;
   columns: number;
@@ -14,7 +13,7 @@ interface OwnerState {
   defaultColumns?: number;
   defaultHeight?: number;
   defaultSpacing?: number;
-  isSSR: boolean | 0 | undefined;
+  isSSR: boolean;
 }
 const getStyle = ({ ownerState }: { ownerState: OwnerState }): TwStyle => {
   const styles = {
@@ -33,9 +32,10 @@ const getStyle = ({ ownerState }: { ownerState: OwnerState }): TwStyle => {
     ...(ownerState.maxColumnHeight && {
       height: ownerState.maxColumnHeight + ownerState.spacing,
     }),
+    margin: `calc(0px - (${ownerState.spacing}px / 2))`,
     "& > *": {
       margin: `calc(${ownerState.spacing}px / 2)`,
-      width: `calc(${(100 / ownerState.columns).toFixed(2)}% - ${ownerState.spacing}px)`,
+      width: `calc(${(100 / ownerState.columns).toFixed(2)}% - (${ownerState.spacing}px / 2))`,
     },
   };
 };
@@ -64,7 +64,7 @@ export const Masonry = <T extends ElementType = "div">(props: Props<T>) => {
   const [maxColumnHeight, setMaxColumnHeight] = useState<number>();
   const isSSR =
     !maxColumnHeight &&
-    defaultHeight &&
+    !!defaultHeight &&
     defaultColumns !== undefined &&
     defaultSpacing !== undefined;
   const [numberOfLineBreaks, setNumberOfLineBreaks] = useState(isSSR ? defaultColumns - 1 : 0);

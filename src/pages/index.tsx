@@ -7,6 +7,7 @@ import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
+import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeList, PopularTagList, SharedMemeList } from "@/components/home";
 import { MemeSortDropDown } from "@/components/home/DropDown";
 import { SearchInput } from "@/components/search";
@@ -18,7 +19,6 @@ const HomePage: NextPage = () => {
   return (
     <>
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
-
       <IntroPageNavigation />
       <PullToRefresh>
         <section className="pt-16" />
@@ -33,9 +33,9 @@ const HomePage: NextPage = () => {
         </Suspense>
         {isLogin && <SharedMemeList name={user?.name} />}
         <MemeSortDropDown />
-        <Suspense>
+        <SSRSuspense>
           <MemeList />
-        </Suspense>
+        </SSRSuspense>
       </PullToRefresh>
     </>
   );

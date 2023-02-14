@@ -5,7 +5,7 @@ import { RandomImage } from "@/components/common/RandomImge";
 export const EmptyMemesView = () => {
   return (
     <div className="absolute left-1/2 top-1/2 flex -translate-y-2/4 -translate-x-2/4 flex-col items-center justify-center font-suit">
-      <span className="text-32-bold-140">
+      <span className="whitespace-nowrap text-32-bold-140">
         당신이 찾는{" "}
         <Link href="/">
           <RandomImage className="-mb-[calc(1.4em-3.2rem)/2] inline-block h-32 w-32 rounded-8" />

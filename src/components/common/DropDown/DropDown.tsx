@@ -52,7 +52,7 @@ const DropDownContents = ({
   children,
   width,
   ...rest
-}: PropsWithChildren<{ width: string; css?: CSSInterpolation }>) => {
+}: PropsWithChildren<{ width?: string; css?: CSSInterpolation }>) => {
   const isOpen = useContext(DropDownContext);
   return (
     <ul
@@ -68,6 +68,10 @@ const DropDownContents = ({
           transition: transform 0.4s ease, opacity 0.2s ease-in-out;
           ${!isOpen && "pointer-events: none;"}
         `,
+        width &&
+          css`
+            width: ${width}rem;
+          `,
         { opacity: isOpen ? 1 : 0 },
       ]}
       {...rest}

@@ -31,4 +31,28 @@ export class MemeApi {
     };
     return result;
   };
+
+  getMemesByType = async ({
+    offset,
+    limit,
+    option,
+  }: {
+    offset: number;
+    limit: number;
+    option: string;
+  }) => {
+    const currentpage = offset / limit;
+
+    const { data } = await this.api.get<GetMemesResponse>(
+      `/memes?page=${currentpage}&size=${limit}&sort=${option},desc`,
+    );
+    const result = {
+      data: data.memes,
+      offset: offset,
+      limit: limit,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
+    };
+    return result;
+  };
 }

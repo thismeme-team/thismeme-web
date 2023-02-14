@@ -40,3 +40,23 @@ export const useGetPopularMemes = () => {
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
   return { data: memeList, ...rest };
 };
+
+/**
+ * 밈 type 에 따른 리스트 api
+ * @param type  밈 리스트 type <share,recent>
+ */
+const types = { share: "shareCount", recent: "createdDate", user: "user" };
+
+export const useGetMemesByType = (type: keyof typeof types) => {
+  const { data, ...rest } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesByType(types[type]),
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.meme.getMemesByType({ offset: pageParam, limit: 10, option: types[type] }),
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  return { data: memeList, ...rest };
+};

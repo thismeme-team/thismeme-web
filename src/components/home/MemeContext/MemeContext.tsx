@@ -1,5 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
-import { createContext, Suspense, useContext, useState } from "react";
+import { createContext, useContext, useState } from "react";
+
+import { SSRSuspense } from "@/components/common/Suspense";
 
 import { MemeSortDropDown } from "../DropDown";
 import { MemeList } from "../MemeList";
@@ -15,9 +17,9 @@ export const MemeContext = () => {
     <MenuContext.Provider value={meme}>
       <MenuSetContext.Provider value={setMeme}>
         <MemeSortDropDown />
-        <Suspense>
+        <SSRSuspense>
           <MemeList />
-        </Suspense>
+        </SSRSuspense>
       </MenuSetContext.Provider>
     </MenuContext.Provider>
   );

@@ -7,6 +7,7 @@ import { Photo } from "@/components/common/Photo";
 import type { Meme } from "@/types";
 
 import { MemeLongPress } from "../LongPress";
+
 interface Props {
   meme: Meme;
 }
@@ -15,6 +16,7 @@ export const MemeItem = memo(({ meme }: Props) => {
 
   const longPress = useLongPress(onOpen, {
     threshold: 1300,
+    cancelOnMovement: true,
   });
 
   return (

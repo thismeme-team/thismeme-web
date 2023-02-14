@@ -10,6 +10,10 @@ html {
   font-size: 62.5%;
   /*기본 롱프레스 비활성화*/
   -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -khtml-user-drag: none;
+  -moz-user-drag: none;
+  -ms-user-drag: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
@@ -17,12 +21,13 @@ html {
   user-select: none;
 }
 
-body{
+body {
   color: black;
   background: #f3f4f8 !important;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-a, button {
+a,
+button {
   cursor: pointer;
 }

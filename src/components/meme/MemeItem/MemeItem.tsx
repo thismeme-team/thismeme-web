@@ -43,7 +43,7 @@ export const MemeItem = memo(({ meme }: Props) => {
         />
         <div className="flex items-center justify-between font-suit text-14-semibold-140">
           <span>{meme.name}</span>
-          <span className="flex items-center">
+          <span className="flex items-center gap-4">
             <Icon height={16} name="memeShare" width={16} />
             <span className="text-gray-600">{meme.shareCount}</span>
           </span>

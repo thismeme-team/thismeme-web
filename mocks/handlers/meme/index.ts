@@ -1,6 +1,11 @@
 import { rest } from "msw";
 
-import type { GetMemeDetailByIdResponse } from "@/infra/api/meme/types";
+import type {
+  GetMemeDetailByIdResponse,
+  GetMemesByCollectionIdResponse,
+} from "@/infra/api/meme/types";
+
+import * as MOCK_DATA from "../search/data";
 
 export const getMemeDetail = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/memes/:id`,
@@ -27,6 +32,21 @@ export const getMemeDetail = rest.get(
           ],
           count: 0,
         },
+      }),
+    );
+  },
+);
+
+export const getMemesByCollectionId = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/memes/boards/:id`,
+  (req, res, ctx) => {
+    const data = MOCK_DATA.memes.slice(0, 10);
+
+    return res(
+      ctx.delay(),
+      ctx.json<GetMemesByCollectionIdResponse>({
+        memes: data,
+        count: 10,
       }),
     );
   },

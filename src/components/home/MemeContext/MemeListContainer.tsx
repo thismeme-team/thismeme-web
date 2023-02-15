@@ -3,19 +3,19 @@ import { createContext, useContext, useState } from "react";
 
 import { SSRSuspense } from "@/components/common/Suspense";
 
-import { MemeSortDropDown } from "../DropDown";
 import { RecentMemeList, SharedMemeList, UserFindMemeList } from "../MemeList";
+import { MemeSortDropDown } from "./DropDown";
 
 type MemeListType = "user" | "share" | "recent";
-export const MenuContext = createContext<MemeListType>("share");
-export const MenuSetContext = createContext<Dispatch<SetStateAction<MemeListType>>>(() => null);
+export const MemeListContext = createContext<MemeListType>("share");
+export const MemeListSetContext = createContext<Dispatch<SetStateAction<MemeListType>>>(() => null);
 
-export const MemeContext = () => {
+export const MemeListContainer = () => {
   const [meme, setMeme] = useState<MemeListType>("share");
 
   return (
-    <MenuContext.Provider value={meme}>
-      <MenuSetContext.Provider value={setMeme}>
+    <MemeListContext.Provider value={meme}>
+      <MemeListSetContext.Provider value={setMeme}>
         <MemeSortDropDown />
         <SSRSuspense>
           {meme === "share" ? (
@@ -26,10 +26,10 @@ export const MemeContext = () => {
             <UserFindMemeList />
           )}
         </SSRSuspense>
-      </MenuSetContext.Provider>
-    </MenuContext.Provider>
+      </MemeListSetContext.Provider>
+    </MemeListContext.Provider>
   );
 };
 
-export const useMemeContext = () => useContext(MenuContext);
-export const useSetMemeContext = () => useContext(MenuSetContext);
+export const useMemeListContext = () => useContext(MemeListContext);
+export const useSetMemeListContext = () => useContext(MemeListSetContext);

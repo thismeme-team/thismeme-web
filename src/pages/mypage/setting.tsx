@@ -1,9 +1,13 @@
+import { useModal } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
+import { SignOutModal } from "@/components/common/Modal";
 import { Navigation } from "@/components/common/Navigation";
 import { BackButton } from "@/components/common/Navigation/BackButton";
 import { Photo } from "@/components/common/Photo";
 
 const SettingPage = () => {
+  const modalProps = useModal();
+
   return (
     <>
       <Navigation>
@@ -25,12 +29,16 @@ const SettingPage = () => {
           </div>
         </section>
         <section className="mb-28 flex flex-wrap justify-center">
-          <Button className="w-full rounded-10 bg-black py-20 text-18-bold-140 text-white">
+          <Button
+            className="w-full rounded-10 bg-black py-20 text-18-bold-140 text-white"
+            onClick={modalProps.onOpen}
+          >
             Log out
           </Button>
           <Button className="mt-8 text-12-regular-160 text-gray-600">회원 탈퇴</Button>
         </section>
       </article>
+      <SignOutModal {...modalProps} />
     </>
   );
 };

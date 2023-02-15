@@ -6,12 +6,12 @@ import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeSortDropDown } from "../DropDown";
 import { RecentMemeList, SharedMemeList, UserFindMemeList } from "../MemeList";
 
-type Meme = "user" | "share" | "recent";
-export const MenuContext = createContext<Meme>("share");
-export const MenuSetContext = createContext<Dispatch<SetStateAction<Meme>>>(() => null);
+type MemeListType = "user" | "share" | "recent";
+export const MenuContext = createContext<MemeListType>("share");
+export const MenuSetContext = createContext<Dispatch<SetStateAction<MemeListType>>>(() => null);
 
 export const MemeContext = () => {
-  const [meme, setMeme] = useState<Meme>("share");
+  const [meme, setMeme] = useState<MemeListType>("share");
 
   return (
     <MenuContext.Provider value={meme}>

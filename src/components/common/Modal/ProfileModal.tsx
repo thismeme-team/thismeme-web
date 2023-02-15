@@ -4,7 +4,7 @@ import { DropDown } from "../DropDown";
 import { Icon } from "../Icon";
 
 export const ProfileModal = () => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   return (
     <>
       <DropDown>
@@ -26,7 +26,10 @@ export const ProfileModal = () => {
               <span className="text-16-semibold-140">collect</span>
             </section>
           </DropDown.Content>
-          <DropDown.Content className="mt-24 flex h-60 items-center justify-center bg-black font-suit text-18-bold-140 text-white">
+          <DropDown.Content
+            className="mt-24 flex h-60 items-center justify-center bg-black font-suit text-18-bold-140 text-white"
+            onClick={() => logout()}
+          >
             로그아웃
           </DropDown.Content>
         </DropDown.Contents>

@@ -11,7 +11,7 @@ export const ProfileModal = () => {
         <DropDown.Trigger>
           <Icon name="loginprofile" />
         </DropDown.Trigger>
-        <DropDown.Contents css={{ right: 0 }} width="34">
+        <DropDown.Contents css={{ right: 0, width: "34rem" }}>
           <DropDown.Content className="flex h-92 items-center justify-between p-16 font-suit text-22-bold-140">
             <Icon height={60} name="loginprofile" width={60} />@{user?.name}
             <Icon name="setting" />

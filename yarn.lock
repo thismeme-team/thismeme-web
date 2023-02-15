@@ -4826,6 +4826,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@use-gesture/core@npm:10.2.24":
+  version: 10.2.24
+  resolution: "@use-gesture/core@npm:10.2.24"
+  checksum: 92c2cedde03ca5a209f0f2abc120d834601bfa1631d61983ae6eede99bcf680ff229d006394f10dd3825f4da838c3cd0156f67a3b586ec031e52d3b3ec618bef
+  languageName: node
+  linkType: hard
+
+"@use-gesture/react@npm:^10.2.24":
+  version: 10.2.24
+  resolution: "@use-gesture/react@npm:10.2.24"
+  dependencies:
+    "@use-gesture/core": 10.2.24
+  peerDependencies:
+    react: ">= 16.8.0"
+  checksum: f8e651aa2e32f78af369b43366ae186aa8beb5b2684308da4262395663559a0eefb0124964db948d9636fe8fe5bfc870937f398dcb8f2cfe738a0c4a37d555c4
+  languageName: node
+  linkType: hard
+
 "@webassemblyjs/ast@npm:1.11.1":
   version: 1.11.1
   resolution: "@webassemblyjs/ast@npm:1.11.1"
@@ -11301,6 +11319,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"konsta@npm:^1.0.2":
+  version: 1.0.2
+  resolution: "konsta@npm:1.0.2"
+  checksum: b582961e04da27c6d5f39272c39dc8b3709a31f4835dda69d6a2d91e063d19e392cec7e8f0acfc20aedeb1814995b7464c00eb70ee5bca33164812f6e6cbabf8
+  languageName: node
+  linkType: hard
+
 "language-subtag-registry@npm:~0.3.2":
   version: 0.3.22
   resolution: "language-subtag-registry@npm:0.3.22"
@@ -11550,6 +11575,13 @@ __metadata:
   bin:
     loose-envify: cli.js
   checksum: 6517e24e0cad87ec9888f500c5b5947032cdfe6ef65e1c1936a0c48a524b81e65542c9c3edc91c97d5bddc806ee2a985dbc79be89215d613b1de5db6d1cfe6f4
+  languageName: node
+  linkType: hard
+
+"lottie-web@npm:^5.10.2":
+  version: 5.10.2
+  resolution: "lottie-web@npm:5.10.2"
+  checksum: 9ec80b479d8d03c079bd4f246d301f0c4aac2c4d6f8daaa79f6f3fc285aaba377c64879f6748d49c1db52b9854aea81c3203d858e9c686f7a47cd8b771d112d0
   languageName: node
   linkType: hard
 
@@ -17264,6 +17296,7 @@ __metadata:
     "@types/react-dom": 18.0.9
     "@typescript-eslint/eslint-plugin": ^5.45.0
     "@typescript-eslint/parser": ^5.45.0
+    "@use-gesture/react": ^10.2.24
     autoprefixer: ^10.4.13
     axios: ^1.2.0
     babel-loader: ^8.3.0
@@ -17280,7 +17313,9 @@ __metadata:
     eslint-plugin-simple-import-sort: ^8.0.0
     eslint-plugin-storybook: ^0.6.7
     husky: ^8.0.2
+    konsta: ^1.0.2
     lint-staged: ^13.0.4
+    lottie-web: ^5.10.2
     msw: ^0.49.1
     msw-storybook-addon: ^1.6.3
     next: 13.0.5

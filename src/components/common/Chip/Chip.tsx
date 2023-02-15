@@ -9,7 +9,7 @@ type Props<T extends ElementType> = {
 } & ComponentPropsWithoutRef<T>;
 
 const sizes = {
-  medium: "h-36 w-fit rounded-20 px-16 py-8 text-14-semibold-140",
+  medium: "h-36 w-fit rounded-20 px-16 py-8 font-suit text-14-semibold-140",
 };
 
 const colors = {

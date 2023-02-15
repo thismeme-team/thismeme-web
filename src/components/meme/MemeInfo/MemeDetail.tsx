@@ -29,9 +29,7 @@ export const MemeDetail = ({ id }: Props) => {
           src={imageUrl}
           width={imageWidth}
         />
-        <div className="absolute right-16 top-16">
-          <MemeExport id={id} />
-        </div>
+        <MemeExport id={id} />
         <div className="flex items-center justify-between pt-4 pb-16 font-suit text-12-bold-160 text-gray-500">
           <span>{createdDate.split("T")[0].replaceAll("-", ".")}</span>
           {isFetchedAfterMount && (

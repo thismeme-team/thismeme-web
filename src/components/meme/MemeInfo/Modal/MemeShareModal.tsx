@@ -12,7 +12,7 @@ import {
 interface Props extends ModalProps {
   id: string;
 }
-export const MemeShareModal = ({ id, ...rest }: Props) => {
+export const MemeShareModal = ({ id, ...modalProps }: Props) => {
   const { show } = useToast();
 
   const {
@@ -27,7 +27,7 @@ export const MemeShareModal = ({ id, ...rest }: Props) => {
   const showNativeShareErrorToast = () => show("공유하기가 지원되지 않습니다.");
 
   return (
-    <Modal {...rest}>
+    <Modal {...modalProps}>
       <Modal.Header />
       <Photo className="my-24 w-300 rounded-15" src={src} />
       <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
@@ -46,7 +46,7 @@ export const MemeShareModal = ({ id, ...rest }: Props) => {
           <ClipboardCopyButton
             target={PAGE_URL}
             onSuccess={() => {
-              rest.onClose();
+              modalProps.onClose();
               showClipboardCopyToast();
             }}
           />
@@ -58,7 +58,7 @@ export const MemeShareModal = ({ id, ...rest }: Props) => {
             title={name}
             url={PAGE_URL}
             onError={() => {
-              rest.onClose();
+              modalProps.onClose();
               showNativeShareErrorToast();
             }}
           />

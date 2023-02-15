@@ -1,5 +1,3 @@
-import { useMemo } from "react";
-
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 import { RandomImage } from "@/components/common/RandomImge";
@@ -8,18 +6,16 @@ import type { ModalProps } from "./Modal";
 import { Modal } from "./Modal";
 
 export const SignUpModal = (props: ModalProps) => {
-  // FIX: Modal이 닫힐 때 랜덤 밈이 바뀌는 현상 수정
-  const meme = useMemo(
-    () => <RandomImage className="-mb-[calc(1.4em-3.2rem)/2] inline-block h-32 w-32 rounded-8" />,
-    [],
-  );
-
   return (
     <Modal {...props}>
       <Modal.Header />
       <div className="m-auto w-300 rounded-24 px-8 pb-24">
         <section className="align-left mt-36 mb-10 text-left font-suit text-32-bold-140">
-          <div>킹 받는 {meme} 을</div>
+          <div>
+            킹 받는{" "}
+            <RandomImage className="-mb-[calc(1.4em-3.2rem)/2] inline-block h-32 w-32 rounded-8" />
+            을
+          </div>
           <div>바로 찾아서</div>
           <div>보낼 수 있어요!</div>
         </section>

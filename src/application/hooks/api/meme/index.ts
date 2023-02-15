@@ -46,28 +46,16 @@ export const useGetPopularMemes = () => {
 };
 
 /**
- * 공유순 밈 리스트 api
+ * 밈 type 에 따른 리스트 api
+ * @param sort  밈 리스트 type : share,recent,popular
  */
+const types = { share: "shareCount", recent: "createdDate", popular: "viewCount", user: "user" };
 
-export const useGetSharedMemes = () => {
+export const useGetMemesBySort = (sort: keyof typeof types) => {
   const { data, ...rest } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getSharedMemes,
+    queryKey: QUERY_KEYS.getMemesBySort(sort),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getSharedMemes({ offset: pageParam, limit: LIMIT }),
-    getNextPageParam: (lastPage) => {
-      const { isLastPage, offset, limit } = lastPage;
-      return isLastPage ? undefined : offset + limit;
-    },
-  });
-  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  return { data: memeList, ...rest };
-};
-
-export const useGetRecentMemes = () => {
-  const { data, ...rest } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getRecentMemes,
-    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getRecentMemes({ offset: pageParam, limit: LIMIT }),
+      api.meme.getMemesBySort({ offset: pageParam, limit: LIMIT, sort: types[sort] }),
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;
       return isLastPage ? undefined : offset + limit;

@@ -3,7 +3,6 @@ import { rest } from "msw";
 import type { GetMemesResponse } from "@/infra/api/search/types";
 
 import * as MOCK_DATA from "./data";
-import { memeSample } from "./data";
 
 export const getSearch = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/search`,
@@ -85,24 +84,3 @@ export const getMemeList = rest.get(`${process.env.NEXT_PUBLIC_API_URL}/memes`, 
     ctx.delay(500),
   );
 });
-
-/*NOTE 최근 밈 리스트 테스트 하기 위한 용도*/
-export const getRecentList = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/memesRecent`,
-  (req, res, ctx) => {
-    const { searchParams } = req.url;
-    const page = Number(searchParams.get("page"));
-    const size = Number(searchParams.get("size"));
-
-    const data = memeSample.slice(page, page + size);
-
-    return res(
-      ctx.status(200),
-      ctx.json<GetMemesResponse>({
-        memes: data,
-        count: data.length,
-      }),
-      ctx.delay(500),
-    );
-  },
-);

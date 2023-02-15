@@ -32,30 +32,19 @@ export class MemeApi {
     return result;
   };
 
-  getSharedMemes = async ({ offset, limit }: { offset: number; limit: number }) => {
+  getMemesBySort = async ({
+    offset,
+    limit,
+    sort,
+  }: {
+    offset: number;
+    limit: number;
+    sort: string;
+  }) => {
     const currentpage = offset / limit;
 
     const { data } = await this.api.get<GetMemesResponse>(
-      `/memes?page=${currentpage}&size=${limit}&sort=shareCount,desc`,
-    );
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
-  };
-
-  getRecentMemes = async ({ offset, limit }: { offset: number; limit: number }) => {
-    const currentpage = offset / limit;
-
-    /*NOTE 
-    실제 api 는 memesRecent 가 아닌 memes로 수정(msw 테스트용)
-    */
-    const { data } = await this.api.get<GetMemesResponse>(
-      `/memesRecent?page=${currentpage}&size=${limit}&sort=createdDate,desc`,
+      `/memes?page=${currentpage}&size=${limit}&sort=${sort},desc`,
     );
     const result = {
       data: data.memes,

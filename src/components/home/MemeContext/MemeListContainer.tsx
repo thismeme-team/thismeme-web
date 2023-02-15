@@ -3,7 +3,7 @@ import { createContext, useContext, useState } from "react";
 
 import { SSRSuspense } from "@/components/common/Suspense";
 
-import { RecentMemeList, SharedMemeList, UserFindMemeList } from "../MemeList";
+import { MemeList, UserFindMemeList } from "../MemeList";
 import { MemeSortDropDown } from "./DropDown";
 
 type MemeListType = "user" | "share" | "recent";
@@ -17,15 +17,7 @@ export const MemeListContainer = () => {
     <MemeListContext.Provider value={meme}>
       <MemeListSetContext.Provider value={setMeme}>
         <MemeSortDropDown />
-        <SSRSuspense>
-          {meme === "share" ? (
-            <SharedMemeList />
-          ) : meme === "recent" ? (
-            <RecentMemeList />
-          ) : (
-            <UserFindMemeList />
-          )}
-        </SSRSuspense>
+        <SSRSuspense>{meme === "user" ? <UserFindMemeList /> : <MemeList />}</SSRSuspense>
       </MemeListSetContext.Provider>
     </MemeListContext.Provider>
   );

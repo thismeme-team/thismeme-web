@@ -3,4 +3,5 @@ export const QUERY_KEYS = {
   getPopularMemes: ["getPopularMemes"],
   getSharedMemes: ["getSharedMemes"],
   getRecentMemes: ["getRecentMemes"],
+  getMemesBySort: (sort: string) => ["getMemesByOption", sort],
 } as const;

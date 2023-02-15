@@ -5,14 +5,18 @@ import { api } from "@/infra/api";
 
 import { QUERY_KEYS } from "./queryKey";
 
-export const useGetMyAccount = ({ enabled }: UseQueryOptions) =>
-  useQuery({
+export const useGetMyAccount = ({ enabled }: UseQueryOptions) => {
+  const queryClient = useQueryClient();
+  return useQuery({
     suspense: false,
     queryKey: QUERY_KEYS.getMyAccount,
     queryFn: api.account.getMyAccount,
     enabled,
-    staleTime: Infinity,
+    onError: () => {
+      queryClient.setQueryData(QUERY_KEYS.getMyAccount, null);
+    },
   });
+};
 
 export const useLogout = () => {
   const queryClient = useQueryClient();

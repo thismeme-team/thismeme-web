@@ -6,11 +6,11 @@ export const refresh = rest.post(
     const refreshToken = req.cookies.refreshToken;
 
     // NOTE: refreshToken 이 없거나 만료되었으면 401, 정상 200
-    const status = refreshToken ? 401 : Math.random() < 0.3 ? 401 : 200;
+    const status = !refreshToken ? 401 : Math.random() < 0.3 ? 401 : 200;
 
     // NOTE: Internal Server Error 500
     return res(
-      ctx.status(Math.random() > 0.8 ? 500 : status),
+      ctx.status(Math.random() > 0.85 ? 500 : status),
       ctx.json({
         accessToken: "Refresh Test",
       }),

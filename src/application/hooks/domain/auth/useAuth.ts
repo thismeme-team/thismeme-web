@@ -4,7 +4,7 @@ import { useGetMyAccount, useLogout } from "@/application/hooks";
 import { api } from "@/infra/api";
 
 export const useAuth = () => {
-  const { data } = useGetMyAccount({ enabled: true });
+  const { data } = useGetMyAccount();
   const { mutate: logout } = useLogout();
 
   const login = useCallback((token: string) => {

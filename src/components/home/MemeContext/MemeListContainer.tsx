@@ -12,6 +12,7 @@ export const MemeListSetContext = createContext<Dispatch<SetStateAction<MemeList
 
 export const MemeListContainer = () => {
   const [meme, setMeme] = useState<MemeListType>("share");
+  console.log(meme);
 
   return (
     <MemeListContext.Provider value={meme}>

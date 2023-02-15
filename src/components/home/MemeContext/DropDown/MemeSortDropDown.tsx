@@ -1,5 +1,5 @@
 import type { MouseEvent } from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { css } from "twin.macro";
 
 import { useAuth } from "@/application/hooks";
@@ -10,11 +10,15 @@ import { useSetMemeListContext } from "../MemeListContainer";
 
 export const MemeSortDropDown = () => {
   const { isLogin, user } = useAuth();
-  const [menu, setMenu] = useState<string>(
-    user?.name ? `@${user?.name}이 찾는 밈` : `공유가 많이 된 밈`,
-  );
+  const [menu, setMenu] = useState<string>("공유가 많이 된 밈");
 
   const setMemeList = useSetMemeListContext();
+
+  useEffect(() => {
+    //NOTE 처음 드롭다운 메뉴 관리
+    setMenu(isLogin ? `@${user?.name}이 찾는 밈` : `공유가 많이 된 밈`);
+    setMemeList(isLogin ? "user" : "share");
+  }, [isLogin, setMemeList, user?.name]);
 
   const handleDropMenu = (e: MouseEvent<HTMLLIElement>) => {
     setMenu((e.target as HTMLElement).innerText);

@@ -5,6 +5,7 @@ import { Icon } from "@/components/common/Icon";
 import { MyPageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
 import { SSRSuspense } from "@/components/common/Suspense";
+import { withAuth } from "@/components/hocs";
 import { Collection } from "@/components/mypage";
 
 const MyPage = () => {
@@ -50,4 +51,4 @@ const MyPage = () => {
   );
 };
 
-export default MyPage;
+export default withAuth(MyPage);

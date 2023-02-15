@@ -1,5 +1,6 @@
 import { CollectPageNavigation } from "@/components/common/Navigation";
 import { SSRSuspense } from "@/components/common/Suspense";
+import { withAuth } from "@/components/hocs";
 import { Collection } from "@/components/mypage";
 import { SearchInput } from "@/components/search";
 
@@ -21,4 +22,4 @@ const CollectPage = () => {
   );
 };
 
-export default CollectPage;
+export default withAuth(CollectPage);

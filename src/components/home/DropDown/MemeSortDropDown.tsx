@@ -42,7 +42,7 @@ export const MemeSortDropDown = () => {
           )}
         </DropDown.Trigger>
       </div>
-      <DropDown.Contents width="34">
+      <DropDown.Contents css={{ width: "34rem" }}>
         {isLogin && (
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"

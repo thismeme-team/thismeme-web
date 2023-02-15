@@ -24,7 +24,7 @@ export const NativeShareButton = ({ title, text, url, onSuccess, onError }: Prop
       onError?.();
       return;
     }
-    navigator.share({ title, text, url }).then(onSuccess).catch(onError);
+    navigator.share({ title, text, url }).then(onSuccess);
   };
 
   return (

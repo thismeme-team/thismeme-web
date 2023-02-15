@@ -1,3 +1,5 @@
+import tw from "twin.macro";
+
 import { useDownload, useMemeDetailById, useToast } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
@@ -35,11 +37,11 @@ export const MemeExport = ({ id }: Props) => {
   return (
     <DropDown>
       <DropDown.Trigger>
-        <span className="mb-16 flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+        <span className="absolute top-16 right-16 flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
           <Icon color="white" name="meatball" />
         </span>
       </DropDown.Trigger>
-      <DropDown.Contents css={{ right: 0 }} width="34">
+      <DropDown.Contents css={tw`w-full right-0 top-72`}>
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
           onClick={handleImageDownload}

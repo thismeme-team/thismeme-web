@@ -3,6 +3,7 @@ import type { GetServerSideProps, NextPage } from "next";
 import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
+import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemesByTag } from "@/components/explore";
 import { TagFavoriteButton } from "@/components/tags";
@@ -17,12 +18,13 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery }) => {
       <NextSeo description={`${searchQuery} 밈 모음`} title={TITLE.exploreByKeyword(searchQuery)} />
 
       <ExplorePageNavigation title={searchQuery} />
+      <PullToRefresh>
+        <SSRSuspense>
+          <MemesByTag searchQuery={searchQuery} />
+        </SSRSuspense>
 
-      <SSRSuspense>
-        <MemesByTag searchQuery={searchQuery} />
-      </SSRSuspense>
-
-      <TagFavoriteButton />
+        <TagFavoriteButton />
+      </PullToRefresh>
     </>
   );
 };

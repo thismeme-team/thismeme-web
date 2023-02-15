@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { memo, useCallback } from "react";
+import { memo } from "react";
 
 import { useLongPress, useModal } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 import type { Meme } from "@/types";
 
-import { MemeLongPress } from "../MemeLongPress";
+import { MemeLongPress } from "../LongPress";
 
 interface Props {
   meme: Meme;
@@ -14,18 +14,26 @@ interface Props {
 export const MemeItem = memo(({ meme }: Props) => {
   const { open, onOpen, onClose } = useModal();
 
-  const callBack = useCallback(() => {
-    onOpen();
-  }, [onOpen]);
-
-  const longPress = useLongPress(callBack, {
+  const longPress = useLongPress(onOpen, {
     threshold: 1300,
+    cancelOnMovement: true,
   });
 
   return (
-    <div {...longPress()}>
-      {open && <MemeLongPress onClose={onClose} />}
-      <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`} prefetch={false}>
+    <div
+      {...longPress()}
+      onContextMenu={(e) => {
+        e.preventDefault();
+      }}
+    >
+      <MemeLongPress
+        description={meme.description}
+        image={meme.image}
+        name={meme.name}
+        open={open}
+        onClose={onClose}
+      />
+      <Link className="flex flex-col gap-6" href={`/memes/${meme.memeId}`}>
         <Photo
           alt={meme.name}
           className="rounded-15"
@@ -35,7 +43,7 @@ export const MemeItem = memo(({ meme }: Props) => {
         />
         <div className="flex items-center justify-between font-suit text-14-semibold-140">
           <span>{meme.name}</span>
-          <span className="flex items-center">
+          <span className="flex items-center gap-4">
             <Icon height={16} name="memeShare" width={16} />
             <span className="text-gray-600">{meme.shareCount}</span>
           </span>

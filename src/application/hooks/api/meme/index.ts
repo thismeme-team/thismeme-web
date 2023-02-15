@@ -1,5 +1,5 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
-import { useInfiniteQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
 
 import { useSuspendedQuery } from "@/application/hooks/api/core";
 import { api } from "@/infra/api";
@@ -65,4 +65,8 @@ export const useGetMemesByCollectionId = (collectionId: string) => {
   const isEmpty = data?.pages[0].data.length === 0;
 
   return { data: memeList, isEmpty, ...rest };
+};
+
+export const usePostMemeToCollection = (memeId: string) => {
+  return useMutation({ mutationFn: () => api.meme.postMemeToCollection(memeId) });
 };

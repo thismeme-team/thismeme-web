@@ -1,4 +1,8 @@
-import { useModal } from "@/application/hooks";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+import { useAuth, useModal } from "@/application/hooks";
+import { PATH } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { SignOutModal } from "@/components/common/Modal";
 import { Navigation } from "@/components/common/Navigation";
@@ -7,6 +11,12 @@ import { Photo } from "@/components/common/Photo";
 
 const SettingPage = () => {
   const modalProps = useModal();
+
+  const { user, isLogin, isLoading } = useAuth();
+  const { replace } = useRouter();
+  useEffect(() => {
+    if (!isLoading && !isLogin) replace(PATH.getMainPage);
+  }, [isLoading, isLogin, replace]);
 
   return (
     <>
@@ -21,11 +31,11 @@ const SettingPage = () => {
         <section>
           <div className="mt-24 flex h-64 items-center justify-between border-b border-gray-200">
             <span className="text-22-bold-140">계정 정보</span>
-            <span className="text-16-semibold-140 text-gray-600">email@email.com</span>
+            <span className="text-16-semibold-140 text-gray-600">{user?.email}</span>
           </div>
           <div className="flex h-64 justify-between py-16">
             <span className="text-22-bold-140">문의하기</span>
-            <Photo className="h-32 w-32" />
+            <Photo className="h-32 w-32" src="/img/fallbackImage.png" />
           </div>
         </section>
         <section className="mb-28 flex flex-wrap justify-center">

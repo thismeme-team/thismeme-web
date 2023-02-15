@@ -12,6 +12,10 @@ export const SignOutModal = (props: ModalProps) => {
   const { show } = useToast();
   const { push } = useRouter();
 
+  const handleCancel = () => {
+    onClose();
+    push(PATH.getMainPage);
+  };
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
@@ -40,7 +44,7 @@ export const SignOutModal = (props: ModalProps) => {
         </span>
       </div>
       <Modal.Footer className="flex h-66 text-18-bold-140">
-        <button className="grow bg-gray-400 text-white" onClick={onClose}>
+        <button className="grow bg-gray-400 text-white" onClick={handleCancel}>
           취소
         </button>
         <button className="grow border-black bg-black text-white" onClick={handleLogout}>

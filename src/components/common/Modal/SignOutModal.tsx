@@ -1,13 +1,25 @@
+import { useRouter } from "next/router";
+
+import { useAuth, useToast } from "@/application/hooks";
+import { PATH } from "@/application/util";
 import type { ModalProps } from "@/components/common/Modal/Modal";
 import { Modal } from "@/components/common/Modal/Modal";
 import { RandomImage } from "@/components/common/RandomImge";
 
 export const SignOutModal = (props: ModalProps) => {
   const { onClose } = props;
+  const { logout } = useAuth();
+  const { show } = useToast();
+  const { push } = useRouter();
 
   const handleLogout = () => {
-    // TODO Mutation
-    onClose();
+    logout(undefined, {
+      onSuccess: () => {
+        onClose();
+        push(PATH.getMainPage);
+      },
+      onError: () => show("오류가 발생하였습니다"),
+    });
   };
 
   return (

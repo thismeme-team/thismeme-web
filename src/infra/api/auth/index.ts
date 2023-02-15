@@ -1,7 +1,7 @@
 import type { AxiosInstance, AxiosRequestConfig } from "axios";
 import { isAxiosError } from "axios";
 
-import { IS_CSR, LOCAL_STORAGE_KEY, safeLocalStorage } from "@/application/util";
+import { IS_CSR } from "@/application/util";
 import type { RefreshResponse } from "@/infra/api/auth/types";
 
 export class AuthApi {
@@ -26,7 +26,6 @@ export class AuthApi {
       const origin = error.config as AxiosRequestConfig;
 
       if (origin.url === "/token/refresh" && status === 401) {
-        safeLocalStorage.remove(LOCAL_STORAGE_KEY.isLogin);
         location.reload();
       }
 
@@ -45,6 +44,10 @@ export class AuthApi {
 
   setAccessToken = (token: string) => {
     this.api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
+  };
+
+  deleteAccessToken = () => {
+    delete this.api.defaults.headers.common["Authorization"];
   };
 
   logout = () => {

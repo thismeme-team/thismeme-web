@@ -69,4 +69,8 @@ export class MemeApi {
     };
     return result;
   };
+
+  postMemeToCollection = (memeId: string) => {
+    return this.api.post(`/memes/${memeId}/board`).then((response) => response.data);
+  };
 }

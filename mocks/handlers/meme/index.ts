@@ -40,7 +40,7 @@ export const getMemeDetail = rest.get(
 export const getMemesByCollectionId = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/memes/boards/:id`,
   (req, res, ctx) => {
-    const data = MOCK_DATA.memes.slice(0, 10);
+    const data = MOCK_DATA.memes.slice(0, 5);
 
     return res(
       ctx.delay(),
@@ -49,5 +49,12 @@ export const getMemesByCollectionId = rest.get(
         count: 10,
       }),
     );
+  },
+);
+
+export const postMemeToCollection = rest.post(
+  `${process.env.NEXT_PUBLIC_API_URL}/memes/:id/board`,
+  (req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(Math.random() > 0.8 ? 500 : 200));
   },
 );

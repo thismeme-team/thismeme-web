@@ -9,7 +9,7 @@ import { Icon } from "@/components/common/Icon";
 export const MemeSortDropDown = () => {
   const { isLogin, user } = useAuth();
   const [menu, setMenu] = useState<string>(
-    user?.name ? `@${user?.name}이 찾는 밈` : `공유가 많이 된 밈`,
+    user?.name ? `@${user?.name}이 찾는 그 밈` : `공유가 많이 된 그 밈`,
   );
 
   const handleDropMenu = (e: MouseEvent<HTMLLIElement>) => {

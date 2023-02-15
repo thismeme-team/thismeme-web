@@ -10,7 +10,7 @@ interface Props {
 export const UserSharedMemeList = ({ name }: Props) => {
   return (
     <div>
-      <div className="my-16 flex justify-between font-suit text-22-bold-140">
+      <div className="flex justify-between py-16 font-suit text-22-bold-140">
         {`@${name} 이 공유했던 밈`}
         <Icon
           height={32}

@@ -1,3 +1,4 @@
+import * as account from "./account";
 import * as auth from "./auth";
 import * as meme from "./meme";
 import * as post from "./post";
@@ -10,4 +11,5 @@ export const handlers = [
   ...Object.values(tags),
   ...Object.values(meme),
   ...Object.values(search),
+  ...Object.values(account),
 ];

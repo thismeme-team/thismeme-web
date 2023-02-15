@@ -1,12 +1,12 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Suspense } from "react";
 
 import { useAuth } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
+import { SSRSuspense } from "@/components/common/Suspense";
 import { PopularTagList, UserSharedMemeList } from "@/components/home";
 import { MemeListContainer } from "@/components/home/MemeContext";
 import { SearchInput } from "@/components/search";
@@ -26,9 +26,9 @@ const HomePage: NextPage = () => {
             router.push("/search");
           }}
         />
-        <Suspense>
+        <SSRSuspense fallback={<div className="h-84" />}>
           <PopularTagList />
-        </Suspense>
+        </SSRSuspense>
         {isLogin && <UserSharedMemeList name={user?.name} />}
         <MemeListContainer />
       </PullToRefresh>

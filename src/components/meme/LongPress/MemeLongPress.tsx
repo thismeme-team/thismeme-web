@@ -1,8 +1,9 @@
 import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
-import { useDownload, useToast } from "@/application/hooks";
+import { useAuth, useDownload, useModal, useToast } from "@/application/hooks";
 import { android } from "@/application/util";
+import { SignUpModal } from "@/components/common/Modal";
 import type { Image } from "@/types";
 
 interface Props {
@@ -15,7 +16,9 @@ interface Props {
 
 export const MemeLongPress = ({ name, description, image, open, onClose }: Props) => {
   const { download } = useDownload();
+  const modalProps = useModal();
   const { show } = useToast();
+  const { isLogin } = useAuth();
 
   const url = image.images[0].imageUrl;
 
@@ -51,6 +54,7 @@ export const MemeLongPress = ({ name, description, image, open, onClose }: Props
         ]}
         onBackdropClick={onClose}
       >
+        <SignUpModal {...modalProps} />
         <ActionsGroup>
           <ActionsButton
             css={css`
@@ -61,7 +65,7 @@ export const MemeLongPress = ({ name, description, image, open, onClose }: Props
             `}
             onClick={() => {
               onClose();
-              handleCollectionSave();
+              isLogin ? handleCollectionSave() : modalProps.onOpen();
             }}
           >
             콜렉션에 저장하기

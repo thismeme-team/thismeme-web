@@ -27,6 +27,8 @@ export interface Meme {
   };
 
   author?: string;
+
+  tags?: string[];
 }
 
 export interface Image {

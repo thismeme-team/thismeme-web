@@ -40,3 +40,17 @@ export const useGetPopularMemes = () => {
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
   return { data: memeList, ...rest };
 };
+
+export const useGetUserSharedMemes = () => {
+  const { data, ...rest } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getUserSharedMemes,
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.meme.getUserSharedMemes({ offset: pageParam, limit: 10 }),
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  return { data: memeList, ...rest };
+};

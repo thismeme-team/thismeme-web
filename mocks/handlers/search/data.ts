@@ -50,17 +50,6 @@ export const tags = [
 ];
 
 const sampleImages = [
-  // NOTE: onError 에서 잡음
-  // 비어있는 url
-  { url: "", width: 400, height: 700 },
-  // load 할 수 없는 이미지(ex - 404, 500)
-  { url: "https://picsum.xxx/700/400", width: 700, height: 400 }, // 500
-  { url: "https://picsum.photos/id/asdfsdf/200/300", width: 200, height: 300 }, // 404
-
-  // NOTE: ErrorBoundary 에서 잡음
-  // encoding 오류와 같이 Image 컴포넌트 자체에서 나는 오류 이미지
-  { url: "https://picsum.photos/..400/700", width: 400, height: 700 },
-
   // NOTE: 정상 이미지
   { url: "https://picsum.photos/400", width: 400, height: 400 },
   { url: "https://picsum.photos/200/300", width: 200, height: 300 },
@@ -93,6 +82,6 @@ export const memes = Array.from(Array(1024).keys()).map((id) => {
       ],
       count: 1,
     },
-    tags: ["무한도전", "박명수"],
+    tags: ["무한도전", "박명수", "sample"],
   };
 });

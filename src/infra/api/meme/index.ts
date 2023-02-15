@@ -31,4 +31,20 @@ export class MemeApi {
     };
     return result;
   };
+
+  getUserSharedMemes = async ({ offset, limit }: { offset: number; limit: number }) => {
+    const currentpage = offset / limit;
+
+    const { data } = await this.api.get<GetMemesResponse>(
+      `/user/memes?page=${currentpage}&size=${limit}&sort=shareCount,desc`,
+    );
+    const result = {
+      data: data.memes,
+      offset: offset,
+      limit: limit,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
+    };
+    return result;
+  };
 }

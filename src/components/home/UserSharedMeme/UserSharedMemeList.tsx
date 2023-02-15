@@ -1,5 +1,6 @@
 import { css } from "twin.macro";
 
+import { useGetUserSharedMemes } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 
 import { SharedMemeItem } from "./SharedMemeItem";
@@ -7,7 +8,9 @@ import { SharedMemeItem } from "./SharedMemeItem";
 interface Props {
   name?: string;
 }
-export const SharedMemeList = ({ name }: Props) => {
+export const UserSharedMemeList = ({ name }: Props) => {
+  const { data: memeList } = useGetUserSharedMemes();
+
   return (
     <div>
       <div className="my-16 flex justify-between font-suit text-22-bold-140">
@@ -22,9 +25,9 @@ export const SharedMemeList = ({ name }: Props) => {
         />
       </div>
       <ul className="mb-24 flex snap-x snap-mandatory gap-10 overflow-x-scroll">
-        <SharedMemeItem />
-        <SharedMemeItem />
-        <SharedMemeItem />
+        {memeList.map((meme) => (
+          <SharedMemeItem key={meme.memeId} meme={meme} />
+        ))}
       </ul>
     </div>
   );

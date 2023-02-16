@@ -30,7 +30,11 @@ const HomePage: NextPage = () => {
         <SSRSuspense fallback={<div className="h-84" />}>
           <PopularTagList />
         </SSRSuspense>
-        {isLogin && <UserSharedMemeList name={user?.name} />}
+        {isLogin && (
+          <SSRSuspense>
+            <UserSharedMemeList name={user?.name} />
+          </SSRSuspense>
+        )}
         <MemeSortDropDown />
         <SSRSuspense>
           <MemeList />

@@ -1,12 +1,12 @@
 import { css } from "twin.macro";
 
-import { useGetPopularMemes, useIntersect } from "@/application/hooks";
+import { useGetUserFindMemes, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 export const UserFindMemeList = () => {
-  const { data: memeList, fetchNextPage } = useGetPopularMemes();
-  //NOTE 회원이 찾는 밈 인기 밈으로 대체 / 수정 예정
+  const { data: memeList, fetchNextPage } = useGetUserFindMemes();
+  //FIX 회원이 찾는 밈 api 형태가 getMemeBySort 와 다를 수 있을 것 같아서 컴포넌트 분리해둠
 
   const ref = useIntersect(async () => {
     fetchNextPage();

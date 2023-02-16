@@ -55,4 +55,24 @@ export class MemeApi {
     };
     return result;
   };
+
+  /*
+  NOTE 회원이 찾는 밈 api 임의로 url 작성
+  헤더 넣은 api 로 수정되어야 함
+  */
+  getUserFindMemes = async ({ offset, limit }: { offset: number; limit: number }) => {
+    const currentpage = offset / limit;
+
+    const { data } = await this.api.get<GetMemesResponse>(
+      `/memes?page=${currentpage}&size=${limit}&sort=viewCount,desc`,
+    );
+    const result = {
+      data: data.memes,
+      offset: offset,
+      limit: limit,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
+    };
+    return result;
+  };
 }

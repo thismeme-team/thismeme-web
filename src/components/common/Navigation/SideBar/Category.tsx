@@ -8,11 +8,12 @@ import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
 const FAVORITE_ID = "즐겨찾기";
+const TAG_DELETE_DELAY = 1500;
 
 export const Category = () => {
   const router = useRouter();
   const setDrawerOpen = useSetDrawerContext();
-  const { show } = useToast();
+  const { show, close } = useToast();
 
   const { data } = useGetCategoryWithTag({
     select: ({ categories }) => {
@@ -35,15 +36,39 @@ export const Category = () => {
       return restItem;
     },
   });
-  const { mutate: deleteFavoriteTag } = useDeleteFavoriteTag();
+  const { mutate: deleteFavoriteTag, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
 
   const onClickItem = (tagName: string) => {
     setDrawerOpen(false);
     router.push(PATH.getExploreByTagPath(tagName));
   };
 
-  const handleDeleteItem = (tagId: number) => {
-    deleteFavoriteTag(tagId, { onError: () => show("즐겨찾기 삭제가 실패했습니다") });
+  const handleDeleteItem = async (tagId: number) => {
+    show(
+      (id) => (
+        <>
+          <div className="grow">태그가 삭제 되었습니다.</div>
+          <button
+            className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+            onClick={() => {
+              onCancel();
+              close({ id, duration: 0 });
+              show("태그 삭제를 취소 하였습니다.");
+            }}
+          >
+            삭제 취소
+          </button>
+        </>
+      ),
+      { duration: TAG_DELETE_DELAY },
+    );
+
+    deleteFavoriteTag(tagId, {
+      onError: (err) => {
+        if (err instanceof Error && err.name === "CanceledError") return;
+        show("태그 삭제가 실패하였습니다.");
+      },
+    });
   };
 
   return (

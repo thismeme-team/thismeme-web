@@ -1,5 +1,5 @@
 export const QUERY_KEYS = {
   getMemeDetailById: (id: string) => ["getMemeDetailById", id],
   getPopularMemes: ["getPopularMemes"],
-  getMemesByCollectionId: (collectionId: string) => ["getMemesByCollectionId", collectionId],
+  getMemesByCollectionId: (collectionId: number | null) => ["getMemesByCollectionId", collectionId],
 } as const;

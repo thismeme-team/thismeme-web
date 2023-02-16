@@ -37,22 +37,21 @@ export class MemeApi {
   };
 
   /**
-   * 콜렉션 별 밈 리스트 API
-   * endpoint에 board에서 collection 으로 변경할 예정
+   * 콜렉션 별 밈 목록 API
    */
   getMemesByCollectionId = async ({
     collectionId,
     offset,
     limit,
   }: {
-    collectionId: string;
+    collectionId: number;
     offset: number;
     limit: number;
   }) => {
     const page = offset / limit;
 
     const { data } = await this.api.get<GetMemesByCollectionIdResponse>(
-      `/memes/boards/${collectionId}`,
+      `/memes/collections/${collectionId}`,
       {
         params: {
           page,
@@ -68,9 +67,5 @@ export class MemeApi {
       isFirstPage: offset >= 0 && offset < limit,
     };
     return result;
-  };
-
-  postMemeToCollection = (memeId: string) => {
-    return this.api.post(`/memes/${memeId}/board`).then((response) => response.data);
   };
 }

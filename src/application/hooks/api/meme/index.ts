@@ -1,5 +1,5 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
-import { useInfiniteQuery, useMutation } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { useSuspendedQuery } from "@/application/hooks/api/core";
 import { api } from "@/infra/api";
@@ -51,7 +51,7 @@ export const useGetPopularMemes = () => {
  * 마이페이지(/mypage)에서는 무한스크롤 적용 안함
  * 콜렉션 페이지(/collect) 페이지에서 무한 스크롤 적용함
  */
-export const useGetMemesByCollectionId = (collectionId: string) => {
+export const useGetMemesByCollectionId = (collectionId: number) => {
   const { data, ...rest } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getMemesByCollectionId(collectionId),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
@@ -65,8 +65,4 @@ export const useGetMemesByCollectionId = (collectionId: string) => {
   const isEmpty = data?.pages[0].data.length === 0;
 
   return { data: memeList, isEmpty, ...rest };
-};
-
-export const usePostMemeToCollection = (memeId: string) => {
-  return useMutation({ mutationFn: () => api.meme.postMemeToCollection(memeId) });
 };

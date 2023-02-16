@@ -1,14 +1,16 @@
-import { useContext } from "react";
 import { css } from "twin.macro";
 
 import { useGetMemesBySort, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
-import { MemeListContext } from "../MemeContext";
+import type { MemeListType } from "../type";
 
-export const MemeList = () => {
-  const sort = useContext(MemeListContext);
+interface Props {
+  sort: MemeListType;
+}
+
+export const MemeList = ({ sort }: Props) => {
   const { data: memeList, fetchNextPage } = useGetMemesBySort(sort);
 
   const ref = useIntersect(async () => {

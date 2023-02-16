@@ -7,8 +7,7 @@ import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { PopularTagList, UserSharedMemeList } from "@/components/home";
-import { MemeListContainer } from "@/components/home/MemeContext";
+import { MemeListContainer, PopularTagList, UserSharedMemeList } from "@/components/home";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {

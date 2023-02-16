@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import type { Dispatch, MouseEvent, SetStateAction } from "react";
 import { useEffect, useState } from "react";
 import { css } from "twin.macro";
 
@@ -6,13 +6,14 @@ import { useAuth } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown/DropDown";
 import { Icon } from "@/components/common/Icon";
 
-import { useSetMemeListContext } from "../MemeListContainer";
+import type { MemeListType } from "../type";
 
-export const MemeSortDropDown = () => {
+interface Props {
+  setMemeList: Dispatch<SetStateAction<MemeListType>>;
+}
+export const MemeSortDropDown = ({ setMemeList }: Props) => {
   const { isLogin, user } = useAuth();
   const [menu, setMenu] = useState<string>("공유가 많이 된 밈");
-
-  const setMemeList = useSetMemeListContext();
 
   useEffect(() => {
     //NOTE 처음 드롭다운 메뉴 관리

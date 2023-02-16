@@ -3,12 +3,12 @@ import { css } from "twin.macro";
 
 import { useDownload, useToast } from "@/application/hooks";
 import { android } from "@/application/util";
-import type { Image } from "@/types";
+import type { MemeImages } from "@/types";
 
 interface Props {
   name: string;
   description: string;
-  image: Image;
+  image: MemeImages;
   open: boolean;
   onClose: () => void;
 }

@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const Collection = ({ id }: Props) => {
-  const { data: memeList, isEmpty } = useGetMemesByCollectionId(id);
+  const { data: memeList, isEmpty } = useGetMemesByCollectionId(Number(id));
 
   if (isEmpty) {
     return (

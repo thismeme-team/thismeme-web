@@ -1,6 +1,13 @@
 import tw from "twin.macro";
 
-import { useAuth, useDownload, useMemeDetailById, useModal, useToast } from "@/application/hooks";
+import {
+  useAuth,
+  useCollection,
+  useDownload,
+  useMemeDetailById,
+  useModal,
+  useToast,
+} from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 import { SignUpModal } from "@/components/common/Modal";
@@ -9,12 +16,14 @@ interface Props {
   id: string;
 }
 export const MemeExport = ({ id }: Props) => {
+  const { isLogin } = useAuth();
   const {
     name,
     description,
     image: { images },
   } = useMemeDetailById(id);
-  const { isLogin } = useAuth();
+  const { onUpdateCollection } = useCollection({ memeId: Number(id) });
+
   const modalProps = useModal();
   const { download } = useDownload();
   const { show } = useToast();
@@ -27,15 +36,6 @@ export const MemeExport = ({ id }: Props) => {
       name,
       onSuccess: () => show("이미지를 다운로드 했습니다!"),
     });
-
-  const handleCollectionSave = () => {
-    /**
-     * TODO
-     * 콜렉션 저장 mutate 호출
-     */
-
-    show("콜렉션에 저장했습니다!");
-  };
 
   const handleNaviteShare = async () => {
     if (!navigator.share) {
@@ -61,7 +61,7 @@ export const MemeExport = ({ id }: Props) => {
           </DropDown.Content>
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={isLogin ? handleCollectionSave : modalProps.onOpen}
+            onClick={isLogin ? onUpdateCollection : modalProps.onOpen}
           >
             콜렉션에 저장하기
           </DropDown.Content>
@@ -76,6 +76,7 @@ export const MemeExport = ({ id }: Props) => {
           </DropDown.Content>
         </DropDown.Contents>
       </DropDown>
+
       <SignUpModal {...modalProps} />
     </>
   );

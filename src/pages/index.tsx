@@ -1,6 +1,5 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Suspense } from "react";
 
 import { useAuth } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
@@ -22,14 +21,15 @@ const HomePage: NextPage = () => {
       <PullToRefresh>
         <section className="pt-16" />
         <SearchInput
+          inputMode="none"
           placeholder="당신이 생각한 '그 밈' 검색하기"
           onClick={() => {
             router.push("/search");
           }}
         />
-        <Suspense>
+        <SSRSuspense fallback={<div className="h-84" />}>
           <PopularTagList />
-        </Suspense>
+        </SSRSuspense>
         {isLogin && <UserSharedMemeList name={user?.name} />}
         <MemeSortDropDown />
         <SSRSuspense>

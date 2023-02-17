@@ -67,29 +67,5 @@ export const useGetMemeTagsById = (id: string) => {
 export const fetchMemeTagsById = (id: string, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getMemeTagsById(id), () => api.tags.getMemeTagsById(id));
 
-export const usePostFavoriteTag = (tagId: number) => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: () => api.tags.postFavoriteTag(tagId),
-    onMutate: async (newTagId: number) => {
-      // await queryClient.cancelQueries({
-      //   queryKey: QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId),
-      // });
-      // const previousCollectionInfo = queryClient.getQueryData(
-      //   QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId),
-      // );
-      // queryClient.setQueryData(QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId), {
-      //   collectionId: null,
-      //   done: false,
-      // });
-      // return { previousCollectionInfo, deletedMemeId };
-    },
-    onError: (_, deletedMemeId, context) => {
-      // queryClient.setQueryData(
-      //   QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId),
-      //   context?.previousCollectionInfo,
-      // );
-    },
-  });
-};
+export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
+  queryClient.fetchQuery(QUERY_KEYS.getTagInfo(tagId), () => api.tags.getTagInfo(tagId));

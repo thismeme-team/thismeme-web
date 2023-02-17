@@ -1,6 +1,10 @@
 import type { AxiosInstance } from "axios";
 
-import type { GetCategoryByTagResponse, GetMemeTagsByIdResponse } from "./types";
+import type {
+  GetCategoryByTagResponse,
+  GetMemeTagsByIdResponse,
+  GetTagInfoResponse,
+} from "./types";
 
 export class TagApi {
   constructor(private api: AxiosInstance) {}
@@ -46,5 +50,9 @@ export class TagApi {
 
   deleteFavoriteTag = (tagId: number) => {
     return this.api.delete(`/tags/${tagId}/fav`).then((response) => response.data);
+  };
+
+  getTagInfo = (tagId: number) => {
+    return this.api.get<GetTagInfoResponse>(`/tags/${tagId}`).then((response) => response.data);
   };
 }

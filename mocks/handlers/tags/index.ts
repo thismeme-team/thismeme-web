@@ -53,14 +53,25 @@ export const deleteFavoriteTag = rest.delete(
   },
 );
 
+/**
+ * 태그 상세 조회 API
+ */
 export const getTagInfo = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/tags/:tag`,
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId`,
   async (req, res, ctx) => {
-    const tag = String(req.params.tag);
+    const tagId = String(req.params.tagId);
 
-    if (["무한도전", "분노"].includes(tag)) {
-      return res(ctx.delay(), ctx.status(200), ctx.json({ tagId: 1, tag: tag, isFav: true }));
-    }
-    return res(ctx.delay(), ctx.status(200), ctx.json({ tagId: 1, tag: tag, isFav: false }));
+    return res(
+      ctx.delay(),
+      ctx.status(200),
+      ctx.json({
+        tagId,
+        name: "개발자",
+        viewCount: 54,
+        categoryId: 1,
+        categoryName: "카테고리 명1",
+        isFav: true,
+      }),
+    );
   },
 );

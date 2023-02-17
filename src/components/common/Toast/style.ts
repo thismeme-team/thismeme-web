@@ -3,7 +3,7 @@ import tw, { css, theme } from "twin.macro";
 export const toastColors = {
   black: css`
     background: ${theme`colors.gray.800`};
-    color: white;
+    color: ${theme`colors.gray.100`};
   `,
 };
 

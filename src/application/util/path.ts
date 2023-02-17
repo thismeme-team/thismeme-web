@@ -16,4 +16,6 @@ export const PATH = {
   getExploreByTagPath: (tagId: number) => {
     return `/explore/tags/${tagId}`;
   },
+
+  getMainPage: "/",
 };

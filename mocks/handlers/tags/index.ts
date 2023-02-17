@@ -49,7 +49,7 @@ export const postFavoriteTag = rest.post(
 export const deleteFavoriteTag = rest.delete(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId/fav`,
   async (req, res, ctx) => {
-    return res(ctx.delay(), ctx.status(200));
+    return res(ctx.delay(), ctx.status(Math.random() > 0.8 ? 500 : 200));
   },
 );
 

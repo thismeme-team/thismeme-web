@@ -41,15 +41,18 @@ export class TagApi {
       .then((response) => response.data);
   };
 
-  getCategoryWithTags = () =>
-    this.api.get<GetCategoryByTagResponse>("/tags/categories").then((response) => response.data);
+  getCategoryWithTags = () => {
+    return this.api
+      .get<GetCategoryByTagResponse>("/tags/categories")
+      .then((response) => response.data);
+  };
 
   postFavoriteTag = (tagId: number) => {
     return this.api.post(`/tags/${tagId}/fav`).then((response) => response.data);
   };
 
-  deleteFavoriteTag = (tagId: number) => {
-    return this.api.delete(`/tags/${tagId}/fav`).then((response) => response.data);
+  deleteFavoriteTag = (tagId: number, signal?: AbortSignal) => {
+    return this.api.delete(`tags/${tagId}/fav`, { signal }).then((response) => response.data);
   };
 
   getTagInfo = (tagId: number) => {

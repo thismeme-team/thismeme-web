@@ -17,4 +17,6 @@ export const PATH = {
     const encodedValue = encodeURIComponent(tag);
     return `/explore/tags?q=${encodedValue}`;
   },
+
+  getMainPage: "/",
 };

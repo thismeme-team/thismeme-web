@@ -22,7 +22,9 @@ export const DropDown = ({ children }: PropsWithChildren) => {
   return (
     <DropDownContext.Provider value={isOpen}>
       <DropDownSetContext.Provider value={setIsOpen}>
-        <div ref={ref}>{children}</div>
+        <div css={{ fontSize: 0 }} ref={ref}>
+          {children}
+        </div>
       </DropDownSetContext.Provider>
     </DropDownContext.Provider>
   );

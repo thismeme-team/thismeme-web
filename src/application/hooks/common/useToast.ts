@@ -18,8 +18,8 @@ const toastFactory = (type: ToastType, message: Toast["message"], option?: Toast
 export const useToast = () => {
   const dispatch = useSetToastContext();
   const close = useCallback(
-    async ({ id, duration }: Pick<Toast, "id" | "duration">) => {
-      await delay(duration || DEFAULT_TOAST_DELAY);
+    async ({ id, duration = DEFAULT_TOAST_DELAY }: Pick<Toast, "id" | "duration">) => {
+      await delay(duration);
       dispatch({ type: "dismiss", id });
 
       await delay(ANIMATION_EXPIRE_DELAY);
@@ -38,5 +38,5 @@ export const useToast = () => {
     [close, dispatch],
   );
 
-  return { show };
+  return { show, close };
 };

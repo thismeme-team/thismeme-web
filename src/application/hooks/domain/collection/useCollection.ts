@@ -1,14 +1,10 @@
 import {
   useDeleteMemeFromCollection,
-  useGetCollectionInfoByMemeId,
+  useGetCollectionCheck,
   usePostMemeToCollection,
   useToast,
 } from "@/application/hooks";
 
-interface CollectionInfo {
-  collectionId: number | null;
-  done: boolean;
-}
 interface UseCollectionArg {
   memeId: number;
 }
@@ -17,18 +13,14 @@ interface UseCollectionArg {
  * 추후 기획이 특정 폴더에 밈을 저장하게 되면 수정
  */
 export const useCollection = ({ memeId }: UseCollectionArg) => {
-  const { data: collectionInfo } = useGetCollectionInfoByMemeId<CollectionInfo>(memeId, {
-    select: ({ collectionId }) => {
-      return { collectionId, done: !!collectionId };
-    },
-  });
+  const { data: collectionCheck } = useGetCollectionCheck(memeId);
   const { mutate: postMemeToCollection } = usePostMemeToCollection({ memeId });
   const { mutate: deleteMemeFromCollection } = useDeleteMemeFromCollection({ memeId });
 
   const { show } = useToast();
 
   const onUpdateCollection = () => {
-    if (collectionInfo.done) {
+    if (collectionCheck.isAdded) {
       deleteMemeFromCollection(memeId, {
         onSuccess: () => {
           show("콜렉션에서 삭제했습니다!");
@@ -48,5 +40,5 @@ export const useCollection = ({ memeId }: UseCollectionArg) => {
       });
     }
   };
-  return { collectionInfo, onUpdateCollection };
+  return { ...collectionCheck, onUpdateCollection };
 };

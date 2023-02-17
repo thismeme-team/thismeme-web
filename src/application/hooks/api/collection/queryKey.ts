@@ -1,3 +1,3 @@
 export const QUERY_KEYS = {
-  getCollectionInfoByMemeId: (memeId: number) => ["getCollectionInfoByMemeId", memeId],
+  getCollectionCheck: (memeId: number) => ["getCollectionCheck", memeId],
 } as const;

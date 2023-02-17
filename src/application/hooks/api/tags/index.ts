@@ -1,5 +1,5 @@
 import type { QueryClient } from "@tanstack/react-query";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useSuspendedQuery } from "@/application/hooks/api/core";
 import { api } from "@/infra/api";
@@ -66,3 +66,30 @@ export const useGetMemeTagsById = (id: string) => {
 
 export const fetchMemeTagsById = (id: string, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getMemeTagsById(id), () => api.tags.getMemeTagsById(id));
+
+export const usePostFavoriteTag = (tagId: number) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => api.tags.postFavoriteTag(tagId),
+    onMutate: async (newTagId: number) => {
+      // await queryClient.cancelQueries({
+      //   queryKey: QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId),
+      // });
+      // const previousCollectionInfo = queryClient.getQueryData(
+      //   QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId),
+      // );
+      // queryClient.setQueryData(QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId), {
+      //   collectionId: null,
+      //   done: false,
+      // });
+      // return { previousCollectionInfo, deletedMemeId };
+    },
+    onError: (_, deletedMemeId, context) => {
+      // queryClient.setQueryData(
+      //   QUERY_KEYS.getCollectionInfoByMemeId(deletedMemeId),
+      //   context?.previousCollectionInfo,
+      // );
+    },
+  });
+};

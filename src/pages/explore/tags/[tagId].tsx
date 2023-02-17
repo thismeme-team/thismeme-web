@@ -1,5 +1,7 @@
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetServerSideProps, NextPage } from "next";
 
+import { fetchTagInfo } from "@/application/hooks";
 import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
@@ -29,21 +31,29 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
-  /**
-   * @description
-   * query.q 타입 검사
-   * 문자열이 아니면 404 로 이동
-   */
-  if (!query.q || typeof query.q !== "string") {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+  const tagId = params?.tagId;
+  const queryClient = new QueryClient();
+
+  if (typeof tagId !== "string") {
     return {
       notFound: true,
     };
   }
-  return {
-    props: {
-      searchQuery: query?.q,
-    },
-  };
+
+  try {
+    const { name: tagName } = await fetchTagInfo(Number(tagId), queryClient);
+
+    return {
+      props: {
+        hydrateState: dehydrate(queryClient),
+        searchQuery: tagName,
+      },
+    };
+  } catch (e) {
+    return {
+      notFound: true,
+    };
+  }
 };
 export default ExploreByTagPage;

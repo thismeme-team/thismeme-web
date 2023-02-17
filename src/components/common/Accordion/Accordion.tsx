@@ -24,7 +24,7 @@ export const Accordion = ({ items, onClickItem }: Props) => {
             <ul className="flex flex-col gap-16 py-16 px-50 text-16-semibold-130">
               {item.children.map((child) => (
                 <li key={child}>
-                  <button onClick={() => onClickItem?.(child)}>{child}</button>
+                  <button onClick={() => onClickItem?.(item.id)}>{child}</button>
                 </li>
               ))}
             </ul>

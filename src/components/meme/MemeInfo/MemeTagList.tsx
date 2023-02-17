@@ -20,7 +20,7 @@ export const MemeTagList = ({ id }: Props) => {
             className="rounded-20 border border-primary-300 bg-gray-100 py-8 px-16 font-suit text-14-semibold-140 active:bg-gray-400"
             key={tag.tagId}
           >
-            <Link href={PATH.getExploreByTagPath(tag.name)}>{tag.name}</Link>
+            <Link href={PATH.getExploreByTagPath(tag.tagId)}>{tag.name}</Link>
           </li>
         ))}
       </ul>

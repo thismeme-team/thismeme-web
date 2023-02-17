@@ -12,7 +12,7 @@ export const Category = () => {
 
   const onClickItem = (tagName: string) => {
     setDrawerOpen(false);
-    router.push(PATH.getExploreByTagPath(tagName));
+    router.push(PATH.getExploreByTagPath(1));
   };
 
   return <Accordion items={data} onClickItem={onClickItem} />;

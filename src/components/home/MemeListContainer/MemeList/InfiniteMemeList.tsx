@@ -1,21 +1,17 @@
 import { css } from "twin.macro";
 
-import { useGetMemesBySort, useIntersect } from "@/application/hooks";
+import { useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
-
-import type { MemeListType } from "../type";
+import type { Meme } from "@/types";
 
 interface Props {
-  sort: MemeListType;
+  memeList: Meme[];
+  onEndReached: () => void;
 }
 
-export const MemeList = ({ sort }: Props) => {
-  const { data: memeList, fetchNextPage } = useGetMemesBySort(sort);
-
-  const ref = useIntersect(async () => {
-    fetchNextPage();
-  });
+export const InfiniteMemeList = ({ memeList, onEndReached }: Props) => {
+  const ref = useIntersect(onEndReached);
 
   return (
     <div

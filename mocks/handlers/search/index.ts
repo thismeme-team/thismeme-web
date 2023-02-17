@@ -73,7 +73,9 @@ export const getMemeList = rest.get(`${process.env.NEXT_PUBLIC_API_URL}/memes`, 
   const page = Number(searchParams.get("page"));
   const size = Number(searchParams.get("size"));
 
-  const data = MOCK_DATA.memes.slice(page, page + size);
+  const offset = Math.floor(Math.random() * 200) + page;
+
+  const data = MOCK_DATA.memes.slice(offset, offset + size);
 
   return res(
     ctx.status(200),

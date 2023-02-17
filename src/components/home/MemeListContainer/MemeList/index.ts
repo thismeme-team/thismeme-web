@@ -1,2 +1,3 @@
-export * from "./MemeList";
+export * from "./CommonMemeList";
+export * from "./InfiniteMemeList";
 export * from "./UserFindMemeList";

@@ -1,19 +1,21 @@
 import { useState } from "react";
 
+import { useAuth } from "@/application/hooks";
 import { SSRSuspense } from "@/components/common/Suspense";
 
-import { MemeSortDropDown } from "../MemeListContainer/DropDown";
-import { MemeList, UserFindMemeList } from "./MemeList";
+import { MemeSortDropDown } from "./DropDown";
+import { CommonMemeList, UserFindMemeList } from "./MemeList";
 import type { MemeListType } from "./type";
 
 export const MemeListContainer = () => {
-  const [memeList, setMemeList] = useState<MemeListType>("share");
+  const { isLogin } = useAuth();
+  const [sortBy, setSortBy] = useState<MemeListType>(isLogin ? "user" : "share");
 
   return (
     <>
-      <MemeSortDropDown setMemeList={setMemeList} />
+      <MemeSortDropDown sortBy={sortBy} onClickItem={setSortBy} />
       <SSRSuspense>
-        {memeList === "user" ? <UserFindMemeList /> : <MemeList sort={memeList} />}
+        {sortBy === "user" ? <UserFindMemeList /> : <CommonMemeList sortBy={sortBy} />}
       </SSRSuspense>
     </>
   );

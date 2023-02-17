@@ -3,6 +3,7 @@ import axios from "axios";
 import { AccountApi } from "@/infra/api/account";
 import { AuthApi } from "@/infra/api/auth";
 
+import { CollectionApi } from "./collection";
 import { MemeApi } from "./meme";
 import { SearchApi } from "./search";
 import { TagApi } from "./tags";
@@ -37,4 +38,5 @@ export const api = {
   search: new SearchApi(axiosSearchBasic),
   meme: new MemeApi(axiosBasic),
   tags: new TagApi(axiosBasic),
+  collection: new CollectionApi(axiosBasic),
 };

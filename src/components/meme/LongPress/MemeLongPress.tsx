@@ -2,6 +2,7 @@ import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
 import { useAuth, useDownload, useModal, useToast } from "@/application/hooks";
+import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { android } from "@/application/util";
 import { SignUpModal } from "@/components/common/Modal";
 import type { Image } from "@/types";
@@ -19,6 +20,7 @@ export const MemeLongPress = ({ name, description, image, open, onClose }: Props
   const modalProps = useModal();
   const { show } = useToast();
   const { isLogin } = useAuth();
+  const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({ memeId: 1 });
 
   const url = image.images[0].imageUrl;
 
@@ -93,6 +95,7 @@ export const MemeLongPress = ({ name, description, image, open, onClose }: Props
             `}
             onClick={() => {
               onClose();
+              postMemeToSharedCollection();
               handleNaviteShare();
             }}
           >

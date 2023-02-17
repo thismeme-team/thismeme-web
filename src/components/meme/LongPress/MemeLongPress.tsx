@@ -8,6 +8,7 @@ import { SignUpModal } from "@/components/common/Modal";
 import type { Image } from "@/types";
 
 interface Props {
+  id: number;
   name: string;
   description: string;
   image: Image;
@@ -15,12 +16,12 @@ interface Props {
   onClose: () => void;
 }
 
-export const MemeLongPress = ({ name, description, image, open, onClose }: Props) => {
+export const MemeLongPress = ({ id, name, description, image, open, onClose }: Props) => {
   const { download } = useDownload();
   const modalProps = useModal();
   const { show } = useToast();
   const { isLogin } = useAuth();
-  const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({ memeId: 1 });
+  const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({ memeId: id });
 
   const url = image.images[0].imageUrl;
 

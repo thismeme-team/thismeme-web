@@ -28,6 +28,7 @@ export const MemeItem = memo(({ meme }: Props) => {
     >
       <MemeLongPress
         description={meme.description}
+        id={meme.memeId}
         image={meme.image}
         name={meme.name}
         open={open}

@@ -1,34 +1,45 @@
-import type { Dispatch, MouseEvent, SetStateAction } from "react";
-import { useEffect, useState } from "react";
+import type { Dispatch, SetStateAction } from "react";
+import { startTransition, useCallback, useEffect } from "react";
 import { css } from "twin.macro";
 
 import { useAuth } from "@/application/hooks";
-import { DropDown } from "@/components/common/DropDown/DropDown";
+import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 
 import type { MemeListType } from "../type";
 
 interface Props {
-  setMemeList: Dispatch<SetStateAction<MemeListType>>;
+  sortBy: MemeListType;
+  onClickItem: Dispatch<SetStateAction<MemeListType>>;
 }
-export const MemeSortDropDown = ({ setMemeList }: Props) => {
+
+export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
   const { isLogin, user } = useAuth();
-  const [menu, setMenu] = useState<string>("공유가 많이 된 밈");
+
+  const dropDownText: { [key in MemeListType]: string } = {
+    user: `@${user?.name}이 찾는 밈`,
+    recent: "최신 업로드 된 그 밈",
+    share: "공유가 많이 된 그 밈",
+  };
+
+  const handleSortBy = useCallback(
+    (type: MemeListType) => {
+      // NOTE: 화면 변경 완료될 때까지 이전 UI를 유지하게 하여 MemeList 높이가 0이 되지 않도록 함
+      // MemeList 높이가 0이 되면 스크롤이 상단으로 튀는 문제 발생
+      startTransition(() => onClickItem(type));
+    },
+    [onClickItem],
+  );
 
   useEffect(() => {
-    //NOTE 처음 드롭다운 메뉴 관리
-    setMenu(isLogin ? `@${user?.name}이 찾는 밈` : `공유가 많이 된 밈`);
-    setMemeList(isLogin ? "user" : "share");
-  }, [isLogin, setMemeList, user?.name]);
-
-  const handleDropMenu = (e: MouseEvent<HTMLLIElement>) => {
-    setMenu((e.target as HTMLElement).innerText);
-  };
+    // NOTE: 로그인 & 로그아웃 상태 변경 시 드롭다운 상태 재설정
+    handleSortBy(isLogin ? "user" : "share");
+  }, [isLogin, handleSortBy]);
 
   return (
     <DropDown>
       <div className="flex items-center py-16">
-        <header className="font-suit text-22-bold-140">{menu}</header>
+        <header className="font-suit text-22-bold-140">{dropDownText[sortBy]}</header>
         <DropDown.Trigger>
           {({ isOpen }) => (
             <span className="flex h-40 w-40">
@@ -51,31 +62,28 @@ export const MemeSortDropDown = ({ setMemeList }: Props) => {
         {isLogin && (
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={(e) => {
-              handleDropMenu(e);
-              setMemeList("user");
+            onClick={() => {
+              handleSortBy("user");
             }}
           >
-            {`@${user?.name}이 찾는 그 밈`}
+            {dropDownText.user}
           </DropDown.Content>
         )}
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={(e) => {
-            handleDropMenu(e);
-            setMemeList("share");
+          onClick={() => {
+            handleSortBy("share");
           }}
         >
-          공유가 많이 된 그 밈
+          {dropDownText.share}
         </DropDown.Content>
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={(e) => {
-            handleDropMenu(e);
-            setMemeList("recent");
+          onClick={() => {
+            handleSortBy("recent");
           }}
         >
-          최신 업로드 된 그 밈
+          {dropDownText.recent}
         </DropDown.Content>
       </DropDown.Contents>
     </DropDown>

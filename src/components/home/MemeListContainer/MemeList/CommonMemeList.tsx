@@ -1,6 +1,8 @@
 import { useGetMemesBySort } from "@/application/hooks";
-import { InfiniteMemeList } from "@/components/home/MemeListContainer/MemeList/InfiniteMemeList";
-import type { MemeListType } from "@/components/home/MemeListContainer/type";
+import { InfiniteMemeList } from "@/components/meme/InfiniteMemeList";
+import { MemeLongPressContainer } from "@/components/meme/LongPress";
+
+import type { MemeListType } from "../type";
 
 interface Props {
   sortBy: MemeListType;
@@ -8,5 +10,9 @@ interface Props {
 export const CommonMemeList = ({ sortBy }: Props) => {
   const { data: memeList, fetchNextPage } = useGetMemesBySort(sortBy);
 
-  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
+  return (
+    <MemeLongPressContainer memeList={memeList}>
+      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
+    </MemeLongPressContainer>
+  );
 };

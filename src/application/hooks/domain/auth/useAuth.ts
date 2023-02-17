@@ -14,7 +14,7 @@ export const useAuth = () => {
   return {
     logout,
     login,
-    isLogin: isLoading || Boolean(data),
+    isLogin: Boolean(data),
     user: data,
     isLoading,
   };

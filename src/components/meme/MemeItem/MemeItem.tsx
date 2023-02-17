@@ -2,6 +2,7 @@ import Link from "next/link";
 import { memo } from "react";
 
 import { useLongPress, useModal } from "@/application/hooks";
+import { isEncodingError } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 import type { Meme } from "@/types";
@@ -39,6 +40,7 @@ export const MemeItem = memo(({ meme }: Props) => {
           className="rounded-15"
           height={meme.image.images[0]?.imageHeight}
           src={meme.image.images[0]?.imageUrl}
+          unoptimized={isEncodingError(meme.image.images[0]?.imageUrl)}
           width={meme.image.images[0]?.imageWidth}
         />
         <div className="flex items-center justify-between font-suit text-14-semibold-140">

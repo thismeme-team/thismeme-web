@@ -5,11 +5,11 @@ import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 interface Props {
-  id: string;
+  collectionId: string;
 }
 
-export const Collection = ({ id }: Props) => {
-  const { data: memeList, isEmpty } = useGetMemesByCollectionId(Number(id));
+export const Collection = ({ collectionId }: Props) => {
+  const { data: memeList, isEmpty } = useGetMemesByCollectionId(Number(collectionId));
 
   if (isEmpty) {
     return (

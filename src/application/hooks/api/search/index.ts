@@ -54,3 +54,31 @@ export const useGetMemesByTag = (tag: string) => {
 
   return { data: memeList, isEmpty, ...rest };
 };
+
+export const useGetMemesFromCollectionByKeyword = ({
+  keyword,
+  collectionId,
+}: {
+  keyword: string;
+  collectionId: number;
+}) => {
+  const { data, ...rest } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesFromCollectionByKeyword({ keyword, collectionId }),
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.search.getMemesFromCollectionByKeyword({
+        keyword,
+        collectionId,
+        offset: pageParam,
+        limit: PAGE_SIZE,
+      }),
+    enabled: !!keyword && !!collectionId,
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].data.length === 0;
+
+  return { data: memeList, isEmpty, ...rest };
+};

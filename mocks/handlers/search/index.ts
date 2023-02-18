@@ -67,3 +67,26 @@ export const getSearchResultsByTag = rest.get(
     );
   },
 );
+
+export const getMemesFromCollectionByKeyword = rest.get(
+  `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search/collection/:collectionId`,
+  (req, res, ctx) => {
+    const { searchParams } = req.url;
+    const query = searchParams.get("keyword");
+    const offset = Number(searchParams.get("offset"));
+    const limit = Number(searchParams.get("limit"));
+    const data = MOCK_DATA.memes.slice(offset, offset + limit);
+
+    if (!query || !query.trim()) {
+      return res(ctx.status(400));
+    }
+    return res(
+      ctx.status(200),
+      ctx.json<GetMemesResponse>({
+        memes: data,
+        count: data.length,
+      }),
+      ctx.delay(500),
+    );
+  },
+);

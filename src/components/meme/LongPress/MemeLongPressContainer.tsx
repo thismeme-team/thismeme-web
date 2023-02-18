@@ -18,14 +18,14 @@ export const MemeLongPressContainer = ({
   const longPress = useLongPress(
     (event) => {
       const memeId = (event.target as HTMLElement).dataset.id;
-      if (memeId) setCurrentMemeId(+memeId);
+      if (memeId && !isNaN(+memeId)) setCurrentMemeId(+memeId);
     },
     {
       threshold: 1000,
       cancelOnMovement: true,
     },
   );
-  const currentMemeInfo = memeList.filter((meme) => meme.memeId === currentMemeId)[0];
+  const currentMemeInfo = memeList.find((meme) => meme.memeId === currentMemeId);
   const isOpen = !!currentMemeInfo;
 
   return (
@@ -41,8 +41,8 @@ export const MemeLongPressContainer = ({
         {children}
       </div>
       <MemeLongPress
-        {...currentMemeInfo}
-        open={isOpen}
+        isOpen={isOpen}
+        meme={currentMemeInfo}
         onClose={() => setCurrentMemeId(LONG_PRESS_CLOSED)}
       />
     </>

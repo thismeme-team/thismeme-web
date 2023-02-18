@@ -3,21 +3,21 @@ import { css } from "twin.macro";
 
 import { useDownload, useToast } from "@/application/hooks";
 import { android } from "@/application/util";
-import type { Image } from "@/types";
+import type { Meme } from "@/types";
 
 interface Props {
-  name: string;
-  description: string;
-  image: Image;
-  open: boolean;
+  meme?: Meme;
+  isOpen: boolean;
   onClose: () => void;
 }
 
-export const MemeLongPress = ({ name, description, image, open, onClose }: Props) => {
+export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
   const { download } = useDownload();
   const { show } = useToast();
 
-  const url = image?.images[0].imageUrl;
+  const name = meme?.name || "";
+  const description = meme?.description || "";
+  const url = meme?.image?.images[0].imageUrl || "";
 
   const handleImageDownload = () =>
     download({
@@ -35,17 +35,19 @@ export const MemeLongPress = ({ name, description, image, open, onClose }: Props
 
   return (
     <Actions
-      opened={open}
+      opened={isOpen}
       css={[
         !android &&
           css`
             max-width: calc(min(48rem, 100%) - 3.6rem);
+            padding-inline: 0;
             padding-bottom: 4rem;
           `,
         android &&
           css`
             max-width: calc(min(48rem, 100%));
             border-radius: 0 0 1.3rem 1.3rem;
+            padding: 0;
           `,
       ]}
       onBackdropClick={onClose}

@@ -20,5 +20,6 @@ export { default as notloginprofile } from "/public/icon/profile2.svg";
 export { default as search } from "/public/icon/search.svg";
 export { default as setting } from "/public/icon/setting.svg";
 export { default as share } from "/public/icon/share.svg";
+export { default as star } from "/public/icon/star.svg";
 export { default as warn } from "/public/icon/warn.svg";
 export { default as whiteKakao } from "/public/icon/whiteKakao.svg";

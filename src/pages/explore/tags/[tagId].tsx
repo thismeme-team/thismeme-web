@@ -8,7 +8,7 @@ import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemesByTag } from "@/components/explore";
-import { TagFavoriteButton } from "@/components/tags";
+import { TagBookmarkButton } from "@/components/tags";
 
 interface Props {
   searchQuery: string;
@@ -20,12 +20,13 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery }) => {
       <NextSeo description={`${searchQuery} 밈 모음`} title={TITLE.exploreByKeyword(searchQuery)} />
 
       <ExplorePageNavigation title={searchQuery} />
+
       <PullToRefresh>
         <SSRSuspense>
           <MemesByTag searchQuery={searchQuery} />
         </SSRSuspense>
 
-        <TagFavoriteButton />
+        <TagBookmarkButton />
       </PullToRefresh>
     </>
   );

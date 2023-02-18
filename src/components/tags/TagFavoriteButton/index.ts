@@ -1,1 +1,1 @@
-export * from "./TagFavoriteButton";
+export * from "./TagBookmarkButton";

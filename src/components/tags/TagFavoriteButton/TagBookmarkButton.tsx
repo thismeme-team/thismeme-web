@@ -1,8 +1,9 @@
 import { useState } from "react";
 
 import { useToast } from "@/application/hooks";
-import { Button } from "@/components/common/Button";
-import { Icon } from "@/components/common/Icon";
+import { AuthValidateHandler } from "@/hocs/auth";
+
+import { TagBookmarkButtonView } from "./TagBookmarkButtonView";
 
 export const TagBookmarkButton = () => {
   /**
@@ -25,18 +26,11 @@ export const TagBookmarkButton = () => {
   };
 
   return (
-    <label className="fixed bottom-32 right-18 text-center">
-      <input checked={isSuccess} className="peer hidden" type="checkbox" />
-      <Button
-        className="mb-3 flex h-60 w-60 items-center justify-center rounded-full bg-gray-700 focus:bg-black peer-checked:bg-primary-300"
-        id="bookmark"
+    <AuthValidateHandler handler={["onClick"]}>
+      <TagBookmarkButtonView
+        checked={isSuccess}
         onClick={isSuccess ? handleDeleteBookmark : handleSaveBookmark}
-      >
-        <Icon height={30} name="star" width={30} />
-      </Button>
-      <span className="text-12-bold-160 text-gray-700 peer-checked:text-gray-600 peer-focus:text-black ">
-        {isSuccess ? "북마크 완료!" : "태그 북마크"}
-      </span>
-    </label>
+      />
+    </AuthValidateHandler>
   );
 };

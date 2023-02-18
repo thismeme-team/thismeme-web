@@ -1,16 +1,13 @@
-import { useAuth, useIsMount, useModal } from "@/application/hooks";
+import { useAuth, useModal } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 import { ProfileModal, SignUpModal } from "@/components/common/Modal";
 
 export const Profile = () => {
-  const { isLogin } = useAuth();
+  const { isLoading, isLogin } = useAuth();
   const modalProps = useModal();
 
-  const isMount = useIsMount();
-
-  if (!isMount) return null;
-
+  if (isLoading) return null;
   if (isLogin) return <ProfileModal />;
 
   return (

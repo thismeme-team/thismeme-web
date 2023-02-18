@@ -42,7 +42,7 @@ export const useDeleteMemeFromCollection = ({ memeId }: { memeId: number }) => {
 
       queryClient.setQueryData(QUERY_KEYS.getCollectionCheck(deletedMemeId), {
         collectionId: null,
-        done: false,
+        isAdded: false,
       });
 
       return { previousCollectionInfo, deletedMemeId };
@@ -75,7 +75,7 @@ export const usePostMemeToCollection = ({ memeId }: { memeId: number }) => {
 
       queryClient.setQueryData(QUERY_KEYS.getCollectionCheck(newMemeId), {
         collectionId: 1,
-        done: true,
+        isAdded: true,
       });
 
       return { previousCollectionInfo, newMemeId };

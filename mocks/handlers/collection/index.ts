@@ -9,9 +9,9 @@ export const getCollectionInfoByMemeId = rest.get(
     const memeId = Number(req.params.memeId);
 
     if (memeId >= 5) {
-      return res(ctx.delay(), ctx.status(200), ctx.json({ collectionId: 1 }));
+      return res(ctx.delay(), ctx.status(200), ctx.json({ collectionId: 1, isAdded: true }));
     }
-    return res(ctx.delay(), ctx.status(200), ctx.json({ collectionId: null }));
+    return res(ctx.delay(), ctx.status(200), ctx.json({ collectionId: null, isAdded: false }));
   },
 );
 

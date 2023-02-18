@@ -1,35 +1,42 @@
-import { useState } from "react";
-
-import { useToast } from "@/application/hooks";
+import {
+  useDeleteFavoriteTag,
+  useGetTagInfo,
+  usePostFavoriteTag,
+  useToast,
+} from "@/application/hooks";
 import { AuthValidateHandler } from "@/hocs/auth";
 
 import { TagBookmarkButtonView } from "./TagBookmarkButtonView";
 
-export const TagBookmarkButton = () => {
-  /**
-   * FIX
-   * 태그 즐겨찾기 api 연동
-   */
-  const [isSuccess, setIsSuccess] = useState(false);
+interface Props {
+  tagId: number;
+}
+export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show } = useToast();
+  console.debug(typeof tagId);
+  const { isFav } = useGetTagInfo(tagId);
+  const { mutate: saveMutation } = usePostFavoriteTag();
+  const { mutate: deleteMutation } = useDeleteFavoriteTag();
+
   const handleSaveBookmark = () => {
-    // TODO Save Mutation
-    setIsSuccess(true);
-    show("즐겨찾기에 추가했습니다.");
+    saveMutation(tagId, {
+      onSuccess: () => show("즐겨찾기에 추가했습니다."),
+      onError: () => show("다시 시도해 주세요."),
+    });
   };
 
   const handleDeleteBookmark = () => {
-    // TODO Delete Mutation
-    setIsSuccess(false);
-
-    show("즐겨찾기에서 해제했습니다.");
+    deleteMutation(tagId, {
+      onSuccess: () => show("즐겨찾기에서 해제했습니다."),
+      onError: () => show("다시 시도해 주세요."),
+    });
   };
 
   return (
     <AuthValidateHandler handler={["onClick"]}>
       <TagBookmarkButtonView
-        checked={isSuccess}
-        onClick={isSuccess ? handleDeleteBookmark : handleSaveBookmark}
+        checked={isFav}
+        onClick={isFav ? handleDeleteBookmark : handleSaveBookmark}
       />
     </AuthValidateHandler>
   );

@@ -3,6 +3,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useDebounce } from "@/application/hooks";
 import { useSuspendedQuery } from "@/application/hooks/api/core";
+import type { QuerySelectOption } from "@/application/hooks/api/core/types";
 import { delay } from "@/application/util";
 import { api } from "@/infra/api";
 import type { GetPopularTagsResponse, GetTagSearchResponse } from "@/infra/api/tags/types";
@@ -44,7 +45,7 @@ export const useGetTagSearch = (value: string) => {
 export const useGetCategoryWithTag = <T>({
   select,
 }: {
-  select: (data: Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>) => T;
+  select: QuerySelectOption<T, typeof api.tags.getCategoryWithTags>;
 }) =>
   useSuspendedQuery({
     queryKey: QUERY_KEYS.getCategoryWithTags,
@@ -64,6 +65,52 @@ export const useGetMemeTagsById = (id: string) => {
 export const fetchMemeTagsById = (id: string, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getMemeTagsById(id), () => api.tags.getMemeTagsById(id));
 
+export const useGetTagInfo = (tagId: number) => {
+  return useSuspendedQuery({
+    queryKey: QUERY_KEYS.getTagInfo(tagId),
+    queryFn: () => api.tags.getTagInfo(tagId),
+  }).data;
+};
+
+export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
+  queryClient.fetchQuery(QUERY_KEYS.getTagInfo(tagId), () => api.tags.getTagInfo(tagId));
+
+export const usePostFavoriteTag = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: api.tags.postFavoriteTag,
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
+      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
+        ReturnType<typeof api.tags.getTagInfo>
+      >;
+
+      queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
+        const newCategory = (
+          old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
+        ).categories.map((category) => ({
+          ...category,
+          tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: true } : tag)),
+        }));
+
+        return { categories: newCategory };
+      });
+
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+        ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
+        isFav: true,
+      }));
+
+      return { previousTagInfo };
+    },
+
+    onError: (err, id, context) => {
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
+    },
+  });
+};
+
 export const useDeleteFavoriteTag = (wait = 0) => {
   const queryClient = useQueryClient();
 
@@ -73,40 +120,37 @@ export const useDeleteFavoriteTag = (wait = 0) => {
     mutationFn: (id: number) => api.tags.deleteFavoriteTag(id, controller.signal),
     onMutate: async (id) => {
       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getCategoryWithTags });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
 
       const previousCategory = queryClient.getQueryData(QUERY_KEYS.getCategoryWithTags);
-
-      /**
-       * @desc
-       *  Query Cache에 담긴 데이터가 unknown 이므로 타입 단언 사용
-       *  좀 더 좋은 타입 추론 방법이 없을지..?
-       */
+      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
+        ReturnType<typeof api.tags.getTagInfo>
+      >;
 
       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
         const newCategory = (
           old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
         ).categories.map((category) => ({
           ...category,
-          tags: category.tags.filter((tag) => tag.tagId !== id),
+          tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: false } : tag)),
         }));
+
         return { categories: newCategory };
       });
 
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+        ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
+        isFav: false,
+      }));
+
       await delay(wait);
-      return { previousCategory };
+      return { previousCategory, previousTagInfo };
     },
 
     onError: (err, id, context) => {
       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, context?.previousCategory);
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
     },
-
-    // NOTE: 실제 즐겨찾기 삭제 api가 아직 개발 중이므로 재검증 로직 주석 처리
-    // onSettled: () => {
-    //   queryClient.invalidateQueries(QUERY_KEYS.getCategoryWithTags);
-    // },
   });
   return { ...mutation, onCancel: () => controller.abort() };
 };
-
-export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
-  queryClient.fetchQuery(QUERY_KEYS.getTagInfo(tagId), () => api.tags.getTagInfo(tagId));

@@ -59,7 +59,7 @@ export const deleteFavoriteTag = rest.delete(
 export const getTagInfo = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId`,
   async (req, res, ctx) => {
-    const tagId = String(req.params.tagId);
+    const tagId = +req.params.tagId;
 
     return res(
       ctx.delay(),

@@ -12,9 +12,10 @@ import { TagBookmarkButton } from "@/components/tags";
 
 interface Props {
   searchQuery: string;
+  tagId: number;
 }
 
-const ExploreByTagPage: NextPage<Props> = ({ searchQuery }) => {
+const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
   return (
     <>
       <NextSeo description={`${searchQuery} 밈 모음`} title={TITLE.exploreByKeyword(searchQuery)} />
@@ -26,7 +27,7 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery }) => {
           <MemesByTag searchQuery={searchQuery} />
         </SSRSuspense>
 
-        <TagBookmarkButton />
+        <TagBookmarkButton tagId={tagId} />
       </PullToRefresh>
     </>
   );
@@ -49,6 +50,7 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
       props: {
         hydrateState: dehydrate(queryClient),
         searchQuery: tagName,
+        tagId: Number(tagId),
       },
     };
   } catch (e) {

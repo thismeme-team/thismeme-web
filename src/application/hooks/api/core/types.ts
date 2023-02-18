@@ -26,3 +26,7 @@ export type SuspendedUseQueryOptions<
   TData = TQueryFnData,
   TQueryKey extends QueryKey = QueryKey,
 > = Omit<UseQueryOptions<TQueryFnData, TError, TData, TQueryKey>, "suspense">;
+
+export type QuerySelectOption<Result, API extends (...args: any) => any> = (
+  data: Awaited<ReturnType<API>>,
+) => Result;

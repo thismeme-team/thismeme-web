@@ -1,17 +1,32 @@
-import { useAuth } from "@/application/hooks";
+import { useRouter } from "next/router";
+
+import { useAuth, useToast } from "@/application/hooks";
+import { PATH } from "@/application/util";
 
 import { DropDown } from "../DropDown";
 import { Icon } from "../Icon";
 
 export const ProfileModal = () => {
   const { user, logout } = useAuth();
+  const { show } = useToast();
+  const { push } = useRouter();
+
+  const handleLogout = () => {
+    logout(undefined, {
+      onSuccess: () => push(PATH.getMainPage),
+      onError: () => show("오류가 발생하였습니다"),
+    });
+  };
+
   return (
     <>
       <DropDown>
         <DropDown.Trigger>
-          <Icon name="loginprofile" />
+          <span css={{ fontSize: 0 }}>
+            <Icon name="loginprofile" />
+          </span>
         </DropDown.Trigger>
-        <DropDown.Contents css={{ right: 18, top: "6.8rem", width: "34rem" }}>
+        <DropDown.Contents css={{ top: "7rem", right: "1.6rem", width: "34rem" }}>
           <DropDown.Content className="flex h-92 items-center justify-between p-16 font-suit text-22-bold-140">
             <Icon height={60} name="loginprofile" width={60} />@{user?.name}
             <Icon name="setting" />
@@ -27,8 +42,8 @@ export const ProfileModal = () => {
             </section>
           </DropDown.Content>
           <DropDown.Content
-            className="mt-24 flex h-60 items-center justify-center bg-black font-suit text-18-bold-140 text-white"
-            onClick={() => logout()}
+            className="mt-24 flex h-60 cursor-pointer items-center justify-center bg-black font-suit text-18-bold-140 text-white"
+            onClick={handleLogout}
           >
             로그아웃
           </DropDown.Content>

@@ -16,15 +16,7 @@ export interface Meme {
   createdDate: string;
   modifiedDate: string;
 
-  image: {
-    images: {
-      imageId: number;
-      imageUrl: string;
-      imageWidth: number;
-      imageHeight: number;
-    }[];
-    count: number;
-  };
+  image: Image;
 
   author?: string;
 }

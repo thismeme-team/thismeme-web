@@ -8,5 +8,5 @@ export type GetMyAccountResponse = {
   saveCount: number;
   collectionId: number;
   shareCollectionId: number;
-  //user_id 추가 예정
+  id: number;
 };

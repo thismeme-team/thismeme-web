@@ -63,8 +63,7 @@ export const useGetMemesByTag = (tag: string) => {
  * data - 밈 검색 결과
  */
 
-export const useGetUserFindMemes = (keyword: string) => {
-  console.log(keyword);
+export const useGetUserFindMemes = ({ keyword, userId }: { keyword: string; userId: number }) => {
   const { data, ...rest } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getUserFindMemes(keyword),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
@@ -73,9 +72,9 @@ export const useGetUserFindMemes = (keyword: string) => {
             keyword: keyword,
             offset: pageParam,
             limit: PAGE_SIZE,
-            userId: "1",
+            userId: String(userId),
           })
-        : api.meme.getPopularMemes({ offset: pageParam, limit: 10 }),
+        : api.meme.getMemesBySort({ offset: pageParam, limit: 10, sort: "viewCount" }),
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;
       return isLastPage ? undefined : offset + limit;

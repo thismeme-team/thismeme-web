@@ -1,11 +1,11 @@
 import { css } from "twin.macro";
 
-import { useAuth, useGetPopularMemes, useIntersect } from "@/application/hooks";
+import { useAuth, useGetMemesBySort, useIntersect } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 export const RelativeMemeList = () => {
-  const { data: memeList, fetchNextPage } = useGetPopularMemes();
+  const { data: memeList, fetchNextPage } = useGetMemesBySort("popular");
   const ref = useIntersect(async () => {
     fetchNextPage();
   });

@@ -7,7 +7,7 @@ import { SharedMemeItem } from "./SharedMemeItem";
 interface Props {
   name?: string;
 }
-export const SharedMemeList = ({ name }: Props) => {
+export const UserSharedMemeList = ({ name }: Props) => {
   return (
     <div>
       <div className="flex justify-between py-16 font-suit text-22-bold-140">

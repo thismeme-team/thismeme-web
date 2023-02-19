@@ -16,7 +16,7 @@ export const getMyAccount = rest.get(
         saveCount: 34,
         collectionId: 3,
         shareCollectionId: 4,
-        //userId 필드 추가
+        id: 100,
       }),
     );
   },

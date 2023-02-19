@@ -15,7 +15,7 @@ export const TagBookmarkButtonView = ({ onClick, checked }: Props) => {
         id="bookmark"
         className={`${
           checked ? "bg-primary-300" : "bg-gray-700"
-        } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black `}
+        } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
         onClick={onClick}
       >
         <Icon height={30} name="star" width={30} />

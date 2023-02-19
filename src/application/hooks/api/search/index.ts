@@ -54,3 +54,35 @@ export const useGetMemesByTag = (tag: string) => {
 
   return { data: memeList, isEmpty, ...rest };
 };
+
+/**
+ * 회원이 찾는 밈 API
+ * @param keyword 최근 검색어 3개를 string으로
+ * 최근검색어가 없다면 인기 밈 fetch
+ * @returns
+ * data - 밈 검색 결과
+ */
+
+export const useGetUserFindMemes = (keyword: string) => {
+  console.log(keyword);
+  const { data, ...rest } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getUserFindMemes(keyword),
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      keyword
+        ? api.search.getUserFindMemes({
+            keyword: keyword,
+            offset: pageParam,
+            limit: PAGE_SIZE,
+            userId: "1",
+          })
+        : api.meme.getPopularMemes({ offset: pageParam, limit: 10 }),
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].data.length === 0;
+
+  return { data: memeList, isEmpty, ...rest };
+};

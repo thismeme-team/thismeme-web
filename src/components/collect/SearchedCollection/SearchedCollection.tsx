@@ -1,12 +1,21 @@
-import { useGetMemesByCollectionId } from "@/application/hooks";
+import { useGetMemesFromCollectionByKeyword } from "@/application/hooks";
 import { InfiniteMemeList } from "@/components/meme/InfiniteMemeList";
+import { MemeLongPressContainer } from "@/components/meme/LongPress";
 
 interface Props {
+  searchQuery: string;
   collectionId: number;
 }
 
-export const Collection = ({ collectionId }: Props) => {
-  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByCollectionId(collectionId);
+export const SearchedCollection = ({ searchQuery, collectionId }: Props) => {
+  const {
+    data: memeList,
+    isEmpty,
+    fetchNextPage,
+  } = useGetMemesFromCollectionByKeyword({
+    keyword: searchQuery,
+    collectionId,
+  });
 
   if (isEmpty) {
     return (
@@ -23,7 +32,9 @@ export const Collection = ({ collectionId }: Props) => {
   }
   return (
     <div className="mt-12">
-      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
+      <MemeLongPressContainer memeList={memeList}>
+        <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
+      </MemeLongPressContainer>
     </div>
   );
 };

@@ -75,11 +75,14 @@ export const getMemesFromCollectionByKeyword = rest.get(
     const query = searchParams.get("keyword");
     const offset = Number(searchParams.get("offset"));
     const limit = Number(searchParams.get("limit"));
-    const data = MOCK_DATA.memes.slice(offset, offset + limit);
 
     if (!query || !query.trim()) {
-      return res(ctx.status(400));
+      return res(ctx.status(400), ctx.json({ test: "test" }));
     }
+
+    const filterByKeyword = MOCK_DATA.memes.filter((memes) => memes.tags.includes(query || ""));
+    const data = filterByKeyword.slice(offset, offset + limit);
+
     return res(
       ctx.status(200),
       ctx.json<GetMemesResponse>({

@@ -1,4 +1,8 @@
-import { useGetMemesFromCollectionByKeyword, useInput } from "@/application/hooks";
+import { useDeferredValue } from "react";
+import { css } from "twin.macro";
+
+import { useInput } from "@/application/hooks";
+import { SearchedCollection } from "@/components/collect/SearchedCollection";
 import { CollectPageNavigation } from "@/components/common/Navigation";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { withAuth } from "@/components/hocs";
@@ -7,10 +11,10 @@ import { SearchInput } from "@/components/search";
 
 const CollectPage = () => {
   const inputProps = useInput();
-  const { data: memeList, fetchNextPage } = useGetMemesFromCollectionByKeyword({
-    keyword: inputProps.value,
-    collectionId: 1,
-  });
+  // const deferredQuery = inputProps.value;
+  const deferredQuery = useDeferredValue(inputProps.value);
+  // const isStale = inputProps.value !== deferredQuery;
+  console.log({ deferredQuery });
 
   return (
     <>
@@ -25,8 +29,8 @@ const CollectPage = () => {
 
       <SSRSuspense>
         {/* TODO: 검색 결과 보여주기 */}
-        {/* {inputProps.value && <SearchedCollection collectionId="1" searchQuery={inputProps.value} />}
-        {!inputProps.value && <Collection collectionId="1" />} */}
+        {deferredQuery && <SearchedCollection collectionId={1} searchQuery={deferredQuery} />}
+        {!deferredQuery && <Collection collectionId={1} />}
       </SSRSuspense>
     </>
   );

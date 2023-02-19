@@ -44,7 +44,7 @@ const MyPage = () => {
           </div>
         </Link>
         <SSRSuspense>
-          <Collection collectionId="1" />
+          <Collection collectionId={1} />
         </SSRSuspense>
       </div>
     </>

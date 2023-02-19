@@ -46,7 +46,7 @@ export const getMemeDetail = rest.get(
 export const getMemesByCollectionId = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/memes/collections/:id`,
   (req, res, ctx) => {
-    const data = MOCK_DATA.memes.slice(0, 5);
+    const data = MOCK_DATA.memes.slice(0, 10);
 
     return res(
       ctx.delay(),

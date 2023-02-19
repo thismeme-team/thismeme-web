@@ -15,7 +15,7 @@ export const TagBookmarkButtonView = ({ onClick, checked }: Props) => {
         id="bookmark"
         className={`${
           checked ? "bg-primary-300" : "bg-gray-700"
-        } ${animation} peer mb-3 h-60 w-60 rounded-full focus:bg-black `}
+        } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black `}
         onClick={onClick}
       >
         <Icon height={30} name="star" width={30} />
@@ -23,7 +23,7 @@ export const TagBookmarkButtonView = ({ onClick, checked }: Props) => {
       <span
         className={`${
           checked ? "text-gray-600" : "text-gray-700"
-        } ${animation} text-12-bold-160 peer-focus:text-black`}
+        } ${animation} text-12-bold-160 peer-active:text-black`}
       >
         {checked ? "북마크 완료!" : "태그 북마크"}
       </span>

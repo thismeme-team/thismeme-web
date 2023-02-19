@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
 import { useIsMount } from "@/application/hooks";
-import { pretendard, suit, tossface } from "@/styles/fonts";
+import { pretendard, suit } from "@/styles/fonts";
 
 interface Props {
   id: string;
@@ -25,7 +25,7 @@ export const Portal = ({ id, children }: PropsWithChildren<Props>) => {
   let element = document.getElementById(id);
   if (!element) {
     element = document.createElement("div");
-    element.className = `${pretendard.variable} ${suit.variable} ${tossface.variable}`;
+    element.className = `${pretendard.variable} ${suit.variable}`;
     element.id = id;
 
     document.body.prepend(element);

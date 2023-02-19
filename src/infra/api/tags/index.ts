@@ -39,4 +39,7 @@ export class TagApi {
 
   getCategoryWithTags = () =>
     this.api.get<GetCategoryByTagResponse>("/tags/categories").then((response) => response.data);
+
+  deleteFavoriteTag = (id: number, signal?: AbortSignal) =>
+    this.api.delete(`tags/${id}/fav`, { signal }).then((response) => response.data);
 }

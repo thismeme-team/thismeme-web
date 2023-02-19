@@ -50,6 +50,8 @@ export const tags = [
 ];
 
 const sampleImages = [
+  // NOTE: ErrorBoundary 에서 잡음
+  /*{ url: "https://picsum.photos/..400/700", width: 400, height: 700 },*/
   // NOTE: 정상 이미지
   { url: "https://picsum.photos/400", width: 400, height: 400 },
   { url: "https://picsum.photos/200/300", width: 200, height: 300 },

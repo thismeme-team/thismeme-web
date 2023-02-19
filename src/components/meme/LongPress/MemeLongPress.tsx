@@ -4,26 +4,26 @@ import { css } from "twin.macro";
 import { useAuth, useDownload, useModal, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { android } from "@/application/util";
-import { SignUpModal } from "@/components/common/Modal";
-import type { Image } from "@/types";
+import type { Meme } from "@/types";
 
 interface Props {
-  id: number;
-  name: string;
-  description: string;
-  image: Image;
-  open: boolean;
+  meme?: Meme;
+  isOpen: boolean;
   onClose: () => void;
 }
 
-export const MemeLongPress = ({ id, name, description, image, open, onClose }: Props) => {
+export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
   const { download } = useDownload();
   const modalProps = useModal();
   const { show } = useToast();
   const { isLogin } = useAuth();
-  const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({ memeId: id });
+  const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
+    memeId: meme?.memeId as number,
+  });
 
-  const url = image.images[0].imageUrl;
+  const name = meme?.name || "";
+  const description = meme?.description || "";
+  const url = meme?.image?.images[0].imageUrl || "";
 
   const handleImageDownload = () =>
     download({
@@ -40,81 +40,80 @@ export const MemeLongPress = ({ id, name, description, image, open, onClose }: P
   };
 
   return (
-    <>
-      <Actions
-        opened={open}
-        css={[
-          !android &&
-            css`
-              max-width: calc(min(48rem, 100%) - 3.6rem);
-              padding-bottom: 4rem;
-            `,
-          android &&
-            css`
-              max-width: calc(min(48rem, 100%));
-              border-radius: 0 0 1.3rem 1.3rem;
-            `,
-        ]}
-        onBackdropClick={onClose}
-      >
-        <SignUpModal {...modalProps} />
-        <ActionsGroup>
-          <ActionsButton
-            css={css`
-              height: 6.2rem;
-              padding-inline: 1.8rem;
-              color: ${!android && "#007aff"};
-              font-size: ${android ? "1.65" : "2"}rem;
-            `}
-            onClick={() => {
-              onClose();
-              isLogin ? handleCollectionSave() : modalProps.onOpen();
-            }}
-          >
-            콜렉션에 저장하기
-          </ActionsButton>
-          <ActionsButton
-            css={css`
-              height: 6.2rem;
-              padding-inline: 1.8rem;
-              color: ${!android && "#007aff"};
-              font-size: ${android ? "1.65" : "2"}rem;
-            `}
-            onClick={() => {
-              onClose();
-              handleImageDownload();
-            }}
-          >
-            이미지 다운로드
-          </ActionsButton>
-          <ActionsButton
-            css={css`
-              height: 6.2rem;
-              padding-inline: 1.8rem;
-              color: ${!android && "#007aff"};
-              font-size: ${android ? "1.65" : "2"}rem;
-            `}
-            onClick={() => {
-              onClose();
-              postMemeToSharedCollection();
-              handleNaviteShare();
-            }}
-          >
-            공유하기
-          </ActionsButton>
-          <ActionsButton
-            css={css`
-              height: 6.2rem;
-              padding-inline: 1.8rem;
-              color: #eb4e3d;
-              font-size: ${android ? "1.65" : "2"}rem;
-            `}
-            onClick={onClose}
-          >
-            취소하기
-          </ActionsButton>
-        </ActionsGroup>
-      </Actions>
-    </>
+    <Actions
+      opened={isOpen}
+      css={[
+        !android &&
+          css`
+            max-width: calc(min(48rem, 100%) - 3.6rem);
+            padding-inline: 0;
+            padding-bottom: 4rem;
+          `,
+        android &&
+          css`
+            max-width: calc(min(48rem, 100%));
+            border-radius: 0 0 1.3rem 1.3rem;
+            padding: 0;
+          `,
+      ]}
+      onBackdropClick={onClose}
+    >
+      <ActionsGroup>
+        <ActionsButton
+          css={css`
+            height: 6.2rem;
+            padding-inline: 1.8rem;
+            color: ${!android && "#007aff"};
+            font-size: ${android ? "1.65" : "2"}rem;
+          `}
+          onClick={() => {
+            onClose();
+            handleCollectionSave();
+          }}
+        >
+          콜렉션에 저장하기
+        </ActionsButton>
+        <ActionsButton
+          css={css`
+            height: 6.2rem;
+            padding-inline: 1.8rem;
+            color: ${!android && "#007aff"};
+            font-size: ${android ? "1.65" : "2"}rem;
+          `}
+          onClick={() => {
+            onClose();
+            handleImageDownload();
+          }}
+        >
+          이미지 다운로드
+        </ActionsButton>
+        <ActionsButton
+          css={css`
+            height: 6.2rem;
+            padding-inline: 1.8rem;
+            color: ${!android && "#007aff"};
+            font-size: ${android ? "1.65" : "2"}rem;
+          `}
+          onClick={() => {
+            onClose();
+            handleNaviteShare();
+            postMemeToSharedCollection();
+          }}
+        >
+          공유하기
+        </ActionsButton>
+        <ActionsButton
+          css={css`
+            height: 6.2rem;
+            padding-inline: 1.8rem;
+            color: #eb4e3d;
+            font-size: ${android ? "1.65" : "2"}rem;
+          `}
+          onClick={onClose}
+        >
+          취소하기
+        </ActionsButton>
+      </ActionsGroup>
+    </Actions>
   );
 };

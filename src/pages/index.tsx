@@ -7,8 +7,7 @@ import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeList, PopularTagList, UserSharedMemeList } from "@/components/home";
-import { MemeSortDropDown } from "@/components/home/DropDown";
+import { MemeListContainer, PopularTagList, UserSharedMemeList } from "@/components/home";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
@@ -35,10 +34,7 @@ const HomePage: NextPage = () => {
             <UserSharedMemeList name={user?.name} />
           </SSRSuspense>
         )}
-        <MemeSortDropDown />
-        <SSRSuspense>
-          <MemeList />
-        </SSRSuspense>
+        <MemeListContainer />
       </PullToRefresh>
     </>
   );

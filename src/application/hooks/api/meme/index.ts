@@ -35,7 +35,7 @@ export const fetchMemeDetailById = (id: string, queryClient: QueryClient) =>
 const types = { share: "shareCount", recent: "createdDate", popular: "viewCount", user: "user" };
 
 export const useGetMemesBySort = (sort: keyof typeof types) => {
-  const { data, ...rest } = useInfiniteQuery({
+  const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getMemesBySort(sort),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.meme.getMemesBySort({ offset: pageParam, limit: LIMIT, sort: types[sort] }),
@@ -45,19 +45,5 @@ export const useGetMemesBySort = (sort: keyof typeof types) => {
     },
   });
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  return { data: memeList, ...rest };
-};
-
-export const useGetUserFindMemes = () => {
-  const { data, ...rest } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getUserFindMemes,
-    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getUserFindMemes({ offset: pageParam, limit: LIMIT }),
-    getNextPageParam: (lastPage) => {
-      const { isLastPage, offset, limit } = lastPage;
-      return isLastPage ? undefined : offset + limit;
-    },
-  });
-  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  return { data: memeList, ...rest };
+  return { data: memeList, fetchNextPage };
 };

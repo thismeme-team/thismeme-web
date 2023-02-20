@@ -12,6 +12,11 @@ export const getMyAccount = rest.get(
         email: "test@gmail.com",
         modifiedDate: null,
         name: "test",
+        shareCount: 97,
+        saveCount: 34,
+        collectionId: 3,
+        shareCollectionId: 4,
+        id: 100,
       }),
     );
   },

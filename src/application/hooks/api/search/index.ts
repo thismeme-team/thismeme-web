@@ -3,6 +3,8 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
 
+import { useLocalStorage } from "../../common";
+import type { RecentSearch } from "../../domain";
 import { QUERY_KEYS } from "./queryKey";
 
 const PAGE_SIZE = 20;
@@ -15,7 +17,7 @@ const PAGE_SIZE = 20;
  * isEmpty - 밈 검색 결과가 없는 경우 true
  */
 export const useGetMemesByKeyword = (keyword: string) => {
-  const { data, ...rest } = useInfiniteQuery({
+  const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getMemesByKeyword(keyword),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesByKeyword({ keyword, offset: pageParam, limit: PAGE_SIZE }),
@@ -28,7 +30,7 @@ export const useGetMemesByKeyword = (keyword: string) => {
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
   const isEmpty = data?.pages[0].data.length === 0;
 
-  return { data: memeList, isEmpty, ...rest };
+  return { data: memeList, isEmpty, fetchNextPage };
 };
 
 /**
@@ -39,7 +41,7 @@ export const useGetMemesByKeyword = (keyword: string) => {
  * isEmpty - 밈 검색 결과가 없는 경우 true
  */
 export const useGetMemesByTag = (tag: string) => {
-  const { data, ...rest } = useInfiniteQuery({
+  const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getMemesByTag(tag),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
@@ -52,5 +54,36 @@ export const useGetMemesByTag = (tag: string) => {
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
   const isEmpty = data?.pages[0].data.length === 0;
 
-  return { data: memeList, isEmpty, ...rest };
+  return { data: memeList, isEmpty, fetchNextPage };
+};
+
+/**
+ * 회원이 찾는 밈 API
+ */
+
+export const useGetUserFindMemes = ({ userId }: { userId: number }) => {
+  const [items] = useLocalStorage<RecentSearch[]>("recentSearch", { defaultValue: [] });
+  const keywords = items
+    .map((item) => item.value)
+    .slice(0, 3)
+    .join();
+
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getUserFindMemes(keywords),
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.search.getUserFindMemes({
+        keywords: keywords,
+        offset: pageParam,
+        limit: PAGE_SIZE,
+        userId: String(userId),
+      }),
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].data.length === 0;
+
+  return { data: memeList, isEmpty, fetchNextPage };
 };

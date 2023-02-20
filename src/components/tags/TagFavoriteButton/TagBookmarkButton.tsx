@@ -4,16 +4,19 @@ import {
   usePostFavoriteTag,
   useToast,
 } from "@/application/hooks";
+import { Button } from "@/components/common/Button";
+import { Icon } from "@/components/common/Icon";
 import { AuthValidateHandler } from "@/hocs/auth";
-
-import { TagBookmarkButtonView } from "./TagBookmarkButtonView";
 
 interface Props {
   tagId: number;
 }
+
+const animation = "transition-colors duration-200 ease-in-out";
+
 export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show } = useToast();
-  console.debug(typeof tagId);
+
   const { isFav } = useGetTagInfo(tagId);
   const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation } = useDeleteFavoriteTag();
@@ -32,12 +35,28 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
     });
   };
 
+  const handleClick = isFav ? handleDeleteBookmark : handleSaveBookmark;
+
   return (
-    <AuthValidateHandler handler={["onClick"]}>
-      <TagBookmarkButtonView
-        checked={isFav}
-        onClick={isFav ? handleDeleteBookmark : handleSaveBookmark}
-      />
-    </AuthValidateHandler>
+    <div className="fixed bottom-32 right-18 text-center">
+      <AuthValidateHandler handler={["onClick"]}>
+        <Button
+          id="bookmark"
+          className={`${
+            isFav ? "bg-primary-300 [&_*]:fill-[#fddd71]" : "bg-gray-800"
+          } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
+          onClick={handleClick}
+        >
+          <Icon height={28} name="star" width={28} />
+        </Button>
+      </AuthValidateHandler>
+      <span
+        className={`${
+          isFav ? "text-gray-600" : "text-gray-700"
+        } ${animation} text-12-bold-160 peer-active:text-black`}
+      >
+        {isFav ? "북마크 완료!" : "태그 북마크"}
+      </span>
+    </div>
   );
 };

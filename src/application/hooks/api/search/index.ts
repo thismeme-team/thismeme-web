@@ -3,7 +3,6 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
 
-import { useDebounce } from "../../common";
 import { QUERY_KEYS } from "./queryKey";
 
 const PAGE_SIZE = 20;
@@ -63,20 +62,17 @@ export const useGetMemesFromCollectionByKeyword = ({
   keyword: string;
   collectionId: number;
 }) => {
-  const debouncedValue = useDebounce(keyword);
-
-  const { data, ...rest } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getMemesFromCollectionByKeyword({ keyword: debouncedValue, collectionId }),
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesFromCollectionByKeyword({ keyword: keyword, collectionId }),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesFromCollectionByKeyword({
-        keyword: debouncedValue,
+        keyword: keyword,
         collectionId,
         offset: pageParam,
         limit: PAGE_SIZE,
       }),
-    // enabled: false,
-    // enabled: !!debouncedValue,
-    suspense: false,
+    enabled: !!keyword && !!collectionId,
+    keepPreviousData: true,
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;
       return isLastPage ? undefined : offset + limit;
@@ -85,5 +81,5 @@ export const useGetMemesFromCollectionByKeyword = ({
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
   const isEmpty = data?.pages[0].data.length === 0;
 
-  return { data: memeList, isEmpty, ...rest };
+  return { data: memeList, fetchNextPage, isEmpty };
 };

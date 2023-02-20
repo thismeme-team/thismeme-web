@@ -73,7 +73,7 @@ export const useGetUserFindMemes = () => {
  * 콜렉션 페이지(/collect) 페이지에서 무한 스크롤 적용함
  */
 export const useGetMemesByCollectionId = (collectionId: number) => {
-  const { data, ...rest } = useInfiniteQuery({
+  const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getMemesByCollectionId(collectionId),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.meme.getMemesByCollectionId({ collectionId, offset: pageParam, limit: 10 }),
@@ -85,5 +85,5 @@ export const useGetMemesByCollectionId = (collectionId: number) => {
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
   const isEmpty = data?.pages[0].data.length === 0;
 
-  return { data: memeList, isEmpty, ...rest };
+  return { data: memeList, fetchNextPage, isEmpty };
 };

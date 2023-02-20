@@ -52,7 +52,7 @@ export const getMemesByCollectionId = rest.get(
       ctx.delay(),
       ctx.json<GetMemesByCollectionIdResponse>({
         memes: data,
-        count: 10,
+        count: data.length,
       }),
     );
   },

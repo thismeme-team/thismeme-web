@@ -1,12 +1,13 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
-import { InfiniteMemeList } from "@/components/meme/InfiniteMemeList";
+import { Masonry } from "@/components/common/Masonry";
+import { MemeItem } from "@/components/meme/MemeItem";
 
 interface Props {
   collectionId: number;
 }
 
-export const Collection = ({ collectionId }: Props) => {
-  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByCollectionId(collectionId);
+export const SummarizedCollection = ({ collectionId }: Props) => {
+  const { data: memeList, isEmpty } = useGetMemesByCollectionId(collectionId);
 
   if (isEmpty) {
     return (
@@ -22,8 +23,10 @@ export const Collection = ({ collectionId }: Props) => {
     );
   }
   return (
-    <div className="mt-12">
-      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
-    </div>
+    <Masonry columns={2} spacing={9}>
+      {memeList.map((meme) => (
+        <MemeItem key={meme.memeId} meme={meme} />
+      ))}
+    </Masonry>
   );
 };

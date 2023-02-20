@@ -6,7 +6,7 @@ import { MyPageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { withAuth } from "@/components/hocs";
-import { Collection } from "@/components/mypage";
+import { SummarizedCollection } from "@/components/mypage";
 
 const MyPage = () => {
   /**
@@ -20,7 +20,7 @@ const MyPage = () => {
         <Photo className="h-100 w-100 rounded-full" />
         <span className="mt-4 text-22-bold-140">@nickname</span>
         <div className="mt-24 flex divide-x divide-solid divide-gray-200">
-          <Link className="pr-40 text-center" href="/mypage">
+          <Link className="pr-40 text-center" href="/share">
             <div className="text-32-bold-140">97</div>
             <div className="text-16-semibold-140">share</div>
           </Link>
@@ -33,8 +33,11 @@ const MyPage = () => {
 
       <div className="pb-30">
         <Link href="/collect">
-          <div className="my-16 flex justify-between font-suit text-22-bold-140">
-            Collection
+          <div className="my-16 flex items-center justify-between font-suit text-22-bold-140">
+            <div className="flex items-center gap-8">
+              Collection
+              <span className="text-16-semibold-140 text-gray-600">00</span>
+            </div>
             <Icon
               name="chevronDown"
               css={css`
@@ -44,7 +47,7 @@ const MyPage = () => {
           </div>
         </Link>
         <SSRSuspense>
-          <Collection collectionId={1} />
+          <SummarizedCollection collectionId={1} />
         </SSRSuspense>
       </div>
     </>

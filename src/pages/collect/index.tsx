@@ -1,20 +1,16 @@
 import { useDeferredValue } from "react";
-import { css } from "twin.macro";
 
-import { useInput } from "@/application/hooks";
-import { SearchedCollection } from "@/components/collect/SearchedCollection";
+import { useDebounce, useInput } from "@/application/hooks";
+import { Collection, SearchedCollection } from "@/components/collect";
 import { CollectPageNavigation } from "@/components/common/Navigation";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { withAuth } from "@/components/hocs";
-import { Collection } from "@/components/mypage";
 import { SearchInput } from "@/components/search";
 
 const CollectPage = () => {
   const inputProps = useInput();
-  // const deferredQuery = inputProps.value;
-  const deferredQuery = useDeferredValue(inputProps.value);
-  // const isStale = inputProps.value !== deferredQuery;
-  console.log({ deferredQuery });
+  const debouncedQuery = useDebounce(inputProps.value);
+  const isSearching = useDeferredValue(!!debouncedQuery);
 
   return (
     <>
@@ -27,11 +23,15 @@ const CollectPage = () => {
         type="text"
       />
 
-      <SSRSuspense>
-        {/* TODO: 검색 결과 보여주기 */}
-        {deferredQuery && <SearchedCollection collectionId={1} searchQuery={deferredQuery} />}
-        {!deferredQuery && <Collection collectionId={1} />}
-      </SSRSuspense>
+      <div className="mt-16">
+        <SSRSuspense>
+          {isSearching ? (
+            <SearchedCollection collectionId={1} searchQuery={debouncedQuery} />
+          ) : (
+            <Collection collectionId={1} />
+          )}
+        </SSRSuspense>
+      </div>
     </>
   );
 };

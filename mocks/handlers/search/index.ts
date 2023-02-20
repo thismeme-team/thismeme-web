@@ -77,7 +77,7 @@ export const getMemesFromCollectionByKeyword = rest.get(
     const limit = Number(searchParams.get("limit"));
 
     if (!query || !query.trim()) {
-      return res(ctx.status(400), ctx.json({ test: "test" }));
+      return res(ctx.status(400));
     }
 
     const filterByKeyword = MOCK_DATA.memes.filter((memes) => memes.tags.includes(query || ""));

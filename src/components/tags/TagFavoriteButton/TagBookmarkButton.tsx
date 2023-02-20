@@ -6,7 +6,7 @@ import {
 } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
-import { AuthValidateHandler } from "@/hocs/auth";
+import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
 
 interface Props {
   tagId: number;
@@ -39,7 +39,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
 
   return (
     <div className="fixed bottom-32 right-18 text-center">
-      <AuthValidateHandler handler={["onClick"]}>
+      <WithAuthHandlers handlers={["onClick"]}>
         <Button
           id="bookmark"
           className={`${
@@ -49,7 +49,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
         >
           <Icon height={28} name="star" width={28} />
         </Button>
-      </AuthValidateHandler>
+      </WithAuthHandlers>
       <span
         className={`${
           isFav ? "text-gray-600" : "text-gray-700"

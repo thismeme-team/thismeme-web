@@ -1,7 +1,7 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
-import type { GetServerSideProps, NextPage } from "next";
+import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
-import { fetchTagInfo } from "@/application/hooks";
+import { fetchTagInfo, prefetchMemesByTag } from "@/application/hooks";
 import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
@@ -33,7 +33,14 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
+export const getStaticPaths: GetStaticPaths = () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const tagId = params?.tagId;
   const queryClient = new QueryClient();
 
@@ -46,9 +53,13 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   try {
     const { name: tagName } = await fetchTagInfo(Number(tagId), queryClient);
 
+    // NOTE: tag name 이 api request 값이기 때문에 waterfall 한 fetching 이 필요합니다
+    await prefetchMemesByTag(tagName, queryClient);
+
     return {
       props: {
-        hydrateState: dehydrate(queryClient),
+        // NOTE: useInfiniteQuery 사용 시 queryCache에 undefined 프로퍼티가 있으므로 에러 방지를 위해 직렬화/역직렬화가 필요합니다
+        hydrateState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
         searchQuery: tagName,
         tagId: Number(tagId),
       },

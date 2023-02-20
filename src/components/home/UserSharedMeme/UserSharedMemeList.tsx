@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { css } from "twin.macro";
 
-import { useGetUserSharedMemes } from "@/application/hooks";
+import { useGetMemesByCollectionId } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 
 import { SharedMemeItem } from "./SharedMemeItem";
@@ -10,7 +10,7 @@ interface Props {
   name?: string;
 }
 export const UserSharedMemeList = ({ name }: Props) => {
-  const { data: memeList } = useGetUserSharedMemes();
+  const { data: memeList } = useGetMemesByCollectionId(2); //NOTE: ShareId 들어가야 함
 
   return (
     <div>

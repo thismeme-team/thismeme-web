@@ -13,6 +13,7 @@ import { SearchInput } from "@/components/search";
 const HomePage: NextPage = () => {
   const router = useRouter();
   const { isLogin, user } = useAuth();
+
   return (
     <>
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />

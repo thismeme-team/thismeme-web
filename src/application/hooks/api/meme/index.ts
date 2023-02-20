@@ -48,21 +48,6 @@ export const useGetMemesBySort = (sort: keyof typeof types) => {
   return { data: memeList, ...rest };
 };
 
-/*NOTE 회원이 공유한 밈 api collection으로 요망*/
-export const useGetUserSharedMemes = () => {
-  const { data, ...rest } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getUserSharedMemes,
-    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getUserSharedMemes({ offset: pageParam, limit: 10 }),
-    getNextPageParam: (lastPage) => {
-      const { isLastPage, offset, limit } = lastPage;
-      return isLastPage ? undefined : offset + limit;
-    },
-  });
-  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  return { data: memeList, ...rest };
-};
-
 export const useGetUserFindMemes = () => {
   const { data, ...rest } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getUserFindMemes,
@@ -75,4 +60,30 @@ export const useGetUserFindMemes = () => {
   });
   const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
   return { data: memeList, ...rest };
+};
+
+/**
+ * 콜렉션 별 밈 리스트 API
+ *
+ * NOTE
+ * 현재 하나의 콜렉션만이 존재(즉, collectionId가 하나)
+ * 추후에 여러개의 콜렉션을 다룰 예정(즉, collectionId에 여러개)
+ *
+ * 마이페이지(/mypage)에서는 무한스크롤 적용 안함
+ * 콜렉션 페이지(/collect) 페이지에서 무한 스크롤 적용함
+ */
+export const useGetMemesByCollectionId = (collectionId: number) => {
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesByCollectionId(collectionId),
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.meme.getMemesByCollectionId({ collectionId, offset: pageParam, limit: 10 }),
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].data.length === 0;
+
+  return { data: memeList, fetchNextPage, isEmpty };
 };

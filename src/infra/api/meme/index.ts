@@ -1,7 +1,7 @@
 import type { AxiosInstance } from "axios";
 
 import type { GetMemesResponse } from "../search/types";
-import type { GetMemeDetailByIdResponse } from "./types";
+import type { GetMemeDetailByIdResponse, GetMemesByCollectionIdResponse } from "./types";
 
 export class MemeApi {
   constructor(private api: AxiosInstance) {}
@@ -10,23 +10,6 @@ export class MemeApi {
     return this.api
       .get<GetMemeDetailByIdResponse>(`/memes/${id}`)
       .then((response) => response.data);
-  };
-
-  /*NOTE 회원이 공유한 밈 api collection url 로 수정 */
-  getUserSharedMemes = async ({ offset, limit }: { offset: number; limit: number }) => {
-    const currentpage = offset / limit;
-
-    const { data } = await this.api.get<GetMemesResponse>(
-      `/user/memes?page=${currentpage}&size=${limit}&sort=shareCount,desc`,
-    );
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
   };
 
   getMemesBySort = async ({
@@ -61,6 +44,40 @@ export class MemeApi {
 
     const { data } = await this.api.get<GetMemesResponse>(
       `/memes?page=${currentpage}&size=${limit}&sort=viewCount,desc`,
+    );
+    const result = {
+      data: data.memes,
+      offset: offset,
+      limit: limit,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
+    };
+    return result;
+  };
+
+  /**
+   * 콜렉션 별 밈 목록 API
+   */
+  getMemesByCollectionId = async ({
+    collectionId,
+    offset,
+    limit,
+  }: {
+    collectionId: number;
+    offset: number;
+    limit: number;
+  }) => {
+    const page = offset / limit;
+
+    const { data } = await this.api.get<GetMemesByCollectionIdResponse>(
+      `/memes/collections/${collectionId}`,
+      {
+        params: {
+          page,
+          size: limit,
+          sort: "id,desc",
+        },
+      },
     );
     const result = {
       data: data.memes,

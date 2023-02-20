@@ -8,15 +8,21 @@ import { CommonMemeList, UserFindMemeList } from "./MemeList";
 import type { MemeListType } from "./type";
 
 export const MemeListContainer = () => {
-  const { isLogin } = useAuth();
+  const { isLogin, isLoading } = useAuth();
   const [sortBy, setSortBy] = useState<MemeListType>(isLogin ? "user" : "share");
 
   return (
     <>
-      <MemeSortDropDown sortBy={sortBy} onClickItem={setSortBy} />
-      <SSRSuspense>
-        {sortBy === "user" ? <UserFindMemeList /> : <CommonMemeList sortBy={sortBy} />}
-      </SSRSuspense>
+      {isLoading ? (
+        <></>
+      ) : (
+        <>
+          <MemeSortDropDown sortBy={sortBy} onClickItem={setSortBy} />
+          <SSRSuspense>
+            {sortBy === "user" ? <UserFindMemeList /> : <CommonMemeList sortBy={sortBy} />}
+          </SSRSuspense>
+        </>
+      )}
     </>
   );
 };

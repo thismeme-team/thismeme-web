@@ -1,10 +1,10 @@
-import { useGetUserSharedMemes } from "@/application/hooks";
+import { useGetMemesByCollectionId } from "@/application/hooks";
 
 import { InfiniteMemeList } from "../meme/InfiniteMemeList";
 import { MemeLongPressContainer } from "../meme/LongPress";
 
 export const MemeList = () => {
-  const { data: memeList, fetchNextPage } = useGetUserSharedMemes();
+  const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(2); //ShareId 로 props 넣어야됨
 
   return (
     <MemeLongPressContainer memeList={memeList}>

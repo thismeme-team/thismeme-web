@@ -59,18 +59,18 @@ export class SearchApi {
 
   getUserFindMemes = async ({
     userId,
-    keyword,
+    keywords,
     offset,
     limit,
   }: {
     userId: string;
-    keyword: string;
+    keywords: string;
     offset: number;
     limit: number;
   }) => {
     const { data } = await this.api.get<GetMemesResponse>(`/search/user/${userId}`, {
       params: {
-        keyword,
+        keywords,
         offset,
         limit,
       },

@@ -16,7 +16,7 @@ export const UserFindMemeList = ({ userId }: Props) => {
     recentSearchArray.length < 3 ? recentSearchArray : recentSearchArray.slice(0, 3);
 
   const { data: memeList, fetchNextPage } = useGetUserFindMemes({
-    keyword: recentKeyword.join(),
+    keywords: recentKeyword.join(),
     userId: userId as number,
   });
 

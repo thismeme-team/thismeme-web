@@ -63,13 +63,13 @@ export const useGetMemesByTag = (tag: string) => {
  * data - 밈 검색 결과
  */
 
-export const useGetUserFindMemes = ({ keyword, userId }: { keyword: string; userId: number }) => {
+export const useGetUserFindMemes = ({ keywords, userId }: { keywords: string; userId: number }) => {
   const { data, ...rest } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getUserFindMemes(keyword),
+    queryKey: QUERY_KEYS.getUserFindMemes(keywords),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      keyword
+      keywords
         ? api.search.getUserFindMemes({
-            keyword: keyword,
+            keywords: keywords,
             offset: pageParam,
             limit: PAGE_SIZE,
             userId: String(userId),

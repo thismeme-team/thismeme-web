@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 
 import { BackButtonNavigation } from "@/components/common/Navigation";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeList } from "@/components/share";
+import { SharedMemeList } from "@/components/share";
 
 const SharedHistoryPage: NextPage = () => {
   return (
@@ -10,7 +10,7 @@ const SharedHistoryPage: NextPage = () => {
       <BackButtonNavigation title="공유 히스토리" />
       <section className="pt-16" />
       <SSRSuspense>
-        <MemeList />
+        <SharedMemeList />
       </SSRSuspense>
     </>
   );

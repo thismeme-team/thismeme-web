@@ -1,1 +1,1 @@
-export * from "./MemeList";
+export * from "./SharedMemeList";

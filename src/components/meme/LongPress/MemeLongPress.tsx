@@ -14,9 +14,7 @@ interface Props {
 
 export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
   const { download } = useDownload();
-  const modalProps = useModal();
   const { show } = useToast();
-  const { isLogin } = useAuth();
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: meme?.memeId as number,
   });

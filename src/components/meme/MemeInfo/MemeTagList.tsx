@@ -17,10 +17,12 @@ export const MemeTagList = ({ id }: Props) => {
       <ul className="flex flex-wrap gap-8">
         {tags.map((tag) => (
           <li
-            className="rounded-20 border border-primary-300 bg-gray-100 py-8 px-16 font-suit text-14-semibold-140 active:bg-gray-400"
+            className="rounded-20 border border-primary-300 bg-gray-100 font-suit text-14-semibold-140 active:bg-gray-400"
             key={tag.tagId}
           >
-            <Link href={PATH.getExploreByTagPath(tag.tagId)}>{tag.name}</Link>
+            <Link className="block py-8 px-16" href={PATH.getExploreByTagPath(tag.tagId)}>
+              {tag.name}
+            </Link>
           </li>
         ))}
       </ul>

@@ -7,7 +7,7 @@ interface Props {
 export const CollectionSaveButton = ({ onClick }: Props) => {
   return (
     <Button
-      className="flex h-52 w-full items-center gap-8 rounded-10 bg-gray-900"
+      className="flex h-52 w-full items-center gap-8 rounded-10 bg-gray-900 active:bg-black"
       onClick={onClick}
     >
       <Icon name="collection" />

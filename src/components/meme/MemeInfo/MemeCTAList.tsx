@@ -15,7 +15,10 @@ export const MemeCTAList = ({ id }: Props) => {
 
   return (
     <div className="flex w-full gap-10 py-40">
-      <Button className="h-52 w-52 shrink-0 rounded-10 bg-gray-900" onClick={modalProps.onOpen}>
+      <Button
+        className="h-52 w-52 shrink-0 rounded-10 bg-gray-900 active:bg-black"
+        onClick={modalProps.onOpen}
+      >
         <Icon color="stroke-white" name="memeShare" />
       </Button>
       <MemeShareModal id={id} {...modalProps} />

@@ -27,7 +27,7 @@ export const UserSharedMemeList = ({ name }: Props) => {
           />
         </div>
       </Link>
-      <ul className="mb-24 flex snap-x snap-mandatory gap-10 overflow-x-scroll">
+      <ul className="mb-24 flex w-[calc(100%+2rem)] snap-x snap-mandatory gap-10 overflow-x-scroll">
         {memeList.map((meme) => (
           <SharedMemeItem key={meme.memeId} meme={meme} />
         ))}

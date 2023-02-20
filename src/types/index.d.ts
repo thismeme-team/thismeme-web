@@ -19,8 +19,6 @@ export interface Meme {
   image: Image;
 
   author?: string;
-
-  tags?: string[];
 }
 
 export interface Image {

@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import { PATH } from "@/application/util";
-import { Chip } from "@/components/common/Chip";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 import type { Meme } from "@/types";
+
+import { SharedMemeTagList } from "./SharedMemeTagList";
 
 interface Props {
   meme: Meme;
@@ -12,7 +12,7 @@ interface Props {
 
 export const SharedMemeItem = ({ meme }: Props) => {
   return (
-    <li className="min-w-full snap-center">
+    <li className="min-w-[calc(100%-2rem)] snap-start">
       <Link href={`/memes/${meme.memeId}`}>
         <div>
           <Photo
@@ -30,15 +30,7 @@ export const SharedMemeItem = ({ meme }: Props) => {
           </span>
         </section>
       </Link>
-      <ul className="flex gap-8 overflow-x-scroll">
-        {meme.tags?.map((tag, i) => (
-          <li className="shrink-0" key={i}>
-            <Link href={`${PATH.getExploreByTagPath(tag)}`}>
-              <Chip as="button" color="white" label={tag} size="medium" />
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <SharedMemeTagList id={String(meme.memeId)} />
     </li>
   );
 };

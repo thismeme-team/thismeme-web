@@ -26,9 +26,13 @@ export const SharedMemeItem = () => {
         </section>
       </Link>
       <ul className="flex gap-8 overflow-x-scroll">
-        {["상위태그", "상위태그상위태그", "상위태그상위태그상위태그"].map((tag, i) => (
-          <li className="shrink-0" key={i}>
-            <Link href={`${PATH.getExploreByTagPath(tag)}`}>
+        {["상위태그", "상위태그상위태그", "상위태그상위태그상위태그"].map((tag, index) => (
+          /**
+           * TODO
+           * 밈별 태그 조회 API 추가
+           */
+          <li className="shrink-0" key={index}>
+            <Link href={`${PATH.getExploreByTagPath(1)}`}>
               <Chip as="button" color="white" label={tag} size="medium" />
             </Link>
           </li>

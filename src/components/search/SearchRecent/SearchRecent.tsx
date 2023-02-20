@@ -42,7 +42,7 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
               onAddItem({ value, type });
 
               if (isTagType(type)) {
-                router.push(`${PATH.getExploreByTagPath(value)}`);
+                router.push(`${PATH.getExploreByTagPath(id)}`);
                 return;
               }
               router.push(`${PATH.getExploreByKeywordPath(value)}`);

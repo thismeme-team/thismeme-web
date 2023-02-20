@@ -13,9 +13,3 @@ export const suit = localFont({
   weight: "100 900",
   display: "swap",
 });
-
-export const tossface = localFont({
-  src: "./TossFaceFontMac.ttf",
-  variable: "--font-tossfaceVariable",
-  display: "swap",
-});

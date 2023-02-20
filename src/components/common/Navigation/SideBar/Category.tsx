@@ -38,9 +38,9 @@ export const Category = () => {
   });
   const { mutate: deleteFavoriteTag, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
 
-  const onClickItem = (tagName: string) => {
+  const onClickItem = (tagId: number) => {
     setDrawerOpen(false);
-    router.push(PATH.getExploreByTagPath(tagName));
+    router.push(PATH.getExploreByTagPath(tagId));
   };
 
   const handleDeleteItem = async (tagId: number) => {
@@ -94,7 +94,7 @@ export const Category = () => {
                   className="flex w-fit gap-6 py-8 [&>#remove_*]:stroke-gray-600 [&>#remove_*]:hover:stroke-black"
                   key={tag.tagId}
                 >
-                  <button onClick={() => onClickItem(tag.name)}>{tag.name}</button>
+                  <button onClick={() => onClickItem(tag.tagId)}>{tag.name}</button>
                   {item.id === FAVORITE_ID && (
                     <button id="remove" onClick={() => handleDeleteItem(tag.tagId)}>
                       <Icon height={24} name="cancel" width={24} />

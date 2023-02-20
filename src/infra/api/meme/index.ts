@@ -36,9 +36,9 @@ export class MemeApi {
     return result;
   };
 
-  /*
-  NOTE 회원이 찾는 밈 api 다른 브랜치에서 작업함
-  */
+  /**
+   * NOTE 회원이 찾는 밈 api 다른 브랜치에서 작업함
+   */
   getUserFindMemes = async ({ offset, limit }: { offset: number; limit: number }) => {
     const currentpage = offset / limit;
 

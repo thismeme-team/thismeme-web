@@ -44,9 +44,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
               title: name,
               description,
             }}
-            onSuccess={() => {
-              postMemeToSharedCollection();
-            }}
+            onSuccess={postMemeToSharedCollection}
           />
           <span className="absolute bottom-0 font-suit text-12-bold-160">카카오로 공유</span>
         </li>
@@ -66,12 +64,10 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
             text={description}
             title={name}
             url={PAGE_URL}
+            onSuccess={postMemeToSharedCollection}
             onError={() => {
               modalProps.onClose();
               showNativeShareErrorToast();
-            }}
-            onSuccess={() => {
-              postMemeToSharedCollection();
             }}
           />
           <span className="absolute bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>

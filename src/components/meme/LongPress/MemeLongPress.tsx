@@ -1,7 +1,7 @@
 import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
-import { useAuth, useDownload, useModal, useToast } from "@/application/hooks";
+import { useDownload, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { android } from "@/application/util";
 import type { Meme } from "@/types";

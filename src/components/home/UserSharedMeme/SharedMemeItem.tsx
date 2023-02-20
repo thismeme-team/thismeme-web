@@ -12,7 +12,7 @@ interface Props {
 
 export const SharedMemeItem = ({ meme }: Props) => {
   return (
-    <li className="min-w-[calc(100%-2rem)] snap-start">
+    <li className="mr-10 min-w-[calc(100%-2rem)] snap-start">
       <Link href={`/memes/${meme.memeId}`}>
         <div>
           <Photo

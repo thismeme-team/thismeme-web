@@ -10,7 +10,10 @@ interface Props {
   name?: string;
 }
 export const UserSharedMemeList = ({ name }: Props) => {
-  const { data: memeList } = useGetMemesByCollectionId(2); //NOTE: ShareId 들어가야 함
+  /** NOTE: ShareId 들어가야 함
+   *
+   */
+  const { data: memeList } = useGetMemesByCollectionId(2);
 
   return (
     <div>
@@ -27,7 +30,7 @@ export const UserSharedMemeList = ({ name }: Props) => {
           />
         </div>
       </Link>
-      <ul className="mb-24 flex w-[calc(100%+2rem)] snap-x snap-mandatory gap-10 overflow-x-scroll">
+      <ul className="mb-24 flex w-[calc(100%+2rem)] snap-x snap-mandatory overflow-x-scroll">
         {memeList.map((meme) => (
           <SharedMemeItem key={meme.memeId} meme={meme} />
         ))}

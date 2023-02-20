@@ -1,8 +1,9 @@
 import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
-import { useDownload, useToast } from "@/application/hooks";
+import { useCollection, useDownload, useToast } from "@/application/hooks";
 import { android } from "@/application/util";
+import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
 import type { Meme } from "@/types";
 
 interface Props {
@@ -14,6 +15,7 @@ interface Props {
 export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
   const { download } = useDownload();
   const { show } = useToast();
+  const { onUpdateCollection } = useCollection({ memeId: Number(meme?.memeId) });
 
   const name = meme?.name || "";
   const description = meme?.description || "";
@@ -25,8 +27,6 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
       name,
       onSuccess: () => show("이미지를 다운로드 했습니다!"),
     });
-
-  const handleCollectionSave = () => show("콜렉션에 저장했습니다!");
 
   const handleNaviteShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
@@ -53,20 +53,22 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
       onBackdropClick={onClose}
     >
       <ActionsGroup>
-        <ActionsButton
-          css={css`
-            height: 6.2rem;
-            padding-inline: 1.8rem;
-            color: ${!android && "#007aff"};
-            font-size: ${android ? "1.65" : "2"}rem;
-          `}
-          onClick={() => {
-            onClose();
-            handleCollectionSave();
-          }}
-        >
-          콜렉션에 저장하기
-        </ActionsButton>
+        <WithAuthHandlers handlers={["onClick"]}>
+          <ActionsButton
+            css={css`
+              height: 6.2rem;
+              padding-inline: 1.8rem;
+              color: ${!android && "#007aff"};
+              font-size: ${android ? "1.65" : "2"}rem;
+            `}
+            onClick={() => {
+              onClose();
+              onUpdateCollection();
+            }}
+          >
+            콜렉션에 저장하기
+          </ActionsButton>
+        </WithAuthHandlers>
         <ActionsButton
           css={css`
             height: 6.2rem;

@@ -1,22 +1,14 @@
 import tw from "twin.macro";
 
-import {
-  useAuth,
-  useCollection,
-  useDownload,
-  useMemeDetailById,
-  useModal,
-  useToast,
-} from "@/application/hooks";
+import { useCollection, useDownload, useMemeDetailById, useToast } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
-import { SignUpModal } from "@/components/common/Modal";
+import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
 
 interface Props {
   id: string;
 }
 export const MemeExport = ({ id }: Props) => {
-  const { isLogin } = useAuth();
   const {
     name,
     description,
@@ -24,7 +16,6 @@ export const MemeExport = ({ id }: Props) => {
   } = useMemeDetailById(id);
   const { onUpdateCollection } = useCollection({ memeId: Number(id) });
 
-  const modalProps = useModal();
   const { download } = useDownload();
   const { show } = useToast();
 
@@ -59,12 +50,14 @@ export const MemeExport = ({ id }: Props) => {
           >
             이미지 다운로드
           </DropDown.Content>
-          <DropDown.Content
-            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={isLogin ? onUpdateCollection : modalProps.onOpen}
-          >
-            콜렉션에 저장하기
-          </DropDown.Content>
+          <WithAuthHandlers handlers={["onClick"]}>
+            <DropDown.Content
+              className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+              onClick={onUpdateCollection}
+            >
+              콜렉션에 저장하기
+            </DropDown.Content>
+          </WithAuthHandlers>
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onClick={handleNaviteShare}
@@ -76,8 +69,6 @@ export const MemeExport = ({ id }: Props) => {
           </DropDown.Content>
         </DropDown.Contents>
       </DropDown>
-
-      <SignUpModal {...modalProps} />
     </>
   );
 };

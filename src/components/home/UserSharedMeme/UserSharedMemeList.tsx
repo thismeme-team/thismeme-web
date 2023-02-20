@@ -8,13 +8,10 @@ import { SharedMemeItem } from "./SharedMemeItem";
 
 interface Props {
   name?: string;
+  sharedId?: number;
 }
-export const UserSharedMemeList = ({ name }: Props) => {
-  /** NOTE: ShareId 들어가야 함
-   *
-   */
-  const { data: memeList } = useGetMemesByCollectionId(2);
-
+export const UserSharedMemeList = ({ name, sharedId }: Props) => {
+  const { data: memeList } = useGetMemesByCollectionId(sharedId as number);
   return (
     <div>
       <Link href="/share">

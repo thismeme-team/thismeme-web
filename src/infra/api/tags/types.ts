@@ -26,3 +26,5 @@ export interface GetCategoryByTagResponse {
     tags: (Pick<Tag, "tagId" | "name" | "viewCount"> & { isFav: boolean })[];
   }[];
 }
+
+export type GetTagInfoResponse = Tag & { isFav: boolean };

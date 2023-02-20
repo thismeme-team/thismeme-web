@@ -13,9 +13,8 @@ export const PATH = {
    * @param tag - 태그
    * @return /explore/tags?q={encoded 태그}
    */
-  getExploreByTagPath: (tag: string) => {
-    const encodedValue = encodeURIComponent(tag);
-    return `/explore/tags?q=${encodedValue}`;
+  getExploreByTagPath: (tagId: number) => {
+    return `/explore/tags/${tagId}`;
   },
 
   getMainPage: "/",

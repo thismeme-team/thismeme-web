@@ -13,7 +13,7 @@ import { SearchInput } from "@/components/search";
 const HomePage: NextPage = () => {
   const router = useRouter();
   const { isLogin, user } = useAuth();
-
+  console.log(user);
   return (
     <>
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
@@ -32,7 +32,7 @@ const HomePage: NextPage = () => {
         </SSRSuspense>
         {isLogin && (
           <SSRSuspense>
-            <UserSharedMemeList name={user?.name} />
+            <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
           </SSRSuspense>
         )}
         <MemeListContainer />

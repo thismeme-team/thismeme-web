@@ -37,25 +37,6 @@ export class MemeApi {
   };
 
   /**
-   * NOTE 회원이 찾는 밈 api 다른 브랜치에서 작업함
-   */
-  getUserFindMemes = async ({ offset, limit }: { offset: number; limit: number }) => {
-    const currentpage = offset / limit;
-
-    const { data } = await this.api.get<GetMemesResponse>(
-      `/memes?page=${currentpage}&size=${limit}&sort=viewCount,desc`,
-    );
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
-  };
-
-  /**
    * 콜렉션 별 밈 목록 API
    */
   getMemesByCollectionId = async ({

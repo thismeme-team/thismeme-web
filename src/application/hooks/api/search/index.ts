@@ -59,30 +59,24 @@ export const useGetMemesByTag = (tag: string) => {
 
 /**
  * 회원이 찾는 밈 API
- * @param keyword 최근 검색어 3개를 string으로
- * 최근검색어가 없다면 인기 밈 fetch
- * @returns
- * data - 밈 검색 결과
  */
 
 export const useGetUserFindMemes = ({ userId }: { userId: number }) => {
-  const [items, _] = useLocalStorage<RecentSearch[]>("recentSearch", { defaultValue: [] });
+  const [items] = useLocalStorage<RecentSearch[]>("recentSearch", { defaultValue: [] });
   const keywords = items
-    .map((item: RecentSearch) => item.value)
+    .map((item) => item.value)
     .slice(0, 3)
     .join();
 
   const { data, fetchNextPage } = useInfiniteQuery({
     queryKey: QUERY_KEYS.getUserFindMemes(keywords),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      keywords
-        ? api.search.getUserFindMemes({
-            keywords: keywords,
-            offset: pageParam,
-            limit: PAGE_SIZE,
-            userId: String(userId),
-          })
-        : api.meme.getMemesBySort({ offset: pageParam, limit: 10, sort: "viewCount" }),
+      api.search.getUserFindMemes({
+        keywords: keywords,
+        offset: pageParam,
+        limit: PAGE_SIZE,
+        userId: String(userId),
+      }),
     getNextPageParam: (lastPage) => {
       const { isLastPage, offset, limit } = lastPage;
       return isLastPage ? undefined : offset + limit;

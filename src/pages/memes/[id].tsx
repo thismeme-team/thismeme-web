@@ -22,8 +22,8 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) =>
       <MemeDetail id={id} />
       <MemeTagList id={id} />
       <MemeCTAList id={id} />
+
       <SSRSuspense>
-        {/* NOTE: 클라이언트 사이드에서만 렌더링 */}
         <RelativeMemeList />
       </SSRSuspense>
     </>

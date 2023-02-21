@@ -12,30 +12,6 @@ export class MemeApi {
       .then((response) => response.data);
   };
 
-  getMemesBySort = async ({
-    offset,
-    limit,
-    sort,
-  }: {
-    offset: number;
-    limit: number;
-    sort: string;
-  }) => {
-    const currentpage = offset / limit;
-
-    const { data } = await this.api.get<GetMemesResponse>(
-      `/memes?page=${currentpage}&size=${limit}&sort=${sort},desc`,
-    );
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
-  };
-
   /**
    * 콜렉션 별 밈 목록 API
    */
@@ -60,6 +36,34 @@ export class MemeApi {
         },
       },
     );
+    const result = {
+      data: data.memes,
+      offset: offset,
+      limit: limit,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
+    };
+    return result;
+  };
+
+  getMemesBySort = async ({
+    offset,
+    limit,
+    sort,
+  }: {
+    offset: number;
+    limit: number;
+    sort: string;
+  }) => {
+    const page = offset / limit;
+
+    const { data } = await this.api.get<GetMemesResponse>(`/memes`, {
+      params: {
+        page,
+        size: limit,
+        sort: `${sort},desc`,
+      },
+    });
     const result = {
       data: data.memes,
       offset: offset,

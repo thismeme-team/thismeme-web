@@ -4,11 +4,11 @@ import { InfiniteMemeList } from "../meme/InfiniteMemeList";
 import { MemeLongPressContainer } from "../meme/LongPress";
 
 interface Props {
-  sharedId?: number;
+  sharedId: number;
 }
 
 export const SharedMemeList = ({ sharedId }: Props) => {
-  const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(sharedId as number);
+  const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(sharedId);
 
   return (
     <MemeLongPressContainer memeList={memeList}>

@@ -13,13 +13,13 @@ import { SearchInput } from "@/components/search";
 const HomePage: NextPage = () => {
   const router = useRouter();
   const { isLogin, user } = useAuth();
-  console.log(user);
+
   return (
     <>
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
       <IntroPageNavigation />
       <PullToRefresh>
-        <section className="pt-16" />
+        <section className="pt-8" />
         <SearchInput
           inputMode="none"
           placeholder="당신이 생각한 '그 밈' 검색하기"
@@ -32,7 +32,7 @@ const HomePage: NextPage = () => {
         </SSRSuspense>
         {isLogin && (
           <SSRSuspense>
-            <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
+            <UserSharedMemeList name={user?.name} sharedId={user?.shareCollectionId} />
           </SSRSuspense>
         )}
         <MemeListContainer />

@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { useAuth, useModal } from "@/application/hooks";
+import { useAuth, useChannelIO, useModal } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { SignOutModal } from "@/components/common/Modal";
@@ -16,6 +16,8 @@ const SettingPage = () => {
   useEffect(() => {
     if (!isLoading && !isLogin) replace(PATH.getMainPage);
   }, [isLoading, isLogin, replace]);
+
+  useChannelIO({ user });
 
   return (
     <>

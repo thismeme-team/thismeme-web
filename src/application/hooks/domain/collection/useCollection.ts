@@ -14,8 +14,8 @@ interface UseCollectionArg {
  */
 export const useCollection = ({ memeId }: UseCollectionArg) => {
   const { data: collectionCheck } = useGetCollectionCheck(memeId);
-  const { mutate: postMemeToCollection } = usePostMemeToCollection({ memeId });
-  const { mutate: deleteMemeFromCollection } = useDeleteMemeFromCollection({ memeId });
+  const { mutate: postMemeToCollection } = usePostMemeToCollection();
+  const { mutate: deleteMemeFromCollection } = useDeleteMemeFromCollection();
 
   const { show } = useToast();
 

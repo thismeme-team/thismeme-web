@@ -26,12 +26,12 @@ export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
 /**
  * 콜렉션 삭제 API
  */
-export const useDeleteMemeFromCollection = ({ memeId }: { memeId: number }) => {
+export const useDeleteMemeFromCollection = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => api.collection.deleteMemeFromCollection(memeId),
-    onMutate: async (deletedMemeId: number) => {
+    mutationFn: api.collection.deleteMemeFromCollection,
+    onMutate: async (deletedMemeId) => {
       await queryClient.cancelQueries({
         queryKey: QUERY_KEYS.getCollectionCheck(deletedMemeId),
       });
@@ -59,12 +59,12 @@ export const useDeleteMemeFromCollection = ({ memeId }: { memeId: number }) => {
 /**
  * 콜렉션 저장 API
  */
-export const usePostMemeToCollection = ({ memeId }: { memeId: number }) => {
+export const usePostMemeToCollection = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: () => api.collection.postMemeToCollection(memeId),
-    onMutate: async (newMemeId: number) => {
+    mutationFn: api.collection.postMemeToCollection,
+    onMutate: async (newMemeId) => {
       await queryClient.cancelQueries({
         queryKey: QUERY_KEYS.getCollectionCheck(newMemeId),
       });

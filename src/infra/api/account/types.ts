@@ -1,8 +1,12 @@
-export type GetMyAccountResponse = {
+export interface GetMyAccountResponse {
+  id: number;
   email: string;
   name: string;
   createdDate: string;
   modifiedDate: string | null;
-  board_id: number;
-  share_board_id: number;
-};
+  imageUrl: string;
+  shareCount: number;
+  saveCount: number;
+  collectionId: number;
+  shareCollectionId: number;
+}

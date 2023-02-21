@@ -1,4 +1,4 @@
-export * from "./CollectPageNavigation";
+export * from "./BackButtonNavigation";
 export * from "./ExplorePageNavigation";
 export * from "./IntroPageNavigation";
 export * from "./MyPageNavigation";

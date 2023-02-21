@@ -8,4 +8,5 @@ export const QUERY_KEYS = {
     keyword: string;
     collectionId: number;
   }) => ["getMemesFromCollectionByKeyword", { keyword, collectionId }],
+  getUserFindMemes: (keywords: string) => ["getUserFindMemes", keywords],
 } as const;

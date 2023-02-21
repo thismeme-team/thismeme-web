@@ -1,60 +1,14 @@
 import { rest } from "msw";
 
+import * as MOCK_DATA from "./data";
+
 export const getPopularTag = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags`,
   async (req, res, ctx) => {
-    return res(
-      ctx.delay(),
-      ctx.status(200),
-      ctx.json({
-        tags: [
-          {
-            tagId: 1,
-            name: "무",
-            categoryName: "sample",
-            viewCount: 3,
-          },
-          {
-            tagId: 2,
-            name: "무한",
-            categoryName: "sample",
-            viewCount: 3,
-          },
-          {
-            tagId: 3,
-            name: "무한도",
-            categoryName: "sample",
-            viewCount: 3,
-          },
-          {
-            tagId: 4,
-            name: "무한도전",
-            categoryName: "sample",
-            viewCount: 3,
-          },
-          {
-            tagId: 5,
-            name: "무한도전전전전",
-            categoryName: "sample",
-            viewCount: 3,
-          },
-          {
-            tagId: 6,
-            name: "무한도전전전전전전전전",
-            categoryName: "sample",
-            viewCount: 3,
-          },
-          {
-            tagId: 7,
-            name: "무한도전전전전전전전전",
-            categoryName: "sample",
-            viewCount: 3,
-          },
-        ],
-      }),
-    );
+    return res(ctx.delay(), ctx.status(200), ctx.json({ tags: MOCK_DATA.popularTag }));
   },
 );
+
 export const getCategoryWithTag = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/categories`,
   async (req, res, ctx) => {
@@ -62,74 +16,12 @@ export const getCategoryWithTag = rest.get(
       ctx.delay(300),
       ctx.status(200),
       ctx.json({
-        categories: [
-          {
-            categoryId: 1,
-            name: "카테고리 명1",
-            priority: 100,
-            tags: [
-              {
-                tagId: 1,
-                name: "개발자",
-                viewCount: 52,
-                isFav: true,
-              },
-              {
-                tagId: 4,
-                name: "페페",
-                viewCount: 26,
-                isFav: false,
-              },
-              {
-                tagId: 5,
-                name: "유머",
-                viewCount: 140,
-                isFav: true,
-              },
-            ],
-          },
-          {
-            categoryId: 2,
-            name: "카테고리 명2",
-            priority: 200,
-            tags: [
-              {
-                tagId: 2,
-                name: "에브리타임",
-                viewCount: 49,
-                isFav: true,
-              },
-              {
-                tagId: 3,
-                name: "시험기간",
-                viewCount: 34,
-                isFav: true,
-              },
-              {
-                tagId: 12,
-                name: "무전",
-                viewCount: 18,
-                isFav: false,
-              },
-              {
-                tagId: 13,
-                name: "무한전",
-                viewCount: 8,
-                isFav: false,
-              },
-              {
-                tagId: 14,
-                name: "무도전",
-                viewCount: 2,
-                isFav: false,
-              },
-            ],
-          },
-        ],
+        categories: MOCK_DATA.categories,
       }),
     );
   },
 );
+
 export const getMemeTagsById = rest.get(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/memes/:id`,
   async (req, res, ctx) => {
@@ -147,9 +39,39 @@ export const getMemeTagsById = rest.get(
   },
 );
 
+export const postFavoriteTag = rest.post(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId/fav`,
+  async (req, res, ctx) => {
+    return res(ctx.delay(), ctx.status(200));
+  },
+);
+
 export const deleteFavoriteTag = rest.delete(
-  `${process.env.NEXT_PUBLIC_API_URL}/tags/:id/fav`,
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId/fav`,
   async (req, res, ctx) => {
     return res(ctx.delay(), ctx.status(Math.random() > 0.8 ? 500 : 200));
+  },
+);
+
+/**
+ * 태그 상세 조회 API
+ */
+export const getTagInfo = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId`,
+  async (req, res, ctx) => {
+    const tagId = +req.params.tagId;
+
+    return res(
+      ctx.delay(),
+      ctx.status(200),
+      ctx.json({
+        tagId,
+        name: "개발자",
+        viewCount: 54,
+        categoryId: 1,
+        categoryName: "카테고리 명1",
+        isFav: true,
+      }),
+    );
   },
 );

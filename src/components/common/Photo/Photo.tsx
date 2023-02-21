@@ -1,7 +1,6 @@
 import Image from "next/image";
 import type { ComponentProps } from "react";
 import { useEffect, useState } from "react";
-import { ErrorBoundary } from "react-error-boundary";
 
 /**
  * NOTE
@@ -12,8 +11,8 @@ import { ErrorBoundary } from "react-error-boundary";
 interface Props extends Omit<ComponentProps<"img">, "placeholder"> {
   fallbackSrc?: string;
   priority?: boolean;
+  unoptimized?: boolean;
 }
-
 const base64Blur =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
 
@@ -48,33 +47,17 @@ export const Photo = ({
       className={`relative overflow-hidden [&>img]:!static ${className}`}
       css={[width && height && { aspectRatio: `calc(${width} / ${height})` }]}
     >
-      <ErrorBoundary
-        fallback={
-          // NOTE: encoding 오류와 같이 Image 컴포넌트 자체에서 나는 오류 잡음
-          <Image
-            fill
-            alt="fallback"
-            blurDataURL={base64Blur}
-            placeholder="blur"
-            sizes=" "
-            src={fallbackSrc}
-            style={{ objectFit: "cover" }}
-            {...rest}
-          />
-        }
-      >
-        <Image
-          fill
-          alt={alt}
-          blurDataURL={base64Blur}
-          placeholder="blur"
-          sizes=" "
-          src={isFailLoading ? fallbackSrc : src}
-          style={{ objectFit: "cover" }}
-          onError={setIsFailLoading}
-          {...rest}
-        />
-      </ErrorBoundary>
+      <Image
+        fill
+        alt={alt}
+        blurDataURL={base64Blur}
+        placeholder="blur"
+        sizes=" "
+        src={isFailLoading ? fallbackSrc : src}
+        style={{ objectFit: "cover" }}
+        onError={setIsFailLoading}
+        {...rest}
+      />
     </div>
   );
 };

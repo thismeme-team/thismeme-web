@@ -2,7 +2,7 @@ import { useDeferredValue } from "react";
 
 import { useDebounce, useInput } from "@/application/hooks";
 import { Collection, SearchedCollection } from "@/components/collect";
-import { CollectPageNavigation } from "@/components/common/Navigation";
+import { BackButtonNavigation } from "@/components/common/Navigation";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { withAuth } from "@/components/hocs";
 import { SearchInput } from "@/components/search";
@@ -14,7 +14,7 @@ const CollectPage = () => {
 
   return (
     <>
-      <CollectPageNavigation />
+      <BackButtonNavigation title="나의 콜렉션" />
 
       <SearchInput
         {...inputProps}

@@ -84,4 +84,32 @@ export class SearchApi {
     };
     return result;
   };
+
+  getUserFindMemes = async ({
+    userId,
+    keywords,
+    offset,
+    limit,
+  }: {
+    userId: string;
+    keywords: string;
+    offset: number;
+    limit: number;
+  }) => {
+    const { data } = await this.api.get<GetMemesResponse>(`/search/user/${userId}`, {
+      params: {
+        keywords,
+        offset,
+        limit,
+      },
+    });
+    const result = {
+      data: data.memes,
+      offset: offset,
+      limit: limit,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
+    };
+    return result;
+  };
 }

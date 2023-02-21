@@ -6,9 +6,7 @@ export class CollectionApi {
   constructor(private api: AxiosInstance) {}
 
   /**
-   * NOTE
-   * 임시: 밈별 콜렉션 정보 API
-   * 백엔드에 밈별 콜렉션 정보 API 인터페이스 요청하기
+   * 밈별 콜렉션 정보 API
    */
   getCollectionCheck = (memeId: number) => {
     return this.api
@@ -28,5 +26,12 @@ export class CollectionApi {
    */
   postMemeToCollection = (memeId: number) => {
     return this.api.post(`/collections/memes/${memeId}`).then((response) => response.data);
+  };
+
+  /**
+   * 공유 콜렉션 저장 API
+   */
+  postMemeToSharedCollection = (memeId: number) => {
+    return this.api.post(`/collections/share/memes/${memeId}`).then((response) => response.data);
   };
 }

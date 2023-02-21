@@ -12,7 +12,7 @@ export const SearchPopularList = () => {
     <ul className="px-14">
       {tags?.map((tag, index) => (
         <li key={tag.tagId}>
-          <Link href={PATH.getExploreByTagPath(tag.name)}>
+          <Link href={PATH.getExploreByTagPath(tag.tagId)}>
             <SearchPopularItem index={index} name={tag.name} />
           </Link>
         </li>

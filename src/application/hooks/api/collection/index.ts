@@ -8,9 +8,7 @@ import { useSuspendedQuery } from "../core";
 import { QUERY_KEYS } from "./queryKey";
 
 /**
- * NOTE
- * 임시: 밈별 콜렉션 정보 API
- * 백엔드에 밈별 콜렉션 정보 API 인터페이스 요청하기
+ * 밈별 콜렉션 정보 API
  */
 export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
   memeId: number,
@@ -86,5 +84,11 @@ export const usePostMemeToCollection = () => {
         context?.previousCollectionInfo,
       );
     },
+  });
+};
+
+export const usePostMemeToSharedCollection = ({ memeId }: { memeId: number }) => {
+  return useMutation({
+    mutationFn: () => api.collection.postMemeToSharedCollection(memeId),
   });
 };

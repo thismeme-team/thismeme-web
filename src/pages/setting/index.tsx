@@ -5,8 +5,7 @@ import { useAuth, useModal } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { SignOutModal } from "@/components/common/Modal";
-import { Navigation } from "@/components/common/Navigation";
-import { BackButton } from "@/components/common/Navigation/BackButton";
+import { BackButtonNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
 
 const SettingPage = () => {
@@ -20,13 +19,7 @@ const SettingPage = () => {
 
   return (
     <>
-      <Navigation>
-        <Navigation.Left>
-          <BackButton />
-        </Navigation.Left>
-        <Navigation.Center>설정</Navigation.Center>
-      </Navigation>
-
+      <BackButtonNavigation title="설정" />
       <article className="flex h-[calc(100vh-5.4rem)] flex-col justify-between">
         <section>
           <div className="mt-24 flex h-64 items-center justify-between border-b border-gray-200">

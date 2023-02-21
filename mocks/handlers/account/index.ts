@@ -8,10 +8,15 @@ export const getMyAccount = rest.get(
     return res(
       ctx.status(isAuth ? 200 : 401),
       ctx.json({
-        createDate: new Date().toISOString(),
+        createdDate: new Date().toISOString(),
         email: "test@gmail.com",
         modifiedDate: null,
         name: "test",
+        shareCount: 97,
+        saveCount: 34,
+        collectionId: 3,
+        sharedCollectionId: 4,
+        id: 100,
       }),
     );
   },

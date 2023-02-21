@@ -1,5 +1,6 @@
 import { useMemeDetailById } from "@/application/hooks";
 import { Photo } from "@/components/common/Photo";
+import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeExport } from "@/components/meme/MemeInfo/DropDown/MemeExport";
 
 interface Props {
@@ -29,7 +30,11 @@ export const MemeDetail = ({ id }: Props) => {
           src={imageUrl}
           width={imageWidth}
         />
-        <MemeExport id={id} />
+
+        <SSRSuspense>
+          <MemeExport id={id} />
+        </SSRSuspense>
+
         <div className="flex items-center justify-between pt-4 pb-16 font-suit text-12-bold-160 text-gray-500">
           <span>{createdDate.split("T")[0].replaceAll("-", ".")}</span>
           {isFetchedAfterMount && (

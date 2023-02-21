@@ -68,24 +68,31 @@ export const getSearchResultsByTag = rest.get(
   },
 );
 
-export const getMemeList = rest.get(`${process.env.NEXT_PUBLIC_API_URL}/memes`, (req, res, ctx) => {
-  const { searchParams } = req.url;
-  const page = Number(searchParams.get("page"));
-  const size = Number(searchParams.get("size"));
+export const getMemesFromCollectionByKeyword = rest.get(
+  `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search/collection/:collectionId`,
+  (req, res, ctx) => {
+    const { searchParams } = req.url;
+    const query = searchParams.get("keyword");
+    const offset = Number(searchParams.get("offset"));
+    const limit = Number(searchParams.get("limit"));
 
-  const offset = Math.floor(Math.random() * 200) + page;
+    if (!query || !query.trim()) {
+      return res(ctx.status(400));
+    }
 
-  const data = MOCK_DATA.memes.slice(offset, offset + size);
+    const filterByKeyword = MOCK_DATA.memes.filter((memes) => memes.tags.includes(query || ""));
+    const data = filterByKeyword.slice(offset, offset + limit);
 
-  return res(
-    ctx.status(200),
-    ctx.json<GetMemesResponse>({
-      memes: data,
-      count: data.length,
-    }),
-    ctx.delay(500),
-  );
-});
+    return res(
+      ctx.status(200),
+      ctx.json<GetMemesResponse>({
+        memes: data,
+        count: data.length,
+      }),
+      ctx.delay(500),
+    );
+  },
+);
 
 export const getUserFindMemes = rest.get(
   `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search/user/:userId`,

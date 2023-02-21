@@ -62,7 +62,7 @@ const variants = {
     margin-bottom: 0;
     height: auto;
     transform-origin: 0 55%;
-    transform: scale(1; 0.60);
+    transform: scale(1, 0.60);
     border-radius: 4px / 6.7px;
     &:empty::before {
       content: "\\00a0";

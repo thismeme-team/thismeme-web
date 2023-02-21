@@ -1,5 +1,6 @@
 import * as account from "./account";
 import * as auth from "./auth";
+import * as collection from "./collection";
 import * as meme from "./meme";
 import * as post from "./post";
 import * as search from "./search";
@@ -12,4 +13,5 @@ export const handlers = [
   ...Object.values(meme),
   ...Object.values(search),
   ...Object.values(account),
+  ...Object.values(collection),
 ];

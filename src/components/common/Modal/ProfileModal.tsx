@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useRouter } from "next/router";
 
 import { useAuth, useToast } from "@/application/hooks";
@@ -27,9 +28,14 @@ export const ProfileModal = () => {
           </span>
         </DropDown.Trigger>
         <DropDown.Contents css={{ top: "7rem", right: "1.6rem", width: "34rem" }}>
-          <DropDown.Content className="flex h-92 items-center justify-between p-16 font-suit text-22-bold-140">
-            <Icon height={60} name="loginprofile" width={60} />@{user?.name}
-            <Icon name="setting" />
+          <DropDown.Content>
+            <Link
+              className="flex h-92 items-center justify-between p-16 font-suit text-22-bold-140"
+              href="/mypage"
+            >
+              <Icon height={60} name="loginprofile" width={60} />@{user?.name}
+              <Icon name="setting" />
+            </Link>
           </DropDown.Content>
           <DropDown.Content className="flex h-80 items-center justify-center font-suit">
             <section className="flex flex-col border-r-2 border-gray-200 pr-40">

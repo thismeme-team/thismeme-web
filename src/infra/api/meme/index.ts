@@ -1,7 +1,7 @@
 import type { AxiosInstance } from "axios";
 
 import type { GetMemesResponse } from "../search/types";
-import type { GetMemeDetailByIdResponse } from "./types";
+import type { GetMemeDetailByIdResponse, GetMemesByCollectionIdResponse } from "./types";
 
 export class MemeApi {
   constructor(private api: AxiosInstance) {}
@@ -10,6 +10,40 @@ export class MemeApi {
     return this.api
       .get<GetMemeDetailByIdResponse>(`/memes/${id}`)
       .then((response) => response.data);
+  };
+
+  /**
+   * 콜렉션 별 밈 목록 API
+   */
+  getMemesByCollectionId = async ({
+    collectionId,
+    offset,
+    limit,
+  }: {
+    collectionId: number;
+    offset: number;
+    limit: number;
+  }) => {
+    const page = offset / limit;
+
+    const { data } = await this.api.get<GetMemesByCollectionIdResponse>(
+      `/memes/collections/${collectionId}`,
+      {
+        params: {
+          page,
+          size: limit,
+          sort: "id,desc",
+        },
+      },
+    );
+    const result = {
+      data: data.memes,
+      offset: offset,
+      limit: limit,
+      isLastPage: data.memes.length < limit,
+      isFirstPage: offset >= 0 && offset < limit,
+    };
+    return result;
   };
 
   getMemesBySort = async ({
@@ -21,11 +55,15 @@ export class MemeApi {
     limit: number;
     sort: string;
   }) => {
-    const currentpage = offset / limit;
+    const page = offset / limit;
 
-    const { data } = await this.api.get<GetMemesResponse>(
-      `/memes?page=${currentpage}&size=${limit}&sort=${sort},desc`,
-    );
+    const { data } = await this.api.get<GetMemesResponse>(`/memes`, {
+      params: {
+        page,
+        size: limit,
+        sort: `${sort},desc`,
+      },
+    });
     const result = {
       data: data.memes,
       offset: offset,

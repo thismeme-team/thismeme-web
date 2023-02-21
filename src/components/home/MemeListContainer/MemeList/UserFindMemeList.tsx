@@ -13,7 +13,7 @@ export const UserFindMemeList = ({ userId }: Props) => {
 
   return (
     <MemeLongPressContainer memeList={memeList}>
-      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
+      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
     </MemeLongPressContainer>
   );
 };

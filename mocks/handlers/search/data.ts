@@ -62,9 +62,12 @@ const sampleImages = [
   { url: "https://picsum.photos/236/354", width: 236, height: 354 },
 ];
 
+const sampleTags = ["무한도전", "도전", "무한", "박명수", "유재석", "명수", "재석", "예시"];
+
 export const memes = Array.from(Array(1024).keys()).map((id) => {
   const randomIndex = Math.floor(Math.random() * sampleImages.length);
   const { url, width, height } = sampleImages[randomIndex];
+  const randomTags = sampleTags.filter(() => Math.random() > 0.5);
   return {
     memeId: id,
     name: "무난한도전",
@@ -84,6 +87,6 @@ export const memes = Array.from(Array(1024).keys()).map((id) => {
       ],
       count: 1,
     },
-    tags: ["무한도전", "박명수"],
+    tags: randomTags,
   };
 });

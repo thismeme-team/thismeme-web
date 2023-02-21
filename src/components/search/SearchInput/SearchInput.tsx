@@ -11,7 +11,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Props) => {
   return (
     <form
-      className="relative flex items-center justify-start"
+      className="relative flex items-center justify-start py-8"
       onSubmit={(e) => {
         e.preventDefault();
         onSearchByKeyWord?.();

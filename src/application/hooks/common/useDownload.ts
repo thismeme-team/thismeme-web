@@ -20,24 +20,19 @@ export const useDownload = () => {
       try {
         setIsDownloading(true);
 
-        /**
-         * NOTE Optimistic UI
-         * 로딩, 실패 케이스도 고려해야 한다면
-         * react-hot-toast의 promise 버전 toast를 구현해야 함
-         */
-        onSuccess?.();
-
-        const blob = await fetch(target, { mode: "no-cors" }).then((response) => response.blob());
+        const blob = await fetch(target).then((response) => response.blob());
         const blobURL = URL.createObjectURL(blob);
+        const ext = /\.(\w+)$/g.exec(target)?.[0] || ".png";
 
         const a = document.createElement("a");
         a.href = blobURL;
-        a.download = name;
+        a.download = name + ext;
         a.rel = "noopener noreferrer";
 
         a.click();
 
         URL.revokeObjectURL(blobURL);
+        onSuccess?.();
       } catch (e) {
         onError?.();
       } finally {

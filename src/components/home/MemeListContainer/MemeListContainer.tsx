@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useAuth } from "@/application/hooks";
 import { SSRSuspense } from "@/components/common/Suspense";
 
+import { SkeletonMeme } from "../Skeleton/SkeletonMeme";
 import { MemeSortDropDown } from "./DropDown";
 import { CommonMemeList, UserFindMemeList } from "./MemeList";
 import type { MemeListType } from "./type";
@@ -15,7 +16,7 @@ export const MemeListContainer = () => {
   return (
     <>
       <MemeSortDropDown sortBy={sortBy} onClickItem={setSortBy} />
-      <SSRSuspense>
+      <SSRSuspense fallback={<SkeletonMeme />}>
         {sortBy === "user" ? (
           <UserFindMemeList userId={user?.id} />
         ) : (

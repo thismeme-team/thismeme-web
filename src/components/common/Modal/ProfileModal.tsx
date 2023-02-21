@@ -6,6 +6,7 @@ import { PATH } from "@/application/util";
 
 import { DropDown } from "../DropDown";
 import { Icon } from "../Icon";
+import { Photo } from "../Photo";
 
 export const ProfileModal = () => {
   const { user, logout } = useAuth();
@@ -24,7 +25,7 @@ export const ProfileModal = () => {
       <DropDown>
         <DropDown.Trigger>
           <span css={{ fontSize: 0 }}>
-            <Icon name="loginprofile" />
+            <Photo className="h-32 w-32 rounded-10" src={user?.imageUrl} />
           </span>
         </DropDown.Trigger>
         <DropDown.Contents css={{ top: "7rem", right: "1.6rem", width: "34rem" }}>
@@ -33,17 +34,18 @@ export const ProfileModal = () => {
               className="flex h-92 items-center justify-between p-16 font-suit text-22-bold-140"
               href="/mypage"
             >
-              <Icon height={60} name="loginprofile" width={60} />@{user?.name}
+              <Photo className="mr-16 h-60 w-60 rounded-full" src={user?.imageUrl} />
+              {user?.name}
               <Icon name="setting" />
             </Link>
           </DropDown.Content>
           <DropDown.Content className="flex h-80 items-center justify-center font-suit">
-            <section className="flex flex-col border-r-2 border-gray-200 pr-40">
-              <span className="text-32-bold-140">97</span>
+            <section className="flex flex-col border-r-2 border-gray-200 pr-40 text-center">
+              <span className="text-32-bold-140">{user?.shareCount}</span>
               <span className="text-16-semibold-140">share</span>
             </section>
-            <section className="flex flex-col pl-40">
-              <span className="text-32-bold-140">43</span>
+            <section className="flex flex-col pl-40 text-center">
+              <span className="text-32-bold-140">{user?.saveCount}</span>
               <span className="text-16-semibold-140">collect</span>
             </section>
           </DropDown.Content>

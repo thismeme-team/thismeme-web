@@ -21,10 +21,7 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) =>
       <ExplorePageNavigation />
       <MemeDetail id={id} />
       <MemeTagList id={id} />
-
-      <SSRSuspense>
-        <MemeCTAList id={id} />
-      </SSRSuspense>
+      <MemeCTAList id={id} />
 
       <SSRSuspense>
         <RelativeMemeList />

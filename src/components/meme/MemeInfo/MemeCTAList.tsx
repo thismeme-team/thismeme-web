@@ -1,8 +1,11 @@
-import { useCollection, useModal } from "@/application/hooks";
+import { useModal } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
-import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
+import { Skeleton } from "@/components/common/Skeleton";
+import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeShareModal } from "@/components/meme/MemeInfo/Modal";
+
+import { CollectionSaveButton } from "./Button";
 
 interface Props {
   id: string;
@@ -10,7 +13,6 @@ interface Props {
 
 export const MemeCTAList = ({ id }: Props) => {
   const memeShareModalProps = useModal();
-  const { isAdded, onUpdateCollection } = useCollection({ memeId: Number(id) });
 
   return (
     <div className="flex w-full gap-10 py-40">
@@ -22,24 +24,17 @@ export const MemeCTAList = ({ id }: Props) => {
       </Button>
       <MemeShareModal id={id} {...memeShareModalProps} />
 
-      <WithAuthHandlers handlers={["onClick"]}>
-        <Button
-          className={`flex h-52 w-full items-center gap-8 rounded-10 ${
-            isAdded ? "bg-gray-300" : "bg-gray-900 active:bg-black"
-          }`}
-          onClick={onUpdateCollection}
-        >
-          <Icon
-            className={`${isAdded ? "[&_*]:fill-gray-800" : "[&_*]:fill-secondary-1000"}`}
-            name="collection"
+      <SSRSuspense
+        fallback={
+          <Skeleton
+            animation="wave"
+            style={{ width: "100%", height: "5.2rem", borderRadius: "1rem" }}
+            variant="rectangular"
           />
-          <span
-            className={`font-suit text-16-semibold-140 ${isAdded ? "text-gray-800" : "text-white"}`}
-          >
-            콜렉션에 저장
-          </span>
-        </Button>
-      </WithAuthHandlers>
+        }
+      >
+        <CollectionSaveButton id={id} />
+      </SSRSuspense>
     </div>
   );
 };

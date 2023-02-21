@@ -11,7 +11,7 @@ export const UserSharedMemeList = ({ name }: Props) => {
   return (
     <div>
       <div className="flex justify-between py-16 font-suit text-22-bold-140">
-        {`@${name} 이 공유했던 밈`}
+        {`@${name} 이(가) 공유했던 밈`}
         <Icon
           height={32}
           name="chevronDown"

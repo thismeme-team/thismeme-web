@@ -32,10 +32,18 @@ export const MemeLongPressContainer = ({
     <>
       <div
         {...longPress()}
-        onContextMenu={(e) => e.preventDefault()}
         onClickCapture={(e) => {
           // NOTE: 롱프레스가 open 된 상태에서 마우스를 뗄 시 뒤에 있는 <MemeItem />의 <Link />가 클릭 되는 것을 막습니다
           if (isOpen) e.preventDefault();
+        }}
+        onContextMenu={(e) => {
+          e.preventDefault();
+        }}
+        onTouchEndCapture={(e) => {
+          e.preventDefault();
+        }}
+        onTouchStartCapture={(e) => {
+          e.preventDefault();
         }}
       >
         {children}

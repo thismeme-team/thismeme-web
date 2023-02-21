@@ -8,5 +8,5 @@ export interface GetMyAccountResponse {
   shareCount: number;
   saveCount: number;
   collectionId: number;
-  shareCollectionId: number;
+  sharedCollectionId: number;
 }

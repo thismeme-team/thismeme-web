@@ -1,8 +1,7 @@
 import { css } from "twin.macro";
 
 import { useGetMemesByTag, useIntersect } from "@/application/hooks";
-import { Masonry } from "@/components/common/Masonry";
-import { MemeItem } from "@/components/meme/MemeItem";
+import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
 
 import { EmptyMemesView } from "../EmptyMemesView";
 
@@ -30,11 +29,9 @@ export const MemesByTag = ({ searchQuery }: Props) => {
         `,
       ]}
     >
-      <Masonry columns={2} spacing={9}>
-        {memeList.map((meme) => (
-          <MemeItem key={meme.memeId} meme={meme} />
-        ))}
-      </Masonry>
+      <MemeLongPressContainer memeList={memeList}>
+        <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
+      </MemeLongPressContainer>
       <div className="h-20" ref={ref} />
     </div>
   );

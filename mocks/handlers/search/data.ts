@@ -84,6 +84,6 @@ export const memes = Array.from(Array(1024).keys()).map((id) => {
       ],
       count: 1,
     },
-    tags: ["무한도전", "박명수"],
+    tags: ["무한도전", "박명수", "sample"],
   };
 });

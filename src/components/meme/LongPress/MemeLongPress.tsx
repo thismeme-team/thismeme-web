@@ -2,6 +2,7 @@ import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
 import { useDownload, useToast } from "@/application/hooks";
+import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { android } from "@/application/util";
 import type { Meme } from "@/types";
 
@@ -14,6 +15,9 @@ interface Props {
 export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
   const { download } = useDownload();
   const { show } = useToast();
+  const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
+    memeId: meme?.memeId as number,
+  });
 
   const name = meme?.name || "";
   const description = meme?.description || "";
@@ -91,6 +95,7 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
           onClick={() => {
             onClose();
             handleNaviteShare();
+            postMemeToSharedCollection();
           }}
         >
           공유하기

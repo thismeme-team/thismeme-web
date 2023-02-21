@@ -1,5 +1,5 @@
 export type GetMyAccountResponse = {
-  createDate: string;
+  createdDate: string;
   email: string;
   modifiedDate: string | null;
   name: string;
@@ -7,6 +7,6 @@ export type GetMyAccountResponse = {
   shareCount: number;
   saveCount: number;
   collectionId: number;
-  shareCollectionId: number;
+  sharedCollectionId: number;
   id: number;
 };

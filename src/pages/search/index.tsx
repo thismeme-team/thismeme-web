@@ -41,6 +41,7 @@ const SearchPage: NextPage = () => {
       <div className="relative mt-16">
         <SearchInput
           {...inputProps}
+          maxLength={14}
           placeholder="당신이 생각한 '그 밈' 검색하기"
           spellCheck={false}
           type="text"

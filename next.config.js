@@ -74,6 +74,9 @@ const nextConfig = {
         hostname: "**",
       },
     ],
+    // Link: https://fe-developers.kakaoent.com/2022/220714-next-image/
+    imageSizes: [32, 64, 256, 512],
+    deviceSizes: [750],
   },
 };
 

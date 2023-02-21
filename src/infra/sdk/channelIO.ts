@@ -1,6 +1,6 @@
 import { IS_CSR } from "@/application/util";
 
-class ChannelService {
+export class ChannelService {
   constructor() {
     if (IS_CSR) this.loadScript();
   }
@@ -89,5 +89,3 @@ interface CallbackUser {
 interface Profile {
   [key: string]: string | number | boolean | null;
 }
-
-export const channelService = new ChannelService();

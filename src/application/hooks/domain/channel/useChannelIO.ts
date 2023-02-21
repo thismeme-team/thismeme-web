@@ -1,12 +1,14 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import { channelService } from "@/infra/sdk";
+import { ChannelService } from "@/infra/sdk";
 import type { User } from "@/types";
 
 interface Props {
   user?: User;
 }
-export const useChannelIO = ({ user }: Props) =>
+export const useChannelIO = ({ user }: Props) => {
+  const [channelService] = useState(() => new ChannelService());
+
   useEffect(() => {
     if (user) {
       const { name, email } = user;
@@ -26,4 +28,5 @@ export const useChannelIO = ({ user }: Props) =>
     return () => {
       channelService.shutdown();
     };
-  }, [user]);
+  }, [channelService, user]);
+};

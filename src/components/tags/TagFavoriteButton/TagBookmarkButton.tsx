@@ -1,4 +1,5 @@
 import {
+  useAuthValidation,
   useDeleteFavoriteTag,
   useGetTagInfo,
   usePostFavoriteTag,
@@ -6,7 +7,6 @@ import {
 } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
-import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
 
 interface Props {
   tagId: number;
@@ -16,10 +16,10 @@ const animation = "transition-colors duration-200 ease-in-out";
 
 export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show } = useToast();
-
   const { isFav } = useGetTagInfo(tagId);
   const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation } = useDeleteFavoriteTag();
+  const { validatorWithSignUpModal } = useAuthValidation();
 
   const handleSaveBookmark = () => {
     saveMutation(tagId, {
@@ -39,17 +39,15 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
 
   return (
     <div className="fixed bottom-32 right-18 text-center">
-      <WithAuthHandlers handlers={["onClick"]}>
-        <Button
-          id="bookmark"
-          className={`${
-            isFav ? "bg-primary-300 [&_*]:fill-[#fddd71]" : "bg-gray-800"
-          } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
-          onClick={handleClick}
-        >
-          <Icon height={28} name="star" width={28} />
-        </Button>
-      </WithAuthHandlers>
+      <Button
+        id="bookmark"
+        className={`${
+          isFav ? "bg-primary-300 [&_*]:fill-[#fddd71]" : "bg-gray-800"
+        } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
+        onClick={validatorWithSignUpModal(handleClick)}
+      >
+        <Icon height={28} name="star" width={28} />
+      </Button>
       <span
         className={`${
           isFav ? "text-gray-600" : "text-gray-700"

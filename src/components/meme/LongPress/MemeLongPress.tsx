@@ -2,13 +2,13 @@ import { Actions, ActionsButton, ActionsGroup } from "konsta/react";
 import { css } from "twin.macro";
 
 import {
+  useAuthValidation,
   useCollection,
   useDownload,
   usePostMemeToSharedCollection,
   useToast,
 } from "@/application/hooks";
 import { android } from "@/application/util";
-import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
 import type { Meme } from "@/types";
 
 interface Props {
@@ -24,6 +24,7 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: meme?.memeId as number,
   });
+  const { validator, validatorWithSignUpModal } = useAuthValidation();
 
   const name = meme?.name || "";
   const description = meme?.description || "";
@@ -61,22 +62,20 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
       onBackdropClick={onClose}
     >
       <ActionsGroup>
-        <WithAuthHandlers handlers={["onClick"]}>
-          <ActionsButton
-            css={css`
-              height: 6.2rem;
-              padding-inline: 1.8rem;
-              color: ${!android && "#007aff"};
-              font-size: ${android ? "1.65" : "2"}rem;
-            `}
-            onClick={() => {
-              onClose();
-              onUpdateCollection();
-            }}
-          >
-            콜렉션에 저장하기
-          </ActionsButton>
-        </WithAuthHandlers>
+        <ActionsButton
+          css={css`
+            height: 6.2rem;
+            padding-inline: 1.8rem;
+            color: ${!android && "#007aff"};
+            font-size: ${android ? "1.65" : "2"}rem;
+          `}
+          onClick={() => {
+            onClose();
+            validatorWithSignUpModal(onUpdateCollection)();
+          }}
+        >
+          콜렉션에 저장하기
+        </ActionsButton>
         <ActionsButton
           css={css`
             height: 6.2rem;
@@ -101,7 +100,7 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
           onClick={() => {
             onClose();
             handleNaviteShare();
-            postMemeToSharedCollection();
+            validator(postMemeToSharedCollection)();
           }}
         >
           공유하기

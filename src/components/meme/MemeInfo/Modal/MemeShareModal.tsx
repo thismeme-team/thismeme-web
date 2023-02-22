@@ -26,7 +26,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
     memeId: Number(id),
   });
 
-  const { validator } = useAuthValidation();
+  const { validate } = useAuthValidation();
 
   const src = images[0].imageUrl;
 
@@ -46,7 +46,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
               title: name,
               description,
             }}
-            onSuccess={validator(postMemeToSharedCollection)}
+            onSuccess={validate(postMemeToSharedCollection, { needSignUpModal: false })}
           />
           <span className="absolute bottom-0 font-suit text-12-bold-160">카카오로 공유</span>
         </li>
@@ -56,7 +56,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
             onSuccess={() => {
               modalProps.onClose();
               showClipboardCopyToast();
-              validator(postMemeToSharedCollection)();
+              validate(postMemeToSharedCollection, { needSignUpModal: false })();
             }}
           />
           <span className="absolute bottom-0 font-suit text-12-bold-160">링크 복사</span>
@@ -66,7 +66,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
             text={description}
             title={name}
             url={PAGE_URL}
-            onSuccess={validator(postMemeToSharedCollection)}
+            onSuccess={validate(postMemeToSharedCollection, { needSignUpModal: false })}
             onError={() => {
               modalProps.onClose();
               showNativeShareErrorToast();

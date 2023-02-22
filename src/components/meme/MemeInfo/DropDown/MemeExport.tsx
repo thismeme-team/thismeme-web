@@ -27,7 +27,7 @@ export const MemeExport = ({ id }: Props) => {
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: Number(id),
   });
-  const { validator, validatorWithSignUpModal } = useAuthValidation();
+  const { validate } = useAuthValidation();
 
   const url = images[0].imageUrl;
 
@@ -62,7 +62,7 @@ export const MemeExport = ({ id }: Props) => {
           </DropDown.Content>
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={validatorWithSignUpModal(onUpdateCollection)}
+            onClick={validate(onUpdateCollection)}
           >
             콜렉션에 저장하기
           </DropDown.Content>
@@ -70,7 +70,7 @@ export const MemeExport = ({ id }: Props) => {
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onClick={() => {
               handleNaviteShare();
-              validator(postMemeToSharedCollection)();
+              validate(postMemeToSharedCollection, { needSignUpModal: false })();
             }}
           >
             공유하기

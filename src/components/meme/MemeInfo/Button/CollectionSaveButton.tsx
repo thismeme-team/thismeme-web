@@ -8,13 +8,14 @@ interface Props {
 
 export const CollectionSaveButton = ({ id }: Props) => {
   const { isAdded, onUpdateCollection } = useCollection({ memeId: Number(id) });
-  const { validatorWithSignUpModal } = useAuthValidation();
+  const { validate } = useAuthValidation();
+
   return (
     <Button
       className={`flex h-52 w-full items-center gap-8 rounded-10 ${
         isAdded ? "bg-gray-300" : "bg-gray-900 active:bg-black"
       }`}
-      onClick={validatorWithSignUpModal(onUpdateCollection)}
+      onClick={validate(onUpdateCollection)}
     >
       <Icon
         className={`${isAdded ? "[&_*]:fill-gray-800" : "[&_*]:fill-secondary-1000"}`}

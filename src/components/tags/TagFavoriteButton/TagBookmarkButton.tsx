@@ -19,7 +19,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const { isFav } = useGetTagInfo(tagId);
   const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation } = useDeleteFavoriteTag();
-  const { validatorWithSignUpModal } = useAuthValidation();
+  const { validate } = useAuthValidation();
 
   const handleSaveBookmark = () => {
     saveMutation(tagId, {
@@ -44,7 +44,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
         className={`${
           isFav ? "bg-primary-300 [&_*]:fill-[#fddd71]" : "bg-gray-800"
         } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
-        onClick={validatorWithSignUpModal(handleClick)}
+        onClick={validate(handleClick)}
       >
         <Icon height={28} name="star" width={28} />
       </Button>

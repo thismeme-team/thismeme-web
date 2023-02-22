@@ -24,7 +24,7 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: meme?.memeId as number,
   });
-  const { validator, validatorWithSignUpModal } = useAuthValidation();
+  const { validate } = useAuthValidation();
 
   const name = meme?.name || "";
   const description = meme?.description || "";
@@ -71,7 +71,7 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
           `}
           onClick={() => {
             onClose();
-            validatorWithSignUpModal(onUpdateCollection)();
+            validate(onUpdateCollection)();
           }}
         >
           콜렉션에 저장하기
@@ -100,7 +100,7 @@ export const MemeLongPress = ({ isOpen, onClose, meme }: Props) => {
           onClick={() => {
             onClose();
             handleNaviteShare();
-            validator(postMemeToSharedCollection)();
+            validate(postMemeToSharedCollection, { needSignUpModal: false })();
           }}
         >
           공유하기

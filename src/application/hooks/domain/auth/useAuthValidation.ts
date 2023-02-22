@@ -5,27 +5,22 @@ import { useSignUpModalContext } from "@/components/common/Modal";
 import { useAuth } from "./useAuth";
 
 type Handler = (...args: any[]) => unknown;
+interface ValidatorOptions {
+  needSignUpModal: boolean;
+}
 
 export const useAuthValidation = () => {
   const { isLogin } = useAuth();
   const modalProps = useSignUpModalContext();
 
-  const validatorWithSignUpModal = useCallback(
-    <T extends Handler>(handler: T) =>
+  const validate = useCallback(
+    <T extends Handler>(handler: T, options: ValidatorOptions = { needSignUpModal: true }) =>
       (...args: Parameters<T>) => {
-        if (!isLogin) modalProps.onOpen();
-        else handler(args);
+        if (isLogin) return handler(args) as ReturnType<T>;
+        if (!isLogin && options.needSignUpModal) return modalProps.onOpen();
       },
     [isLogin, modalProps],
   );
 
-  const validator = useCallback(
-    <T extends Handler>(handler: T) =>
-      (...args: Parameters<T>) => {
-        if (isLogin) handler(args);
-      },
-    [isLogin],
-  );
-
-  return { validatorWithSignUpModal, validator };
+  return { validate };
 };

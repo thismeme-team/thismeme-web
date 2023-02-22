@@ -1,14 +1,14 @@
 import { Skeleton } from "@/components/common/Skeleton";
 
-export const SkeletonTagList = () => {
+export const SkeletonTagList = ({ count }: { count: number }) => {
   return (
     <div className="flex gap-8">
-      {[1, 2, 3, 4, 5].map((i) => (
+      {Array.from(Array(count).keys()).map((i) => (
         <Skeleton
           animation="wave"
           as="div"
           key={i}
-          style={{ borderRadius: "2.8rem", height: "6rem", width: "8.5rem" }}
+          style={{ borderRadius: "2.8rem", height: "3.6rem", width: "8.5rem" }}
           variant="rounded"
         />
       ))}

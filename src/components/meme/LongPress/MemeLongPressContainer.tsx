@@ -39,12 +39,6 @@ export const MemeLongPressContainer = ({
         onContextMenu={(e) => {
           e.preventDefault();
         }}
-        onTouchEndCapture={(e) => {
-          e.preventDefault();
-        }}
-        onTouchStartCapture={(e) => {
-          e.preventDefault();
-        }}
       >
         {children}
       </div>

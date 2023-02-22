@@ -28,7 +28,7 @@ const HomePage: NextPage = () => {
             router.push("/search");
           }}
         />
-        <SSRSuspense fallback={<SkeletonTagList />}>
+        <SSRSuspense fallback={<SkeletonTagList count={5} />}>
           <PopularTagList />
         </SSRSuspense>
         {isLogin && (

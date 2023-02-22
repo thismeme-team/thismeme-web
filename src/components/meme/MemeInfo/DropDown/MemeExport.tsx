@@ -1,6 +1,6 @@
 import tw from "twin.macro";
 
-import { useDownload, useMemeDetailById, useToast } from "@/application/hooks";
+import { useMemeDetailById, useToast } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 
@@ -13,17 +13,9 @@ export const MemeExport = ({ id }: Props) => {
     description,
     image: { images },
   } = useMemeDetailById(id);
-  const { download } = useDownload();
   const { show } = useToast();
 
   const url = images[0].imageUrl;
-
-  const handleImageDownload = () =>
-    download({
-      target: url,
-      name,
-      onSuccess: () => show("이미지를 다운로드 했습니다!"),
-    });
 
   const handleCollectionSave = () => show("콜렉션에 저장했습니다!");
 
@@ -42,12 +34,6 @@ export const MemeExport = ({ id }: Props) => {
         </span>
       </DropDown.Trigger>
       <DropDown.Contents css={tw`w-full right-0 top-72`}>
-        <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={handleImageDownload}
-        >
-          이미지 다운로드
-        </DropDown.Content>
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
           onClick={handleCollectionSave}

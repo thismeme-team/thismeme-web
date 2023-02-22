@@ -1,3 +1,5 @@
+import { css } from "twin.macro";
+
 import { useMemeDetailById } from "@/application/hooks";
 import { Photo } from "@/components/common/Photo";
 import { MemeExport } from "@/components/meme/MemeInfo/DropDown/MemeExport";
@@ -21,7 +23,12 @@ export const MemeDetail = ({ id }: Props) => {
 
   return (
     <article>
-      <section className="relative mt-16 flex flex-col">
+      <section
+        className="relative mt-16 flex flex-col"
+        css={css`
+          -webkit-touch-callout: initial;
+        `}
+      >
         <Photo
           priority
           className="max-h-[70vh] min-h-[25vh] w-full rounded-15"

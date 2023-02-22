@@ -9,13 +9,8 @@
 html {
   font-size: 62.5%;
   /*기본 롱프레스 비활성화*/
-  -webkit-touch-callout: none !important;
-  -webkit-user-drag: none !important;
-  -khtml-user-drag: none;
-  -moz-user-drag: none;
-  -ms-user-drag: none;
+  -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;

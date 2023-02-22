@@ -20,7 +20,7 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
     <>
       <NextSeo description={`${searchQuery} 밈 모음`} title={TITLE.exploreByKeyword(searchQuery)} />
 
-      <ExplorePageNavigation title={searchQuery} />
+      <ExplorePageNavigation title={`#${searchQuery}`} />
 
       <PullToRefresh>
         <SSRSuspense>

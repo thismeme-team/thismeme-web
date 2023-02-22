@@ -16,12 +16,12 @@ export interface Meme {
   createdDate: string;
   modifiedDate: string;
 
-  image: Image;
+  image: MemeImages;
 
   author?: string;
 }
 
-export interface Image {
+export interface MemeImages {
   images: {
     imageId: number;
     imageUrl: string;
@@ -32,14 +32,14 @@ export interface Image {
 }
 
 export interface User {
-  createdDate: string;
+  id: number;
   email: string;
-  modifiedDate: string | null;
   name: string;
-  imageUrl?: string;
+  createdDate: string;
+  modifiedDate: string | null;
+  imageUrl: string;
   shareCount: number;
   saveCount: number;
   collectionId: number;
-  sharedCollectionId: number;
-  id: number;
+  shareCollectionId: number;
 }

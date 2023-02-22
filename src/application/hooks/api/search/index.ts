@@ -91,3 +91,32 @@ export const useGetUserFindMemes = ({ userId }: { userId: number }) => {
 
   return { data: memeList, isEmpty, fetchNextPage };
 };
+
+export const useGetMemesFromCollectionByKeyword = ({
+  keyword,
+  collectionId,
+}: {
+  keyword: string;
+  collectionId: number;
+}) => {
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesFromCollectionByKeyword({ keyword: keyword, collectionId }),
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.search.getMemesFromCollectionByKeyword({
+        keyword: keyword,
+        collectionId,
+        offset: pageParam,
+        limit: PAGE_SIZE,
+      }),
+    enabled: !!keyword && !!collectionId,
+    keepPreviousData: true,
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].data.length === 0;
+
+  return { data: memeList, fetchNextPage, isEmpty };
+};

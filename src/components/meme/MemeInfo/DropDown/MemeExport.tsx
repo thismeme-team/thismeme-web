@@ -1,23 +1,25 @@
 import tw from "twin.macro";
 
-import { useMemeDetailById, useToast } from "@/application/hooks";
+import { useCollection, useMemeDetailById, useToast } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
+import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
 
 interface Props {
   id: string;
 }
+
 export const MemeExport = ({ id }: Props) => {
   const {
     name,
     description,
     image: { images },
   } = useMemeDetailById(id);
+  const { onUpdateCollection } = useCollection({ memeId: Number(id) });
+
   const { show } = useToast();
 
   const url = images[0].imageUrl;
-
-  const handleCollectionSave = () => show("콜렉션에 저장했습니다!");
 
   const handleNaviteShare = async () => {
     if (!navigator.share) {
@@ -34,12 +36,14 @@ export const MemeExport = ({ id }: Props) => {
         </span>
       </DropDown.Trigger>
       <DropDown.Contents css={tw`w-full right-0 top-72`}>
-        <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={handleCollectionSave}
-        >
-          콜렉션에 저장하기
-        </DropDown.Content>
+        <WithAuthHandlers handlers={["onClick"]}>
+          <DropDown.Content
+            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+            onClick={onUpdateCollection}
+          >
+            콜렉션에 저장하기
+          </DropDown.Content>
+        </WithAuthHandlers>
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
           onClick={handleNaviteShare}

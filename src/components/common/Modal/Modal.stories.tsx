@@ -12,7 +12,6 @@ export const SignUp = () => {
   return (
     <>
       <button onClick={modalProps.onOpen}>open button</button>
-      <SignUpModal />
     </>
   );
 };

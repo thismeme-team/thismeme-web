@@ -7,7 +7,7 @@ import { QueryClientProvider } from "../src/application/queryClient";
 import { Suspense } from "react";
 import { RouterContext } from "next/dist/shared/lib/router-context";
 import { ToastContainer, ToastProvider } from "../src/components/common/Toast";
-import { SignUpModalProvider } from "../src/components/common/Modal";
+import { SignUpModal, SignUpModalProvider } from "../src/components/common/Modal";
 
 // Initialize MSW
 initialize();
@@ -21,6 +21,7 @@ export const decorators = [
           <Suspense fallback="loading...">
             <div className="__font_family_variables font-pretendard">
               <ToastContainer />
+              <SignUpModal />
               <Story />
             </div>
           </Suspense>

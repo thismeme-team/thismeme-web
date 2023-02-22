@@ -1,21 +1,14 @@
-import { useRouter } from "next/router";
-import { useEffect } from "react";
-
 import { useAuth, useModal } from "@/application/hooks";
-import { PATH } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { SignOutModal } from "@/components/common/Modal";
 import { BackButtonNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
+import { withAuth } from "@/components/hocs";
 
 const SettingPage = () => {
   const modalProps = useModal();
 
-  const { user, isLogin, isLoading } = useAuth();
-  const { replace } = useRouter();
-  useEffect(() => {
-    if (!isLoading && !isLogin) replace(PATH.getMainPage);
-  }, [isLoading, isLogin, replace]);
+  const { user } = useAuth();
 
   return (
     <>
@@ -46,4 +39,4 @@ const SettingPage = () => {
   );
 };
 
-export default SettingPage;
+export default withAuth(SettingPage);

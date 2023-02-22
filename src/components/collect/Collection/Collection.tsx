@@ -1,6 +1,5 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
-import { InfiniteMemeList } from "@/components/meme/InfiniteMemeList";
-import { MemeLongPressContainer } from "@/components/meme/LongPress";
+import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
 
 interface Props {
   collectionId: number;

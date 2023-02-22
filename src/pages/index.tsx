@@ -32,7 +32,7 @@ const HomePage: NextPage = () => {
         </SSRSuspense>
         {isLogin && (
           <SSRSuspense>
-            <UserSharedMemeList name={user?.name} sharedId={user?.shareCollectionId} />
+            <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
           </SSRSuspense>
         )}
         <MemeListContainer />

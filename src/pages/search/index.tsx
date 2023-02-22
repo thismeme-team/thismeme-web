@@ -6,12 +6,14 @@ import { useInput, useRecentSearch } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
+import { SSRSuspense } from "@/components/common/Suspense";
 import {
   SearchInput,
   SearchPopularList,
   SearchRecent,
   SearchResultList,
 } from "@/components/search";
+import { SkeletonTagList } from "@/components/search/Skeleton";
 
 /**
  * FIX
@@ -63,9 +65,9 @@ const SearchPage: NextPage = () => {
           <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
         )}
         {!inputProps.value && !focus && (
-          <Suspense>
+          <SSRSuspense fallback={<SkeletonTagList />}>
             <SearchPopularList />
-          </Suspense>
+          </SSRSuspense>
         )}
       </div>
     </>

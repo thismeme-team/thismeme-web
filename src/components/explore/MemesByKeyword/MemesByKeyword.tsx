@@ -1,6 +1,6 @@
 import { css } from "twin.macro";
 
-import { useGetMemesByKeyword, useIntersect } from "@/application/hooks";
+import { useGetMemesByKeyword } from "@/application/hooks";
 import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
 
 import { EmptyMemesView } from "../EmptyMemesView";
@@ -10,10 +10,6 @@ interface Props {
 }
 export const MemesByKeyword = ({ searchQuery }: Props) => {
   const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByKeyword(searchQuery);
-
-  const ref = useIntersect(async () => {
-    fetchNextPage();
-  });
 
   if (isEmpty) {
     return <EmptyMemesView />;
@@ -32,7 +28,6 @@ export const MemesByKeyword = ({ searchQuery }: Props) => {
       <MemeLongPressContainer memeList={memeList}>
         <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
       </MemeLongPressContainer>
-      <div className="h-20" ref={ref} />
     </div>
   );
 };

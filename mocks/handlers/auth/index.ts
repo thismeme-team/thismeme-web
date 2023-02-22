@@ -10,9 +10,7 @@ export const refresh = rest.post(
 
     // NOTE: Internal Server Error 500
     return res(
-      ctx.status(500),
-      // ctx.status(200),
-      // ctx.status(Math.random() > 0.85 ? 500 : status),
+      ctx.status(Math.random() > 0.85 ? 500 : status),
       ctx.json({
         accessToken: "Refresh Test",
       }),

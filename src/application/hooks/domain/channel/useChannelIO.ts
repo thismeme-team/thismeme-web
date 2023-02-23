@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
 import { ChannelService } from "@/infra/sdk";
 import type { User } from "@/types";
@@ -6,27 +6,36 @@ import type { User } from "@/types";
 interface Props {
   user?: User;
 }
-export const useChannelIO = ({ user }: Props) => {
-  const [channelService] = useState(() => new ChannelService());
 
+const MAX_LOAD_DELAY = 1000;
+export const useChannelIO = ({ user }: Props) => {
   useEffect(() => {
-    if (user) {
-      const { name, email } = user;
-      channelService.boot({
-        pluginKey: process.env.NEXT_PUBLIC_CHANNEL_IO_KEY,
-        memberId: email,
-        profile: {
-          name,
-          email,
-        },
-      });
-    } else {
-      channelService.boot({
-        pluginKey: process.env.NEXT_PUBLIC_CHANNEL_IO_KEY,
-      });
-    }
+    const channelService = ChannelService.getInstance();
+
+    const timeout = setTimeout(
+      () => {
+        if (user) {
+          const { name, email } = user;
+          channelService.boot({
+            pluginKey: process.env.NEXT_PUBLIC_CHANNEL_IO_KEY,
+            memberId: email,
+            profile: {
+              name,
+              email,
+            },
+          });
+        } else {
+          channelService.boot({
+            pluginKey: process.env.NEXT_PUBLIC_CHANNEL_IO_KEY,
+          });
+        }
+      },
+      channelService.isLoaded() ? 0 : MAX_LOAD_DELAY,
+    );
+
     return () => {
       channelService.shutdown();
+      clearTimeout(timeout);
     };
-  }, [channelService, user]);
+  }, [user]);
 };

@@ -1,15 +1,23 @@
 import { IS_CSR } from "@/application/util";
 
 export class ChannelService {
-  constructor() {
+  private static sdk: ChannelService;
+
+  private constructor() {
     if (IS_CSR) this.loadScript();
   }
+  public static getInstance() {
+    if (this.sdk) return this.sdk;
+    return (this.sdk = new ChannelService());
+  }
+
+  isLoaded = () => !window.ChannelIO?.q;
 
   loadScript() {
     (function () {
       const w = window;
       if (w.ChannelIO) {
-        return;
+        return console.error("ChannelIO initialized twice.");
       }
       const ch: IChannelIO = function (...args) {
         ch.c?.(...args);

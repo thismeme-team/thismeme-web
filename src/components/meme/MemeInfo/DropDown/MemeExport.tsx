@@ -1,9 +1,14 @@
 import tw from "twin.macro";
 
-import { useCollection, useMemeDetailById, useToast } from "@/application/hooks";
+import {
+  useAuthValidation,
+  useCollection,
+  useMemeDetailById,
+  usePostMemeToSharedCollection,
+  useToast,
+} from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
-import { WithAuthHandlers } from "@/components/common/WithAuthHandlers";
 
 interface Props {
   id: string;
@@ -18,6 +23,10 @@ export const MemeExport = ({ id }: Props) => {
   const { onUpdateCollection } = useCollection({ memeId: Number(id) });
 
   const { show } = useToast();
+  const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
+    memeId: Number(id),
+  });
+  const { validate } = useAuthValidation();
 
   const url = images[0].imageUrl;
 
@@ -36,17 +45,18 @@ export const MemeExport = ({ id }: Props) => {
         </span>
       </DropDown.Trigger>
       <DropDown.Contents css={tw`w-full right-0 top-72`}>
-        <WithAuthHandlers handlers={["onClick"]}>
-          <DropDown.Content
-            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={onUpdateCollection}
-          >
-            콜렉션에 저장하기
-          </DropDown.Content>
-        </WithAuthHandlers>
         <DropDown.Content
           className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-          onClick={handleNaviteShare}
+          onClick={validate(onUpdateCollection)}
+        >
+          콜렉션에 저장하기
+        </DropDown.Content>
+        <DropDown.Content
+          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+          onClick={() => {
+            handleNaviteShare();
+            validate(postMemeToSharedCollection, { needSignUpModal: false })();
+          }}
         >
           공유하기
         </DropDown.Content>

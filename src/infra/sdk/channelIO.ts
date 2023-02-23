@@ -9,7 +9,7 @@ export class ChannelService {
     (function () {
       const w = window;
       if (w.ChannelIO) {
-        return w.console.error("ChannelIO script included twice.");
+        return;
       }
       const ch: IChannelIO = function (...args) {
         ch.c?.(...args);

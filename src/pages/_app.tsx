@@ -10,6 +10,7 @@ import { QueryClientProvider } from "@/application/queryClient";
 import { android } from "@/application/util";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
+import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
 import type { DefaultPageProps } from "@/types";
 
@@ -37,14 +38,17 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
       </Head>
       <QueryClientProvider hydrateState={pageProps.hydrateState}>
         <ToastProvider>
-          <KonstaStyle theme={android ? "material" : "ios"}>
-            <Layout>
-              <QueryErrorBoundary>
-                <ToastContainer />
-                <Component {...pageProps} />
-              </QueryErrorBoundary>
-            </Layout>
-          </KonstaStyle>
+          <SignUpModalProvider>
+            <KonstaStyle theme={android ? "material" : "ios"}>
+              <Layout>
+                <QueryErrorBoundary>
+                  <ToastContainer />
+                  <SignUpModal />
+                  <Component {...pageProps} />
+                </QueryErrorBoundary>
+              </Layout>
+            </KonstaStyle>
+          </SignUpModalProvider>
         </ToastProvider>
       </QueryClientProvider>
     </>

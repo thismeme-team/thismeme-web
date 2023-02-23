@@ -2,9 +2,10 @@ import { useRouter } from "next/router";
 
 import { useAuth, useToast } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import type { ModalProps } from "@/components/common/Modal/Modal";
-import { Modal } from "@/components/common/Modal/Modal";
 import { RandomImage } from "@/components/common/RandomImge";
+
+import { Modal } from "./Modal";
+import type { ModalProps } from "./types";
 
 export const SignOutModal = (props: ModalProps) => {
   const { onClose } = props;

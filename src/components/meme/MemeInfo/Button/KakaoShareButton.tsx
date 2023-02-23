@@ -4,17 +4,17 @@ import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 
 interface Props {
+  resource: Omit<KakaoShareOptions, "onSuccess" | "onError">;
   onSuccess?: () => void;
-  resource: KakaoShareOptions;
+  onError?: () => void;
 }
-export const KakaoShareButton = ({ onSuccess, resource }: Props) => {
+export const KakaoShareButton = ({ resource, onSuccess, onError }: Props) => {
   const { share } = useKakaoShare();
   return (
     <Button
       className="flex h-50 w-50 gap-8 rounded-10 bg-gray-900"
       onClick={() => {
-        share(resource);
-        onSuccess?.();
+        share({ ...resource, onSuccess, onError });
       }}
     >
       <Icon name="whiteKakao" />

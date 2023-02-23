@@ -41,5 +41,5 @@ export interface User {
   shareCount: number;
   saveCount: number;
   collectionId: number;
-  shareCollectionId: number;
+  sharedCollectionId: number;
 }

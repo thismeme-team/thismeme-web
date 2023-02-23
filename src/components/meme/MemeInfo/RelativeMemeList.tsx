@@ -1,14 +1,10 @@
 import { css } from "twin.macro";
 
-import { useAuth, useGetMemesBySort, useIntersect } from "@/application/hooks";
-import { Masonry } from "@/components/common/Masonry";
-import { MemeItem } from "@/components/meme/MemeItem";
+import { useAuth, useGetMemesBySort } from "@/application/hooks";
+import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
 
 export const RelativeMemeList = () => {
   const { data: memeList, fetchNextPage } = useGetMemesBySort("popular");
-  const ref = useIntersect(async () => {
-    fetchNextPage();
-  });
   const { user } = useAuth();
 
   return (
@@ -24,12 +20,9 @@ export const RelativeMemeList = () => {
           `,
         ]}
       >
-        <Masonry columns={2} spacing={9}>
-          {memeList.map((meme) => (
-            <MemeItem key={meme.memeId} meme={meme} />
-          ))}
-        </Masonry>
-        <div className="h-20" ref={ref} />
+        <MemeLongPressContainer memeList={memeList}>
+          <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
+        </MemeLongPressContainer>
       </div>
     </>
   );

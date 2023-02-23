@@ -13,7 +13,7 @@ const SharedHistoryPage: NextPage = () => {
       <BackButtonNavigation title="공유 히스토리" />
       <section className="pt-16" />
       <SSRSuspense>
-        <SharedMemeList sharedId={user?.shareCollectionId as number} />
+        <SharedMemeList sharedId={user?.sharedCollectionId as number} />
       </SSRSuspense>
     </>
   );

@@ -31,6 +31,7 @@ const HomePage: NextPage = () => {
         <SSRSuspense fallback={<SkeletonTagList count={5} />}>
           <PopularTagList />
         </SSRSuspense>
+        <section className="pb-40" />
         {isLogin && (
           <SSRSuspense fallback={<SkeletonMeme />}>
             <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />

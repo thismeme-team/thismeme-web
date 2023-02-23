@@ -1,15 +1,21 @@
-import type { Dispatch, PropsWithChildren, SetStateAction } from "react";
-import { createContext, useContext, useState } from "react";
+import type { PropsWithChildren } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 const DrawerContext = createContext(false);
-const DrawerSetContext = createContext<Dispatch<SetStateAction<boolean>>>(() => null);
+const DrawerSetContext = createContext<(state: boolean) => void>(() => null);
 
 export const DrawerContextProvider = ({ children }: PropsWithChildren) => {
   const [isOpen, setIsOpen] = useState(false);
 
+  const handleDrawer = useCallback((state: boolean) => {
+    if (state) document.body.style.overflow = "hidden";
+    else document.body.style.overflow = "";
+    setIsOpen(state);
+  }, []);
+
   return (
     <DrawerContext.Provider value={isOpen}>
-      <DrawerSetContext.Provider value={setIsOpen}>{children}</DrawerSetContext.Provider>
+      <DrawerSetContext.Provider value={handleDrawer}>{children}</DrawerSetContext.Provider>
     </DrawerContext.Provider>
   );
 };

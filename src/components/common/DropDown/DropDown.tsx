@@ -68,6 +68,7 @@ const DropDownContents = ({
           background: white;
           overflow: hidden;
           transition: transform 0.4s ease, opacity 0.2s ease-in-out;
+          box-shadow: 0px 0px 20px rgba(0, 0, 0, 10%);
           ${!isOpen && "pointer-events: none;"}
         `,
         width &&

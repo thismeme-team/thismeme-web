@@ -4,7 +4,10 @@ const Document = () => {
   return (
     <Html>
       <Head>
-        <link href="/public/favicon.ico" rel="icon" />
+        <link href="/favicon.ico" rel="shortcut icon" />
+        <link href="/apple-icon-120x120.png" rel="apple-touch-icon" />
+        <link href="/apple-icon-180x180.png" rel="apple-touch-icon" sizes="180x180" />
+        <link href="https://server.thismeme.me" rel="preconnect" />
         <script
           defer
           crossOrigin="anonymous"

@@ -12,6 +12,9 @@ const Document = () => {
         <meta content="그 밈" name="apple-mobile-web-app-title" />
         <meta content="yes" name="apple-mobile-web-app-capable" />
         <meta content="default" name="apple-mobile-web-app-status-bar-style" />
+
+        <meta content="#F3F4F8" name="theme-color" />
+
         <script
           defer
           crossOrigin="anonymous"

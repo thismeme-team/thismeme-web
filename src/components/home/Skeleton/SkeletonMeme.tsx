@@ -4,7 +4,7 @@ import { SkeletonTagList } from "./SkeletonTagList";
 
 export const SkeletonMeme = () => {
   return (
-    <div>
+    <>
       <Skeleton
         animation="wave"
         as="div"
@@ -37,6 +37,6 @@ export const SkeletonMeme = () => {
         />
       </div>
       <SkeletonTagList count={3} />
-    </div>
+    </>
   );
 };

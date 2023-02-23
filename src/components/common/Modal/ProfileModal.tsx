@@ -34,8 +34,10 @@ export const ProfileModal = () => {
               className="flex h-92 items-center justify-between p-16 font-suit text-22-bold-140"
               href="/mypage"
             >
-              <Photo className="mr-16 h-60 w-60 rounded-full" src={user?.imageUrl} />
-              {user?.name}
+              <section className="mr-16 flex items-center">
+                <Photo className="mr-16 h-60 w-60 rounded-full" src={user?.imageUrl} />
+                {user?.name}
+              </section>
               <Icon name="setting" />
             </Link>
           </DropDown.Content>

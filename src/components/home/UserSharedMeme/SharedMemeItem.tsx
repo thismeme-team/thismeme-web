@@ -2,8 +2,10 @@ import Link from "next/link";
 
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
+import { SSRSuspense } from "@/components/common/Suspense";
 import type { Meme } from "@/types";
 
+import { SkeletonTagList } from "../Skeleton";
 import { SharedMemeTagList } from "./SharedMemeTagList";
 
 interface Props {
@@ -30,7 +32,9 @@ export const SharedMemeItem = ({ meme }: Props) => {
           </span>
         </section>
       </Link>
-      <SharedMemeTagList id={String(meme.memeId)} />
+      <SSRSuspense fallback={<SkeletonTagList count={3} />}>
+        <SharedMemeTagList id={String(meme.memeId)} />
+      </SSRSuspense>
     </li>
   );
 };

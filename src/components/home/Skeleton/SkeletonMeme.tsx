@@ -11,16 +11,15 @@ export const SkeletonMeme = () => {
         variant="rectangular"
         style={{
           width: "100%",
-          height: "4rem",
+          fontSize: "2.2rem",
           borderRadius: "2rem",
-          marginBottom: "1rem",
-          marginTop: "4.2rem",
+          marginBottom: "1.6rem",
         }}
       />
       <Skeleton
         animation="wave"
         as="div"
-        style={{ width: "100%", height: "40rem", borderRadius: "2rem", marginBottom: "1rem" }}
+        style={{ width: "100%", height: "34rem", borderRadius: "2rem", marginBottom: "1rem" }}
         variant="rectangular"
       />
       <div className="flex justify-between gap-20">

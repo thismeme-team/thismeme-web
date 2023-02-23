@@ -6,7 +6,7 @@ import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeCTAList, MemeDetail, MemeTagList, RelativeMemeList } from "@/components/meme/MemeInfo";
+import { MemeCTAList, MemeDetail, MemeTagList, RelativeMemeList } from "@/components/meme";
 import type { DefaultPageProps, Meme } from "@/types";
 
 interface Props {

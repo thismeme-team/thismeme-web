@@ -1,8 +1,6 @@
 import type { ComponentMeta } from "@storybook/react";
 
-import { useModal } from "@/application/hooks";
-
-import { SignUpModal } from "./SignUpModal";
+import { SignUpModal, useSignUpModalContext } from "./SignUpModal";
 
 export default {
   title: "components/common/Modal",
@@ -10,11 +8,10 @@ export default {
 } as ComponentMeta<typeof SignUpModal>;
 
 export const SignUp = () => {
-  const modalProps = useModal();
+  const modalProps = useSignUpModalContext();
   return (
     <>
       <button onClick={modalProps.onOpen}>open button</button>
-      <SignUpModal {...modalProps} />
     </>
   );
 };

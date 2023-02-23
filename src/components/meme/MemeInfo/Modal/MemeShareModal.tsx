@@ -1,4 +1,4 @@
-import { useMemeDetailById, useToast } from "@/application/hooks";
+import { useAuthValidation, useMemeDetailById, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { PAGE_URL } from "@/application/util";
 import type { ModalProps } from "@/components/common/Modal";
@@ -26,6 +26,8 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
     memeId: Number(id),
   });
 
+  const { validate } = useAuthValidation();
+
   const src = images[0].imageUrl;
 
   const showClipboardCopyToast = () => show("링크를 복사했습니다!");
@@ -44,7 +46,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
               title: name,
               description,
             }}
-            onSuccess={postMemeToSharedCollection}
+            onSuccess={validate(postMemeToSharedCollection, { needSignUpModal: false })}
           />
           <span className="absolute bottom-0 font-suit text-12-bold-160">카카오로 공유</span>
         </li>
@@ -54,7 +56,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
             onSuccess={() => {
               modalProps.onClose();
               showClipboardCopyToast();
-              postMemeToSharedCollection();
+              validate(postMemeToSharedCollection, { needSignUpModal: false })();
             }}
           />
           <span className="absolute bottom-0 font-suit text-12-bold-160">링크 복사</span>
@@ -64,7 +66,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
             text={description}
             title={name}
             url={PAGE_URL}
-            onSuccess={postMemeToSharedCollection}
+            onSuccess={validate(postMemeToSharedCollection, { needSignUpModal: false })}
             onError={() => {
               modalProps.onClose();
               showNativeShareErrorToast();

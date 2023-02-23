@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/common/Skeleton";
 
 export const SkeletonTagList = ({ count }: { count: number }) => {
   return (
-    <div className="flex gap-8">
+    <div className="mb-40 flex gap-8">
       {Array.from(Array(count).keys()).map((i) => (
         <Skeleton
           animation="wave"

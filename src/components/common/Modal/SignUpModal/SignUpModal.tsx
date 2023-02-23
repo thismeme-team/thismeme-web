@@ -2,12 +2,14 @@ import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 import { RandomImage } from "@/components/common/RandomImge";
 
-import type { ModalProps } from "./Modal";
-import { Modal } from "./Modal";
+import { Modal } from "../Modal";
+import { useSignUpModalContext } from "./context";
 
-export const SignUpModal = (props: ModalProps) => {
+export const SignUpModal = () => {
+  const modalProps = useSignUpModalContext();
+
   return (
-    <Modal {...props}>
+    <Modal {...modalProps}>
       <Modal.Header />
       <div className="m-auto w-300 rounded-24 px-8 pb-24">
         <section className="align-left mt-36 mb-10 text-left font-suit text-32-bold-140">

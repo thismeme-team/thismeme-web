@@ -1,21 +1,23 @@
 import type { PropsWithChildren } from "react";
 import { Children, createContext, isValidElement, useContext } from "react";
 
-import type { useModal } from "@/application/hooks";
 import { useClickOutside } from "@/application/hooks";
 import { fadeInOut } from "@/application/util/animation";
 import { Icon } from "@/components/common/Icon";
 import { Portal } from "@/components/common/Portal";
 
-type ModalContextValue = ReturnType<typeof useModal>;
+import type { ModalProps } from "./types";
+
+type ModalContextValue = ModalProps;
+
 const ModalContext = createContext<ModalContextValue>(null as unknown as ModalContextValue);
 
-export interface ModalProps {
-  open: boolean;
-  onOpen: () => void;
-  onClose: () => void;
-}
-export const Modal = ({ children, open, onOpen, onClose }: PropsWithChildren<ModalProps>) => {
+export const Modal = ({
+  children,
+  open,
+  onOpen,
+  onClose,
+}: PropsWithChildren<ModalContextValue>) => {
   const ref = useClickOutside({ onClose });
 
   const reactChildren = Children.toArray(children);

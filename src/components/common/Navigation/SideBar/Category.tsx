@@ -20,14 +20,14 @@ export const Category = () => {
       const favoriteItem = {
         name: FAVORITE_ID,
         id: FAVORITE_ID,
-        icon: "", // TODO: svg url 연동 필요
+        icon: "/icon/star.svg",
         tags: categories.map((category) => category.tags.filter((tag) => tag.isFav)).flat(),
       };
 
       const restItem = categories.map((category) => ({
         name: category.name,
         id: String(category.categoryId),
-        icon: "",
+        icon: category.icon,
         tags: category.tags.filter((tag) => !tag.isFav),
       }));
 
@@ -77,8 +77,8 @@ export const Category = () => {
         <Item key={item.id} value={item.id}>
           <Header className="py-4">
             <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-gray-100 data-[state=open]:bg-gray-100 [&>#chevronDown]:data-[state=open]:rotate-180">
-              <Photo className="h-24 w-24" src={item.icon} />
-              <span className="flex-grow text-left">{item.name}</span>
+              <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
+              <span className="flex-grow text-left text-18-bold-140">{item.name}</span>
               <Icon
                 aria-hidden
                 className="transition-transform duration-300 ease-[cubic-bezier(0.87,0,0.13,1)]"

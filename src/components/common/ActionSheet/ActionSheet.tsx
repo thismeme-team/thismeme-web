@@ -77,8 +77,11 @@ export const ActionSheet = ({ children, onBackdropClick }: PropsWithChildren<Pro
                 inset: auto 0 0 0;
                 display: flex;
                 justify-content: center;
-                padding-bottom: calc(env(safe-area-inset-bottom) + 4rem);
               `,
+              !android &&
+                css`
+                  padding-bottom: calc(env(safe-area-inset-bottom) + 4rem);
+                `,
               transitionStyles.sheet[status],
             ]}
           >
@@ -86,22 +89,32 @@ export const ActionSheet = ({ children, onBackdropClick }: PropsWithChildren<Pro
               ref={sheetRef}
               css={[
                 css`
-                  background: white;
-                  color: #007aff;
                   @media (prefers-color-scheme: dark) {
                     background: #2b2e38;
                   }
                 `,
                 android
                   ? css`
+                      background: #e2e9f8;
+
+                      padding-inline: 1.8rem;
                       border-radius: 0 0 1rem 1rem;
+                      font-size: 1.65rem;
                       width: min(100vw, 48rem);
+                      color: #1b1b1f;
+
+                      @media (prefers-color-scheme: dark) {
+                        color: #e3e2e6;
+                      }
                     `
                   : css`
+                      background: white;
+
                       border-radius: 1rem;
                       font-size: 2rem;
                       padding-inline: 1.6rem;
                       width: calc(min(100vw, 48rem) - 3.6rem);
+                      color: #007aff;
                     `,
               ]}
             >
@@ -117,7 +130,7 @@ export const ActionSheet = ({ children, onBackdropClick }: PropsWithChildren<Pro
 type ActionSheetButtonProps = ComponentProps<"button">;
 const ActionSheetButton = ({ children, ...rest }: PropsWithChildren<ActionSheetButtonProps>) => {
   return (
-    <button css={android ? tw`` : tw`flex items-center h-62`} {...rest}>
+    <button css={tw`flex h-62 items-center`} {...rest}>
       {children}
     </button>
   );

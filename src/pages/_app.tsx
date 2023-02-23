@@ -6,6 +6,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
+import { useWindowSize } from "@/application/hooks";
 import { QueryClientProvider } from "@/application/queryClient";
 import { android } from "@/application/util";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
@@ -21,12 +22,20 @@ if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
 const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
   const router = useRouter();
 
+  const windowSize = useWindowSize();
+
   useEffect(() => {
     router.beforePopState((state) => {
       state.options.scroll = false;
       return true;
     });
   }, [router]);
+
+  useEffect(() => {
+    // NOTE: iOS PWA vh 이슈 대응 - 기본 vh 값 대신 window.innerHeight/100 값으로 재설정 합니다
+    const vh = windowSize.height * 0.01;
+    document.documentElement.style.setProperty("--vh", `${vh}px`);
+  }, [windowSize.height]);
 
   return (
     <>

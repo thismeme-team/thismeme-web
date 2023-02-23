@@ -47,3 +47,7 @@ yarn-error.log*
 
 # storybook build artifacts
 /storybook-static
+
+# pwa
+/public/sw.js
+/public/workbox-e739d0df.js

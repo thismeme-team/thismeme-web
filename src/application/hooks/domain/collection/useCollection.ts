@@ -20,7 +20,7 @@ export const useCollection = ({ memeId }: UseCollectionArg) => {
   const { show } = useToast();
 
   const onUpdateCollection = () => {
-    if (collectionCheck.isAdded) {
+    if (collectionCheck?.isAdded) {
       deleteMemeFromCollection(memeId, {
         onSuccess: () => {
           show("콜렉션에서 삭제했습니다!");

@@ -13,4 +13,3 @@ export * from "./useLongPress";
 export * from "./useModal";
 export * from "./useToast";
 export * from "./useValidation";
-export * from "./useWindowSize";

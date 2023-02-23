@@ -36,7 +36,7 @@ const DrawerContent = ({ children, className, direction }: DrawerContentProps) =
       css={css`
         position: fixed;
         pointer-events: ${isOpen ? "auto" : "none"};
-        min-height: calc(var(--vh) * 100 - 5.4rem);
+        min-height: calc(100vh - 5.4rem);
         inset: 0;
         overflow: hidden;
       `}

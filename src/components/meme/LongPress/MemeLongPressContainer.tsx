@@ -1,13 +1,37 @@
 import type { PropsWithChildren } from "react";
 import { useState } from "react";
 
-import { useLongPress } from "@/application/hooks";
+import { useLongPress, useModal } from "@/application/hooks";
+import { OverLay } from "@/components/common/Overlay";
+import { MemeLongPress } from "@/components/meme";
 import type { Meme } from "@/types";
-
-import { MemeLongPress } from "./MemeLongPress";
 
 // NOTE: 롱프레스가 닫힌 상태를 표현하기 위해 존재할 수 없는 Meme ID를 주었습니다
 const LONG_PRESS_CLOSED = -1;
+
+interface Props {
+  meme: Meme;
+}
+
+export const TestMemeLongPress = ({ meme, children }: PropsWithChildren<Props>) => {
+  const { open, onOpen, onClose } = useModal();
+
+  const longPress = useLongPress(onOpen, {
+    threshold: 1000,
+    cancelOnMovement: true,
+  });
+
+  return (
+    <>
+      <div {...longPress()} onContextMenu={(e) => e.preventDefault()}>
+        {children}
+      </div>
+      <OverLay isOpen={open} onBackdropClick={onClose}>
+        {(state) => <MemeLongPress isOpen={state === "entered"} meme={meme} onClose={onClose} />}
+      </OverLay>
+    </>
+  );
+};
 
 export const MemeLongPressContainer = ({
   memeList,
@@ -40,11 +64,11 @@ export const MemeLongPressContainer = ({
       >
         {children}
       </div>
-      <MemeLongPress
-        isOpen={isOpen}
-        meme={currentMemeInfo}
-        onClose={() => setCurrentMemeId(LONG_PRESS_CLOSED)}
-      />
+      {/*<MemeLongPress*/}
+      {/*  isOpen={isOpen}*/}
+      {/*  meme={currentMemeInfo}*/}
+      {/*  onClose={() => setCurrentMemeId(LONG_PRESS_CLOSED)}*/}
+      {/*/>*/}
     </>
   );
 };

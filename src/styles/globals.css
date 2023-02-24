@@ -10,7 +10,6 @@ html {
   font-size: 62.5%;
   /*기본 롱프레스 비활성화*/
   -webkit-touch-callout: none !important;
-  overscroll-behavior-y: none;
   -webkit-user-drag: none !important;
   -khtml-user-drag: none;
   -moz-user-drag: none;
@@ -26,6 +25,7 @@ html {
 body {
   color: black;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overscroll-behavior-y: none;
 }
 
 a,

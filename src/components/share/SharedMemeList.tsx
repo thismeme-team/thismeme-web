@@ -1,5 +1,5 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
-import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 interface Props {
   sharedId: number;
@@ -8,9 +8,5 @@ interface Props {
 export const SharedMemeList = ({ sharedId }: Props) => {
   const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(sharedId);
 
-  return (
-    <MemeLongPressContainer memeList={memeList}>
-      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
-    </MemeLongPressContainer>
-  );
+  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
 };

@@ -16,7 +16,6 @@ export const MemeItem = memo(({ meme: { name, image, memeId, shareCount } }: Pro
       <Photo
         alt={name}
         className="rounded-15"
-        data-id={memeId}
         height={image.images[0]?.imageHeight}
         src={image.images[0]?.imageUrl}
         unoptimized={isEncodingError(image.images[0]?.imageUrl)}

@@ -1,7 +1,7 @@
 import { css } from "twin.macro";
 
 import { useGetMemesByTag } from "@/application/hooks";
-import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 import { EmptyMemesView } from "../EmptyMemesView";
 
@@ -25,9 +25,7 @@ export const MemesByTag = ({ searchQuery }: Props) => {
         `,
       ]}
     >
-      <MemeLongPressContainer memeList={memeList}>
-        <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
-      </MemeLongPressContainer>
+      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
     </div>
   );
 };

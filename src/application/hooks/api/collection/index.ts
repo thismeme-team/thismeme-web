@@ -1,3 +1,4 @@
+import type { UseQueryOptions } from "@tanstack/react-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
@@ -8,15 +9,16 @@ import { QUERY_KEYS } from "./queryKey";
 /**
  * 밈별 콜렉션 정보 API
  */
-export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(memeId: number) => {
-  const { data, ...rest } = useQuery({
+export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
+  memeId: number,
+  options?: UseQueryOptions<GetCollectionCheckResponse, unknown, T>,
+) => {
+  return useQuery({
     queryKey: QUERY_KEYS.getCollectionCheck(memeId),
     queryFn: () => api.collection.getCollectionCheck(memeId),
     suspense: false,
-    enabled: !isNaN(memeId),
+    ...options,
   });
-
-  return { data, ...rest };
 };
 
 /**

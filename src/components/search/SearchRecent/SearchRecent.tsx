@@ -29,7 +29,6 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
               <Icon
                 className="absolute right-6"
                 name="delete2"
-                onContextMenu={(e) => e.preventDefault()}
                 onClick={(e) => {
                   e.stopPropagation();
                   onDelete(id);

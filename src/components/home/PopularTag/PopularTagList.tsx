@@ -8,7 +8,7 @@ export const PopularTagList = () => {
   const { tags } = useGetPopularTags();
 
   return (
-    <ul className="mb-40 flex shrink-0 gap-8 overflow-x-scroll">
+    <ul className="flex shrink-0 gap-8 overflow-x-scroll">
       {tags?.map((tag) => (
         <li className="shrink-0" key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.tagId)}>

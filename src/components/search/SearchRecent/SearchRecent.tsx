@@ -9,7 +9,7 @@ import { SearchItem } from "../SearchItem";
 
 interface Props {
   items: RecentSearch[];
-  onAddItem: ({ value, type }: Omit<RecentSearch, "id">) => void;
+  onAddItem: ({ value, type, id }: RecentSearch) => void;
   onDelete: (id: RecentSearch["id"]) => void;
 }
 
@@ -39,7 +39,7 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
               <Icon className="min-w-24" name={isTagType(type) ? "pound" : "search"} />
             }
             onClick={() => {
-              onAddItem({ value, type });
+              onAddItem({ value, type, id });
 
               if (isTagType(type)) {
                 router.push(`${PATH.getExploreByTagPath(id)}`);

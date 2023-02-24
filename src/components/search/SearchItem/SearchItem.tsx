@@ -24,7 +24,7 @@ export const SearchItem = ({
       {...rest}
     >
       {startComponent}
-      {ColoredText}
+      <div className="max-w-230">{ColoredText}</div>
       {endComponent}
     </div>
   );

@@ -14,10 +14,9 @@ interface Props {
 }
 export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
   const { show } = useToast();
-
-  const { onUpdateCollection } = useCollection({ memeId: Number(meme?.memeId) });
+  const { onUpdateCollection } = useCollection({ memeId: meme.memeId });
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
-    memeId: meme?.memeId as number,
+    memeId: meme.memeId,
   });
   const { validate } = useAuthValidation();
 
@@ -27,7 +26,9 @@ export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
 
   const handleNaviteShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
-    await navigator.share({ title: name, text: description, url });
+    await navigator
+      .share({ title: name, text: description, url })
+      .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
   return (
     <ActionSheet isOpen={isOpen}>
@@ -43,7 +44,6 @@ export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
         onClick={() => {
           onClose();
           handleNaviteShare();
-          validate(postMemeToSharedCollection, { needSignUpModal: false })();
         }}
       >
         공유하기

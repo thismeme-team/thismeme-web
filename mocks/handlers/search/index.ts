@@ -103,9 +103,6 @@ export const getUserFindMemes = rest.get(
     const limit = Number(searchParams.get("limit"));
     const data = MOCK_DATA.memes.slice(offset, offset + limit);
 
-    if (!query || !query.trim()) {
-      return res(ctx.status(400));
-    }
     return res(
       ctx.status(200),
       ctx.json<GetMemesResponse>({

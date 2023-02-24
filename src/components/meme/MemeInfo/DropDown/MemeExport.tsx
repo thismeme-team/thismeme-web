@@ -39,10 +39,10 @@ export const MemeExport = ({ id }: Props) => {
     });
 
   const handleNaviteShare = async () => {
-    if (!navigator.share) {
-      return show("공유하기가 지원되지 않습니다.");
-    }
-    await navigator.share({ title: name, text: description, url });
+    if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
+    await navigator
+      .share({ title: name, text: description, url })
+      .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
 
   return (
@@ -70,7 +70,6 @@ export const MemeExport = ({ id }: Props) => {
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onClick={() => {
               handleNaviteShare();
-              validate(postMemeToSharedCollection, { needSignUpModal: false })();
             }}
           >
             공유하기

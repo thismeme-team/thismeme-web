@@ -31,7 +31,7 @@ const SearchPage: NextPage = () => {
   const onSearchByKeyword = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
 
-    onAddItem({ value: inputProps.value, type: "keyword" });
+    onAddItem({ value: inputProps.value, type: "keyword", id: Date.now() });
     router.push(PATH.getExploreByKeywordPath(inputProps.value));
   };
 

@@ -18,10 +18,8 @@ export const SharedMemeItem = ({ meme }: Props) => {
       <Link href={`/memes/${meme.memeId}`}>
         <div>
           <Photo
-            className="m-auto mb-8 rounded-15"
-            height={44}
+            className="m-auto mb-8 h-[40rem] w-[34rem] rounded-15"
             src={meme.image.images[0]?.imageUrl}
-            width={40}
           />
         </div>
         <section className="mb-8 flex items-center justify-between font-suit text-18-bold-140">

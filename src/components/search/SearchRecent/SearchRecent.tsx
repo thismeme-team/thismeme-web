@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import type { RecentSearch, RecentSearchWithId } from "@/application/hooks";
+import type { RecentSearch } from "@/application/hooks";
 import { isTagType } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
@@ -9,7 +9,7 @@ import { SearchItem } from "../SearchItem";
 
 interface Props {
   items: RecentSearch[];
-  onAddItem: ({ value, type, id }: RecentSearchWithId) => void;
+  onAddItem: ({ value, type, id }: RecentSearch) => void;
   onDelete: (id: RecentSearch["id"]) => void;
 }
 

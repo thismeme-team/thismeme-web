@@ -1,9 +1,9 @@
 import { useLocalStorage } from "@/application/hooks/common";
 
-import type { RecentSearch, RecentSearchWithId } from "./types";
+import type { RecentSearch } from "./types";
 
-const createRecentSearch = ({ value, type, id }: RecentSearchWithId): RecentSearch => ({
-  id: id || Date.now(),
+const createRecentSearch = ({ value, type, id }: RecentSearch): RecentSearch => ({
+  id,
   value,
   type,
 });
@@ -13,7 +13,7 @@ export const useRecentSearch = () => {
     defaultValue: [],
   });
 
-  const onAddItem = ({ value, type, id }: RecentSearchWithId) => {
+  const onAddItem = ({ value, type, id }: RecentSearch) => {
     if (!value.trim()) {
       return;
     }

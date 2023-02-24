@@ -38,9 +38,11 @@ export const MemeExport = ({ id }: Props) => {
       onSuccess: () => show("이미지를 다운로드 했습니다!"),
     });
 
-  const handleNaviteShare = async (onSuccess: () => void) => {
+  const handleNaviteShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
-    await navigator.share({ title: name, text: description, url }).then(onSuccess);
+    await navigator
+      .share({ title: name, text: description, url })
+      .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
 
   return (
@@ -67,9 +69,7 @@ export const MemeExport = ({ id }: Props) => {
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onClick={() => {
-              handleNaviteShare(() => {
-                validate(postMemeToSharedCollection, { needSignUpModal: false })();
-              });
+              handleNaviteShare();
             }}
           >
             공유하기

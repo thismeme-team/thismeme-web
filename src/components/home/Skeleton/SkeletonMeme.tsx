@@ -20,7 +20,7 @@ export const SkeletonMeme = () => {
       <Skeleton
         animation="wave"
         as="div"
-        style={{ width: "100%", height: "34rem", borderRadius: "2rem", marginBottom: "0.8rem" }}
+        style={{ width: "100%", height: "40rem", borderRadius: "2rem", marginBottom: "0.8rem" }}
         variant="rectangular"
       />
       <div className="mb-8 flex justify-between gap-20 text-18-bold-140">

@@ -24,9 +24,11 @@ export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
   const description = meme?.description || "";
   const url = meme?.image?.images[0].imageUrl || "";
 
-  const handleNaviteShare = async (onSuccess: () => void) => {
+  const handleNaviteShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
-    await navigator.share({ title: name, text: description, url }).then(onSuccess);
+    await navigator
+      .share({ title: name, text: description, url })
+      .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
   return (
     <ActionSheet isOpen={isOpen}>
@@ -41,9 +43,7 @@ export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
       <ActionSheet.Button
         onClick={() => {
           onClose();
-          handleNaviteShare(() => {
-            validate(postMemeToSharedCollection, { needSignUpModal: false })();
-          });
+          handleNaviteShare();
         }}
       >
         공유하기

@@ -1,7 +1,7 @@
 import { css } from "twin.macro";
 
 import { useAuth, useGetMemesBySort } from "@/application/hooks";
-import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
+import { MasonryInfiniteGrid } from "@/components/meme";
 
 export const RelativeMemeList = () => {
   const { data: memeList, fetchNextPage } = useGetMemesBySort("popular");
@@ -20,9 +20,7 @@ export const RelativeMemeList = () => {
           `,
         ]}
       >
-        <MemeLongPressContainer memeList={memeList}>
-          <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
-        </MemeLongPressContainer>
+        <MasonryInfiniteGrid memeList={memeList} onEndReached={fetchNextPage} />
       </div>
     </>
   );

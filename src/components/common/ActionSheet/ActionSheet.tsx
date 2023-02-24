@@ -3,7 +3,7 @@ import { css } from "twin.macro";
 
 import { android } from "@/application/util";
 
-const DELAY = 500;
+const DELAY = 300;
 
 export const ActionSheet = ({ children, isOpen }: PropsWithChildren<{ isOpen?: boolean }>) => {
   return (

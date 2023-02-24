@@ -3,12 +3,10 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const defaultTheme = require("tailwindcss/defaultTheme");
 
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const konstaConfig = require("konsta/config");
 const PX0_300 = { ...Array.from(Array(301)).map((_, i) => `${i / 10}rem`) };
 const PX0_50 = { ...Array.from(Array(51)).map((_, i) => `${i / 10}rem`) };
 
-module.exports = konstaConfig({
+module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/components/**/*.{js,ts,jsx,tsx}",
@@ -221,4 +219,4 @@ module.exports = konstaConfig({
     },
   },
   plugins: [require("@tailwindcss/line-clamp")],
-});
+};

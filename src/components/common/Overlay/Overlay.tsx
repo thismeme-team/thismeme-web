@@ -5,7 +5,7 @@ import { css } from "twin.macro";
 
 import { Portal } from "@/components/common/Portal";
 
-const DELAY = 500;
+const DELAY = 300;
 
 interface Props {
   onBackdropClick: () => void;

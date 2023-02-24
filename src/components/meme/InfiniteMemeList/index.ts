@@ -1,1 +1,1 @@
-export * from "./InfiniteMemeList";
+export * from "./MasonryInfiniteGrid";

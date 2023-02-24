@@ -1,10 +1,9 @@
 import type { UseQueryOptions } from "@tanstack/react-query";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
 import type { GetCollectionCheckResponse } from "@/infra/api/collection/types";
 
-import { useSuspendedQuery } from "../core";
 import { QUERY_KEYS } from "./queryKey";
 
 /**
@@ -12,11 +11,12 @@ import { QUERY_KEYS } from "./queryKey";
  */
 export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
   memeId: number,
-  options?: UseQueryOptions<GetCollectionCheckResponse, any, T>,
+  options?: UseQueryOptions<GetCollectionCheckResponse, unknown, T>,
 ) => {
-  return useSuspendedQuery({
+  return useQuery({
     queryKey: QUERY_KEYS.getCollectionCheck(memeId),
     queryFn: () => api.collection.getCollectionCheck(memeId),
+    suspense: false,
     ...options,
   });
 };

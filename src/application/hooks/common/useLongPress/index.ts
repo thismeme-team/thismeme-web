@@ -84,6 +84,7 @@ export function useLongPress<
 ): CallableContextResult<LongPressResult<Target, typeof detect> | Record<string, never>, Context> {
   const isLongPressActive = useRef(false);
   const isPressed = useRef(false);
+  const isPreventBackGround = useRef(false);
   const timer = useRef<NodeJS.Timeout>();
   const savedCallback = useRef(callback);
   const startPosition = useRef<Coordinates>(null);
@@ -119,6 +120,7 @@ export function useLongPress<
       timer.current = setTimeout(() => {
         if (savedCallback.current) {
           savedCallback.current(event, meta);
+          isPreventBackGround.current = true;
           isLongPressActive.current = true;
         }
       }, threshold);
@@ -178,6 +180,11 @@ export function useLongPress<
     [cancel, cancelOnMovement, onMove],
   );
 
+  const preventClickBackground = useCallback((event: LongPressEvent<Target>) => {
+    if (isPreventBackGround.current) event.preventDefault();
+    isPreventBackGround.current = false;
+  }, []);
+
   useEffect(
     () => (): void => {
       // Clear timeout on unmount
@@ -205,6 +212,10 @@ export function useLongPress<
         onTouchEnd: cancel(context) as TouchEventHandler<Target>,
       };
 
+      const clickHandlers = {
+        onClickCapture: preventClickBackground,
+      };
+
       if (callback === null) {
         return {};
       }
@@ -217,11 +228,11 @@ export function useLongPress<
         return touchHandlers;
       }
 
-      return { ...mouseHandlers, ...touchHandlers };
+      return { ...mouseHandlers, ...touchHandlers, ...clickHandlers };
     }
 
     return result;
-  }, [callback, cancel, detect, handleMove, start]);
+  }, [callback, cancel, detect, handleMove, preventClickBackground, start]);
 }
 
 // Export all typings

@@ -5,18 +5,19 @@ import { api } from "@/infra/api";
 import type { GetCollectionCheckResponse } from "@/infra/api/collection/types";
 
 import { QUERY_KEYS } from "./queryKey";
-
 /**
  * 밈별 콜렉션 정보 API
  */
 export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
   memeId: number,
+  isLogin?: boolean,
   options?: UseQueryOptions<GetCollectionCheckResponse, unknown, T>,
 ) => {
   return useQuery({
     queryKey: QUERY_KEYS.getCollectionCheck(memeId),
     queryFn: () => api.collection.getCollectionCheck(memeId),
     suspense: false,
+    enabled: !!isLogin,
     ...options,
   });
 };

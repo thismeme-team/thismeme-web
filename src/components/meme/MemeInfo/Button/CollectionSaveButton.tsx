@@ -7,8 +7,8 @@ interface Props {
 }
 
 export const CollectionSaveButton = ({ id }: Props) => {
-  const { isAdded, onUpdateCollection } = useCollection({ memeId: Number(id) });
-  const { validate } = useAuthValidation();
+  const { validate, isLogin } = useAuthValidation();
+  const { isAdded, onUpdateCollection } = useCollection({ memeId: Number(id), isLogin });
 
   return (
     <Button

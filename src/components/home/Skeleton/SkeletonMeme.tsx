@@ -11,7 +11,7 @@ export const SkeletonMeme = () => {
         variant="rectangular"
         style={{
           width: "100%",
-          fontSize: "2.2rem",
+          height: "3.2rem",
           borderRadius: "2rem",
           marginBottom: "1.6rem",
           marginTop: "1.6rem",

@@ -88,10 +88,10 @@ export const Category = () => {
             </Trigger>
           </Header>
           <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
-            <ul className="flex flex-col px-50 font-suit text-16-semibold-140">
+            <ul className="flex flex-col pl-50 pr-16 font-suit text-16-semibold-140">
               {item.tags.map((tag) => (
                 <li
-                  className="flex w-fit gap-6 py-8 [&>#remove_*]:stroke-gray-600 [&>#remove_*]:hover:stroke-black"
+                  className="flex w-full justify-between gap-6 py-8 [&>#remove_*]:stroke-gray-600 [&>#remove_*]:hover:stroke-black"
                   key={tag.tagId}
                 >
                   <button onClick={() => onClickItem(tag.tagId)}>{tag.name}</button>

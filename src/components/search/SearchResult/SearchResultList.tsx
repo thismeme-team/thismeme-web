@@ -9,7 +9,7 @@ import { SearchItem } from "../SearchItem/SearchItem";
 
 interface Prop {
   value: string;
-  onAddItem: ({ value, type }: Omit<RecentSearch, "id">) => void;
+  onAddItem: ({ value, type, id }: RecentSearch) => void;
 }
 
 export const SearchResultList = ({ value, onAddItem }: Prop) => {
@@ -28,7 +28,7 @@ export const SearchResultList = ({ value, onAddItem }: Prop) => {
               startComponent={<Icon name="pound" />}
               tagName={tag.name}
               onClick={() => {
-                onAddItem({ value: tag.name, type: "tag" });
+                onAddItem({ value: tag.name, type: "tag", id: tag.tagId });
               }}
             />
           </Link>

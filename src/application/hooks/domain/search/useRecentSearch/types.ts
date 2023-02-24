@@ -5,3 +5,7 @@ export interface RecentSearch {
   value: string;
   type: RecentSearchType;
 }
+
+export interface RecentSearchWithId extends Omit<RecentSearch, "id"> {
+  id?: number;
+}

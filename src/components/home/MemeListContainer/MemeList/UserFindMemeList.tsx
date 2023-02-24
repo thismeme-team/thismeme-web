@@ -1,5 +1,5 @@
 import { useGetUserFindMemes } from "@/application/hooks";
-import { InfiniteMemeList, MemeLongPressContainer } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 interface Props {
   userId: number | undefined;
@@ -10,9 +10,5 @@ export const UserFindMemeList = ({ userId }: Props) => {
     userId: userId as number,
   });
 
-  return (
-    <MemeLongPressContainer memeList={memeList}>
-      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
-    </MemeLongPressContainer>
-  );
+  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
 };

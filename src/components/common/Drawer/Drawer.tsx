@@ -19,7 +19,7 @@ const DrawerTrigger = ({ children }: DrawerTriggerProps) => {
   const isOpen = useDrawerContext();
   const setIsOpen = useSetDrawerContext();
 
-  return <button onClick={() => setIsOpen((prev) => !prev)}>{children({ isOpen })}</button>;
+  return <button onClick={() => setIsOpen(!isOpen)}>{children({ isOpen })}</button>;
 };
 
 interface DrawerContentProps {

@@ -25,6 +25,7 @@
     "plugin:prettier/recommended"
   ],
   "plugins": ["simple-import-sort", "@tanstack/query"],
+  "ignorePatterns": ["public"],
   "settings": {
     "import/parsers": {
       "@typescript-eslint/parser": [".ts", ".tsx"]

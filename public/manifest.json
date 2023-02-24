@@ -1,0 +1,22 @@
+{
+  "name": "그 밈",
+  "icons": [
+    {
+      "src": "/assets/chrome-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/chrome-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "display": "standalone",
+  "start_url": "/",
+  "description": "네가 찾던 ‘그 밈’ 그 집이 내 집이였어야 해",
+  "background_color": "white",
+  "theme_color": "#F3F4F8",
+  "orientation": "portrait"
+}

@@ -1,4 +1,3 @@
-/** @type {import("next").NextConfig} */
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 
@@ -11,7 +10,14 @@ const includedDirs = [
   path.resolve(__dirname, "./src/styles"),
 ];
 
-const nextConfig = {
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const withPWA = require("next-pwa")({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development",
+});
+
+/** @type {import("next").NextConfig} */
+const nextConfig = withPWA({
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config, options) => {
@@ -79,6 +85,6 @@ const nextConfig = {
     deviceSizes: [750],
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
-};
+});
 
 module.exports = nextConfig;

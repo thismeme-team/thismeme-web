@@ -12,11 +12,16 @@ interface Props {
 
 export const MemeItem = memo(({ meme: { name, image, memeId, shareCount } }: Props) => {
   return (
-    <Link className="flex flex-col gap-6" draggable={false} href={`/memes/${memeId}`}>
+    <Link
+      shallow
+      className="flex flex-col gap-6"
+      draggable={false}
+      href={`/memes/${memeId}`}
+      prefetch={false}
+    >
       <Photo
         alt={name}
         className="rounded-15"
-        data-id={memeId}
         draggable={false}
         height={image.images[0]?.imageHeight}
         sizes="100px"

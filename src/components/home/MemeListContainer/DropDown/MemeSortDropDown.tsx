@@ -17,7 +17,7 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
   const { isLogin, user } = useAuth();
 
   const dropDownText: { [key in MemeListType]: string } = {
-    user: `@${user?.name}이 찾는 밈`,
+    user: `${user?.name}이(가) 찾는 그 밈`,
     recent: "최신 업로드 된 그 밈",
     share: "공유가 많이 된 그 밈",
   };

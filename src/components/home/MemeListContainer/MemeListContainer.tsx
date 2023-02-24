@@ -15,7 +15,7 @@ export const MemeListContainer = () => {
   return (
     <>
       <MemeSortDropDown sortBy={sortBy} onClickItem={setSortBy} />
-      <SSRSuspense>
+      <SSRSuspense fallback={<div>SkeletionMemeList</div>}>
         {sortBy === "user" ? (
           <UserFindMemeList userId={user?.id} />
         ) : (

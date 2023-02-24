@@ -4,12 +4,11 @@ import type { RecentSearch } from "@/application/hooks";
 import { useGetTagSearch } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
-
-import { SearchItem } from "../SearchItem/SearchItem";
+import { SearchItem } from "@/components/search";
 
 interface Prop {
   value: string;
-  onAddItem: ({ value, type }: Omit<RecentSearch, "id">) => void;
+  onAddItem: ({ value, type, id }: RecentSearch) => void;
 }
 
 export const SearchResultList = ({ value, onAddItem }: Prop) => {
@@ -28,7 +27,7 @@ export const SearchResultList = ({ value, onAddItem }: Prop) => {
               startComponent={<Icon name="pound" />}
               tagName={tag.name}
               onClick={() => {
-                onAddItem({ value: tag.name, type: "tag" });
+                onAddItem({ value: tag.name, type: "tag", id: tag.tagId });
               }}
             />
           </Link>

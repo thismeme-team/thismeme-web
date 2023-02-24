@@ -1,4 +1,4 @@
-import type { PropsWithChildren } from "react";
+import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
@@ -7,9 +7,10 @@ import { pretendard, suit } from "@/styles/fonts";
 
 interface Props {
   id: string;
+  children: ReactNode | ReactNode[];
 }
 
-export const Portal = ({ id, children }: PropsWithChildren<Props>) => {
+export const Portal = ({ id, children }: Props) => {
   const isMount = useIsMount();
   const ref = useRef<HTMLDivElement>();
 

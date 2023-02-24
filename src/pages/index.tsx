@@ -8,6 +8,7 @@ import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeListContainer, PopularTagList, UserSharedMemeList } from "@/components/home";
+import { SkeletonMeme, SkeletonTagList } from "@/components/home/Skeleton";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
@@ -27,11 +28,12 @@ const HomePage: NextPage = () => {
             router.push("/search");
           }}
         />
-        <SSRSuspense fallback={<div className="h-84" />}>
+        <SSRSuspense fallback={<SkeletonTagList count={5} />}>
           <PopularTagList />
         </SSRSuspense>
+        <section className="pb-40" />
         {isLogin && (
-          <SSRSuspense>
+          <SSRSuspense fallback={<SkeletonMeme />}>
             <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
           </SSRSuspense>
         )}

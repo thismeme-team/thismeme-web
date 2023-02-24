@@ -1,5 +1,6 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { useRouter } from "next/router";
 
 import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
 import { TITLE } from "@/application/util";
@@ -14,7 +15,12 @@ interface Props {
   meme: Pick<Meme, "name" | "description">;
 }
 
-const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) => {
+const MemeDetailPage: NextPage<Props> = ({ meme: { name, description } }) => {
+  const { query } = useRouter();
+  const id = query.id as string;
+
+  // TODO id validation
+  // TODO increase view count
   return (
     <>
       <NextSeo description={description} title={TITLE.memeDetail(name)} />
@@ -23,7 +29,7 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) =>
       <MemeTagList id={id} />
       <MemeCTAList id={id} />
 
-      <SSRSuspense>
+      <SSRSuspense key={id}>
         <RelativeMemeList />
       </SSRSuspense>
     </>

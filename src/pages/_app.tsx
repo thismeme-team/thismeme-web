@@ -1,13 +1,11 @@
 import "@/styles/globals.css";
 
-import { App as KonstaStyle } from "konsta/react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 import { QueryClientProvider } from "@/application/queryClient";
-import { android } from "@/application/util";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
@@ -39,15 +37,13 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
       <QueryClientProvider hydrateState={pageProps.hydrateState}>
         <ToastProvider>
           <SignUpModalProvider>
-            <KonstaStyle theme={android ? "material" : "ios"}>
-              <Layout>
-                <QueryErrorBoundary>
-                  <ToastContainer />
-                  <SignUpModal />
-                  <Component {...pageProps} />
-                </QueryErrorBoundary>
-              </Layout>
-            </KonstaStyle>
+            <Layout>
+              <QueryErrorBoundary>
+                <ToastContainer />
+                <SignUpModal />
+                <Component {...pageProps} />
+              </QueryErrorBoundary>
+            </Layout>
           </SignUpModalProvider>
         </ToastProvider>
       </QueryClientProvider>

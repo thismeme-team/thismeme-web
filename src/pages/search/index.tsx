@@ -6,12 +6,14 @@ import { useInput, useRecentSearch } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
+import { SSRSuspense } from "@/components/common/Suspense";
 import {
   SearchInput,
   SearchPopularList,
   SearchRecent,
   SearchResultList,
 } from "@/components/search";
+import { SkeletonTagList } from "@/components/search/Skeleton";
 
 /**
  * FIX
@@ -29,7 +31,7 @@ const SearchPage: NextPage = () => {
   const onSearchByKeyword = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
 
-    onAddItem({ value: inputProps.value, type: "keyword" });
+    onAddItem({ value: inputProps.value, type: "keyword", id: Date.now() });
     router.push(PATH.getExploreByKeywordPath(inputProps.value));
   };
 
@@ -41,7 +43,6 @@ const SearchPage: NextPage = () => {
       <div className="relative mt-8">
         <SearchInput
           {...inputProps}
-          maxLength={14}
           placeholder="당신이 생각한 '그 밈' 검색하기"
           spellCheck={false}
           type="text"
@@ -63,9 +64,9 @@ const SearchPage: NextPage = () => {
           <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
         )}
         {!inputProps.value && !focus && (
-          <Suspense>
+          <SSRSuspense fallback={<SkeletonTagList />}>
             <SearchPopularList />
-          </Suspense>
+          </SSRSuspense>
         )}
       </div>
     </>

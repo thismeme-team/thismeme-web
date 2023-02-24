@@ -17,7 +17,7 @@ export const useColoredText = ({ tagName, searchText }: Props) => {
   const ColoredText: ReactNode = (
     <>
       {checkValidation && index !== -1 ? (
-        <div>
+        <div className="truncate">
           <span>{tagName.slice(0, tagName.search(searchText))}</span>
           <span className="text-secondary-1000">
             {tagName.slice(index, index + searchText.length)}

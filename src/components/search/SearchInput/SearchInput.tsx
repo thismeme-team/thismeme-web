@@ -18,7 +18,7 @@ export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Prop
       }}
     >
       <InputBase
-        className="h-48 w-full rounded-22 bg-gray-100 pl-22 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500"
+        className="h-48 w-full rounded-22 bg-gray-100 pl-22 pr-65 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500"
         value={value}
         {...rest}
         endComponents={

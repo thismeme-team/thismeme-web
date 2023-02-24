@@ -1,5 +1,5 @@
 import { useGetUserFindMemes } from "@/application/hooks";
-import { MasonryInfiniteGrid } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 interface Props {
   userId: number | undefined;
@@ -10,5 +10,5 @@ export const UserFindMemeList = ({ userId }: Props) => {
     userId: userId as number,
   });
 
-  return <MasonryInfiniteGrid memeList={memeList} onEndReached={fetchNextPage} />;
+  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
 };

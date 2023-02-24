@@ -1,5 +1,5 @@
 import { useGetMemesBySort } from "@/application/hooks";
-import { MasonryInfiniteGrid } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 import type { MemeListType } from "../type";
 
@@ -9,5 +9,5 @@ interface Props {
 export const CommonMemeList = ({ sortBy }: Props) => {
   const { data: memeList, fetchNextPage } = useGetMemesBySort(sortBy);
 
-  return <MasonryInfiniteGrid memeList={memeList} onEndReached={fetchNextPage} />;
+  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
 };

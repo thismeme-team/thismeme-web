@@ -1,5 +1,5 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
-import { MasonryInfiniteGrid } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 interface Props {
   sharedId: number;
@@ -8,5 +8,5 @@ interface Props {
 export const SharedMemeList = ({ sharedId }: Props) => {
   const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(sharedId);
 
-  return <MasonryInfiniteGrid memeList={memeList} onEndReached={fetchNextPage} />;
+  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
 };

@@ -1,7 +1,7 @@
 import { css } from "twin.macro";
 
 import { useGetMemesByTag } from "@/application/hooks";
-import { MasonryInfiniteGrid } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 import { EmptyMemesView } from "../EmptyMemesView";
 
@@ -25,7 +25,7 @@ export const MemesByTag = ({ searchQuery }: Props) => {
         `,
       ]}
     >
-      <MasonryInfiniteGrid memeList={memeList} onEndReached={fetchNextPage} />
+      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
     </div>
   );
 };

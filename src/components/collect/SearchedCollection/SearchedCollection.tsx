@@ -1,5 +1,5 @@
 import { useGetMemesFromCollectionByKeyword } from "@/application/hooks";
-import { MasonryInfiniteGrid } from "@/components/meme";
+import { InfiniteMemeList } from "@/components/meme";
 
 interface Props {
   searchQuery: string;
@@ -19,5 +19,5 @@ export const SearchedCollection = ({ searchQuery, collectionId }: Props) => {
   if (isEmpty) {
     return null;
   }
-  return <MasonryInfiniteGrid memeList={memeList} onEndReached={fetchNextPage} />;
+  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
 };

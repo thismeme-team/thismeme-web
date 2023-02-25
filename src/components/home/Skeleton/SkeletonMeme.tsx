@@ -4,14 +4,14 @@ import { SkeletonTagList } from "./SkeletonTagList";
 
 export const SkeletonMeme = () => {
   return (
-    <>
+    <div className="mb-24">
       <Skeleton
         animation="wave"
         as="div"
         variant="rectangular"
         style={{
           width: "100%",
-          fontSize: "2.2rem",
+          height: "3.2rem",
           borderRadius: "2rem",
           marginBottom: "1.6rem",
           marginTop: "1.6rem",
@@ -38,6 +38,6 @@ export const SkeletonMeme = () => {
         />
       </div>
       <SkeletonTagList count={3} />
-    </>
+    </div>
   );
 };

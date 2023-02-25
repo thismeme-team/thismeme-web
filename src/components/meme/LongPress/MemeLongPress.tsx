@@ -1,5 +1,5 @@
 import {
-  useAuthValidation,
+  useAuth,
   useCollection,
   usePostMemeToSharedCollection,
   useToast,
@@ -14,11 +14,12 @@ interface Props {
 }
 export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
   const { show } = useToast();
-  const { onUpdateCollection } = useCollection({ memeId: meme.memeId });
+  const { validate, isLogin, user } = useAuth();
+  const { onUpdateCollection } = useCollection({ memeId: meme.memeId, isLogin });
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: meme.memeId,
+    sharedId: user?.sharedCollectionId as number,
   });
-  const { validate } = useAuthValidation();
 
   const name = meme?.name || "";
   const description = meme?.description || "";

@@ -18,7 +18,7 @@ export const SharedMemeItem = ({ meme }: Props) => {
       <Link href={`/memes/${meme.memeId}`}>
         <div>
           <Photo
-            className="m-auto mb-8 h-[40rem] w-[34rem] rounded-15"
+            className="m-auto mb-8 h-[40rem] w-full rounded-15"
             src={meme.image.images[0]?.imageUrl}
           />
         </div>

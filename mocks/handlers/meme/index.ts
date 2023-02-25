@@ -22,8 +22,8 @@ export const getMemeDetail = rest.get(
         description: "밈 설명 밈 설명".repeat(10),
         viewCount: 1,
         shareCount: 1,
-        createdDate: "2023.01.08",
-        modifiedDate: "2023.01.09",
+        createdDate: "2023-02-19T16:23:00",
+        modifiedDate: "2023-02-20T16:23:00",
         image: {
           images: [
             {

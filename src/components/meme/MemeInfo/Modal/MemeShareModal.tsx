@@ -1,5 +1,3 @@
-import { userAgent } from "next/server";
-
 import { useAuthValidation, useMemeDetailById, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { PAGE_URL } from "@/application/util";

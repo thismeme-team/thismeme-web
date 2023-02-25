@@ -4,7 +4,7 @@ import { useGetMyAccount, useLogout } from "@/application/hooks";
 import { api } from "@/infra/api";
 
 export const useAuth = () => {
-  const { data, isLoading } = useGetMyAccount();
+  const { data, isLoading, refetch } = useGetMyAccount();
   const { mutate: logout } = useLogout();
 
   const login = useCallback((token: string) => {
@@ -14,6 +14,7 @@ export const useAuth = () => {
   return {
     logout,
     login,
+    refetch,
     isLogin: Boolean(data),
     user: data,
     isLoading,

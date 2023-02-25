@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import tw from "twin.macro";
 
 import {
@@ -18,7 +17,6 @@ interface Props {
 
 export const MemeExport = ({ id }: Props) => {
   const { name, description } = useMemeDetailById(id);
-  const { asPath } = useRouter();
   const { validate, isLogin, user } = useAuth();
   const { onUpdateCollection } = useCollection({ memeId: Number(id), isLogin });
 
@@ -31,7 +29,7 @@ export const MemeExport = ({ id }: Props) => {
   const handleNativeShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
     await navigator
-      .share({ title: name, text: description, url: DOMAIN + asPath })
+      .share({ title: name, text: description, url: DOMAIN + "/memes/" + id })
       .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
 

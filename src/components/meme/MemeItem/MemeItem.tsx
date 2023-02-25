@@ -35,7 +35,7 @@ export const MemeItem = memo(({ meme: { name, image, memeId, shareCount }, onCli
         <span>{name}</span>
         <span className="flex items-center gap-4">
           <Icon height={16} name="memeShare" width={16} />
-          <span className="text-gray-600">{shareCount}</span>
+          <span className="text-14-semibold-140 text-gray-600">{shareCount}</span>
         </span>
       </div>
     </Link>

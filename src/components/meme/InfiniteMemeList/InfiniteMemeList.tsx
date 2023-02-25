@@ -3,6 +3,7 @@ import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 
 import { prefetchCollectionCheck, useIntersect } from "@/application/hooks";
+import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
 import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeLongPressContainer } from "@/components/meme";
@@ -27,15 +28,13 @@ export const InfiniteMemeList = ({ memeList, onEndReached }: Props) => {
     (id: number) => {
       const data = queryClient.getQueriesData<UseInfiniteQueryResult<{ data: Meme[] }>["data"]>({
         type: "active",
-        predicate: ({ queryKey }) => {
-          if (typeof queryKey[0] !== "string") return false;
-          return queryKey[0].startsWith("@memeList");
-        },
+        queryKey: [CORE_QUERY_KEY.infiniteMemeList],
       });
 
       let cachedMeme: Meme | undefined;
       data.map(([, queryData]) => {
         queryData?.pages.map((meme) => {
+          if (cachedMeme) return;
           cachedMeme = meme.data.find((m) => m.memeId === id);
         });
       });

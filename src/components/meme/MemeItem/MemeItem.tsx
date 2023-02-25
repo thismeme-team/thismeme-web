@@ -14,7 +14,6 @@ interface Props {
 export const MemeItem = memo(({ meme: { name, image, memeId, shareCount }, onClick }: Props) => {
   return (
     <Link
-      scroll
       className="flex flex-col gap-6"
       draggable={false}
       href={`/memes/${memeId}`}

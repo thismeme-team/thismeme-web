@@ -6,7 +6,6 @@ import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
-import { SSRSuspense } from "@/components/common/Suspense";
 import { MemesByTag } from "@/components/explore";
 import { TagBookmarkButton } from "@/components/tags";
 
@@ -23,10 +22,7 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
       <ExplorePageNavigation title={`#${searchQuery}`} />
 
       <PullToRefresh>
-        <SSRSuspense>
-          <MemesByTag searchQuery={searchQuery} />
-        </SSRSuspense>
-
+        <MemesByTag searchQuery={searchQuery} />
         <TagBookmarkButton tagId={tagId} />
       </PullToRefresh>
     </>
@@ -63,7 +59,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         searchQuery: tagName,
         tagId: Number(tagId),
       },
-      revalidate: 60 * 20, // 10분
+      revalidate: 60 * 20, // 20분
     };
   } catch (e) {
     return {

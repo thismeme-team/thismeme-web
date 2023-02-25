@@ -1,5 +1,5 @@
 import {
-  useAuthValidation,
+  useAuth,
   useDeleteFavoriteTag,
   useGetTagInfo,
   usePostFavoriteTag,
@@ -19,7 +19,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const { isFav } = useGetTagInfo(tagId);
   const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation } = useDeleteFavoriteTag();
-  const { validate } = useAuthValidation();
+  const { validate } = useAuth();
 
   const handleSaveBookmark = () => {
     saveMutation(tagId, {

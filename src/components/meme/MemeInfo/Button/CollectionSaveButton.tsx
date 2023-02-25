@@ -1,4 +1,4 @@
-import { useAuthValidation, useCollection } from "@/application/hooks";
+import { useAuth, useCollection } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 export const CollectionSaveButton = ({ id }: Props) => {
-  const { validate, isLogin } = useAuthValidation();
+  const { validate, isLogin } = useAuth();
   const { isAdded, onUpdateCollection } = useCollection({ memeId: Number(id), isLogin });
 
   return (

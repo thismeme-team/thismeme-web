@@ -1,7 +1,7 @@
 import tw from "twin.macro";
 
 import {
-  useAuthValidation,
+  useAuth,
   useCollection,
   useDownload,
   useMemeDetailById,
@@ -20,14 +20,15 @@ export const MemeExport = ({ id }: Props) => {
     description,
     image: { images },
   } = useMemeDetailById(id);
-  const { onUpdateCollection } = useCollection({ memeId: Number(id) });
+  const { validate, isLogin, user } = useAuth();
+  const { onUpdateCollection } = useCollection({ memeId: Number(id), isLogin });
 
   const { download } = useDownload();
   const { show } = useToast();
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: Number(id),
+    sharedId: user?.sharedCollectionId as number,
   });
-  const { validate } = useAuthValidation();
 
   const url = images[0].imageUrl;
 

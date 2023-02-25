@@ -24,9 +24,9 @@ export const ProfileModal = () => {
     <>
       <DropDown>
         <DropDown.Trigger>
-          <span css={{ fontSize: 0 }}>
+          <button css={{ fontSize: 0 }}>
             <Photo className="h-32 w-32 rounded-10" src={user?.imageUrl} />
-          </span>
+          </button>
         </DropDown.Trigger>
         <DropDown.Contents css={{ top: "7rem", right: "1.6rem", width: "34rem" }}>
           <DropDown.Content>

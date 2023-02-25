@@ -1,12 +1,12 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
-import { useInfiniteQuery } from "@tanstack/react-query";
 
 import { useSuspendedQuery } from "@/application/hooks/api/core";
 import { api } from "@/infra/api";
 
+import { useCoreInfiniteQuery } from "../core/useCoreInfiniteQuery";
 import { QUERY_KEYS } from "./queryKey";
 
-const LIMIT = 10;
+const PAGE_SIZE = 10;
 
 /**
  * 밈 상세 조회 API
@@ -35,17 +35,22 @@ export const fetchMemeDetailById = (id: string, queryClient: QueryClient) =>
 const types = { share: "shareCount", recent: "createdDate", popular: "viewCount", user: "user" };
 
 export const useGetMemesBySort = (sort: keyof typeof types) => {
-  const { data, fetchNextPage } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getMemesBySort(sort),
-    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getMemesBySort({ offset: pageParam, limit: LIMIT, sort: types[sort] }),
-    getNextPageParam: (lastPage) => {
-      const { isLastPage, offset, limit } = lastPage;
-      return isLastPage ? undefined : offset + limit;
+  const { data, isEmpty, isFetchingNextPage, fetchNextPage } = useCoreInfiniteQuery(
+    QUERY_KEYS.getMemesBySort(sort),
+    ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.meme.getMemesBySort({ offset: pageParam, limit: PAGE_SIZE, sort: types[sort] }),
+    PAGE_SIZE,
+    {
+      select: (data) => {
+        return {
+          pages: data.pages.map((page) => ({ data: page.memes })),
+          pageParams: data.pageParams,
+        };
+      },
     },
-  });
-  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  return { data: memeList, fetchNextPage };
+  );
+
+  return { data, isEmpty, isFetchingNextPage, fetchNextPage };
 };
 
 /**
@@ -59,17 +64,21 @@ export const useGetMemesBySort = (sort: keyof typeof types) => {
  * 콜렉션 페이지(/collect) 페이지에서 무한 스크롤 적용함
  */
 export const useGetMemesByCollectionId = (collectionId: number) => {
-  const { data, fetchNextPage } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getMemesByCollectionId(collectionId),
-    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
-      api.meme.getMemesByCollectionId({ collectionId, offset: pageParam, limit: 10 }),
-    getNextPageParam: (lastPage) => {
-      const { isLastPage, offset, limit } = lastPage;
-      return isLastPage ? undefined : offset + limit;
+  const { data, isEmpty, isFetchingNextPage, fetchNextPage } = useCoreInfiniteQuery(
+    QUERY_KEYS.getMemesByCollectionId(collectionId),
+    ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.meme.getMemesByCollectionId({ collectionId, offset: pageParam, limit: PAGE_SIZE }),
+    PAGE_SIZE,
+    {
+      staleTime: 0,
+      select: (data) => {
+        return {
+          pages: data.pages.map((page) => ({ data: page.memes })),
+          pageParams: data.pageParams,
+        };
+      },
     },
-  });
-  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
-  const isEmpty = data?.pages[0].data.length === 0;
+  );
 
-  return { data: memeList, fetchNextPage, isEmpty };
+  return { data, isEmpty, isFetchingNextPage, fetchNextPage };
 };

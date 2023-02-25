@@ -18,7 +18,7 @@ export const MemeCTAList = ({ id }: Props) => {
         className="h-52 w-52 shrink-0 rounded-10 bg-gray-900 active:bg-black"
         onClick={memeShareModalProps.onOpen}
       >
-        <Icon color="stroke-white" name="memeShare" />
+        <Icon color="stroke-white" height="24" name="memeShare" width="24" />
       </Button>
       <MemeShareModal id={id} {...memeShareModalProps} />
 

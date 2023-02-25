@@ -16,10 +16,13 @@ const animation = "transition-colors duration-200 ease-in-out";
 
 export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show } = useToast();
-  const { isFav } = useGetTagInfo(tagId);
+  const { validate, isLoading } = useAuth();
+  const { data, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
   const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation } = useDeleteFavoriteTag();
-  const { validate } = useAuth();
+
+  if (!isFetchedAfterMount || !data) return null;
+  const { isFav } = data;
 
   const handleSaveBookmark = () => {
     saveMutation(tagId, {

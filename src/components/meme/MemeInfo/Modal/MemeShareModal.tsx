@@ -1,8 +1,6 @@
-import { useRouter } from "next/router";
-
 import { useAuth, useMemeDetailById, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
-import { DOMAIN } from "@/application/util";
+import { DOMAIN, PATH } from "@/application/util";
 import type { ModalProps } from "@/components/common/Modal";
 import { Modal } from "@/components/common/Modal";
 import { Photo } from "@/components/common/Photo";
@@ -18,8 +16,7 @@ interface Props extends ModalProps {
 export const MemeShareModal = ({ id, ...modalProps }: Props) => {
   const { show } = useToast();
   const { validate, user } = useAuth();
-  const { asPath } = useRouter();
-  const pageUrl = DOMAIN + asPath;
+  const pageUrl = `${DOMAIN}${PATH.getMemeDetailPage(Number(id))}`;
 
   const {
     name,

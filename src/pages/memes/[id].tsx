@@ -3,7 +3,14 @@ import { Suspense } from "react";
 
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeCTAList, MemeDetail, MemeTagList, RelativeMemeList } from "@/components/meme";
+import {
+  MemeCTAList,
+  MemeDetail,
+  MemeTagList,
+  RelativeMemeList,
+  SkeletonMemeDetail,
+  SkeletonMemeTagList,
+} from "@/components/meme";
 
 interface Props {
   id: string;
@@ -13,12 +20,14 @@ const MemeDetailPage: NextPage<Props> = ({ id }) => {
   return (
     <>
       <ExplorePageNavigation />
-      <SSRSuspense>
+      <SSRSuspense fallback={<SkeletonMemeDetail />}>
         <MemeDetail id={id} />
-        <MemeTagList id={id} />
-        <MemeCTAList id={id} />
-        <Suspense>
-          <RelativeMemeList />
+        <Suspense fallback={<SkeletonMemeTagList />}>
+          <MemeTagList id={id} />
+          <MemeCTAList id={id} />
+          <Suspense>
+            <RelativeMemeList />
+          </Suspense>
         </Suspense>
       </SSRSuspense>
     </>

@@ -13,7 +13,7 @@ import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
   const router = useRouter();
-  const { isLogin, user } = useAuth();
+  const { isLoading, isLogin, user } = useAuth();
 
   return (
     <>
@@ -33,11 +33,14 @@ const HomePage: NextPage = () => {
         </SSRSuspense>
         <section className="pb-40" />
         {isLogin && (
-          <SSRSuspense fallback={<SkeletonMeme />}>
-            <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
-          </SSRSuspense>
+          <>
+            <SSRSuspense fallback={<SkeletonMeme />}>
+              <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
+              <MemeListContainer />
+            </SSRSuspense>
+          </>
         )}
-        <MemeListContainer />
+        {!isLogin && !isLoading && <MemeListContainer />}
       </PullToRefresh>
     </>
   );

@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-import type { GetMemesResponse } from "@/infra/api/search/types";
+import type { GetMemesResponse } from "@/types";
 
 import * as MOCK_DATA from "./data";
 

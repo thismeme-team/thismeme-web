@@ -43,3 +43,11 @@ export interface User {
   collectionId: number;
   sharedCollectionId: number;
 }
+
+export interface GetMemesResponse {
+  memes: Meme[];
+  /**
+   * memes의 개수
+   */
+  count: number;
+}

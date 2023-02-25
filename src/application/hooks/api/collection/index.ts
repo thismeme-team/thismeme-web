@@ -52,6 +52,9 @@ export const useDeleteMemeFromCollection = () => {
 
       return { previousCollectionInfo, deletedMemeId };
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ACCOUNT_QUERY_KEYS.getMyAccount });
+    },
     onError: (_, deletedMemeId, context) => {
       queryClient.setQueryData(
         QUERY_KEYS.getCollectionCheck(deletedMemeId),
@@ -84,6 +87,9 @@ export const usePostMemeToCollection = () => {
       });
 
       return { previousCollectionInfo, newMemeId };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ACCOUNT_QUERY_KEYS.getMyAccount });
     },
     onError: (_, newMemeId, context) => {
       queryClient.setQueryData(

@@ -6,7 +6,17 @@ interface Props {
 }
 
 export const Collection = ({ collectionId }: Props) => {
-  const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(collectionId);
+  const {
+    data: memeList,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useGetMemesByCollectionId(collectionId);
 
-  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
+  return (
+    <InfiniteMemeList
+      loading={isFetchingNextPage}
+      memeList={memeList}
+      onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
+    />
+  );
 };

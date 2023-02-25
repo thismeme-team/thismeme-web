@@ -2,6 +2,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
 import { ExplorePageNavigation } from "@/components/common/Navigation";
+import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
 import {
   MemeCTAList,
@@ -20,15 +21,31 @@ const MemeDetailPage: NextPage<Props> = ({ id }) => {
   return (
     <>
       <ExplorePageNavigation />
+
       <SSRSuspense fallback={<SkeletonMemeDetail />} key={id}>
         <MemeDetail id={id} />
         <Suspense fallback={<SkeletonMemeTagList />}>
           <MemeTagList id={id} />
         </Suspense>
         <MemeCTAList id={id} />
-        <Suspense>
-          <RelativeMemeList />
-        </Suspense>
+      </SSRSuspense>
+
+      <SSRSuspense
+        fallback={
+          <>
+            <Skeleton
+              style={{
+                fontSize: "2.2rem",
+                width: "50%",
+                marginTop: "1.6rem",
+                marginBottom: "1.6rem",
+              }}
+            />
+            <MemeListSkeleton />
+          </>
+        }
+      >
+        <RelativeMemeList />
       </SSRSuspense>
     </>
   );

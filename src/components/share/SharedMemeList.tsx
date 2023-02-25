@@ -6,7 +6,13 @@ interface Props {
 }
 
 export const SharedMemeList = ({ sharedId }: Props) => {
-  const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(sharedId);
+  const { data: memeList, isFetchingNextPage, fetchNextPage } = useGetMemesByCollectionId(sharedId);
 
-  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
+  return (
+    <InfiniteMemeList
+      loading={isFetchingNextPage}
+      memeList={memeList}
+      onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
+    />
+  );
 };

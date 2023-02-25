@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 
-import type { GetMemesResponse } from "./types";
+import type { GetMemesResponse } from "@/types";
 
 export class SearchApi {
   constructor(private api: AxiosInstance) {}
@@ -14,21 +14,14 @@ export class SearchApi {
     offset: number;
     limit: number;
   }) => {
-    const { data } = await this.api.get<GetMemesResponse>("/search", {
+    const response = await this.api.get<GetMemesResponse>("/search", {
       params: {
         keyword,
         offset,
         limit,
       },
     });
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
+    return response.data;
   };
 
   getMemesByTag = async ({
@@ -40,21 +33,14 @@ export class SearchApi {
     offset: number;
     limit: number;
   }) => {
-    const { data } = await this.api.get<GetMemesResponse>("/search/tag", {
+    const response = await this.api.get<GetMemesResponse>("/search/tag", {
       params: {
         keyword,
         offset,
         limit,
       },
     });
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
+    return response.data;
   };
 
   getMemesFromCollectionByKeyword = async ({
@@ -68,21 +54,14 @@ export class SearchApi {
     offset: number;
     limit: number;
   }) => {
-    const { data } = await this.api.get<GetMemesResponse>(`/search/collection/${collectionId}`, {
+    const response = await this.api.get<GetMemesResponse>(`/search/collection/${collectionId}`, {
       params: {
         keyword,
         offset,
         limit,
       },
     });
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
+    return response.data;
   };
 
   getUserFindMemes = async ({
@@ -96,20 +75,13 @@ export class SearchApi {
     offset: number;
     limit: number;
   }) => {
-    const { data } = await this.api.get<GetMemesResponse>(`/search/user/${userId}`, {
+    const response = await this.api.get<GetMemesResponse>(`/search/user/${userId}`, {
       params: {
         keywords,
         offset,
         limit,
       },
     });
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
+    return response.data;
   };
 }

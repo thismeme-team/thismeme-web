@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import {
   useDeleteMemeFromCollection,
   useGetCollectionCheck,
@@ -5,11 +7,12 @@ import {
   useToast,
 } from "@/application/hooks";
 
+const TAG_DELETE_DELAY = 3000;
+
 interface UseCollectionArg {
   memeId: number;
   isLogin: boolean;
 }
-
 /**
  * 추후 기획이 특정 폴더에 밈을 저장하게 되면 수정
  */
@@ -34,7 +37,20 @@ export const useCollection = ({ memeId, isLogin }: UseCollectionArg) => {
     } else {
       postMemeToCollection(memeId, {
         onSuccess: () => {
-          show("콜렉션에 저장했습니다!");
+          show(
+            () => (
+              <>
+                <div className="grow">콜렉션에 저장했습니다!</div>
+                <Link
+                  className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+                  href="/collect"
+                >
+                  보러가기
+                </Link>
+              </>
+            ),
+            { duration: TAG_DELETE_DELAY },
+          );
         },
         onError: () => {
           show("콜렉션 저장에 실패했습니다!");
@@ -42,5 +58,6 @@ export const useCollection = ({ memeId, isLogin }: UseCollectionArg) => {
       });
     }
   };
+
   return { ...collectionCheck, onUpdateCollection };
 };

@@ -1,6 +1,7 @@
 import type { AxiosInstance } from "axios";
 
-import type { GetMemesResponse } from "../search/types";
+import type { GetMemesResponse } from "@/types";
+
 import type { GetMemeDetailByIdResponse, GetMemesByCollectionIdResponse } from "./types";
 
 export class MemeApi {
@@ -26,7 +27,7 @@ export class MemeApi {
   }) => {
     const page = offset / limit;
 
-    const { data } = await this.api.get<GetMemesByCollectionIdResponse>(
+    const response = await this.api.get<GetMemesByCollectionIdResponse>(
       `/memes/collections/${collectionId}`,
       {
         params: {
@@ -36,14 +37,7 @@ export class MemeApi {
         },
       },
     );
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
+    return response.data;
   };
 
   getMemesBySort = async ({
@@ -57,20 +51,13 @@ export class MemeApi {
   }) => {
     const page = offset / limit;
 
-    const { data } = await this.api.get<GetMemesResponse>(`/memes`, {
+    const response = await this.api.get<GetMemesResponse>(`/memes`, {
       params: {
         page,
         size: limit,
         sort: `${sort},desc`,
       },
     });
-    const result = {
-      data: data.memes,
-      offset: offset,
-      limit: limit,
-      isLastPage: data.memes.length < limit,
-      isFirstPage: offset >= 0 && offset < limit,
-    };
-    return result;
+    return response.data;
   };
 }

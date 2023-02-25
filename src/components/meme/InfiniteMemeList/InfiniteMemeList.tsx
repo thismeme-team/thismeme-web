@@ -1,41 +1,54 @@
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 
 import { prefetchCollectionCheck, useIntersect } from "@/application/hooks";
 import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
 import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
 import { Masonry } from "@/components/common/Masonry";
+import { renderMemeItemSkeletons } from "@/components/common/Skeleton";
 import { MemeLongPressContainer } from "@/components/meme";
 import { MemeItem } from "@/components/meme/MemeItem";
-import type { Meme } from "@/types";
+import type { GetMemesResponse, Meme } from "@/types";
 
-interface Props {
+const skeletons = renderMemeItemSkeletons(4);
+
+const builder = ({ elements, loading = false }: { elements: JSX.Element[]; loading?: boolean }) => {
+  if (loading) return elements.concat(skeletons);
+  return elements;
+};
+
+interface InfiniteMemeListProps {
   memeList: Meme[];
-  onEndReached: () => void;
+  loading?: boolean;
+  onRequestAppend: () => void;
 }
 
-export const InfiniteMemeList = ({ memeList, onEndReached }: Props) => {
-  const ref = useIntersect(onEndReached);
+export const InfiniteMemeList = ({
+  memeList,
+  loading = false,
+  onRequestAppend,
+}: InfiniteMemeListProps) => {
+  const ref = useIntersect(onRequestAppend, { rootMargin: "200% 0px" });
 
   /**
    * @desc
    *  csr 환경에서 빠른 페이지 전환을 위해
-   *  밈 상세 데이터를 query cache 에서 polling 합니다
+   *  밈 상세 데이터를 query cache 에서 pulling 합니다
    */
   const queryClient = useQueryClient();
   const getMemeDetailFromCache = useCallback(
     (id: number) => {
-      const data = queryClient.getQueriesData<UseInfiniteQueryResult<{ data: Meme[] }>["data"]>({
+      const data = queryClient.getQueriesData<UseInfiniteQueryResult<GetMemesResponse>["data"]>({
         type: "active",
         queryKey: [CORE_QUERY_KEY.infiniteMemeList],
       });
 
       let cachedMeme: Meme | undefined;
-      data.map(([, queryData]) => {
-        queryData?.pages.map((meme) => {
+      data.forEach(([, queryData]) => {
+        queryData?.pages.forEach((_) => {
           if (cachedMeme) return;
-          cachedMeme = meme.data.find((m) => m.memeId === id);
+          cachedMeme = _.memes.find((meme) => meme.memeId === id);
         });
       });
 
@@ -55,14 +68,22 @@ export const InfiniteMemeList = ({ memeList, onEndReached }: Props) => {
     [queryClient],
   );
 
+  const elements = useMemo(
+    () =>
+      memeList.map((meme) => {
+        return (
+          <MemeLongPressContainer key={meme.memeId} meme={meme}>
+            <MemeItem meme={meme} onClick={getMemeDetailFromCache} />
+          </MemeLongPressContainer>
+        );
+      }),
+    [memeList, getMemeDetailFromCache],
+  );
+
   return (
     <>
       <Masonry columns={2} spacing={9}>
-        {memeList.map((meme, idx) => (
-          <MemeLongPressContainer key={idx} meme={meme}>
-            <MemeItem meme={meme} onClick={getMemeDetailFromCache} />
-          </MemeLongPressContainer>
-        ))}
+        {builder({ elements, loading })}
       </Masonry>
       <div className="h-20" ref={ref} />
     </>

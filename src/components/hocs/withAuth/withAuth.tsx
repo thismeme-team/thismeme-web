@@ -19,6 +19,7 @@ export const withAuth = (WrappedComponent: ComponentType) => {
       }
     }, [isLogin, isLoading, router, show]);
 
+    if (!isLoading && !isLogin) return null;
     return <WrappedComponent />;
   };
   ComponentWithAuth.displayName = `withAuth(${displayName})`;

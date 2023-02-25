@@ -1,8 +1,5 @@
-import type { Meme } from "@/types";
+import type { GetMemesResponse, Meme } from "@/types";
 
-export interface GetMemesByCollectionIdResponse {
-  memes: Meme[];
-  count: number;
-}
+export type GetMemesByCollectionIdResponse = GetMemesResponse;
 
 export type GetMemeDetailByIdResponse = Meme;

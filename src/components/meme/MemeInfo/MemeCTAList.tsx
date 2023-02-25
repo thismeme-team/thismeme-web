@@ -1,8 +1,6 @@
 import { useModal } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
-import { Skeleton } from "@/components/common/Skeleton";
-import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeShareModal } from "@/components/meme/MemeInfo/Modal";
 
 import { CollectionSaveButton } from "./Button";
@@ -24,17 +22,7 @@ export const MemeCTAList = ({ id }: Props) => {
       </Button>
       <MemeShareModal id={id} {...memeShareModalProps} />
 
-      <SSRSuspense
-        fallback={
-          <Skeleton
-            animation="wave"
-            style={{ width: "100%", height: "5.2rem", borderRadius: "1rem" }}
-            variant="rectangular"
-          />
-        }
-      >
-        <CollectionSaveButton id={id} />
-      </SSRSuspense>
+      <CollectionSaveButton id={id} />
     </div>
   );
 };

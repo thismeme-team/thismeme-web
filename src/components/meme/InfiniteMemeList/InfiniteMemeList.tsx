@@ -2,7 +2,7 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback } from "react";
 
-import { useIntersect } from "@/application/hooks";
+import { prefetchCollectionCheck, useIntersect } from "@/application/hooks";
 import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
 import { Masonry } from "@/components/common/Masonry";
 import { MemeLongPressContainer } from "@/components/meme";
@@ -17,6 +17,11 @@ interface Props {
 export const InfiniteMemeList = ({ memeList, onEndReached }: Props) => {
   const ref = useIntersect(onEndReached);
 
+  /**
+   * @desc
+   *  csr 환경에서 빠른 페이지 전환을 위해
+   *  밈 상세 데이터를 query cache 에서 polling 합니다
+   */
   const queryClient = useQueryClient();
   const getMemeDetailFromCache = useCallback(
     (id: number) => {
@@ -40,6 +45,12 @@ export const InfiniteMemeList = ({ memeList, onEndReached }: Props) => {
           QUERY_KEYS.getMemeDetailById(String(cachedMeme.memeId)),
           cachedMeme,
         );
+
+        // NOTE: 조회수 증가를 위해 한번 더 밈 상세 api를 fetch 합니다
+        queryClient.invalidateQueries(QUERY_KEYS.getMemeDetailById(String(cachedMeme.memeId)));
+
+        // NOTE: collection check api에 waterfall 현상이 일어나기 때문에 prefetch 합니다
+        prefetchCollectionCheck(cachedMeme.memeId, queryClient);
       }
     },
     [queryClient],

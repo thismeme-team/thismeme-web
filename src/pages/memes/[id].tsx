@@ -10,8 +10,6 @@ interface Props {
 }
 
 const MemeDetailPage: NextPage<Props> = ({ id }) => {
-  // TODO increase view count
-
   return (
     <>
       <ExplorePageNavigation />

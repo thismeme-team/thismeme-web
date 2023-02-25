@@ -16,13 +16,13 @@ const LIMIT = 10;
  */
 
 export const useMemeDetailById = (id: string) => {
-  const { data, isFetchedAfterMount } = useSuspendedQuery({
+  const { data, isRefetching } = useSuspendedQuery({
     queryKey: QUERY_KEYS.getMemeDetailById(id),
     queryFn: () => api.meme.getMemeDetailById(id),
     staleTime: Infinity,
   });
 
-  return { ...data, isFetchedAfterMount };
+  return { ...data, isRefetching };
 };
 
 export const fetchMemeDetailById = (id: string, queryClient: QueryClient) =>

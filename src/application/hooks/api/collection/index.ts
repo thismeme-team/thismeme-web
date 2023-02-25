@@ -1,4 +1,4 @@
-import type { UseQueryOptions } from "@tanstack/react-query";
+import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
@@ -20,6 +20,11 @@ export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
     ...options,
   });
 };
+export const prefetchCollectionCheck = (memeId: number, queryClient: QueryClient) =>
+  queryClient.prefetchQuery({
+    queryKey: QUERY_KEYS.getCollectionCheck(memeId),
+    queryFn: () => api.collection.getCollectionCheck(memeId),
+  });
 
 /**
  * 콜렉션 삭제 API

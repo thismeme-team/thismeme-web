@@ -21,12 +21,14 @@ const builder = ({ elements, loading = false }: { elements: JSX.Element[]; loadi
 interface InfiniteMemeListProps {
   memeList: Meme[];
   loading?: boolean;
+  isCollection?: boolean;
   onRequestAppend: () => void;
 }
 
 export const InfiniteMemeList = ({
   memeList,
   loading = false,
+  isCollection = false,
   onRequestAppend,
 }: InfiniteMemeListProps) => {
   const ref = useIntersect(onRequestAppend, { rootMargin: "200% 0px" });
@@ -72,12 +74,12 @@ export const InfiniteMemeList = ({
     () =>
       memeList.map((meme) => {
         return (
-          <MemeLongPressContainer key={meme.memeId} meme={meme}>
+          <MemeLongPressContainer isCollection={isCollection} key={meme.memeId} meme={meme}>
             <MemeItem meme={meme} onClick={getMemeDetailFromCache} />
           </MemeLongPressContainer>
         );
       }),
-    [memeList, getMemeDetailFromCache],
+    [memeList, getMemeDetailFromCache, isCollection],
   );
 
   return (

@@ -22,6 +22,7 @@ export const SearchedCollection = ({ searchQuery, collectionId }: Props) => {
   }
   return (
     <InfiniteMemeList
+      isCollection={true}
       loading={isFetchingNextPage}
       memeList={memeList}
       onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}

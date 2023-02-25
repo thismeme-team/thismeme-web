@@ -14,6 +14,7 @@ export const Collection = ({ collectionId }: Props) => {
 
   return (
     <InfiniteMemeList
+      isCollection={true}
       loading={isFetchingNextPage}
       memeList={memeList}
       onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}

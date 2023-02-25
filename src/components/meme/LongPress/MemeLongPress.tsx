@@ -12,8 +12,9 @@ interface Props {
   meme: Meme;
   onClose: () => void;
   isOpen: boolean;
+  isCollection: boolean;
 }
-export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
+export const MemeLongPress = ({ meme, onClose, isOpen, isCollection = false }: Props) => {
   const { show } = useToast();
   const { validate, isLogin, user } = useAuth();
   const { onUpdateCollection } = useCollection({ memeId: meme.memeId, isLogin });
@@ -37,14 +38,16 @@ export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
   };
   return (
     <ActionSheet isOpen={isOpen}>
-      <ActionSheet.Button
-        onClick={() => {
-          onClose();
-          validate(onUpdateCollection)();
-        }}
-      >
-        콜렉션에 저장하기
-      </ActionSheet.Button>
+      {!isCollection && (
+        <ActionSheet.Button
+          onClick={() => {
+            onClose();
+            validate(onUpdateCollection)();
+          }}
+        >
+          콜렉션에 저장하기
+        </ActionSheet.Button>
+      )}
       <ActionSheet.Button
         onClick={() => {
           onClose();

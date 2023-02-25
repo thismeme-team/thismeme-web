@@ -20,13 +20,14 @@ export const MemeExport = ({ id }: Props) => {
     description,
     image: { images },
   } = useMemeDetailById(id);
-  const { validate, isLogin } = useAuthValidation();
+  const { validate, isLogin, user } = useAuthValidation();
   const { onUpdateCollection } = useCollection({ memeId: Number(id), isLogin });
 
   const { download } = useDownload();
   const { show } = useToast();
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: Number(id),
+    sharedId: user?.sharedCollectionId as number,
   });
 
   const url = images[0].imageUrl;

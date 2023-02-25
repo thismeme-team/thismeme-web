@@ -14,10 +14,11 @@ interface Props {
 }
 export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
   const { show } = useToast();
-  const { validate, isLogin } = useAuthValidation();
+  const { validate, isLogin, user } = useAuthValidation();
   const { onUpdateCollection } = useCollection({ memeId: meme.memeId, isLogin });
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: meme.memeId,
+    sharedId: user?.sharedCollectionId as number,
   });
 
   const name = meme?.name || "";

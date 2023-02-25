@@ -10,7 +10,7 @@ interface ValidatorOptions {
 }
 
 export const useAuthValidation = () => {
-  const { isLogin } = useAuth();
+  const { isLogin, user } = useAuth();
   const modalProps = useSignUpModalContext();
 
   const validate = useCallback(
@@ -22,5 +22,5 @@ export const useAuthValidation = () => {
     [isLogin, modalProps],
   );
 
-  return { validate, isLogin };
+  return { validate, isLogin, user };
 };

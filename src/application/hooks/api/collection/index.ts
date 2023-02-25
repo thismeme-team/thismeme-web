@@ -86,9 +86,19 @@ export const usePostMemeToCollection = () => {
   });
 };
 
-export const useGetMemesBySharedId = (collectionId: number) => {
+/**
+ * 콜렉션 별 밈 리스트 API
+ *
+ * NOTE
+ * 현재 하나의 콜렉션만이 존재(즉, collectionId가 하나)
+ * 추후에 여러개의 콜렉션을 다룰 예정(즉, collectionId에 여러개)
+ *
+ * 마이페이지(/mypage)에서는 무한스크롤 적용 안함
+ * 콜렉션 페이지(/collect) 페이지에서 무한 스크롤 적용함
+ */
+export const useGetMemesByCollectionId = (collectionId: number) => {
   const { data, fetchNextPage } = useInfiniteQuery({
-    queryKey: QUERY_KEYS.getMemesBySharedId(collectionId),
+    queryKey: QUERY_KEYS.getMemesByCollectionId(collectionId),
     queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
       api.meme.getMemesByCollectionId({ collectionId, offset: pageParam, limit: 10 }),
     getNextPageParam: (lastPage) => {
@@ -102,13 +112,19 @@ export const useGetMemesBySharedId = (collectionId: number) => {
   return { data: memeList, fetchNextPage, isEmpty };
 };
 
-export const usePostMemeToSharedCollection = ({ memeId }: { memeId: number }) => {
+export const usePostMemeToSharedCollection = ({
+  memeId,
+  sharedId,
+}: {
+  memeId: number;
+  sharedId: number;
+}) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: () => api.collection.postMemeToSharedCollection(memeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.getMemesBySharedId(4) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.getMemesByCollectionId(sharedId) });
     },
   });
 };

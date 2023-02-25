@@ -81,8 +81,8 @@ const nextConfig = withPWA({
       },
     ],
     // Link: https://fe-developers.kakaoent.com/2022/220714-next-image/
-    imageSizes: [32, 64, 256, 512],
-    deviceSizes: [750],
+    imageSizes: [64, 256],
+    deviceSizes: [512],
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 });

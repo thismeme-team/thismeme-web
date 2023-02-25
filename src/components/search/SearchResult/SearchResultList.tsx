@@ -4,8 +4,7 @@ import type { RecentSearch } from "@/application/hooks";
 import { useGetTagSearch } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
-
-import { SearchItem } from "../SearchItem/SearchItem";
+import { SearchItem } from "@/components/search";
 
 interface Prop {
   value: string;

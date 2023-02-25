@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
+
 import { useAuth, useMemeDetailById, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
-import { PAGE_URL } from "@/application/util";
+import { DOMAIN } from "@/application/util";
 import type { ModalProps } from "@/components/common/Modal";
 import { Modal } from "@/components/common/Modal";
 import { Photo } from "@/components/common/Photo";
@@ -16,6 +18,9 @@ interface Props extends ModalProps {
 export const MemeShareModal = ({ id, ...modalProps }: Props) => {
   const { show } = useToast();
   const { validate, user } = useAuth();
+  const { asPath } = useRouter();
+  const pageUrl = DOMAIN + asPath;
+
   const {
     name,
     description,
@@ -40,7 +45,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
         <li className="relative flex flex-col items-center gap-8">
           <KakaoShareButton
             resource={{
-              url: PAGE_URL,
+              url: pageUrl,
               imageUrl: src,
               title: name,
               description,
@@ -51,7 +56,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
         </li>
         <li className="relative flex flex-col items-center gap-8">
           <ClipboardCopyButton
-            target={PAGE_URL}
+            target={pageUrl}
             onSuccess={() => {
               modalProps.onClose();
               showClipboardCopyToast();
@@ -64,7 +69,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
           <NativeShareButton
             text={description}
             title={name}
-            url={PAGE_URL}
+            url={pageUrl}
             onSuccess={validate(postMemeToSharedCollection, { needSignUpModal: false })}
             onError={() => {
               modalProps.onClose();

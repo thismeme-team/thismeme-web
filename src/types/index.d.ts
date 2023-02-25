@@ -30,3 +30,16 @@ export interface MemeImages {
   }[];
   count: number;
 }
+
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  createdDate: string;
+  modifiedDate: string | null;
+  imageUrl: string;
+  shareCount: number;
+  saveCount: number;
+  collectionId: number;
+  sharedCollectionId: number;
+}

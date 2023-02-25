@@ -8,15 +8,25 @@ import type { Meme } from "@/types";
 
 interface Props {
   meme: Meme;
+  onClick?: (id: number) => void;
 }
 
-export const MemeItem = memo(({ meme: { name, image, memeId, shareCount } }: Props) => {
+export const MemeItem = memo(({ meme: { name, image, memeId, shareCount }, onClick }: Props) => {
   return (
-    <Link className="flex flex-col gap-6" href={`/memes/${memeId}`}>
+    <Link
+      scroll
+      className="flex flex-col gap-6"
+      draggable={false}
+      href={`/memes/${memeId}`}
+      prefetch={false}
+      onClick={() => onClick?.(memeId)}
+    >
       <Photo
         alt={name}
         className="rounded-15"
+        draggable={false}
         height={image.images[0]?.imageHeight}
+        sizes="100px"
         src={image.images[0]?.imageUrl}
         unoptimized={isEncodingError(image.images[0]?.imageUrl)}
         width={image.images[0]?.imageWidth}

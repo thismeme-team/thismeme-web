@@ -80,6 +80,10 @@ const nextConfig = withPWA({
         hostname: "**",
       },
     ],
+    // Link: https://fe-developers.kakaoent.com/2022/220714-next-image/
+    imageSizes: [64, 256],
+    deviceSizes: [512],
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
 });
 

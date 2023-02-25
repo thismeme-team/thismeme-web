@@ -1,30 +1,34 @@
-import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { Suspense } from "react";
 
-import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
-import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
-import { NextSeo } from "@/components/common/NextSeo";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeCTAList, MemeDetail, MemeTagList, RelativeMemeList } from "@/components/meme";
-import type { DefaultPageProps, Meme } from "@/types";
+import {
+  MemeCTAList,
+  MemeDetail,
+  MemeTagList,
+  RelativeMemeList,
+  SkeletonMemeDetail,
+  SkeletonMemeTagList,
+} from "@/components/meme";
 
 interface Props {
   id: string;
-  meme: Pick<Meme, "name" | "description">;
 }
 
-const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) => {
+const MemeDetailPage: NextPage<Props> = ({ id }) => {
   return (
     <>
-      <NextSeo description={description} title={TITLE.memeDetail(name)} />
       <ExplorePageNavigation />
-      <MemeDetail id={id} />
-      <MemeTagList id={id} />
-      <MemeCTAList id={id} />
-
-      <SSRSuspense>
-        <RelativeMemeList />
+      <SSRSuspense fallback={<SkeletonMemeDetail />} key={id}>
+        <MemeDetail id={id} />
+        <Suspense fallback={<SkeletonMemeTagList />}>
+          <MemeTagList id={id} />
+        </Suspense>
+        <MemeCTAList id={id} />
+        <Suspense>
+          <RelativeMemeList />
+        </Suspense>
       </SSRSuspense>
     </>
   );
@@ -37,35 +41,19 @@ export const getStaticPaths: GetStaticPaths = () => {
   };
 };
 
-export const getStaticProps: GetStaticProps<
-  DefaultPageProps & Props,
-  Partial<Pick<Props, "id">>
-> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const id = params?.id as string;
-  const queryClient = new QueryClient();
 
-  try {
-    const [{ description, name }] = await Promise.all([
-      fetchMemeDetailById(id, queryClient),
-      fetchMemeTagsById(id, queryClient),
-    ]);
-
-    return {
-      props: {
-        hydrateState: dehydrate(queryClient),
-        id,
-        meme: {
-          description,
-          name,
-        },
-      },
-      revalidate: 60 * 10, // 10분
-    };
-  } catch (e) {
+  if (isNaN(+id))
     return {
       notFound: true,
     };
-  }
+
+  return {
+    props: {
+      id,
+    },
+  };
 };
 
 export default MemeDetailPage;

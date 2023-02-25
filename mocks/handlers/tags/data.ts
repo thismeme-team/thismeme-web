@@ -47,6 +47,7 @@ export const categories = [
   {
     categoryId: 1,
     name: "카테고리 명1",
+    icon: "https://raw.githubusercontent.com/toss/tossface/cec7ea0420b7f17d6f546fd7359da9bd4cb3315c/dist/svg/u1F363.svg",
     priority: 100,
     tags: [
       {
@@ -72,6 +73,7 @@ export const categories = [
   {
     categoryId: 2,
     name: "카테고리 명2",
+    icon: "https://raw.githubusercontent.com/toss/tossface/cec7ea0420b7f17d6f546fd7359da9bd4cb3315c/dist/svg/u1F364.svg",
     priority: 200,
     tags: [
       {

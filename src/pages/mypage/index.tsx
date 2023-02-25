@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { css } from "twin.macro";
 
-import { useAuth } from "@/application/hooks";
+import { useAuth, useChannelIO } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 import { MyPageNavigation } from "@/components/common/Navigation";
 import { Photo } from "@/components/common/Photo";
@@ -12,6 +12,8 @@ import { SummarizedCollection } from "@/components/mypage";
 
 const MyPage = () => {
   const { isLoading, user } = useAuth();
+
+  useChannelIO({ user });
 
   if (!user) return null;
   return (

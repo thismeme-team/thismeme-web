@@ -8,16 +8,17 @@ import type { Meme } from "@/types";
 
 interface Props {
   meme: Meme;
+  onClick?: (id: number) => void;
 }
 
-export const MemeItem = memo(({ meme: { name, image, memeId, shareCount } }: Props) => {
+export const MemeItem = memo(({ meme: { name, image, memeId, shareCount }, onClick }: Props) => {
   return (
     <Link
-      shallow
+      scroll
       className="flex flex-col gap-6"
       draggable={false}
       href={`/memes/${memeId}`}
-      prefetch={false}
+      onClick={() => onClick?.(memeId)}
     >
       <Photo
         alt={name}

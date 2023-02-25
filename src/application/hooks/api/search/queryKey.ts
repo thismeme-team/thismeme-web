@@ -1,12 +1,12 @@
 export const QUERY_KEYS = {
-  getMemesByKeyword: (keyword: string) => ["getMemesByKeyword", keyword],
-  getMemesByTag: (tag: string) => ["getMemesByTag", tag],
+  getMemesByKeyword: (keyword: string) => ["@memeList/getMemesByKeyword", keyword],
+  getMemesByTag: (tag: string) => ["@memeList/getMemesByTag", tag],
   getMemesFromCollectionByKeyword: ({
     keyword,
     collectionId,
   }: {
     keyword: string;
     collectionId: number;
-  }) => ["getMemesFromCollectionByKeyword", { keyword, collectionId }],
-  getUserFindMemes: (keywords: string) => ["getUserFindMemes", keywords],
+  }) => ["@memeList/getMemesFromCollectionByKeyword", { keyword, collectionId }],
+  getUserFindMemes: (keywords: string) => ["@memeList/getUserFindMemes", keywords],
 } as const;

@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
         searchQuery: tagName,
         tagId: Number(tagId),
       },
-      revalidate: 60 * 10, // 10분
+      revalidate: 60 * 20, // 10분
     };
   } catch (e) {
     return {

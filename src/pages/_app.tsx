@@ -10,6 +10,7 @@ import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
+import { MazeScript } from "@/infra/sdk";
 import type { DefaultPageProps } from "@/types";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
@@ -28,6 +29,7 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
 
   return (
     <>
+      <MazeScript />
       <Head>
         <meta
           content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=yes"

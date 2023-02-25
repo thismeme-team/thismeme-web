@@ -1,4 +1,4 @@
-import type { QueryFunctionContext } from "@tanstack/react-query";
+import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
 
@@ -62,6 +62,10 @@ export const useGetMemesByTag = (tag: string) => {
 
   return { data, isEmpty, isFetchingNextPage, fetchNextPage };
 };
+export const prefetchMemesByTag = (tag: string, queryClient: QueryClient) =>
+  queryClient.fetchInfiniteQuery(QUERY_KEYS.getMemesByTag(tag), ({ pageParam = 0 }) =>
+    api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
+  );
 
 /**
  * 회원이 찾는 밈 API

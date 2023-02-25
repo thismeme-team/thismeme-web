@@ -1,6 +1,7 @@
 import type { AxiosInstance } from "axios";
 
-import type { GetMemesResponse } from "../search/types";
+import type { GetMemesResponse } from "@/types";
+
 import type { GetMemeDetailByIdResponse, GetMemesByCollectionIdResponse } from "./types";
 
 export class MemeApi {

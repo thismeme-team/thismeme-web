@@ -116,6 +116,10 @@ export function useLongPress<
 
       // When touched trigger onStart and start timer
       onStart?.(event, meta);
+
+      // NOTE: iOS 카톡 인앱 브라우저의 기본 롱프레스 차단
+      event.stopPropagation();
+
       isPressed.current = true;
       timer.current = setTimeout(() => {
         if (savedCallback.current) {

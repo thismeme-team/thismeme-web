@@ -7,8 +7,7 @@ import type {
 } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import type { GetMemesResponse } from "@/infra/api/search/types";
-import type { Meme } from "@/types";
+import type { GetMemesResponse, Meme } from "@/types";
 
 type BaseQueryFnData = GetMemesResponse;
 

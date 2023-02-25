@@ -22,6 +22,7 @@ export interface GetCategoryByTagResponse {
   categories: {
     categoryId: number;
     name: string;
+    icon: string;
     priority: number;
     tags: (Pick<Tag, "tagId" | "name" | "viewCount"> & { isFav: boolean })[];
   }[];

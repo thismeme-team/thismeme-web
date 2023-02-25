@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-import type { GetMemesResponse } from "@/infra/api/search/types";
+import type { GetMemesResponse } from "@/types";
 
 import * as MOCK_DATA from "./data";
 
@@ -98,7 +98,6 @@ export const getUserFindMemes = rest.get(
   `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search/user/:userId`,
   (req, res, ctx) => {
     const { searchParams } = req.url;
-    const query = searchParams.get("keywords");
     const offset = Number(searchParams.get("offset"));
     const limit = Number(searchParams.get("limit"));
     const data = MOCK_DATA.memes.slice(offset, offset + limit);

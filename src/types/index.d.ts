@@ -30,3 +30,24 @@ export interface MemeImages {
   }[];
   count: number;
 }
+
+export interface User {
+  id: number;
+  email: string;
+  name: string;
+  createdDate: string;
+  modifiedDate: string | null;
+  imageUrl: string;
+  shareCount: number;
+  saveCount: number;
+  collectionId: number;
+  sharedCollectionId: number;
+}
+
+export interface GetMemesResponse {
+  memes: Meme[];
+  /**
+   * memes의 개수
+   */
+  count: number;
+}

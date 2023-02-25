@@ -1,7 +1,6 @@
 import type { AxiosInstance } from "axios";
-import { response } from "msw";
 
-import type { GetMemesResponse } from "./types";
+import type { GetMemesResponse } from "@/types";
 
 export class SearchApi {
   constructor(private api: AxiosInstance) {}

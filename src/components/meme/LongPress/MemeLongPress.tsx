@@ -1,9 +1,12 @@
+import { useRouter } from "next/router";
+
 import {
-  useAuthValidation,
+  useAuth,
   useCollection,
   usePostMemeToSharedCollection,
   useToast,
 } from "@/application/hooks";
+import { DOMAIN } from "@/application/util";
 import { ActionSheet } from "@/components/common/ActionSheet";
 import type { Meme } from "@/types";
 
@@ -14,20 +17,21 @@ interface Props {
 }
 export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
   const { show } = useToast();
-  const { onUpdateCollection } = useCollection({ memeId: meme.memeId });
+  const { validate, isLogin, user } = useAuth();
+  const { onUpdateCollection } = useCollection({ memeId: meme.memeId, isLogin });
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: meme.memeId,
+    sharedId: user?.sharedCollectionId as number,
   });
-  const { validate } = useAuthValidation();
+  const { asPath } = useRouter();
 
   const name = meme?.name || "";
   const description = meme?.description || "";
-  const url = meme?.image?.images[0].imageUrl || "";
 
   const handleNaviteShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
     await navigator
-      .share({ title: name, text: description, url })
+      .share({ title: name, text: description, url: DOMAIN + asPath })
       .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
   return (

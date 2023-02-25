@@ -1,47 +1,37 @@
+import { useRouter } from "next/router";
 import tw from "twin.macro";
 
 import {
-  useAuthValidation,
+  useAuth,
   useCollection,
-  useDownload,
   useMemeDetailById,
   usePostMemeToSharedCollection,
   useToast,
 } from "@/application/hooks";
+import { DOMAIN } from "@/application/util";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 
 interface Props {
   id: string;
 }
-export const MemeExport = ({ id }: Props) => {
-  const {
-    name,
-    description,
-    image: { images },
-  } = useMemeDetailById(id);
-  const { onUpdateCollection } = useCollection({ memeId: Number(id) });
 
-  const { download } = useDownload();
+export const MemeExport = ({ id }: Props) => {
+  const { name, description } = useMemeDetailById(id);
+  const { asPath } = useRouter();
+  const { validate, isLogin, user } = useAuth();
+  const { onUpdateCollection } = useCollection({ memeId: Number(id), isLogin });
+
   const { show } = useToast();
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: Number(id),
+    sharedId: user?.sharedCollectionId as number,
   });
-  const { validate } = useAuthValidation();
 
-  const url = images[0].imageUrl;
-
-  const handleImageDownload = () =>
-    download({
-      target: url,
-      name,
-      onSuccess: () => show("이미지를 다운로드 했습니다!"),
-    });
-
-  const handleNaviteShare = async () => {
+  const handleNativeShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
     await navigator
-      .share({ title: name, text: description, url })
+      .share({ title: name, text: description, url: DOMAIN + asPath })
       .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
 
@@ -56,21 +46,13 @@ export const MemeExport = ({ id }: Props) => {
         <DropDown.Contents css={tw`w-full right-0 top-72`}>
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={handleImageDownload}
-          >
-            이미지 다운로드
-          </DropDown.Content>
-          <DropDown.Content
-            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onClick={validate(onUpdateCollection)}
           >
             콜렉션에 저장하기
           </DropDown.Content>
           <DropDown.Content
             className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={() => {
-              handleNaviteShare();
-            }}
+            onClick={handleNativeShare}
           >
             공유하기
           </DropDown.Content>

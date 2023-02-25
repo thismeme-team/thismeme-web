@@ -4,7 +4,7 @@ import type {
   GetMemeDetailByIdResponse,
   GetMemesByCollectionIdResponse,
 } from "@/infra/api/meme/types";
-import type { GetMemesResponse } from "@/infra/api/search/types";
+import type { GetMemesResponse } from "@/types";
 
 import * as MOCK_DATA from "../search/data";
 

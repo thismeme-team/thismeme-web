@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from "react";
+import { memo } from "react";
 
 import { useLongPress, useModal } from "@/application/hooks";
 import { OverLay } from "@/components/common/Overlay";
@@ -9,7 +10,7 @@ interface Props {
   meme: Meme;
 }
 
-export const MemeLongPressContainer = ({ meme, children }: PropsWithChildren<Props>) => {
+export const MemeLongPressContainer = memo(({ meme, children }: PropsWithChildren<Props>) => {
   const { open, onOpen, onClose } = useModal();
 
   const longPress = useLongPress(onOpen, {
@@ -27,4 +28,6 @@ export const MemeLongPressContainer = ({ meme, children }: PropsWithChildren<Pro
       </OverLay>
     </>
   );
-};
+});
+
+MemeLongPressContainer.displayName = "MemoizedMemeLongPressContainer";

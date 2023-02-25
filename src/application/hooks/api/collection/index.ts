@@ -1,10 +1,11 @@
-import type { UseQueryOptions } from "@tanstack/react-query";
+import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
 import type { GetCollectionCheckResponse } from "@/infra/api/collection/types";
 
 import { QUERY_KEYS as ACCOUNT_QUERY_KEYS } from "../account/queryKey";
+import { QUERY_KEYS as MEME_QUERY_KEYS } from "../meme/queryKey";
 import { QUERY_KEYS } from "./queryKey";
 
 /**
@@ -21,6 +22,11 @@ export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
     ...options,
   });
 };
+export const prefetchCollectionCheck = (memeId: number, queryClient: QueryClient) =>
+  queryClient.prefetchQuery({
+    queryKey: QUERY_KEYS.getCollectionCheck(memeId),
+    queryFn: () => api.collection.getCollectionCheck(memeId),
+  });
 
 /**
  * 콜렉션 삭제 API
@@ -94,8 +100,20 @@ export const usePostMemeToCollection = () => {
   });
 };
 
-export const usePostMemeToSharedCollection = ({ memeId }: { memeId: number }) => {
+export const usePostMemeToSharedCollection = ({
+  memeId,
+  sharedId,
+}: {
+  memeId: number;
+  sharedId: number;
+}) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: () => api.collection.postMemeToSharedCollection(memeId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: MEME_QUERY_KEYS.getMemesByCollectionId(sharedId) });
+      queryClient.invalidateQueries({ queryKey: ACCOUNT_QUERY_KEYS.getMyAccount });
+    },
   });
 };

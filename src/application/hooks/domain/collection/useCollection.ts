@@ -14,7 +14,7 @@ interface UseCollectionArg {
  * 추후 기획이 특정 폴더에 밈을 저장하게 되면 수정
  */
 export const useCollection = ({ memeId, isLogin }: UseCollectionArg) => {
-  const { data: collectionCheck } = useGetCollectionCheck(memeId, isLogin);
+  const { data: collectionCheck } = useGetCollectionCheck(memeId, { enabled: !!isLogin });
   const { mutate: postMemeToCollection } = usePostMemeToCollection();
   const { mutate: deleteMemeFromCollection } = useDeleteMemeFromCollection();
 

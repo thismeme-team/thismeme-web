@@ -1,5 +1,5 @@
-import type { UseQueryOptions } from "@tanstack/react-query";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import type { QueryFunctionContext, UseQueryOptions } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { api } from "@/infra/api";
 import type { GetCollectionCheckResponse } from "@/infra/api/collection/types";
@@ -10,14 +10,12 @@ import { QUERY_KEYS } from "./queryKey";
  */
 export const useGetCollectionCheck = <T = GetCollectionCheckResponse>(
   memeId: number,
-  isLogin?: boolean,
   options?: UseQueryOptions<GetCollectionCheckResponse, unknown, T>,
 ) => {
   return useQuery({
     queryKey: QUERY_KEYS.getCollectionCheck(memeId),
     queryFn: () => api.collection.getCollectionCheck(memeId),
     suspense: false,
-    enabled: !!isLogin,
     ...options,
   });
 };
@@ -88,8 +86,29 @@ export const usePostMemeToCollection = () => {
   });
 };
 
+export const useGetMemesBySharedId = (collectionId: number) => {
+  const { data, fetchNextPage } = useInfiniteQuery({
+    queryKey: QUERY_KEYS.getMemesBySharedId(collectionId),
+    queryFn: ({ pageParam = 0 }: QueryFunctionContext) =>
+      api.meme.getMemesByCollectionId({ collectionId, offset: pageParam, limit: 10 }),
+    getNextPageParam: (lastPage) => {
+      const { isLastPage, offset, limit } = lastPage;
+      return isLastPage ? undefined : offset + limit;
+    },
+  });
+  const memeList = data ? data.pages.flatMap(({ data }) => data) : [];
+  const isEmpty = data?.pages[0].data.length === 0;
+
+  return { data: memeList, fetchNextPage, isEmpty };
+};
+
 export const usePostMemeToSharedCollection = ({ memeId }: { memeId: number }) => {
+  const queryClient = useQueryClient();
+
   return useMutation({
     mutationFn: () => api.collection.postMemeToSharedCollection(memeId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.getMemesBySharedId(4) });
+    },
   });
 };

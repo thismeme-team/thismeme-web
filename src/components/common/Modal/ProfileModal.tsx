@@ -9,7 +9,7 @@ import { Icon } from "../Icon";
 import { Photo } from "../Photo";
 
 export const ProfileModal = () => {
-  const { user, logout, refetch } = useAuth();
+  const { user, logout } = useAuth();
   const { show } = useToast();
   const { push } = useRouter();
 
@@ -24,11 +24,9 @@ export const ProfileModal = () => {
     <>
       <DropDown>
         <DropDown.Trigger>
-          {({ isOpen }) => (
-            <div css={{ fontSize: 0 }} onPointerDown={() => !isOpen && refetch()}>
-              <Photo className="h-32 w-32 rounded-10" src={user?.imageUrl} />
-            </div>
-          )}
+          <button css={{ fontSize: 0 }}>
+            <Photo className="h-32 w-32 rounded-10" src={user?.imageUrl} />
+          </button>
         </DropDown.Trigger>
         <DropDown.Contents css={{ top: "7rem", right: "1.6rem", width: "34rem" }}>
           <DropDown.Content>

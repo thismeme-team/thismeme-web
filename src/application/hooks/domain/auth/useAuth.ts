@@ -10,7 +10,7 @@ interface ValidatorOptions {
 }
 
 export const useAuth = () => {
-  const { data, isLoading, refetch } = useGetMyAccount();
+  const { data, isLoading } = useGetMyAccount();
   const { mutate: logout } = useLogout();
   const isLogin = Boolean(data);
   const modalProps = useSignUpModalContext();
@@ -31,7 +31,6 @@ export const useAuth = () => {
   return {
     logout,
     login,
-    refetch,
     isLogin,
     user: data,
     isLoading,

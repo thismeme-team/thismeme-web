@@ -1,4 +1,4 @@
-import type { QueryClient } from "@tanstack/react-query";
+import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
 import { useDebounce } from "@/application/hooks";
@@ -44,12 +44,15 @@ export const useGetTagSearch = (value: string) => {
  */
 export const useGetCategoryWithTag = <T>({
   select,
+  enabled = true,
 }: {
   select: QuerySelectOption<T, typeof api.tags.getCategoryWithTags>;
+  enabled?: boolean;
 }) =>
-  useSuspendedQuery({
+  useQuery({
     queryKey: QUERY_KEYS.getCategoryWithTags,
     queryFn: api.tags.getCategoryWithTags,
+    enabled,
     select,
   });
 
@@ -65,11 +68,16 @@ export const useGetMemeTagsById = (id: string) => {
 export const fetchMemeTagsById = (id: string, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getMemeTagsById(id), () => api.tags.getMemeTagsById(id));
 
-export const useGetTagInfo = (tagId: number) => {
-  return useSuspendedQuery({
+export const useGetTagInfo = (
+  tagId: number,
+  options: Pick<UseQueryOptions, "enabled"> = { enabled: true },
+) => {
+  return useQuery({
     queryKey: QUERY_KEYS.getTagInfo(tagId),
     queryFn: () => api.tags.getTagInfo(tagId),
-  }).data;
+    staleTime: 0,
+    ...options,
+  });
 };
 
 export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>

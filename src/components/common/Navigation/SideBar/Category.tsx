@@ -1,7 +1,12 @@
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
 
-import { useDeleteFavoriteTag, useGetCategoryWithTag, useToast } from "@/application/hooks";
+import {
+  useAuth,
+  useDeleteFavoriteTag,
+  useGetCategoryWithTag,
+  useToast,
+} from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
@@ -12,10 +17,12 @@ const TAG_DELETE_DELAY = 1500;
 
 export const Category = () => {
   const router = useRouter();
+  const { isLoading } = useAuth();
   const setDrawerOpen = useSetDrawerContext();
   const { show, close } = useToast();
 
   const { data } = useGetCategoryWithTag({
+    enabled: !isLoading,
     select: ({ categories }) => {
       const favoriteItem = {
         name: FAVORITE_ID,
@@ -73,7 +80,7 @@ export const Category = () => {
 
   return (
     <Root collapsible className="w-full min-w-300" defaultValue={FAVORITE_ID} type="single">
-      {data.map((item) => (
+      {data?.map((item) => (
         <Item key={item.id} value={item.id}>
           <Header className="py-4">
             <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-gray-100 data-[state=open]:bg-gray-100 [&>#chevronDown]:data-[state=open]:rotate-180">

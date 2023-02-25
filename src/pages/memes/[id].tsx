@@ -20,14 +20,14 @@ const MemeDetailPage: NextPage<Props> = ({ id }) => {
   return (
     <>
       <ExplorePageNavigation />
-      <SSRSuspense fallback={<SkeletonMemeDetail />}>
+      <SSRSuspense fallback={<SkeletonMemeDetail />} key={id}>
         <MemeDetail id={id} />
         <Suspense fallback={<SkeletonMemeTagList />}>
           <MemeTagList id={id} />
-          <MemeCTAList id={id} />
-          <Suspense>
-            <RelativeMemeList />
-          </Suspense>
+        </Suspense>
+        <MemeCTAList id={id} />
+        <Suspense>
+          <RelativeMemeList />
         </Suspense>
       </SSRSuspense>
     </>

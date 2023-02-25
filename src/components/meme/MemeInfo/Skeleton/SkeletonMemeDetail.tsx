@@ -15,7 +15,7 @@ export const SkeletonMemeDetail = () => {
         animation="wave"
         as="div"
         className="my-16 rounded-10"
-        height="2.2rem"
+        height="3.08rem"
         variant="rectangular"
         width="20rem"
       />

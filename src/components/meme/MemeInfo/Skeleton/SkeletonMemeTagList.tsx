@@ -8,7 +8,7 @@ export const SkeletonMemeTagList = () => {
         animation="wave"
         as="div"
         className="mb-16 mt-32 rounded-10"
-        height="2.2rem"
+        height="3.08rem"
         variant="rectangular"
         width="10rem"
       />

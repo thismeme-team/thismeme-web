@@ -1,5 +1,6 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
+import { MemeLongPressContainer } from "@/components/meme";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 interface Props {
@@ -25,7 +26,9 @@ export const SummarizedCollection = ({ collectionId }: Props) => {
   return (
     <Masonry columns={2} spacing={9}>
       {memeList.map((meme) => (
-        <MemeItem key={meme.memeId} meme={meme} />
+        <MemeLongPressContainer isCollection={true} key={meme.memeId} meme={meme}>
+          <MemeItem key={meme.memeId} meme={meme} />
+        </MemeLongPressContainer>
       ))}
     </Masonry>
   );

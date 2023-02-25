@@ -4,7 +4,7 @@ import {
   usePostMemeToSharedCollection,
   useToast,
 } from "@/application/hooks";
-import { DOMAIN } from "@/application/util";
+import { DOMAIN, PATH } from "@/application/util";
 import { ActionSheet } from "@/components/common/ActionSheet";
 import type { Meme } from "@/types";
 
@@ -28,7 +28,11 @@ export const MemeLongPress = ({ meme, onClose, isOpen }: Props) => {
   const handleNaviteShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
     await navigator
-      .share({ title: name, text: description, url: DOMAIN + "/memes/" + meme.memeId })
+      .share({
+        title: name,
+        text: description,
+        url: `${DOMAIN}${PATH.getMemeDetailPage(meme.memeId)}`,
+      })
       .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
   return (

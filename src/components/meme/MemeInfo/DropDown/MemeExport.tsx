@@ -7,7 +7,7 @@ import {
   usePostMemeToSharedCollection,
   useToast,
 } from "@/application/hooks";
-import { DOMAIN } from "@/application/util";
+import { DOMAIN, PATH } from "@/application/util";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 
@@ -29,7 +29,11 @@ export const MemeExport = ({ id }: Props) => {
   const handleNativeShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
     await navigator
-      .share({ title: name, text: description, url: DOMAIN + "/memes/" + id })
+      .share({
+        title: name,
+        text: description,
+        url: `${DOMAIN}${PATH.getMemeDetailPage(Number(id))}`,
+      })
       .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
 

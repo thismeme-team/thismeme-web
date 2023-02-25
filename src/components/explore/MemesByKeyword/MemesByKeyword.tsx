@@ -1,5 +1,3 @@
-import { css } from "twin.macro";
-
 import { useGetMemesByKeyword } from "@/application/hooks";
 import { InfiniteMemeList } from "@/components/meme";
 
@@ -9,23 +7,22 @@ interface Props {
   searchQuery: string;
 }
 export const MemesByKeyword = ({ searchQuery }: Props) => {
-  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByKeyword(searchQuery);
+  const {
+    data: memeList,
+    isFetchingNextPage,
+    isEmpty,
+    fetchNextPage,
+  } = useGetMemesByKeyword(searchQuery);
 
   if (isEmpty) {
     return <EmptyMemesView />;
   }
 
   return (
-    <div
-      css={[
-        css`
-          width: 100%;
-          min-height: 450px;
-          margin-top: 1.2rem;
-        `,
-      ]}
-    >
-      <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />
-    </div>
+    <InfiniteMemeList
+      loading={isFetchingNextPage}
+      memeList={memeList}
+      onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
+    />
   );
 };

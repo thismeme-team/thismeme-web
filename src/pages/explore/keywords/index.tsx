@@ -4,6 +4,7 @@ import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
+import { MemeListSkeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemesByKeyword } from "@/components/explore";
 
@@ -18,9 +19,11 @@ const ExploreByKeywordPage: NextPage<Props> = ({ searchQuery }) => {
 
       <ExplorePageNavigation title={searchQuery} />
       <PullToRefresh>
-        <SSRSuspense>
-          <MemesByKeyword searchQuery={searchQuery} />
-        </SSRSuspense>
+        <div className="mt-12">
+          <SSRSuspense fallback={<MemeListSkeleton />}>
+            <MemesByKeyword searchQuery={searchQuery} />
+          </SSRSuspense>
+        </div>
       </PullToRefresh>
     </>
   );

@@ -6,6 +6,7 @@ import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
+import { MemeListSkeleton } from "@/components/common/Skeleton/MemeListSkeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemesByTag } from "@/components/explore";
 import { TagBookmarkButton } from "@/components/tags";
@@ -23,9 +24,11 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
       <ExplorePageNavigation title={`#${searchQuery}`} />
 
       <PullToRefresh>
-        <SSRSuspense>
-          <MemesByTag searchQuery={searchQuery} />
-        </SSRSuspense>
+        <div className="mt-12">
+          <SSRSuspense fallback={<MemeListSkeleton />}>
+            <MemesByTag searchQuery={searchQuery} />
+          </SSRSuspense>
+        </div>
 
         <TagBookmarkButton tagId={tagId} />
       </PullToRefresh>

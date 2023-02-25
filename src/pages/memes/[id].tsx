@@ -5,6 +5,7 @@ import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
 import { TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
+import { MemeListSkeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeCTAList, MemeDetail, MemeTagList, RelativeMemeList } from "@/components/meme";
 import type { DefaultPageProps, Meme } from "@/types";
@@ -23,7 +24,7 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description } }) =>
       <MemeTagList id={id} />
       <MemeCTAList id={id} />
 
-      <SSRSuspense>
+      <SSRSuspense fallback={<MemeListSkeleton />}>
         <RelativeMemeList />
       </SSRSuspense>
     </>

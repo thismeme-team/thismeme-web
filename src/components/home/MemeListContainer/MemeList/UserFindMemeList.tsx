@@ -6,9 +6,19 @@ interface Props {
 }
 
 export const UserFindMemeList = ({ userId }: Props) => {
-  const { data: memeList, fetchNextPage } = useGetUserFindMemes({
+  const {
+    data: memeList,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useGetUserFindMemes({
     userId: userId as number,
   });
 
-  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
+  return (
+    <InfiniteMemeList
+      loading={isFetchingNextPage}
+      memeList={memeList}
+      onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
+    />
+  );
 };

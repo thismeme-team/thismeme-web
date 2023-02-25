@@ -1,8 +1,9 @@
 import { useDeferredValue } from "react";
 
-import { useDebounce, useInput } from "@/application/hooks";
+import { useAuth, useDebounce, useInput } from "@/application/hooks";
 import { Collection, SearchedCollection } from "@/components/collect";
 import { BackButtonNavigation } from "@/components/common/Navigation";
+import { MemeListSkeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { withAuth } from "@/components/hocs";
 import { SearchInput } from "@/components/search";
@@ -11,6 +12,9 @@ const CollectPage = () => {
   const inputProps = useInput();
   const debouncedQuery = useDebounce(inputProps.value);
   const isSearching = useDeferredValue(!!debouncedQuery);
+  const { user } = useAuth();
+
+  if (!user) return null;
 
   return (
     <>
@@ -24,11 +28,11 @@ const CollectPage = () => {
       />
 
       <div className="mt-16">
-        <SSRSuspense>
+        <SSRSuspense fallback={<MemeListSkeleton />}>
           {isSearching ? (
-            <SearchedCollection collectionId={1} searchQuery={debouncedQuery} />
+            <SearchedCollection collectionId={user.collectionId} searchQuery={debouncedQuery} />
           ) : (
-            <Collection collectionId={1} />
+            <Collection collectionId={user.collectionId} />
           )}
         </SSRSuspense>
       </div>

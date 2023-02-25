@@ -10,6 +10,7 @@ export const SearchedCollection = ({ searchQuery, collectionId }: Props) => {
   const {
     data: memeList,
     isEmpty,
+    isFetchingNextPage,
     fetchNextPage,
   } = useGetMemesFromCollectionByKeyword({
     keyword: searchQuery,
@@ -19,5 +20,11 @@ export const SearchedCollection = ({ searchQuery, collectionId }: Props) => {
   if (isEmpty) {
     return null;
   }
-  return <InfiniteMemeList memeList={memeList} onEndReached={fetchNextPage} />;
+  return (
+    <InfiniteMemeList
+      loading={isFetchingNextPage}
+      memeList={memeList}
+      onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
+    />
+  );
 };

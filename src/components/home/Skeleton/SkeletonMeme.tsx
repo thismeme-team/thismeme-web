@@ -23,17 +23,17 @@ export const SkeletonMeme = () => {
         style={{ width: "100%", height: "40rem", borderRadius: "2rem", marginBottom: "0.8rem" }}
         variant="rectangular"
       />
-      <div className="mb-8 flex justify-between gap-20 text-18-bold-140">
+      <div className="my-8 flex justify-between gap-20 text-18-bold-140">
         <Skeleton
           animation="wave"
           as="div"
-          style={{ width: "50%", borderRadius: "2rem" }}
+          style={{ width: "50%", height: "2.52rem", borderRadius: "2rem" }}
           variant="rectangular"
         />
         <Skeleton
           animation="wave"
           as="div"
-          style={{ width: "50%", borderRadius: "2rem" }}
+          style={{ width: "50%", height: "2.52rem", borderRadius: "2rem" }}
           variant="rectangular"
         />
       </div>

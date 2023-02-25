@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense, useState } from "react";
 
-import { useInput, useRecentSearch } from "@/application/hooks";
+import { useDebounce, useInput, useRecentSearch } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
@@ -34,6 +34,7 @@ const SearchPage: NextPage = () => {
     onAddItem({ value: inputProps.value, type: "keyword", id: Date.now() });
     router.push(PATH.getExploreByKeywordPath(inputProps.value));
   };
+  const debouncedValue = useDebounce(inputProps.value);
 
   return (
     <>
@@ -61,7 +62,7 @@ const SearchPage: NextPage = () => {
         <p className="mb-24 px-14 text-12-regular-160 text-gray-500">밈 제목,태그를 입력하세요</p>
         {inputProps.value && (
           <Suspense>
-            <SearchResultList value={inputProps.value} onAddItem={onAddItem} />
+            <SearchResultList value={debouncedValue} onAddItem={onAddItem} />
           </Suspense>
         )}
         {!inputProps.value && focus && (

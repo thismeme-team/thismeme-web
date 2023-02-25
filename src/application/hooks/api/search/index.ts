@@ -1,9 +1,10 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
 
+import type { RecentSearch } from "@/application/hooks";
+import { useLocalStorage } from "@/application/hooks";
 import { api } from "@/infra/api";
 
-import { useLocalStorage } from "../../common";
-import type { RecentSearch } from "../../domain";
 import { useCoreInfiniteQuery } from "../core/useCoreInfiniteQuery";
 import { QUERY_KEYS } from "./queryKey";
 
@@ -71,6 +72,11 @@ export const prefetchMemesByTag = (tag: string, queryClient: QueryClient) =>
  * 회원이 찾는 밈 API
  */
 export const useGetUserFindMemes = ({ userId }: { userId: number }) => {
+  const isMount = useRef(false);
+  useEffect(() => {
+    isMount.current = true;
+  }, []);
+
   const [items] = useLocalStorage<RecentSearch[]>("recentSearch", { defaultValue: [] });
   const keywords = items
     .map((item) => item.value)
@@ -88,6 +94,7 @@ export const useGetUserFindMemes = ({ userId }: { userId: number }) => {
       }),
     PAGE_SIZE,
     {
+      enabled: isMount.current,
       select: (data) => {
         return {
           pages: data.pages.map((page) => ({ data: page.memes })),

@@ -70,7 +70,7 @@ export const useGetMemesByCollectionId = (collectionId: number) => {
       api.meme.getMemesByCollectionId({ collectionId, offset: pageParam, limit: PAGE_SIZE }),
     PAGE_SIZE,
     {
-      staleTime: 0,
+      staleTime: 1000 * 5,
       select: (data) => {
         return {
           pages: data.pages.map((page) => ({ data: page.memes })),

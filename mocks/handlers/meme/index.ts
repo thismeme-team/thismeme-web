@@ -44,7 +44,7 @@ export const getMemeDetail = rest.get(
  * 콜렉션 별 밈 목록 API
  */
 export const getMemesByCollectionId = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/memes/collections/:id`,
+  `${process.env.NEXT_PUBLIC_API_URL}/memes/collections/:collectionId`,
   (req, res, ctx) => {
     const data = MOCK_DATA.memes.slice(0, 10);
 

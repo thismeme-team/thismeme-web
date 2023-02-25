@@ -1,13 +1,17 @@
+const path = require("path");
+
+const buildEslintCommand = (filenames) =>
+  `next lint --fix --file ${filenames
+    .map((f) => path.relative(process.cwd(), f))
+    .join(" --file ")}`;
+
 module.exports = {
   // Type check TypeScript files
-  "**/*.(ts|tsx)": () => "yarn tsc --noEmit",
+  "**/*.ts?(x)": () => "yarn tsc",
 
-  // Lint & Prettify TS and JS files
-  "**/*.(ts|tsx|js)": (filenames) => [
-    `yarn eslint --fix ${filenames.join(" ")}`,
-    `yarn prettier --write ${filenames.join(" ")}`,
-  ],
+  // Lint ts,tsx,js,jsx files
+  "*.{js,jsx,ts,tsx}": [buildEslintCommand],
 
-  // Prettify only Markdown and JSON files
-  "**/*.(md|json)": (filenames) => `yarn prettier --write ${filenames.join(" ")}`,
+  // Prettier ts,tsx,js,jsx,md,json files
+  "*.{md,json}": "prettier --write",
 };

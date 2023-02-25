@@ -1,51 +1,53 @@
-import type { Post } from "mocks/types";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 
-import { PostItem } from "@/components/common/PostList/PostItem";
+import { useAuth } from "@/application/hooks";
+import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { IntroPageNavigation } from "@/components/common/Navigation";
+import { NextSeo } from "@/components/common/NextSeo";
+import { PullToRefresh } from "@/components/common/PullToRefresh";
+import { SSRSuspense } from "@/components/common/Suspense";
+import { MemeListContainer, PopularTagList, UserSharedMemeList } from "@/components/home";
+import { SkeletonMeme, SkeletonTagList } from "@/components/home/Skeleton";
+import { SearchInput } from "@/components/search";
 
-type HomeProps = {
-  posts: Post[];
-};
+const HomePage: NextPage = () => {
+  const router = useRouter();
+  const { isLoading, isLogin, user } = useAuth();
 
-const Home: NextPage<HomeProps> = ({ posts }) => {
-  const handleLogin = () => {
-    // Client-side request are mocked by `mocks/browser.ts`.
-    fetch("/login", { method: "POST" })
-      .then((res) => res.json())
-      .then((user) => alert(`성공 !\n${user.nickname}, ${user.email}`));
-  };
   return (
-    <div>
-      <div className="border bg-green-200 p-4">tailwindcss 테스트입니다.</div>
-      <div className="bg-sky-700 px-4 py-2 text-white hover:bg-sky-800 sm:px-8 sm:py-3">
-        tailwindcss 테스트입니다.
-      </div>
-      <button onClick={handleLogin}>Login(Click Me)</button>
-      {posts && (
-        <ul className="flex flex-col gap-4">
-          {posts.map((post) => (
-            <PostItem key={post.id} post={post} />
-            // <li key={post.id}>
-            //   <h1 className="font-bold">{post.title}</h1>
-            //   <p>{post.body}</p>
-            // </li>
-          ))}
-        </ul>
-      )}
-    </div>
+    <>
+      <NextSeo
+        description={DEFAULT_DESCRIPTION}
+        openGraph={{ imageUrl: "/open-graph/home.png" }}
+        title={TITLE.default}
+      />
+      <IntroPageNavigation />
+      <PullToRefresh>
+        <section className="pt-8" />
+        <SearchInput
+          inputMode="none"
+          placeholder="당신이 생각한 '그 밈' 검색하기"
+          onClick={() => {
+            router.push("/search");
+          }}
+        />
+        <SSRSuspense fallback={<SkeletonTagList count={5} />}>
+          <PopularTagList />
+        </SSRSuspense>
+        <section className="pb-40" />
+        {isLogin && (
+          <>
+            <SSRSuspense fallback={<SkeletonMeme />}>
+              <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
+              <MemeListContainer />
+            </SSRSuspense>
+          </>
+        )}
+        {!isLogin && !isLoading && <MemeListContainer />}
+      </PullToRefresh>
+    </>
   );
 };
 
-export async function getServerSideProps() {
-  // Server-side requests are mocked by `mocks/server.ts`.
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const posts = await res.json();
-
-  return {
-    props: {
-      posts,
-    },
-  };
-}
-
-export default Home;
+export default HomePage;

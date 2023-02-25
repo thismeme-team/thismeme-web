@@ -13,7 +13,7 @@ interface Props {
   children: ReactNode;
 }
 
-const QueryClientProvider = ({ hydrateState, children }: Props) => {
+export const QueryClientProvider = ({ hydrateState, children }: Props) => {
   const [queryClient] = useState(
     () =>
       new QueryClient({
@@ -22,7 +22,8 @@ const QueryClientProvider = ({ hydrateState, children }: Props) => {
             suspense: true,
             retry: 0,
             refetchOnWindowFocus: false,
-            useErrorBoundary: true,
+            useErrorBoundary: false,
+            staleTime: 1000 * 20, // 20초
           },
         },
       }),
@@ -35,4 +36,3 @@ const QueryClientProvider = ({ hydrateState, children }: Props) => {
     </TanStackQueryClientProvider>
   );
 };
-export default QueryClientProvider;

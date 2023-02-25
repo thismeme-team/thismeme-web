@@ -8,13 +8,16 @@ on:
   workflow_dispatch:
 
 jobs:
-  job-install:
-    name: Install dependencies
+  job-integrtions:
+    name: Integrtions
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout current commit (${{ github.sha }})
         uses: actions/checkout@v3
+
+      - name: Install Dependencies
+        run: yarn install --immutable --immutable-cache
 
       - name: Run Lint
         run: yarn lint

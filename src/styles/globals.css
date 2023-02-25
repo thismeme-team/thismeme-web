@@ -1,3 +1,40 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* FIX: safari에서 이미지 로딩할 때 gray border 생기는 버그 */
+/* see https://nextjs.org/docs/api-reference/next/image#known-browser-bugs */
+@supports (font: -apple-system-body) and (-webkit-appearance: none) {
+  img[loading="lazy"] {
+    clip-path: inset(0.6px);
+  }
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+}
+
+html {
+  font-size: 62.5%;
+  overscroll-behavior-y: none;
+
+  /*기본 롱프레스 비활성화*/
+  -webkit-touch-callout: none !important;
+  -webkit-user-drag: none !important;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: #f3f4f8 !important;
+}
+
+body {
+  color: black;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  overscroll-behavior-y: none;
+}
+
+a,
+button {
+  cursor: pointer;
+}

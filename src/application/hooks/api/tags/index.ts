@@ -1,7 +1,6 @@
 import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useDebounce } from "@/application/hooks";
 import { useSuspendedQuery } from "@/application/hooks/api/core";
 import type { QuerySelectOption } from "@/application/hooks/api/core/types";
 import { delay } from "@/application/util";
@@ -27,13 +26,11 @@ export const useGetPopularTags = () => {
  * @param value 검색어
  */
 export const useGetTagSearch = (value: string) => {
-  const debouncedValue = useDebounce(value);
-
   const { data, ...rest } = useQuery<GetTagSearchResponse>({
-    queryKey: QUERY_KEYS.getTagSearch(debouncedValue),
-    queryFn: () => api.tags.getTagSearch(debouncedValue),
+    queryKey: QUERY_KEYS.getTagSearch(value),
+    queryFn: () => api.tags.getTagSearch(value),
     keepPreviousData: true,
-    enabled: !!debouncedValue,
+    enabled: !!value,
   });
   return { autoCompletedTags: data?.tags, ...rest };
 };

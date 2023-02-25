@@ -2,7 +2,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 import { fetchTagInfo, prefetchMemesByTag } from "@/application/hooks";
-import { TITLE } from "@/application/util";
+import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
@@ -17,7 +17,7 @@ interface Props {
 const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
   return (
     <>
-      <NextSeo description={`${searchQuery} 밈 모음`} title={TITLE.exploreByKeyword(searchQuery)} />
+      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.exploreByTag(searchQuery)} />
 
       <ExplorePageNavigation title={`#${searchQuery}`} />
 
@@ -25,9 +25,8 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
         <div className="mt-12">
           <MemesByTag searchQuery={searchQuery} />
         </div>
-
-        <TagBookmarkButton tagId={tagId} />
       </PullToRefresh>
+      <TagBookmarkButton tagId={tagId} />
     </>
   );
 };

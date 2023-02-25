@@ -1,8 +1,6 @@
 import { css } from "twin.macro";
 
 import { useMemeDetailById } from "@/application/hooks";
-import { TITLE } from "@/application/util";
-import { NextSeo } from "@/components/common/NextSeo";
 import { Photo } from "@/components/common/Photo";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeExport } from "@/components/meme/MemeInfo/DropDown/MemeExport";
@@ -26,7 +24,6 @@ export const MemeDetail = ({ id }: Props) => {
 
   return (
     <>
-      <NextSeo description={description} title={TITLE.memeDetail(name)} />
       <article>
         <section
           className="relative mt-16 flex flex-col"

@@ -37,7 +37,11 @@ const SearchPage: NextPage = () => {
 
   return (
     <>
-      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.search} />
+      <NextSeo
+        description={DEFAULT_DESCRIPTION}
+        openGraph={{ imageUrl: "/open-graph/home.png" }}
+        title={TITLE.search}
+      />
 
       <SearchPageNavigation />
       <div className="relative mt-8">

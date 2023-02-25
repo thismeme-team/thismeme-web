@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 
-import { TITLE } from "@/application/util";
+import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
@@ -15,7 +15,7 @@ interface Props {
 const ExploreByKeywordPage: NextPage<Props> = ({ searchQuery }) => {
   return (
     <>
-      <NextSeo description={`${searchQuery} 밈 모음`} title={TITLE.exploreByKeyword(searchQuery)} />
+      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.exploreByKeyword(searchQuery)} />
 
       <ExplorePageNavigation title={searchQuery} />
       <PullToRefresh>

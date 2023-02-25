@@ -17,7 +17,11 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.home} />
+      <NextSeo
+        description={DEFAULT_DESCRIPTION}
+        openGraph={{ imageUrl: "/open-graph/home.png" }}
+        title={TITLE.default}
+      />
       <IntroPageNavigation />
       <PullToRefresh>
         <section className="pt-8" />

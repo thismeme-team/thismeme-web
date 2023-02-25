@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import tw from "twin.macro";
 
 import {
@@ -7,6 +8,7 @@ import {
   usePostMemeToSharedCollection,
   useToast,
 } from "@/application/hooks";
+import { DOMAIN } from "@/application/util";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 
@@ -15,12 +17,9 @@ interface Props {
 }
 
 export const MemeExport = ({ id }: Props) => {
-  const {
-    name,
-    description,
-    image: { images },
-  } = useMemeDetailById(id);
+  const { name, description } = useMemeDetailById(id);
   const { onUpdateCollection } = useCollection({ memeId: Number(id) });
+  const { asPath } = useRouter();
 
   const { show } = useToast();
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
@@ -28,12 +27,10 @@ export const MemeExport = ({ id }: Props) => {
   });
   const { validate } = useAuthValidation();
 
-  const url = images[0].imageUrl;
-
   const handleNativeShare = async () => {
     if (!navigator.share) return show("공유하기가 지원되지 않는 브라우저 입니다");
     await navigator
-      .share({ title: name, text: description, url })
+      .share({ title: name, text: description, url: DOMAIN + asPath })
       .then(validate(postMemeToSharedCollection, { needSignUpModal: false }));
   };
 

@@ -4,6 +4,7 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { api } from "@/infra/api";
 import type { GetCollectionCheckResponse } from "@/infra/api/collection/types";
 
+import { QUERY_KEYS as ACCOUNT_QUERY_KEYS } from "../account/queryKey";
 import { QUERY_KEYS } from "./queryKey";
 
 /**
@@ -45,6 +46,9 @@ export const useDeleteMemeFromCollection = () => {
 
       return { previousCollectionInfo, deletedMemeId };
     },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ACCOUNT_QUERY_KEYS.getMyAccount });
+    },
     onError: (_, deletedMemeId, context) => {
       queryClient.setQueryData(
         QUERY_KEYS.getCollectionCheck(deletedMemeId),
@@ -77,6 +81,9 @@ export const usePostMemeToCollection = () => {
       });
 
       return { previousCollectionInfo, newMemeId };
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ACCOUNT_QUERY_KEYS.getMyAccount });
     },
     onError: (_, newMemeId, context) => {
       queryClient.setQueryData(

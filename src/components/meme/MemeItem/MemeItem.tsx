@@ -23,7 +23,7 @@ export const MemeItem = memo(({ meme: { name, image, memeId, shareCount }, onCli
     >
       <Photo
         alt={name}
-        className="rounded-15"
+        className="rounded-16"
         draggable={false}
         height={image.images[0]?.imageHeight}
         sizes="100px"

@@ -38,13 +38,14 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
 
   return (
     <DropDown>
-      <div className="flex items-center py-16">
-        <header className="font-suit text-22-bold-140">{dropDownText[sortBy]}</header>
+      <div className="flex items-center gap-4 py-8">
+        <header className="text-16-semibold-140 text-gray-600">{dropDownText[sortBy]}</header>
         <DropDown.Trigger>
           {({ isOpen }) => (
-            <span className="flex h-40 w-40">
+            <span className="h-24 w-24">
               <Icon
-                name="chevronDown2"
+                color="gray"
+                name="chevronDown"
                 css={css`
                   cursor: pointer;
                   overflow: visible;

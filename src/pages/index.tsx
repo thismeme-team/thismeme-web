@@ -3,12 +3,13 @@ import { useRouter } from "next/router";
 
 import { useAuth } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { Icon } from "@/components/common/Icon";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeListContainer, PopularTagList, UserSharedMemeList } from "@/components/home";
-import { SkeletonMeme, SkeletonTagList } from "@/components/home/Skeleton";
+import { MemeListContainer, UserSharedMemeList } from "@/components/home";
+import { SkeletonMeme } from "@/components/home/Skeleton";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
@@ -25,17 +26,19 @@ const HomePage: NextPage = () => {
       <IntroPageNavigation />
       <PullToRefresh>
         <section className="pt-8" />
-        <SearchInput
-          inputMode="none"
-          placeholder="당신이 생각한 '그 밈' 검색하기"
-          onClick={() => {
-            router.push("/search");
-          }}
-        />
-        <SSRSuspense fallback={<SkeletonTagList count={5} />}>
-          <PopularTagList />
-        </SSRSuspense>
-        <section className="pb-40" />
+        <section className="flex justify-between gap-7">
+          <SearchInput
+            inputMode="none"
+            placeholder="당신이 생각한 '그 밈' 검색하기"
+            onClick={() => {
+              router.push("/search");
+            }}
+          />
+          <button className="text-18-bold-140 text-primary-500">
+            Tag
+            <Icon color="primary" name="chevronDown" />
+          </button>
+        </section>
         {isLogin && (
           <>
             <SSRSuspense fallback={<SkeletonMeme />}>

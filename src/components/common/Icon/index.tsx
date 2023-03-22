@@ -9,6 +9,7 @@ const colors = {
   "stroke-white": "white",
   default: "",
   gray: `${theme`colors.gray.600`}`,
+  "stroke-gray": `${theme`colors.gray.600`}`,
   primary: `${theme`colors.primary.500`}`,
 };
 

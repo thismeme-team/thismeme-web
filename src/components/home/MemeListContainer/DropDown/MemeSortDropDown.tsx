@@ -18,8 +18,8 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
 
   const dropDownText: { [key in MemeListType]: string } = {
     user: `${user?.name}이(가) 찾는 그 밈`,
-    recent: "최신 업로드 된 그 밈",
-    share: "공유가 많이 된 그 밈",
+    recent: "최신 순",
+    share: "공유 순",
   };
 
   const handleSortBy = useCallback(
@@ -42,20 +42,20 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
         <header className="text-16-semibold-140 text-gray-600">{dropDownText[sortBy]}</header>
         <DropDown.Trigger>
           {({ isOpen }) => (
-            <span className="h-24 w-24">
-              <Icon
-                color="gray"
-                name="chevronDown"
-                css={css`
-                  cursor: pointer;
-                  overflow: visible;
-                  margin: auto;
-                  transition-duration: 300ms;
-                  transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
-                  ${isOpen && "transform: rotate(180deg)"}
-                `}
-              />
-            </span>
+            <Icon
+              color="gray"
+              height={24}
+              name="chevronDown"
+              width={24}
+              css={css`
+                cursor: pointer;
+                overflow: visible;
+                margin: auto;
+                transition-duration: 300ms;
+                transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
+                ${isOpen && "transform: rotate(180deg)"}
+              `}
+            />
           )}
         </DropDown.Trigger>
       </div>

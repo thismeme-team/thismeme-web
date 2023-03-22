@@ -11,7 +11,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
 export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Props) => {
   return (
     <form
-      className="relative flex items-center justify-start py-8"
+      className="relative flex w-full items-center justify-start py-8"
       onSubmit={(e) => {
         e.preventDefault();
         onSearchByKeyWord?.();
@@ -27,7 +27,7 @@ export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Prop
               <Icon className="absolute right-46 cursor-pointer" name="delete" onClick={onReset} />
             )}
             <button className="absolute right-16">
-              <Icon name="search" />
+              <Icon color="stroke-gray" name="search" />
             </button>
           </>
         }

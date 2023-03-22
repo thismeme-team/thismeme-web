@@ -26,7 +26,7 @@ const HomePage: NextPage = () => {
       <IntroPageNavigation />
       <PullToRefresh>
         <section className="pt-8" />
-        <section className="flex justify-between gap-7">
+        <section className="flex gap-7">
           <SearchInput
             inputMode="none"
             placeholder="당신이 생각한 '그 밈' 검색하기"
@@ -34,9 +34,11 @@ const HomePage: NextPage = () => {
               router.push("/search");
             }}
           />
-          <button className="text-18-bold-140 text-primary-500">
-            Tag
-            <Icon color="primary" name="chevronDown" />
+          <button>
+            <span className="text-18-bold-140 text-primary-500">Tag</span>
+            <span className="flex w-full justify-center">
+              <Icon color="primary" name="chevronDown" />
+            </span>
           </button>
         </section>
         {isLogin && (

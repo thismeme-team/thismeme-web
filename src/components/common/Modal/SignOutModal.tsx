@@ -15,8 +15,8 @@ export const SignOutModal = (props: ModalProps) => {
 
   const handleCancel = () => {
     onClose();
-    push(PATH.getMainPage);
   };
+
   const handleLogout = () => {
     logout(undefined, {
       onSuccess: () => {
@@ -30,7 +30,7 @@ export const SignOutModal = (props: ModalProps) => {
   return (
     <Modal {...props}>
       <Modal.Header />
-      <div className="m-auto my-24 w-300 rounded-24 px-8 pb-8 pt-12">
+      <div className="m-auto my-24 w-300 rounded-24 pb-8 pt-12">
         <section className="align-left mb-10 text-left font-suit text-32-bold-140">
           <div>
             킹 받는{" "}
@@ -45,11 +45,11 @@ export const SignOutModal = (props: ModalProps) => {
         </span>
       </div>
       <Modal.Footer className="flex h-66 text-18-bold-140">
-        <button className="grow bg-gray-400 text-white" onClick={handleCancel}>
-          취소
+        <button className="grow bg-gray-400 text-white" onClick={handleLogout}>
+          로그아웃
         </button>
-        <button className="grow border-black bg-black text-white" onClick={handleLogout}>
-          확인
+        <button className="grow border-black bg-black text-white" onClick={handleCancel}>
+          그냥 살기
         </button>
       </Modal.Footer>
     </Modal>

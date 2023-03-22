@@ -11,7 +11,7 @@ export const SignUpModal = () => {
   return (
     <Modal {...modalProps}>
       <Modal.Header />
-      <div className="m-auto w-300 rounded-24 px-8 pb-24">
+      <div className="m-auto w-300 rounded-24 pb-24">
         <section className="align-left mt-36 mb-10 text-left font-suit text-32-bold-140">
           <div>
             킹 받는{" "}

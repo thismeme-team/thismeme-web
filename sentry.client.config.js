@@ -10,9 +10,4 @@ Sentry.init({
   dsn: SENTRY_DSN,
   // Adjust this value in production, or use tracesSampler for greater control
   tracesSampleRate: 1.0,
-  integrations: [
-    new Sentry.Integrations.Breadcrumbs({
-      console: false,
-    }),
-  ],
 });

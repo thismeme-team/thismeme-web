@@ -6,10 +6,8 @@ import * as Icons from "./assets";
 const colors = {
   black: "black",
   white: "white",
-  "stroke-white": "white",
   default: "",
   gray: `${theme`colors.gray.600`}`,
-  "stroke-gray": `${theme`colors.gray.600`}`,
   primary: `${theme`colors.primary.500`}`,
 };
 
@@ -18,8 +16,9 @@ export type IconName = keyof typeof Icons;
 interface Props extends SVGProps<SVGSVGElement> {
   name: IconName;
   color?: keyof typeof colors;
+  isStroke?: boolean;
 }
-export const Icon = ({ name, color = "default", ...rest }: Props) => {
+export const Icon = ({ name, color = "default", isStroke = false, ...rest }: Props) => {
   const Svg = Icons[name] as FC<SVGProps<SVGSVGElement>>;
 
   return (
@@ -27,7 +26,7 @@ export const Icon = ({ name, color = "default", ...rest }: Props) => {
       css={css`
         & * {
           stroke: ${colors[color]};
-          ${color.search("stroke") && `fill : ${colors[color]};`}
+          ${!isStroke && `fill : ${colors[color]};`}
         }
       `}
       {...rest}

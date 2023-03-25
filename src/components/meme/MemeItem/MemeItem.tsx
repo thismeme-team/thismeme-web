@@ -13,7 +13,7 @@ interface Props {
 
 export const MemeItem = memo(({ meme: { name, image, memeId }, onClick }: Props) => {
   return (
-    <div className="flex flex-col gap-4">
+    <div className="mb-15 flex flex-col">
       <Link
         scroll
         draggable={false}
@@ -35,6 +35,7 @@ export const MemeItem = memo(({ meme: { name, image, memeId }, onClick }: Props)
       <div className="flex justify-between gap-6">
         <Link
           scroll
+          className="py-4"
           draggable={false}
           href={`/memes/${memeId}`}
           prefetch={false}
@@ -42,8 +43,8 @@ export const MemeItem = memo(({ meme: { name, image, memeId }, onClick }: Props)
         >
           <span className="text-11-semibold-140">{name}</span>
         </Link>
-        <span className="flex h-32 w-32 justify-end">
-          <Icon color="gray" height={16} name="meatball" width={16} />
+        <span className="flex h-24 w-24 items-center justify-center">
+          <Icon color="gray-600" height={16} name="meatball" width={16} />
         </span>
       </div>
     </div>

@@ -27,7 +27,7 @@ export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Prop
               <Icon className="absolute right-46 cursor-pointer" name="delete" onClick={onReset} />
             )}
             <button className="absolute right-16">
-              <Icon isStroke color="gray" name="search" />
+              <Icon name="search" stroke="gray-600" />
             </button>
           </>
         }

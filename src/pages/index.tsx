@@ -37,7 +37,7 @@ const HomePage: NextPage = () => {
           <button>
             <span className="text-18-bold-140 text-primary-500">Tag</span>
             <span className="flex w-full justify-center">
-              <Icon color="primary" name="chevronDown" />
+              <Icon color="primary-500" name="chevronDown" />
             </span>
           </button>
         </section>

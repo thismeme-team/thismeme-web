@@ -4,9 +4,8 @@ import { useAuth, useModal } from "@/application/hooks";
 import { channelUrl, instagramUrl, twitterUrl } from "@/application/util";
 import { Drawer } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
-
-import { SignOutModal } from "../../Modal";
-import { Photo } from "../../Photo";
+import { SignOutModal } from "@/components/common/Modal";
+import { Photo } from "@/components/common/Photo";
 
 export const SideBar = () => {
   const { user, validate, isLogin } = useAuth();
@@ -107,7 +106,6 @@ export const SideBar = () => {
               )}
             </section>
 
-            {/* <div className="absolute bottom-30 left-1/2 -translate-x-1/2"> */}
             <div className="relative">
               <div className="mb-8 flex justify-center gap-8">
                 <a href={twitterUrl} rel="noreferrer" target="_blank">

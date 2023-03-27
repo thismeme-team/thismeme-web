@@ -5,12 +5,12 @@ import * as Icons from "./assets";
 
 type PrefixColor = "gray" | "primary" | "secondary";
 type Variation = "100" | "200" | "300" | "400" | "500" | "600" | "700" | "800" | "900" | "1000";
-type Colors = `${PrefixColor}-${Variation}` | "black" | "white" | "";
+type Colors = `${PrefixColor}-${Variation}` | "black" | "white" | "default";
 
 const colors: { [K in Colors]?: string } = {
   black: "black",
   white: "white",
-  "": "",
+  default: "",
   "gray-600": theme`colors.gray.600`,
   "primary-500": theme`colors.primary.500`,
 };
@@ -23,15 +23,21 @@ interface Props extends SVGProps<SVGSVGElement> {
   stroke?: Colors;
   fill?: Colors;
 }
-export const Icon = ({ name, color = "", stroke = "", fill = "", ...rest }: Props) => {
+export const Icon = ({
+  name,
+  color = "default",
+  stroke = "default",
+  fill = "default",
+  ...rest
+}: Props) => {
   const Svg = Icons[name] as FC<SVGProps<SVGSVGElement>>;
 
   return (
     <Svg
       css={css`
         & * {
-          stroke: ${colors[stroke || color]};
-          fill: ${colors[fill || color]};
+          stroke: ${colors[stroke] || colors[color]};
+          fill: ${colors[fill] || colors[color]};
         }
       `}
       {...rest}

@@ -38,7 +38,7 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
 
   return (
     <DropDown>
-      <div className="flex items-center gap-4 py-8">
+      <div className="flex items-center gap-4 pb-8">
         <header className="text-16-semibold-140 text-gray-600">{dropDownText[sortBy]}</header>
         <DropDown.Trigger>
           {({ isOpen }) => (

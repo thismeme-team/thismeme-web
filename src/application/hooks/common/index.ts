@@ -10,5 +10,6 @@ export * from "./useIsomorphicLayoutEffect";
 export * from "./useLocalStorage";
 export * from "./useLongPress";
 export * from "./useModal";
+export * from "./useScrollDirection";
 export * from "./useToast";
 export * from "./useValidation";

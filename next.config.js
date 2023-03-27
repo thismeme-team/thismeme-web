@@ -1,5 +1,14 @@
+// This file sets a custom webpack configuration to use your Next.js app
+// with Sentry.
+// https://nextjs.org/docs/api-reference/next.config.js/introduction
+// https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const { withSentryConfig } = require("@sentry/nextjs");
+
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
+const IS_DEV = process.env.NODE_ENV === "development";
+const IS_PROD = process.env.NODE_ENV === "production";
 
 // The folders containing files importing twin.macro
 const includedDirs = [
@@ -13,7 +22,7 @@ const includedDirs = [
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withPWA = require("next-pwa")({
   dest: "public",
-  disable: process.env.NODE_ENV === "development",
+  disable: IS_DEV,
 });
 
 /** @type {import("next").NextConfig} */
@@ -85,6 +94,15 @@ const nextConfig = withPWA({
     deviceSizes: [512],
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
+  sentry: {
+    // Use `hidden-source-map` rather than `source-map` as the Webpack `devtool`
+    // for client-side builds. (This will be the default starting in
+    // `@sentry/nextjs` version 8.0.0.) See
+    // https://webpack.js.org/configuration/devtool/ and
+    // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
+    // for more information.
+    hideSourceMaps: IS_PROD,
+  },
 });
 
-module.exports = nextConfig;
+module.exports = withSentryConfig(nextConfig, { silent: true });

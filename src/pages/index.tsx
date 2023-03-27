@@ -1,19 +1,17 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
-import { useAuth } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeListContainer, PopularTagList, UserSharedMemeList } from "@/components/home";
-import { SkeletonMeme, SkeletonTagList } from "@/components/home/Skeleton";
+import { MemeListContainer, PopularTagList } from "@/components/home";
+import { SkeletonTagList } from "@/components/home/Skeleton";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
   const router = useRouter();
-  const { isLoading, isLogin, user } = useAuth();
 
   return (
     <>
@@ -36,15 +34,7 @@ const HomePage: NextPage = () => {
           <PopularTagList />
         </SSRSuspense>
         <section className="pb-40" />
-        {isLogin && (
-          <>
-            <SSRSuspense fallback={<SkeletonMeme />}>
-              <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
-              <MemeListContainer />
-            </SSRSuspense>
-          </>
-        )}
-        {!isLogin && !isLoading && <MemeListContainer />}
+        <MemeListContainer />
       </PullToRefresh>
     </>
   );

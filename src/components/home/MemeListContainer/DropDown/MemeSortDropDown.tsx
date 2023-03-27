@@ -2,7 +2,6 @@ import type { Dispatch, SetStateAction } from "react";
 import { startTransition, useCallback, useEffect } from "react";
 import { css } from "twin.macro";
 
-import { useAuth } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 
@@ -14,10 +13,7 @@ interface Props {
 }
 
 export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
-  const { isLogin, user } = useAuth();
-
   const dropDownText: { [key in MemeListType]: string } = {
-    user: `${user?.name}이(가) 찾는 그 밈`,
     recent: "최신 순",
     share: "공유 순",
   };
@@ -30,11 +26,6 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
     },
     [onClickItem],
   );
-
-  useEffect(() => {
-    // NOTE: 로그인 & 로그아웃 상태 변경 시 드롭다운 상태 재설정
-    handleSortBy(isLogin ? "user" : "share");
-  }, [isLogin, handleSortBy]);
 
   return (
     <DropDown>
@@ -61,16 +52,6 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
         </DropDown.Trigger>
       </div>
       <DropDown.Contents css={{ width: "13.2rem" }}>
-        {isLogin && (
-          <DropDown.Content
-            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={() => {
-              handleSortBy("user");
-            }}
-          >
-            {dropDownText.user}
-          </DropDown.Content>
-        )}
         <DropDown.Content
           className={`group h-56 p-8 text-16-semibold-140 ${
             sortBy === "share" ? "text-gray-900" : "text-gray-600"

@@ -11,34 +11,43 @@ interface Props {
   onClick?: (id: number) => void;
 }
 
-export const MemeItem = memo(({ meme: { name, image, memeId, shareCount }, onClick }: Props) => {
+export const MemeItem = memo(({ meme: { name, image, memeId }, onClick }: Props) => {
   return (
-    <Link
-      scroll
-      className="flex flex-col gap-6"
-      draggable={false}
-      href={`/memes/${memeId}`}
-      prefetch={false}
-      onClick={() => onClick?.(memeId)}
-    >
-      <Photo
-        alt={name}
-        className="rounded-15"
+    <div className="mb-15 flex flex-col">
+      <Link
+        scroll
         draggable={false}
-        height={image.images[0]?.imageHeight}
-        sizes="100px"
-        src={image.images[0]?.imageUrl}
-        unoptimized={isEncodingError(image.images[0]?.imageUrl)}
-        width={image.images[0]?.imageWidth}
-      />
-      <div className="flex items-center justify-between font-suit text-14-semibold-140">
-        <span>{name}</span>
-        <span className="flex items-center gap-4">
-          <Icon height={16} name="memeShare" width={16} />
-          <span className="text-14-semibold-140 text-gray-600">{shareCount}</span>
+        href={`/memes/${memeId}`}
+        prefetch={false}
+        onClick={() => onClick?.(memeId)}
+      >
+        <Photo
+          alt={name}
+          className="rounded-16"
+          draggable={false}
+          height={image.images[0]?.imageHeight}
+          sizes="100px"
+          src={image.images[0]?.imageUrl}
+          unoptimized={isEncodingError(image.images[0]?.imageUrl)}
+          width={image.images[0]?.imageWidth}
+        />
+      </Link>
+      <div className="flex justify-between gap-6">
+        <Link
+          scroll
+          className="py-4"
+          draggable={false}
+          href={`/memes/${memeId}`}
+          prefetch={false}
+          onClick={() => onClick?.(memeId)}
+        >
+          <span className="text-11-semibold-140">{name}</span>
+        </Link>
+        <span className="flex h-24 w-24 items-center justify-center">
+          <Icon color="gray-600" height={16} name="meatball" width={16} />
         </span>
       </div>
-    </Link>
+    </div>
   );
 });
 

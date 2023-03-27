@@ -3,7 +3,8 @@ import { instagramUrl, twitterUrl } from "@/application/util";
 import { Drawer } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 
-import { LoginSideBarContent, LogoutSideBarContent } from "./SideBarContent";
+import { LoginSideBarContent } from "./LoginSideBarContent";
+import { LogoutSideBarContent } from "./LogoutSideBarContent";
 
 export const SideBar = () => {
   const auth = useAuth();

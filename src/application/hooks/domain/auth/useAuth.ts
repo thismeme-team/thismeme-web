@@ -20,9 +20,9 @@ export const useAuth = () => {
   }, []);
 
   const validate = useCallback(
-    <T extends Handler>(handler: T, options: ValidatorOptions = { needSignUpModal: true }) =>
+    <T extends Handler>(handler?: T, options: ValidatorOptions = { needSignUpModal: true }) =>
       (...args: Parameters<T>) => {
-        if (isLogin) return handler(args) as ReturnType<T>;
+        if (isLogin) return handler?.(args) as ReturnType<T>;
         if (!isLogin && options.needSignUpModal) return modalProps.onOpen();
       },
     [isLogin, modalProps],

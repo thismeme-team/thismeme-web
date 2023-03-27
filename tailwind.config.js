@@ -179,6 +179,14 @@ module.exports = {
             fontWeight: "400",
           },
         ],
+        "11-semibold-140": [
+          "1.1rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "600",
+          },
+        ],
       },
       fontFamily: {
         pretendard: ["var(--font-pretendardVariable)", ...defaultTheme.fontFamily.sans],

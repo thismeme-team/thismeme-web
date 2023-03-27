@@ -4,6 +4,8 @@ name: "Chromatic Deployment"
 # Event for the workflow
 on:
   pull_request:
+    paths:
+      - '**/*.stories.tsx'
     branches:
       - main
       - develop

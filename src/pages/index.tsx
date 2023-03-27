@@ -2,12 +2,12 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { Icon } from "@/components/common/Icon";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeListContainer, PopularTagList } from "@/components/home";
-import { SkeletonTagList } from "@/components/home/Skeleton";
+import { MemeListContainer } from "@/components/home";
 import { SearchInput } from "@/components/search";
 
 const HomePage: NextPage = () => {
@@ -23,17 +23,21 @@ const HomePage: NextPage = () => {
       <IntroPageNavigation />
       <PullToRefresh>
         <section className="pt-8" />
-        <SearchInput
-          inputMode="none"
-          placeholder="당신이 생각한 '그 밈' 검색하기"
-          onClick={() => {
-            router.push("/search");
-          }}
-        />
-        <SSRSuspense fallback={<SkeletonTagList count={5} />}>
-          <PopularTagList />
-        </SSRSuspense>
-        <section className="pb-40" />
+        <section className="flex gap-7">
+          <SearchInput
+            inputMode="none"
+            placeholder="당신이 생각한 '그 밈' 검색하기"
+            onClick={() => {
+              router.push("/search");
+            }}
+          />
+          <button>
+            <span className="text-18-bold-140 text-primary-500">Tag</span>
+            <span className="flex w-full justify-center">
+              <Icon color="primary-500" name="chevronDown" />
+            </span>
+          </button>
+        </section>
         <MemeListContainer />
       </PullToRefresh>
     </>

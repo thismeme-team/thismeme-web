@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import { startTransition, useCallback, useEffect } from "react";
+import { startTransition, useCallback } from "react";
 import { css } from "twin.macro";
 
 import { DropDown } from "@/components/common/DropDown";
@@ -29,25 +29,26 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
 
   return (
     <DropDown>
-      <div className="flex items-center py-16">
-        <header className="font-suit text-22-bold-140">
+      <div className="flex items-center gap-4 py-8">
+        <header className="text-16-semibold-140 text-gray-600">
           {dropDownText[sortBy].replace(/\s/g, "")}
         </header>
         <DropDown.Trigger>
           {({ isOpen }) => (
-            <span className="flex h-40 w-40">
-              <Icon
-                name="chevronDown2"
-                css={css`
-                  cursor: pointer;
-                  overflow: visible;
-                  margin: auto;
-                  transition-duration: 300ms;
-                  transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
-                  ${isOpen && "transform: rotate(180deg)"}
-                `}
-              />
-            </span>
+            <Icon
+              color="gray-600"
+              height={24}
+              name="chevronDown"
+              width={24}
+              css={css`
+                cursor: pointer;
+                overflow: visible;
+                margin: auto;
+                transition-duration: 300ms;
+                transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
+                ${isOpen && "transform: rotate(180deg)"}
+              `}
+            />
           )}
         </DropDown.Trigger>
       </div>

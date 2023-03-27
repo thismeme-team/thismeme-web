@@ -20,7 +20,7 @@ const sampleImages = [
   { url: "https://picsum.photos/236/354", width: 236, height: 354 },
 ];
 
-const memes = Array.from(Array(1024).keys()).map((id) => {
+const memes = Array.from(Array(20).keys()).map((id) => {
   const randomIndex = Math.floor(Math.random() * sampleImages.length);
   const { url, width, height } = sampleImages[randomIndex];
   return {

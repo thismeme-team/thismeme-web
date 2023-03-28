@@ -43,9 +43,12 @@ export const Modal = ({
             if (event.target === event.currentTarget) event.preventDefault();
           }}
         >
-          <article className="relative m-auto rounded-24 border border-gray-400 bg-white" ref={ref}>
+          <article
+            className="relative m-auto rounded-24 bg-white shadow-[0_0_20px_rgba(38,37,40,0.2)]"
+            ref={ref}
+          >
             {header}
-            <section className="px-16">{content}</section>
+            <section className="px-24">{content}</section>
             {footer}
           </article>
         </div>
@@ -59,8 +62,11 @@ const ModalHeader = () => {
   return (
     <header className="relative flex h-72 items-center justify-between px-24">
       <Icon name="logo" />
-      <button onClick={onClose}>
-        <Icon name="cancel" />
+      <button
+        className="h-40 w-40 translate-x-8 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 active:bg-gray-100"
+        onClick={onClose}
+      >
+        <Icon className="m-auto" height={24} name="cancel" strokeWidth={1.8} width={24} />
       </button>
     </header>
   );
@@ -68,11 +74,7 @@ const ModalHeader = () => {
 const ModalHeaderType = (<ModalHeader />).type;
 
 const ModalFooter = ({ className, children }: PropsWithChildren<{ className?: string }>) => {
-  return (
-    <footer className={`-ml-1 -mr-1 -mb-1 overflow-hidden rounded-b-24 ${className}`}>
-      {children}
-    </footer>
-  );
+  return <footer className={`overflow-hidden rounded-b-24 ${className}`}>{children}</footer>;
 };
 const ModalFooterType = (<ModalFooter />).type;
 

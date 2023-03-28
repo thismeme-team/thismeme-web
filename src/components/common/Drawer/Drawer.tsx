@@ -23,11 +23,11 @@ const DrawerTrigger = ({ children }: DrawerTriggerProps) => {
 };
 
 interface DrawerContentProps {
-  className: string;
+  className?: string;
   children: ReactNode;
   direction: "left" | "right";
 }
-const DrawerContent = ({ children, className, direction }: DrawerContentProps) => {
+const DrawerContent = ({ children, className = "", direction }: DrawerContentProps) => {
   const isOpen = useDrawerContext();
 
   return (
@@ -39,6 +39,7 @@ const DrawerContent = ({ children, className, direction }: DrawerContentProps) =
         min-height: calc(100vh - 5.4rem);
         inset: 0;
         overflow: hidden;
+        margin-top: 5.4rem;
       `}
     >
       <section
@@ -49,7 +50,7 @@ const DrawerContent = ({ children, className, direction }: DrawerContentProps) =
             will-change: transform;
             transition: transform 0.4s ease, visibility 0s ease 0.4s;
             overflow: auto;
-            padding-inline: 1.8rem;
+            padding-inline: 2rem;
             height: 100%;
             background: white;
           `,

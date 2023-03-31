@@ -54,27 +54,27 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
       </div>
       <DropDown.Contents css={{ width: "13.2rem" }}>
         <DropDown.Content
-          className={`group h-56 cursor-pointer p-8 text-16-semibold-140 ${
+          className={`h-56 cursor-pointer p-8 text-16-semibold-140 ${
             sortBy === "share" ? "text-gray-900" : "text-gray-600"
           }`}
           onClick={() => {
             handleSortBy("share");
           }}
         >
-          <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 group-active:bg-primary-200 group-active:text-gray-900">
+          <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 active:bg-primary-200 active:text-gray-900">
             <Icon height={22} name="shareSort" width={22} />
             {dropDownText.share}
           </section>
         </DropDown.Content>
         <DropDown.Content
-          className={`group h-56 cursor-pointer p-8 text-16-semibold-140 ${
+          className={`h-56 cursor-pointer p-8 text-16-semibold-140 ${
             sortBy === "recent" ? "text-gray-900" : "text-gray-600"
           }`}
           onClick={() => {
             handleSortBy("recent");
           }}
         >
-          <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 group-active:bg-primary-200 group-active:text-gray-900">
+          <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 active:bg-primary-200 active:text-gray-900">
             <Icon height={22} name="recentSort" width={22} />
             {dropDownText.recent}
           </section>

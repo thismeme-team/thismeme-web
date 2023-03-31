@@ -1,1 +1,1 @@
-export type MemeListType = "user" | "share" | "recent";
+export type MemeListType = "share" | "recent";

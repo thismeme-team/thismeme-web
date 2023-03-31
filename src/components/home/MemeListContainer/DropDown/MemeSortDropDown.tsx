@@ -62,7 +62,7 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
           }}
         >
           <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 group-active:bg-primary-200 group-active:text-gray-900">
-            <Icon className="group-active:bg-white" height={22} name="shareSort" width={22} />
+            <Icon height={22} name="shareSort" width={22} />
             {dropDownText.share}
           </section>
         </DropDown.Content>
@@ -75,7 +75,7 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
           }}
         >
           <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 group-active:bg-primary-200 group-active:text-gray-900">
-            <Icon className="group-active:bg-white" height={22} name="recentSort" width={22} />
+            <Icon height={22} name="recentSort" width={22} />
             {dropDownText.recent}
           </section>
         </DropDown.Content>

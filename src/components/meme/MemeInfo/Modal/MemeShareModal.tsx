@@ -31,13 +31,13 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
 
   const src = images[0].imageUrl;
 
-  const showClipboardCopyToast = () => show("링크를 복사했습니다!");
+  const showClipboardCopyToast = () => show("밈을 담아서 링크를 복사했어요 :)");
   const showNativeShareErrorToast = () => show("공유하기가 지원되지 않습니다.");
 
   return (
     <Modal {...modalProps}>
       <Modal.Header />
-      <Photo className="my-24 w-300 rounded-15" src={src} />
+      <Photo className="my-24 h-300 w-300 rounded-15" src={src} />
       <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
         <li className="relative flex flex-col items-center gap-8">
           <KakaoShareButton

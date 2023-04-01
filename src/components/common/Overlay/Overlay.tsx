@@ -13,7 +13,7 @@ interface Props {
   children: ReactNode | ((state: TransitionStatus) => ReactNode);
 }
 
-export const OverLay = ({ children, isOpen, onBackdropClick }: Props) => {
+export const Overlay = ({ children, isOpen, onBackdropClick }: Props) => {
   return (
     <Portal id="overlay-portal">
       <CSSTransition mountOnEnter unmountOnExit in={isOpen} timeout={DELAY}>

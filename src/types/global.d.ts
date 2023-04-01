@@ -21,6 +21,7 @@ declare namespace Kakao {
 interface Window {
   ChannelIO?: IChannelIO;
   ChannelIOInitialized?: boolean;
+  gtag: any;
 }
 
 interface IChannelIO {

@@ -5,6 +5,8 @@ declare namespace NodeJS {
     NEXT_PUBLIC_API_URL: string;
     NEXT_PUBLIC_SEARCH_API_URL: string;
     NEXT_PUBLIC_CHANNEL_IO_KEY: string;
+    NEXT_PUBLIC_GA_ID: string;
+    NEXT_PUBLIC_GTM_ID: string;
   }
 }
 

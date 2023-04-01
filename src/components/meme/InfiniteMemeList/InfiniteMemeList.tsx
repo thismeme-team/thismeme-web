@@ -7,7 +7,7 @@ import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
 import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
 import { Masonry } from "@/components/common/Masonry";
 import { renderMemeItemSkeletons } from "@/components/common/Skeleton";
-import { MemeLongPressContainer } from "@/components/meme";
+import { MemeActionSheetContainer } from "@/components/meme";
 import { MemeItem } from "@/components/meme/MemeItem";
 import type { GetMemesResponse, Meme } from "@/types";
 
@@ -74,9 +74,11 @@ export const InfiniteMemeList = ({
     () =>
       memeList.map((meme) => {
         return (
-          <MemeLongPressContainer isCollection={isCollection} key={meme.memeId} meme={meme}>
-            <MemeItem meme={meme} onClick={getMemeDetailFromCache} />
-          </MemeLongPressContainer>
+          <MemeActionSheetContainer isCollection={isCollection} key={meme.memeId} meme={meme}>
+            {({ onOpen }) => (
+              <MemeItem meme={meme} onClick={getMemeDetailFromCache} onOpen={onOpen} />
+            )}
+          </MemeActionSheetContainer>
         );
       }),
     [memeList, getMemeDetailFromCache, isCollection],

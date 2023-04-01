@@ -9,9 +9,10 @@ import type { Meme } from "@/types";
 interface Props {
   meme: Meme;
   onClick?: (id: number) => void;
+  onOpen?: () => void;
 }
 
-export const MemeItem = memo(({ meme: { name, image, memeId }, onClick }: Props) => {
+export const MemeItem = memo(({ meme: { name, image, memeId }, onClick, onOpen }: Props) => {
   return (
     <div className="mb-15 flex flex-col">
       <Link
@@ -43,9 +44,9 @@ export const MemeItem = memo(({ meme: { name, image, memeId }, onClick }: Props)
         >
           <span className="text-11-semibold-140">{name}</span>
         </Link>
-        <span className="flex h-24 w-24 items-center justify-center">
+        <button className="flex h-32 w-32 justify-center" onClick={onOpen}>
           <Icon color="gray-600" height={16} name="meatball" width={16} />
-        </span>
+        </button>
       </div>
     </div>
   );

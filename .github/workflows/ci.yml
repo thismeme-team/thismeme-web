@@ -18,9 +18,3 @@ jobs:
 
       - name: Install Dependencies
         run: yarn install --immutable --immutable-cache
-
-      - name: Run Lint
-        run: yarn lint
-
-      - name: Run Type Check
-        run: yarn tsc

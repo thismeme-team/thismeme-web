@@ -1,4 +1,4 @@
-interface Tag {
+export interface Tag {
   tagId: number;
   name: string;
   viewCount: number;
@@ -24,7 +24,7 @@ export interface GetCategoryByTagResponse {
     name: string;
     icon: string;
     priority: number;
-    tags: (Pick<Tag, "tagId" | "name" | "viewCount"> & { isFav: boolean })[];
+    tags: (Pick<Tag, "tagId" | "name" | "viewCount" | "categoryName"> & { isFav: boolean })[];
   }[];
 }
 

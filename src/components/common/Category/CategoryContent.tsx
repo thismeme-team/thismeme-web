@@ -12,10 +12,12 @@ import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
+import { SlotCateogry } from "./SlotCateogry";
+
 const FAVORITE_ID = "즐겨찾기";
 const TAG_DELETE_DELAY = 1500;
 
-export const Category = () => {
+export const CategoryContent = () => {
   const router = useRouter();
   const { isLoading } = useAuth();
   const setDrawerOpen = useSetDrawerContext();
@@ -83,33 +85,57 @@ export const Category = () => {
       {data?.map((item) => (
         <Item key={item.id} value={item.id}>
           <Header className="py-4">
-            <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-16 py-12 text-16-semibold-130 hover:bg-gray-100 data-[state=open]:bg-gray-100 [&>#chevronDown]:data-[state=open]:rotate-180">
+            <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
               <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
-              <span className="flex-grow text-left text-18-bold-140">{item.name}</span>
-              <Icon
-                aria-hidden
-                className="transition-transform duration-300 ease-[cubic-bezier(0.87,0,0.13,1)]"
-                id="chevronDown"
-                name="chevronDown"
-              />
+              <span className="flex-grow text-left text-16-semibold-140">
+                {item.name.includes("0") ? (
+                  <SlotCateogry name={item.name} tags={item.tags} />
+                ) : (
+                  item.name
+                )}
+              </span>
+              <span className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100">
+                <Icon
+                  aria-hidden
+                  className="transition-transform duration-300 ease-[cubic-bezier(0.87,0,0.13,1)]"
+                  id="chevronDown"
+                  name="chevronDown"
+                />
+              </span>
             </Trigger>
           </Header>
           <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
-            <ul className="flex flex-col pl-50 pr-16 font-suit text-16-semibold-140">
-              {item.tags.map((tag) => (
-                <li className="flex w-full gap-6 py-8 " key={tag.tagId}>
-                  <button className="grow text-left" onClick={() => onClickItem(tag.tagId)}>
-                    {tag.name}
-                  </button>
-                  {item.id === FAVORITE_ID && (
-                    <button
-                      className="[&_*]:stroke-gray-600 [&_*]:hover:stroke-black"
-                      onClick={() => handleDeleteItem(tag.tagId)}
-                    >
-                      <Icon height={24} name="cancel" width={24} />
-                    </button>
-                  )}
-                </li>
+            <ul className="flex flex-col pr-16 font-suit text-16-semibold-140">
+              {Array.from(new Set(item.tags.map((tag) => tag.categoryName))).map((category) => (
+                <>
+                  <div key={category}>
+                    <div className="py-8 pl-4 text-gray-600">{category}</div>
+                    {item.tags
+                      .filter((tag) => tag.categoryName === category)
+                      .map((tag) => (
+                        <>
+                          <li className="pl-20" key={tag.tagId}>
+                            <section className="flex w-full justify-between gap-6 rounded-8 py-8 pl-16 hover:bg-gray-100">
+                              <button
+                                className="grow text-left"
+                                onClick={() => onClickItem(tag.tagId)}
+                              >
+                                {tag.name}
+                              </button>
+                              {item.id === FAVORITE_ID && (
+                                <button
+                                  className="[&_*]:stroke-gray-600 [&_*]:hover:stroke-black"
+                                  onClick={() => handleDeleteItem(tag.tagId)}
+                                >
+                                  <Icon height={24} name="cancel" width={24} />
+                                </button>
+                              )}
+                            </section>
+                          </li>
+                        </>
+                      ))}
+                  </div>
+                </>
               ))}
             </ul>
           </Content>

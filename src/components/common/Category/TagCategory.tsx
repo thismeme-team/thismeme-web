@@ -4,29 +4,32 @@ import { Drawer } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 import { SSRSuspense } from "@/components/common/Suspense";
 
-import { Category } from "./Category";
+import { CategoryContent } from "./CategoryContent";
 
 export const TagCategory = () => {
   return (
     <Drawer>
       <Drawer.Trigger>
         {({ isOpen }) => (
-          <button className="pt-8">
+          <div className="pt-8">
             <span className="text-18-bold-140 text-primary-500">Tag</span>
             <span
-              className="flex w-full cursor-pointer justify-center"
               css={css`
+                display: flex;
+                justify-content: center;
+                transition-duration: 300ms;
+                transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
                 ${isOpen && "transform: rotate(180deg)"}
               `}
             >
               <Icon color="primary-500" name="chevronDown" />
             </span>
-          </button>
+          </div>
         )}
       </Drawer.Trigger>
       <Drawer.Content className="z-[1001] m-auto max-w-[48rem]" direction="top" top="14.4">
         <SSRSuspense>
-          <Category />
+          <CategoryContent />
         </SSRSuspense>
       </Drawer.Content>
     </Drawer>

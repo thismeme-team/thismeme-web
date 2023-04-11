@@ -64,11 +64,10 @@ const DropDownContents = ({
           z-index: 10;
           width: ${width}rem;
           border-radius: 10px;
-          border: solid 1px ${theme`colors.gray.400`};
           background: white;
           overflow: hidden;
           transition: transform 0.4s ease, opacity 0.2s ease-in-out;
-          box-shadow: 0px 0px 20px rgba(0, 0, 0, 20%);
+          box-shadow: 0px 0px 20px rgba(38, 47, 40, 0.2);
           ${!isOpen && "pointer-events: none;"}
         `,
         width &&

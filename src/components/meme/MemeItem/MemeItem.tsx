@@ -1,18 +1,24 @@
 import Link from "next/link";
 import { memo } from "react";
 
+import { useOverlay } from "@/application/hooks";
 import { isEncodingError } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 import type { Meme } from "@/types";
 
+import { MemeActionSheet } from "../ActionSheet";
+
 interface Props {
   meme: Meme;
   onClick?: (id: number) => void;
-  onOpen?: () => void;
 }
 
-export const MemeItem = memo(({ meme: { name, image, memeId }, onClick, onOpen }: Props) => {
+export const MemeItem = memo(({ meme, onClick }: Props) => {
+  const overlay = useOverlay();
+
+  const { name, image, memeId } = meme;
+
   return (
     <div className="mb-15 flex flex-col">
       <Link
@@ -44,7 +50,14 @@ export const MemeItem = memo(({ meme: { name, image, memeId }, onClick, onOpen }
         >
           <span className="text-11-semibold-140">{name}</span>
         </Link>
-        <button className="flex h-32 w-32 justify-center" onClick={onOpen}>
+        <button
+          className="flex h-32 w-32 justify-center"
+          onClick={() => {
+            overlay.open(({ isOpen, close }) => (
+              <MemeActionSheet isOpen={isOpen} meme={meme} onClose={close} />
+            ));
+          }}
+        >
           <Icon color="gray-600" height={16} name="meatball" width={16} />
         </button>
       </div>

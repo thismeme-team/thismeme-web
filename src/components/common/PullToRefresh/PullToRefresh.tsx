@@ -132,7 +132,7 @@ export const PullToRefresh = ({
   );
 
   return (
-    <div className="touch-none overscroll-y-contain	" ref={elementRef}>
+    <div className="overscroll-y-contain	" ref={elementRef}>
       <div
         css={css`
           padding-top: 0.8rem;

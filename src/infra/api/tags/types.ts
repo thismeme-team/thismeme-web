@@ -3,7 +3,6 @@ export interface Tag {
   name: string;
   viewCount: number;
   categoryId: number;
-  categoryName: string;
 }
 
 export interface GetPopularTagsResponse {
@@ -18,13 +17,23 @@ export interface GetMemeTagsByIdResponse {
   tags: Tag[];
 }
 
+export interface Category {
+  categoryId: number;
+  name: string;
+  priority: number;
+  tags: (Pick<Tag, "tagId" | "name" | "viewCount"> & { isFav: boolean })[];
+}
+
 export interface GetCategoryByTagResponse {
-  categories: {
-    categoryId: number;
+  maincategories: {
+    mainCategoryId: number;
     name: string;
     icon: string;
     priority: number;
-    tags: (Pick<Tag, "tagId" | "name" | "viewCount" | "categoryName"> & { isFav: boolean })[];
+    hasSub: boolean;
+    categories: {
+      categories: Category[];
+    };
   }[];
 }
 

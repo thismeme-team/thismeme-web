@@ -4,7 +4,7 @@ import { css } from "twin.macro";
 import type { Tag } from "@/infra/api/tags/types";
 
 interface Props {
-  tags: Pick<Tag, "tagId" | "name" | "viewCount" | "categoryName">[];
+  tags: Pick<Tag, "tagId" | "name" | "viewCount">[];
   name: string;
 }
 

@@ -43,7 +43,7 @@ export const popularTag = [
   },
 ];
 
-export const categories = [
+export const mainCategories = [
   {
     mainCategoryId: 1,
     name: "사용자",
@@ -60,14 +60,10 @@ export const categories = [
             {
               tagId: 3,
               name: "거짓말쟁이",
-              viewCount: 26,
-              isFav: false,
             },
             {
               tagId: 4,
               name: "귀요미",
-              viewCount: 26,
-              isFav: false,
             },
           ],
         },
@@ -79,14 +75,10 @@ export const categories = [
             {
               tagId: 1,
               name: "개발자",
-              viewCount: 52,
-              isFav: true,
             },
             {
               tagId: 2,
               name: "디자이너",
-              viewCount: 26,
-              isFav: false,
             },
           ],
         },
@@ -109,8 +101,6 @@ export const categories = [
             {
               tagId: 2,
               name: "기쁨",
-              viewCount: 49,
-              isFav: false,
             },
             {
               tagId: 3,
@@ -128,14 +118,10 @@ export const categories = [
             {
               tagId: 13,
               name: "미안함",
-              viewCount: 8,
-              isFav: false,
             },
             {
               tagId: 14,
               name: "짜증",
-              viewCount: 2,
-              isFav: false,
             },
           ],
         },
@@ -158,14 +144,10 @@ export const categories = [
             {
               tagId: 3,
               name: "결심할때",
-              viewCount: 34,
-              isFav: false,
             },
             {
               tagId: 12,
               name: "기다릴때",
-              viewCount: 18,
-              isFav: false,
             },
           ],
         },
@@ -177,14 +159,10 @@ export const categories = [
             {
               tagId: 3,
               name: "개발할때",
-              viewCount: 34,
-              isFav: false,
             },
             {
               tagId: 12,
               name: "더울때",
-              viewCount: 18,
-              isFav: false,
             },
           ],
         },
@@ -207,8 +185,6 @@ export const categories = [
             {
               tagId: 2,
               name: "핀과 제이크",
-              viewCount: 49,
-              isFav: false,
             },
           ],
         },
@@ -220,21 +196,54 @@ export const categories = [
             {
               tagId: 3,
               name: "런닝맨",
-              viewCount: 34,
-              isFav: false,
             },
             {
               tagId: 12,
               name: "무한도전",
-              viewCount: 18,
-              isFav: false,
             },
           ],
         },
       ],
     },
   },
-
+  {
+    mainCategoryId: 5,
+    name: "캐릭터",
+    icon: "https://raw.githubusercontent.com/toss/tossface/cec7ea0420b7f17d6f546fd7359da9bd4cb3315c/dist/svg/u1F60E.svg",
+    priority: 5,
+    hasSub: true,
+    categories: {
+      categories: [
+        {
+          categoryId: 31,
+          name: "인물",
+          priority: 5,
+          tags: [
+            {
+              tagId: 321,
+              name: "박명수",
+            },
+            {
+              tagId: 343,
+              name: "유재석",
+            },
+            {
+              tagId: 356,
+              name: "정준하",
+            },
+            {
+              tagId: 463,
+              name: "정형돈",
+            },
+            {
+              tagId: 355,
+              name: "하하",
+            },
+          ],
+        },
+      ],
+    },
+  },
   {
     mainCategoryId: 6,
     name: "기타",
@@ -251,12 +260,43 @@ export const categories = [
             {
               tagId: 2,
               name: "박명수",
-              viewCount: 49,
-              isFav: false,
             },
           ],
         },
       ],
     },
   },
+];
+
+export const mainTags = [
+  [
+    {
+      tagId: 384,
+      name: "ISTJ",
+    },
+    {
+      tagId: 394,
+      name: "디자이너",
+    },
+  ],
+  [
+    {
+      tagId: 384,
+      name: "서러움",
+    },
+    {
+      tagId: 394,
+      name: "측은함",
+    },
+  ],
+  [
+    {
+      tagId: 384,
+      name: "거절할때",
+    },
+    {
+      tagId: 394,
+      name: "서운할때",
+    },
+  ],
 ];

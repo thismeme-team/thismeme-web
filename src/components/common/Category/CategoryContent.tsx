@@ -21,22 +21,23 @@ export const CategoryContent = () => {
    */
   const { data } = useGetCategoryWithTag({
     enabled: !isLoading,
-    select: ({ maincategories }) => {
-      const favoriteItem = {
-        name: FAVORITE_ID,
-        id: FAVORITE_ID,
-        icon: "/icon/star.svg",
-        categories: maincategories.map((maincategory) => maincategory.categories.categories).flat(),
-      };
+    select: ({ mainCategories, mainTags }) => {
+      // const favoriteItem = {
+      //   name: FAVORITE_ID,
+      //   id: FAVORITE_ID,
+      //   icon: "/icon/star.svg",
+      //   categories: maincategories.map((maincategory) => maincategory.categories.categories).flat(),
+      // };
 
-      const restItem = maincategories.map((maincategory) => ({
+      const restItem = mainCategories.map((maincategory) => ({
         name: maincategory.name,
         id: String(maincategory.mainCategoryId),
         icon: maincategory.icon,
         categories: maincategory.categories.categories,
+        maintags: mainTags[maincategory.mainCategoryId - 1] || [],
       }));
 
-      if (favoriteItem.categories.length) restItem.unshift(favoriteItem);
+      // if (favoriteItem.categories.length) restItem.unshift(favoriteItem);
 
       return restItem;
     },

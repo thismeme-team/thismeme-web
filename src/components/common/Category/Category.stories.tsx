@@ -3,7 +3,7 @@ import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import { CategoryContent } from "./CategoryContent";
 
 export default {
-  title: "components/common/Navigation/Category",
+  title: "components/common/Category",
   component: CategoryContent,
 } as ComponentMeta<typeof CategoryContent>;
 

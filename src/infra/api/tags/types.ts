@@ -21,11 +21,11 @@ export interface Category {
   categoryId: number;
   name: string;
   priority: number;
-  tags: (Pick<Tag, "tagId" | "name" | "viewCount"> & { isFav: boolean })[];
+  tags: Pick<Tag, "tagId" | "name">[];
 }
 
 export interface GetCategoryByTagResponse {
-  maincategories: {
+  mainCategories: {
     mainCategoryId: number;
     name: string;
     icon: string;
@@ -35,6 +35,7 @@ export interface GetCategoryByTagResponse {
       categories: Category[];
     };
   }[];
+  mainTags: Pick<Tag, "tagId" | "name">[][];
 }
 
 export type GetTagInfoResponse = Tag & { isFav: boolean };

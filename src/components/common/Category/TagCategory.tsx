@@ -27,7 +27,7 @@ export const TagCategory = () => {
           </div>
         )}
       </Drawer.Trigger>
-      <Drawer.Content className="z-[1001] m-auto max-w-[48rem]" direction="top" top="14.4">
+      <Drawer.Content className="z-[1001] m-auto max-w-[48rem]" direction="top" top="14.4rem">
         <SSRSuspense>
           <CategoryContent />
         </SSRSuspense>

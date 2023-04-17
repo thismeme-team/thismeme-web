@@ -26,13 +26,13 @@ interface DrawerContentProps {
   className?: string;
   children: ReactNode;
   direction: "left" | "right" | "top" | "bottom";
-  top?: string;
+  top?: string | number;
 }
 const DrawerContent = ({
   children,
   className = "",
   direction = "right",
-  top = "5.4",
+  top = "5.4rem",
 }: DrawerContentProps) => {
   const isOpen = useDrawerContext();
 
@@ -42,10 +42,10 @@ const DrawerContent = ({
       css={css`
         position: fixed;
         pointer-events: ${isOpen ? "auto" : "none"};
-        min-height: calc(100vh - ${top}rem);
+        min-height: calc(100vh - ${top});
         inset: 0;
         overflow: hidden;
-        margin-top: ${top}rem;
+        margin-top: ${top};
       `}
     >
       <section

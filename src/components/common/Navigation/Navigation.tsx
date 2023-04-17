@@ -1,12 +1,14 @@
 import type { CSSInterpolation } from "@emotion/serialize";
 import type { PropsWithChildren } from "react";
 
+import { Z_INDEX } from "@/application/util";
+
 type Props = PropsWithChildren<{ className?: string; css?: CSSInterpolation }>;
 
 export const Navigation = ({ children, className = "" }: Props) => {
   return (
     <header
-      className={`sticky top-0 z-40 flex h-54 shrink-0 items-center justify-between bg-white ${className}`}
+      className={`sticky top-0 ${Z_INDEX.header} flex h-54 shrink-0 items-center justify-between bg-white ${className}`}
     >
       {children}
     </header>

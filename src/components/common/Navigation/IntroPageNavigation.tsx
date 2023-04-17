@@ -6,7 +6,6 @@ import { SearchInput } from "@/components/search";
 
 import { Logo } from "./Logo";
 import { Navigation } from "./Navigation";
-import { Profile } from "./Profile";
 import { SideBar } from "./SideBar";
 
 export const IntroPageNavigation = () => {
@@ -24,7 +23,6 @@ export const IntroPageNavigation = () => {
           <Logo />
         </Navigation.Left>
         <Navigation.Right>
-          <Profile />
           <SideBar />
         </Navigation.Right>
       </Navigation>

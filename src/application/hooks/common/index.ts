@@ -1,3 +1,4 @@
+export * from "./useAnalytics";
 export * from "./useClickOutside";
 export * from "./useClipboard";
 export * from "./useColoredText";

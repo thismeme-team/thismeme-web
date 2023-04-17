@@ -25,7 +25,7 @@ const HomePage: NextPage = () => {
 
       <PullToRefresh>
         <section
-          className={`sticky ${Z_INDEX.header} flex gap-7 bg-white transition-[top] ${
+          className={`sticky ${Z_INDEX.header_tw} flex gap-7 bg-white transition-[top] ${
             direction === "DOWN" ? "top-54" : "top-0"
           }`}
         >

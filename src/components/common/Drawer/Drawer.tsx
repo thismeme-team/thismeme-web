@@ -1,6 +1,9 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import { css } from "twin.macro";
 
+import { APP_WIDTH, Z_INDEX } from "@/application/util";
+import { Portal } from "@/components/common/Portal";
+
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./context";
 
 export const Drawer = ({ children }: PropsWithChildren) => {
@@ -31,40 +34,45 @@ const DrawerContent = ({ children, className = "", direction }: DrawerContentPro
   const isOpen = useDrawerContext();
 
   return (
-    <div
-      className={className}
-      css={css`
-        position: fixed;
-        pointer-events: ${isOpen ? "auto" : "none"};
-        min-height: calc(100vh - 5.4rem);
-        inset: 0;
-        overflow: hidden;
-        margin-top: 5.4rem;
-      `}
-    >
-      <section
-        css={[
-          css`
-            visibility: hidden;
-            transform: translateX(${direction === "left" ? "-110%" : "110%"});
-            will-change: transform;
-            transition: transform 0.4s ease, visibility 0s ease 0.4s;
-            overflow: auto;
-            padding-inline: 2rem;
-            height: 100%;
-            background: white;
-          `,
-          isOpen &&
-            css`
-              visibility: visible;
-              transform: translateX(0);
-              transition: transform 0.4s ease;
-            `,
-        ]}
+    <Portal id="drawer-portal">
+      <div
+        className={className}
+        css={css`
+          position: fixed;
+          pointer-events: ${isOpen ? "auto" : "none"};
+          min-height: calc(100vh - 5.4rem);
+          inset: 0;
+          z-index: ${Z_INDEX.drawer};
+          max-width: ${APP_WIDTH.mobile}rem;
+          overflow: hidden;
+          margin-inline: auto;
+          margin-top: 5.4rem;
+        `}
       >
-        {children}
-      </section>
-    </div>
+        <section
+          css={[
+            css`
+              visibility: hidden;
+              transform: translateX(${direction === "left" ? "-110%" : "110%"});
+              will-change: transform;
+              transition: transform 0.4s ease, visibility 0s ease 0.4s;
+              overflow: auto;
+              padding-inline: 2rem;
+              height: 100%;
+              background: white;
+            `,
+            isOpen &&
+              css`
+                visibility: visible;
+                transform: translateX(0);
+                transition: transform 0.4s ease;
+              `,
+          ]}
+        >
+          {children}
+        </section>
+      </div>
+    </Portal>
   );
 };
 

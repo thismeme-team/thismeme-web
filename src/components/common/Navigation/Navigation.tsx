@@ -8,7 +8,7 @@ type Props = PropsWithChildren<{ className?: string; css?: CSSInterpolation }>;
 export const Navigation = ({ children, className = "" }: Props) => {
   return (
     <header
-      className={`sticky top-0 ${Z_INDEX.header} flex h-54 shrink-0 items-center justify-between bg-white ${className}`}
+      className={`sticky top-0 ${Z_INDEX.header_tw} flex h-54 w-full shrink-0 items-center justify-between bg-white ${className}`}
     >
       {children}
     </header>

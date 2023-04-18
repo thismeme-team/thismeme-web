@@ -33,7 +33,7 @@ export const CategoryContent = () => {
         name: maincategory.name,
         id: String(maincategory.mainCategoryId),
         icon: maincategory.icon,
-        categories: maincategory.categories.categories,
+        categories: maincategory.categories,
         maintags: mainTags[maincategory.mainCategoryId - 1] || [],
       }));
 

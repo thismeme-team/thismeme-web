@@ -31,9 +31,7 @@ export interface GetCategoryByTagResponse {
     icon: string;
     priority: number;
     hasSub: boolean;
-    categories: {
-      categories: Category[];
-    };
+    categories: Category[];
   }[];
   mainTags: Pick<Tag, "tagId" | "name">[][];
 }

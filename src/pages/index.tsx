@@ -2,13 +2,13 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
-import { TagCategory } from "@/components/common/Category";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeListContainer } from "@/components/home";
 import { SearchInput } from "@/components/search";
+import { TagCategory } from "@/components/tags";
 
 const HomePage: NextPage = () => {
   const router = useRouter();

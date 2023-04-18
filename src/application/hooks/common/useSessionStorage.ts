@@ -17,23 +17,17 @@ export function useSessionStorage<T>(
 ): readonly [
   Serializable<T> | undefined,
   (value: SetStateAction<Serializable<T> | undefined>) => void,
-  () => Serializable<T> | undefined,
 ];
 export function useSessionStorage<T>(
   key: string,
   { defaultValue }: StorageStateOptionsWithDefaultValue<T>,
-): readonly [
-  Serializable<T>,
-  (value: SetStateAction<Serializable<T>>) => void,
-  () => Serializable<T>,
-];
+): readonly [Serializable<T>, (value: SetStateAction<Serializable<T>>) => void];
 export function useSessionStorage<T>(
   key: string,
   { defaultValue }: StorageStateOptions<T>,
 ): readonly [
   Serializable<T> | undefined,
   (value: SetStateAction<Serializable<T> | undefined>) => void,
-  () => Serializable<T> | undefined,
 ];
 export function useSessionStorage<T>(
   key: string,
@@ -41,7 +35,6 @@ export function useSessionStorage<T>(
 ): readonly [
   Serializable<T> | undefined,
   (value: SetStateAction<Serializable<T> | undefined>) => void,
-  () => Serializable<T> | undefined,
 ] {
   const get = useCallback(<T>() => {
     if (typeof window === "undefined") return defaultValue;
@@ -69,8 +62,7 @@ export function useSessionStorage<T>(
 
   useEffect(() => {
     setState(get());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [get]);
 
   const set = useCallback(
     (value: SetStateAction<Serializable<T> | undefined>) => {
@@ -89,5 +81,5 @@ export function useSessionStorage<T>(
     [key],
   );
 
-  return [state, set, get];
+  return [state, set];
 }

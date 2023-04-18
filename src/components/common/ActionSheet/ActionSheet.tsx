@@ -1,4 +1,5 @@
 import type { ComponentProps, PropsWithChildren } from "react";
+import { useRef } from "react";
 import { CSSTransition } from "react-transition-group";
 import tw, { css } from "twin.macro";
 
@@ -9,18 +10,23 @@ interface ActionSheetProps {
   onClose: () => void;
 }
 export const ActionSheet = ({ children, isOpen, onClose }: PropsWithChildren<ActionSheetProps>) => {
+  const backdropRef = useRef(null);
+  const nodeRef = useRef(null);
+
   return (
     <>
       <CSSTransition
         mountOnEnter
         unmountOnExit
         in={isOpen}
+        nodeRef={backdropRef}
         timeout={{
           appear: DELAY,
           exit: DELAY,
         }}
       >
         <div
+          ref={backdropRef}
           css={[
             css`
               &.enter-done {
@@ -45,12 +51,14 @@ export const ActionSheet = ({ children, isOpen, onClose }: PropsWithChildren<Act
         mountOnEnter
         unmountOnExit
         in={isOpen}
+        nodeRef={nodeRef}
         timeout={{
           appear: DELAY,
           exit: DELAY,
         }}
       >
         <div
+          ref={nodeRef}
           css={[
             tw`text-16-semibold-140`,
             css`

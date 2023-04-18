@@ -1,8 +1,6 @@
 import type { SetStateAction } from "react";
 import { useCallback, useEffect, useState } from "react";
 
-import { safeLocalStorage } from "@/application/util";
-
 type Serializable<T> = T extends string | number | boolean | unknown[] | Record<string, unknown>
   ? T
   : never;
@@ -14,32 +12,40 @@ interface StorageStateOptionsWithDefaultValue<T> extends StorageStateOptions<T> 
   defaultValue: Serializable<T>;
 }
 
-export function useLocalStorage<T>(
+export function useSessionStorage<T>(
   key: string,
 ): readonly [
   Serializable<T> | undefined,
   (value: SetStateAction<Serializable<T> | undefined>) => void,
+  () => Serializable<T> | undefined,
 ];
-export function useLocalStorage<T>(
+export function useSessionStorage<T>(
   key: string,
   { defaultValue }: StorageStateOptionsWithDefaultValue<T>,
-): readonly [Serializable<T>, (value: SetStateAction<Serializable<T>>) => void];
-export function useLocalStorage<T>(
+): readonly [
+  Serializable<T>,
+  (value: SetStateAction<Serializable<T>>) => void,
+  () => Serializable<T>,
+];
+export function useSessionStorage<T>(
   key: string,
   { defaultValue }: StorageStateOptions<T>,
 ): readonly [
   Serializable<T> | undefined,
   (value: SetStateAction<Serializable<T> | undefined>) => void,
+  () => Serializable<T> | undefined,
 ];
-export function useLocalStorage<T>(
+export function useSessionStorage<T>(
   key: string,
   { defaultValue }: StorageStateOptions<T> = {},
 ): readonly [
   Serializable<T> | undefined,
   (value: SetStateAction<Serializable<T> | undefined>) => void,
+  () => Serializable<T> | undefined,
 ] {
-  const getValue = useCallback(<T>() => {
-    const item = safeLocalStorage.get(key);
+  const get = useCallback(<T>() => {
+    if (typeof window === "undefined") return defaultValue;
+    const item = sessionStorage.getItem(key);
 
     if (item == null) {
       return defaultValue;
@@ -59,14 +65,10 @@ export function useLocalStorage<T>(
     }
   }, [defaultValue, key]);
 
-  /**
-   * NOTE: hydration error 때문에 useState의 초기값으로 defaultValue을 넣어줌
-   * @see https://nextjs.org/docs/messages/react-hydration-error
-   */
   const [state, setState] = useState<Serializable<T> | undefined>(defaultValue);
 
   useEffect(() => {
-    setState(getValue());
+    setState(get());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -76,9 +78,9 @@ export function useLocalStorage<T>(
         const nextValue = typeof value === "function" ? value(curr) : value;
 
         if (nextValue == null) {
-          safeLocalStorage.remove(key);
+          window?.sessionStorage.removeItem(key);
         } else {
-          safeLocalStorage.set(key, JSON.stringify(nextValue));
+          window?.sessionStorage.setItem(key, JSON.stringify(nextValue));
         }
 
         return nextValue;
@@ -87,5 +89,5 @@ export function useLocalStorage<T>(
     [key],
   );
 
-  return [state, set];
+  return [state, set, get];
 }

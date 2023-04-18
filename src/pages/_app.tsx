@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { useAnalytics } from "@/application/hooks";
+import { useAnalytics, useRouteTracking } from "@/application/hooks";
 import { QueryClientProvider } from "@/application/queryClient";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
@@ -27,6 +27,8 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
       return true;
     });
   }, [router]);
+
+  useRouteTracking();
 
   useAnalytics();
 

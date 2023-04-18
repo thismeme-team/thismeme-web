@@ -12,6 +12,7 @@ export * from "./useIsomorphicLayoutEffect";
 export * from "./useLocalStorage";
 export * from "./useLongPress";
 export * from "./useModal";
+export * from "./useRouteTracking";
 export * from "./useSessionStorage";
 export * from "./useToast";
 export * from "./useValidation";

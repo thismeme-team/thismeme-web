@@ -1,14 +1,18 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import type { PropsWithChildren } from "react";
+import { createContext, useEffect } from "react";
 
 import { useIsMount, useSessionStorage } from "@/application/hooks";
 
 const pathsDefaultValue: string[] = [];
 
-export const useRouteTracking = () => {
+export const RouteTrackingContext = createContext(pathsDefaultValue);
+export const RouteTrackingProvider = ({ children }: PropsWithChildren) => {
   const isMount = useIsMount();
   const router = useRouter();
-  const [, set, get] = useSessionStorage<string[]>("paths", { defaultValue: pathsDefaultValue });
+  const [state, set, get] = useSessionStorage<string[]>("paths", {
+    defaultValue: pathsDefaultValue,
+  });
 
   useEffect(() => {
     if (!isMount) return;
@@ -21,4 +25,6 @@ export const useRouteTracking = () => {
     if (isBack) return set((prev) => prev.slice(0, -1));
     return set((prev) => [...prev, router.asPath]);
   }, [get, isMount, router.asPath, set]);
+
+  return <RouteTrackingContext.Provider value={state}>{children}</RouteTrackingContext.Provider>;
 };

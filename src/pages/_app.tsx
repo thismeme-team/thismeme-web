@@ -45,15 +45,15 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
       <QueryClientProvider hydrateState={pageProps.hydrateState}>
         <ToastProvider>
           <SignUpModalProvider>
-            <OverlayProvider>
-              <Layout>
+            <Layout>
+              <OverlayProvider>
                 <QueryErrorBoundary>
                   <ToastContainer />
                   <SignUpModal />
                   <Component {...pageProps} />
                 </QueryErrorBoundary>
-              </Layout>
-            </OverlayProvider>
+              </OverlayProvider>
+            </Layout>
           </SignUpModalProvider>
         </ToastProvider>
       </QueryClientProvider>

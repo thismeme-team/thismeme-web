@@ -1,24 +1,22 @@
 import type { PropsWithChildren } from "react";
-import { Children, createContext, isValidElement, useContext } from "react";
+import { Children, createContext, isValidElement, useContext, useRef } from "react";
+import { CSSTransition } from "react-transition-group";
+import tw, { css } from "twin.macro";
 
 import { useClickOutside } from "@/application/hooks";
-import { fadeInOut } from "@/application/util/animation";
 import { Icon } from "@/components/common/Icon";
-import { Portal } from "@/components/common/Portal";
 
-import type { ModalProps } from "./types";
+const DELAY = 300;
+interface ModalProps {
+  open: boolean;
+  onClose: () => void;
+}
 
-type ModalContextValue = ModalProps;
+const ModalContext = createContext<ModalProps>(null as unknown as ModalProps);
 
-const ModalContext = createContext<ModalContextValue>(null as unknown as ModalContextValue);
-
-export const Modal = ({
-  children,
-  open,
-  onOpen,
-  onClose,
-}: PropsWithChildren<ModalContextValue>) => {
+export const Modal = ({ children, open, onClose }: PropsWithChildren<ModalProps>) => {
   const ref = useClickOutside({ onClose });
+  const nodeRef = useRef(null);
 
   const reactChildren = Children.toArray(children);
 
@@ -34,11 +32,29 @@ export const Modal = ({
   );
 
   return (
-    <ModalContext.Provider value={{ open, onOpen, onClose }}>
-      <Portal id="modal-portal">
+    <ModalContext.Provider value={{ open, onClose }}>
+      <CSSTransition
+        mountOnEnter
+        unmountOnExit
+        in={open}
+        nodeRef={nodeRef}
+        timeout={{
+          appear: DELAY,
+          exit: DELAY,
+        }}
+      >
         <div
-          className="fixed inset-0 z-[1300] flex touch-none items-center bg-black/50"
-          css={fadeInOut(open)}
+          ref={nodeRef}
+          css={[
+            tw`fixed inset-0 z-[1300] flex touch-none bg-black/50`,
+            css`
+              &.enter-done {
+                opacity: 1;
+              }
+              opacity: 0;
+              transition: opacity ${DELAY}ms;
+            `,
+          ]}
           onTouchEnd={(event) => {
             if (event.target === event.currentTarget) event.preventDefault();
           }}
@@ -48,11 +64,11 @@ export const Modal = ({
             ref={ref}
           >
             {header}
-            <section className="px-24">{content}</section>
+            <section className="px-15">{content}</section>
             {footer}
           </article>
         </div>
-      </Portal>
+      </CSSTransition>
     </ModalContext.Provider>
   );
 };

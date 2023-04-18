@@ -1,7 +1,7 @@
-import { useAuth, useMemeDetailById, useToast } from "@/application/hooks";
+import { useAuth, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { DOMAIN, PATH } from "@/application/util";
-import { Dialog } from "@/components/common/Dialog";
+import { Modal } from "@/components/common/Modal";
 import { Photo } from "@/components/common/Photo";
 import {
   ClipboardCopyButton,
@@ -37,8 +37,8 @@ export const MemeShareModal = ({ id, meme, isOpen, onClose }: Props) => {
   const showNativeShareErrorToast = () => show("공유하기가 지원되지 않습니다.");
 
   return (
-    <Dialog isOpen={isOpen} onClose={onClose}>
-      <Dialog.Header onClose={onClose} />
+    <Modal open={isOpen} onClose={onClose}>
+      <Modal.Header />
       <Photo className="my-24 h-300 w-300 rounded-15" src={src} />
       <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
         <li className="relative flex flex-col items-center gap-8">
@@ -78,6 +78,6 @@ export const MemeShareModal = ({ id, meme, isOpen, onClose }: Props) => {
           <span className="absolute bottom-0 font-suit text-12-bold-160">다른 앱 공유</span>
         </li>
       </ul>
-    </Dialog>
+    </Modal>
   );
 };

@@ -1,7 +1,6 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import { css } from "twin.macro";
 
-import { APP_WIDTH, Z_INDEX } from "@/application/util";
 import { Portal } from "@/components/common/Portal";
 
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./context";
@@ -42,8 +41,8 @@ const DrawerContent = ({ children, className = "", direction }: DrawerContentPro
           pointer-events: ${isOpen ? "auto" : "none"};
           min-height: calc(100vh - 5.4rem);
           inset: 0;
-          z-index: ${Z_INDEX.drawer};
-          max-width: ${APP_WIDTH.mobile}rem;
+          z-index: 20;
+          max-width: 48rem;
           overflow: hidden;
           margin-inline: auto;
           margin-top: 5.4rem;

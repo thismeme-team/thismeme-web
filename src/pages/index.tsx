@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useScrollDirection } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, TITLE, Z_INDEX } from "@/application/util";
+import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
@@ -25,7 +25,7 @@ const HomePage: NextPage = () => {
 
       <PullToRefresh>
         <section
-          className={`sticky ${Z_INDEX.header_tw} flex gap-7 bg-white transition-[top] ${
+          className={`sticky z-10 flex gap-7 bg-white transition-[top] ${
             direction === "DOWN" ? "top-54" : "top-0"
           }`}
         >

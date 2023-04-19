@@ -40,6 +40,19 @@ export const getMemeTagsById = rest.get(
   },
 );
 
+export const getFavoriteTags = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/favs`,
+  async (req, res, ctx) => {
+    return res(
+      ctx.delay(300),
+      ctx.status(200),
+      ctx.json({
+        tags: MOCK_DATA.favoriteTags,
+      }),
+    );
+  },
+);
+
 export const postFavoriteTag = rest.post(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId/fav`,
   async (req, res, ctx) => {

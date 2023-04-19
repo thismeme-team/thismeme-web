@@ -289,3 +289,16 @@ export const mainTags = [
     },
   ],
 ];
+
+export const favoriteTags = [
+  {
+    tagId: 321,
+    name: "박명수",
+    isFav: true,
+  },
+  {
+    tagId: 322,
+    name: "무한도전",
+    isFav: true,
+  },
+];

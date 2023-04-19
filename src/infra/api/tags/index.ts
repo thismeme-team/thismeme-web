@@ -2,6 +2,7 @@ import type { AxiosInstance } from "axios";
 
 import type {
   GetCategoryByTagResponse,
+  GetFavoriteTagsResponse,
   GetMemeTagsByIdResponse,
   GetTagInfoResponse,
 } from "./types";
@@ -49,6 +50,10 @@ export class TagApi {
 
   getTagInfo = (tagId: number) => {
     return this.api.get<GetTagInfoResponse>(`/tags/${tagId}`).then((response) => response.data);
+  };
+
+  getFavoriteTags = () => {
+    return this.api.get<GetFavoriteTagsResponse>("/tags/favs").then((response) => response.data);
   };
 
   postFavoriteTag = (tagId: number) => {

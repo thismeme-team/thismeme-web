@@ -40,7 +40,14 @@ export function useCoreInfiniteQuery<
     "queryKey" | "queryFn" | "select"
   > & { select: UseCoreInfiniteQuerySelect<TQueryFnData, TData> },
 ): UseCoreInfiniteQueryResult<TData, TError> {
-  const { data, isFetching, isFetchingNextPage, ...rest } = useInfiniteQuery(queryKey, queryFn, {
+  const {
+    data,
+    isFetching,
+    isFetchingNextPage,
+    isError,
+    fetchNextPage: oldFetchNextPage,
+    ...rest
+  } = useInfiniteQuery(queryKey, queryFn, {
     getNextPageParam: (lastPage, allPages) => {
       const { count } = lastPage;
       const isLastPage = count < pageSize;
@@ -49,10 +56,20 @@ export function useCoreInfiniteQuery<
     },
     ...options,
   });
+  const fetchNextPage = isError ? ((() => {}) as typeof oldFetchNextPage) : oldFetchNextPage;
 
   const flatData = data ? data.pages.flatMap(({ data }) => data) : [];
   const isEmpty = data?.pages[0].data.length === 0;
   const isFetchingBackground = isFetching && !isFetchingNextPage;
 
-  return { data: flatData, isEmpty, isFetching, isFetchingNextPage, isFetchingBackground, ...rest };
+  return {
+    data: flatData,
+    isEmpty,
+    isFetching,
+    isFetchingNextPage,
+    isFetchingBackground,
+    isError,
+    fetchNextPage,
+    ...rest,
+  };
 }

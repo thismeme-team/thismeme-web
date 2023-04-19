@@ -29,7 +29,7 @@ export const Portal = ({ id, children }: Props) => {
     element.className = `${pretendard.variable} ${suit.variable}`;
     element.id = id;
 
-    document.body.prepend(element);
+    document.body.append(element);
   }
 
   ref.current = element as HTMLDivElement;

@@ -43,69 +43,249 @@ export const popularTag = [
   },
 ];
 
-export const categories = [
+export const mainCategories = [
   {
-    categoryId: 1,
-    name: "카테고리 명1",
-    icon: "https://raw.githubusercontent.com/toss/tossface/cec7ea0420b7f17d6f546fd7359da9bd4cb3315c/dist/svg/u1F363.svg",
+    mainCategoryId: 1,
+    name: "사용자",
+    icon: "https://raw.githubusercontent.com/toss/tossface/cec7ea0420b7f17d6f546fd7359da9bd4cb3315c/dist/svg/u1F364.svg",
     priority: 100,
-    tags: [
+    hasSub: true,
+    categories: [
       {
-        tagId: 1,
-        name: "개발자",
-        viewCount: 52,
-        isFav: true,
+        categoryId: 2,
+        name: "성격",
+        priority: 200,
+        tags: [
+          {
+            tagId: 3,
+            name: "거짓말쟁이",
+          },
+          {
+            tagId: 4,
+            name: "귀요미",
+          },
+        ],
       },
       {
-        tagId: 4,
-        name: "페페",
-        viewCount: 26,
-        isFav: false,
-      },
-      {
-        tagId: 5,
-        name: "유머",
-        viewCount: 140,
-        isFav: true,
+        categoryId: 1,
+        name: "직업",
+        priority: 100,
+        tags: [
+          {
+            tagId: 1,
+            name: "개발자",
+          },
+          {
+            tagId: 2,
+            name: "디자이너",
+          },
+        ],
       },
     ],
   },
   {
-    categoryId: 2,
-    name: "카테고리 명2",
+    mainCategoryId: 2,
+    name: "감정",
     icon: "https://raw.githubusercontent.com/toss/tossface/cec7ea0420b7f17d6f546fd7359da9bd4cb3315c/dist/svg/u1F364.svg",
     priority: 200,
-    tags: [
+    hasSub: true,
+    categories: [
       {
-        tagId: 2,
-        name: "에브리타임",
-        viewCount: 49,
-        isFav: true,
+        categoryId: 3,
+        name: "긍정적",
+        priority: 300,
+        tags: [
+          {
+            tagId: 2,
+            name: "기쁨",
+          },
+          {
+            tagId: 3,
+            name: "고마움",
+            viewCount: 34,
+            isFav: false,
+          },
+        ],
       },
       {
-        tagId: 3,
-        name: "시험기간",
-        viewCount: 34,
-        isFav: true,
-      },
-      {
-        tagId: 12,
-        name: "무전",
-        viewCount: 18,
-        isFav: false,
-      },
-      {
-        tagId: 13,
-        name: "무한전",
-        viewCount: 8,
-        isFav: false,
-      },
-      {
-        tagId: 14,
-        name: "무도전",
-        viewCount: 2,
-        isFav: false,
+        categoryId: 4,
+        name: "부정적",
+        priority: 300,
+        tags: [
+          {
+            tagId: 13,
+            name: "미안함",
+          },
+          {
+            tagId: 14,
+            name: "짜증",
+          },
+        ],
       },
     ],
   },
+  {
+    mainCategoryId: 3,
+    name: "할때",
+    icon: "https://github.com/toss/tossface/blob/main/dist/svg/u1F363.svg",
+    priority: 300,
+    hasSub: true,
+    categories: [
+      {
+        categoryId: 5,
+        name: "행동",
+        priority: 300,
+        tags: [
+          {
+            tagId: 3,
+            name: "결심할때",
+          },
+          {
+            tagId: 12,
+            name: "기다릴때",
+          },
+        ],
+      },
+      {
+        categoryId: 6,
+        name: "성향",
+        priority: 400,
+        tags: [
+          {
+            tagId: 3,
+            name: "개발할때",
+          },
+          {
+            tagId: 12,
+            name: "더울때",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    mainCategoryId: 4,
+    name: "콘텐츠",
+    icon: "https://github.com/toss/tossface/blob/main/dist/svg/u1F364.svg",
+    priority: 300,
+    hasSub: true,
+
+    categories: [
+      {
+        categoryId: 7,
+        name: "애니메이션",
+        priority: 500,
+        tags: [
+          {
+            tagId: 2,
+            name: "핀과 제이크",
+          },
+        ],
+      },
+      {
+        categoryId: 8,
+        name: "예능",
+        priority: 500,
+        tags: [
+          {
+            tagId: 3,
+            name: "런닝맨",
+          },
+          {
+            tagId: 12,
+            name: "무한도전",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    mainCategoryId: 5,
+    name: "캐릭터",
+    icon: "https://raw.githubusercontent.com/toss/tossface/cec7ea0420b7f17d6f546fd7359da9bd4cb3315c/dist/svg/u1F60E.svg",
+    priority: 5,
+    hasSub: true,
+    categories: [
+      {
+        categoryId: 31,
+        name: "인물",
+        priority: 5,
+        tags: [
+          {
+            tagId: 321,
+            name: "박명수",
+          },
+          {
+            tagId: 343,
+            name: "유재석",
+          },
+          {
+            tagId: 356,
+            name: "정준하",
+          },
+          {
+            tagId: 463,
+            name: "정형돈",
+          },
+          {
+            tagId: 355,
+            name: "하하",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    mainCategoryId: 6,
+    name: "기타",
+    icon: "https://github.com/toss/tossface/blob/main/dist/svg/u1F365.svg",
+    priority: 400,
+    hasSub: false,
+    categories: [
+      {
+        categoryId: 9,
+        name: "기타",
+        priority: 500,
+        tags: [
+          {
+            tagId: 2,
+            name: "박명수",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export const mainTags = [
+  [
+    {
+      tagId: 384,
+      name: "ISTJ",
+    },
+    {
+      tagId: 394,
+      name: "디자이너",
+    },
+  ],
+  [
+    {
+      tagId: 384,
+      name: "서러움",
+    },
+    {
+      tagId: 394,
+      name: "측은함",
+    },
+  ],
+  [
+    {
+      tagId: 384,
+      name: "거절할때",
+    },
+    {
+      tagId: 394,
+      name: "서운할때",
+    },
+  ],
 ];

@@ -80,82 +80,87 @@ export const useGetTagInfo = (
 export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getTagInfo(tagId), () => api.tags.getTagInfo(tagId));
 
-export const usePostFavoriteTag = () => {
-  const queryClient = useQueryClient();
+/**
+ * NOTE: 즐겨찾기 태그 불러오는 api 작업하면서 아마 수정될 예정
+ * 현재는 CategoryContent 에서 에러나므로 즐겨찾기 관련 로직은 주석 처리
+ */
 
-  return useMutation({
-    mutationFn: api.tags.postFavoriteTag,
-    onMutate: async (id) => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
-      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
-        ReturnType<typeof api.tags.getTagInfo>
-      >;
+// export const usePostFavoriteTag = () => {
+//   const queryClient = useQueryClient();
 
-      queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
-        const newCategory = (
-          old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
-        ).categories.map((category) => ({
-          ...category,
-          tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: true } : tag)),
-        }));
+//   return useMutation({
+//     mutationFn: api.tags.postFavoriteTag,
+//     onMutate: async (id) => {
+//       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
+//       const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
+//         ReturnType<typeof api.tags.getTagInfo>
+//       >;
 
-        return { categories: newCategory };
-      });
+//       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
+//         const newCategory = (
+//           old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
+//         ).categories.map((category) => ({
+//           ...category,
+//           tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: true } : tag)),
+//         }));
 
-      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
-        ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
-        isFav: true,
-      }));
+//         return { categories: newCategory };
+//       });
 
-      return { previousTagInfo };
-    },
+//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+//         ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
+//         isFav: true,
+//       }));
 
-    onError: (err, id, context) => {
-      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
-    },
-  });
-};
+//       return { previousTagInfo };
+//     },
 
-export const useDeleteFavoriteTag = (wait = 0) => {
-  const queryClient = useQueryClient();
+//     onError: (err, id, context) => {
+//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
+//     },
+//   });
+// };
 
-  const controller = new AbortController();
+// export const useDeleteFavoriteTag = (wait = 0) => {
+//   const queryClient = useQueryClient();
 
-  const mutation = useMutation({
-    mutationFn: (id: number) => api.tags.deleteFavoriteTag(id, controller.signal),
-    onMutate: async (id) => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getCategoryWithTags });
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
+//   const controller = new AbortController();
 
-      const previousCategory = queryClient.getQueryData(QUERY_KEYS.getCategoryWithTags);
-      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
-        ReturnType<typeof api.tags.getTagInfo>
-      >;
+//   const mutation = useMutation({
+//     mutationFn: (id: number) => api.tags.deleteFavoriteTag(id, controller.signal),
+//     onMutate: async (id) => {
+//       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getCategoryWithTags });
+//       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
 
-      queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
-        const newCategory = (
-          old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
-        ).categories.map((category) => ({
-          ...category,
-          tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: false } : tag)),
-        }));
+//       const previousCategory = queryClient.getQueryData(QUERY_KEYS.getCategoryWithTags);
+//       const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
+//         ReturnType<typeof api.tags.getTagInfo>
+//       >;
 
-        return { categories: newCategory };
-      });
+//       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
+//         const newCategory = (
+//           old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
+//         ).categories.map((category) => ({
+//           ...category,
+//           tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: false } : tag)),
+//         }));
 
-      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
-        ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
-        isFav: false,
-      }));
+//         return { categories: newCategory };
+//       });
 
-      await delay(wait);
-      return { previousCategory, previousTagInfo };
-    },
+//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+//         ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
+//         isFav: false,
+//       }));
 
-    onError: (err, id, context) => {
-      queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, context?.previousCategory);
-      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
-    },
-  });
-  return { ...mutation, onCancel: () => controller.abort() };
-};
+//       await delay(wait);
+//       return { previousCategory, previousTagInfo };
+//     },
+
+//     onError: (err, id, context) => {
+//       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, context?.previousCategory);
+//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
+//     },
+//   });
+//   return { ...mutation, onCancel: () => controller.abort() };
+// };

@@ -2,13 +2,13 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
-import { Icon } from "@/components/common/Icon";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
 import { MemeListContainer } from "@/components/home";
 import { SearchInput } from "@/components/search";
+import { TagCategory } from "@/components/tags";
 
 const HomePage: NextPage = () => {
   const router = useRouter();
@@ -31,12 +31,9 @@ const HomePage: NextPage = () => {
               router.push("/search");
             }}
           />
-          <button>
-            <span className="text-18-bold-140 text-primary-500">Tag</span>
-            <span className="flex w-full justify-center">
-              <Icon color="primary-500" name="chevronDown" />
-            </span>
-          </button>
+          <SSRSuspense>
+            <TagCategory />
+          </SSRSuspense>
         </section>
         <MemeListContainer />
       </PullToRefresh>

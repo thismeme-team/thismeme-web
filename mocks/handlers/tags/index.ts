@@ -16,7 +16,8 @@ export const getCategoryWithTag = rest.get(
       ctx.delay(300),
       ctx.status(200),
       ctx.json({
-        categories: MOCK_DATA.categories,
+        mainCategories: MOCK_DATA.mainCategories,
+        mainTags: MOCK_DATA.mainTags,
       }),
     );
   },

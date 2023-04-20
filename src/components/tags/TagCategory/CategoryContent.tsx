@@ -47,7 +47,7 @@ export const CategoryContent = () => {
     },
   });
 
-  if (favoriteTags?.length) data?.unshift(favoriteItem);
+  if (favoriteTags?.length && isLogin) data?.unshift(favoriteItem);
 
   const onClickItem = (tagId: number) => {
     setDrawerOpen(false);

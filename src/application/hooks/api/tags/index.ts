@@ -84,11 +84,13 @@ export const useGetTagInfo = (
 export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getTagInfo(tagId), () => api.tags.getTagInfo(tagId));
 
-export const useGetFavoriteTags = ({ enabled = false }: { enabled?: boolean }) => {
+export const useGetFavoriteTags = (
+  options: Pick<UseQueryOptions, "enabled"> = { enabled: false },
+) => {
   const { data, ...rest } = useQuery<GetFavoriteTagsResponse>({
     queryKey: QUERY_KEYS.getFavoriteTags,
     queryFn: () => api.tags.getFavoriteTags(),
-    enabled: enabled,
+    ...options,
   });
 
   const favoriteCategory = [

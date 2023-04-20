@@ -103,51 +103,61 @@ export const useGetFavoriteTags = ({ enabled = false }: { enabled?: boolean }) =
   return { favoriteCategory: favoriteCategory, favoriteTags: data?.tags };
 };
 
-// export const usePostFavoriteTag = () => {
-//   const queryClient = useQueryClient();
+export const usePostFavoriteTag = (name: string) => {
+  const queryClient = useQueryClient();
 
-//   return useMutation({
-//     mutationFn: api.tags.postFavoriteTag,
-//     onMutate: async (id) => {
-//       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
-//       const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
-//         ReturnType<typeof api.tags.getTagInfo>
-//       >;
+  return useMutation({
+    mutationFn: api.tags.postFavoriteTag,
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
 
-//       // queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
-//       //   const newCategory = (
-//       //     old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
-//       //   ).categories.map((category) => ({
-//       //     ...category,
-//       //     tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: true } : tag)),
-//       //   }));
+      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
+        ReturnType<typeof api.tags.getTagInfo>
+      >;
 
-//       //   return { categories: newCategory };
-//       // });
+      /**
+       * Q. 즐겨찾기에서 해제한 태그가 어떤 카테고리인지 모르는 상황에서
+       *  getCategoryWithTags 에 즐겨찾기 추가/해제한 태그를 반영할 수 있을까..?
+       *  - 서버 api 에서 즐겨찾기 태그 리스폰스에 카테고리도 포함해야할 듯
+       */
 
-//       queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, (old) => {
-//         const newTags = (old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>).tags.push({
-//           tagId: id,
-//           name: "",
-//           isFav: true,
-//         });
+      // queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
+      //   const newCategory = (
+      //     old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
+      //   ).categories.map((category) => ({
+      //     ...category,
+      //     tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: true } : tag)),
+      //   }));
 
-//         return { tags: newTags };
-//       });
+      //   return { categories: newCategory };
+      // });
 
-//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
-//         ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
-//         isFav: true,
-//       }));
+      queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, (old) => {
+        const newTags = [
+          ...(old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>).tags,
+          {
+            tagId: id,
+            name: name,
+            isFav: true,
+          },
+        ];
 
-//       return { previousTagInfo };
-//     },
+        return { tags: newTags };
+      });
 
-//     onError: (err, id, context) => {
-//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
-//     },
-//   });
-// };
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+        ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
+        isFav: true,
+      }));
+
+      return { previousTagInfo };
+    },
+
+    onError: (err, id, context) => {
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
+    },
+  });
+};
 
 export const useDeleteFavoriteTag = (wait = 0) => {
   const queryClient = useQueryClient();
@@ -167,13 +177,6 @@ export const useDeleteFavoriteTag = (wait = 0) => {
         ReturnType<typeof api.tags.getTagInfo>
       >;
 
-      /**
-       * Q. 즐겨찾기에서 해제한 태그가 어떤 카테고리인지 모르는 상황에서
-       *  getCategoryWithTags 에 즐겨찾기 해제한 태그를 반영할 수 있을까..?
-       *  아니면 서버 api 에서 즐겨찾기 태그 리스폰스에 카테고리도 포함해야할 듯
-       *
-       */
-
       // queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
       //   const newCategory = (
       //     old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
@@ -185,18 +188,17 @@ export const useDeleteFavoriteTag = (wait = 0) => {
       //   return { categories: newCategory };
       // });
 
-      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
-        ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
-        isFav: false,
-      }));
-
       queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, (old) => {
         const newTags = (old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>).tags.filter(
           (tag) => tag.tagId !== id,
         );
-
         return { tags: newTags };
       });
+
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+        ...(old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>),
+        isFav: false,
+      }));
 
       await delay(wait);
       return { previousCategory, previousTagInfo, previousFavoriteCategory };

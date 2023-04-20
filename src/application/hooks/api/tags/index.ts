@@ -5,7 +5,11 @@ import { useSuspendedQuery } from "@/application/hooks/api/core";
 import type { QuerySelectOption } from "@/application/hooks/api/core/types";
 import { delay } from "@/application/util";
 import { api } from "@/infra/api";
-import type { GetPopularTagsResponse, GetTagSearchResponse } from "@/infra/api/tags/types";
+import type {
+  GetFavoriteTagsResponse,
+  GetPopularTagsResponse,
+  GetTagSearchResponse,
+} from "@/infra/api/tags/types";
 
 import { QUERY_KEYS } from "./queryKey";
 
@@ -80,10 +84,24 @@ export const useGetTagInfo = (
 export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
   queryClient.fetchQuery(QUERY_KEYS.getTagInfo(tagId), () => api.tags.getTagInfo(tagId));
 
-/**
- * NOTE: 즐겨찾기 태그 불러오는 api 작업하면서 아마 수정될 예정
- * 현재는 CategoryContent 에서 에러나므로 즐겨찾기 관련 로직은 주석 처리
- */
+export const useGetFavoriteTags = ({ enabled = false }: { enabled?: boolean }) => {
+  const { data, ...rest } = useQuery<GetFavoriteTagsResponse>({
+    queryKey: QUERY_KEYS.getFavoriteTags,
+    queryFn: () => api.tags.getFavoriteTags(),
+    enabled: enabled,
+  });
+
+  const favoriteCategory = [
+    {
+      categoryId: 0,
+      name: "",
+      priority: 0,
+      tags: data?.tags || [],
+    },
+  ];
+
+  return { favoriteCategory: favoriteCategory, favoriteTags: data?.tags };
+};
 
 // export const usePostFavoriteTag = () => {
 //   const queryClient = useQueryClient();
@@ -96,15 +114,25 @@ export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
 //         ReturnType<typeof api.tags.getTagInfo>
 //       >;
 
-//       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
-//         const newCategory = (
-//           old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
-//         ).categories.map((category) => ({
-//           ...category,
-//           tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: true } : tag)),
-//         }));
+//       // queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
+//       //   const newCategory = (
+//       //     old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
+//       //   ).categories.map((category) => ({
+//       //     ...category,
+//       //     tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: true } : tag)),
+//       //   }));
 
-//         return { categories: newCategory };
+//       //   return { categories: newCategory };
+//       // });
+
+//       queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, (old) => {
+//         const newTags = (old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>).tags.push({
+//           tagId: id,
+//           name: "",
+//           isFav: true,
+//         });
+
+//         return { tags: newTags };
 //       });
 
 //       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
@@ -121,46 +149,64 @@ export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
 //   });
 // };
 
-// export const useDeleteFavoriteTag = (wait = 0) => {
-//   const queryClient = useQueryClient();
+export const useDeleteFavoriteTag = (wait = 0) => {
+  const queryClient = useQueryClient();
 
-//   const controller = new AbortController();
+  const controller = new AbortController();
 
-//   const mutation = useMutation({
-//     mutationFn: (id: number) => api.tags.deleteFavoriteTag(id, controller.signal),
-//     onMutate: async (id) => {
-//       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getCategoryWithTags });
-//       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
+  const mutation = useMutation({
+    mutationFn: (id: number) => api.tags.deleteFavoriteTag(id, controller.signal),
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getCategoryWithTags });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getFavoriteTags });
 
-//       const previousCategory = queryClient.getQueryData(QUERY_KEYS.getCategoryWithTags);
-//       const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
-//         ReturnType<typeof api.tags.getTagInfo>
-//       >;
+      const previousCategory = queryClient.getQueryData(QUERY_KEYS.getCategoryWithTags);
+      const previousFavoriteCategory = queryClient.getQueryData(QUERY_KEYS.getFavoriteTags);
+      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
+        ReturnType<typeof api.tags.getTagInfo>
+      >;
 
-//       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
-//         const newCategory = (
-//           old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
-//         ).categories.map((category) => ({
-//           ...category,
-//           tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: false } : tag)),
-//         }));
+      /**
+       * Q. 즐겨찾기에서 해제한 태그가 어떤 카테고리인지 모르는 상황에서
+       *  getCategoryWithTags 에 즐겨찾기 해제한 태그를 반영할 수 있을까..?
+       *  아니면 서버 api 에서 즐겨찾기 태그 리스폰스에 카테고리도 포함해야할 듯
+       *
+       */
 
-//         return { categories: newCategory };
-//       });
+      // queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, (old) => {
+      //   const newCategory = (
+      //     old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>
+      //   ).categories.map((category) => ({
+      //     ...category,
+      //     tags: category.tags.map((tag) => (tag.tagId === id ? { ...tag, isFav: false } : tag)),
+      //   }));
 
-//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
-//         ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
-//         isFav: false,
-//       }));
+      //   return { categories: newCategory };
+      // });
 
-//       await delay(wait);
-//       return { previousCategory, previousTagInfo };
-//     },
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+        ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
+        isFav: false,
+      }));
 
-//     onError: (err, id, context) => {
-//       queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, context?.previousCategory);
-//       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
-//     },
-//   });
-//   return { ...mutation, onCancel: () => controller.abort() };
-// };
+      queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, (old) => {
+        const newTags = (old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>).tags.filter(
+          (tag) => tag.tagId !== id,
+        );
+
+        return { tags: newTags };
+      });
+
+      await delay(wait);
+      return { previousCategory, previousTagInfo, previousFavoriteCategory };
+    },
+
+    onError: (err, id, context) => {
+      queryClient.setQueryData(QUERY_KEYS.getCategoryWithTags, context?.previousCategory);
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
+      queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, context?.previousFavoriteCategory);
+    },
+  });
+  return { ...mutation, onCancel: () => controller.abort() };
+};

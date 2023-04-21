@@ -7,6 +7,8 @@ import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
+import { SlotCateogry } from "./SlotCateogry";
+
 const FAVORITE_ID = "북마크";
 const TAG_DELETE_DELAY = 1500;
 
@@ -98,7 +100,13 @@ export const CategoryContent = () => {
             <Header className="py-4">
               <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
                 <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
-                <span className="flex-grow text-left text-16-semibold-140">{item.name}</span>
+                <span className="flex-grow text-left text-16-semibold-140">
+                  {item.maintags.length ? (
+                    <SlotCateogry name={item.name} tags={item.maintags} />
+                  ) : (
+                    item.name
+                  )}
+                </span>
                 <span className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100">
                   <Icon
                     aria-hidden

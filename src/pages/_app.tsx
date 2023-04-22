@@ -11,6 +11,7 @@ import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
+import { TagCategoryProvider } from "@/components/tags";
 import { GoogleTagManagerScript, GTagScript } from "@/infra/sdk";
 import type { DefaultPageProps } from "@/types";
 
@@ -45,13 +46,15 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
       <QueryClientProvider hydrateState={pageProps.hydrateState}>
         <ToastProvider>
           <SignUpModalProvider>
-            <Layout>
-              <QueryErrorBoundary>
-                <ToastContainer />
-                <SignUpModal />
-                <Component {...pageProps} />
-              </QueryErrorBoundary>
-            </Layout>
+            <TagCategoryProvider>
+              <Layout>
+                <QueryErrorBoundary>
+                  <ToastContainer />
+                  <SignUpModal />
+                  <Component {...pageProps} />
+                </QueryErrorBoundary>
+              </Layout>
+            </TagCategoryProvider>
           </SignUpModalProvider>
         </ToastProvider>
       </QueryClientProvider>

@@ -5,10 +5,14 @@ import { Icon } from "@/components/common/Icon";
 import { SSRSuspense } from "@/components/common/Suspense";
 
 import { CategoryContent } from "./CategoryContent";
+import { useTagCategoryContext } from "./context";
 
 export const TagCategory = () => {
+  const [isOpen, setIsOpen] = useTagCategoryContext();
+  const handleChange = () => setIsOpen((prev) => !prev);
+
   return (
-    <Drawer>
+    <Drawer isOpen={isOpen} onOpenChange={handleChange}>
       <Drawer.Trigger>
         {({ isOpen }) => (
           <div className="pt-8">
@@ -27,7 +31,7 @@ export const TagCategory = () => {
           </div>
         )}
       </Drawer.Trigger>
-      <Drawer.Content className="z-[1001] m-auto max-w-[48rem]" direction="top" top="14.4rem">
+      <Drawer.Content direction="top" top="14.4rem">
         <SSRSuspense>
           <CategoryContent />
         </SSRSuspense>

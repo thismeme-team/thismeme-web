@@ -12,5 +12,6 @@ export * from "./useLocalStorage";
 export * from "./useLongPress";
 export * from "./useModal";
 export * from "./useScrollDirection";
+export * from "./useScrollLocker";
 export * from "./useToast";
 export * from "./useValidation";

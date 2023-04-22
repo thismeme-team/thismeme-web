@@ -41,11 +41,16 @@ export const SlotCategory = ({ tags, name }: Props) => {
     return () => observer.disconnect();
   }, []);
 
-  const rotate = keyframes`
-    100% {
-      transform: translateY(-100%);
-    }
-  `;
+  const offset = 100 / tags.length;
+  const rotate = keyframes(
+    tags
+      .map(
+        (tag, idx) =>
+          `${offset * (idx + 0.5)}% {transform: translateY(-${offset * (idx + 1)}%);} 
+          ${offset * (idx + 1)}% {transform: translateY(-${offset * (idx + 1)}%);}`,
+      )
+      .join(""),
+  );
 
   return (
     <div className="flex" ref={ref}>

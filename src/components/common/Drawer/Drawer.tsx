@@ -1,13 +1,18 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import { css } from "twin.macro";
 
+import { useScrollLocker } from "@/application/hooks";
 import { Portal } from "@/components/common/Portal";
 
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./context";
 
-export const Drawer = ({ children }: PropsWithChildren) => {
+interface DrawerProps {
+  isOpen?: boolean;
+  onOpenChange?(open: boolean): void;
+}
+export const Drawer = ({ children, isOpen, onOpenChange }: PropsWithChildren<DrawerProps>) => {
   return (
-    <DrawerContextProvider>
+    <DrawerContextProvider isOpen={isOpen} onOpenChange={onOpenChange}>
       {/* NOTE: 공백 문자 제거 */}
       <section css={{ fontSize: 0 }}>{children}</section>
     </DrawerContextProvider>
@@ -37,6 +42,8 @@ const DrawerContent = ({
   top = "5.4rem",
 }: DrawerContentProps) => {
   const isOpen = useDrawerContext();
+
+  useScrollLocker(isOpen);
 
   return (
     <Portal id="drawer-portal">

@@ -72,9 +72,13 @@ export const InfiniteMemeList = ({
 
   const elements = useMemo(
     () =>
-      memeList.map((meme) => {
+      memeList.map((meme, idx) => {
         return (
-          <MemeLongPressContainer isCollection={isCollection} key={meme.memeId} meme={meme}>
+          <MemeLongPressContainer
+            isCollection={isCollection}
+            key={meme.memeId + idx.toString()} // 중복된 memeId 처리
+            meme={meme}
+          >
             <MemeItem meme={meme} onClick={getMemeDetailFromCache} />
           </MemeLongPressContainer>
         );

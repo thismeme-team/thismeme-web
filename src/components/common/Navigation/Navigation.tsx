@@ -1,11 +1,12 @@
+import type { CSSInterpolation } from "@emotion/serialize";
 import type { PropsWithChildren } from "react";
 
-type Props = PropsWithChildren<{ className?: string }>;
+type Props = PropsWithChildren<{ className?: string; css?: CSSInterpolation }>;
 
 export const Navigation = ({ children, className = "" }: Props) => {
   return (
     <header
-      className={`sticky top-0 z-40 flex h-54 w-[calc(100%+3.6rem)] shrink-0 -translate-x-[1.8rem] items-center justify-between bg-white px-18 ${className}`}
+      className={`sticky top-0 z-10 flex h-54 w-full shrink-0 items-center justify-between bg-white ${className}`}
     >
       {children}
     </header>

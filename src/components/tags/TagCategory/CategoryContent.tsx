@@ -9,7 +9,6 @@ import {
   useToast,
 } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
@@ -19,7 +18,6 @@ const TAG_DELETE_DELAY = 1500;
 export const CategoryContent = () => {
   const router = useRouter();
   const { isLoading, isLogin } = useAuth();
-  const setDrawerOpen = useSetDrawerContext();
   const { show, close } = useToast();
 
   const { favoriteCategory, favoriteTags } = useGetFavoriteTags({ enabled: isLogin });
@@ -50,7 +48,6 @@ export const CategoryContent = () => {
   if (favoriteTags?.length && isLogin) data?.unshift(favoriteItem);
 
   const onClickItem = (tagId: number) => {
-    setDrawerOpen(false);
     router.push(PATH.getExploreByTagPath(tagId));
   };
 

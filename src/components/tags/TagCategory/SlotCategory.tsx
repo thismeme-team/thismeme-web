@@ -19,7 +19,8 @@ interface Props {
 
 type OpenType = "open" | "closed";
 
-export const SlotCateogry = ({ tags, name }: Props) => {
+export const SlotCategory = ({ tags, name }: Props) => {
+  const animationTags = [...tags, tags[0]];
   const ref = useRef<HTMLDivElement>(null);
   const [isOpen, setIsOpen] = useState<OpenType>("closed");
 
@@ -41,40 +42,10 @@ export const SlotCateogry = ({ tags, name }: Props) => {
   }, []);
 
   const rotate = keyframes`
-  0% {
-    transform: translateY(0);
-  }
-  10% {
-    transform: translateY(-10%);
-  }
-  20% {
-    transform: translateY(-20%);
-  }
-  30% {
-    transform: translateY(-30%);
-  }
-  40% {
-    transform: translateY(-40%);
-  }
-  50% {
-    transform: translateY(-50%);
-  }
-  60% {
-    transform: translateY(-60%);
-  }
-  70% {
-    transform: translateY(-70%);
-  }
-  80% {
-    transform: translateY(-80%);
-  }
-  90% {
-    transform: translateY(-90%);
-  }
-  100% {
-    transform: translateY(-100%);
-  }
-`;
+    100% {
+      transform: translateY(-100%);
+    }
+  `;
 
   return (
     <div className="flex" ref={ref}>
@@ -89,7 +60,7 @@ export const SlotCateogry = ({ tags, name }: Props) => {
                 flex-direction: column;
               `}
             >
-              {tags.map((tag) => (
+              {animationTags.map((tag) => (
                 <div key={tag.tagId}>{tag.name}</div>
               ))}
             </span>

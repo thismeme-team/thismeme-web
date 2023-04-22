@@ -7,7 +7,7 @@ import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
-import { SlotCateogry } from "./SlotCateogry";
+import { SlotCategory } from "./SlotCategory";
 
 const FAVORITE_ID = "북마크";
 const TAG_DELETE_DELAY = 1500;
@@ -102,7 +102,7 @@ export const CategoryContent = () => {
                 <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
                 <span className="flex-grow text-left text-16-semibold-140">
                   {item.maintags.length ? (
-                    <SlotCateogry name={item.name} tags={item.maintags} />
+                    <SlotCategory name={item.name} tags={item.maintags} />
                   ) : (
                     item.name
                   )}

@@ -1,4 +1,4 @@
-import { useAuth, useToast } from "@/application/hooks";
+import { useAuth, useMemeDetailById, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { DOMAIN, PATH } from "@/application/util";
 import { Modal } from "@/components/common/Modal";
@@ -8,15 +8,13 @@ import {
   KakaoShareButton,
   NativeShareButton,
 } from "@/components/meme/MemeInfo/Button";
-import type { Meme } from "@/types";
 
 interface Props {
   id: string;
-  meme: Meme;
   isOpen: boolean;
   onClose: () => void;
 }
-export const MemeShareModal = ({ id, meme, isOpen, onClose }: Props) => {
+export const MemeShareModal = ({ id, isOpen, onClose }: Props) => {
   const { show } = useToast();
   const { validate, user } = useAuth();
   const pageUrl = `${DOMAIN}${PATH.getMemeDetailPage(Number(id))}`;
@@ -25,7 +23,8 @@ export const MemeShareModal = ({ id, meme, isOpen, onClose }: Props) => {
     name,
     description,
     image: { images },
-  } = meme;
+  } = useMemeDetailById(id);
+
   const src = images[0].imageUrl;
 
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({

@@ -20,12 +20,10 @@ import type { DefaultPageProps, Meme } from "@/types";
 
 interface Props {
   id: string;
-  meme: Meme;
+  meme: Pick<Meme, "name" | "description" | "image">;
 }
 
-const MemeDetailPage: NextPage<Props> = ({ id, meme }) => {
-  const { name, description, image } = meme;
-
+const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image } }) => {
   return (
     <>
       <ExplorePageNavigation />
@@ -42,7 +40,7 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme }) => {
         <Suspense fallback={<SkeletonMemeTagList />}>
           <MemeTagList id={id} />
         </Suspense>
-        <MemeCTAList id={id} meme={meme} />
+        <MemeCTAList id={id} />
       </SSRSuspense>
 
       <SSRSuspense
@@ -81,7 +79,7 @@ export const getStaticProps: GetStaticProps<
   const queryClient = new QueryClient();
 
   try {
-    const [meme] = await Promise.all([
+    const [{ description, name, image }] = await Promise.all([
       fetchMemeDetailById(id, queryClient),
       fetchMemeTagsById(id, queryClient),
     ]);
@@ -90,7 +88,11 @@ export const getStaticProps: GetStaticProps<
       props: {
         hydrateState: dehydrate(queryClient),
         id,
-        meme,
+        meme: {
+          description,
+          name,
+          image,
+        },
       },
       revalidate: 60 * 10, // 10분
     };

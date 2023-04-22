@@ -1,17 +1,17 @@
+import { Suspense } from "react";
+
 import { useOverlay } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 import { MemeShareModal } from "@/components/meme/MemeInfo/Modal";
-import type { Meme } from "@/types";
 
 import { CollectionSaveButton } from "./Button";
 
 interface Props {
   id: string;
-  meme: Meme;
 }
 
-export const MemeCTAList = ({ id, meme }: Props) => {
+export const MemeCTAList = ({ id }: Props) => {
   const overlay = useOverlay();
 
   return (
@@ -20,7 +20,9 @@ export const MemeCTAList = ({ id, meme }: Props) => {
         className="h-52 w-52 shrink-0 rounded-10 bg-gray-900 active:bg-black"
         onClick={() => {
           overlay.open(({ isOpen, close }) => (
-            <MemeShareModal id={id} isOpen={isOpen} meme={meme} onClose={close} />
+            <Suspense>
+              <MemeShareModal id={id} isOpen={isOpen} onClose={close} />
+            </Suspense>
           ));
         }}
       >

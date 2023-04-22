@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import tw from "twin.macro";
 
 import { useAuth, useCollection, useOverlay } from "@/application/hooks";
@@ -37,12 +38,9 @@ export const MemeActionSheet = ({ meme, onClose, isOpen }: Props) => {
           onClick={() => {
             onClose();
             overlay.open(({ isOpen, close }) => (
-              <MemeShareModal
-                id={String(meme.memeId)}
-                isOpen={isOpen}
-                meme={meme}
-                onClose={close}
-              />
+              <Suspense>
+                <MemeShareModal id={String(meme.memeId)} isOpen={isOpen} onClose={close} />
+              </Suspense>
             ));
           }}
         >

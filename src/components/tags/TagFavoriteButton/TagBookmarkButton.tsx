@@ -1,10 +1,4 @@
-import {
-  useAuth,
-  useDeleteFavoriteTag,
-  useGetTagInfo,
-  usePostFavoriteTag,
-  useToast,
-} from "@/application/hooks";
+import { useAuth, useGetTagInfo, useToast } from "@/application/hooks";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 
@@ -18,27 +12,36 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show } = useToast();
   const { validate, isLoading } = useAuth();
   const { data, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
-  const { mutate: saveMutation } = usePostFavoriteTag();
-  const { mutate: deleteMutation } = useDeleteFavoriteTag();
+
+  /**
+   * NOTE: 즐겨찾기 api 가 현재 CategoryContent 에서 에러나므로 즐겨찾기 관련 로직은 주석 처리
+   * 추후 즐겨찾기 api가 수정되면 주석 해제 예정
+   */
+  // const { mutate: saveMutation } = usePostFavoriteTag();
+  // const { mutate: deleteMutation } = useDeleteFavoriteTag();
 
   if (!isFetchedAfterMount || !data) return null;
   const { isFav } = data;
 
-  const handleSaveBookmark = () => {
-    saveMutation(tagId, {
-      onSuccess: () => show("즐겨찾기에 추가했습니다."),
-      onError: () => show("다시 시도해 주세요."),
-    });
-  };
+  /**
+   * NOTE: 즐겨찾기 api 가 현재 CategoryContent 에서 에러나므로 즐겨찾기 관련 로직은 주석 처리
+   * 추후 즐겨찾기 api가 수정되면 주석 해제 예정
+   */
+  // const handleSaveBookmark = () => {
+  //   saveMutation(tagId, {
+  //     onSuccess: () => show("즐겨찾기에 추가했습니다."),
+  //     onError: () => show("다시 시도해 주세요."),
+  //   });
+  // };
 
-  const handleDeleteBookmark = () => {
-    deleteMutation(tagId, {
-      onSuccess: () => show("즐겨찾기에서 해제했습니다."),
-      onError: () => show("다시 시도해 주세요."),
-    });
-  };
+  // const handleDeleteBookmark = () => {
+  //   deleteMutation(tagId, {
+  //     onSuccess: () => show("즐겨찾기에서 해제했습니다."),
+  //     onError: () => show("다시 시도해 주세요."),
+  //   });
+  // };
 
-  const handleClick = isFav ? handleDeleteBookmark : handleSaveBookmark;
+  // const handleClick = isFav ? handleDeleteBookmark : handleSaveBookmark;
 
   return (
     <div className="fixed bottom-32 right-18 text-center">
@@ -47,7 +50,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
         className={`${
           isFav ? "bg-primary-300 [&_*]:fill-[#fddd71]" : "bg-gray-800"
         } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
-        onClick={validate(handleClick)}
+        onClick={validate()}
       >
         <Icon height={28} name="star" width={28} />
       </Button>

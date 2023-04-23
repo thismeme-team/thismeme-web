@@ -45,7 +45,7 @@ const SearchPage: NextPage = () => {
       />
 
       <SearchPageNavigation />
-      <div className="relative mt-8">
+      <div className="relative">
         <SearchInput
           {...inputProps}
           placeholder="당신이 생각한 '그 밈' 검색하기"

@@ -2,18 +2,26 @@ import { useAuth } from "@/application/hooks";
 import { instagramUrl, twitterUrl } from "@/application/util";
 import { Drawer } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
+import { useTagCategoryContext } from "@/components/tags";
 
 import { LoginSideBarContent } from "./LoginSideBarContent";
 import { LogoutSideBarContent } from "./LogoutSideBarContent";
 
 export const SideBar = () => {
   const auth = useAuth();
+  const [, setIsOpenTagCategory] = useTagCategoryContext();
 
   return (
     <>
       <Drawer>
         <Drawer.Trigger>
-          {({ isOpen }) => (isOpen ? <Icon name="cancel" /> : <Icon name="menu" />)}
+          {({ isOpen }) =>
+            isOpen ? (
+              <Icon name="cancel" />
+            ) : (
+              <Icon name="menu" onClick={() => setIsOpenTagCategory(false)} />
+            )
+          }
         </Drawer.Trigger>
         <Drawer.Content direction="right">
           <div className="flex h-full flex-col pt-9 pb-30">

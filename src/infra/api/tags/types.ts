@@ -1,9 +1,8 @@
-interface Tag {
+export interface Tag {
   tagId: number;
   name: string;
   viewCount: number;
   categoryId: number;
-  categoryName: string;
 }
 
 export interface GetPopularTagsResponse {
@@ -18,14 +17,23 @@ export interface GetMemeTagsByIdResponse {
   tags: Tag[];
 }
 
+export interface Category {
+  categoryId: number;
+  name: string;
+  priority: number;
+  tags: Pick<Tag, "tagId" | "name">[];
+}
+
 export interface GetCategoryByTagResponse {
-  categories: {
-    categoryId: number;
+  mainCategories: {
+    mainCategoryId: number;
     name: string;
     icon: string;
     priority: number;
-    tags: (Pick<Tag, "tagId" | "name" | "viewCount"> & { isFav: boolean })[];
+    hasSub: boolean;
+    categories: Category[];
   }[];
+  mainTags: Pick<Tag, "tagId" | "name">[][];
 }
 
 export type GetTagInfoResponse = Tag & { isFav: boolean };

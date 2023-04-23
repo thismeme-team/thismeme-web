@@ -5,12 +5,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { OverlayProvider, useAnalytics } from "@/application/hooks";
+import { OverlayProvider, RouteTrackingProvider, useAnalytics } from "@/application/hooks";
 import { QueryClientProvider } from "@/application/queryClient";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
+import { TagCategoryProvider } from "@/components/tags";
 import { GoogleTagManagerScript, GTagScript } from "@/infra/sdk";
 import type { DefaultPageProps } from "@/types";
 
@@ -43,19 +44,23 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
       </Head>
 
       <QueryClientProvider hydrateState={pageProps.hydrateState}>
-        <ToastProvider>
-          <SignUpModalProvider>
-            <Layout>
-              <OverlayProvider>
-                <QueryErrorBoundary>
-                  <ToastContainer />
-                  <SignUpModal />
-                  <Component {...pageProps} />
-                </QueryErrorBoundary>
-              </OverlayProvider>
-            </Layout>
-          </SignUpModalProvider>
-        </ToastProvider>
+        <RouteTrackingProvider>
+          <ToastProvider>
+            <SignUpModalProvider>
+              <TagCategoryProvider>
+                <Layout>
+                  <OverlayProvider>
+                    <QueryErrorBoundary>
+                      <ToastContainer />
+                      <SignUpModal />
+                      <Component {...pageProps} />
+                    </QueryErrorBoundary>
+                  </OverlayProvider>
+                </Layout>
+              </TagCategoryProvider>
+            </SignUpModalProvider>
+          </ToastProvider>
+        </RouteTrackingProvider>
       </QueryClientProvider>
     </>
   );

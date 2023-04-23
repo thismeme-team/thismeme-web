@@ -13,6 +13,7 @@ export * from "./useLongPress";
 export * from "./useModal";
 export * from "./useRouteTracking";
 export * from "./useScrollDirection";
+export * from "./useScrollLocker";
 export * from "./useSessionStorage";
 export * from "./useToast";
 export * from "./useValidation";

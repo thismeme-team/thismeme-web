@@ -117,18 +117,22 @@ export const usePostFavoriteTag = (name: string) => {
         ReturnType<typeof api.tags.getTagInfo>
       >;
 
-      queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, (old) => {
-        const newTags = [
-          ...(old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>).tags,
-          {
-            tagId: id,
-            name: name,
-            isFav: true,
-          },
-        ];
+      queryClient.setQueryData<Awaited<ReturnType<typeof api.tags.getFavoriteTags>>>(
+        QUERY_KEYS.getFavoriteTags,
+        (old) => {
+          if (!old) return;
+          const newTags = [
+            ...old.tags,
+            {
+              tagId: id,
+              name: name,
+              isFav: true,
+            },
+          ];
 
-        return { tags: newTags };
-      });
+          return { tags: newTags };
+        },
+      );
 
       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
         ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
@@ -160,12 +164,14 @@ export const useDeleteFavoriteTag = (wait = 0) => {
         ReturnType<typeof api.tags.getTagInfo>
       >;
 
-      queryClient.setQueryData(QUERY_KEYS.getFavoriteTags, (old) => {
-        const newTags = (old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>).tags.filter(
-          (tag) => tag.tagId !== id,
-        );
-        return { tags: newTags };
-      });
+      queryClient.setQueryData<Awaited<ReturnType<typeof api.tags.getFavoriteTags>>>(
+        QUERY_KEYS.getFavoriteTags,
+        (old) => {
+          if (!old) return;
+          const newTags = old.tags.filter((tag) => tag.tagId !== id);
+          return { tags: newTags };
+        },
+      );
 
       queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
         ...(old as Awaited<ReturnType<typeof api.tags.getFavoriteTags>>),

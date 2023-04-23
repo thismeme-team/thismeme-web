@@ -5,7 +5,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { useAnalytics } from "@/application/hooks";
+import { RouteTrackingProvider, useAnalytics } from "@/application/hooks";
 import { QueryClientProvider } from "@/application/queryClient";
 import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
 import { Layout } from "@/components/common/Layout";
@@ -44,19 +44,21 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
       </Head>
 
       <QueryClientProvider hydrateState={pageProps.hydrateState}>
-        <ToastProvider>
-          <SignUpModalProvider>
-            <TagCategoryProvider>
-              <Layout>
-                <QueryErrorBoundary>
-                  <ToastContainer />
-                  <SignUpModal />
-                  <Component {...pageProps} />
-                </QueryErrorBoundary>
-              </Layout>
-            </TagCategoryProvider>
-          </SignUpModalProvider>
-        </ToastProvider>
+        <RouteTrackingProvider>
+          <ToastProvider>
+            <SignUpModalProvider>
+              <TagCategoryProvider>
+                <Layout>
+                  <QueryErrorBoundary>
+                    <ToastContainer />
+                    <SignUpModal />
+                    <Component {...pageProps} />
+                  </QueryErrorBoundary>
+                </Layout>
+              </TagCategoryProvider>
+            </SignUpModalProvider>
+          </ToastProvider>
+        </RouteTrackingProvider>
       </QueryClientProvider>
     </>
   );

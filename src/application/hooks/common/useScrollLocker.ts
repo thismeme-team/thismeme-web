@@ -1,6 +1,7 @@
 import { useLayoutEffect, useState } from "react";
 
-const UNIQUE_ID = `scroll-locker-${Date.now()}`;
+const MARK_KEY = "scroll-locker-key";
+const UNIQUE_ID = `key-${Date.now()}`;
 
 let uuid = 0;
 
@@ -30,8 +31,6 @@ export const useScrollLocker = (lock?: boolean) => {
   }, [mergedLock, id]);
 };
 
-const MARK_KEY = `drawer-key`;
-
 const updateCSS = (css: string, key: string) => {
   const container = getContainer();
   const existNode = findExistNode(key);
@@ -44,44 +43,48 @@ const updateCSS = (css: string, key: string) => {
     return existNode;
   }
 
+  if (!canUseDom()) {
+    return null;
+  }
   const newNode = document.createElement("style");
   newNode.innerHTML = css;
   container.appendChild(newNode);
   newNode.setAttribute(getMark(), key);
   return newNode;
 };
-export function removeCSS(key: string) {
+
+const removeCSS = (key: string) => {
   const existNode = findExistNode(key);
   if (existNode) {
     const container = getContainer();
     container.removeChild(existNode);
   }
-}
+};
+
+const getContainer = () => {
+  const head = document.querySelector("head");
+  return head || document.body;
+};
 
 const canUseDom = () => {
   return !!(typeof window !== "undefined" && window.document && window.document.createElement);
 };
 
-function getContainer() {
-  const head = document.querySelector("head");
-  return head || document.body;
-}
-
-function findExistNode(key: string) {
+const findExistNode = (key: string) => {
   const container = getContainer();
 
   return findStyles(container).find((node) => node.getAttribute(getMark()) === key);
-}
+};
 
-function findStyles(container: Element | ShadowRoot) {
+const findStyles = (container: Element | ShadowRoot) => {
   return Array.from(container.children).filter(
     (node) => node.tagName === "STYLE",
   ) as HTMLStyleElement[];
-}
+};
 
-function getMark({ mark }: { mark?: string } = {}) {
+const getMark = ({ mark }: { mark?: string } = {}) => {
   if (mark) {
     return mark.startsWith("data-") ? mark : `data-${mark}`;
   }
   return MARK_KEY;
-}
+};

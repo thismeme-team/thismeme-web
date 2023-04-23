@@ -36,7 +36,7 @@ export const CategoryContent = () => {
         id: String(maincategory.mainCategoryId),
         icon: maincategory.icon,
         categories: maincategory.categories,
-        maintags: mainTags[maincategory.mainCategoryId - 1] || [],
+        mainTags: mainTags[maincategory.mainCategoryId - 1] || [],
       }));
 
       // if (favoriteItem.categories.length) restItem.unshift(favoriteItem);
@@ -101,8 +101,8 @@ export const CategoryContent = () => {
               <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
                 <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
                 <span className="flex-grow text-left text-16-semibold-140">
-                  {item.maintags.length ? (
-                    <SlotCategory name={item.name} tags={item.maintags} />
+                  {item.mainTags.length ? (
+                    <SlotCategory name={item.name} tags={item.mainTags} />
                   ) : (
                     item.name
                   )}

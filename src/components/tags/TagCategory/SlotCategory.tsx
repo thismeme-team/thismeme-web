@@ -5,12 +5,12 @@ import { css } from "twin.macro";
 import type { Tag } from "@/infra/api/tags/types";
 
 const categoryName = {
-  사용자: "가 찾는 밈",
-  감정: "를 느낄 때",
+  사용자: "이(가) 찾는 밈",
+  감정: "을(를) 느낄 때",
   행위: "",
 };
 
-const ANIMATION_DURATION = 800;
+const ANIMATION_DURATION = 1000;
 
 interface Props {
   tags: Pick<Tag, "tagId" | "name">[];
@@ -54,29 +54,29 @@ export const SlotCategory = ({ tags, name }: Props) => {
 
   return (
     <div className="flex" ref={ref}>
-      {isOpen === "closed" ? (
-        <div className="flex">
-          <div className="h-22 w-fit overflow-hidden text-16-semibold-140">
-            <span
-              css={css`
-                height: ${tags.length * 100}%;
-                animation: ${rotate} ${ANIMATION_DURATION * tags.length}ms linear infinite;
-                display: flex;
-                flex-direction: column;
-              `}
-            >
-              {animationTags.map((tag) => (
-                <div key={tag.tagId}>{tag.name}</div>
-              ))}
-            </span>
-          </div>
+      <div className={`flex ${isOpen === "open" ? "absolute opacity-0" : ""}`}>
+        <div className="h-22 w-fit overflow-hidden text-16-semibold-140">
+          <span
+            css={css`
+              height: ${tags.length * 100}%;
+              animation: ${rotate} ${ANIMATION_DURATION * tags.length}ms linear infinite;
+              display: flex;
+              flex-direction: column;
+            `}
+          >
+            {animationTags.map((tag) => (
+              <div className="h-22" key={tag.tagId}>
+                {tag.name}
+              </div>
+            ))}
+          </span>
         </div>
-      ) : (
-        <>
-          <span>ooo</span>
-          {name === "행위" && <span>할때</span>}
-        </>
-      )}
+      </div>
+
+      <div className={`flex ${isOpen === "closed" ? "absolute opacity-0" : ""}`}>
+        <span>ooo</span>
+        {name === "행위" && <span>할때</span>}
+      </div>
       <span>{categoryName[name as keyof typeof categoryName]}</span>
     </div>
   );

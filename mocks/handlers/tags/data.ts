@@ -126,7 +126,7 @@ export const mainCategories = [
   },
   {
     mainCategoryId: 3,
-    name: "할때",
+    name: "행위",
     icon: "https://github.com/toss/tossface/blob/main/dist/svg/u1F363.svg",
     priority: 300,
     hasSub: true,

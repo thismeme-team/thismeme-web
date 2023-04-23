@@ -1,6 +1,5 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
 import { Masonry } from "@/components/common/Masonry";
-import { MemeLongPressContainer } from "@/components/meme";
 import { MemeItem } from "@/components/meme/MemeItem";
 
 interface Props {
@@ -23,12 +22,21 @@ export const SummarizedCollection = ({ collectionId }: Props) => {
       </div>
     );
   }
+  /**
+   * TODO
+   * 기존 기획에서 마이, 콜렉션페이지에서는 액션시트에 '콜렉션에 저장하기' 버튼이 없었기 때문에
+   * MemeItem에서 ActionSheet를 overlay.open 한다면 마이, 콜렉션페이지인지 아닌지 판단하는 로직 필요
+   *
+   * AS-IS
+   * InfiniteMemeList -> MemeActionSheetContainer -> ActionSheet로 isCollection props를 내려주고 있었음
+   * -> 지금은 ActionSheet를 MemeItem에서 overlay.open하므로 이 방법을 사용할 수 없음
+   * TO-BE
+   * 마이페이지인지 아닌지 판단하는 hook을 만들고 MemeActionSheet 에서 호출
+   */
   return (
     <Masonry columns={2} spacing={9}>
       {memeList.map((meme) => (
-        <MemeLongPressContainer isCollection={true} key={meme.memeId} meme={meme}>
-          <MemeItem key={meme.memeId} meme={meme} />
-        </MemeLongPressContainer>
+        <MemeItem key={meme.memeId} meme={meme} />
       ))}
     </Masonry>
   );

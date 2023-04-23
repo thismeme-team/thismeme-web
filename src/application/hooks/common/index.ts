@@ -11,6 +11,7 @@ export * from "./useIsomorphicLayoutEffect";
 export * from "./useLocalStorage";
 export * from "./useLongPress";
 export * from "./useModal";
+export * from "./useOverlay";
 export * from "./useRouteTracking";
 export * from "./useScrollDirection";
 export * from "./useScrollLocker";

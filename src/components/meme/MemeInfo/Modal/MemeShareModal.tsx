@@ -1,7 +1,6 @@
 import { useAuth, useMemeDetailById, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { DOMAIN, PATH } from "@/application/util";
-import type { ModalProps } from "@/components/common/Modal";
 import { Modal } from "@/components/common/Modal";
 import { Photo } from "@/components/common/Photo";
 import {
@@ -10,10 +9,12 @@ import {
   NativeShareButton,
 } from "@/components/meme/MemeInfo/Button";
 
-interface Props extends ModalProps {
+interface Props {
   id: string;
+  isOpen: boolean;
+  onClose: () => void;
 }
-export const MemeShareModal = ({ id, ...modalProps }: Props) => {
+export const MemeShareModal = ({ id, isOpen, onClose }: Props) => {
   const { show } = useToast();
   const { validate, user } = useAuth();
   const pageUrl = `${DOMAIN}${PATH.getMemeDetailPage(Number(id))}`;
@@ -24,20 +25,20 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
     image: { images },
   } = useMemeDetailById(id);
 
+  const src = images[0].imageUrl;
+
   const { mutate: postMemeToSharedCollection } = usePostMemeToSharedCollection({
     memeId: Number(id),
     sharedId: user?.sharedCollectionId as number,
   });
 
-  const src = images[0].imageUrl;
-
-  const showClipboardCopyToast = () => show("링크를 복사했습니다!");
+  const showClipboardCopyToast = () => show("밈을 담아서 링크를 복사했어요 :)");
   const showNativeShareErrorToast = () => show("공유하기가 지원되지 않습니다.");
 
   return (
-    <Modal {...modalProps}>
+    <Modal open={isOpen} onClose={onClose}>
       <Modal.Header />
-      <Photo className="my-24 w-300 rounded-15" src={src} />
+      <Photo className="my-24 h-300 w-300 rounded-15" src={src} />
       <ul className="mx-auto mb-32 flex h-77 w-fit gap-16 whitespace-nowrap text-gray-600">
         <li className="relative flex flex-col items-center gap-8">
           <KakaoShareButton
@@ -55,7 +56,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
           <ClipboardCopyButton
             target={pageUrl}
             onSuccess={() => {
-              modalProps.onClose();
+              onClose();
               showClipboardCopyToast();
               validate(postMemeToSharedCollection, { needSignUpModal: false })();
             }}
@@ -69,7 +70,7 @@ export const MemeShareModal = ({ id, ...modalProps }: Props) => {
             url={pageUrl}
             onSuccess={validate(postMemeToSharedCollection, { needSignUpModal: false })}
             onError={() => {
-              modalProps.onClose();
+              onClose();
               showNativeShareErrorToast();
             }}
           />

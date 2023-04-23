@@ -1,4 +1,6 @@
-import { useLayoutEffect, useState } from "react";
+import { useState } from "react";
+
+import { useIsomorphicLayoutEffect } from "./useIsomorphicLayoutEffect";
 
 const MARK_KEY = "scroll-locker-key";
 const UNIQUE_ID = `key-${Date.now()}`;
@@ -12,7 +14,7 @@ export const useScrollLocker = (lock?: boolean) => {
     return `${UNIQUE_ID}_${uuid}`;
   });
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     if (mergedLock) {
       updateCSS(
         `
@@ -49,7 +51,7 @@ const updateCSS = (css: string, key: string) => {
   const newNode = document.createElement("style");
   newNode.innerHTML = css;
   container.appendChild(newNode);
-  newNode.setAttribute(getMark(), key);
+  newNode.setAttribute(MARK_KEY, key);
   return newNode;
 };
 
@@ -73,18 +75,11 @@ const canUseDom = () => {
 const findExistNode = (key: string) => {
   const container = getContainer();
 
-  return findStyles(container).find((node) => node.getAttribute(getMark()) === key);
+  return findStyles(container).find((node) => node.getAttribute(MARK_KEY) === key);
 };
 
 const findStyles = (container: Element | ShadowRoot) => {
   return Array.from(container.children).filter(
     (node) => node.tagName === "STYLE",
   ) as HTMLStyleElement[];
-};
-
-const getMark = ({ mark }: { mark?: string } = {}) => {
-  if (mark) {
-    return mark.startsWith("data-") ? mark : `data-${mark}`;
-  }
-  return MARK_KEY;
 };

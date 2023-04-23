@@ -3,6 +3,7 @@ export interface Tag {
   name: string;
   viewCount: number;
   categoryId: number;
+  isFav?: boolean;
 }
 
 export interface GetPopularTagsResponse {
@@ -21,7 +22,7 @@ export interface Category {
   categoryId: number;
   name: string;
   priority: number;
-  tags: Pick<Tag, "tagId" | "name">[];
+  tags: Pick<Tag, "tagId" | "name" | "isFav">[];
 }
 
 export interface GetCategoryByTagResponse {
@@ -37,3 +38,4 @@ export interface GetCategoryByTagResponse {
 }
 
 export type GetTagInfoResponse = Tag & { isFav: boolean };
+export type GetFavoriteTagsResponse = Pick<Category, "tags">;

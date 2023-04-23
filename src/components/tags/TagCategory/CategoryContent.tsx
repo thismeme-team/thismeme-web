@@ -1,9 +1,14 @@
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
 
-import { useAuth, useGetCategoryWithTag, useToast } from "@/application/hooks";
+import {
+  useAuth,
+  useDeleteFavoriteTag,
+  useGetCategoryWithTag,
+  useGetFavoriteTags,
+  useToast,
+} from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { useSetDrawerContext } from "@/components/common/Drawer";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
@@ -14,23 +19,22 @@ const TAG_DELETE_DELAY = 1500;
 
 export const CategoryContent = () => {
   const router = useRouter();
-  const { isLoading } = useAuth();
-  const setDrawerOpen = useSetDrawerContext();
+  const { isLoading, isLogin } = useAuth();
   const { show, close } = useToast();
 
-  /**
-   * NOTE : 카테고리 태그 불러오는 api 와 즐겨찾기 태그 불러오는 api 가 분리돼서 수정될 예정
-   */
+  const { favoriteCategory, favoriteTags } = useGetFavoriteTags({ enabled: isLogin });
+
+  const favoriteItem = {
+    name: FAVORITE_ID,
+    id: FAVORITE_ID,
+    icon: "/icon/star.svg",
+    categories: favoriteCategory,
+    maintags: [],
+  };
+
   const { data } = useGetCategoryWithTag({
     enabled: !isLoading,
     select: ({ mainCategories, mainTags }) => {
-      // const favoriteItem = {
-      //   name: FAVORITE_ID,
-      //   id: FAVORITE_ID,
-      //   icon: "/icon/star.svg",
-      //   categories: maincategories.map((maincategory) => maincategory.categories.categories).flat(),
-      // };
-
       const restItem = mainCategories.map((maincategory) => ({
         name: maincategory.name,
         id: String(maincategory.mainCategoryId),
@@ -39,51 +43,45 @@ export const CategoryContent = () => {
         mainTags: mainTags[maincategory.mainCategoryId - 1] || [],
       }));
 
-      // if (favoriteItem.categories.length) restItem.unshift(favoriteItem);
-
       return restItem;
     },
   });
 
+  if (favoriteTags?.length && isLogin) data?.unshift(favoriteItem);
+
   const onClickItem = (tagId: number) => {
-    setDrawerOpen(false);
     router.push(PATH.getExploreByTagPath(tagId));
   };
 
-  /**
-   * NOTE: 즐겨찾기 태그 불러오는 api 작업하면서 아마 수정될 예정
-   * 현재는 CategoryContent 에서 에러나므로 즐겨찾기 관련 로직은 주석 처리
-   */
+  const { mutate: deleteFavoriteTag, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
 
-  // const { mutate: deleteFavoriteTag, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
+  const handleDeleteItem = async (tagId: number) => {
+    show(
+      (id) => (
+        <>
+          <div className="grow">태그가 삭제 되었습니다.</div>
+          <button
+            className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+            onClick={() => {
+              onCancel();
+              close({ id, duration: 0 });
+              show("태그 삭제를 취소 하였습니다.");
+            }}
+          >
+            삭제 취소
+          </button>
+        </>
+      ),
+      { duration: TAG_DELETE_DELAY },
+    );
 
-  // const handleDeleteItem = async (tagId: number) => {
-  //   show(
-  //     (id) => (
-  //       <>
-  //         <div className="grow">태그가 삭제 되었습니다.</div>
-  //         <button
-  //           className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
-  //           onClick={() => {
-  //             onCancel();
-  //             close({ id, duration: 0 });
-  //             show("태그 삭제를 취소 하였습니다.");
-  //           }}
-  //         >
-  //           삭제 취소
-  //         </button>
-  //       </>
-  //     ),
-  //     { duration: TAG_DELETE_DELAY },
-  //   );
-
-  //   deleteFavoriteTag(tagId, {
-  //     onError: (err) => {
-  //       if (err instanceof Error && err.name === "CanceledError") return;
-  //       show("태그 삭제가 실패하였습니다.");
-  //     },
-  //   });
-  // };
+    deleteFavoriteTag(tagId, {
+      onError: (err) => {
+        if (err instanceof Error && err.name === "CanceledError") return;
+        show("태그 삭제가 실패하였습니다.");
+      },
+    });
+  };
 
   return (
     <Root collapsible className="w-full min-w-300" defaultValue={FAVORITE_ID} type="single">
@@ -131,7 +129,10 @@ export const CategoryContent = () => {
                           <div className="grow text-left">{tag.name}</div>
                         </button>
                         {item.id === FAVORITE_ID && (
-                          <button className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100 [&_*]:stroke-gray-600 [&_*]:hover:stroke-black">
+                          <button
+                            className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100 [&_*]:stroke-gray-600 [&_*]:hover:stroke-black"
+                            onClick={() => handleDeleteItem(tag.tagId)}
+                          >
                             <Icon height={24} name="cancel" width={24} />
                           </button>
                         )}

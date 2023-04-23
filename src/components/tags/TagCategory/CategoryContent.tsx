@@ -29,7 +29,7 @@ export const CategoryContent = () => {
     id: FAVORITE_ID,
     icon: "/icon/star.svg",
     categories: favoriteCategory,
-    maintags: [],
+    mainTags: [],
   };
 
   const { data } = useGetCategoryWithTag({

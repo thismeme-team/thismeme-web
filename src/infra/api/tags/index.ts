@@ -56,7 +56,7 @@ export class TagApi {
     return this.api.get<GetFavoriteTagsResponse>("/tags/favs").then((response) => response.data);
   };
 
-  postFavoriteTag = (tagId: number) => {
+  postFavoriteTag = ({ tagId, name }: { tagId: number; name: string }) => {
     return this.api.post(`/tags/${tagId}/fav`).then((response) => response.data);
   };
 

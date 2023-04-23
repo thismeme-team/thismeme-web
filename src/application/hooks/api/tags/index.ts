@@ -105,15 +105,15 @@ export const useGetFavoriteTags = (
   return { favoriteCategory: favoriteCategory, favoriteTags: data?.tags };
 };
 
-export const usePostFavoriteTag = (name: string) => {
+export const usePostFavoriteTag = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: api.tags.postFavoriteTag,
-    onMutate: async (id) => {
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(id) });
+    onMutate: async ({ tagId, name }) => {
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.getTagInfo(tagId) });
 
-      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(id)) as Awaited<
+      const previousTagInfo = queryClient.getQueryData(QUERY_KEYS.getTagInfo(tagId)) as Awaited<
         ReturnType<typeof api.tags.getTagInfo>
       >;
 
@@ -124,7 +124,7 @@ export const usePostFavoriteTag = (name: string) => {
           const newTags = [
             ...old.tags,
             {
-              tagId: id,
+              tagId: tagId,
               name: name,
               isFav: true,
             },
@@ -134,7 +134,7 @@ export const usePostFavoriteTag = (name: string) => {
         },
       );
 
-      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), (old) => ({
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(tagId), (old) => ({
         ...(old as Awaited<ReturnType<typeof api.tags.getCategoryWithTags>>),
         isFav: true,
       }));
@@ -142,8 +142,8 @@ export const usePostFavoriteTag = (name: string) => {
       return { previousTagInfo };
     },
 
-    onError: (err, id, context) => {
-      queryClient.setQueryData(QUERY_KEYS.getTagInfo(id), context?.previousTagInfo);
+    onError: (err, { tagId }, context) => {
+      queryClient.setQueryData(QUERY_KEYS.getTagInfo(tagId), context?.previousTagInfo);
     },
   });
 };

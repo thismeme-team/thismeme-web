@@ -19,15 +19,18 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const { validate, isLoading } = useAuth();
   const { data, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
 
-  const { mutate: saveMutation } = usePostFavoriteTag(data?.name || "");
+  const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation } = useDeleteFavoriteTag();
   if (!isFetchedAfterMount || !data) return null;
   const { isFav } = data;
   const handleSaveBookmark = () => {
-    saveMutation(tagId, {
-      onSuccess: () => show("즐겨찾기에 추가했습니다."),
-      onError: () => show("다시 시도해 주세요."),
-    });
+    saveMutation(
+      { tagId: tagId, name: data.name },
+      {
+        onSuccess: () => show("즐겨찾기에 추가했습니다."),
+        onError: () => show("다시 시도해 주세요."),
+      },
+    );
   };
 
   const handleDeleteBookmark = () => {

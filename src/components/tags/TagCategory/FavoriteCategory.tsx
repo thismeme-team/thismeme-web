@@ -8,20 +8,13 @@ import { Photo } from "@/components/common/Photo";
 
 const FAVORITE_ID = "북마크";
 const TAG_DELETE_DELAY = 1500;
+const FAVORITE_ICON = "/icon/star.svg";
 
 export const FavoriteCategory = () => {
   const { isLogin } = useAuth();
   const router = useRouter();
   const { show, close } = useToast();
-  const { favoriteCategory } = useGetFavoriteTags({ enabled: isLogin });
-
-  const favoriteItem = {
-    name: FAVORITE_ID,
-    id: FAVORITE_ID,
-    icon: "/icon/star.svg",
-    categories: favoriteCategory,
-    mainTags: [],
-  };
+  const { favoriteTags } = useGetFavoriteTags({ enabled: isLogin });
 
   const onClickItem = (tagId: number) => {
     router.push(PATH.getExploreByTagPath(tagId));
@@ -57,14 +50,16 @@ export const FavoriteCategory = () => {
     });
   };
 
+  if (!favoriteTags) return <></>;
+
   return (
     <>
       <div className="py-8 text-18-bold-140">당신이 즐겨찾는 태그</div>
-      <Item value={favoriteItem.id}>
+      <Item value={FAVORITE_ID}>
         <Header className="py-4">
           <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
-            <Photo className="h-24 w-24 p-2" loading="eager" src={favoriteItem.icon} />
-            <span className="flex-grow text-left text-16-semibold-140">{favoriteItem.name}</span>
+            <Photo className="h-24 w-24 p-2" loading="eager" src={FAVORITE_ICON} />
+            <span className="flex-grow text-left text-16-semibold-140">{FAVORITE_ID}</span>
             <span className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100">
               <Icon
                 aria-hidden
@@ -77,24 +72,22 @@ export const FavoriteCategory = () => {
         </Header>
         <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
           <ul className="flex flex-col pr-16 font-suit text-16-semibold-140">
-            {favoriteItem.categories.map((category) => (
+            {favoriteTags.map((tag) => (
               <>
-                {category.tags.map((tag) => (
-                  <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
-                    <button
-                      className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
-                      onClick={() => onClickItem(tag.tagId)}
-                    >
-                      <div className="grow text-left">{tag.name}</div>
-                    </button>
-                    <button
-                      className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100 [&_*]:stroke-gray-600 [&_*]:hover:stroke-black"
-                      onClick={() => handleDeleteItem(tag.tagId)}
-                    >
-                      <Icon height={24} name="cancel" width={24} />
-                    </button>
-                  </li>
-                ))}
+                <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
+                  <button
+                    className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
+                    onClick={() => onClickItem(tag.tagId)}
+                  >
+                    <div className="grow text-left">{tag.name}</div>
+                  </button>
+                  <button
+                    className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100 [&_*]:stroke-gray-600 [&_*]:hover:stroke-black"
+                    onClick={() => handleDeleteItem(tag.tagId)}
+                  >
+                    <Icon height={24} name="cancel" width={24} />
+                  </button>
+                </li>
               </>
             ))}
           </ul>

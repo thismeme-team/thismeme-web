@@ -93,16 +93,7 @@ export const useGetFavoriteTags = (
     ...options,
   });
 
-  const favoriteCategory = [
-    {
-      categoryId: 0,
-      name: "",
-      priority: 0,
-      tags: data?.tags || [],
-    },
-  ];
-
-  return { favoriteCategory: favoriteCategory, favoriteTags: data?.tags };
+  return { favoriteTags: data?.tags };
 };
 
 export const usePostFavoriteTag = () => {

@@ -74,7 +74,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
       </div>
 
       <div className={`flex ${isOpen === "closed" ? "absolute opacity-0" : ""}`}>
-        <span>ooo</span>
+        <span>OOO</span>
         {name === "행위" && <span>할때</span>}
       </div>
       <span>{categoryName[name as keyof typeof categoryName]}</span>

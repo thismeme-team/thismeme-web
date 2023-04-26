@@ -6,6 +6,8 @@ import { PATH } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
+import { CategoryTitle } from "./CategoryTitle";
+
 const FAVORITE_ID = "북마크";
 const TAG_DELETE_DELAY = 1500;
 const FAVORITE_ICON = "/icon/star.svg";
@@ -15,10 +17,6 @@ export const FavoriteCategory = () => {
   const router = useRouter();
   const { show, close } = useToast();
   const { favoriteTags } = useGetFavoriteTags({ enabled: isLogin });
-
-  const onClickItem = (tagId: number) => {
-    router.push(PATH.getExploreByTagPath(tagId));
-  };
 
   const { mutate: deleteFavoriteTag, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
 
@@ -50,11 +48,11 @@ export const FavoriteCategory = () => {
     });
   };
 
-  if (!favoriteTags) return <></>;
+  if (!favoriteTags || !favoriteTags.length) return null;
 
   return (
     <>
-      <div className="py-8 text-18-bold-140">당신이 즐겨찾는 태그</div>
+      <CategoryTitle title={FAVORITE_ID} />
       <Item value={FAVORITE_ID}>
         <Header className="py-4">
           <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
@@ -77,7 +75,7 @@ export const FavoriteCategory = () => {
                 <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
                   <button
                     className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
-                    onClick={() => onClickItem(tag.tagId)}
+                    onClick={() => router.push(PATH.getExploreByTagPath(tag.tagId))}
                   >
                     <div className="grow text-left">{tag.name}</div>
                   </button>

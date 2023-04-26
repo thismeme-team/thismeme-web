@@ -6,10 +6,9 @@ import { PATH } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
+import { CategoryTitle } from "./CategoryTitle";
 import { FavoriteCategory } from "./FavoriteCategory";
 import { SlotCategory } from "./SlotCategory";
-
-const FAVORITE_ID = "북마크";
 
 export const CategoryContent = () => {
   const router = useRouter();
@@ -30,19 +29,12 @@ export const CategoryContent = () => {
     },
   });
 
-  const onClickItem = (tagId: number) => {
-    router.push(PATH.getExploreByTagPath(tagId));
-  };
-
   return (
-    <Root collapsible className="w-full min-w-300" defaultValue={FAVORITE_ID} type="single">
+    <Root collapsible className="w-full min-w-300" defaultValue="북마크" type="single">
       <FavoriteCategory />
       {data?.map((item) => (
         <>
-          {item.name === "사용자" && (
-            <div className="py-8 text-18-bold-140">이럴 때 이런 밈은 어때요?</div>
-          )}
-          {item.name === "콘텐츠" && <div className="py-8 text-18-bold-140">밈 바로 찾기</div>}
+          <CategoryTitle title={item.name} />
           <Item key={item.id} value={item.id}>
             <Header className="py-4">
               <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
@@ -73,7 +65,7 @@ export const CategoryContent = () => {
                       <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
                         <button
                           className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
-                          onClick={() => onClickItem(tag.tagId)}
+                          onClick={() => router.push(PATH.getExploreByTagPath(tag.tagId))}
                         >
                           <div className="grow text-left">{tag.name}</div>
                         </button>

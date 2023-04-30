@@ -18,11 +18,16 @@ import type { NextSeoProps } from "./types";
  *      description: "네가 찾던 ‘그 밈’ 그 집이 내 집이였어야 해",
  *      imageUrl: "https://static.toss.im/assets/paper0/pc_og.png"
  *    }}
+ *    twitter={{
+ *      handle
+ *      site
+ *      cardType
+ *    }}
  * />
  */
 export const NextSeo = (props: NextSeoProps) => {
   const tagsToRender = [];
-  const { title, description, canonical, openGraph } = props;
+  const { title, description, canonical, openGraph, twitter } = props;
 
   if (title) {
     tagsToRender.push(<title key="title">{title}</title>);
@@ -56,6 +61,22 @@ export const NextSeo = (props: NextSeoProps) => {
     }
     if (openGraph.imageUrl) {
       tagsToRender.push(<meta content={openGraph.imageUrl} key="og:image" property="og:image" />);
+    }
+  }
+
+  if (twitter) {
+    if (twitter.cardType) {
+      tagsToRender.push(<meta content={twitter.cardType} key="twitter:card" name="twitter:card" />);
+    }
+
+    if (twitter.site) {
+      tagsToRender.push(<meta content={twitter.site} key="twitter:site" name="twitter:site" />);
+    }
+
+    if (twitter.handle) {
+      tagsToRender.push(
+        <meta content={twitter.handle} key="twitter:creator" name="twitter:creator" />,
+      );
     }
   }
 

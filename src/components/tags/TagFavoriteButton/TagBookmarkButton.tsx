@@ -47,19 +47,15 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
       <Button
         id="bookmark"
         className={`${
-          isFav ? "bg-primary-300 [&_*]:fill-[#fddd71]" : "bg-gray-800"
-        } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
+          isFav
+            ? "bg-gray-200 text-gray-600 shadow-[0_0_20px_rgba(38,37,40,0.2)] active:bg-gray-300 active:text-gray-700"
+            : "bg-gray-800 text-white active:bg-black active:text-white"
+        } ${animation} flex h-53 w-143 justify-between rounded-50 px-24 py-16 text-14-semibold-140`}
         onClick={validate(handleClick)}
       >
-        <Icon height={28} name="star" width={28} />
+        <Icon height={22} name="star" width={22} />
+        태그 북마크
       </Button>
-      <span
-        className={`${
-          isFav ? "text-gray-600" : "text-gray-700"
-        } ${animation} text-12-bold-160 peer-active:text-black`}
-      >
-        {isFav ? "북마크 완료!" : "태그 북마크"}
-      </span>
     </div>
   );
 };

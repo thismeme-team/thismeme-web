@@ -8,12 +8,14 @@ import {
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 
+import { useTagCategoryContext } from "../TagCategory";
+
 interface Props {
   tagId: number;
 }
 
 const animation = "transition-colors duration-200 ease-in-out";
-const TAG_DELETE_DELAY = 1500;
+const TAG_DELAY = 1500;
 
 export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show, close } = useToast();
@@ -21,7 +23,8 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const { data, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
 
   const { mutate: saveMutation } = usePostFavoriteTag();
-  const { mutate: deleteMutation, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
+  const { mutate: deleteMutation, onCancel } = useDeleteFavoriteTag(TAG_DELAY);
+  const [, setIsOpenTagCategory] = useTagCategoryContext();
 
   if (!isFetchedAfterMount || !data) return null;
   const { isFav } = data;
@@ -29,7 +32,22 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
     saveMutation(
       { tagId: tagId, name: data.name },
       {
-        onSuccess: () => show("즐겨찾기에 추가했습니다."),
+        onSuccess: () =>
+          show(
+            <>
+              <div className="grow">태그를 북마크했어요!</div>
+              <button
+                className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+                onClick={() => {
+                  setIsOpenTagCategory(true);
+                  close({ id: tagId, duration: 0 });
+                }}
+              >
+                보러가기
+              </button>
+            </>,
+            { duration: TAG_DELAY },
+          ),
         onError: () => show("다시 시도해 주세요."),
       },
     );
@@ -50,7 +68,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
           되돌리기
         </button>
       </>,
-      { duration: TAG_DELETE_DELAY },
+      { duration: TAG_DELAY },
     );
     deleteMutation(tagId, {
       onError: (err) => {

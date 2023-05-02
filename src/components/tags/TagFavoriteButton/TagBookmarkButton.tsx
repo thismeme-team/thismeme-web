@@ -13,14 +13,16 @@ interface Props {
 }
 
 const animation = "transition-colors duration-200 ease-in-out";
+const TAG_DELETE_DELAY = 1500;
 
 export const TagBookmarkButton = ({ tagId }: Props) => {
-  const { show } = useToast();
+  const { show, close } = useToast();
   const { validate, isLoading } = useAuth();
   const { data, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
 
   const { mutate: saveMutation } = usePostFavoriteTag();
-  const { mutate: deleteMutation } = useDeleteFavoriteTag();
+  const { mutate: deleteMutation, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
+
   if (!isFetchedAfterMount || !data) return null;
   const { isFav } = data;
   const handleSaveBookmark = () => {
@@ -33,10 +35,28 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
     );
   };
 
-  const handleDeleteBookmark = () => {
+  const handleDeleteBookmark = async () => {
+    show(
+      <>
+        <div className="grow">북마크한 태그를 해제했어요!</div>
+        <button
+          className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+          onClick={() => {
+            onCancel();
+            close({ id: tagId, duration: 0 });
+            show("삭제할 뻔한 태그를 살려냈어요!");
+          }}
+        >
+          되돌리기
+        </button>
+      </>,
+      { duration: TAG_DELETE_DELAY },
+    );
     deleteMutation(tagId, {
-      onSuccess: () => show("즐겨찾기에서 해제했습니다."),
-      onError: () => show("다시 시도해 주세요."),
+      onError: (err) => {
+        if (err instanceof Error && err.name === "CanceledError") return;
+        show("다시 시도해주세요.");
+      },
     });
   };
 

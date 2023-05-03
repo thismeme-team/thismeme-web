@@ -1,22 +1,19 @@
-import Link from "next/link";
-
-import { RandomImage } from "@/components/common/RandomImge";
+import { channelUrl } from "@/application/util";
+import { Button } from "@/components/common/Button";
+import { Icon } from "@/components/common/Icon";
 
 export const EmptyMemesView = () => {
   return (
-    <div className="absolute left-1/2 top-1/2 flex -translate-y-2/4 -translate-x-2/4 flex-col items-center justify-center font-suit">
-      <span className="whitespace-nowrap text-32-bold-140">
-        당신이 찾는{" "}
-        <Link href="/">
-          <RandomImage className="-mb-[calc(1.4em-3.2rem)/2] inline-block h-32 w-32 rounded-8" />
-        </Link>
-        은
-      </span>
-      <span className="text-32-bold-140">아직 없나봐요</span>
-      <span className="mt-24 text-center text-16-semibold-140 text-gray-600">
-        다른 키워드로 검색하거나
-        <br />
-        밈의 바다에서 서핑해보세요!
+    <div className="absolute left-1/2 top-1/2 flex -translate-y-2/4 -translate-x-2/4 flex-col items-center justify-center text-32-bold-140">
+      <span>꽤 유니크한 밈을</span>
+      <span>찾고 계시는군요!</span>
+      <a href={channelUrl} rel="noreferrer" target="_blank">
+        <Button className="mt-16 flex h-56 w-160 justify-between rounded-50 bg-gray-800 px-24 py-16 text-14-semibold-140 text-white active:bg-black">
+          <Icon height={24} name="memeChannel" width={24} />그 밈 알려주기
+        </Button>
+      </a>
+      <span className="mt-8 text-center text-12-regular-160 text-gray-600">
+        찾고 싶은 밈 팀에 알려주실래요?
       </span>
     </div>
   );

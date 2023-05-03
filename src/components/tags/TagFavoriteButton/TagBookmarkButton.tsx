@@ -5,6 +5,7 @@ import {
   usePostFavoriteTag,
   useToast,
 } from "@/application/hooks";
+import { TOAST_MESSAGE } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 
@@ -35,7 +36,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
         onSuccess: () =>
           show(
             <>
-              <div className="grow">태그를 북마크했어요!</div>
+              <div className="grow">{TOAST_MESSAGE["태그 북마크"]}</div>
               <button
                 className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
                 onClick={() => {
@@ -48,7 +49,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
             </>,
             { duration: TAG_DELAY },
           ),
-        onError: () => show("다시 시도해 주세요."),
+        onError: () => show(TOAST_MESSAGE["다시 시도"]),
       },
     );
   };
@@ -56,13 +57,13 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const handleDeleteBookmark = async () => {
     show(
       <>
-        <div className="grow">북마크한 태그를 해제했어요!</div>
+        <div className="grow">{TOAST_MESSAGE["태그 북마크 해제"]}</div>
         <button
           className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
           onClick={() => {
             onCancel();
             close({ id: tagId, duration: 0 });
-            show("삭제할 뻔한 태그를 살려냈어요!");
+            show(TOAST_MESSAGE["태그 북마크 취소"]);
           }}
         >
           되돌리기
@@ -73,7 +74,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
     deleteMutation(tagId, {
       onError: (err) => {
         if (err instanceof Error && err.name === "CanceledError") return;
-        show("다시 시도해주세요.");
+        show(TOAST_MESSAGE["다시 시도"]);
       },
     });
   };
@@ -81,7 +82,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const handleClick = isFav ? handleDeleteBookmark : handleSaveBookmark;
 
   return (
-    <div className="fixed bottom-32 right-18 text-center">
+    <div className="fixed bottom-32 left-[50%] translate-x-[-50%] text-center">
       <Button
         id="bookmark"
         className={`${

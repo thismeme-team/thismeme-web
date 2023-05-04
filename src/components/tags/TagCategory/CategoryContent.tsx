@@ -1,7 +1,7 @@
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
 
-import { useAuth, useGetCategoryWithTag } from "@/application/hooks";
+import { useGetCategoryWithTag } from "@/application/hooks";
 import { PATH } from "@/application/util";
 import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
@@ -12,10 +12,8 @@ import { SlotCategory } from "./SlotCategory";
 
 export const CategoryContent = () => {
   const router = useRouter();
-  const { isLoading } = useAuth();
 
   const { data } = useGetCategoryWithTag({
-    enabled: !isLoading,
     select: ({ mainCategories, mainTags }) => {
       const restItem = mainCategories.map((maincategory) => ({
         name: maincategory.name,

@@ -5,15 +5,9 @@ import { css } from "twin.macro";
 import type { Tag } from "@/infra/api/tags/types";
 
 const categoryName: { [key: string]: string } = {
-  사용자: "이(가) 찾는 밈",
-  감정: "을(를) 느낄 때",
-  행위: "",
-};
-
-const categoryOpenName: { [key: string]: string } = {
-  사용자: "OOO이(가) 찾는 밈",
-  감정: "OOO을(를) 느낄 때",
-  행위: "OOO할 때",
+  "OOO이 찾는 밈": "이(가) 찾는 밈",
+  "OOO을 느낄 때": "을(를) 느낄 때",
+  "OOO할 때": "",
 };
 
 const ANIMATION_DURATION = 1000;
@@ -77,7 +71,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
         </div>
       </div>
 
-      {isOpen ? categoryOpenName[name] : categoryName[name]}
+      {isOpen ? name : categoryName[name]}
     </div>
   );
 };

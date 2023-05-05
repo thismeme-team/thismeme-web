@@ -44,7 +44,7 @@ export class TagApi {
 
   getCategoryWithTags = () => {
     return this.api
-      .get<GetCategoryByTagResponse>("/tags/categories")
+      .get<GetCategoryByTagResponse>("/tags/categories/new")
       .then((response) => response.data);
   };
 

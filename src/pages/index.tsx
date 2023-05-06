@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useScrollDirection } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { metadata } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
@@ -17,11 +17,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <NextSeo
-        description={DEFAULT_DESCRIPTION}
-        openGraph={{ imageUrl: "/open-graph/home.png" }}
-        title={TITLE.default}
-      />
+      <NextSeo {...metadata.main} />
       <IntroPageNavigation />
 
       <PullToRefresh>

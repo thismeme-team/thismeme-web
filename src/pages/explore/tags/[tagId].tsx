@@ -2,7 +2,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 import { fetchTagInfo, prefetchMemesByTag } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { APP_NAME, DEFAULT_DESCRIPTION, title } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
@@ -17,7 +17,17 @@ interface Props {
 const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
   return (
     <>
-      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.exploreByTag(searchQuery)} />
+      <NextSeo
+        description={DEFAULT_DESCRIPTION}
+        title={title.exploreByTag(searchQuery)}
+        openGraph={{
+          siteName: APP_NAME,
+          imageUrl: `/api/og?tag=${searchQuery}`,
+        }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
+      />
 
       <ExplorePageNavigation title={`#${searchQuery}`} />
 

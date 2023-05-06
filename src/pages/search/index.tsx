@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { Suspense, useState } from "react";
 
 import { useDebounce, useInput, useRecentSearch } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
+import { metadata, PATH } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -38,11 +38,7 @@ const SearchPage: NextPage = () => {
 
   return (
     <>
-      <NextSeo
-        description={DEFAULT_DESCRIPTION}
-        openGraph={{ imageUrl: "/open-graph/home.png" }}
-        title={TITLE.search}
-      />
+      <NextSeo {...metadata.search} />
 
       <SearchPageNavigation />
       <div className="relative">

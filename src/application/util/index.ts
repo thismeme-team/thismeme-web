@@ -4,7 +4,7 @@ export * from "./delay";
 export * from "./device";
 export * from "./gtag";
 export * from "./image-util";
+export * from "./metadata";
 export * from "./path";
-export * from "./seo";
 export * from "./storage";
 export * from "./throttle";

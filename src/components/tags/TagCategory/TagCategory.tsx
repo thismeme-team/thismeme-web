@@ -15,7 +15,7 @@ export const TagCategory = () => {
     <Drawer isOpen={isOpen} onOpenChange={handleChange}>
       <Drawer.Trigger>
         {({ isOpen }) => (
-          <div className="pt-8">
+          <div>
             <span className="text-18-bold-140 text-primary-500">Tag</span>
             <span
               css={css`

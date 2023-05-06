@@ -28,6 +28,7 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
             endComponent={
               <Icon
                 className="shrink-0"
+                color="gray-600"
                 name="delete2"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -36,7 +37,7 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
               />
             }
             startComponent={
-              <Icon className="shrink-0" name={isTagType(type) ? "pound" : "search"} />
+              <Icon className="min-w-24 shrink-0" name={isTagType(type) ? "pound" : "search"} />
             }
             onClick={() => {
               onAddItem({ value, type, id });

@@ -6,7 +6,7 @@ import type { NextSeoProps } from "./types";
  * @name NextSeo
  * @description
  * 현재 페이지에 타이틀, 설명, [OpenGraph](https://nowonbun.tistory.com/517) (공유 시 타이틀, 설명, 이미지) 를 적용할 수 있도록 하는 컴포넌트입니다.
- * 추후에 twitter card 도 적용할 예정입니다.
+ * @see {@link https://developer.twitter.com/en/docs/twitter-for-websites/cards/overview/markup Cards Markup}
  * @example
  * <NextSeo
  *    title="홈 | 당신이 찾는 ‘그 밈’"
@@ -16,12 +16,13 @@ import type { NextSeoProps } from "./types";
  *      url: "https://app.thismeme.me",
  *      title: "홈 | 당신이 찾는 ‘그 밈’",
  *      description: "네가 찾던 ‘그 밈’ 그 집이 내 집이였어야 해",
- *      imageUrl: "https://static.toss.im/assets/paper0/pc_og.png"
+ *      imageUrl: "https://static.toss.im/assets/paper0/pc_og.png",
+ *      siteName: '그 밈'
  *    }}
  *    twitter={{
- *      handle
- *      site
- *      cardType
+ *      handle: "@thismeme_team",
+ *      site: "@thismeme_team",
+ *      cardType: "summary_large_image"
  *    }}
  * />
  */
@@ -40,6 +41,12 @@ export const NextSeo = (props: NextSeoProps) => {
   if (openGraph?.title || title) {
     tagsToRender.push(
       <meta content={openGraph?.title || title} key="og:title" property="og:title" />,
+    );
+  }
+
+  if (openGraph?.siteName) {
+    tagsToRender.push(
+      <meta content={openGraph.siteName} key="og:site_name" property="og:site_name" />,
     );
   }
 

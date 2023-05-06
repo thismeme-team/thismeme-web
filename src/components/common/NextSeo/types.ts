@@ -3,6 +3,7 @@ interface OpenGraph {
   title?: string;
   description?: string;
   imageUrl?: string;
+  siteName?: string;
 }
 
 interface Twitter {

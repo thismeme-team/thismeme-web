@@ -16,7 +16,6 @@ const ExploreByKeywordPage: NextPage<Props> = ({ searchQuery }) => {
   return (
     <>
       <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.exploreByKeyword(searchQuery)} />
-
       <ExplorePageNavigation title={searchQuery} />
       <PullToRefresh>
         <div className="mt-12">

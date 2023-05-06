@@ -8,7 +8,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onSearchByKeyWord?: () => void;
 }
 
-export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Props) => {
+export const SearchInput = ({ onReset, onSearchByKeyWord, value, className, ...rest }: Props) => {
   return (
     <form
       className="relative my-16 flex w-full items-center justify-start"
@@ -18,7 +18,7 @@ export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Prop
       }}
     >
       <InputBase
-        className="relative h-56 w-full rounded-30 bg-gray-100 pl-22 pr-76 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500"
+        className={`relative h-56 w-full rounded-30 bg-gray-100 pl-22 pr-76 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500 ${className}`}
         value={value}
         {...rest}
         endComponents={

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
 import { TITLE } from "@/application/util";
-import { ExplorePageNavigation } from "@/components/common/Navigation";
+import { MemeDetailPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -26,7 +26,7 @@ interface Props {
 const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image } }) => {
   return (
     <>
-      <ExplorePageNavigation />
+      <MemeDetailPageNavigation />
       <NextSeo
         description={description}
         title={TITLE.memeDetail(name)}

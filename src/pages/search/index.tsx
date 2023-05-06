@@ -1,6 +1,6 @@
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Suspense, useState } from "react";
+import { Suspense } from "react";
 
 import { useDebounce, useInput, useRecentSearch } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, PATH, TITLE } from "@/application/util";
@@ -26,7 +26,6 @@ const SearchPage: NextPage = () => {
   const inputProps = useInput();
   const { items, onDeleteItem, onAddItem } = useRecentSearch();
   const router = useRouter();
-  const [focus, setFocus] = useState(false);
 
   const onSearchByKeyword = () => {
     if (!inputProps.value || !inputProps.value.trim()) return;
@@ -52,26 +51,28 @@ const SearchPage: NextPage = () => {
           spellCheck={false}
           type="text"
           onSearchByKeyWord={onSearchByKeyword}
-          onBlur={() => {
-            setFocus(false);
-          }}
-          onFocus={() => {
-            setFocus(true);
-          }}
         />
-        <p className="mb-24 px-14 text-12-regular-160 text-gray-500">밈 제목,태그를 입력하세요</p>
         {inputProps.value && (
-          <Suspense>
-            <SearchResultList value={debouncedValue} onAddItem={onAddItem} />
-          </Suspense>
+          <>
+            <p className="mb-4 text-16-semibold-140 text-gray-500">태그 자동완성</p>
+            <Suspense>
+              <SearchResultList value={debouncedValue} onAddItem={onAddItem} />
+            </Suspense>
+          </>
         )}
-        {!inputProps.value && focus && (
-          <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
+        {!inputProps.value && (
+          <>
+            <p className="text-16-semibold-140 text-gray-500">친구들이 찾는 인기태그</p>
+            <SSRSuspense fallback={<SkeletonTagList />}>
+              <SearchPopularList />
+            </SSRSuspense>
+          </>
         )}
-        {!inputProps.value && !focus && (
-          <SSRSuspense fallback={<SkeletonTagList />}>
-            <SearchPopularList />
-          </SSRSuspense>
+        {!inputProps.value && (
+          <>
+            <p className="mt-12 mb-4 text-16-semibold-140 text-gray-500">최근 검색</p>
+            <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
+          </>
         )}
       </div>
     </>

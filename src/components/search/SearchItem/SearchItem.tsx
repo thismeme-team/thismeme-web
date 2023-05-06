@@ -20,7 +20,7 @@ export const SearchItem = ({
 
   return (
     <div
-      className="flex h-50 w-full cursor-pointer items-center gap-10 pl-11 pr-6 font-suit text-16-semibold-140"
+      className="flex h-50 w-full cursor-pointer items-center gap-10 pl-11 pr-6 font-suit text-16-regular-140"
       {...rest}
     >
       {startComponent}

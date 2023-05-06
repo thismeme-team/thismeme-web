@@ -18,13 +18,67 @@ const logo = (
   </svg>
 );
 
-export default function handler(request: NextRequest) {
-  try {
-    const { searchParams } = new URL(request.url);
+/**
+ * NOTE: 이미지가 함수와 함께 번들로 제공되고 배포되며 오픈 그래프 이미지를 렌더링할 때 이미지를 가져오라는 외부 요청이 발생하지 않습니다.
+ * @see https://vercel.com/docs/concepts/functions/edge-functions/og-image-generation/og-image-examples#using-a-local-image
+ */
+const defaultImage = fetch(new URL("../../../public/open-graph/home.png", import.meta.url)).then(
+  (res) => res.arrayBuffer(),
+);
 
-    // ?tag=<tag>
-    const hasTag = searchParams.has("tag");
-    const tag = hasTag ? searchParams.get("tag")?.slice(0, 100) : "My default title";
+export default async function handler(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const defaultImageData = await defaultImage;
+
+  const defaultImageResponse = new ImageResponse(
+    (
+      <div
+        style={{
+          display: "flex",
+          background: "#f6f6f6",
+          width: "100%",
+          height: "100%",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          alt="그밈이미지"
+          height="630"
+          // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+          // @ts-expect-error
+          src={defaultImageData}
+          width="1200"
+        />
+      </div>
+    ),
+    {
+      width: 1200,
+      height: 630,
+    },
+  );
+
+  // ?tag=<tag>
+  const hasTag = searchParams.has("tag");
+  if (!hasTag) {
+    return defaultImageResponse;
+  }
+
+  try {
+    const tag = searchParams.get("tag")?.slice(0, 11);
+    const title = `${tag} 밈`;
+
+    // NOTE: 태그 검색 결과 중 첫번째 검색 결과만 가져옵니다.
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search/tag?keyword=${tag}&offset=0&limit=1`,
+    );
+    const { memes } = await response.json();
+
+    if (typeof memes === "undefined" || memes.length === 0) {
+      return defaultImageResponse;
+    }
 
     return new ImageResponse(
       (
@@ -41,8 +95,8 @@ export default function handler(request: NextRequest) {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            alt={tag}
-            src="https://jjmeme-bucket-2.s3.amazonaws.com/hashed_name_image/f006498e9ee4a434546f6534604a587f37a8080f302721b42eee1889d75fba04.jpg"
+            alt={title}
+            src={memes[0].image.images[0].imageUrl}
             style={{
               position: "absolute",
               width: "100%",
@@ -78,7 +132,7 @@ export default function handler(request: NextRequest) {
               fontWeight: 800,
             }}
           >
-            {tag} 밈
+            {title}
           </p>
         </div>
       ),
@@ -88,8 +142,6 @@ export default function handler(request: NextRequest) {
       },
     );
   } catch (e) {
-    return new Response(`Failed to generate the image`, {
-      status: 500,
-    });
+    return defaultImageResponse;
   }
 }

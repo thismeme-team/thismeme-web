@@ -44,37 +44,35 @@ const SearchPage: NextPage = () => {
       />
 
       <SearchPageNavigation />
-      <div className="relative">
-        <SearchInput
-          {...inputProps}
-          placeholder="당신이 생각한 '그 밈' 검색하기"
-          spellCheck={false}
-          type="text"
-          onSearchByKeyWord={onSearchByKeyword}
-        />
-        {inputProps.value && (
-          <>
-            <p className="mb-4 text-16-semibold-140 text-gray-500">태그 자동완성</p>
-            <Suspense>
-              <SearchResultList value={debouncedValue} onAddItem={onAddItem} />
-            </Suspense>
-          </>
-        )}
-        {!inputProps.value && (
-          <>
-            <p className="text-16-semibold-140 text-gray-500">친구들이 찾는 인기태그</p>
-            <SSRSuspense fallback={<SkeletonTagList />}>
-              <SearchPopularList />
-            </SSRSuspense>
-          </>
-        )}
-        {!inputProps.value && (
-          <>
-            <p className="mt-12 mb-4 text-16-semibold-140 text-gray-500">최근 검색</p>
-            <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
-          </>
-        )}
-      </div>
+      <SearchInput
+        {...inputProps}
+        placeholder="당신이 생각한 '그 밈' 검색하기"
+        spellCheck={false}
+        type="text"
+        onSearchByKeyWord={onSearchByKeyword}
+      />
+      {inputProps.value && (
+        <>
+          <p className="mb-4 text-16-semibold-140 text-gray-500">태그 자동완성</p>
+          <Suspense>
+            <SearchResultList value={debouncedValue} onAddItem={onAddItem} />
+          </Suspense>
+        </>
+      )}
+      {!inputProps.value && (
+        <>
+          <p className="text-16-semibold-140 text-gray-500">친구들이 찾는 인기태그</p>
+          <SSRSuspense fallback={<SkeletonTagList />}>
+            <SearchPopularList />
+          </SSRSuspense>
+        </>
+      )}
+      {!inputProps.value && (
+        <>
+          <p className="mt-12 mb-4 text-16-semibold-140 text-gray-500">최근 검색</p>
+          <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
+        </>
+      )}
     </>
   );
 };

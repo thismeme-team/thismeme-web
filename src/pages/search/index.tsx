@@ -46,6 +46,8 @@ const SearchPage: NextPage = () => {
       <SearchPageNavigation />
       <SearchInput
         {...inputProps}
+        // eslint-disable-next-line jsx-a11y/no-autofocus
+        autoFocus
         placeholder="당신이 생각한 '그 밈' 검색하기"
         spellCheck={false}
         type="text"

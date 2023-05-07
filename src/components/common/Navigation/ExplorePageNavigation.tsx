@@ -1,9 +1,7 @@
 import { useRouter } from "next/router";
-import tw from "twin.macro";
 
 import { useScrollDirection } from "@/application/hooks";
 import { Logo } from "@/components/common/Navigation/Logo";
-import { SSRSuspense } from "@/components/common/Suspense";
 import { SearchInput } from "@/components/search";
 import { TagCategory } from "@/components/tags";
 
@@ -32,16 +30,14 @@ export const ExplorePageNavigation = ({ title }: Props) => {
         }`}
       >
         <SearchInput
-          css={tw`placeholder:text-gray-900`}
+          className="placeholder:text-gray-900"
           inputMode="none"
           placeholder={title}
           onClick={() => {
             router.push("/search");
           }}
         />
-        <SSRSuspense>
-          <TagCategory />
-        </SSRSuspense>
+        <TagCategory />
       </section>
     </>
   );

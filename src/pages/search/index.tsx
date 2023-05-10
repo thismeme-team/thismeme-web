@@ -3,8 +3,9 @@ import { useRouter } from "next/router";
 import { Suspense, useState } from "react";
 
 import { useDebounce, useInput, useRecentSearch } from "@/application/hooks";
-import { metadata, PATH } from "@/application/util";
+import { DEFAULT_DESCRIPTION, PATH, SITE_NAME } from "@/application/util";
 import { SearchPageNavigation } from "@/components/common/Navigation";
+import type { NextSeoProps } from "@/components/common/NextSeo";
 import { NextSeo } from "@/components/common/NextSeo";
 import { SSRSuspense } from "@/components/common/Suspense";
 import {
@@ -38,7 +39,7 @@ const SearchPage: NextPage = () => {
 
   return (
     <>
-      <NextSeo {...metadata.search} />
+      <NextSeo {...metadata} />
 
       <SearchPageNavigation />
       <div className="relative">
@@ -72,6 +73,19 @@ const SearchPage: NextPage = () => {
       </div>
     </>
   );
+};
+
+const metadata: NextSeoProps = {
+  title: `${SITE_NAME} : 무한도전 밈 검색`,
+  description: DEFAULT_DESCRIPTION,
+
+  openGraph: {
+    siteName: SITE_NAME,
+    imageUrl: `/open-graph/home.png`,
+  },
+  twitter: {
+    cardType: "summary_large_image",
+  },
 };
 
 export default SearchPage;

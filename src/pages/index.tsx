@@ -2,8 +2,9 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 
 import { useScrollDirection } from "@/application/hooks";
-import { metadata } from "@/application/util";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
+import type { NextSeoProps } from "@/components/common/NextSeo";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -17,7 +18,7 @@ const HomePage: NextPage = () => {
 
   return (
     <>
-      <NextSeo {...metadata.main} />
+      <NextSeo {...metadata} />
       <IntroPageNavigation />
 
       <PullToRefresh>
@@ -41,6 +42,19 @@ const HomePage: NextPage = () => {
       </PullToRefresh>
     </>
   );
+};
+
+const metadata: NextSeoProps = {
+  title: `${SITE_NAME} : 무한도전 밈 검색`,
+  description: DEFAULT_DESCRIPTION,
+
+  openGraph: {
+    siteName: SITE_NAME,
+    imageUrl: `/open-graph/home.png`,
+  },
+  twitter: {
+    cardType: "summary_large_image",
+  },
 };
 
 export default HomePage;

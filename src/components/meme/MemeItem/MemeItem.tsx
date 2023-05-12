@@ -48,7 +48,7 @@ export const MemeItem = memo(({ meme, onClick }: Props) => {
           prefetch={false}
           onClick={() => onClick?.(memeId)}
         >
-          <span className="text-11-semibold-140">{name}</span>
+          <span className="text-12-medium-160 line-clamp-2">{name}</span>
         </Link>
         <button
           className="flex h-32 w-32 justify-center"
@@ -58,7 +58,7 @@ export const MemeItem = memo(({ meme, onClick }: Props) => {
             ));
           }}
         >
-          <Icon color="gray-600" height={16} name="meatball" width={16} />
+          <Icon color="gray-600" height={20} name="meatball" width={20} />
         </button>
       </div>
     </div>

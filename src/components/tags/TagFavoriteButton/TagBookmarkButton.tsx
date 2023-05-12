@@ -5,7 +5,6 @@ import {
   usePostFavoriteTag,
   useToast,
 } from "@/application/hooks";
-import { TOAST_MESSAGE } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 
@@ -36,7 +35,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
         onSuccess: () =>
           show(
             <>
-              <div className="grow">{TOAST_MESSAGE["태그 북마크"]}</div>
+              <div className="grow">태그를 북마크했어요!</div>
               <button
                 className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
                 onClick={() => {
@@ -49,7 +48,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
             </>,
             { duration: TAG_DELAY },
           ),
-        onError: () => show(TOAST_MESSAGE["다시 시도"]),
+        onError: () => show("다시 시도해 주세요."),
       },
     );
   };
@@ -57,13 +56,13 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const handleDeleteBookmark = async () => {
     show(
       <>
-        <div className="grow">{TOAST_MESSAGE["태그 북마크 해제"]}</div>
+        <div className="grow">북마크한 태그를 해제했어요!</div>
         <button
           className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
           onClick={() => {
             onCancel();
             close({ id: tagId, duration: 0 });
-            show(TOAST_MESSAGE["태그 북마크 취소"]);
+            show("삭제할 뻔한 태그를 살려냈어요!");
           }}
         >
           되돌리기
@@ -74,7 +73,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
     deleteMutation(tagId, {
       onError: (err) => {
         if (err instanceof Error && err.name === "CanceledError") return;
-        show(TOAST_MESSAGE["다시 시도"]);
+        show("다시 시도해 주세요.");
       },
     });
   };

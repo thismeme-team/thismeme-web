@@ -135,10 +135,9 @@ export const PullToRefresh = ({
     <div className="overscroll-y-contain" ref={elementRef}>
       <div
         css={css`
-          padding-top: 0.8rem;
           height: ${headHeight}px;
           position: absolute;
-          top: 5.4rem;
+          top: 14.2rem;
           inset-inline: 0;
         `}
       >

@@ -8,25 +8,27 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onSearchByKeyWord?: () => void;
 }
 
-export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Props) => {
+export const SearchInput = ({ onReset, onSearchByKeyWord, value, className, ...rest }: Props) => {
   return (
     <form
-      className="relative flex w-full items-center justify-start py-16"
+      className="relative my-16 flex w-full items-center justify-start"
       onSubmit={(e) => {
         e.preventDefault();
         onSearchByKeyWord?.();
       }}
     >
       <InputBase
-        className="h-56 w-full rounded-30 bg-gray-100 pl-22 pr-65 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500"
+        className={`relative h-56 w-full rounded-30 bg-gray-100 pl-22 pr-76 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500 ${className}`}
         value={value}
         {...rest}
         endComponents={
           <>
             {value && (
-              <Icon className="absolute right-46 cursor-pointer" name="delete" onClick={onReset} />
+              <button className="absolute right-44 h-full px-4">
+                <Icon name="delete" onClick={onReset} />
+              </button>
             )}
-            <button className="absolute right-16">
+            <button className="absolute right-0 h-full pl-8 pr-16">
               <Icon name="search" stroke="gray-600" />
             </button>
           </>

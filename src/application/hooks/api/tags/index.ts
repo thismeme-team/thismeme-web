@@ -22,7 +22,7 @@ export const useGetPopularTags = () => {
     queryFn: () => api.tags.getPopularTags(),
   });
 
-  return { tags: data?.tags, ...rest };
+  return { tags: data?.tags.slice(0, 10), ...rest };
 };
 
 /**
@@ -84,7 +84,7 @@ export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
 export const useGetFavoriteTags = (
   options: Pick<UseQueryOptions, "enabled"> = { enabled: false },
 ) => {
-  const { data, ...rest } = useQuery<GetFavoriteTagsResponse>({
+  const { data } = useQuery<GetFavoriteTagsResponse>({
     queryKey: QUERY_KEYS.getFavoriteTags,
     queryFn: () => api.tags.getFavoriteTags(),
     ...options,

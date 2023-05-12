@@ -37,5 +37,5 @@ export const useRecentSearch = () => {
     setItems((prevItems) => [...prevItems.filter((item) => item.id !== id)]);
   };
 
-  return { items, onAddItem, onDeleteItem };
+  return { items: items.slice(0, 10), onAddItem, onDeleteItem };
 };

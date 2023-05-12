@@ -20,5 +20,5 @@ export const RefreshContent = () => {
     };
   }, []);
 
-  return <div className="absolute inset-0 m-auto h-80 w-80" ref={logoContainer} />;
+  return <div className="absolute inset-0 m-auto h-80 w-80 -translate-y-8" ref={logoContainer} />;
 };

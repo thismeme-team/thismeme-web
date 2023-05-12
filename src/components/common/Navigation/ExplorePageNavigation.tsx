@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import tw from "twin.macro";
 
 import { useScrollDirection } from "@/application/hooks";
 import { Logo } from "@/components/common/Navigation/Logo";
@@ -30,7 +31,7 @@ export const ExplorePageNavigation = ({ title }: Props) => {
         }`}
       >
         <SearchInput
-          className="placeholder:text-gray-900"
+          css={tw`placeholder:text-gray-900`}
           inputMode="none"
           placeholder={title}
           onClick={() => {

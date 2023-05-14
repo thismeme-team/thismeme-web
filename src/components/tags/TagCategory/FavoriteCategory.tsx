@@ -7,6 +7,7 @@ import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
 import { CategoryTitle } from "./CategoryTitle";
+import { useTagCategoryContext } from "./context";
 
 const FAVORITE_ID = "북마크";
 const TAG_DELETE_DELAY = 1500;
@@ -17,8 +18,14 @@ export const FavoriteCategory = () => {
   const router = useRouter();
   const { show, close } = useToast();
   const { favoriteTags } = useGetFavoriteTags({ enabled: isLogin });
+  const [, setIsOpenTagCategory] = useTagCategoryContext();
 
   const { mutate: deleteFavoriteTag, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
+
+  const onClickItem = (tagId: number) => {
+    setIsOpenTagCategory(false);
+    router.push(PATH.getExploreByTagPath(tagId));
+  };
 
   const handleDeleteItem = async (tagId: number) => {
     show(
@@ -75,7 +82,7 @@ export const FavoriteCategory = () => {
                 <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
                   <button
                     className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
-                    onClick={() => router.push(PATH.getExploreByTagPath(tag.tagId))}
+                    onClick={() => onClickItem(tag.tagId)}
                   >
                     <div className="grow text-left">{tag.name}</div>
                   </button>

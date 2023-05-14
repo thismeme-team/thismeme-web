@@ -13,6 +13,7 @@ export { default as kakao } from "/public/icon/kakao.svg";
 export { default as kakao2 } from "/public/icon/kakao2.svg";
 export { default as logo } from "/public/icon/logo.svg";
 export { default as meatball } from "/public/icon/meatball.svg";
+export { default as memeChannel } from "/public/icon/memeChannel.svg";
 export { default as memeShare } from "/public/icon/memeShare.svg";
 export { default as menu } from "/public/icon/menu.svg";
 export { default as pound } from "/public/icon/pound.svg";

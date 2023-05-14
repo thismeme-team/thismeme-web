@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
 import { SITE_NAME } from "@/application/util";
-import { ExplorePageNavigation } from "@/components/common/Navigation";
+import { MemeDetailPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -26,7 +26,6 @@ interface Props {
 const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image } }) => {
   return (
     <>
-      <ExplorePageNavigation />
       <NextSeo
         description={description}
         title={name}
@@ -38,6 +37,8 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image 
           cardType: "summary_large_image",
         }}
       />
+
+      <MemeDetailPageNavigation />
 
       <SSRSuspense fallback={<SkeletonMemeDetail />} key={id}>
         <MemeDetail id={id} />

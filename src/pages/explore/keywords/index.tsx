@@ -20,11 +20,9 @@ const ExploreByKeywordPage: NextPage<Props> = ({ searchQuery }) => {
 
       <ExplorePageNavigation title={searchQuery} />
       <PullToRefresh>
-        <div className="mt-12">
-          <SSRSuspense fallback={<MemeListSkeleton />}>
-            <MemesByKeyword searchQuery={searchQuery} />
-          </SSRSuspense>
-        </div>
+        <SSRSuspense fallback={<MemeListSkeleton />}>
+          <MemesByKeyword searchQuery={searchQuery} />
+        </SSRSuspense>
       </PullToRefresh>
     </>
   );

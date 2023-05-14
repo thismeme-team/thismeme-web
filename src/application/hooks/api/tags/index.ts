@@ -22,7 +22,7 @@ export const useGetPopularTags = () => {
     queryFn: () => api.tags.getPopularTags(),
   });
 
-  return { tags: data?.tags, ...rest };
+  return { tags: data?.tags.slice(0, 10), ...rest };
 };
 
 /**
@@ -41,19 +41,16 @@ export const useGetTagSearch = (value: string) => {
 
 /**
  * @desc
- * Navigation Drawer (SideBar) 카테고리/태그
+ * Tag Category 에 즐겨찾기를 제외한 태그들
  */
 export const useGetCategoryWithTag = <T>({
   select,
-  enabled = true,
 }: {
   select: QuerySelectOption<T, typeof api.tags.getCategoryWithTags>;
-  enabled?: boolean;
 }) =>
   useQuery({
     queryKey: QUERY_KEYS.getCategoryWithTags,
     queryFn: api.tags.getCategoryWithTags,
-    enabled,
     select,
   });
 
@@ -87,22 +84,13 @@ export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
 export const useGetFavoriteTags = (
   options: Pick<UseQueryOptions, "enabled"> = { enabled: false },
 ) => {
-  const { data, ...rest } = useQuery<GetFavoriteTagsResponse>({
+  const { data } = useQuery<GetFavoriteTagsResponse>({
     queryKey: QUERY_KEYS.getFavoriteTags,
     queryFn: () => api.tags.getFavoriteTags(),
     ...options,
   });
 
-  const favoriteCategory = [
-    {
-      categoryId: 0,
-      name: "",
-      priority: 0,
-      tags: data?.tags || [],
-    },
-  ];
-
-  return { favoriteCategory: favoriteCategory, favoriteTags: data?.tags };
+  return { favoriteTags: data?.tags };
 };
 
 export const usePostFavoriteTag = () => {

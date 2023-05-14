@@ -4,10 +4,10 @@ import { css } from "twin.macro";
 
 import type { Tag } from "@/infra/api/tags/types";
 
-const categoryName = {
-  사용자: "이(가) 찾는 밈",
-  감정: "을(를) 느낄 때",
-  행위: "",
+const categoryName: { [key: string]: string } = {
+  "OOO이 찾는 밈": "이(가) 찾는 밈",
+  "OOO을 느낄 때": "을(를) 느낄 때",
+  "OOO할 때": "",
 };
 
 const ANIMATION_DURATION = 1000;
@@ -17,12 +17,10 @@ interface Props {
   name: string;
 }
 
-type OpenType = "open" | "closed";
-
 export const SlotCategory = ({ tags, name }: Props) => {
   const animationTags = [...tags, tags[0]];
   const ref = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState<OpenType>("closed");
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const parent = ref.current?.closest("[data-state]") as HTMLElement;
@@ -32,7 +30,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
         if (mutation.attributeName === "data-state") {
           const mutatedParent = mutation.target as HTMLElement;
           const currentState = mutatedParent.dataset.state;
-          setIsOpen(currentState as OpenType);
+          setIsOpen(currentState === "open");
         }
       });
     });
@@ -54,7 +52,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
 
   return (
     <div className="flex" ref={ref}>
-      <div className={`flex ${isOpen === "open" ? "absolute opacity-0" : ""}`}>
+      <div className={`flex ${isOpen ? "absolute opacity-0" : ""}`}>
         <div className="h-22 w-fit overflow-hidden text-16-semibold-140">
           <span
             css={css`
@@ -73,11 +71,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
         </div>
       </div>
 
-      <div className={`flex ${isOpen === "closed" ? "absolute opacity-0" : ""}`}>
-        <span>ooo</span>
-        {name === "행위" && <span>할때</span>}
-      </div>
-      <span>{categoryName[name as keyof typeof categoryName]}</span>
+      {isOpen ? name : categoryName[name]}
     </div>
   );
 };

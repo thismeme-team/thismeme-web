@@ -67,6 +67,19 @@ export const deleteFavoriteTag = rest.delete(
   },
 );
 
+export const getTagAutoSearch = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/search`,
+  async (req, res, ctx) => {
+    return res(
+      ctx.delay(),
+      ctx.status(200),
+      ctx.json({
+        tags: MOCK_DATA.favoriteTags,
+      }),
+    );
+  },
+);
+
 /**
  * 태그 상세 조회 API
  */

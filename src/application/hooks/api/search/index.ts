@@ -1,16 +1,11 @@
-import type {
-  QueryClient,
-  QueryFunctionContext,
-  UseInfiniteQueryResult,
-} from "@tanstack/react-query";
-import { useQueryClient } from "@tanstack/react-query";
+import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
 import type { RecentSearch } from "@/application/hooks";
 import { useLocalStorage } from "@/application/hooks";
 import { api } from "@/infra/api";
-import type { GetSearchMemesResponse } from "@/types";
 
+import { useSuspendedQuery } from "../core";
 import { useCoreInfiniteQuery } from "../core/useCoreInfiniteQuery";
 import { QUERY_KEYS } from "./queryKey";
 
@@ -71,14 +66,16 @@ export const useGetMemesByTag = (tag: string) => {
 };
 
 export const useGetThumbnail = (tag: string) => {
-  const queryClient = useQueryClient();
-  const data = queryClient.getQueryData<UseInfiniteQueryResult<GetSearchMemesResponse>["data"]>(
-    QUERY_KEYS.getMemesByTag(tag),
-  );
-  const meme = data?.pages[0].memes[0];
-  const totalCount = data?.pages[0].totalCount;
-
-  return { meme, totalCount };
+  const { data } = useSuspendedQuery({
+    queryKey: QUERY_KEYS.getThumbnail(tag),
+    queryFn: () => api.search.getMemesByTag({ keyword: tag, offset: 0, limit: 1 }),
+    staleTime: Infinity,
+    select: (data) => {
+      const { totalCount, memes } = data;
+      return { totalCount, thumbnailImage: memes[0].image.images[0].imageUrl };
+    },
+  });
+  return { data };
 };
 
 export const prefetchMemesByTag = (tag: string, queryClient: QueryClient) =>

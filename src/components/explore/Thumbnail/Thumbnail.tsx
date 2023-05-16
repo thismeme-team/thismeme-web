@@ -9,16 +9,17 @@ interface Props {
 }
 export const Thumbnail = ({ tag }: Props) => {
   const router = useRouter();
-  const { writeText } = useClipboard();
   const toast = useToast();
-  const { meme, totalCount } = useGetThumbnail(tag);
-  const pageUrl = `${DOMAIN}${router.asPath}`;
+  const { writeText } = useClipboard();
+  const {
+    data: { totalCount, thumbnailImage },
+  } = useGetThumbnail(tag);
 
-  if (!meme || !totalCount) return null;
+  const pageUrl = `${DOMAIN}${router.asPath}`;
 
   return (
     <div className="flex gap-16 px-28 pt-16 pb-24">
-      <Photo className="h-80 w-80 rounded-full" src={meme.image.images[0].imageUrl} />
+      <Photo className="h-80 w-80 rounded-full" src={thumbnailImage} />
       <div className="flex flex-1 flex-col items-center justify-center">
         <span className="text-14-semibold-140 text-gray-900">{totalCount}개 밈</span>
         <button

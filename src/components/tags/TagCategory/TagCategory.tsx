@@ -7,7 +7,10 @@ import { SSRSuspense } from "@/components/common/Suspense";
 import { CategoryContent } from "./CategoryContent";
 import { useTagCategoryContext } from "./context";
 
-export const TagCategory = () => {
+interface Props {
+  topOffset: string;
+}
+export const TagCategory = ({ topOffset }: Props) => {
   const [isOpen, setIsOpen] = useTagCategoryContext();
   const handleChange = () => setIsOpen((prev) => !prev);
 
@@ -31,7 +34,7 @@ export const TagCategory = () => {
           </div>
         )}
       </Drawer.Trigger>
-      <Drawer.Content direction="top" top="14.2rem">
+      <Drawer.Content direction="top" top={topOffset}>
         <SSRSuspense>
           <CategoryContent />
         </SSRSuspense>

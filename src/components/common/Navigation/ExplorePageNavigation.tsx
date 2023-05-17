@@ -60,7 +60,7 @@ export const ExplorePageNavigation = ({ title }: Props) => {
           />
         </div>
 
-        <TagCategory />
+        <TagCategory topOffset={direction === "UP" ? "8.8rem" : "14.2rem"} />
       </section>
     </>
   );

@@ -13,7 +13,7 @@ export const SearchPopularList = () => {
       {tags?.map((tag) => (
         <li className="shrink-0" key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.tagId)}>
-            <SearchPopularItem imageSrc="" name={tag.name} />
+            <SearchPopularItem imageSrc={tag.imageUrl} name={tag.name} />
           </Link>
         </li>
       ))}

@@ -6,13 +6,18 @@ import { RandomImage } from "@/components/common/RandomImge";
 import { Modal } from "../Modal";
 import { useSignUpModalContext } from "./context";
 
+const EXPIRES = new Date();
+
 export const SignUpModal = () => {
   const modalProps = useSignUpModalContext();
 
   const setCookie = () => {
+    // NOTE: 쿠키 만료시간은 1분으로 지정
+    EXPIRES.setMinutes(EXPIRES.getMinutes() + 1);
     if (IS_CSR) {
-      document.cookie = `nextPageUrl=${window.location}; path=/; domain=.thismeme.me`;
-      document.cookie = `nextPageUrl=${window.location}; path=/; domain=${window.location.hostname}`;
+      document.cookie = `nextPageUrl=${
+        window.location
+      }; path=/; domain=.thismeme.me; expires=  ${EXPIRES.toUTCString()} ;`;
     }
   };
 

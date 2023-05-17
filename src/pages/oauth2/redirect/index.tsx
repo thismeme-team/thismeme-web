@@ -8,7 +8,9 @@ const KaKaoRedirect = () => {
 
   useEffect(() => {
     const token = new URLSearchParams(location.search).get("accessToken");
+    const nextUrl = new URLSearchParams(location.search).get("nextPageUrl");
     if (token) login(token);
+    if (nextUrl) sessionStorage.setItem("nextPageUrl", nextUrl);
     Router.push("/");
   }, [login]);
 

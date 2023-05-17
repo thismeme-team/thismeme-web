@@ -1,3 +1,4 @@
+import { IS_CSR } from "@/application/util";
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 import { RandomImage } from "@/components/common/RandomImge";
@@ -7,6 +8,13 @@ import { useSignUpModalContext } from "./context";
 
 export const SignUpModal = () => {
   const modalProps = useSignUpModalContext();
+
+  const setCookie = () => {
+    if (IS_CSR) {
+      document.cookie = `nextPageUrl=${window.location}; path=/; domain=.thismeme.me`;
+      document.cookie = `nextPageUrl=${window.location}; path=/; domain=${window.location.hostname}`;
+    }
+  };
 
   return (
     <Modal {...modalProps}>
@@ -29,6 +37,7 @@ export const SignUpModal = () => {
             as="a"
             className="h-50 w-290 rounded-10 bg-[#FEE500] px-40 py-14 font-suit text-16-semibold-140"
             href={`${process.env.NEXT_PUBLIC_KAKAO_OAUTH2_URL}`}
+            onClick={setCookie}
           >
             <Icon className="mr-8" name="kakao2" />
             카카오로 3초 만에 시작하기

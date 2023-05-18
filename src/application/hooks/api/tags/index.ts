@@ -17,12 +17,12 @@ import { QUERY_KEYS } from "./queryKey";
  * 인기 태그 조회 API
  */
 export const useGetPopularTags = () => {
-  const { data, ...rest } = useQuery<GetPopularTagsResponse>({
+  const { data } = useQuery<GetPopularTagsResponse>({
     queryKey: QUERY_KEYS.getPopularTags,
     queryFn: () => api.tags.getPopularTags(),
   });
 
-  return { tags: data?.tags.slice(0, 10), ...rest };
+  return { ...data };
 };
 
 /**

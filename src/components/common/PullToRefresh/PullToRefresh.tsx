@@ -140,7 +140,7 @@ export const PullToRefresh = ({
           top: 14.2rem;
           inset-inline: 0;
           margin: auto;
-          width: 30%;
+          pointer-events: none;
         `}
       >
         {status !== "pulling" && <RefreshContent />}

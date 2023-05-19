@@ -18,7 +18,7 @@ export const Thumbnail = ({ tag }: Props) => {
   const pageUrl = `${DOMAIN}${router.asPath}`;
 
   return (
-    <div className="flex gap-16 px-28 pt-16 pb-24">
+    <div className="flex gap-16 px-22 pt-16 pb-24">
       <Photo className="h-80 w-80 rounded-full" src={thumbnailImage} />
       <div className="flex flex-1 flex-col items-center justify-center gap-2">
         <span className="text-14-semibold-140 text-gray-900">{totalCount}개 밈</span>

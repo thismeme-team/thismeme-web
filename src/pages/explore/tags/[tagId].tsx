@@ -32,10 +32,8 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
       <ExplorePageNavigation title={`#${searchQuery}`} />
 
       <PullToRefresh>
-        <div className="mt-12">
-          <Thumbnail tag={searchQuery} />
-          <MemesByTag searchQuery={searchQuery} />
-        </div>
+        <Thumbnail tag={searchQuery} />
+        <MemesByTag searchQuery={searchQuery} />
       </PullToRefresh>
       <TagBookmarkButton tagId={tagId} />
     </>

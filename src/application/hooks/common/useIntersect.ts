@@ -4,20 +4,23 @@ type IntersectHandler = (entry: IntersectionObserverEntry, observer: Intersectio
 
 export const useIntersect = (onIntersect: IntersectHandler, options?: IntersectionObserverInit) => {
   const [ref, setRef] = useState<Element | null>(null);
-  const callbackRef = useRef(
-    (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) onIntersect(entry, observer);
-      });
-    },
+  const callback = (entries: IntersectionObserverEntry[], observer: IntersectionObserver) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) onIntersect(entry, observer);
+    });
+  };
+  const observerRef = useRef(
+    typeof IntersectionObserver === "undefined"
+      ? undefined
+      : new IntersectionObserver(callback, options),
   );
 
   useEffect(() => {
-    if (!ref) return;
-    const observer = new IntersectionObserver(callbackRef.current, options);
+    const observer = observerRef.current;
+    if (!ref || !observer) return;
     observer.observe(ref);
     return () => observer.disconnect();
-  }, [ref, options]);
+  }, [ref]);
 
   return setRef;
 };

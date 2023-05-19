@@ -34,7 +34,7 @@ export const IntroPageNavigation = () => {
             router.push("/search");
           }}
         />
-        <TagCategory />
+        <TagCategory topOffset={direction === "UP" ? "8.8rem" : "14.2rem"} />
       </section>
     </>
   );

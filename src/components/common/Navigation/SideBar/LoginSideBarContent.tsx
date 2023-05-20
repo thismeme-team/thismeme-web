@@ -28,7 +28,7 @@ export const LoginSideBarContent = (props: LoginSideBarContentProps) => {
             <span className="block text-16-semibold-140">share</span>
           </Link>
           <Link className="pl-40 text-center" href="/collect">
-            <span className="block text-32-bold-140">{user?.sharedCollectionId}</span>
+            <span className="block text-32-bold-140">{user?.saveCount}</span>
             <span className="block text-16-semibold-140">collect</span>
           </Link>
         </div>

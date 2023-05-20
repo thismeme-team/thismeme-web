@@ -16,7 +16,7 @@ export const SignUpModal = () => {
     if (IS_CSR) {
       document.cookie = `nextPageUrl=${
         window.location
-      }; path=/; domain=localhost; expires=  ${EXPIRES.toUTCString()} ;`;
+      }; path=/; domain=.thismeme.me; expires=  ${EXPIRES.toUTCString()} ;`;
     }
   };
 

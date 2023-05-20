@@ -6,18 +6,17 @@ import { RandomImage } from "@/components/common/RandomImge";
 import { Modal } from "../Modal";
 import { useSignUpModalContext } from "./context";
 
-const EXPIRES = new Date();
-
 export const SignUpModal = () => {
   const modalProps = useSignUpModalContext();
 
-  const setCookie = () => {
+  const handleSetCookie = () => {
     // NOTE: 쿠키 만료시간은 1분으로 지정
+    const EXPIRES = new Date();
     EXPIRES.setMinutes(EXPIRES.getMinutes() + 1);
     if (IS_CSR) {
       document.cookie = `nextPageUrl=${
         window.location
-      }; path=/; domain=.thismeme.me; expires=  ${EXPIRES.toUTCString()} ;`;
+      }; path=/; domain=localhost; expires=  ${EXPIRES.toUTCString()} ;`;
     }
   };
 
@@ -41,8 +40,8 @@ export const SignUpModal = () => {
           <Button
             as="a"
             className="h-50 w-290 rounded-10 bg-[#FEE500] px-40 py-14 font-suit text-16-semibold-140"
-            href={`${process.env.NEXT_PUBLIC_KAKAO_OAUTH2_URL}`}
-            onClick={setCookie}
+            //href={`${process.env.NEXT_PUBLIC_KAKAO_OAUTH2_URL}`}
+            onClick={handleSetCookie}
           >
             <Icon className="mr-8" name="kakao2" />
             카카오로 3초 만에 시작하기

@@ -10,8 +10,7 @@ const KaKaoRedirect = () => {
     const token = new URLSearchParams(location.search).get("accessToken");
     const nextUrl = new URLSearchParams(location.search).get("nextPageUrl");
     if (token) login(token);
-    if (nextUrl) sessionStorage.setItem("nextPageUrl", nextUrl);
-    Router.push("/");
+    Router.push(nextUrl as string);
   }, [login]);
 
   return <div></div>;

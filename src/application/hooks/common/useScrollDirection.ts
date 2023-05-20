@@ -5,6 +5,7 @@ import { throttle } from "@/application/util";
 const SCROLL_DIRECTION = {
   up: "UP",
   down: "DOWN",
+  init: "INIT",
 } as const;
 type DIRECTION = typeof SCROLL_DIRECTION[keyof typeof SCROLL_DIRECTION];
 
@@ -12,7 +13,7 @@ const OFFSET = 100;
 const DELAY = 200;
 export const useScrollDirection = () => {
   const prevScrollY = useRef(0);
-  const [direction, setDirection] = useState<DIRECTION>(SCROLL_DIRECTION.up);
+  const [direction, setDirection] = useState<DIRECTION>(SCROLL_DIRECTION.init);
   useEffect(() => {
     const handleScroll = throttle(() => {
       const currentScrollY = window.scrollY;

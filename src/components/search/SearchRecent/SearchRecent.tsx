@@ -27,7 +27,8 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
             tagName={value}
             endComponent={
               <Icon
-                className="absolute right-6"
+                className="min-w-24"
+                color="gray-600"
                 name="delete2"
                 onClick={(e) => {
                   e.stopPropagation();

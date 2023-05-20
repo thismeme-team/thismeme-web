@@ -7,12 +7,14 @@ import { Icon } from "@/components/common/Icon";
 import { Photo } from "@/components/common/Photo";
 
 import { CategoryTitle } from "./CategoryTitle";
+import { useTagCategoryContext } from "./context";
 import { FavoriteCategory } from "./FavoriteCategory";
 import { SlotCategory } from "./SlotCategory";
 
 export const CategoryContent = () => {
   const router = useRouter();
 
+  const [, setIsOpenTagCategory] = useTagCategoryContext();
   const { data } = useGetCategoryWithTag({
     select: ({ mainCategories, mainTags }) => {
       const restItem = mainCategories.map((maincategory) => ({
@@ -26,6 +28,11 @@ export const CategoryContent = () => {
       return restItem;
     },
   });
+
+  const onClickItem = (tagId: number) => {
+    setIsOpenTagCategory(false);
+    router.push(PATH.getExploreByTagPath(tagId));
+  };
 
   return (
     <Root collapsible className="w-full min-w-300" defaultValue="북마크" type="single">
@@ -63,7 +70,7 @@ export const CategoryContent = () => {
                       <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
                         <button
                           className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
-                          onClick={() => router.push(PATH.getExploreByTagPath(tag.tagId))}
+                          onClick={() => onClickItem(tag.tagId)}
                         >
                           <div className="grow text-left">{tag.name}</div>
                         </button>

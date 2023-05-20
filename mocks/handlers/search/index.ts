@@ -4,24 +4,6 @@ import type { GetMemesResponse } from "@/types";
 
 import * as MOCK_DATA from "./data";
 
-export const getSearch = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/tags/search`,
-  (req, res, ctx) => {
-    const query = req.url.searchParams.get("word");
-
-    if (!query) {
-      return res(ctx.delay(), ctx.status(404));
-    }
-
-    return res(
-      ctx.delay(),
-      ctx.json({
-        tags: MOCK_DATA.tags.filter((tag) => tag.name.search(query) !== -1),
-      }),
-    );
-  },
-);
-
 export const getSearchResultsByKeyword = rest.get(
   `${process.env.NEXT_PUBLIC_SEARCH_API_URL}/search`,
   (req, res, ctx) => {

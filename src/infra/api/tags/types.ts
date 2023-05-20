@@ -3,11 +3,14 @@ export interface Tag {
   name: string;
   viewCount: number;
   categoryId: number;
-  isFav?: boolean;
+  isFav: boolean;
+  categoryName: string;
+  imageUrl: string;
 }
 
 export interface GetPopularTagsResponse {
-  tags: Tag[];
+  tags: Omit<Tag, "isFav">[];
+  count: number;
 }
 
 export interface GetTagSearchResponse {
@@ -15,7 +18,7 @@ export interface GetTagSearchResponse {
 }
 
 export interface GetMemeTagsByIdResponse {
-  tags: Tag[];
+  tags: Omit<Tag, "isFav" | "imageUrl">[];
 }
 
 export interface Category {
@@ -37,5 +40,5 @@ export interface GetCategoryByTagResponse {
   mainTags: Pick<Tag, "tagId" | "name">[][];
 }
 
-export type GetTagInfoResponse = Tag & { isFav: boolean };
+export type GetTagInfoResponse = Omit<Tag, "imageUrl">;
 export type GetFavoriteTagsResponse = Pick<Category, "tags">;

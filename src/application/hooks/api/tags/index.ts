@@ -17,12 +17,12 @@ import { QUERY_KEYS } from "./queryKey";
  * 인기 태그 조회 API
  */
 export const useGetPopularTags = () => {
-  const { data, ...rest } = useQuery<GetPopularTagsResponse>({
+  const { data } = useQuery<GetPopularTagsResponse>({
     queryKey: QUERY_KEYS.getPopularTags,
     queryFn: () => api.tags.getPopularTags(),
   });
 
-  return { tags: data?.tags, ...rest };
+  return { ...data };
 };
 
 /**
@@ -84,7 +84,7 @@ export const fetchTagInfo = (tagId: number, queryClient: QueryClient) =>
 export const useGetFavoriteTags = (
   options: Pick<UseQueryOptions, "enabled"> = { enabled: false },
 ) => {
-  const { data, ...rest } = useQuery<GetFavoriteTagsResponse>({
+  const { data } = useQuery<GetFavoriteTagsResponse>({
     queryKey: QUERY_KEYS.getFavoriteTags,
     queryFn: () => api.tags.getFavoriteTags(),
     ...options,

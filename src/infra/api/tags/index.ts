@@ -4,6 +4,7 @@ import type {
   GetCategoryByTagResponse,
   GetFavoriteTagsResponse,
   GetMemeTagsByIdResponse,
+  GetPopularTagsResponse,
   GetTagInfoResponse,
 } from "./types";
 
@@ -33,7 +34,7 @@ export class TagApi {
   };
 
   getPopularTags = () => {
-    return this.api.get(`/tags?size=5&sort=viewCount,desc`).then((response) => response.data);
+    return this.api.get<GetPopularTagsResponse>(`/tags/rank/new`).then((response) => response.data);
   };
 
   getMemeTagsById = (id: string) => {

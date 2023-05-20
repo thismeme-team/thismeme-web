@@ -29,6 +29,7 @@
     "@sentry/nextjs": "^7.44.0",
     "@tanstack/react-query": "^4.19.1",
     "@use-gesture/react": "^10.2.24",
+    "@vercel/og": "^0.5.3",
     "axios": "^1.2.0",
     "lottie-web": "^5.10.2",
     "next": "13.0.5",

@@ -3,8 +3,8 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
 import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
-import { TITLE } from "@/application/util";
-import { ExplorePageNavigation } from "@/components/common/Navigation";
+import { SITE_NAME } from "@/application/util";
+import { MemeDetailPageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -26,14 +26,19 @@ interface Props {
 const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image } }) => {
   return (
     <>
-      <ExplorePageNavigation />
       <NextSeo
         description={description}
-        title={TITLE.memeDetail(name)}
+        title={name}
         openGraph={{
+          siteName: SITE_NAME,
           imageUrl: image.images[0].imageUrl,
         }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
       />
+
+      <MemeDetailPageNavigation />
 
       <SSRSuspense fallback={<SkeletonMemeDetail />} key={id}>
         <MemeDetail id={id} />

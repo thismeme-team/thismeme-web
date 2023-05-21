@@ -1,6 +1,6 @@
 import { rest } from "msw";
 
-import type { GetMemesResponse } from "@/types";
+import type { GetMemesResponse, GetSearchMemesResponse } from "@/types";
 
 import * as MOCK_DATA from "./data";
 
@@ -18,9 +18,10 @@ export const getSearchResultsByKeyword = rest.get(
     }
     return res(
       ctx.status(200),
-      ctx.json<GetMemesResponse>({
+      ctx.json<GetSearchMemesResponse>({
         memes: data,
         count: data.length,
+        totalCount: 100,
       }),
       ctx.delay(500),
     );
@@ -41,9 +42,10 @@ export const getSearchResultsByTag = rest.get(
     }
     return res(
       ctx.status(200),
-      ctx.json<GetMemesResponse>({
+      ctx.json<GetSearchMemesResponse>({
         memes: data,
         count: data.length,
+        totalCount: 100,
       }),
       ctx.delay(500),
     );

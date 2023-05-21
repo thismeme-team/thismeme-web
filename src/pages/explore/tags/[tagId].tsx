@@ -6,7 +6,7 @@ import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
-import { MemesByTag } from "@/components/explore";
+import { MemesByTag, Thumbnail } from "@/components/explore";
 import { TagBookmarkButton } from "@/components/tags";
 
 interface Props {
@@ -32,6 +32,7 @@ const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
       <ExplorePageNavigation title={`#${searchQuery}`} />
 
       <PullToRefresh>
+        <Thumbnail tag={searchQuery} />
         <MemesByTag searchQuery={searchQuery} />
       </PullToRefresh>
       <TagBookmarkButton tagId={tagId} />

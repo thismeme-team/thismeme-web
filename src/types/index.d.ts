@@ -51,3 +51,7 @@ export interface GetMemesResponse {
    */
   count: number;
 }
+
+export interface GetSearchMemesResponse extends GetMemesResponse {
+  totalCount: number;
+}

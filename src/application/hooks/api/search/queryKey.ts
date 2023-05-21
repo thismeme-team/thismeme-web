@@ -23,5 +23,4 @@ export const QUERY_KEYS = {
     "getUserFindMemes",
     keywords,
   ],
-  getThumbnail: (tag: string) => ["getThumbnail", tag],
 } as const;

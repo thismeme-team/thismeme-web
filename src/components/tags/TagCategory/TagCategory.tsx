@@ -36,7 +36,7 @@ export const TagCategory = ({ topOffset }: Props) => {
       </Drawer.Trigger>
       <Drawer.Content direction="top" top={topOffset}>
         <SSRSuspense>
-          <CategoryContent />
+          <CategoryContent isOpen={isOpen} />
         </SSRSuspense>
       </Drawer.Content>
     </Drawer>

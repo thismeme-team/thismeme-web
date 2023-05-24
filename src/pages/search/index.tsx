@@ -68,7 +68,7 @@ const SearchPage: NextPage = () => {
       )}
       {!inputProps.value && (
         <>
-          <p className="mt-12 mb-4 text-16-semibold-140 text-gray-500">최근 검색</p>
+          <p className="pt-12 pb-4 text-16-semibold-140 text-gray-500">최근 검색</p>
           <SearchRecent items={items} onAddItem={onAddItem} onDelete={onDeleteItem} />
         </>
       )}

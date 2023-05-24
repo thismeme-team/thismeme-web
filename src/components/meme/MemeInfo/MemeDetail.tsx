@@ -26,7 +26,7 @@ export const MemeDetail = ({ id }: Props) => {
     <>
       <article>
         <section
-          className="relative mt-16 flex flex-col"
+          className="relative flex flex-col"
           css={css`
             -webkit-touch-callout: initial;
           `}

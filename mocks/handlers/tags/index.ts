@@ -102,3 +102,16 @@ export const getTagInfo = rest.get(
     );
   },
 );
+
+export const getTagRank = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/rank/new`,
+  async (req, res, ctx) => {
+    return res(
+      ctx.delay(),
+      ctx.status(200),
+      ctx.json({
+        tags: MOCK_DATA.popularTag,
+      }),
+    );
+  },
+);

@@ -17,7 +17,7 @@ export const ServiceGuide = () => {
         }
       `}
     >
-      <Image alt="serviceGuide" height={400} src={serviceGuide} width={360} />
+      <Image alt="serviceGuide" height={216} src={serviceGuide} width={360} />
       <Button
         as="a"
         className="absolute bottom-[-10%] right-[20%] w-fit rounded-30 bg-[#6D7BFF] py-16 px-32 font-pretendard text-18-bold-140 font-semibold text-white"

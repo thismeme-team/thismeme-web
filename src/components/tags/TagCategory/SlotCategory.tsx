@@ -5,7 +5,7 @@ import { css } from "twin.macro";
 import type { Tag } from "@/infra/api/tags/types";
 
 const categoryName: { [key: string]: string } = {
-  "OOO이 찾는 밈": "이(가) 찾는 밈",
+  "OOO이 사용하는 밈": "이(가) 사용하는 밈",
   "OOO을 느낄 때": "을(를) 느낄 때",
   "OOO할 때": "",
 };

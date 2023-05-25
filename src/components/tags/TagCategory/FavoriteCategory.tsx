@@ -22,9 +22,9 @@ export const FavoriteCategory = () => {
 
   const { mutate: deleteFavoriteTag, onCancel } = useDeleteFavoriteTag(TAG_DELETE_DELAY);
 
-  const onClickItem = (tagId: number) => {
+  const onClickItem = (tagId: number, tagName: string) => {
     setIsOpenTagCategory(false);
-    router.push(PATH.getExploreByTagPath(tagId));
+    router.push(PATH.getExploreByTagPath(tagId, tagName));
   };
 
   const handleDeleteItem = async (tagId: number) => {
@@ -82,7 +82,7 @@ export const FavoriteCategory = () => {
                 <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
                   <button
                     className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
-                    onClick={() => onClickItem(tag.tagId)}
+                    onClick={() => onClickItem(tag.tagId, tag.name)}
                   >
                     <div className="grow text-left">{tag.name}</div>
                   </button>

@@ -57,14 +57,7 @@ const DrawerContent = ({
           z-index: 20;
           max-width: 48rem;
           @media screen and (min-width: 1280px) {
-            margin-right: 5%;
-            max-width: 37.5rem;
-          }
-          @media screen and (min-width: 1680px) {
-            margin-right: 15%;
-          }
-          @media screen and (min-width: 1920px) {
-            margin-right: 25%;
+            max-width: 44rem;
           }
           overflow: hidden;
           margin-inline: auto;

@@ -84,6 +84,9 @@ export const ActionSheet = ({ children, isOpen, onClose }: PropsWithChildren<Act
                 background: white;
                 border-radius: 1rem;
                 width: calc(min(100vw, 48rem) - 3.6rem);
+                @media screen and (min-width: 1280px) {
+                  width: calc(min(100vw, 44rem) - 3.6rem);
+                }
               `,
             ]}
           >

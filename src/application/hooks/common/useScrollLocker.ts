@@ -19,7 +19,7 @@ export const useScrollLocker = (lock?: boolean) => {
       updateCSS(
         `
       html body {
-        overflow-y: hidden;
+        overflow: hidden;
       }`,
         id,
       );

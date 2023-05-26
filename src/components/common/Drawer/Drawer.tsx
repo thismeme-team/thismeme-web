@@ -52,7 +52,7 @@ const DrawerContent = ({
         css={css`
           position: fixed;
           pointer-events: ${isOpen ? "auto" : "none"};
-          min-height: calc(100vh - ${top});
+          min-height: calc(100dvh - ${top});
           inset: 0;
           z-index: 20;
           max-width: 44rem;

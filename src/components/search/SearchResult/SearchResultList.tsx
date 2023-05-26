@@ -21,7 +21,7 @@ export const SearchResultList = ({ value, onAddItem }: Prop) => {
     <ul className="absolute bg-white">
       {autoCompletedTags?.map((tag) => (
         <li key={tag.tagId}>
-          <Link href={PATH.getExploreByTagPath(tag.tagId)}>
+          <Link href={PATH.getExploreByTagPath(tag.tagId, tag.name)}>
             <SearchItem
               searchText={value}
               startComponent={<Icon name="pound" />}

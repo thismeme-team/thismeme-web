@@ -15,7 +15,7 @@ const SettingPage = () => {
   return (
     <>
       <BackButtonNavigation title="설정" />
-      <article className="flex h-[calc(100vh-5.4rem)] flex-col justify-between">
+      <article className="flex h-[calc(100dvh-5.4rem)] flex-col justify-between">
         <section>
           <div className="mt-24 flex h-64 items-center justify-between border-b border-gray-200">
             <span className="text-22-bold-140">계정 정보</span>

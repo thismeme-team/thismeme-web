@@ -6,9 +6,17 @@ import { InputBase } from "@/components/common/Input";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onReset?: () => void;
   onSearchByKeyWord?: () => void;
+  isDelete?: boolean;
 }
 
-export const SearchInput = ({ onReset, onSearchByKeyWord, value, className, ...rest }: Props) => {
+export const SearchInput = ({
+  onReset,
+  onSearchByKeyWord,
+  value,
+  className,
+  isDelete = true,
+  ...rest
+}: Props) => {
   return (
     <form
       className="relative my-16 flex w-full items-center justify-start"
@@ -18,12 +26,14 @@ export const SearchInput = ({ onReset, onSearchByKeyWord, value, className, ...r
       }}
     >
       <InputBase
-        className={`relative h-56 w-full rounded-30 bg-gray-100 pl-22 pr-76 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500 ${className}`}
         value={value}
+        className={`relative h-56 w-full rounded-30 bg-gray-100 pl-22 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500  ${
+          isDelete ? "pr-76" : "pr-52"
+        } ${className}`}
         {...rest}
         endComponents={
           <>
-            {value && (
+            {value && isDelete && (
               <button className="absolute right-44 h-full px-4">
                 <Icon name="delete" onClick={onReset} />
               </button>

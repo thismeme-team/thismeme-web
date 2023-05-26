@@ -2,9 +2,9 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
-import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
+import { fetchMemeDetailById, fetchMemeTagsById, useMoveMemeDetail } from "@/application/hooks";
 import { SITE_NAME } from "@/application/util";
-import { MemeDetailPageNavigation } from "@/components/common/Navigation";
+import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
 import { SSRSuspense } from "@/components/common/Suspense";
@@ -24,6 +24,7 @@ interface Props {
 }
 
 const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image } }) => {
+  const { searchQueryString } = useMoveMemeDetail();
   return (
     <>
       <NextSeo
@@ -38,7 +39,7 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image 
         }}
       />
 
-      <MemeDetailPageNavigation />
+      <ExplorePageNavigation title={searchQueryString} />
 
       <SSRSuspense fallback={<SkeletonMemeDetail />} key={id}>
         <MemeDetail id={id} />

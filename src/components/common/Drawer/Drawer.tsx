@@ -55,7 +55,7 @@ const DrawerContent = ({
           min-height: calc(100dvh - ${top});
           inset: 0;
           z-index: 20;
-          max-width: 48rem;
+          max-width: 44rem;
           overflow: hidden;
           margin-inline: auto;
           margin-top: ${top};

@@ -83,7 +83,7 @@ export const ActionSheet = ({ children, isOpen, onClose }: PropsWithChildren<Act
               css`
                 background: white;
                 border-radius: 1rem;
-                width: calc(min(100vw, 48rem) - 3.6rem);
+                width: calc(min(100vw, 44rem) - 3.6rem);
               `,
             ]}
           >

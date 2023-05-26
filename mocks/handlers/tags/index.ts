@@ -3,7 +3,7 @@ import { rest } from "msw";
 import * as MOCK_DATA from "./data";
 
 export const getCategoryWithTag = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/tags/categories`,
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/categories/new`,
   async (req, res, ctx) => {
     return res(
       ctx.delay(300),

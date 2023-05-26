@@ -171,6 +171,14 @@ module.exports = {
             fontWeight: "700",
           },
         ],
+        "12-medium-160": [
+          "1.2rem",
+          {
+            lineHeight: "160%",
+            letterSpacing: "0em",
+            fontWeight: "500",
+          },
+        ],
         "12-regular-160": [
           "1.2rem",
           {

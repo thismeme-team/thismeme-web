@@ -25,10 +25,18 @@ const logo = (
 const defaultImage = fetch(new URL("../../../public/open-graph/home.png", import.meta.url)).then(
   (res) => res.arrayBuffer(),
 );
+/**
+ * NOTE: @vercel/og 의 빌트인 폰트가 noto sans에 font-weight: 400 이어서 다른 폰트나 weight를 사용하고 싶으면 custom 폰트를 사용해야 함
+ * @see https://github.com/vercel/satori/issues/263#issuecomment-1500705357
+ */
+const suitFont = fetch(new URL("../../styles/fonts/SUIT-ExtraBold.otf", import.meta.url)).then(
+  (res) => res.arrayBuffer(),
+);
 
 export default async function handler(request: NextRequest) {
   const { searchParams } = new URL(request.url);
   const defaultImageData = await defaultImage;
+  const suitFontData = await suitFont;
 
   const defaultImageResponse = new ImageResponse(
     (
@@ -129,7 +137,6 @@ export default async function handler(request: NextRequest) {
               position: "relative",
               color: "white",
               fontSize: 88,
-              fontWeight: 800,
             }}
           >
             {title}
@@ -139,6 +146,13 @@ export default async function handler(request: NextRequest) {
       {
         width: 1200,
         height: 630,
+        fonts: [
+          {
+            name: "suit-extrabold",
+            data: suitFontData,
+            style: "normal",
+          },
+        ],
       },
     );
   } catch (e) {

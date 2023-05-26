@@ -11,3 +11,5 @@ export const channelUrl = "https://thismeme.channel.io/lounge";
 export const SITE_NAME = "그 밈";
 
 export const DEFAULT_DESCRIPTION = "당신이 찾는 ‘그 밈’ 여기 있다.";
+
+export const thismemeGuideUrl = "https://zonemy.notion.site/ca4dba6972a340c28e4be60d1cc83547";

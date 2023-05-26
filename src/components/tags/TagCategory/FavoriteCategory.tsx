@@ -55,7 +55,7 @@ export const FavoriteCategory = () => {
     });
   };
 
-  if (!favoriteTags || !favoriteTags.length) return null;
+  if (!favoriteTags || !favoriteTags.length || !isLogin) return null;
 
   return (
     <>

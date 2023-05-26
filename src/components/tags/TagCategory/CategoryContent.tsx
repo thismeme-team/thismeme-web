@@ -1,5 +1,6 @@
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
+import React, { Fragment } from "react";
 
 import { useGetCategoryWithTag } from "@/application/hooks";
 import { PATH } from "@/application/util";
@@ -38,9 +39,9 @@ export const CategoryContent = () => {
     <Root collapsible className="w-full min-w-300" defaultValue="북마크" type="single">
       <FavoriteCategory />
       {data?.map((item) => (
-        <>
+        <Fragment key={item.id}>
           <CategoryTitle title={item.name} />
-          <Item key={item.id} value={item.id}>
+          <Item value={item.id}>
             <Header className="py-4">
               <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
                 <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
@@ -64,7 +65,7 @@ export const CategoryContent = () => {
             <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
               <ul className="flex flex-col pr-16 font-suit text-16-semibold-140">
                 {item.categories.map((category) => (
-                  <>
+                  <Fragment key={category.categoryId}>
                     <div className="py-8 pl-4 text-gray-600">{category.name}</div>
                     {category.tags.map((tag) => (
                       <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
@@ -76,12 +77,12 @@ export const CategoryContent = () => {
                         </button>
                       </li>
                     ))}
-                  </>
+                  </Fragment>
                 ))}
               </ul>
             </Content>
           </Item>
-        </>
+        </Fragment>
       ))}
     </Root>
   );

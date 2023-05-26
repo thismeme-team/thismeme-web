@@ -41,7 +41,7 @@ export const CategoryContent = () => {
       {data?.map((item) => (
         <Fragment key={item.id}>
           <CategoryTitle title={item.name} />
-          <Item key={item.id} value={item.id}>
+          <Item value={item.id}>
             <Header className="py-4">
               <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
                 <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />

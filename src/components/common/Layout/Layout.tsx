@@ -9,7 +9,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
     <>
       <ServiceGuide />
       <main
-        className={`relative min-h-screen ${pretendard.variable} ${suit.variable} mx-auto max-w-[48rem] bg-white px-18 font-suit shadow-lg xl:max-w-[44rem]`}
+        className={`relative min-h-screen ${pretendard.variable} ${suit.variable} mx-auto max-w-[44rem] bg-white px-18 font-suit shadow-lg`}
       >
         {children}
       </main>

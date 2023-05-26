@@ -18,7 +18,7 @@ export const SearchResultList = ({ value, onAddItem }: Prop) => {
     return null;
   }
   return (
-    <ul className="absolute w-full bg-white">
+    <ul className="absolute bg-white">
       {autoCompletedTags?.map((tag) => (
         <li key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.tagId)}>

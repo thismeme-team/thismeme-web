@@ -6,28 +6,40 @@ import { InputBase } from "@/components/common/Input";
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onReset?: () => void;
   onSearchByKeyWord?: () => void;
+  isDelete?: boolean;
 }
 
-export const SearchInput = ({ onReset, onSearchByKeyWord, value, ...rest }: Props) => {
+export const SearchInput = ({
+  onReset,
+  onSearchByKeyWord,
+  value,
+  className,
+  isDelete = true,
+  ...rest
+}: Props) => {
   return (
     <form
-      className="relative flex items-center justify-start py-8"
+      className="relative my-16 flex w-full items-center justify-start"
       onSubmit={(e) => {
         e.preventDefault();
         onSearchByKeyWord?.();
       }}
     >
       <InputBase
-        className="h-48 w-full rounded-22 bg-gray-100 pl-22 pr-65 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500"
         value={value}
+        className={`relative h-56 w-full rounded-30 bg-gray-100 pl-22 font-suit text-16-semibold-140 text-black outline-none placeholder:text-gray-500  ${
+          isDelete ? "pr-76" : "pr-52"
+        } ${className}`}
         {...rest}
         endComponents={
           <>
-            {value && (
-              <Icon className="absolute right-46 cursor-pointer" name="delete" onClick={onReset} />
+            {value && isDelete && (
+              <button className="absolute right-44 h-full px-4">
+                <Icon name="delete" onClick={onReset} />
+              </button>
             )}
-            <button className="absolute right-16">
-              <Icon name="search" />
+            <button className="absolute right-0 h-full pl-8 pr-16">
+              <Icon name="search" stroke="gray-600" />
             </button>
           </>
         }

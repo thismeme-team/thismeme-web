@@ -55,7 +55,7 @@ export class MemeApi {
       params: {
         page,
         size: limit,
-        sort: `${sort},desc`,
+        sort: `${sort},id,desc`,
       },
     });
     return response.data;

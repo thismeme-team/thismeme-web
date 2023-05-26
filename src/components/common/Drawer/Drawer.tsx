@@ -1,11 +1,18 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import { css } from "twin.macro";
 
+import { useScrollLocker } from "@/application/hooks";
+import { Portal } from "@/components/common/Portal";
+
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./context";
 
-export const Drawer = ({ children }: PropsWithChildren) => {
+interface DrawerProps {
+  isOpen?: boolean;
+  onOpenChange?(open: boolean): void;
+}
+export const Drawer = ({ children, isOpen, onOpenChange }: PropsWithChildren<DrawerProps>) => {
   return (
-    <DrawerContextProvider>
+    <DrawerContextProvider isOpen={isOpen} onOpenChange={onOpenChange}>
       {/* NOTE: 공백 문자 제거 */}
       <section css={{ fontSize: 0 }}>{children}</section>
     </DrawerContextProvider>
@@ -23,47 +30,64 @@ const DrawerTrigger = ({ children }: DrawerTriggerProps) => {
 };
 
 interface DrawerContentProps {
-  className: string;
+  className?: string;
   children: ReactNode;
-  direction: "left" | "right";
+  direction: "left" | "right" | "top" | "bottom";
+  top?: string | number;
 }
-const DrawerContent = ({ children, className, direction }: DrawerContentProps) => {
+const DrawerContent = ({
+  children,
+  className = "",
+  direction = "right",
+  top = "5.4rem",
+}: DrawerContentProps) => {
   const isOpen = useDrawerContext();
 
+  useScrollLocker(isOpen);
+
   return (
-    <div
-      className={className}
-      css={css`
-        position: fixed;
-        pointer-events: ${isOpen ? "auto" : "none"};
-        min-height: calc(100vh - 5.4rem);
-        inset: 0;
-        overflow: hidden;
-      `}
-    >
-      <section
-        css={[
-          css`
-            visibility: hidden;
-            transform: translateX(${direction === "left" ? "-110%" : "110%"});
-            will-change: transform;
-            transition: transform 0.4s ease, visibility 0s ease 0.4s;
-            overflow: auto;
-            padding-inline: 1.8rem;
-            height: 100%;
-            background: white;
-          `,
-          isOpen &&
-            css`
-              visibility: visible;
-              transform: translateX(0);
-              transition: transform 0.4s ease;
-            `,
-        ]}
+    <Portal id="drawer-portal">
+      <div
+        className={className}
+        css={css`
+          position: fixed;
+          pointer-events: ${isOpen ? "auto" : "none"};
+          min-height: calc(100dvh - ${top});
+          inset: 0;
+          z-index: 20;
+          max-width: 44rem;
+          overflow: hidden;
+          margin-inline: auto;
+          margin-top: ${top};
+        `}
       >
-        {children}
-      </section>
-    </div>
+        <section
+          css={[
+            css`
+              visibility: hidden;
+              transform: translateX(
+                  ${direction === "right" ? "110%" : direction === "left" ? "-110%" : 0}
+                )
+                translateY(${direction === "top" ? "-110%" : direction === "bottom" ? "110%" : 0});
+              will-change: transform;
+              transition: transform 0.4s ease, visibility 0s ease 0.4s;
+              overflow: auto;
+              padding-inline: 2rem;
+              height: 100%;
+              background: white;
+            `,
+            isOpen &&
+              css`
+                visibility: visible;
+                transform: translateX(0);
+                transition: transform 0.4s ease;
+              `,
+          ]}
+        >
+          {children}
+        </section>
+      </div>
+    </Portal>
   );
 };
 

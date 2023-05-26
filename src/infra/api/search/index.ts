@@ -1,6 +1,6 @@
 import type { AxiosInstance } from "axios";
 
-import type { GetMemesResponse } from "@/types";
+import type { GetMemesResponse, GetSearchMemesResponse } from "@/types";
 
 export class SearchApi {
   constructor(private api: AxiosInstance) {}
@@ -14,7 +14,7 @@ export class SearchApi {
     offset: number;
     limit: number;
   }) => {
-    const response = await this.api.get<GetMemesResponse>("/search", {
+    const response = await this.api.get<GetSearchMemesResponse>("/search", {
       params: {
         keyword,
         offset,
@@ -33,7 +33,7 @@ export class SearchApi {
     offset: number;
     limit: number;
   }) => {
-    const response = await this.api.get<GetMemesResponse>("/search/tag", {
+    const response = await this.api.get<GetSearchMemesResponse>("/search/tag", {
       params: {
         keyword,
         offset,

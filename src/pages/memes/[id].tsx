@@ -2,8 +2,8 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
-import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
-import { TITLE } from "@/application/util";
+import { fetchMemeDetailById, fetchMemeTagsById, useMoveMemeDetail } from "@/application/hooks";
+import { SITE_NAME } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
@@ -24,16 +24,22 @@ interface Props {
 }
 
 const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image } }) => {
+  const { searchQueryString } = useMoveMemeDetail();
   return (
     <>
-      <ExplorePageNavigation />
       <NextSeo
         description={description}
-        title={TITLE.memeDetail(name)}
+        title={name}
         openGraph={{
+          siteName: SITE_NAME,
           imageUrl: image.images[0].imageUrl,
         }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
       />
+
+      <ExplorePageNavigation title={searchQueryString} />
 
       <SSRSuspense fallback={<SkeletonMemeDetail />} key={id}>
         <MemeDetail id={id} />

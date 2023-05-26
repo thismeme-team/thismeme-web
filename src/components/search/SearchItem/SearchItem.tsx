@@ -20,11 +20,11 @@ export const SearchItem = ({
 
   return (
     <div
-      className="flex h-50 w-full cursor-pointer items-center gap-10 pl-11 pr-6 font-suit text-16-semibold-140"
+      className="flex h-50 w-full cursor-pointer items-center gap-12 px-14 font-suit text-16-regular-140"
       {...rest}
     >
       {startComponent}
-      <div className="max-w-230">{ColoredText}</div>
+      <div className="grow truncate pr-4">{ColoredText}</div>
       {endComponent}
     </div>
   );

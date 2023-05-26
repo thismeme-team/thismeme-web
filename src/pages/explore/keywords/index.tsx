@@ -1,7 +1,8 @@
 import type { GetServerSideProps, NextPage } from "next";
 
-import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
+import type { NextSeoProps } from "@/components/common/NextSeo";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
 import { MemeListSkeleton } from "@/components/common/Skeleton";
@@ -15,18 +16,28 @@ interface Props {
 const ExploreByKeywordPage: NextPage<Props> = ({ searchQuery }) => {
   return (
     <>
-      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.exploreByKeyword(searchQuery)} />
+      <NextSeo title={`'${searchQuery}' 밈`} {...metadata} />
 
       <ExplorePageNavigation title={searchQuery} />
       <PullToRefresh>
-        <div className="mt-12">
-          <SSRSuspense fallback={<MemeListSkeleton />}>
-            <MemesByKeyword searchQuery={searchQuery} />
-          </SSRSuspense>
-        </div>
+        <SSRSuspense fallback={<MemeListSkeleton />}>
+          <MemesByKeyword searchQuery={searchQuery} />
+        </SSRSuspense>
       </PullToRefresh>
     </>
   );
+};
+
+const metadata: NextSeoProps = {
+  description: DEFAULT_DESCRIPTION,
+
+  openGraph: {
+    siteName: SITE_NAME,
+    imageUrl: "/open-graph/home.png",
+  },
+  twitter: {
+    cardType: "summary_large_image",
+  },
 };
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {

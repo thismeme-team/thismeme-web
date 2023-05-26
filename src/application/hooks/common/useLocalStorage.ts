@@ -3,12 +3,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { safeLocalStorage } from "@/application/util";
 
-export type Serializable<T> = T extends
-  | string
-  | number
-  | boolean
-  | unknown[]
-  | Record<string, unknown>
+type Serializable<T> = T extends string | number | boolean | unknown[] | Record<string, unknown>
   ? T
   : never;
 

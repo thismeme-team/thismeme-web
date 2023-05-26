@@ -1,13 +1,18 @@
 import { useRouter } from "next/router";
+import type { ComponentProps } from "react";
 
+import { useRouteTracking } from "@/application/hooks";
 import { Icon } from "@/components/common/Icon";
 
-export const BackButton = () => {
+export const BackButton = (props: ComponentProps<"button">) => {
   const router = useRouter();
+
+  const { isInitialPage } = useRouteTracking();
+  if (isInitialPage) return null;
+
   return (
-    <button onClick={() => router.back()}>
+    <button {...props} onClick={() => router.back()}>
       <Icon name="back" />
     </button>
   );
 };
-export {};

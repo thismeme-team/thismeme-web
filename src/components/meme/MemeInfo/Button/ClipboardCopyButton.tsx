@@ -11,8 +11,11 @@ export const ClipboardCopyButton = ({ target, onSuccess }: Props) => {
   const handleClick = () => writeText(target, { onSuccess });
 
   return (
-    <Button className="flex h-50 w-50 gap-8 rounded-10 bg-gray-900" onClick={handleClick}>
-      <Icon color="white" name="share" />
+    <Button
+      className="h-50 w-50 gap-8 rounded-10 bg-gray-900 hover:bg-black active:bg-black"
+      onClick={handleClick}
+    >
+      <Icon fill="white" name="share" />
     </Button>
   );
 };

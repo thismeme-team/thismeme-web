@@ -1,4 +1,5 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
 import type { RecentSearch } from "@/application/hooks";
@@ -45,24 +46,28 @@ export const useGetMemesByKeyword = (keyword: string) => {
  * isEmpty - 밈 검색 결과가 없는 경우 true
  */
 export const useGetMemesByTag = (tag: string) => {
-  const { data, isEmpty, isFetchingNextPage, fetchNextPage } = useCoreInfiniteQuery(
+  const { data, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
     QUERY_KEYS.getMemesByTag(tag),
     ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
-    PAGE_SIZE,
     {
-      enabled: !!tag,
-      select: (data) => {
-        return {
-          pages: data.pages.map((page) => ({ data: page.memes })),
-          pageParams: data.pageParams,
-        };
+      getNextPageParam: (lastPage, allPages) => {
+        const { count } = lastPage;
+        const isLastPage = count < PAGE_SIZE;
+        const offset = count * (allPages.length - 1);
+        return isLastPage ? undefined : offset + PAGE_SIZE;
       },
+      enabled: !!tag,
     },
   );
 
-  return { data, isEmpty, isFetchingNextPage, fetchNextPage };
+  const memes = data?.pages.flatMap(({ memes }) => memes) || [];
+  const totalCount = data?.pages[0].totalCount;
+  const isEmpty = !memes.length;
+
+  return { data: memes, totalCount, isEmpty, isFetchingNextPage, fetchNextPage };
 };
+
 export const prefetchMemesByTag = (tag: string, queryClient: QueryClient) =>
   queryClient.fetchInfiniteQuery(QUERY_KEYS.getMemesByTag(tag), ({ pageParam = 0 }) =>
     api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),

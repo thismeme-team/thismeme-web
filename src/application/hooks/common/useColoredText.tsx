@@ -17,13 +17,13 @@ export const useColoredText = ({ tagName, searchText }: Props) => {
   const ColoredText: ReactNode = (
     <>
       {checkValidation && index !== -1 ? (
-        <div className="truncate">
+        <>
           <span>{tagName.slice(0, tagName.search(searchText))}</span>
           <span className="text-secondary-1000">
             {tagName.slice(index, index + searchText.length)}
           </span>
           <span>{tagName.slice(index + searchText.length)}</span>
-        </div>
+        </>
       ) : (
         <span>{tagName}</span>
       )}

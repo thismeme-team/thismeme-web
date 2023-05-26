@@ -2,21 +2,15 @@ import { rest } from "msw";
 
 import * as MOCK_DATA from "./data";
 
-export const getPopularTag = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/tags`,
-  async (req, res, ctx) => {
-    return res(ctx.delay(), ctx.status(200), ctx.json({ tags: MOCK_DATA.popularTag }));
-  },
-);
-
 export const getCategoryWithTag = rest.get(
-  `${process.env.NEXT_PUBLIC_API_URL}/tags/categories`,
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/categories/new`,
   async (req, res, ctx) => {
     return res(
       ctx.delay(300),
       ctx.status(200),
       ctx.json({
-        categories: MOCK_DATA.categories,
+        mainCategories: MOCK_DATA.mainCategories,
+        mainTags: MOCK_DATA.mainTags,
       }),
     );
   },
@@ -39,6 +33,19 @@ export const getMemeTagsById = rest.get(
   },
 );
 
+export const getFavoriteTags = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/favs`,
+  async (req, res, ctx) => {
+    return res(
+      ctx.delay(300),
+      ctx.status(200),
+      ctx.json({
+        tags: MOCK_DATA.favoriteTags,
+      }),
+    );
+  },
+);
+
 export const postFavoriteTag = rest.post(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId/fav`,
   async (req, res, ctx) => {
@@ -50,6 +57,19 @@ export const deleteFavoriteTag = rest.delete(
   `${process.env.NEXT_PUBLIC_API_URL}/tags/:tagId/fav`,
   async (req, res, ctx) => {
     return res(ctx.delay(), ctx.status(Math.random() > 0.8 ? 500 : 200));
+  },
+);
+
+export const getTagAutoSearch = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/search`,
+  async (req, res, ctx) => {
+    return res(
+      ctx.delay(),
+      ctx.status(200),
+      ctx.json({
+        tags: MOCK_DATA.favoriteTags,
+      }),
+    );
   },
 );
 
@@ -71,6 +91,19 @@ export const getTagInfo = rest.get(
         categoryId: 1,
         categoryName: "카테고리 명1",
         isFav: true,
+      }),
+    );
+  },
+);
+
+export const getTagRank = rest.get(
+  `${process.env.NEXT_PUBLIC_API_URL}/tags/rank/new`,
+  async (req, res, ctx) => {
+    return res(
+      ctx.delay(),
+      ctx.status(200),
+      ctx.json({
+        tags: MOCK_DATA.popularTag,
       }),
     );
   },

@@ -32,6 +32,7 @@ const getStyle = ({ ownerState }: { ownerState: OwnerState }): TwStyle => {
     ...(ownerState.maxColumnHeight && {
       height: ownerState.maxColumnHeight + ownerState.spacing,
     }),
+    overflowAnchor: "none",
     margin: `calc(0px - (${ownerState.spacing}px / 2))`,
     "& > *": {
       margin: `calc(${ownerState.spacing}px / 2)`,
@@ -137,6 +138,7 @@ export const Masonry = <T extends ElementType = "div">(props: Props<T>) => {
       });
     }
   };
+
   const observer = useRef(
     typeof ResizeObserver === "undefined" ? undefined : new ResizeObserver(handleResize),
   );
@@ -149,9 +151,15 @@ export const Masonry = <T extends ElementType = "div">(props: Props<T>) => {
     }
 
     if (masonryRef.current) {
+      /**
+       * @desc
+       *   masonry 3-4 줄 되는 현상때문에 자식 노드를 모두 observe 하는 로직으로 롤백했습니다
+       *   (그러나 오류 재현이 잘 안됨..)
+       */
       (masonryRef.current.childNodes as NodeListOf<HTMLElement>).forEach((childNode) => {
         resizeObserver.observe(childNode);
       });
+      // resizeObserver.observe(masonryRef.current);
     }
 
     return () => resizeObserver.disconnect();

@@ -2,11 +2,11 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 import { fetchTagInfo, prefetchMemesByTag } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
 import { ExplorePageNavigation } from "@/components/common/Navigation";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
-import { MemesByTag } from "@/components/explore";
+import { MemesByTag, Thumbnail } from "@/components/explore";
 import { TagBookmarkButton } from "@/components/tags";
 
 interface Props {
@@ -17,14 +17,23 @@ interface Props {
 const ExploreByTagPage: NextPage<Props> = ({ searchQuery, tagId }) => {
   return (
     <>
-      <NextSeo description={DEFAULT_DESCRIPTION} title={TITLE.exploreByTag(searchQuery)} />
+      <NextSeo
+        description={DEFAULT_DESCRIPTION}
+        title={`'${searchQuery}' 밈`}
+        openGraph={{
+          siteName: SITE_NAME,
+          imageUrl: `/api/og?tag=${searchQuery}`,
+        }}
+        twitter={{
+          cardType: "summary_large_image",
+        }}
+      />
 
       <ExplorePageNavigation title={`#${searchQuery}`} />
 
       <PullToRefresh>
-        <div className="mt-12">
-          <MemesByTag searchQuery={searchQuery} />
-        </div>
+        <Thumbnail tag={searchQuery} />
+        <MemesByTag searchQuery={searchQuery} />
       </PullToRefresh>
       <TagBookmarkButton tagId={tagId} />
     </>

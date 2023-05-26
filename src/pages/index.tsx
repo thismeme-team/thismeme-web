@@ -1,53 +1,36 @@
 import type { NextPage } from "next";
-import { useRouter } from "next/router";
 
-import { useAuth } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, TITLE } from "@/application/util";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
 import { IntroPageNavigation } from "@/components/common/Navigation";
+import type { NextSeoProps } from "@/components/common/NextSeo";
 import { NextSeo } from "@/components/common/NextSeo";
 import { PullToRefresh } from "@/components/common/PullToRefresh";
-import { SSRSuspense } from "@/components/common/Suspense";
-import { MemeListContainer, PopularTagList, UserSharedMemeList } from "@/components/home";
-import { SkeletonMeme, SkeletonTagList } from "@/components/home/Skeleton";
-import { SearchInput } from "@/components/search";
+import { MemeListContainer } from "@/components/home";
 
 const HomePage: NextPage = () => {
-  const router = useRouter();
-  const { isLoading, isLogin, user } = useAuth();
-
   return (
     <>
-      <NextSeo
-        description={DEFAULT_DESCRIPTION}
-        openGraph={{ imageUrl: "/open-graph/home.png" }}
-        title={TITLE.default}
-      />
+      <NextSeo {...metadata} />
       <IntroPageNavigation />
+
       <PullToRefresh>
-        <section className="pt-8" />
-        <SearchInput
-          inputMode="none"
-          placeholder="당신이 생각한 '그 밈' 검색하기"
-          onClick={() => {
-            router.push("/search");
-          }}
-        />
-        <SSRSuspense fallback={<SkeletonTagList count={5} />}>
-          <PopularTagList />
-        </SSRSuspense>
-        <section className="pb-40" />
-        {isLogin && (
-          <>
-            <SSRSuspense fallback={<SkeletonMeme />}>
-              <UserSharedMemeList name={user?.name} sharedId={user?.sharedCollectionId} />
-              <MemeListContainer />
-            </SSRSuspense>
-          </>
-        )}
-        {!isLogin && !isLoading && <MemeListContainer />}
+        <MemeListContainer />
       </PullToRefresh>
     </>
   );
+};
+
+const metadata: NextSeoProps = {
+  title: `${SITE_NAME} : 무한도전 밈 검색`,
+  description: DEFAULT_DESCRIPTION,
+
+  openGraph: {
+    siteName: SITE_NAME,
+    imageUrl: `/open-graph/home.png`,
+  },
+  twitter: {
+    cardType: "summary_large_image",
+  },
 };
 
 export default HomePage;

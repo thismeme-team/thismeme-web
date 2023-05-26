@@ -15,7 +15,7 @@ export const SharedMemeTagList = ({ id }: Props) => {
     <ul className="flex min-h-[3.6rem] gap-8 overflow-x-scroll">
       {tags?.slice(0, 3)?.map((tag) => (
         <li className="shrink-0" key={tag.tagId}>
-          <Link href={`${PATH.getExploreByTagPath(tag.tagId)}`}>
+          <Link href={`${PATH.getExploreByTagPath(tag.tagId, tag.name)}`}>
             <Chip as="button" color="white" label={tag.name} size="medium" />
           </Link>
         </li>

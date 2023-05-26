@@ -8,56 +8,92 @@ import {
 import { Button } from "@/components/common/Button";
 import { Icon } from "@/components/common/Icon";
 
+import { useTagCategoryContext } from "../TagCategory";
+
 interface Props {
   tagId: number;
 }
 
 const animation = "transition-colors duration-200 ease-in-out";
+const TAG_DELAY = 1500;
 
 export const TagBookmarkButton = ({ tagId }: Props) => {
-  const { show } = useToast();
+  const { show, close } = useToast();
   const { validate, isLoading } = useAuth();
   const { data, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
+
   const { mutate: saveMutation } = usePostFavoriteTag();
-  const { mutate: deleteMutation } = useDeleteFavoriteTag();
+  const { mutate: deleteMutation, onCancel } = useDeleteFavoriteTag(TAG_DELAY);
+  const [, setIsOpenTagCategory] = useTagCategoryContext();
 
   if (!isFetchedAfterMount || !data) return null;
   const { isFav } = data;
-
   const handleSaveBookmark = () => {
-    saveMutation(tagId, {
-      onSuccess: () => show("즐겨찾기에 추가했습니다."),
-      onError: () => show("다시 시도해 주세요."),
-    });
+    saveMutation(
+      { tagId: tagId, name: data.name },
+      {
+        onSuccess: () =>
+          show(
+            <>
+              <div className="grow">태그를 북마크했어요!</div>
+              <button
+                className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+                onClick={() => {
+                  setIsOpenTagCategory(true);
+                  close({ id: tagId, duration: 0 });
+                }}
+              >
+                보러가기
+              </button>
+            </>,
+            { duration: TAG_DELAY },
+          ),
+        onError: () => show("다시 시도해 주세요."),
+      },
+    );
   };
 
-  const handleDeleteBookmark = () => {
+  const handleDeleteBookmark = async () => {
+    show(
+      <>
+        <div className="grow">북마크한 태그를 해제했어요!</div>
+        <button
+          className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+          onClick={() => {
+            onCancel();
+            close({ id: tagId, duration: 0 });
+            show("삭제할 뻔한 태그를 살려냈어요!");
+          }}
+        >
+          되돌리기
+        </button>
+      </>,
+      { duration: TAG_DELAY },
+    );
     deleteMutation(tagId, {
-      onSuccess: () => show("즐겨찾기에서 해제했습니다."),
-      onError: () => show("다시 시도해 주세요."),
+      onError: (err) => {
+        if (err instanceof Error && err.name === "CanceledError") return;
+        show("다시 시도해 주세요.");
+      },
     });
   };
 
   const handleClick = isFav ? handleDeleteBookmark : handleSaveBookmark;
 
   return (
-    <div className="fixed bottom-32 right-18 text-center">
+    <div className="fixed bottom-32 left-[50%] translate-x-[-50%] text-center">
       <Button
         id="bookmark"
         className={`${
-          isFav ? "bg-primary-300 [&_*]:fill-[#fddd71]" : "bg-gray-800"
-        } ${animation} peer mb-3 h-60 w-60 rounded-full active:bg-black`}
+          isFav
+            ? "bg-gray-200 text-gray-600 shadow-[0_0_20px_rgba(38,37,40,0.2)] active:bg-gray-300 active:text-gray-700"
+            : "bg-gray-800 text-white active:bg-black active:text-white"
+        } ${animation} flex h-53 w-143 justify-between rounded-50 px-24 py-16 text-14-semibold-140`}
         onClick={validate(handleClick)}
       >
-        <Icon height={28} name="star" width={28} />
+        <Icon height={22} name="star" width={22} />
+        태그 북마크
       </Button>
-      <span
-        className={`${
-          isFav ? "text-gray-600" : "text-gray-700"
-        } ${animation} text-12-bold-160 peer-active:text-black`}
-      >
-        {isFav ? "북마크 완료!" : "태그 북마크"}
-      </span>
     </div>
   );
 };

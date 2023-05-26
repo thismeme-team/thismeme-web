@@ -2,7 +2,9 @@ import type { AxiosInstance } from "axios";
 
 import type {
   GetCategoryByTagResponse,
+  GetFavoriteTagsResponse,
   GetMemeTagsByIdResponse,
+  GetPopularTagsResponse,
   GetTagInfoResponse,
 } from "./types";
 
@@ -32,7 +34,7 @@ export class TagApi {
   };
 
   getPopularTags = () => {
-    return this.api.get(`/tags?size=5&sort=viewCount,desc`).then((response) => response.data);
+    return this.api.get<GetPopularTagsResponse>(`/tags/rank/new`).then((response) => response.data);
   };
 
   getMemeTagsById = (id: string) => {
@@ -43,7 +45,7 @@ export class TagApi {
 
   getCategoryWithTags = () => {
     return this.api
-      .get<GetCategoryByTagResponse>("/tags/categories")
+      .get<GetCategoryByTagResponse>("/tags/categories/new")
       .then((response) => response.data);
   };
 
@@ -51,7 +53,11 @@ export class TagApi {
     return this.api.get<GetTagInfoResponse>(`/tags/${tagId}`).then((response) => response.data);
   };
 
-  postFavoriteTag = (tagId: number) => {
+  getFavoriteTags = () => {
+    return this.api.get<GetFavoriteTagsResponse>("/tags/favs").then((response) => response.data);
+  };
+
+  postFavoriteTag = ({ tagId, name }: { tagId: number; name: string }) => {
     return this.api.post(`/tags/${tagId}/fav`).then((response) => response.data);
   };
 

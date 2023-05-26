@@ -7,7 +7,6 @@ import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
 import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
 import { Masonry } from "@/components/common/Masonry";
 import { renderMemeItemSkeletons } from "@/components/common/Skeleton";
-import { MemeLongPressContainer } from "@/components/meme";
 import { MemeItem } from "@/components/meme/MemeItem";
 import type { GetMemesResponse, Meme } from "@/types";
 
@@ -21,14 +20,12 @@ const builder = ({ elements, loading = false }: { elements: JSX.Element[]; loadi
 interface InfiniteMemeListProps {
   memeList: Meme[];
   loading?: boolean;
-  isCollection?: boolean;
   onRequestAppend: () => void;
 }
 
 export const InfiniteMemeList = ({
   memeList,
   loading = false,
-  isCollection = false,
   onRequestAppend,
 }: InfiniteMemeListProps) => {
   const ref = useIntersect(onRequestAppend, { rootMargin: "200% 0px" });
@@ -72,14 +69,16 @@ export const InfiniteMemeList = ({
 
   const elements = useMemo(
     () =>
-      memeList.map((meme) => {
+      memeList.map((meme, idx) => {
         return (
-          <MemeLongPressContainer isCollection={isCollection} key={meme.memeId} meme={meme}>
-            <MemeItem meme={meme} onClick={getMemeDetailFromCache} />
-          </MemeLongPressContainer>
+          <MemeItem
+            key={meme.memeId + idx.toString()} // 중복된 memeId 처리
+            meme={meme}
+            onClick={getMemeDetailFromCache}
+          />
         );
       }),
-    [memeList, getMemeDetailFromCache, isCollection],
+    [memeList, getMemeDetailFromCache],
   );
 
   return (

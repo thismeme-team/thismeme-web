@@ -1,8 +1,7 @@
 import type { Dispatch, SetStateAction } from "react";
-import { startTransition, useCallback, useEffect } from "react";
+import { startTransition, useCallback } from "react";
 import { css } from "twin.macro";
 
-import { useAuth } from "@/application/hooks";
 import { DropDown } from "@/components/common/DropDown";
 import { Icon } from "@/components/common/Icon";
 
@@ -14,12 +13,9 @@ interface Props {
 }
 
 export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
-  const { isLogin, user } = useAuth();
-
   const dropDownText: { [key in MemeListType]: string } = {
-    user: `${user?.name}이(가) 찾는 그 밈`,
-    recent: "최신 업로드 된 그 밈",
-    share: "공유가 많이 된 그 밈",
+    recent: "최신 순",
+    share: "공유 순",
   };
 
   const handleSortBy = useCallback(
@@ -31,59 +27,57 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
     [onClickItem],
   );
 
-  useEffect(() => {
-    // NOTE: 로그인 & 로그아웃 상태 변경 시 드롭다운 상태 재설정
-    handleSortBy(isLogin ? "user" : "share");
-  }, [isLogin, handleSortBy]);
-
   return (
     <DropDown>
-      <div className="flex items-center py-16">
-        <header className="font-suit text-22-bold-140">{dropDownText[sortBy]}</header>
+      <div className="flex items-center gap-4 pb-8">
+        <header className="text-16-semibold-140 text-gray-600">
+          {dropDownText[sortBy].replace(/\s/g, "")}
+        </header>
         <DropDown.Trigger>
           {({ isOpen }) => (
-            <span className="flex h-40 w-40">
-              <Icon
-                name="chevronDown2"
-                css={css`
-                  cursor: pointer;
-                  overflow: visible;
-                  margin: auto;
-                  transition-duration: 300ms;
-                  transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
-                  ${isOpen && "transform: rotate(180deg)"}
-                `}
-              />
-            </span>
+            <Icon
+              color="gray-600"
+              height={24}
+              name="chevronDown"
+              width={24}
+              css={css`
+                cursor: pointer;
+                overflow: visible;
+                margin: auto;
+                transition-duration: 300ms;
+                transition-timing-function: cubic-bezier(0.87, 0, 0.13, 1);
+                ${isOpen && "transform: rotate(180deg)"}
+              `}
+            />
           )}
         </DropDown.Trigger>
       </div>
-      <DropDown.Contents css={{ width: "34rem" }}>
-        {isLogin && (
-          <DropDown.Content
-            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
-            onClick={() => {
-              handleSortBy("user");
-            }}
-          >
-            {dropDownText.user}
-          </DropDown.Content>
-        )}
+      <DropDown.Contents css={{ width: "13.2rem" }}>
         <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+          className={`h-56 cursor-pointer p-8 text-16-semibold-140 ${
+            sortBy === "share" ? "text-gray-900" : "text-gray-600"
+          }`}
           onClick={() => {
             handleSortBy("share");
           }}
         >
-          {dropDownText.share}
+          <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 active:bg-primary-200 active:text-gray-900">
+            <Icon height={22} name="shareSort" width={22} />
+            {dropDownText.share}
+          </section>
         </DropDown.Content>
         <DropDown.Content
-          className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+          className={`h-56 cursor-pointer p-8 text-16-semibold-140 ${
+            sortBy === "recent" ? "text-gray-900" : "text-gray-600"
+          }`}
           onClick={() => {
             handleSortBy("recent");
           }}
         >
-          {dropDownText.recent}
+          <section className="flex h-full items-center gap-4 rounded-8 px-4 py-8 active:bg-primary-200 active:text-gray-900">
+            <Icon height={22} name="recentSort" width={22} />
+            {dropDownText.recent}
+          </section>
         </DropDown.Content>
       </DropDown.Contents>
     </DropDown>

@@ -1,3 +1,4 @@
+import { captureException } from "@sentry/nextjs";
 import type { NextPageContext } from "next";
 
 import { Navigation } from "@/components/common/Navigation";
@@ -26,6 +27,9 @@ const ErrorPage = ({ statusCode, err }: Props) => {
 
 ErrorPage.getInitialProps = ({ res, err }: NextPageContext) => {
   const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
+
+  if (statusCode !== 404) captureException(err);
+
   return { statusCode, err };
 };
 

@@ -27,7 +27,8 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
             tagName={value}
             endComponent={
               <Icon
-                className="absolute right-6"
+                className="min-w-24"
+                color="gray-600"
                 name="delete2"
                 onClick={(e) => {
                   e.stopPropagation();
@@ -42,7 +43,7 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
               onAddItem({ value, type, id });
 
               if (isTagType(type)) {
-                router.push(`${PATH.getExploreByTagPath(id)}`);
+                router.push(`${PATH.getExploreByTagPath(id, value)}`);
                 return;
               }
               router.push(`${PATH.getExploreByKeywordPath(value)}`);

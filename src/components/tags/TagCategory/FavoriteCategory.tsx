@@ -1,6 +1,5 @@
 import { Content, Header, Item, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
-import type { Dispatch, SetStateAction } from "react";
 
 import { useAuth, useDeleteFavoriteTag, useGetFavoriteTags, useToast } from "@/application/hooks";
 import { PATH } from "@/application/util";
@@ -14,11 +13,7 @@ const FAVORITE_ID = "북마크";
 const TAG_DELETE_DELAY = 1500;
 const FAVORITE_ICON = "/icon/star.svg";
 
-interface Props {
-  setValue: Dispatch<SetStateAction<string>>;
-}
-
-export const FavoriteCategory = ({ setValue }: Props) => {
+export const FavoriteCategory = () => {
   const { isLogin } = useAuth();
   const router = useRouter();
   const { show, close } = useToast();
@@ -65,12 +60,7 @@ export const FavoriteCategory = ({ setValue }: Props) => {
   return (
     <>
       <CategoryTitle title={FAVORITE_ID} />
-      <Item
-        value={FAVORITE_ID}
-        onClick={() => {
-          setValue((value) => (value === FAVORITE_ID ? "" : FAVORITE_ID));
-        }}
-      >
+      <Item value={FAVORITE_ID}>
         <Header className="py-4">
           <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
             <Photo className="h-24 w-24 p-2" loading="eager" src={FAVORITE_ICON} />

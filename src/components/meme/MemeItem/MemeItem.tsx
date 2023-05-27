@@ -40,8 +40,7 @@ export const MemeItem = memo(({ meme, onClick }: Props) => {
       </button>
       <div className="flex justify-between gap-6">
         <button
-          className="py-4"
-          draggable={false}
+          className="py-4 text-start"
           onClick={() => {
             onClick?.(memeId);
             movePage(memeId);

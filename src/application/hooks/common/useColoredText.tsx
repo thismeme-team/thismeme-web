@@ -8,10 +8,10 @@ interface Props {
 }
 
 export const useColoredText = ({ tagName, searchText }: Props) => {
-  const index = tagName.search(searchText); //문자 있는 지 없는 확인
+  const index = tagName.search(searchText);
   const checkValidation = useValidation({
     text: searchText,
-    regularValidation: /([^가-힣a-z\x20])/i, //나중에 체크할 정규식이 많아진다면 따로 파일로 분리해서 정리해도 조을듯!
+    regularValidation: /([^가-힣a-z\x20])/i,
   });
 
   const ColoredText: ReactNode = (
@@ -19,7 +19,7 @@ export const useColoredText = ({ tagName, searchText }: Props) => {
       {checkValidation && index !== -1 ? (
         <>
           <span>{tagName.slice(0, tagName.search(searchText))}</span>
-          <span className="text-secondary-1000">
+          <span className="text-16-semibold-140 text-secondary-1000">
             {tagName.slice(index, index + searchText.length)}
           </span>
           <span>{tagName.slice(index + searchText.length)}</span>

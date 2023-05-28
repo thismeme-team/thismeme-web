@@ -62,7 +62,7 @@ const SearchPage: NextPage = () => {
         <>
           <p className="text-16-semibold-140 text-gray-500">친구들이 찾는 인기태그</p>
           <SSRSuspense fallback={<SkeletonTagList />}>
-            <SearchPopularList />
+            <SearchPopularList onAddItem={onAddItem} />
           </SSRSuspense>
         </>
       )}

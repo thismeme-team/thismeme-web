@@ -1,15 +1,18 @@
+import type { HTMLAttributes } from "react";
+
 import { Photo } from "@/components/common/Photo";
 
-interface Props {
+interface Props extends HTMLAttributes<HTMLButtonElement> {
   name: string;
   imageSrc: string;
 }
 
-export const SearchPopularItem = ({ name, imageSrc }: Props) => {
+export const SearchPopularItem = ({ name, imageSrc, ...rest }: Props) => {
   return (
     <button
       className="relative overflow-hidden rounded-26 py-16 px-32"
       onContextMenu={(e) => e.preventDefault()}
+      {...rest}
     >
       <Photo
         alt={name}

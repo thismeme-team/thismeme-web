@@ -81,7 +81,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
   const handleClick = isFav ? handleDeleteBookmark : handleSaveBookmark;
 
   return (
-    <div className="fixed bottom-32 left-[50%] translate-x-[-50%] text-center">
+    <div className="ga-search-result-tag-bookmark-click fixed bottom-32 left-[50%] translate-x-[-50%] text-center">
       <Button
         id="bookmark"
         className={`${

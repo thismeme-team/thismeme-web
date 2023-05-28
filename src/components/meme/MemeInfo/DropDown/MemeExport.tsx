@@ -41,24 +41,24 @@ export const MemeExport = ({ id }: Props) => {
     <>
       <DropDown>
         <DropDown.Trigger>
-          <span className="absolute top-16 right-16 flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+          <span className="ga-meme-add-click absolute top-16 right-16 flex h-40 w-40 items-center justify-center rounded-10 bg-black shadow-[0_0_20px_rgba(255,255,255,0.3)]">
             <Icon color="white" name="meatball" />
           </span>
         </DropDown.Trigger>
         <DropDown.Contents css={tw`w-full right-0 top-72`}>
           <DropDown.Content
-            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+            className="ga-meme-add-save-click flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onClick={validate(onUpdateCollection)}
           >
             콜렉션에 저장하기
           </DropDown.Content>
           <DropDown.Content
-            className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
+            className="ga-meme-add-share-click flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100"
             onClick={handleNativeShare}
           >
             공유하기
           </DropDown.Content>
-          <DropDown.Content className="flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100">
+          <DropDown.Content className="ga-meme-add-channeltalk-click flex h-56 items-center p-16 font-suit text-18-bold-140 hover:bg-primary-100">
             신고
           </DropDown.Content>
         </DropDown.Contents>

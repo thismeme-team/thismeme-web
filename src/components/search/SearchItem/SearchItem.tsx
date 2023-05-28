@@ -20,7 +20,7 @@ export const SearchItem = ({
 
   return (
     <div
-      className="flex h-50 w-full cursor-pointer items-center gap-12 px-14 font-suit text-16-regular-140"
+      className="ga-searching-recent-tag-click flex h-50 w-full cursor-pointer items-center gap-12 px-14 text-16-regular-140"
       {...rest}
     >
       {startComponent}

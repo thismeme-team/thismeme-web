@@ -21,7 +21,7 @@ export const MemeTagList = ({ id }: Props) => {
             key={tag.tagId}
           >
             <Link
-              className="px-16 leading-[3.4rem]"
+              className="ga-meme-tag-click px-16 leading-[3.4rem]"
               href={PATH.getExploreByTagPath(tag.tagId, tag.name)}
             >
               {tag.name}

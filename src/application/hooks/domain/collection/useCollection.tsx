@@ -42,7 +42,7 @@ export const useCollection = ({ memeId, isLogin }: UseCollectionArg) => {
               <>
                 <div className="grow">콜렉션에 저장했습니다!</div>
                 <Link
-                  className="justify-self-end text-14-semibold-140 leading-none text-gray-400"
+                  className="ga-meme-toast-see-collection-click justify-self-end text-14-semibold-140 leading-none text-gray-400"
                   href="/collect"
                 >
                   보러가기

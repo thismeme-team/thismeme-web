@@ -16,7 +16,7 @@ export const TagCategory = ({ topOffset }: Props) => {
 
   return (
     <Drawer isOpen={isOpen} onOpenChange={handleChange}>
-      <Drawer.Trigger>
+      <Drawer.Trigger className="ga-tag-category-click">
         {({ isOpen }) => (
           <div>
             <span className="text-18-bold-140 text-primary-500">Tag</span>

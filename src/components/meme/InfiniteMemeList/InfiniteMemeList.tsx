@@ -1,6 +1,6 @@
 import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef } from "react";
 
 import { prefetchCollectionCheck, useIntersect } from "@/application/hooks";
 import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";

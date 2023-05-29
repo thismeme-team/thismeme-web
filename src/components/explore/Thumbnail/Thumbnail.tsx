@@ -23,7 +23,7 @@ export const Thumbnail = ({ tag }: Props) => {
       <div className="flex flex-1 flex-col items-center justify-center gap-2">
         <span className="text-14-semibold-140 text-gray-900">{totalCount}개 밈</span>
         <button
-          className="w-full rounded-full bg-gray-800 py-8 text-14-semibold-140 text-white active:bg-black"
+          className="ga-search-result-share-click w-full rounded-full bg-gray-800 py-8 text-14-semibold-140 text-white active:bg-black"
           onClick={() => {
             writeText(pageUrl, {
               onSuccess: () => {

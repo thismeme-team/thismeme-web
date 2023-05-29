@@ -12,7 +12,7 @@ export const ClipboardCopyButton = ({ target, onSuccess }: Props) => {
 
   return (
     <Button
-      className="h-50 w-50 gap-8 rounded-10 bg-gray-900 hover:bg-black active:bg-black"
+      className="ga-meme-item-add-link-share-click h-50 w-50 gap-8 rounded-10 bg-gray-900 hover:bg-black active:bg-black"
       onClick={handleClick}
     >
       <Icon fill="white" name="share" />

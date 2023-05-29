@@ -17,7 +17,7 @@ export const SideBar = () => {
         <Drawer.Trigger>
           {({ isOpen }) =>
             isOpen ? (
-              <Icon name="cancel" />
+              <Icon className="ga-common-category-click" name="cancel" />
             ) : (
               <Icon name="menu" onClick={() => setIsOpenTagCategory(false)} />
             )

@@ -12,7 +12,7 @@ export const KakaoShareButton = ({ resource, onSuccess, onError }: Props) => {
   const { share } = useKakaoShare();
   return (
     <Button
-      className="h-50 w-50 gap-8 rounded-10 bg-gray-900 hover:bg-black active:bg-black"
+      className="ga-meme-item-add-kakao-share-click h-50 w-50 gap-8 rounded-10 bg-gray-900 hover:bg-black active:bg-black"
       onClick={() => {
         share({ ...resource, onSuccess, onError });
       }}

@@ -36,6 +36,7 @@ export const MemeSortDropDown = ({ sortBy, onClickItem }: Props) => {
         <DropDown.Trigger>
           {({ isOpen }) => (
             <Icon
+              className="ga-reordering-click"
               color="gray-600"
               height={24}
               name="chevronDown"

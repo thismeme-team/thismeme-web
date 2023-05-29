@@ -1,11 +1,15 @@
 import Link from "next/link";
 
+import type { RecentSearch } from "@/application/hooks";
 import { useGetPopularTags } from "@/application/hooks";
 import { PATH } from "@/application/util";
 
 import { SearchPopularItem } from "./SearchPopularItem";
 
-export const SearchPopularList = () => {
+interface Props {
+  onAddItem: ({ value, type, id }: RecentSearch) => void;
+}
+export const SearchPopularList = ({ onAddItem }: Props) => {
   const { tags } = useGetPopularTags();
 
   return (
@@ -13,7 +17,13 @@ export const SearchPopularList = () => {
       {tags?.map((tag) => (
         <li className="shrink-0" key={tag.tagId}>
           <Link href={PATH.getExploreByTagPath(tag.tagId, tag.name)}>
-            <SearchPopularItem imageSrc={tag.imageUrl} name={tag.name} />
+            <SearchPopularItem
+              imageSrc={tag.imageUrl}
+              name={tag.name}
+              onClick={() => {
+                onAddItem({ value: tag.name, type: "tag", id: tag.tagId });
+              }}
+            />
           </Link>
         </li>
       ))}

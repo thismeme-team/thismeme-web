@@ -23,11 +23,11 @@ export const LoginSideBarContent = (props: LoginSideBarContentProps) => {
         </Link>
 
         <div className="mt-24 flex justify-center divide-x divide-solid divide-gray-200">
-          <Link className="pr-40 text-center" href="/share">
+          <Link className="ga-profile-share-click pr-40 text-center" href="/share">
             <span className="block text-32-bold-140">{user?.shareCount}</span>
             <span className="block text-16-semibold-140">share</span>
           </Link>
-          <Link className="pl-40 text-center" href="/collect">
+          <Link className="ga-profile-collect-click pl-40 text-center" href="/collect">
             <span className="block text-32-bold-140">{user?.saveCount}</span>
             <span className="block text-16-semibold-140">collect</span>
           </Link>

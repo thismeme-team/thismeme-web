@@ -25,13 +25,13 @@ const MyPage = () => {
           {isLoading ? <Skeleton animation="wave" width={70} /> : user.name}
         </span>
         <div className="mt-24 flex divide-x divide-solid divide-gray-200">
-          <Link className="pr-40 text-center" href="/share">
+          <Link className="ga-profile-share-click pr-40 text-center" href="/share">
             <div className="text-32-bold-140">
               {isLoading ? <Skeleton animation="wave" width={47} /> : user.shareCount}
             </div>
             <div className="text-16-semibold-140">share</div>
           </Link>
-          <Link className="pl-40 text-center" href="/collect">
+          <Link className="ga-profile-collect-click pl-40 text-center" href="/collect">
             <div className="text-32-bold-140">
               {isLoading ? <Skeleton animation="wave" width={47} /> : user.saveCount}
             </div>

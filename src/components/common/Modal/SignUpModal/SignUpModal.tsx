@@ -39,7 +39,7 @@ export const SignUpModal = () => {
         <section className="m-auto flex justify-between pt-32">
           <Button
             as="a"
-            className="h-50 w-290 rounded-10 bg-[#FEE500] px-40 py-14 font-suit text-16-semibold-140"
+            className="ga-signup-click h-50 w-290 rounded-10 bg-[#FEE500] px-40 py-14 font-suit text-16-semibold-140"
             href={`${process.env.NEXT_PUBLIC_KAKAO_OAUTH2_URL}`}
             onClick={handleSetCookie}
           >

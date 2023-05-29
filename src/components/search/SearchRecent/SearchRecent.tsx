@@ -22,37 +22,38 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
       {items.map((item) => {
         const { id, value, type } = item;
         return (
-          <SearchItem
-            key={id}
-            tagName={value}
-            endComponent={
-              <Icon
-                className="min-w-24"
-                color="gray-600"
-                name="delete2"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onDelete(id);
-                }}
-              />
-            }
-            startComponent={
-              <Icon className="min-w-24" name={isTagType(type) ? "pound" : "search"} />
-            }
-            onClick={() => {
-              onAddItem({ value, type, id });
-
-              if (isTagType(type)) {
-                router.push(`${PATH.getExploreByTagPath(id, value)}`);
-                return;
+          <div className="ga-searching-recent-tag-click" key={id}>
+            <SearchItem
+              tagName={value}
+              endComponent={
+                <Icon
+                  className="min-w-24"
+                  color="gray-600"
+                  name="delete2"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onDelete(id);
+                  }}
+                />
               }
-              router.push(`${PATH.getExploreByKeywordPath(value)}`);
-            }}
-            onMouseDown={(e) => {
-              // Prevent input blur
-              e.preventDefault();
-            }}
-          />
+              startComponent={
+                <Icon className="min-w-24" name={isTagType(type) ? "pound" : "search"} />
+              }
+              onClick={() => {
+                onAddItem({ value, type, id });
+
+                if (isTagType(type)) {
+                  router.push(`${PATH.getExploreByTagPath(id, value)}`);
+                  return;
+                }
+                router.push(`${PATH.getExploreByKeywordPath(value)}`);
+              }}
+              onMouseDown={(e) => {
+                // Prevent input blur
+                e.preventDefault();
+              }}
+            />
+          </div>
         );
       })}
     </div>

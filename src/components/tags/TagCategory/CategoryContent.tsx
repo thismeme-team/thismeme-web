@@ -12,6 +12,15 @@ import { useTagCategoryContext } from "./context";
 import { FavoriteCategory } from "./FavoriteCategory";
 import { SlotCategory } from "./SlotCategory";
 
+const gtmTrigger: { [key: string]: string } = {
+  "OOO이 사용하는 밈": "ga-tag-category-people-click",
+  "OOO을 느낄 때": "ga-tag-category-feel-click",
+  "OOO할 때": "ga-tag-category-act-click",
+  콘텐츠: "ga-tag-category-content-click",
+  캐릭터: "ga-tag-category-character-click",
+  기타: "ga-tag-category-etc-click",
+} as const;
+
 export const CategoryContent = () => {
   const router = useRouter();
 
@@ -43,7 +52,11 @@ export const CategoryContent = () => {
           <CategoryTitle title={item.name} />
           <Item value={item.id}>
             <Header className="py-4">
-              <Trigger className="flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180">
+              <Trigger
+                className={`${
+                  gtmTrigger[item.name]
+                } flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180`}
+              >
                 <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
                 <span className="flex-grow text-left text-16-semibold-140">
                   {item.mainTags.length ? (
@@ -70,7 +83,7 @@ export const CategoryContent = () => {
                     {category.tags.map((tag) => (
                       <li className="flex w-full justify-between gap-6 pl-20" key={tag.tagId}>
                         <button
-                          className="w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
+                          className="ga-tag-category-tags-click w-full rounded-8 py-8 pl-16 hover:bg-primary-200"
                           onClick={() => onClickItem(tag.tagId, tag.name)}
                         >
                           <div className="grow text-left">{tag.name}</div>

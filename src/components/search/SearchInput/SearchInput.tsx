@@ -38,7 +38,7 @@ export const SearchInput = ({
                 <Icon name="delete" onClick={onReset} />
               </button>
             )}
-            <button className="absolute right-0 h-full pl-8 pr-16">
+            <button className="ga-searching-done-click absolute right-0 h-full pl-8 pr-16">
               <Icon name="search" stroke="gray-600" />
             </button>
           </>

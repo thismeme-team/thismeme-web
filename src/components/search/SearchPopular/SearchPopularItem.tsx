@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<HTMLButtonElement> {
 export const SearchPopularItem = ({ name, imageSrc, ...rest }: Props) => {
   return (
     <button
-      className="relative overflow-hidden rounded-26 py-16 px-32"
+      className="ga-search-popular-tag-click relative overflow-hidden rounded-26 py-16 px-32"
       onContextMenu={(e) => e.preventDefault()}
       {...rest}
     >

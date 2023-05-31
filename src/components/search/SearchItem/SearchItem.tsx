@@ -14,13 +14,14 @@ export const SearchItem = ({
   tagName,
   startComponent,
   endComponent,
+  className = "",
   ...rest
 }: SearchItemProps) => {
   const { ColoredText } = useColoredText({ tagName, searchText });
 
   return (
     <div
-      className="flex h-50 w-full cursor-pointer items-center gap-12 px-14 text-16-regular-140"
+      className={`flex h-50 w-full cursor-pointer items-center gap-12 px-14 text-16-regular-140 ${className}`}
       {...rest}
     >
       {startComponent}

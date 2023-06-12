@@ -1,5 +1,5 @@
 import { useAuth } from "@/application/hooks";
-import { instagramUrl, twitterUrl } from "@/application/util";
+import { instagramUrl, twitterUrl } from "@/common/utils";
 import { useTagCategoryContext } from "@/components/tags";
 
 import { Drawer } from "../../Drawer";

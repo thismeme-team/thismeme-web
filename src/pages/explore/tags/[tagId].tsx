@@ -2,10 +2,10 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
 import { fetchTagInfo, prefetchMemesByTag } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { PullToRefresh } from "@/common/components/PullToRefresh";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
 import { MemesByTag, Thumbnail } from "@/components/explore";
 import { TagBookmarkButton } from "@/components/tags";
 

@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 
 import type { RecentSearch } from "@/application/hooks";
 import { isTagType } from "@/application/hooks";
-import { PATH } from "@/application/util";
 import { Icon } from "@/common/components/Icon";
+import { PATH } from "@/common/utils";
 
 import { SearchItem } from "../SearchItem";
 

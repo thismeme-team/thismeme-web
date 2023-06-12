@@ -1,6 +1,6 @@
 import Script from "next/script";
 
-import * as gtag from "@/application/util";
+import * as gtag from "@/common/utils";
 
 export const GTagScript = () => {
   return (

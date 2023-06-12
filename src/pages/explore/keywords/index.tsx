@@ -1,12 +1,12 @@
 import type { GetServerSideProps, NextPage } from "next";
 
-import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import type { NextSeoProps } from "@/common/components/NextSeo";
 import { NextSeo } from "@/common/components/NextSeo";
 import { PullToRefresh } from "@/common/components/PullToRefresh";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
 import { MemesByKeyword } from "@/components/explore";
 
 interface Props {

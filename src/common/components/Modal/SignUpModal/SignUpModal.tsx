@@ -1,4 +1,4 @@
-import { IS_CSR } from "@/application/util";
+import { IS_CSR } from "@/common/utils";
 
 import { Button } from "../../Button";
 import { Icon } from "../../Icon";

@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 
-import { delay } from "@/application/util";
 import { useSetToastContext } from "@/common/components/Toast";
 import type { Toast, ToastOption, ToastType } from "@/common/components/Toast/types";
+import { delay } from "@/common/utils";
 
 const DEFAULT_TOAST_DELAY = 1000;
 const ANIMATION_EXPIRE_DELAY = 1000;

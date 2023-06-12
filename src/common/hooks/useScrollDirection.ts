@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 
-import { throttle } from "@/application/util";
+import { throttle } from "@/common/utils";
 
 const SCROLL_DIRECTION = {
   up: "UP",

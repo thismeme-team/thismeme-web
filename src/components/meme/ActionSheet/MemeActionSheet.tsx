@@ -2,9 +2,9 @@ import { Suspense } from "react";
 import tw from "twin.macro";
 
 import { useAuth, useCollection } from "@/application/hooks";
-import { channelUrl } from "@/application/util";
 import { ActionSheet } from "@/common/components/ActionSheet";
 import { useOverlay } from "@/common/hooks";
+import { channelUrl } from "@/common/utils";
 import type { Meme } from "@/types";
 
 import { MemeShareModal } from "../MemeInfo/Modal";

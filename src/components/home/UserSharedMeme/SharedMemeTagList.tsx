@@ -1,8 +1,8 @@
 import Link from "next/link";
 
 import { useGetMemeTagsById } from "@/application/hooks";
-import { PATH } from "@/application/util";
 import { Chip } from "@/common/components/Chip";
+import { PATH } from "@/common/utils";
 
 interface Props {
   id: string;

@@ -3,7 +3,7 @@ import type { PropsWithChildren } from "react";
 import { useRef, useState } from "react";
 import { css } from "twin.macro";
 
-import { delay } from "@/application/util";
+import { delay } from "@/common/utils";
 
 import { RefreshContent } from "./RefreshContent";
 import { getScrollParent, getScrollTop } from "./utils";

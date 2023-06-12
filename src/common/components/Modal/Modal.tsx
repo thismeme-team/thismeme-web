@@ -1,8 +1,8 @@
 import type { PropsWithChildren } from "react";
 import { Children, createContext, isValidElement, useContext } from "react";
 
-import { fadeInOut } from "@/application/util";
 import { useClickOutside } from "@/common/hooks";
+import { fadeInOut } from "@/common/utils";
 
 import { Icon } from "../Icon";
 

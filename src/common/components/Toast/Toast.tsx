@@ -1,4 +1,4 @@
-import { slideUpDown } from "@/application/util";
+import { slideUpDown } from "@/common/utils";
 
 import { Icon } from "../Icon";
 import { defaultToastStyle, toastColors, toastIconColors } from "./style";

@@ -1,7 +1,7 @@
 import type { SetStateAction } from "react";
 import { useCallback, useEffect, useState } from "react";
 
-import { safeLocalStorage } from "@/application/util";
+import { safeLocalStorage } from "@/common/utils";
 
 type Serializable<T> = T extends string | number | boolean | unknown[] | Record<string, unknown>
   ? T

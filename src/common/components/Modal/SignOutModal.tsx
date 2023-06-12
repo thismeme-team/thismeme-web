@@ -1,8 +1,8 @@
 import { useRouter } from "next/router";
 
 import { useAuth } from "@/application/hooks";
-import { PATH } from "@/application/util";
 import { useToast } from "@/common/hooks";
+import { PATH } from "@/common/utils";
 
 import { RandomImage } from "../RandomImge";
 import { Modal } from "./Modal";

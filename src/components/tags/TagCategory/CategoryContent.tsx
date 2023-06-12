@@ -3,9 +3,9 @@ import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 
 import { useGetCategoryWithTag } from "@/application/hooks";
-import { PATH } from "@/application/util";
 import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
+import { PATH } from "@/common/utils";
 
 import { CategoryTitle } from "./CategoryTitle";
 import { useTagCategoryContext } from "./context";

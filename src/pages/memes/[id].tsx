@@ -3,11 +3,11 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
 import { fetchMemeDetailById, fetchMemeTagsById, useMoveMemeDetail } from "@/application/hooks";
-import { SITE_NAME } from "@/application/util";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
+import { SITE_NAME } from "@/common/utils";
 import {
   MemeCTAList,
   MemeDetail,

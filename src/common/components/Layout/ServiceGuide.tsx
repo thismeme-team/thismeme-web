@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { thismemeGuideUrl } from "@/application/util";
+import { thismemeGuideUrl } from "@/common/utils";
 
 import { Button } from "../Button";
 

@@ -1,4 +1,4 @@
-import { IS_CSR } from "@/application/util";
+import { IS_CSR } from "@/common/utils";
 
 type ScrollElement = HTMLElement | Window;
 const defaultRoot = IS_CSR ? window : null;

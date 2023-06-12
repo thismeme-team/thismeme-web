@@ -42,6 +42,7 @@ export const SearchHeader = ({ searchValue, isBack = true }: Props) => {
         )}
 
         <SearchInput
+          className="ga-search-bar-click"
           inputMode="none"
           isDelete={false}
           placeholder={"당신이 생각한 '그 밈' 검색하기"}

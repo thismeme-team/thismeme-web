@@ -29,7 +29,7 @@ export const NativeShareButton = ({ title, text, url, onSuccess, onError }: Prop
 
   return (
     <Button
-      className="h-50 w-50 gap-8 rounded-10 bg-gray-900 hover:bg-black active:bg-black"
+      className="ga-meme-item-add-other-share-click h-50 w-50 gap-8 rounded-10 bg-gray-900 hover:bg-black active:bg-black"
       onClick={handleClick}
     >
       <Icon color="white" name="meatball" />

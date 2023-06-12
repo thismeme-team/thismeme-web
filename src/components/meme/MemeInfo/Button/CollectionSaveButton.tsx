@@ -12,7 +12,7 @@ export const CollectionSaveButton = ({ id }: Props) => {
 
   return (
     <Button
-      className={`flex h-52 w-full items-center gap-8 rounded-10 ${
+      className={`ga-meme-save-click h-52 w-full items-center gap-8 rounded-10 ${
         isAdded ? "bg-gray-300" : "bg-gray-900 active:bg-black"
       }`}
       onClick={validate(onUpdateCollection)}

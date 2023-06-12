@@ -27,6 +27,7 @@ export const MemeActionSheet = ({ meme, onClose, isOpen }: Props) => {
     <>
       <ActionSheet isOpen={isOpen} onClose={onClose}>
         <ActionSheet.Button
+          className="ga-meme-item-add-save-click"
           onClick={() => {
             onClose();
             validate(onUpdateCollection)();
@@ -35,6 +36,7 @@ export const MemeActionSheet = ({ meme, onClose, isOpen }: Props) => {
           콜렉션에 저장하기
         </ActionSheet.Button>
         <ActionSheet.Button
+          className="ga-meme-item-add-share-click"
           onClick={() => {
             onClose();
             overlay.open(({ isOpen, close }) => (

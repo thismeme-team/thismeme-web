@@ -21,12 +21,18 @@ export const Drawer = ({ children, isOpen, onOpenChange }: PropsWithChildren<Dra
 
 interface DrawerTriggerProps {
   children: ({ isOpen }: { isOpen: boolean }) => ReactNode;
+  className?: string;
 }
-const DrawerTrigger = ({ children }: DrawerTriggerProps) => {
+
+const DrawerTrigger = ({ children, className = "" }: DrawerTriggerProps) => {
   const isOpen = useDrawerContext();
   const setIsOpen = useSetDrawerContext();
 
-  return <button onClick={() => setIsOpen(!isOpen)}>{children({ isOpen })}</button>;
+  return (
+    <button className={className} onClick={() => setIsOpen(!isOpen)}>
+      {children({ isOpen })}
+    </button>
+  );
 };
 
 interface DrawerContentProps {

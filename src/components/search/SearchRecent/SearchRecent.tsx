@@ -23,6 +23,7 @@ export const SearchRecent = ({ items, onAddItem, onDelete }: Props) => {
         const { id, value, type } = item;
         return (
           <SearchItem
+            className="ga-searching-recent-tag-click"
             key={id}
             tagName={value}
             endComponent={

@@ -84,7 +84,7 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
     <div className="fixed bottom-32 left-[50%] translate-x-[-50%] text-center">
       <Button
         id="bookmark"
-        className={`${
+        className={`ga-search-result-tag-bookmark-click ${
           isFav
             ? "bg-gray-200 text-gray-600 shadow-[0_0_20px_rgba(38,37,40,0.2)] active:bg-gray-300 active:text-gray-700"
             : "bg-gray-800 text-white active:bg-black active:text-white"

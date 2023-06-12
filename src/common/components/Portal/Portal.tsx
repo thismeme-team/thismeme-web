@@ -2,7 +2,7 @@ import type { ReactNode } from "react";
 import { useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 
-import { useIsMount } from "@/application/hooks";
+import { useIsMount } from "@/common/hooks";
 import { pretendard, suit } from "@/styles/fonts";
 
 interface Props {

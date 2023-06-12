@@ -1,4 +1,4 @@
-import { useToast } from "@/application/hooks/common";
+import { useToast } from "@/common/hooks";
 
 import { Button } from "../Button";
 import type { Toast } from "./types";

@@ -2,11 +2,12 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo } from "react";
 
-import { prefetchCollectionCheck, useIntersect } from "@/application/hooks";
+import { prefetchCollectionCheck } from "@/application/hooks";
 import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
 import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
 import { Masonry } from "@/common/components/Masonry";
 import { renderMemeItemSkeletons } from "@/common/components/Skeleton";
+import { useIntersect } from "@/common/hooks";
 import { MemeItem } from "@/components/meme/MemeItem";
 import type { GetMemesResponse, Meme } from "@/types";
 

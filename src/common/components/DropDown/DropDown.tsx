@@ -9,8 +9,8 @@ import type {
 import { createContext, useContext, useState } from "react";
 import { css } from "twin.macro";
 
-import { useClickOutside } from "@/application/hooks";
 import { withDelay } from "@/application/util/delay";
+import { useClickOutside } from "@/common/hooks";
 
 const DropDownContext = createContext(false);
 const DropDownSetContext = createContext<Dispatch<SetStateAction<boolean>>>(() => null);

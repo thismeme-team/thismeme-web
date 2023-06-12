@@ -5,12 +5,13 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { OverlayProvider, RouteTrackingProvider, useAnalytics } from "@/application/hooks";
+import { OverlayProvider, RouteTrackingProvider } from "@/application/hooks";
 import { QueryClientProvider } from "@/application/queryClient";
 import { QueryErrorBoundary } from "@/common/components/ErrorBoundary";
 import { Layout } from "@/common/components/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/common/components/Modal";
 import { ToastContainer, ToastProvider } from "@/common/components/Toast";
+import { useAnalytics } from "@/common/hooks";
 import { TagCategoryProvider } from "@/components/tags";
 import { GoogleTagManagerScript, GTagScript } from "@/infra/sdk";
 import type { DefaultPageProps } from "@/types";

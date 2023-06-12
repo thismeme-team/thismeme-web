@@ -1,9 +1,10 @@
 import { useDeferredValue } from "react";
 
-import { useAuth, useDebounce, useInput } from "@/application/hooks";
+import { useAuth } from "@/application/hooks";
 import { BackButtonNavigation } from "@/common/components/Navigation";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
+import { useDebounce, useInput } from "@/common/hooks";
 import { Collection, SearchedCollection } from "@/components/collect";
 import { withAuth } from "@/components/hocs";
 import { SearchInput } from "@/components/search";

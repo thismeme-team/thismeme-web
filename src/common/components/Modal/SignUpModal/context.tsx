@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import { createContext, useContext } from "react";
 
-import { useModal } from "@/application/hooks";
+import { useModal } from "@/common/hooks";
 
 import type { ModalProps } from "../types";
 

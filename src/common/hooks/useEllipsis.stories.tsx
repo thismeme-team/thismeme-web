@@ -1,5 +1,6 @@
-import { useEllipsis } from "@/application/hooks";
 import { Button } from "@/common/components/Button";
+
+import { useEllipsis } from "./useEllipsis";
 
 export default {
   title: "hooks/common/useEllipsis",

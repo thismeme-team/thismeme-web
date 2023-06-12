@@ -1,7 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import { css } from "twin.macro";
 
-import { useScrollLocker } from "@/application/hooks";
+import { useScrollLocker } from "@/common/hooks";
 
 import { Portal } from "../Portal";
 import { DrawerContextProvider, useDrawerContext, useSetDrawerContext } from "./context";

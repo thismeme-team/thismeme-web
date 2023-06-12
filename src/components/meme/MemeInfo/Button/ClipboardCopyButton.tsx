@@ -1,6 +1,6 @@
-import { useClipboard } from "@/application/hooks";
 import { Button } from "@/common/components/Button";
 import { Icon } from "@/common/components/Icon";
+import { useClipboard } from "@/common/hooks";
 
 interface Props {
   target: string;

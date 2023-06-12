@@ -1,6 +1,6 @@
 import { useRef } from "react";
 
-import { useIsomorphicLayoutEffect } from "@/application/hooks";
+import { useIsomorphicLayoutEffect } from "@/common/hooks";
 
 import { Portal } from "../Portal";
 import { useToastContext } from "./context";

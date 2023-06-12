@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 import { CSSTransition } from "react-transition-group";
 import { css } from "twin.macro";
 
-import { useScrollDirection } from "@/application/hooks";
+import { useScrollDirection } from "@/common/hooks";
 import { SearchInput } from "@/components/search";
 import { TagCategory } from "@/components/tags";
 

@@ -1,7 +1,7 @@
 import type { ComponentProps } from "react";
 import { Suspense } from "react";
 
-import { useIsMount } from "@/application/hooks";
+import { useIsMount } from "@/common/hooks";
 
 type Props = ComponentProps<typeof Suspense>;
 

@@ -1,6 +1,6 @@
 import type { ComponentMeta } from "@storybook/react";
 
-import { Chip } from "@/components/common/Chip";
+import { Chip } from "@/common/components/Chip";
 
 import { SearchItem } from "./SearchItem";
 

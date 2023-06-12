@@ -2,8 +2,8 @@ import { memo } from "react";
 
 import { useMoveMemeDetail, useOverlay } from "@/application/hooks";
 import { isEncodingError } from "@/application/util";
-import { Icon } from "@/components/common/Icon";
-import { Photo } from "@/components/common/Photo";
+import { Icon } from "@/common/components/Icon";
+import { Photo } from "@/common/components/Photo";
 import type { Meme } from "@/types";
 
 import { MemeActionSheet } from "../ActionSheet";

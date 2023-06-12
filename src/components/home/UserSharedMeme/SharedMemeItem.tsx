@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-import { Icon } from "@/components/common/Icon";
-import { Photo } from "@/components/common/Photo";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { Icon } from "@/common/components/Icon";
+import { Photo } from "@/common/components/Photo";
+import { SSRSuspense } from "@/common/components/Suspense";
 import type { Meme } from "@/types";
 
 import { SkeletonTagList } from "../Skeleton";

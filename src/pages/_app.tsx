@@ -7,10 +7,10 @@ import { useEffect } from "react";
 
 import { OverlayProvider, RouteTrackingProvider, useAnalytics } from "@/application/hooks";
 import { QueryClientProvider } from "@/application/queryClient";
-import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
-import { Layout } from "@/components/common/Layout";
-import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
-import { ToastContainer, ToastProvider } from "@/components/common/Toast";
+import { QueryErrorBoundary } from "@/common/components/ErrorBoundary";
+import { Layout } from "@/common/components/Layout";
+import { SignUpModal, SignUpModalProvider } from "@/common/components/Modal";
+import { ToastContainer, ToastProvider } from "@/common/components/Toast";
 import { TagCategoryProvider } from "@/components/tags";
 import { GoogleTagManagerScript, GTagScript } from "@/infra/sdk";
 import type { DefaultPageProps } from "@/types";

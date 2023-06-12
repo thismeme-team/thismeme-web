@@ -3,7 +3,7 @@ import tw from "twin.macro";
 
 import { useAuth, useCollection, useOverlay } from "@/application/hooks";
 import { channelUrl } from "@/application/util";
-import { ActionSheet } from "@/components/common/ActionSheet";
+import { ActionSheet } from "@/common/components/ActionSheet";
 import type { Meme } from "@/types";
 
 import { MemeShareModal } from "../MemeInfo/Modal";

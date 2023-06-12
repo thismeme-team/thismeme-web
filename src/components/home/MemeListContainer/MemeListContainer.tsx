@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-import { MemeListSkeleton } from "@/components/common/Skeleton";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { MemeListSkeleton } from "@/common/components/Skeleton";
+import { SSRSuspense } from "@/common/components/Suspense";
 
 import { MemeSortDropDown } from "./DropDown";
 import { CommonMemeList } from "./MemeList";

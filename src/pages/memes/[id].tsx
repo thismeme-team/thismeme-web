@@ -4,10 +4,10 @@ import { Suspense } from "react";
 
 import { fetchMemeDetailById, fetchMemeTagsById, useMoveMemeDetail } from "@/application/hooks";
 import { SITE_NAME } from "@/application/util";
-import { ExplorePageNavigation } from "@/components/common/Navigation";
-import { NextSeo } from "@/components/common/NextSeo";
-import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { ExplorePageNavigation } from "@/common/components/Navigation";
+import { NextSeo } from "@/common/components/NextSeo";
+import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
+import { SSRSuspense } from "@/common/components/Suspense";
 import {
   MemeCTAList,
   MemeDetail,

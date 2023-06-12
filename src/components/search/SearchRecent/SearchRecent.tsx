@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import type { RecentSearch } from "@/application/hooks";
 import { isTagType } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { Icon } from "@/components/common/Icon";
+import { Icon } from "@/common/components/Icon";
 
 import { SearchItem } from "../SearchItem";
 

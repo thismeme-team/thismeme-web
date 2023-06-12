@@ -1,8 +1,8 @@
 import { useAuth, useChannelIO, useModal } from "@/application/hooks";
-import { Button } from "@/components/common/Button";
-import { SignOutModal } from "@/components/common/Modal";
-import { BackButtonNavigation } from "@/components/common/Navigation";
-import { Photo } from "@/components/common/Photo";
+import { Button } from "@/common/components/Button";
+import { SignOutModal } from "@/common/components/Modal";
+import { BackButtonNavigation } from "@/common/components/Navigation";
+import { Photo } from "@/common/components/Photo";
 import { withAuth } from "@/components/hocs";
 
 const SettingPage = () => {

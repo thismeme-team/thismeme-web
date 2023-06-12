@@ -1,8 +1,8 @@
 import { Suspense } from "react";
 
 import { useOverlay } from "@/application/hooks";
-import { Button } from "@/components/common/Button";
-import { Icon } from "@/components/common/Icon";
+import { Button } from "@/common/components/Button";
+import { Icon } from "@/common/components/Icon";
 import { MemeShareModal } from "@/components/meme/MemeInfo/Modal";
 
 import { CollectionSaveButton } from "./Button";

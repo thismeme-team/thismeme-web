@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { RecentSearch } from "@/application/hooks";
 import { useGetTagSearch } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { Icon } from "@/components/common/Icon";
+import { Icon } from "@/common/components/Icon";
 import { SearchItem } from "@/components/search";
 
 interface Prop {

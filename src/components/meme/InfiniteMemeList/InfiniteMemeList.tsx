@@ -5,8 +5,8 @@ import { useCallback, useMemo } from "react";
 import { prefetchCollectionCheck, useIntersect } from "@/application/hooks";
 import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
 import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
-import { Masonry } from "@/components/common/Masonry";
-import { renderMemeItemSkeletons } from "@/components/common/Skeleton";
+import { Masonry } from "@/common/components/Masonry";
+import { renderMemeItemSkeletons } from "@/common/components/Skeleton";
 import { MemeItem } from "@/components/meme/MemeItem";
 import type { GetMemesResponse, Meme } from "@/types";
 

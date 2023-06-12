@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 
 import { useGetMyAccount, useLogout } from "@/application/hooks";
-import { useSignUpModalContext } from "@/components/common/Modal";
+import { useSignUpModalContext } from "@/common/components/Modal";
 import { api } from "@/infra/api";
 
 type Handler = (...args: any[]) => unknown;

@@ -4,10 +4,10 @@ import { Suspense } from "react";
 
 import { useDebounce, useInput, useRecentSearch } from "@/application/hooks";
 import { DEFAULT_DESCRIPTION, PATH, SITE_NAME } from "@/application/util";
-import { SearchPageNavigation } from "@/components/common/Navigation";
-import type { NextSeoProps } from "@/components/common/NextSeo";
-import { NextSeo } from "@/components/common/NextSeo";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { SearchPageNavigation } from "@/common/components/Navigation";
+import type { NextSeoProps } from "@/common/components/NextSeo";
+import { NextSeo } from "@/common/components/NextSeo";
+import { SSRSuspense } from "@/common/components/Suspense";
 import {
   SearchInput,
   SearchPopularList,

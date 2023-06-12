@@ -8,8 +8,8 @@ import {
   useToast,
 } from "@/application/hooks";
 import { DOMAIN, PATH } from "@/application/util";
-import { DropDown } from "@/components/common/DropDown";
-import { Icon } from "@/components/common/Icon";
+import { DropDown } from "@/common/components/DropDown";
+import { Icon } from "@/common/components/Icon";
 
 interface Props {
   id: string;

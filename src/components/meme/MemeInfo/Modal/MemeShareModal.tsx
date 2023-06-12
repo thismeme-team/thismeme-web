@@ -1,8 +1,8 @@
 import { useAuth, useMemeDetailById, useToast } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { DOMAIN, PATH } from "@/application/util";
-import { Modal } from "@/components/common/Modal";
-import { Photo } from "@/components/common/Photo";
+import { Modal } from "@/common/components/Modal";
+import { Photo } from "@/common/components/Photo";
 import {
   ClipboardCopyButton,
   KakaoShareButton,

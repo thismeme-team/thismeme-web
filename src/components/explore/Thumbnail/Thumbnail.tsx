@@ -2,7 +2,7 @@ import { useRouter } from "next/router";
 
 import { useClipboard, useGetMemesByTag, useToast } from "@/application/hooks";
 import { DOMAIN } from "@/application/util";
-import { Photo } from "@/components/common/Photo";
+import { Photo } from "@/common/components/Photo";
 
 interface Props {
   tag: string;

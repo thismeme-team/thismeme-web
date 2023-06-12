@@ -4,8 +4,8 @@ import React, { Fragment } from "react";
 
 import { useGetCategoryWithTag } from "@/application/hooks";
 import { PATH } from "@/application/util";
-import { Icon } from "@/components/common/Icon";
-import { Photo } from "@/components/common/Photo";
+import { Icon } from "@/common/components/Icon";
+import { Photo } from "@/common/components/Photo";
 
 import { CategoryTitle } from "./CategoryTitle";
 import { useTagCategoryContext } from "./context";

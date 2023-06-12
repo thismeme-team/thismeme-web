@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import type { ComponentProps } from "react";
 
-import { useRouteTracking } from "@/application/hooks";
+import { useRouteTracking } from "@/common/hooks";
 
 import { Icon } from "../../Icon";
 

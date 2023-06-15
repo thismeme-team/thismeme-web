@@ -12,7 +12,7 @@ import { Layout } from "@/components/common/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
 import { ToastContainer, ToastProvider } from "@/components/common/Toast";
 import { TagCategoryProvider } from "@/components/tags";
-import { GoogleTagManagerScript, GTagScript } from "@/infra/sdk";
+import { GoogleTagManagerScript, GTagScript, MazeScript } from "@/infra/sdk";
 import type { DefaultPageProps } from "@/types";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
@@ -35,6 +35,7 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
     <>
       <GTagScript />
       <GoogleTagManagerScript />
+      <MazeScript />
 
       <Head>
         <meta

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import type { RecentSearch } from "@/application/hooks";
 import { useGetPopularTags } from "@/application/hooks";
-import { PATH } from "@/application/util";
+import { PATH } from "@/common/utils";
 
 import { SearchPopularItem } from "./SearchPopularItem";
 

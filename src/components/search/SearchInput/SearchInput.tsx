@@ -1,7 +1,7 @@
 import type { InputHTMLAttributes } from "react";
 
-import { Icon } from "@/components/common/Icon";
-import { InputBase } from "@/components/common/Input";
+import { Icon } from "@/common/components/Icon";
+import { InputBase } from "@/common/components/Input";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   onReset?: () => void;

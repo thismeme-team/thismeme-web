@@ -2,7 +2,7 @@ import Link from "next/link";
 import { css } from "twin.macro";
 
 import { useGetMemesByCollectionId } from "@/application/hooks";
-import { Icon } from "@/components/common/Icon";
+import { Icon } from "@/common/components/Icon";
 
 import { SharedMemeItem } from "./SharedMemeItem";
 

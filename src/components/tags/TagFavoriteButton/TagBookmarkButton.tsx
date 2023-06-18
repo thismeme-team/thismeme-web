@@ -3,10 +3,10 @@ import {
   useDeleteFavoriteTag,
   useGetTagInfo,
   usePostFavoriteTag,
-  useToast,
 } from "@/application/hooks";
-import { Button } from "@/components/common/Button";
-import { Icon } from "@/components/common/Icon";
+import { Button } from "@/common/components/Button";
+import { Icon } from "@/common/components/Icon";
+import { useToast } from "@/common/hooks";
 
 import { useTagCategoryContext } from "../TagCategory";
 

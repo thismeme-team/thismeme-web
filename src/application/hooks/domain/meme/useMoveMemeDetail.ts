@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { PATH } from "@/application/util";
+import { PATH } from "@/common/utils";
 
 export const useMoveMemeDetail = () => {
   const router = useRouter();

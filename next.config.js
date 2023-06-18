@@ -11,13 +11,7 @@ const IS_DEV = process.env.NODE_ENV === "development";
 const IS_PROD = process.env.NODE_ENV === "production";
 
 // The folders containing files importing twin.macro
-const includedDirs = [
-  path.resolve(__dirname, "./src/application"),
-  path.resolve(__dirname, "./src/components"),
-  path.resolve(__dirname, "./src/infra"),
-  path.resolve(__dirname, "./src/pages"),
-  path.resolve(__dirname, "./src/styles"),
-];
+const includedDirs = [path.resolve(__dirname, "./src")];
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const withPWA = require("next-pwa")({

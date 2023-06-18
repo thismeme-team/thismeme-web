@@ -1,7 +1,7 @@
 import type { AxiosInstance, AxiosRequestConfig } from "axios";
 import { isAxiosError } from "axios";
 
-import { IS_CSR } from "@/application/util";
+import { IS_CSR } from "@/common/utils";
 import type { RefreshResponse } from "@/infra/api/auth/types";
 
 export class AuthApi {

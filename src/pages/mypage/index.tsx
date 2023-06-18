@@ -2,11 +2,11 @@ import Link from "next/link";
 import { css } from "twin.macro";
 
 import { useAuth, useChannelIO } from "@/application/hooks";
-import { Icon } from "@/components/common/Icon";
-import { MyPageNavigation } from "@/components/common/Navigation";
-import { Photo } from "@/components/common/Photo";
-import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { Icon } from "@/common/components/Icon";
+import { MyPageNavigation } from "@/common/components/Navigation";
+import { Photo } from "@/common/components/Photo";
+import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
+import { SSRSuspense } from "@/common/components/Suspense";
 import { withAuth } from "@/components/hocs";
 import { SummarizedCollection } from "@/components/mypage";
 

@@ -1,7 +1,7 @@
 import { captureException } from "@sentry/nextjs";
 import type { NextPageContext } from "next";
 
-import { Navigation } from "@/components/common/Navigation";
+import { Navigation } from "@/common/components/Navigation";
 
 interface Props {
   statusCode: number;

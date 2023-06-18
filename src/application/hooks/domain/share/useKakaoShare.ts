@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { KakaoSDK } from "@/infra/sdk";
+import { KakaoSDK } from "@/common/libs";
 
 export interface KakaoShareOptions {
   title: string;

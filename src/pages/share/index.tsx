@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
 
 import { useAuth } from "@/application/hooks";
-import { BackButtonNavigation } from "@/components/common/Navigation";
-import { MemeListSkeleton } from "@/components/common/Skeleton";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { BackButtonNavigation } from "@/common/components/Navigation";
+import { MemeListSkeleton } from "@/common/components/Skeleton";
+import { SSRSuspense } from "@/common/components/Suspense";
 import { withAuth } from "@/components/hocs";
 import { SharedMemeList } from "@/components/share";
 

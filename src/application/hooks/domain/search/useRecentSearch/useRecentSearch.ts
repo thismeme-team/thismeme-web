@@ -1,4 +1,4 @@
-import { useLocalStorage } from "@/application/hooks/common";
+import { useLocalStorage } from "@/common/hooks";
 
 import type { RecentSearch } from "./types";
 

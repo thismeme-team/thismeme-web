@@ -2,8 +2,8 @@ import type { Dispatch, SetStateAction } from "react";
 import { startTransition, useCallback } from "react";
 import { css } from "twin.macro";
 
-import { DropDown } from "@/components/common/DropDown";
-import { Icon } from "@/components/common/Icon";
+import { DropDown } from "@/common/components/DropDown";
+import { Icon } from "@/common/components/Icon";
 
 import type { MemeListType } from "../type";
 

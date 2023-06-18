@@ -1,6 +1,6 @@
 import type { HTMLAttributes, ReactNode } from "react";
 
-import { useColoredText } from "@/application/hooks";
+import { useColoredText } from "@/common/hooks";
 
 interface SearchItemProps extends HTMLAttributes<HTMLDivElement> {
   searchText?: string;

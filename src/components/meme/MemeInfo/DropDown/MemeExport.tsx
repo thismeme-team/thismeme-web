@@ -5,11 +5,11 @@ import {
   useCollection,
   useMemeDetailById,
   usePostMemeToSharedCollection,
-  useToast,
 } from "@/application/hooks";
-import { DOMAIN, PATH } from "@/application/util";
-import { DropDown } from "@/components/common/DropDown";
-import { Icon } from "@/components/common/Icon";
+import { DropDown } from "@/common/components/DropDown";
+import { Icon } from "@/common/components/Icon";
+import { useToast } from "@/common/hooks";
+import { DOMAIN, PATH } from "@/common/utils";
 
 interface Props {
   id: string;

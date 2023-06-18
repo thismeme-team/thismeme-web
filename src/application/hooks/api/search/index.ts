@@ -3,7 +3,7 @@ import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
 import type { RecentSearch } from "@/application/hooks";
-import { useLocalStorage } from "@/application/hooks";
+import { useLocalStorage } from "@/common/hooks";
 import { api } from "@/infra/api";
 
 import { useCoreInfiniteQuery } from "../core/useCoreInfiniteQuery";

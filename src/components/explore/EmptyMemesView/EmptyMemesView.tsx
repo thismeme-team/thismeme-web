@@ -1,6 +1,6 @@
-import { channelUrl } from "@/application/util";
-import { Button } from "@/components/common/Button";
-import { Icon } from "@/components/common/Icon";
+import { Button } from "@/common/components/Button";
+import { Icon } from "@/common/components/Icon";
+import { channelUrl } from "@/common/utils";
 
 export const EmptyMemesView = () => {
   return (

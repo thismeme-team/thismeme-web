@@ -1,6 +1,6 @@
 import type { HTMLAttributes } from "react";
 
-import { Photo } from "@/components/common/Photo";
+import { Photo } from "@/common/components/Photo";
 
 interface Props extends HTMLAttributes<HTMLButtonElement> {
   name: string;

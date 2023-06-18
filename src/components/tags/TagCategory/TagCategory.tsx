@@ -1,8 +1,8 @@
 import { css } from "twin.macro";
 
-import { Drawer } from "@/components/common/Drawer";
-import { Icon } from "@/components/common/Icon";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { Drawer } from "@/common/components/Drawer";
+import { Icon } from "@/common/components/Icon";
+import { SSRSuspense } from "@/common/components/Suspense";
 
 import { CategoryContent } from "./CategoryContent";
 import { useTagCategoryContext } from "./context";

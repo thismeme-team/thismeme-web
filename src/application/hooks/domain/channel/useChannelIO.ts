@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-import { ChannelService } from "@/infra/sdk";
+import { ChannelService } from "@/common/libs";
 import type { User } from "@/types";
 
 interface Props {

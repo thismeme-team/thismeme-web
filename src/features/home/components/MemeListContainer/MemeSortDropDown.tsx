@@ -5,7 +5,7 @@ import { css } from "twin.macro";
 import { DropDown } from "@/common/components/DropDown";
 import { Icon } from "@/common/components/Icon";
 
-import type { MemeListType } from "../type";
+import type { MemeListType } from "./type";
 
 interface Props {
   sortBy: MemeListType;

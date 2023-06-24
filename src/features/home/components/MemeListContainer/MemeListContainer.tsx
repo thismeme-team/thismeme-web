@@ -3,8 +3,8 @@ import { useState } from "react";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
 
-import { MemeSortDropDown } from "./DropDown";
-import { CommonMemeList } from "./MemeList";
+import { CommonMemeList } from "./CommonMemeList";
+import { MemeSortDropDown } from "./MemeSortDropDown";
 import type { MemeListType } from "./type";
 
 export const MemeListContainer = () => {

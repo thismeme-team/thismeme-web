@@ -1,7 +1,7 @@
 import { useGetMemesBySort } from "@/application/hooks";
 import { InfiniteMemeList } from "@/components/meme";
 
-import type { MemeListType } from "../type";
+import type { MemeListType } from "./type";
 
 interface Props {
   sortBy: MemeListType;

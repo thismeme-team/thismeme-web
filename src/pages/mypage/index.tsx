@@ -8,7 +8,7 @@ import { Photo } from "@/common/components/Photo";
 import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
 import { withAuth } from "@/components/hocs";
-import { SummarizedCollection } from "@/components/mypage";
+import { SummarizedCollection } from "@/features/mypage/components";
 
 const MyPage = () => {
   const { isLoading, user } = useAuth();

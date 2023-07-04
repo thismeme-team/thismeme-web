@@ -8,7 +8,7 @@ import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
 import { Masonry } from "@/common/components/Masonry";
 import { renderMemeItemSkeletons } from "@/common/components/Skeleton";
 import { useIntersect } from "@/common/hooks";
-import { MemeItem } from "@/components/meme/MemeItem";
+import { MemeItem } from "@/features/common";
 import type { GetMemesResponse, Meme } from "@/types";
 
 const skeletons = renderMemeItemSkeletons(4);

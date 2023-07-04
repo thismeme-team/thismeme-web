@@ -1,5 +1,6 @@
 import { Skeleton } from "@/common/components/Skeleton";
-import { SkeletonMemeTagList } from "@/components/meme";
+
+import { SkeletonMemeTagList } from "./SkeletonMemeTagList";
 
 export const SkeletonMemeDetail = () => {
   return (

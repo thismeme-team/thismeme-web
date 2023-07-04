@@ -1,5 +1,5 @@
 import { useGetMemesFromCollectionByKeyword } from "@/application/hooks";
-import { InfiniteMemeList } from "@/components/meme";
+import { InfiniteMemeList } from "@/features/common";
 
 interface Props {
   searchQuery: string;

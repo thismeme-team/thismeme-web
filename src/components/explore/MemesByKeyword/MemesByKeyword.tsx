@@ -1,5 +1,5 @@
 import { useGetMemesByKeyword } from "@/application/hooks";
-import { InfiniteMemeList } from "@/components/meme";
+import { InfiniteMemeList } from "@/features/common";
 
 import { EmptyMemesView } from "../EmptyMemesView";
 

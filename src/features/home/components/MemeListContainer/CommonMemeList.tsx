@@ -1,5 +1,5 @@
 import { useGetMemesBySort } from "@/application/hooks";
-import { InfiniteMemeList } from "@/components/meme";
+import { InfiniteMemeList } from "@/features/common";
 
 import type { MemeListType } from "./type";
 

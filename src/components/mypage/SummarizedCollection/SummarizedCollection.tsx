@@ -1,6 +1,6 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
 import { Masonry } from "@/common/components/Masonry";
-import { MemeItem } from "@/components/meme/MemeItem";
+import { MemeItem } from "@/features/common";
 
 interface Props {
   collectionId: number;

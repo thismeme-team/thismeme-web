@@ -1,5 +1,5 @@
 import { useGetMemesByCollectionId } from "@/application/hooks";
-import { InfiniteMemeList } from "@/components/meme";
+import { InfiniteMemeList } from "@/features/common";
 
 interface Props {
   sharedId: number;

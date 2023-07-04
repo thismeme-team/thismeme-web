@@ -5,9 +5,8 @@ import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
 import { useOverlay } from "@/common/hooks";
 import { isEncodingError } from "@/common/utils";
+import { MemeActionSheet } from "@/features/common";
 import type { Meme } from "@/types";
-
-import { MemeActionSheet } from "../ActionSheet";
 
 interface Props {
   meme: Meme;

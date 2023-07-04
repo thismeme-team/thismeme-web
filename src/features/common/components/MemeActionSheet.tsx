@@ -5,9 +5,8 @@ import { useAuth, useCollection } from "@/application/hooks";
 import { ActionSheet } from "@/common/components/ActionSheet";
 import { useOverlay } from "@/common/hooks";
 import { channelUrl } from "@/common/utils";
+import { MemeShareModal } from "@/features/memes/components";
 import type { Meme } from "@/types";
-
-import { MemeShareModal } from "../MemeInfo/Modal";
 
 interface Props {
   meme: Meme;

@@ -15,7 +15,7 @@ import {
   RelativeMemeList,
   SkeletonMemeDetail,
   SkeletonMemeTagList,
-} from "@/components/meme";
+} from "@/features/memes/components";
 import type { DefaultPageProps, Meme } from "@/types";
 
 interface Props {

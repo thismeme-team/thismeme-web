@@ -3,7 +3,8 @@ import { css } from "twin.macro";
 import { useMemeDetailById } from "@/application/hooks";
 import { Photo } from "@/common/components/Photo";
 import { SSRSuspense } from "@/common/components/Suspense";
-import { MemeExport } from "@/components/meme/MemeInfo/DropDown/MemeExport";
+
+import { MemeExport } from "./MemeExport";
 
 interface Props {
   id: string;

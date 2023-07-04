@@ -4,11 +4,10 @@ import { Modal } from "@/common/components/Modal";
 import { Photo } from "@/common/components/Photo";
 import { useToast } from "@/common/hooks";
 import { DOMAIN, PATH } from "@/common/utils";
-import {
-  ClipboardCopyButton,
-  KakaoShareButton,
-  NativeShareButton,
-} from "@/components/meme/MemeInfo/Button";
+
+import { ClipboardCopyButton } from "./ClipboardCopyButton";
+import { KakaoShareButton } from "./KakaoShareButton";
+import { NativeShareButton } from "./NativeShareButton";
 
 interface Props {
   id: string;

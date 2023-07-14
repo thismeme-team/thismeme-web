@@ -1,18 +1,16 @@
-import { useGetMemesByTag } from "@/application/hooks";
-import { InfiniteMemeList } from "@/features/common";
-
-import { EmptyMemesView } from "../EmptyMemesView";
+import { useGetMemesByKeyword } from "@/application/hooks";
+import { EmptyMemesView, InfiniteMemeList } from "@/features/common";
 
 interface Props {
   searchQuery: string;
 }
-export const MemesByTag = ({ searchQuery }: Props) => {
+export const MemesByKeyword = ({ searchQuery }: Props) => {
   const {
     data: memeList,
-    isEmpty,
     isFetchingNextPage,
+    isEmpty,
     fetchNextPage,
-  } = useGetMemesByTag(searchQuery);
+  } = useGetMemesByKeyword(searchQuery);
 
   if (isEmpty) {
     return <EmptyMemesView />;

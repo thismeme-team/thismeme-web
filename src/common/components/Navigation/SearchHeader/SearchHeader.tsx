@@ -3,7 +3,7 @@ import { CSSTransition } from "react-transition-group";
 import { css } from "twin.macro";
 
 import { useScrollDirection } from "@/common/hooks";
-import { TagCategory } from "@/components/tags";
+import { TagCategory } from "@/features/common";
 import { SearchInput } from "@/features/search/components";
 
 import { BackButton } from "../BackButton";

@@ -7,8 +7,7 @@ import {
 import { Button } from "@/common/components/Button";
 import { Icon } from "@/common/components/Icon";
 import { useToast } from "@/common/hooks";
-
-import { useTagCategoryContext } from "../TagCategory";
+import { useTagCategoryContext } from "@/features/common";
 
 interface Props {
   tagId: number;

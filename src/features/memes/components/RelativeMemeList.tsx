@@ -1,5 +1,5 @@
-import { useAuth, useGetMemesBySort } from "@/application/hooks";
-import { InfiniteMemeList } from "@/features/common";
+import { useGetMemesBySort } from "@/application/hooks";
+import { InfiniteMemeList, useAuth } from "@/features/common";
 
 export const RelativeMemeList = () => {
   const { data: memeList, isFetchingNextPage, fetchNextPage } = useGetMemesBySort("popular");

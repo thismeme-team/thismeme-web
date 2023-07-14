@@ -1,10 +1,9 @@
 import type { NextPage } from "next";
 
-import { useAuth } from "@/application/hooks";
 import { BackButtonNavigation } from "@/common/components/Navigation";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
-import { withAuth } from "@/features/common";
+import { useAuth, withAuth } from "@/features/common";
 import { SharedMemeList } from "@/features/share/components";
 
 const SharedHistoryPage: NextPage = () => {

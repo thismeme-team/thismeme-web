@@ -1,9 +1,10 @@
-import { useAuth, useMemeDetailById } from "@/application/hooks";
+import { useMemeDetailById } from "@/application/hooks";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { Modal } from "@/common/components/Modal";
 import { Photo } from "@/common/components/Photo";
 import { useToast } from "@/common/hooks";
 import { DOMAIN, PATH } from "@/common/utils";
+import { useAuth } from "@/features/common";
 
 import { ClipboardCopyButton } from "./ClipboardCopyButton";
 import { KakaoShareButton } from "./KakaoShareButton";

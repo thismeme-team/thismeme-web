@@ -2,8 +2,8 @@ import { useRouter } from "next/router";
 import type { ComponentType } from "react";
 import { useEffect } from "react";
 
-import { useAuth } from "@/application/hooks";
 import { useToast } from "@/common/hooks";
+import { useAuth } from "@/features/common";
 
 export const withAuth = (WrappedComponent: ComponentType) => {
   const displayName = WrappedComponent.displayName || WrappedComponent.name || "Component";

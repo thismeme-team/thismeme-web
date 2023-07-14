@@ -1,13 +1,8 @@
-import {
-  useAuth,
-  useDeleteFavoriteTag,
-  useGetTagInfo,
-  usePostFavoriteTag,
-} from "@/application/hooks";
+import { useDeleteFavoriteTag, useGetTagInfo, usePostFavoriteTag } from "@/application/hooks";
 import { Button } from "@/common/components/Button";
 import { Icon } from "@/common/components/Icon";
 import { useToast } from "@/common/hooks";
-import { useTagCategoryContext } from "@/features/common";
+import { useAuth, useTagCategoryContext } from "@/features/common";
 
 interface Props {
   tagId: number;

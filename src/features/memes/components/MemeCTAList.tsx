@@ -1,10 +1,9 @@
 import { Suspense } from "react";
 
-import { useAuth } from "@/application/hooks";
 import { Button } from "@/common/components/Button";
 import { Icon } from "@/common/components/Icon";
 import { useOverlay } from "@/common/hooks";
-import { useCollection } from "@/features/common";
+import { useAuth, useCollection } from "@/features/common";
 
 import { MemeShareModal } from "./MemeShareModal";
 

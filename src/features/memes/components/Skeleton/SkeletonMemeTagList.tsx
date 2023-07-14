@@ -1,5 +1,4 @@
 import { Skeleton } from "@/common/components/Skeleton";
-import { SkeletonTagList } from "@/components/home/Skeleton";
 
 export const SkeletonMemeTagList = () => {
   return (
@@ -12,7 +11,17 @@ export const SkeletonMemeTagList = () => {
         variant="rectangular"
         width="10rem"
       />
-      <SkeletonTagList count={3} />
+      <div className="flex gap-8">
+        {Array.from(Array(3).keys()).map((i) => (
+          <Skeleton
+            animation="wave"
+            as="div"
+            key={i}
+            style={{ borderRadius: "2.8rem", height: "3.6rem", width: "8.5rem" }}
+            variant="rounded"
+          />
+        ))}
+      </div>
     </>
   );
 };

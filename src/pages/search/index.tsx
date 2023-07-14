@@ -14,8 +14,8 @@ import {
   SearchPopularList,
   SearchRecent,
   SearchResultList,
-} from "@/components/search";
-import { SkeletonTagList } from "@/components/search/Skeleton";
+  SkeletonTagList,
+} from "@/features/search/components";
 
 /**
  * FIX

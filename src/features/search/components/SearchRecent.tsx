@@ -5,7 +5,7 @@ import { isTagType } from "@/application/hooks";
 import { Icon } from "@/common/components/Icon";
 import { PATH } from "@/common/utils";
 
-import { SearchItem } from "../SearchItem";
+import { SearchItem } from "./SearchItem";
 
 interface Props {
   items: RecentSearch[];

@@ -6,8 +6,8 @@ import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
 import { useDebounce, useInput } from "@/common/hooks";
 import { withAuth } from "@/components/hocs";
-import { SearchInput } from "@/components/search";
 import { Collection, SearchedCollection } from "@/features/collect/components";
+import { SearchInput } from "@/features/search/components";
 
 const CollectPage = () => {
   const inputProps = useInput();

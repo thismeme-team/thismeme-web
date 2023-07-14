@@ -1,10 +1,10 @@
 import Link from "next/link";
 
-import type { RecentSearch } from "@/application/hooks";
 import { useGetTagSearch } from "@/application/hooks";
 import { Icon } from "@/common/components/Icon";
 import { PATH } from "@/common/utils";
 
+import type { RecentSearch } from "../hooks";
 import { SearchItem } from "./SearchItem";
 
 interface Prop {

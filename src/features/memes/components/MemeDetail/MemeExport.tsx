@@ -1,15 +1,11 @@
 import tw from "twin.macro";
 
-import {
-  useAuth,
-  useCollection,
-  useMemeDetailById,
-  usePostMemeToSharedCollection,
-} from "@/application/hooks";
+import { useAuth, useMemeDetailById, usePostMemeToSharedCollection } from "@/application/hooks";
 import { DropDown } from "@/common/components/DropDown";
 import { Icon } from "@/common/components/Icon";
 import { useToast } from "@/common/hooks";
 import { DOMAIN, PATH } from "@/common/utils";
+import { useCollection } from "@/features/common";
 
 interface Props {
   id: string;

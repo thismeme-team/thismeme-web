@@ -1,11 +1,10 @@
 import { memo } from "react";
 
-import { useMoveMemeDetail } from "@/application/hooks";
 import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
 import { useOverlay } from "@/common/hooks";
 import { isEncodingError } from "@/common/utils";
-import { MemeActionSheet } from "@/features/common";
+import { MemeActionSheet, useMoveMemeDetail } from "@/features/common";
 import type { Meme } from "@/types";
 
 interface Props {

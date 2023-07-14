@@ -1,9 +1,9 @@
 import Link from "next/link";
 
-import type { RecentSearch } from "@/application/hooks";
 import { useGetPopularTags } from "@/application/hooks";
 import { PATH } from "@/common/utils";
 
+import type { RecentSearch } from "../../hooks";
 import { SearchPopularItem } from "./SearchPopularItem";
 
 interface Props {

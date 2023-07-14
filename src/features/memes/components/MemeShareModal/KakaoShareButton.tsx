@@ -1,7 +1,8 @@
-import type { KakaoShareOptions } from "@/application/hooks/domain/share";
-import { useKakaoShare } from "@/application/hooks/domain/share";
 import { Button } from "@/common/components/Button";
 import { Icon } from "@/common/components/Icon";
+
+import type { KakaoShareOptions } from "../../hooks";
+import { useKakaoShare } from "../../hooks";
 
 interface Props {
   resource: Omit<KakaoShareOptions, "onSuccess" | "onError">;

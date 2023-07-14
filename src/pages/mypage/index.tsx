@@ -7,7 +7,7 @@ import { MyPageNavigation } from "@/common/components/Navigation";
 import { Photo } from "@/common/components/Photo";
 import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
-import { withAuth } from "@/components/hocs";
+import { withAuth } from "@/features/common";
 import { SummarizedCollection } from "@/features/mypage/components";
 
 const MyPage = () => {

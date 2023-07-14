@@ -4,7 +4,7 @@ import { SignOutModal } from "@/common/components/Modal";
 import { BackButtonNavigation } from "@/common/components/Navigation";
 import { Photo } from "@/common/components/Photo";
 import { useModal } from "@/common/hooks";
-import { withAuth } from "@/components/hocs";
+import { withAuth } from "@/features/common";
 
 const SettingPage = () => {
   const modalProps = useModal();

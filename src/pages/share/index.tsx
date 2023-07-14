@@ -5,7 +5,7 @@ import { BackButtonNavigation } from "@/common/components/Navigation";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
 import { withAuth } from "@/components/hocs";
-import { SharedMemeList } from "@/components/share";
+import { SharedMemeList } from "@/features/share/components";
 
 const SharedHistoryPage: NextPage = () => {
   const { user } = useAuth();

@@ -7,7 +7,7 @@ import { PullToRefresh } from "@/common/components/PullToRefresh";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
 import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
-import { MemesByKeyword } from "@/components/explore";
+import { MemesByKeyword } from "@/features/explore/keywords/components";
 
 interface Props {
   searchQuery: string;

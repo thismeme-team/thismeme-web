@@ -1,11 +1,11 @@
 import Link from "next/link";
 
-import type { useAuth } from "@/application/hooks";
 import { Icon } from "@/common/components/Icon";
 import { SignOutModal } from "@/common/components/Modal";
 import { Photo } from "@/common/components/Photo";
 import { useModal } from "@/common/hooks";
 import { channelUrl } from "@/common/utils";
+import type { useAuth } from "@/features/common";
 
 type LoginSideBarContentProps = ReturnType<typeof useAuth>;
 

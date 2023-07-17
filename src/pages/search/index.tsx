@@ -2,7 +2,6 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { useRecentSearch } from "@/application/hooks";
 import { SearchPageNavigation } from "@/common/components/Navigation";
 import type { NextSeoProps } from "@/common/components/NextSeo";
 import { NextSeo } from "@/common/components/NextSeo";
@@ -14,8 +13,9 @@ import {
   SearchPopularList,
   SearchRecent,
   SearchResultList,
-} from "@/components/search";
-import { SkeletonTagList } from "@/components/search/Skeleton";
+  SkeletonTagList,
+} from "@/features/search/components";
+import { useRecentSearch } from "@/features/search/hooks";
 
 /**
  * FIX

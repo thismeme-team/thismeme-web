@@ -1,7 +1,7 @@
 import type { ComponentMeta, ComponentStory } from "@storybook/react";
 import React from "react";
 
-import { MemeItem } from "@/components/meme/MemeItem";
+import { MemeItem } from "@/features/common";
 
 import { Masonry } from "./Masonry";
 

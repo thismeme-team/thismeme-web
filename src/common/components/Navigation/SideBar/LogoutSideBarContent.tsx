@@ -1,7 +1,7 @@
-import type { useAuth } from "@/application/hooks";
 import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
 import { channelUrl } from "@/common/utils";
+import type { useAuth } from "@/features/common";
 
 const defaultAvatarUrl = "/img/default-avatar.png";
 const defaultName = "로그인하기";

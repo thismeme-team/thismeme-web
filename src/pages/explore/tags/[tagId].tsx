@@ -6,8 +6,7 @@ import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { PullToRefresh } from "@/common/components/PullToRefresh";
 import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
-import { MemesByTag, Thumbnail } from "@/components/explore";
-import { TagBookmarkButton } from "@/components/tags";
+import { MemesByTag, TagBookmarkButton, Thumbnail } from "@/features/explore/tags/components";
 
 interface Props {
   searchQuery: string;

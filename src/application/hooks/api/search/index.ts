@@ -2,8 +2,8 @@ import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
-import type { RecentSearch } from "@/application/hooks";
 import { useLocalStorage } from "@/common/hooks";
+import type { RecentSearch } from "@/features/search/hooks";
 import { api } from "@/infra/api";
 
 import { useCoreInfiniteQuery } from "../core/useCoreInfiniteQuery";

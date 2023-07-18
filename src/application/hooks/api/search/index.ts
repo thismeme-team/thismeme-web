@@ -2,11 +2,11 @@ import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
 
+import { useCoreInfiniteQuery } from "@/api/core";
 import { useLocalStorage } from "@/common/hooks";
 import type { RecentSearch } from "@/features/search/hooks";
 import { api } from "@/infra/api";
 
-import { useCoreInfiniteQuery } from "../core/useCoreInfiniteQuery";
 import { QUERY_KEYS } from "./queryKey";
 
 const PAGE_SIZE = 20;

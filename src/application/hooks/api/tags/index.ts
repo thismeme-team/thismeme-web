@@ -1,8 +1,8 @@
 import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 
-import { useSuspendedQuery } from "@/application/hooks/api/core";
-import type { QuerySelectOption } from "@/application/hooks/api/core/types";
+import type { QuerySelectOption } from "@/api/core";
+import { useSuspendedQuery } from "@/api/core";
 import { delay } from "@/common/utils";
 import { api } from "@/infra/api";
 import type {

@@ -1,9 +1,8 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 
-import { useSuspendedQuery } from "@/application/hooks/api/core";
+import { useCoreInfiniteQuery, useSuspendedQuery } from "@/api/core";
 import { api } from "@/infra/api";
 
-import { useCoreInfiniteQuery } from "../core/useCoreInfiniteQuery";
 import { QUERY_KEYS } from "./queryKey";
 
 const PAGE_SIZE = 10;

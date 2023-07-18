@@ -1,4 +1,4 @@
-import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
+import { CORE_QUERY_KEY } from "@/api/core";
 
 export const QUERY_KEYS = {
   getMemesByKeyword: (keyword: string) => [

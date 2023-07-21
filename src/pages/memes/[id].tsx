@@ -3,7 +3,7 @@ import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
 import { useGetMemeDetailById } from "@/api/meme";
-import { fetchMemeTagsById } from "@/application/hooks";
+import { useGetMemeTagsById } from "@/api/tag";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
@@ -89,7 +89,7 @@ export const getStaticProps: GetStaticProps<
   try {
     const [{ description, name, image }] = await Promise.all([
       useGetMemeDetailById.fetchQuery(id, queryClient),
-      fetchMemeTagsById(id, queryClient),
+      useGetMemeTagsById.fetchQuery(id, queryClient),
     ]);
 
     return {

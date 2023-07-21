@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useGetMemeTagsById } from "@/application/hooks";
+import { useGetMemeTagsById } from "@/api/tag";
 import { PATH } from "@/common/utils";
 
 interface Props {

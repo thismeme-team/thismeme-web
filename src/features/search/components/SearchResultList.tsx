@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useGetTagSearch } from "@/application/hooks";
+import { useGetTagSearch } from "@/api/tag";
 import { Icon } from "@/common/components/Icon";
 import { PATH } from "@/common/utils";
 

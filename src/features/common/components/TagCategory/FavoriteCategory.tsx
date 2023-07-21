@@ -1,7 +1,7 @@
 import { Content, Header, Item, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
 
-import { useDeleteFavoriteTag, useGetFavoriteTags } from "@/application/hooks";
+import { useDeleteFavoriteTag, useGetFavoriteTags } from "@/api/tag";
 import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
 import { useToast } from "@/common/hooks";

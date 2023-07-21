@@ -2,7 +2,7 @@ import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion"
 import { useRouter } from "next/router";
 import React, { Fragment } from "react";
 
-import { useGetCategoryWithTag } from "@/application/hooks";
+import { useGetCategoryWithTag } from "@/api/tag";
 import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
 import { PATH } from "@/common/utils";

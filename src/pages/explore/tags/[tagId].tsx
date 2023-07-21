@@ -1,7 +1,8 @@
 import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
-import { fetchTagInfo, prefetchMemesByTag } from "@/application/hooks";
+import { useGetTagInfo } from "@/api/tag";
+import { prefetchMemesByTag } from "@/application/hooks";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { PullToRefresh } from "@/common/components/PullToRefresh";
@@ -57,7 +58,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 
   try {
-    const { name: tagName } = await fetchTagInfo(Number(tagId), queryClient);
+    const { name: tagName } = await useGetTagInfo.fetchQuery(Number(tagId), queryClient);
 
     // NOTE: tag name 이 api request 값이기 때문에 waterfall 한 fetching 이 필요합니다
     await prefetchMemesByTag(tagName, queryClient);

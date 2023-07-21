@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
-import { QUERY_KEYS } from "@/application/hooks/api/account/queryKey";
-
+import { useGetMyAccount } from "../account";
 import { api } from "../core";
 import { useGetMemesByCollectionId } from "../meme";
 
@@ -18,7 +17,7 @@ export const usePostMemeToSharedCollection = ({
     mutationFn: () => api.collection.postMemeToSharedCollection(memeId),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: useGetMemesByCollectionId.queryKey(sharedId) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.getMyAccount });
+      queryClient.invalidateQueries({ queryKey: useGetMyAccount.queryKey });
     },
   });
 };

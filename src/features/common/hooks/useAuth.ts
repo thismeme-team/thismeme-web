@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 
-import { useGetMyAccount, useLogout } from "@/application/hooks";
+import { useGetMyAccount, useLogout } from "@/api/account";
 import { useSignUpModalContext } from "@/common/components/Modal";
 import { api } from "@/infra/api";
 

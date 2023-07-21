@@ -2,6 +2,7 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
+import type { DefaultPageProps } from "@/api/core";
 import { useGetMemeDetailById } from "@/api/meme";
 import { useGetMemeTagsById } from "@/api/tag";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
@@ -18,7 +19,7 @@ import {
   SkeletonMemeDetail,
   SkeletonMemeTagList,
 } from "@/features/memes/components";
-import type { DefaultPageProps, Meme } from "@/types";
+import type { Meme } from "@/types";
 
 interface Props {
   id: string;

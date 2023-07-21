@@ -5,7 +5,8 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { QueryClientProvider } from "@/application/queryClient";
+import type { DefaultPageProps } from "@/api/core";
+import { QueryClientProvider } from "@/api/core";
 import { QueryErrorBoundary } from "@/common/components/ErrorBoundary";
 import { Layout } from "@/common/components/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/common/components/Modal";
@@ -13,7 +14,6 @@ import { ToastContainer, ToastProvider } from "@/common/components/Toast";
 import { OverlayProvider, RouteTrackingProvider, useAnalytics } from "@/common/hooks";
 import { GoogleTagManagerScript, GTagScript } from "@/common/libs";
 import { TagCategoryProvider } from "@/features/common";
-import type { DefaultPageProps } from "@/types";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   await import("../../mocks");

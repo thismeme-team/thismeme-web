@@ -2,9 +2,9 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo } from "react";
 
+import { useGetCollectionCheck } from "@/api/collection";
 import { CORE_QUERY_KEY } from "@/api/core";
 import { useGetMemeDetailById } from "@/api/meme";
-import { prefetchCollectionCheck } from "@/application/hooks";
 import { Masonry } from "@/common/components/Masonry";
 import { renderMemeItemSkeletons } from "@/common/components/Skeleton";
 import { useIntersect } from "@/common/hooks";
@@ -62,7 +62,7 @@ export const InfiniteMemeList = ({
         queryClient.invalidateQueries(useGetMemeDetailById.queryKey(String(cachedMeme.memeId)));
 
         // NOTE: collection check api에 waterfall 현상이 일어나기 때문에 prefetch 합니다
-        prefetchCollectionCheck(cachedMeme.memeId, queryClient);
+        useGetCollectionCheck.prefetchQuery(cachedMeme.memeId, queryClient);
       }
     },
     [queryClient],

@@ -1,5 +1,5 @@
+import { usePostMemeToSharedCollection } from "@/api/collection";
 import { useGetMemeDetailById } from "@/api/meme";
-import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { Modal } from "@/common/components/Modal";
 import { Photo } from "@/common/components/Photo";
 import { useToast } from "@/common/hooks";

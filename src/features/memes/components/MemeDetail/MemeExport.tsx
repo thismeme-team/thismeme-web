@@ -1,7 +1,7 @@
 import tw from "twin.macro";
 
+import { usePostMemeToSharedCollection } from "@/api/collection";
 import { useGetMemeDetailById } from "@/api/meme";
-import { usePostMemeToSharedCollection } from "@/application/hooks";
 import { DropDown } from "@/common/components/DropDown";
 import { Icon } from "@/common/components/Icon";
 import { useToast } from "@/common/hooks";

@@ -1,4 +1,4 @@
-import { useMemeDetailById } from "@/application/hooks";
+import { useGetMemeDetailById } from "@/api/meme";
 import { usePostMemeToSharedCollection } from "@/application/hooks/api/collection";
 import { Modal } from "@/common/components/Modal";
 import { Photo } from "@/common/components/Photo";
@@ -24,7 +24,7 @@ export const MemeShareModal = ({ id, isOpen, onClose }: Props) => {
     name,
     description,
     image: { images },
-  } = useMemeDetailById(id);
+  } = useGetMemeDetailById(id);
 
   const src = images[0].imageUrl;
 

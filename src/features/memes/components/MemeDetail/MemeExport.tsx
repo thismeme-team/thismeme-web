@@ -1,6 +1,7 @@
 import tw from "twin.macro";
 
-import { useMemeDetailById, usePostMemeToSharedCollection } from "@/application/hooks";
+import { useGetMemeDetailById } from "@/api/meme";
+import { usePostMemeToSharedCollection } from "@/application/hooks";
 import { DropDown } from "@/common/components/DropDown";
 import { Icon } from "@/common/components/Icon";
 import { useToast } from "@/common/hooks";
@@ -12,7 +13,7 @@ interface Props {
 }
 
 export const MemeExport = ({ id }: Props) => {
-  const { name, description } = useMemeDetailById(id);
+  const { name, description } = useGetMemeDetailById(id);
   const { validate, isLogin, user } = useAuth();
   const { onUpdateCollection } = useCollection({ memeId: Number(id), isLogin });
 

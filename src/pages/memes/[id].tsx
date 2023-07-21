@@ -2,7 +2,8 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
-import { fetchMemeDetailById, fetchMemeTagsById } from "@/application/hooks";
+import { useGetMemeDetailById } from "@/api/meme";
+import { fetchMemeTagsById } from "@/application/hooks";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
@@ -87,7 +88,7 @@ export const getStaticProps: GetStaticProps<
 
   try {
     const [{ description, name, image }] = await Promise.all([
-      fetchMemeDetailById(id, queryClient),
+      useGetMemeDetailById.fetchQuery(id, queryClient),
       fetchMemeTagsById(id, queryClient),
     ]);
 

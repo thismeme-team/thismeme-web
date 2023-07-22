@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 
-import { useGetMemesByTag } from "@/application/hooks";
+import { useGetMemesByTag } from "@/api/search";
 import { Photo } from "@/common/components/Photo";
 import { useClipboard, useToast } from "@/common/hooks";
 import { DOMAIN } from "@/common/utils";

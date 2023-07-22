@@ -1,4 +1,4 @@
-import { useGetMemesFromCollectionByKeyword } from "@/application/hooks";
+import { useGetMemesFromCollectionByKeyword } from "@/api/search";
 import { InfiniteMemeList } from "@/features/common";
 
 interface Props {

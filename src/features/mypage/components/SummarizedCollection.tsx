@@ -1,4 +1,4 @@
-import { useGetMemesByCollectionId } from "@/application/hooks";
+import { useGetMemesByCollectionId } from "@/api/meme";
 import { Masonry } from "@/common/components/Masonry";
 import { MemeItem } from "@/features/common";
 

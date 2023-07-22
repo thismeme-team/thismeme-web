@@ -1,6 +1,6 @@
 import { css } from "twin.macro";
 
-import { useMemeDetailById } from "@/application/hooks";
+import { useGetMemeDetailById } from "@/api/meme";
 import { Photo } from "@/common/components/Photo";
 import { SSRSuspense } from "@/common/components/Suspense";
 
@@ -19,7 +19,7 @@ export const MemeDetail = ({ id }: Props) => {
     description,
     image: { images },
     isRefetching,
-  } = useMemeDetailById(id);
+  } = useGetMemeDetailById(id);
 
   const { imageUrl, imageWidth, imageHeight } = images[0];
 

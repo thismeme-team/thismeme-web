@@ -4,7 +4,7 @@ import {
   useDeleteMemeFromCollection,
   useGetCollectionCheck,
   usePostMemeToCollection,
-} from "@/application/hooks";
+} from "@/api/collection";
 import { useToast } from "@/common/hooks";
 
 const TAG_DELETE_DELAY = 3000;

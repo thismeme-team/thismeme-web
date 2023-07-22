@@ -1,4 +1,4 @@
-import { useGetMemesBySort } from "@/application/hooks";
+import { useGetMemesBySort } from "@/api/meme";
 import { InfiniteMemeList } from "@/features/common";
 
 import type { MemeListType } from "./type";

@@ -1,8 +1,8 @@
 import { useCallback } from "react";
 
-import { useGetMyAccount, useLogout } from "@/application/hooks";
+import { useGetMyAccount, useLogout } from "@/api/account";
+import { api } from "@/api/core";
 import { useSignUpModalContext } from "@/common/components/Modal";
-import { api } from "@/infra/api";
 
 type Handler = (...args: any[]) => unknown;
 interface ValidatorOptions {

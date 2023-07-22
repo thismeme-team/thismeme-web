@@ -6,6 +6,7 @@ import type {
   GetMemeTagsByIdResponse,
   GetPopularTagsResponse,
   GetTagInfoResponse,
+  GetTagSearchResponse,
 } from "./types";
 
 export class TagApi {
@@ -25,7 +26,7 @@ export class TagApi {
     }
     //NOTE : api response에 categoryName 없음 check
     return this.api
-      .get("/tags/search", {
+      .get<GetTagSearchResponse>("/tags/search", {
         params: {
           word: value,
         },

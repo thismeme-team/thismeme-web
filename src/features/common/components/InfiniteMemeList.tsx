@@ -2,9 +2,9 @@ import type { UseInfiniteQueryResult } from "@tanstack/react-query";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCallback, useMemo } from "react";
 
-import { prefetchCollectionCheck } from "@/application/hooks";
-import { CORE_QUERY_KEY } from "@/application/hooks/api/core/queryKey";
-import { QUERY_KEYS } from "@/application/hooks/api/meme/queryKey";
+import { useGetCollectionCheck } from "@/api/collection";
+import { CORE_QUERY_KEY } from "@/api/core";
+import { useGetMemeDetailById } from "@/api/meme";
 import { Masonry } from "@/common/components/Masonry";
 import { renderMemeItemSkeletons } from "@/common/components/Skeleton";
 import { useIntersect } from "@/common/hooks";
@@ -54,15 +54,15 @@ export const InfiniteMemeList = ({
 
       if (cachedMeme) {
         queryClient.setQueryData(
-          QUERY_KEYS.getMemeDetailById(String(cachedMeme.memeId)),
+          useGetMemeDetailById.queryKey(String(cachedMeme.memeId)),
           cachedMeme,
         );
 
         // NOTE: 조회수 증가를 위해 한번 더 밈 상세 api를 fetch 합니다
-        queryClient.invalidateQueries(QUERY_KEYS.getMemeDetailById(String(cachedMeme.memeId)));
+        queryClient.invalidateQueries(useGetMemeDetailById.queryKey(String(cachedMeme.memeId)));
 
         // NOTE: collection check api에 waterfall 현상이 일어나기 때문에 prefetch 합니다
-        prefetchCollectionCheck(cachedMeme.memeId, queryClient);
+        useGetCollectionCheck.prefetchQuery(cachedMeme.memeId, queryClient);
       }
     },
     [queryClient],

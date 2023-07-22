@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { useGetPopularTags } from "@/application/hooks";
+import { useGetPopularTags } from "@/api/tag";
 import { PATH } from "@/common/utils";
 
 import type { RecentSearch } from "../../hooks";

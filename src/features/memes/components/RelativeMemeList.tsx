@@ -1,4 +1,4 @@
-import { useGetMemesBySort } from "@/application/hooks";
+import { useGetMemesBySort } from "@/api/meme";
 import { InfiniteMemeList, useAuth } from "@/features/common";
 
 export const RelativeMemeList = () => {

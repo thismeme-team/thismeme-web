@@ -1,4 +1,4 @@
-import { useGetMemesByTag } from "@/application/hooks";
+import { useGetMemesByTag } from "@/api/search";
 import { EmptyMemesView, InfiniteMemeList } from "@/features/common";
 
 interface Props {

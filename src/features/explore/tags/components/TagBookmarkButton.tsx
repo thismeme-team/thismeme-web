@@ -1,4 +1,4 @@
-import { useDeleteFavoriteTag, useGetTagInfo, usePostFavoriteTag } from "@/application/hooks";
+import { useDeleteFavoriteTag, useGetTagInfo, usePostFavoriteTag } from "@/api/tag";
 import { Button } from "@/common/components/Button";
 import { Icon } from "@/common/components/Icon";
 import { useToast } from "@/common/hooks";

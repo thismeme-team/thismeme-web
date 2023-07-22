@@ -5,8 +5,12 @@ import {
   QueryClientProvider as TanStackQueryClientProvider,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import type { ReactNode } from "react";
+import type { ComponentProps, ReactNode } from "react";
 import { useState } from "react";
+
+export interface DefaultPageProps {
+  hydrateState: ComponentProps<typeof QueryClientProvider>["hydrateState"];
+}
 
 interface Props {
   hydrateState?: DehydratedState;

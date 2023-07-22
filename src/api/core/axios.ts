@@ -2,11 +2,10 @@ import axios from "axios";
 
 import { AccountApi } from "@/infra/api/account";
 import { AuthApi } from "@/infra/api/auth";
-
-import { CollectionApi } from "./collection";
-import { MemeApi } from "./meme";
-import { SearchApi } from "./search";
-import { TagApi } from "./tags";
+import { CollectionApi } from "@/infra/api/collection";
+import { MemeApi } from "@/infra/api/meme";
+import { SearchApi } from "@/infra/api/search";
+import { TagApi } from "@/infra/api/tags";
 
 export const axiosBasic = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}`,

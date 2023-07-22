@@ -11,14 +11,6 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx}",
     "./src/features/**/*.{js,ts,jsx,tsx}",
     "./src/common/**/*.{js,ts,jsx,tsx}",
-
-    /**
-     * ################################
-     * 리팩터링 이후 아래 content는 제거될 예정입니다.
-     * @deprecated
-     */
-    "./src/components/**/*.{js,ts,jsx,tsx}",
-    "./src/application/**/*.{js,ts,jsx,tsx}",
   ],
   safelist: [{ pattern: /line-clamp-/ }],
   theme: {

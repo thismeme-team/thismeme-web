@@ -1,11 +1,11 @@
 import type { NextPage } from "next";
 
-import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/application/util";
-import { IntroPageNavigation } from "@/components/common/Navigation";
-import type { NextSeoProps } from "@/components/common/NextSeo";
-import { NextSeo } from "@/components/common/NextSeo";
-import { PullToRefresh } from "@/components/common/PullToRefresh";
-import { MemeListContainer } from "@/components/home";
+import { IntroPageNavigation } from "@/common/components/Navigation";
+import type { NextSeoProps } from "@/common/components/NextSeo";
+import { NextSeo } from "@/common/components/NextSeo";
+import { PullToRefresh } from "@/common/components/PullToRefresh";
+import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
+import { MemeListContainer } from "@/features/home/components";
 
 const HomePage: NextPage = () => {
   return (

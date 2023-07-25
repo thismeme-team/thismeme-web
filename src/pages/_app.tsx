@@ -5,15 +5,15 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
-import { OverlayProvider, RouteTrackingProvider, useAnalytics } from "@/application/hooks";
-import { QueryClientProvider } from "@/application/queryClient";
-import { QueryErrorBoundary } from "@/components/common/ErrorBoundary";
-import { Layout } from "@/components/common/Layout";
-import { SignUpModal, SignUpModalProvider } from "@/components/common/Modal";
-import { ToastContainer, ToastProvider } from "@/components/common/Toast";
-import { TagCategoryProvider } from "@/components/tags";
-import { GoogleTagManagerScript, GTagScript } from "@/infra/sdk";
-import type { DefaultPageProps } from "@/types";
+import type { DefaultPageProps } from "@/api/core";
+import { QueryClientProvider } from "@/api/core";
+import { QueryErrorBoundary } from "@/common/components/ErrorBoundary";
+import { Layout } from "@/common/components/Layout";
+import { SignUpModal, SignUpModalProvider } from "@/common/components/Modal";
+import { ToastContainer, ToastProvider } from "@/common/components/Toast";
+import { OverlayProvider, RouteTrackingProvider, useAnalytics } from "@/common/hooks";
+import { GoogleTagManagerScript, GTagScript } from "@/common/libs";
+import { TagCategoryProvider } from "@/features/common";
 
 if (process.env.NEXT_PUBLIC_API_MOCKING === "enabled") {
   await import("../../mocks");

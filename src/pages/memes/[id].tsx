@@ -2,12 +2,15 @@ import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { Suspense } from "react";
 
-import { fetchMemeDetailById, fetchMemeTagsById, useMoveMemeDetail } from "@/application/hooks";
-import { SITE_NAME } from "@/application/util";
-import { ExplorePageNavigation } from "@/components/common/Navigation";
-import { NextSeo } from "@/components/common/NextSeo";
-import { MemeListSkeleton, Skeleton } from "@/components/common/Skeleton";
-import { SSRSuspense } from "@/components/common/Suspense";
+import type { DefaultPageProps } from "@/api/core";
+import { useGetMemeDetailById } from "@/api/meme";
+import { useGetMemeTagsById } from "@/api/tag";
+import { ExplorePageNavigation } from "@/common/components/Navigation";
+import { NextSeo } from "@/common/components/NextSeo";
+import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
+import { SSRSuspense } from "@/common/components/Suspense";
+import { SITE_NAME } from "@/common/utils";
+import { useMoveMemeDetail } from "@/features/common";
 import {
   MemeCTAList,
   MemeDetail,
@@ -15,8 +18,8 @@ import {
   RelativeMemeList,
   SkeletonMemeDetail,
   SkeletonMemeTagList,
-} from "@/components/meme";
-import type { DefaultPageProps, Meme } from "@/types";
+} from "@/features/memes/components";
+import type { Meme } from "@/types";
 
 interface Props {
   id: string;
@@ -86,8 +89,8 @@ export const getStaticProps: GetStaticProps<
 
   try {
     const [{ description, name, image }] = await Promise.all([
-      fetchMemeDetailById(id, queryClient),
-      fetchMemeTagsById(id, queryClient),
+      useGetMemeDetailById.fetchQuery(id, queryClient),
+      useGetMemeTagsById.fetchQuery(id, queryClient),
     ]);
 
     return {

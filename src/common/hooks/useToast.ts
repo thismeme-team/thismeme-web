@@ -1,0 +1,42 @@
+import { useCallback } from "react";
+
+import { useSetToastContext } from "@/common/components/Toast";
+import type { Toast, ToastOption, ToastType } from "@/common/components/Toast/types";
+import { delay } from "@/common/utils";
+
+const DEFAULT_TOAST_DELAY = 1000;
+const ANIMATION_EXPIRE_DELAY = 1000;
+
+const toastFactory = (type: ToastType, message: Toast["message"], option?: ToastOption): Toast => ({
+  type,
+  id: Date.now(),
+  message,
+  visible: true,
+  ...option,
+});
+
+export const useToast = () => {
+  const dispatch = useSetToastContext();
+  const close = useCallback(
+    async ({ id, duration = DEFAULT_TOAST_DELAY }: Pick<Toast, "id" | "duration">) => {
+      await delay(duration);
+      dispatch({ type: "dismiss", id });
+
+      await delay(ANIMATION_EXPIRE_DELAY);
+      dispatch({ type: "remove", id });
+    },
+    [dispatch],
+  );
+
+  const show = useCallback(
+    (message: Toast["message"], option?: ToastOption) => {
+      const toast = toastFactory("custom", message, option);
+      dispatch({ type: "add", toast });
+
+      return close({ id: toast.id, duration: option?.duration });
+    },
+    [close, dispatch],
+  );
+
+  return { show, close };
+};

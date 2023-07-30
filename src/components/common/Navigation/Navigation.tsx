@@ -3,10 +3,10 @@ import type { PropsWithChildren } from "react";
 
 type Props = PropsWithChildren<{ className?: string; css?: CSSInterpolation }>;
 
-export const Navigation = ({ children, className = "" }: Props) => {
+export const Navigation = ({ children, className = "bg-white" }: Props) => {
   return (
     <header
-      className={`sticky top-0 z-10 flex h-54 w-full shrink-0 items-center justify-between bg-white ${className}`}
+      className={`sticky top-0 z-10 flex h-54 w-full shrink-0 items-center justify-between ${className} `}
     >
       {children}
     </header>

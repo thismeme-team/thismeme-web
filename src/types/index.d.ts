@@ -1,11 +1,3 @@
-import type { ComponentProps } from "react";
-
-import type { QueryClientProvider } from "@/application/queryClient";
-
-export interface DefaultPageProps {
-  hydrateState: ComponentProps<typeof QueryClientProvider>["hydrateState"];
-}
-
 export interface Meme {
   memeId: number;
   name: string;

@@ -1,7 +1,7 @@
 import Router from "next/router";
 import React, { useEffect } from "react";
 
-import { useAuth } from "@/application/hooks";
+import { useAuth } from "@/features/common";
 
 const KaKaoRedirect = () => {
   const { login } = useAuth();

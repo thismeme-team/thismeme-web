@@ -1,9 +1,9 @@
-import { BackButtonNavigation } from "@/common/components/Navigation";
+import { UploadNavigation } from "@/common/components/Navigation";
 
 const UploadPage = () => {
   return (
     <>
-      <BackButtonNavigation title="" />
+      <UploadNavigation />
       upload
     </>
   );

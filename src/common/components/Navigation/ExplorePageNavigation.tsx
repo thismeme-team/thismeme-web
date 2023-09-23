@@ -1,3 +1,5 @@
+import { UploadButton } from "@/common/components/Navigation/UploadButton";
+
 import { Logo } from "./Logo";
 import { Navigation } from "./Navigation";
 import { SearchHeader } from "./SearchHeader";

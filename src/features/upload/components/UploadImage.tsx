@@ -3,15 +3,15 @@ import type { ChangeEventHandler } from "react";
 import { Icon } from "@/common/components/Icon";
 
 interface Props {
-  handleUploadImage?: ChangeEventHandler<HTMLInputElement>;
+  onChange?: ChangeEventHandler<HTMLInputElement>;
 }
-export const UploadImage = ({ handleUploadImage }: Props) => {
+export const UploadImage = ({ onChange }: Props) => {
   /**
    * @todo 이미지 10mb 크기 조정
    */
   return (
     <div className="mx-16 flex aspect-square flex-col items-center justify-center gap-16 rounded-16 bg-gray-200">
-      <input hidden id="image" type="file" onChange={handleUploadImage} />
+      <input hidden multiple id="image" type="file" onChange={onChange} />
       <label
         className="flex cursor-pointer items-center gap-6 rounded-26 bg-primary-700 px-24 py-14 text-16-semibold-140 text-white hover:bg-primary-500 focus:bg-primary-500 active:bg-primary-800"
         htmlFor="image"

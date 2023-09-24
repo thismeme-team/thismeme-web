@@ -1,5 +1,5 @@
 import { UploadNavigation } from "@/common/components/Navigation";
-import { AdditionalUploadBtn, UploadMeme } from "@/features/upload/components";
+import { AdditionalUploadBtn, UploadInitialMeme, UploadMeme } from "@/features/upload/components";
 
 const UploadPage = () => {
   /**
@@ -10,7 +10,7 @@ const UploadPage = () => {
     <>
       <UploadNavigation />
       <div className="flex flex-col gap-16 pt-16 pb-60">
-        <UploadMeme src="" />
+        <UploadInitialMeme />
         <UploadMeme isFocus src="https://picsum.photos/200/100" />
         {/*<UploadMeme src="https://picsum.photos/200/150" />*/}
         <AdditionalUploadBtn className="mx-auto" />

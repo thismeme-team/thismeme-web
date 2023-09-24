@@ -4,12 +4,11 @@ import { UploadImage } from "@/features/upload/components/UploadImage";
 import { UploadMemeData } from "@/features/upload/components/UploadMemeData";
 
 interface Props {
-  src?: string;
+  src: string;
   isFocus?: boolean;
 }
 
 export const UploadMeme = ({ src, isFocus }: Props) => {
-  const canHidden = !!src;
   return (
     <section className="relative">
       <button className="absolute top-16 left-16">
@@ -18,15 +17,14 @@ export const UploadMeme = ({ src, isFocus }: Props) => {
       <div
         // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
         tabIndex={0}
-        className={`group w-full rounded-24 border bg-white pt-64 pb-16 ${
-          canHidden && "focus-within:border-primary-500 focus:outline-none"
-        }`}
+        className={`group w-full rounded-24 border bg-white pt-64 pb-16 
+         focus-within:border-primary-500 focus:outline-none`}
         ref={(e) => {
           if (isFocus) e?.focus();
         }}
       >
         {src ? <Photo className="mx-16 rounded-16" src={src} /> : <UploadImage />}
-        <UploadMemeData className={canHidden ? "group-[:not(:focus-within)]:hidden" : ""} />
+        <UploadMemeData className="group-[:not(:focus-within)]:hidden" />
       </div>
     </section>
   );

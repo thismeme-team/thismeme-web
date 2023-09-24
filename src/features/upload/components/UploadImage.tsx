@@ -13,7 +13,7 @@ export const UploadImage = ({ handleUploadImage }: Props) => {
     <div className="mx-16 flex aspect-square flex-col items-center justify-center gap-16 rounded-16 bg-gray-200">
       <input hidden id="image" type="file" onChange={handleUploadImage} />
       <label
-        className="flex cursor-pointer items-center gap-6 rounded-26 bg-primary-700 px-24 py-14 text-16-semibold-140 text-white hover:bg-primary-500 active:bg-primary-800"
+        className="flex cursor-pointer items-center gap-6 rounded-26 bg-primary-700 px-24 py-14 text-16-semibold-140 text-white hover:bg-primary-500 focus:bg-primary-500 active:bg-primary-800"
         htmlFor="image"
       >
         <Icon height={24} name="memeShare" stroke="white" width={24} />

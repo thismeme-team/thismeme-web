@@ -1,6 +1,7 @@
+import { useState } from "react";
+
 import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
-import { UploadImage } from "@/features/upload/components/UploadImage";
 import { UploadMemeData } from "@/features/upload/components/UploadMemeData";
 
 interface Props {
@@ -9,6 +10,8 @@ interface Props {
 }
 
 export const UploadMeme = ({ src, isFocus }: Props) => {
+  const [height, setHeight] = useState(1000);
+
   return (
     <section className="relative">
       <button className="absolute top-16 left-16">
@@ -22,9 +25,18 @@ export const UploadMeme = ({ src, isFocus }: Props) => {
         ref={(e) => {
           if (isFocus) e?.focus();
         }}
+        onPointerDown={(e) => {
+          if (!e.currentTarget) return;
+          const h = e.currentTarget.getBoundingClientRect().height;
+          if (h === 0) return;
+          setHeight(h);
+        }}
       >
-        {src ? <Photo className="mx-16 rounded-16" src={src} /> : <UploadImage />}
-        <UploadMemeData className="group-[:not(:focus-within)]:hidden" />
+        <Photo className="mx-16 rounded-16" src={src} />
+        <UploadMemeData
+          className="max-h-[100rem] overflow-hidden transition-[max-height] duration-500 ease-in-out group-[:not(:focus-within)]:max-h-0"
+          css={{ maxHeight: height / 10 + "rem" }}
+        />
       </div>
     </section>
   );

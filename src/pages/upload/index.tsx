@@ -12,7 +12,8 @@ const UploadPage = () => {
       <div className="flex flex-col gap-16 pt-16 pb-60">
         <UploadInitialMeme />
         <UploadMeme isFocus src="https://picsum.photos/200/100" />
-        {/*<UploadMeme src="https://picsum.photos/200/150" />*/}
+        <UploadMeme src="https://picsum.photos/200/150" />
+        <UploadMeme src="https://picsum.photos/200/150" />
         <AdditionalUploadBtn className="mx-auto" />
       </div>
     </>

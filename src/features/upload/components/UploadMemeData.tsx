@@ -1,3 +1,4 @@
+import type { CSSInterpolation } from "@emotion/serialize";
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 
 import { Icon } from "@/common/components/Icon";
@@ -6,6 +7,7 @@ import { Photo } from "@/common/components/Photo";
 interface Props {
   src?: string;
   className?: string;
+  css?: CSSInterpolation;
 }
 
 export const UploadMemeData = ({ src, className }: Props) => {
@@ -41,7 +43,9 @@ export const UploadMemeData = ({ src, className }: Props) => {
               </span>
             </Trigger>
           </Header>
-          <Content>hello</Content>
+          <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
+            hello
+          </Content>
         </Item>
         <Item value="밈 사용상황">
           <Header className="border-b border-gray-100">
@@ -58,7 +62,9 @@ export const UploadMemeData = ({ src, className }: Props) => {
               </span>
             </Trigger>
           </Header>
-          <Content>hello</Content>
+          <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
+            hello
+          </Content>
         </Item>
       </Root>
     </div>

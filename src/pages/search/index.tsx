@@ -2,19 +2,20 @@ import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import { Suspense } from "react";
 
-import { useDebounce, useInput, useRecentSearch } from "@/application/hooks";
-import { DEFAULT_DESCRIPTION, PATH, SITE_NAME } from "@/application/util";
-import { SearchPageNavigation } from "@/components/common/Navigation";
-import type { NextSeoProps } from "@/components/common/NextSeo";
-import { NextSeo } from "@/components/common/NextSeo";
-import { SSRSuspense } from "@/components/common/Suspense";
+import { SearchPageNavigation } from "@/common/components/Navigation";
+import type { NextSeoProps } from "@/common/components/NextSeo";
+import { NextSeo } from "@/common/components/NextSeo";
+import { SSRSuspense } from "@/common/components/Suspense";
+import { useDebounce, useInput } from "@/common/hooks";
+import { DEFAULT_DESCRIPTION, PATH, SITE_NAME } from "@/common/utils";
 import {
   SearchInput,
   SearchPopularList,
   SearchRecent,
   SearchResultList,
-} from "@/components/search";
-import { SkeletonTagList } from "@/components/search/Skeleton";
+  SkeletonTagList,
+} from "@/features/search/components";
+import { useRecentSearch } from "@/features/search/hooks";
 
 /**
  * FIX

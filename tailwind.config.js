@@ -139,6 +139,14 @@ module.exports = {
             fontWeight: "700",
           },
         ],
+        "18-semibold-140": [
+          "1.8rem",
+          {
+            lineHeight: "140%",
+            letterSpacing: "0em",
+            fontWeight: "600",
+          },
+        ],
         "16-semibold-140": [
           "1.6rem",
           {

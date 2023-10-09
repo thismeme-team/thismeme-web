@@ -77,6 +77,7 @@ const nextConfig = withPWA({
     return config;
   },
   images: {
+    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",

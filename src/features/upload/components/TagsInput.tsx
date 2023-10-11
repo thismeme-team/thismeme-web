@@ -3,18 +3,15 @@ import * as tagsInput from "@zag-js/tags-input";
 import type { InputHTMLAttributes } from "react";
 import { useState } from "react";
 
+import { Chip } from "@/common/components/Chip";
 import { Icon } from "@/common/components/Icon";
+
+import { borderStyle } from "../styles";
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
   word: string;
   description: string;
 }
-
-const borderStyle = {
-  active: "border-primary-800",
-  error: "border-secondary-800",
-  normal: "border-gray-500",
-};
 
 export const TagsInput = (props: Props) => {
   const [focus, setFocus] = useState(false);
@@ -64,6 +61,7 @@ export const TagsInput = (props: Props) => {
             <input
               {...api.inputProps}
               className="ml-4 placeholder:text-gray-500 focus:outline-none"
+              maxLength={11}
               placeholder={api.count ? "" : props.placeholder}
               onBlur={() => setFocus(false)}
               onFocus={() => setFocus(true)}
@@ -79,9 +77,13 @@ export const TagsInput = (props: Props) => {
       <span className="text-12-regular-160 text-gray-500">
         {isValidInput ? props.description : "태그는 11자로 이내로 작성해주세요"}
       </span>
-      {/**
-       * 입력한 태그의 연관 검색 태그 리스트
-       */}
+      <div css={{ height: "1.6rem" }} />
+      {
+        /**
+         * 입력한 태그의 연관 검색 태그 리스트
+         */
+        <Chip color="primary" label="박명수" />
+      }
     </div>
   );
 };

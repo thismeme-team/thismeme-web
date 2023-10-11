@@ -5,6 +5,7 @@ import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
 
 import { TagsInput } from "./TagsInput";
+import { TitleInput } from "./TitleInput";
 
 interface Props {
   src?: string;
@@ -20,14 +21,7 @@ export const UploadMemeData = ({ src, className }: Props) => {
         <span className="text-14-semibold-140 text-gray-900">분노하는 ISTJ</span>
       </div>
       <div className="relative w-full px-16 text-18-semibold-140 leading-[160%]">
-        <input
-          className="peer w-full border-b border-gray-200 px-4 pb-4 placeholder:text-gray-500 focus:outline-none"
-          placeholder=" "
-          type="text"
-        />
-        <span className="pointer-events-none absolute inset-y-0 left-20 text-gray-500 peer-[:not(:placeholder-shown)]:opacity-0">
-          제목 작성 <span className="text-secondary-700">*</span>
-        </span>
+        <TitleInput />
       </div>
       <Root className="w-full border-t border-gray-100 " type="multiple">
         <Item value="밈 출처">

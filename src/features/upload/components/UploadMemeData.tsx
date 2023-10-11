@@ -4,6 +4,8 @@ import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion"
 import { Icon } from "@/common/components/Icon";
 import { Photo } from "@/common/components/Photo";
 
+import { TagsInput } from "./TagsInput";
+
 interface Props {
   src?: string;
   className?: string;
@@ -44,7 +46,19 @@ export const UploadMemeData = ({ src, className }: Props) => {
             </Trigger>
           </Header>
           <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
-            hello
+            <div className="h-24" />
+            <TagsInput
+              description="이 밈에 등장한 캐릭터를 작성해보세요!"
+              placeholder="박명수, 홍진경"
+              word="이(가)"
+            />
+            <div className="h-16" />
+            <TagsInput
+              description="이 밈의 출처를 작성해보세요!"
+              placeholder="무한도전, 에반게리온"
+              word="에 출연해요"
+            />
+            <div className="h-24" />
           </Content>
         </Item>
         <Item value="밈 사용상황">
@@ -63,7 +77,24 @@ export const UploadMemeData = ({ src, className }: Props) => {
             </Trigger>
           </Header>
           <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
-            hello
+            <div className="h-24" />
+            <TagsInput
+              description="이 밈을 쓸 것 같은 사람을 작성해보세요!"
+              placeholder="ISTJ, 직장인"
+              word="은(는)"
+            />
+            <div className="h-16" />
+            <TagsInput
+              description="이 밈에서 느껴지는 감정을 작성해보세요!"
+              placeholder="미안함, 부끄러움"
+              word="을(를) 느끼고"
+            />
+            <div className="h-16" />
+            <TagsInput
+              description="이 밈을 사용하는 상황을 작성해보세요!"
+              placeholder="씁쓸할때, 일하기 싫을때"
+              word="은(는)"
+            />
           </Content>
         </Item>
       </Root>

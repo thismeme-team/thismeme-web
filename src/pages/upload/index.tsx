@@ -15,7 +15,7 @@ const UploadPage = () => {
    */
 
   const [memeData, setMemeData] = useState<MemeUploadFormData[]>([]);
-  console.log(memeData);
+
   return (
     <>
       <UploadNavigation />

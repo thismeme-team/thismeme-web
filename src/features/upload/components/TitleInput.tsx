@@ -17,10 +17,10 @@ export const TitleInput = () => {
         type="text"
         value={text}
         className={`peer w-full border-b px-4 pb-4 placeholder:text-gray-500 focus:outline-none ${
-          focus
-            ? borderStyle.active
-            : !isValidInput
+          !isValidInput
             ? borderStyle.error
+            : focus
+            ? borderStyle.active
             : isFilled
             ? borderStyle.none
             : borderStyle.normal

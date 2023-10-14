@@ -7,6 +7,8 @@ export const TitleInput = () => {
   const [focus, setFocus] = useState(false);
 
   const isValidInput = text.length < 24;
+  const isFilled = !focus && text.length;
+
   return (
     <>
       <input
@@ -15,7 +17,13 @@ export const TitleInput = () => {
         type="text"
         value={text}
         className={`peer w-full border-b px-4 pb-4 placeholder:text-gray-500 focus:outline-none ${
-          !isValidInput ? borderStyle.error : focus ? borderStyle.active : borderStyle.normal
+          focus
+            ? borderStyle.active
+            : !isValidInput
+            ? borderStyle.error
+            : isFilled
+            ? borderStyle.none
+            : borderStyle.normal
         }`}
         onBlur={() => setFocus(false)}
         onChange={(e) => setText(e.target.value)}

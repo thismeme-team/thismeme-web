@@ -6,6 +6,7 @@ export { default as chevronDown2 } from "/public/icon/chevronDown2.svg";
 export { default as collection } from "/public/icon/collection.svg";
 export { default as delete } from "/public/icon/delete.svg";
 export { default as delete2 } from "/public/icon/delete2.svg";
+export { default as delete3 } from "/public/icon/delete3.svg";
 export { default as download } from "/public/icon/download.svg";
 export { default as google } from "/public/icon/google.svg";
 export { default as instagram } from "/public/icon/instagram-logo.svg";

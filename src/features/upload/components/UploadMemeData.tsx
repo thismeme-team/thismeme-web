@@ -23,7 +23,7 @@ export const UploadMemeData = ({ index }: Props) => {
           </>
         )}
       </div>
-      <TitleInput name={`memes.${index}.title`} />
+      <TitleInput index={index} name={`memes.${index}.title`} />
       <Accordion.Root className="w-full border-t border-gray-100 " type="multiple">
         <Accordion.Item value="밈 출처">
           <Accordion.Header className="border-b border-gray-100">

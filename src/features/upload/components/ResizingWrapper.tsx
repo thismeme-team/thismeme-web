@@ -25,7 +25,7 @@ export const ResizingWrapper = ({ focus, children }: PropsWithChildren<Props>) =
         // eslint-disable-next-line react/jsx-sort-props
         onPointerDown={(e) => {
           if (!e.currentTarget) return;
-          e.currentTarget.focus();
+          e.currentTarget.focus({ preventScroll: true });
           const h = e.currentTarget.getBoundingClientRect().height;
           if (h === 0) return;
           setHeight(h);

@@ -126,6 +126,7 @@ const UploadPage = () => {
   const handleDeleteAndReset = (index: number) => {
     if (fields.length === 1) {
       reset();
+      toast.show("밈이 삭제되었습니다.");
       return;
     }
     remove(index);
@@ -157,10 +158,9 @@ const UploadPage = () => {
                     <Icon className="m-auto" color="gray-600" name="meatball" />
                   </button>
 
-                  {/* {fields.length > 1 && (
-                  )} */}
                   <button
                     className="absolute top-16 right-16 h-40 w-40 translate-x-8 -translate-y-8 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 active:bg-gray-100"
+                    disabled={!isDirty}
                     type="button"
                     onClick={() => handleDeleteAndReset(index)}
                   >

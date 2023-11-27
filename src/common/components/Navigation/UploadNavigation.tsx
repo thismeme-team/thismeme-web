@@ -10,7 +10,9 @@ export const UploadNavigation = () => {
         <BackButton />
       </Navigation.Left>
       <Navigation.Right>
-        <button className="p-4 text-18-semibold-140 text-gray-500">게시</button>
+        <button className="p-4 text-18-semibold-140 text-gray-500" type="submit">
+          게시
+        </button>
       </Navigation.Right>
     </Navigation>
   );

@@ -12,7 +12,7 @@ export const BackButton = (props: ComponentProps<"button">) => {
   if (isInitialPage) return null;
 
   return (
-    <button {...props} onClick={() => router.back()}>
+    <button {...props} type="button" onClick={() => router.back()}>
       <Icon name="back" />
     </button>
   );

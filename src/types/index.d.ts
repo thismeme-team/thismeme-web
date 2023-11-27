@@ -13,13 +13,6 @@ export interface Meme {
   author?: string;
 }
 
-export interface MemeUploadFormData {
-  index: number;
-  image: string | ArrayBuffer | null;
-  title: string;
-  tags: string[];
-}
-
 export interface MemeImages {
   images: {
     imageId: number;

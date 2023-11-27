@@ -1,45 +1,43 @@
-import { useState } from "react";
+import { clsx } from "clsx";
+import type { FieldPath } from "react-hook-form";
+import { useFormContext, useWatch } from "react-hook-form";
 
-import { borderStyle } from "../styles";
+import type { MemeFormValues } from "@/pages/upload";
 
-export const TitleInput = () => {
-  const [text, setText] = useState<string>("");
-  const [focus, setFocus] = useState(false);
+const MAX_TITLE_LENGTH = 24;
+interface Props {
+  name: FieldPath<MemeFormValues>;
+}
 
-  const isValidInput = text.length < 24;
-  const isFilled = !focus && text.length;
+export const TitleInput = (props: Props) => {
+  const { register } = useFormContext<MemeFormValues>();
+  const title = useWatch({ name: props.name });
 
   return (
-    <>
+    <label className="relative w-full px-16 text-18-semibold-140 leading-[160%]">
       <input
-        maxLength={24}
         placeholder=" "
         type="text"
-        value={text}
-        className={`peer w-full border-b px-4 pb-4 placeholder:text-gray-500 focus:outline-none ${
-          !isValidInput
-            ? borderStyle.error
-            : focus
-            ? borderStyle.active
-            : isFilled
-            ? borderStyle.none
-            : borderStyle.normal
-        }`}
-        onBlur={() => setFocus(false)}
-        onChange={(e) => setText(e.target.value)}
-        onFocus={() => setFocus(true)}
+        {...register(props.name, {
+          required: true,
+          maxLength: MAX_TITLE_LENGTH,
+        })}
+        className={clsx(
+          "peer w-full border-b border-gray-200 px-4 pb-4 placeholder:text-gray-500 focus:border-primary-800 focus:outline-none",
+          title && "[&:not(:focus)]:border-b-0",
+        )}
       />
-      <div className="flex justify-between px-4">
-        <span className="text-12-regular-160 text-gray-500">
-          {isValidInput
-            ? "밈을 잘 설명할 수 있는 제목을 작성해주세요."
-            : "24자 미만으로 작성해주세요."}
-        </span>
-        <span className="text-12-regular-160 text-gray-500">{text.length}/24</span>
-      </div>
-      <span className="pointer-events-none absolute inset-y-0 left-20 text-gray-500 peer-[:not(:placeholder-shown)]:opacity-0">
+      <span className="pointer-events-none absolute inset-y-0 left-20 text-gray-500 peer-autofill:invisible peer-[:not(:placeholder-shown)]:invisible">
         제목 작성 <span className="text-secondary-700">*</span>
       </span>
-    </>
+      <p className="invisible flex justify-between px-4 peer-focus:visible">
+        <span className="text-12-regular-160 text-gray-500">
+          밈을 잘 설명할 수 있는 제목을 작성해주세요.
+        </span>
+        <span className="text-12-regular-160 text-gray-500">
+          {title.length}/{MAX_TITLE_LENGTH}
+        </span>
+      </p>
+    </label>
   );
 };

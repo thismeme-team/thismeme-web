@@ -1,3 +1,2 @@
-export * from "./AdditionalUploadButton";
-export * from "./UploadInitialMeme";
-export * from "./UploadMeme";
+export * from "./ResizingWrapper";
+export * from "./UploadMemeData";

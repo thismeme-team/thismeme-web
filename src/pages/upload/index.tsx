@@ -28,6 +28,8 @@ const uploadButtonStyle = {
   disabled: "disabled:border-gray-400 disabled:text-gray-300 [&_*]:disabled:stroke-gray-300",
 };
 
+const MAX_FIELDS_LENGTH = 10;
+
 const defaultValues = {
   memes: [{ image: null, title: "", tags1: [], tags2: [], tags3: [], tags4: [], tags5: [] }],
 };
@@ -41,13 +43,14 @@ const UploadPage = () => {
   const {
     handleSubmit,
     control,
+    setError,
     formState: { isDirty },
   } = methods;
 
   const { fields, append, remove, update } = useFieldArray({
     name: "memes",
     control,
-    rules: { maxLength: 10 },
+    rules: { maxLength: MAX_FIELDS_LENGTH },
   });
   const hiddenFileInput = useRef<HTMLInputElement>(null);
 
@@ -61,6 +64,15 @@ const UploadPage = () => {
     }
     const filesLength = e.target.files.length;
     const imageArray = Array.from(e.target.files);
+
+    if (filesLength + fields.length > MAX_FIELDS_LENGTH) {
+      toast.show("최대 10개까지 업로드 가능합니다.");
+      setError(`root.maxLength`, {
+        type: "maxLengthError",
+        message: "최대 10개까지 업로드 가능합니다.",
+      });
+      imageArray.splice(MAX_FIELDS_LENGTH - fields.length + (isDirty ? 0 : 1));
+    }
 
     imageArray.forEach((image, index) => {
       const reader = new FileReader();
@@ -76,7 +88,7 @@ const UploadPage = () => {
         };
 
         if (!isDirty && index === 0) {
-          // NOTE: 값을 건드리지 않았다면 0번째 데이터를 교체합니다
+          // NOTE: 밈 업로드 폼 상태가 변경되지 않았다면 첫번째 필드 값을 교체합니다.
           update(index, field);
           return;
         }
@@ -194,8 +206,8 @@ const UploadPage = () => {
             className={clsx(
               "mx-auto flex w-fit gap-6 rounded-26 border border-gray-300 bg-white px-24 py-14 text-16-semibold-140 text-gray-700",
               Object.values(uploadButtonStyle),
-              // NOTE: 값을 건드리지 않았다면 업로드 버튼을 숨깁니다.
-              !isDirty && "hidden",
+              // NOTE: 값을 건드리지 않았거나 업로드한 밈이 10개가 되면 업로드 버튼을 숨깁니다.
+              (!isDirty || fields.length === 10) && "hidden",
             )}
           >
             <input

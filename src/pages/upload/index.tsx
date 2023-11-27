@@ -1,6 +1,7 @@
 import { clsx } from "clsx";
 import type { ChangeEventHandler } from "react";
-import { Fragment, useRef } from "react";
+import { Fragment } from "react";
+import type { SubmitHandler } from "react-hook-form";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 
 import { Icon } from "@/common/components/Icon";
@@ -38,6 +39,7 @@ const UploadPage = () => {
   const toast = useToast();
 
   const methods = useForm<MemeFormValues>({
+    mode: "all",
     defaultValues: defaultValues,
   });
   const {
@@ -53,13 +55,8 @@ const UploadPage = () => {
     control,
     rules: { maxLength: MAX_FIELDS_LENGTH },
   });
-  const hiddenFileInput = useRef<HTMLInputElement>(null);
 
-  const onAddMemeImages = () => {
-    hiddenFileInput.current?.click();
-  };
-
-  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleChangeMemeImages: ChangeEventHandler<HTMLInputElement> = (e) => {
     if (!e.target.files) {
       return;
     }
@@ -123,7 +120,7 @@ const UploadPage = () => {
       toast.show("밈 이미지가 변경되었습니다.");
     };
 
-  const handleDeleteAndReset = (index: number) => {
+  const handleRemoveAndReset = (index: number) => {
     if (fields.length === 1) {
       reset();
       toast.show("밈이 삭제되었습니다.");
@@ -132,7 +129,8 @@ const UploadPage = () => {
     remove(index);
   };
 
-  const onSumbit = () => {
+  const onSumbit: SubmitHandler<MemeFormValues> = (data) => {
+    console.log(data);
     /**
      * TODO
      * - 밈 업로드 로직 작성
@@ -162,7 +160,7 @@ const UploadPage = () => {
                     className="absolute top-16 right-16 h-40 w-40 translate-x-8 -translate-y-8 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 active:bg-gray-100"
                     disabled={!isDirty}
                     type="button"
-                    onClick={() => handleDeleteAndReset(index)}
+                    onClick={() => handleRemoveAndReset(index)}
                   >
                     <Icon className="m-auto" height={24} name="delete3" width={24} />
                   </button>
@@ -170,11 +168,18 @@ const UploadPage = () => {
                   <div className="w-full rounded-24 px-16">
                     {field.image === null ? (
                       <>
-                        <button
+                        <label
                           className="flex aspect-square w-full flex-col items-center justify-center gap-16 rounded-16 bg-gray-200"
-                          type="button"
-                          onClick={onAddMemeImages}
+                          htmlFor="meme"
                         >
+                          <input
+                            hidden
+                            multiple
+                            required
+                            id="meme"
+                            type="file"
+                            onChange={handleChangeMemeImages}
+                          />
                           <div className="flex cursor-pointer items-center gap-6 rounded-26 bg-primary-700 px-24 py-14 text-16-semibold-140 text-white hover:bg-primary-500 focus:bg-primary-500 active:bg-primary-800">
                             <Icon height={24} name="memeShare" stroke="white" width={24} />
                             업로드
@@ -184,7 +189,7 @@ const UploadPage = () => {
                             <li>10MB 미만의 이미지를 권장해요.</li>
                             <li>사이즈는 0 : 0 비율로 추천해요!</li>
                           </ul>
-                        </button>
+                        </label>
                       </>
                     ) : (
                       <label
@@ -223,13 +228,18 @@ const UploadPage = () => {
               hidden
               multiple
               id="meme-uploader"
-              ref={hiddenFileInput}
               type="file"
-              onChange={handleChange}
+              onChange={handleChangeMemeImages}
             />
             <Icon className="h-24 w-24" name="memeShare" stroke="gray-700" />
             추가 업로드
           </label>
+
+          <input
+            className="absolute top-10 right-18 z-10 cursor-pointer p-4 text-18-semibold-140 text-gray-500"
+            type="submit"
+            value="게시"
+          />
         </form>
       </FormProvider>
     </>

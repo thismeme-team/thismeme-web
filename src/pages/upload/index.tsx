@@ -44,6 +44,7 @@ const UploadPage = () => {
     handleSubmit,
     control,
     setError,
+    reset,
     formState: { isDirty },
   } = methods;
 
@@ -122,6 +123,14 @@ const UploadPage = () => {
       toast.show("밈 이미지가 변경되었습니다.");
     };
 
+  const handleDeleteAndReset = (index: number) => {
+    if (fields.length === 1) {
+      reset();
+      return;
+    }
+    remove(index);
+  };
+
   const onSumbit = () => {
     /**
      * TODO
@@ -148,15 +157,15 @@ const UploadPage = () => {
                     <Icon className="m-auto" color="gray-600" name="meatball" />
                   </button>
 
-                  {fields.length > 1 && (
-                    <button
-                      className="absolute top-16 right-16 h-40 w-40 translate-x-8 -translate-y-8 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 active:bg-gray-100"
-                      type="button"
-                      onClick={() => remove(index)}
-                    >
-                      <Icon className="m-auto" height={24} name="delete3" width={24} />
-                    </button>
-                  )}
+                  {/* {fields.length > 1 && (
+                  )} */}
+                  <button
+                    className="absolute top-16 right-16 h-40 w-40 translate-x-8 -translate-y-8 rounded-full transition-colors duration-200 ease-in-out hover:bg-gray-100 active:bg-gray-100"
+                    type="button"
+                    onClick={() => handleDeleteAndReset(index)}
+                  >
+                    <Icon className="m-auto" height={24} name="delete3" width={24} />
+                  </button>
 
                   <div className="w-full rounded-24 px-16">
                     {field.image === null ? (

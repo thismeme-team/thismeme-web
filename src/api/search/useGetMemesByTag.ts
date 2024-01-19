@@ -1,7 +1,7 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { api, CORE_QUERY_KEY } from "../core";
+import { api } from "../core";
 
 const PAGE_SIZE = 20;
 
@@ -35,8 +35,7 @@ export const useGetMemesByTag = (tag: string) => {
   return { data: memes, totalCount, isEmpty, isFetchingNextPage, fetchNextPage };
 };
 
-useGetMemesByTag.queryKey = (tag: string) =>
-  [CORE_QUERY_KEY.infiniteMemeList, "getMemesByTag", tag] as const;
+useGetMemesByTag.queryKey = (tag: string) => ["getMemesByTag", tag] as const;
 
 useGetMemesByTag.fetchInfiniteQuery = (tag: string, queryClient: QueryClient) =>
   queryClient.fetchInfiniteQuery(useGetMemesByTag.queryKey(tag), ({ pageParam = 0 }) =>

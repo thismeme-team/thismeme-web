@@ -18,7 +18,7 @@ export const MemeItem = memo(({ meme, onClick }: Props) => {
   const { name, image, memeId } = meme;
 
   return (
-    <div className="mb-15 flex flex-col">
+    <div className="mb-15 flex w-[calc(50%-10px)] flex-col ">
       <button
         className="ga-meme-item-click"
         draggable={false}

@@ -4,7 +4,7 @@ type Props<T extends ElementType> = {
   as?: T;
   className?: string;
   label: string;
-  size: keyof typeof sizes;
+  size?: keyof typeof sizes;
   color: keyof typeof colors;
 } & ComponentPropsWithoutRef<T>;
 
@@ -15,11 +15,13 @@ const sizes = {
 const colors = {
   white: "border-[1px] border-gray-200 bg-white text-gray-700",
   black: "bg-black text-white",
+  primary:
+    "bg-gray-100 text-primary-700 focus:bg-white focus:text-primary-500 hover:bg-white hover:text-primary-500 active:bg-gray-300 active:text-primary-800",
 };
 
 export const Chip = <T extends ElementType>({
   as,
-  size,
+  size = "medium",
   color,
   className = "",
   label,

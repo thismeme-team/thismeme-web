@@ -36,4 +36,9 @@ export const PATH = {
     const encodedValue = encodeURIComponent(search);
     return `/memes/${id}?q=${encodedValue}`;
   },
+
+  /**
+   * 밈 업로드 페이지
+   */
+  getUploadPage: () => "/upload",
 };

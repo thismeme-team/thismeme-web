@@ -26,6 +26,7 @@ export const QueryClientProvider = ({ hydrateState, children }: Props) => {
             suspense: true,
             retry: 0,
             refetchOnWindowFocus: false,
+            // FIXME this must be set to true
             useErrorBoundary: false,
             staleTime: 1000 * 20, // 20초
           },

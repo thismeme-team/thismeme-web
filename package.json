@@ -19,6 +19,7 @@
     "postinstall": "husky install"
   },
   "dependencies": {
+    "@egjs/react-infinitegrid": "^4.11.0",
     "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/serialize": "^1.1.1",
@@ -30,6 +31,8 @@
     "@tanstack/react-query": "^4.19.1",
     "@use-gesture/react": "^10.2.24",
     "@vercel/og": "^0.5.3",
+    "@zag-js/react": "^0.22.0",
+    "@zag-js/tags-input": "^0.22.0",
     "axios": "^1.2.0",
     "lottie-web": "^5.10.2",
     "next": "13.0.5",

@@ -11,7 +11,10 @@ const colors: { [K in Colors]?: string } = {
   black: "black",
   white: "white",
   default: "",
+  "gray-400": theme`colors.gray.400`,
   "gray-600": theme`colors.gray.600`,
+  "gray-700": theme`colors.gray.700`,
+  "gray-800": theme`colors.gray.800`,
   "primary-500": theme`colors.primary.500`,
 };
 

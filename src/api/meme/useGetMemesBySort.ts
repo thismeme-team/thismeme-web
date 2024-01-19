@@ -1,6 +1,6 @@
 import type { QueryFunctionContext } from "@tanstack/react-query";
 
-import { api, CORE_QUERY_KEY, useCoreInfiniteQuery } from "../core";
+import { api, useCoreInfiniteQuery } from "../core";
 
 const PAGE_SIZE = 10;
 
@@ -28,5 +28,4 @@ export const useGetMemesBySort = (sort: keyof typeof types) => {
 
   return { data, isEmpty, isFetchingNextPage, fetchNextPage };
 };
-useGetMemesBySort.queryKey = (sort: string) =>
-  [CORE_QUERY_KEY.infiniteMemeList, "getMemesBySort", sort] as const;
+useGetMemesBySort.queryKey = (sort: string) => ["getMemesBySort", sort] as const;

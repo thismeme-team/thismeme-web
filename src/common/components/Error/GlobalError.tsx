@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 import { Navigation } from "../Navigation";
 
 export const GlobalError = () => {
@@ -9,6 +11,9 @@ export const GlobalError = () => {
         <span className="mt-16 text-16-semibold-140 text-gray-600">
           이 페이지를 새로고침 해보세요.
         </span>
+        <Link className="mt-16 text-16-semibold-140 text-primary-800" href="/">
+          홈으로 돌아가기
+        </Link>
       </div>
     </>
   );

@@ -2,15 +2,10 @@ import { useGetMemesByTag } from "@/api/search";
 import { EmptyMemesView, InfiniteMemeList } from "@/features/common";
 
 interface Props {
-  searchQuery: string;
+  tagName: string;
 }
-export const MemesByTag = ({ searchQuery }: Props) => {
-  const {
-    data: memeList,
-    isEmpty,
-    isFetchingNextPage,
-    fetchNextPage,
-  } = useGetMemesByTag(searchQuery);
+export const MemesByTag = ({ tagName }: Props) => {
+  const { data: memeList, isEmpty, isFetchingNextPage, fetchNextPage } = useGetMemesByTag(tagName);
 
   if (isEmpty) {
     return <EmptyMemesView />;

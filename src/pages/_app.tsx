@@ -35,8 +35,12 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
 
   return (
     <>
-      <GTagScript />
-      <GoogleTagManagerScript />
+      {process.env.NODE_ENV === "production" && (
+        <>
+          <GTagScript />
+          <GoogleTagManagerScript />
+        </>
+      )}
 
       <Head>
         <meta

@@ -1,13 +1,12 @@
 import type { QueryClient, UseQueryOptions } from "@tanstack/react-query";
-import { useQuery } from "@tanstack/react-query";
 
-import { api } from "../core";
+import { api, useSuspendedQuery } from "../core";
 
 export const useGetTagInfo = (
   tagId: number,
   options: Pick<UseQueryOptions, "enabled"> = { enabled: true },
 ) => {
-  return useQuery({
+  return useSuspendedQuery({
     queryKey: useGetTagInfo.queryKey(tagId),
     queryFn: () => useGetTagInfo.queryFn(tagId),
     staleTime: 0,

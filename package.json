@@ -19,6 +19,7 @@
     "postinstall": "husky install"
   },
   "dependencies": {
+    "@egjs/react-infinitegrid": "^4.11.0",
     "@emotion/css": "^11.10.5",
     "@emotion/react": "^11.10.5",
     "@emotion/serialize": "^1.1.1",

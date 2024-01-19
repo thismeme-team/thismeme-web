@@ -1784,6 +1784,24 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@cfcs/core@npm:^0.0.24":
+  version: 0.0.24
+  resolution: "@cfcs/core@npm:0.0.24"
+  dependencies:
+    "@egjs/component": ^3.0.4
+  checksum: 6e1873f0ce85d2a401f3938a5bc9ce396c49b1fdcac0a3b2369245be25d7a7522e98515b7b7157ad6f0ce7b4e0a996b47ed2d3b8c70a4531e57d83b6dedbafa9
+  languageName: node
+  linkType: hard
+
+"@cfcs/core@npm:^0.0.5":
+  version: 0.0.5
+  resolution: "@cfcs/core@npm:0.0.5"
+  dependencies:
+    "@egjs/component": ^3.0.2
+  checksum: 4c2043e15f3330461de2519acc64581310e1078923034e27565a64938df9b9ff8e1066137ebba635ea16e937daace76154770b17fd44913156e078b1bf5ad6f0
+  languageName: node
+  linkType: hard
+
 "@cnakazawa/watch@npm:^1.0.3":
   version: 1.0.4
   resolution: "@cnakazawa/watch@npm:1.0.4"
@@ -1880,6 +1898,72 @@ __metadata:
   version: 0.5.7
   resolution: "@discoveryjs/json-ext@npm:0.5.7"
   checksum: 2176d301cc258ea5c2324402997cf8134ebb212469c0d397591636cea8d3c02f2b3cf9fd58dcb748c7a0dade77ebdc1b10284fa63e608c033a1db52fddc69918
+  languageName: node
+  linkType: hard
+
+"@egjs/children-differ@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@egjs/children-differ@npm:1.0.1"
+  dependencies:
+    "@egjs/list-differ": ^1.0.0
+  checksum: 087f286822a93cc5ac2ba0beb9f332f3828a8870fea0e9d0a177078c96fc265ce74979be827a78dab674a833e3a22d4fe60636112a1aae93252e0a38f58ff754
+  languageName: node
+  linkType: hard
+
+"@egjs/component@npm:^3.0.0, @egjs/component@npm:^3.0.1, @egjs/component@npm:^3.0.2, @egjs/component@npm:^3.0.4":
+  version: 3.0.5
+  resolution: "@egjs/component@npm:3.0.5"
+  checksum: d2ca53cc86b82df0fac3f21045a05d70a542c1f6a061cf534c67b336830644d0fbef07e322fcbe5bd809f59504103319a2c6467af58a9f8009a81655c3fe366f
+  languageName: node
+  linkType: hard
+
+"@egjs/grid@npm:^1.15.0":
+  version: 1.15.0
+  resolution: "@egjs/grid@npm:1.15.0"
+  dependencies:
+    "@egjs/children-differ": ^1.0.1
+    "@egjs/component": ^3.0.0
+    "@egjs/imready": ^1.3.0
+  checksum: 3705b1eef7ac7bf6f2f98084a334b491c84b99fffb085a33d91155b16edba3c32b228eecfdbb3910b66d976c731dc35df7e0dadf49276dade3dc1bfaadcaf986
+  languageName: node
+  linkType: hard
+
+"@egjs/imready@npm:^1.3.0":
+  version: 1.4.1
+  resolution: "@egjs/imready@npm:1.4.1"
+  dependencies:
+    "@cfcs/core": ^0.0.24
+    "@egjs/component": ^3.0.1
+  checksum: 719afe734c4346555ffb75a5a487242c02a26509cfda9cc77272c7ec878e5058fff68027ea64a70a460b3e9393164df8adb70cba9a008d13d2029e8932687df9
+  languageName: node
+  linkType: hard
+
+"@egjs/infinitegrid@npm:~4.11.0":
+  version: 4.11.0
+  resolution: "@egjs/infinitegrid@npm:4.11.0"
+  dependencies:
+    "@cfcs/core": ^0.0.5
+    "@egjs/children-differ": ^1.0.1
+    "@egjs/component": ^3.0.0
+    "@egjs/grid": ^1.15.0
+    "@egjs/list-differ": ^1.0.0
+  checksum: 033b7435f5195cabe4e308c70c546c110724e275b3c5b44b5ac35a8b89b46fbe6fe15ffe42b7ec6a5752d9248ba937349693cf477653e81f97a820313532f1ff
+  languageName: node
+  linkType: hard
+
+"@egjs/list-differ@npm:^1.0.0":
+  version: 1.0.1
+  resolution: "@egjs/list-differ@npm:1.0.1"
+  checksum: 2c126c66d7753c1b86816192f265fa8a58fc45b62b739ebce9008202c2485dcc81d62a9e8d26ceb73efd1679140d39dd5ae3638d63e1ebaf5ca9d6bc824a16c7
+  languageName: node
+  linkType: hard
+
+"@egjs/react-infinitegrid@npm:^4.11.0":
+  version: 4.11.0
+  resolution: "@egjs/react-infinitegrid@npm:4.11.0"
+  dependencies:
+    "@egjs/infinitegrid": ~4.11.0
+  checksum: e105e2f6683187b15c42c9407e67e4e4ffa2adba0dbcf286987d14484ed1202accddfccc63609f450e84ae6fa9fca23b0141b3688c61e64239bce7745600a815
   languageName: node
   linkType: hard
 
@@ -17583,11 +17667,11 @@ __metadata:
 
 "typescript@patch:typescript@4.9.3#~builtin<compat/typescript>":
   version: 4.9.3
-  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=a66ed4"
+  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: d7bdcf5e18193f709339540d69577f7b0389000265db2bf10edfaa67336a29d6bcbee11828084150f7fdd110d605794cfa6df33bebc0a2e33daad2dbe2a7a59f
+  checksum: 67ca21a387c0572f1c04936e638dde7782c5aa520c3754aadc7cc9b7c915da9ebc3e27c601bfff4ccb7d7264e82dce6d277ada82ec09dc75024349e0ef64926d
   languageName: node
   linkType: hard
 
@@ -18808,6 +18892,7 @@ __metadata:
     "@babel/core": ^7.20.5
     "@babel/plugin-syntax-typescript": ^7.20.0
     "@babel/preset-react": ^7.18.6
+    "@egjs/react-infinitegrid": ^4.11.0
     "@emotion/css": ^11.10.5
     "@emotion/react": ^11.10.5
     "@emotion/serialize": ^1.1.1

@@ -6,6 +6,7 @@ import * as gtag from "@/common/utils";
 export const useAnalytics = () => {
   const router = useRouter();
   useEffect(() => {
+    if (process.env.NODE_ENV !== "production") return;
     const handleRouteChange = (url: URL) => {
       gtag.pageview(url);
     };

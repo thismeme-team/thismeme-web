@@ -45,7 +45,7 @@ export function useCoreInfiniteQuery<
     isFetching,
     isFetchingNextPage,
     isError,
-    fetchNextPage: oldFetchNextPage,
+    fetchNextPage: originalFetchNextPage,
     ...rest
   } = useInfiniteQuery(queryKey, queryFn, {
     getNextPageParam: (lastPage, allPages) => {
@@ -56,7 +56,9 @@ export function useCoreInfiniteQuery<
     },
     ...options,
   });
-  const fetchNextPage = isError ? ((() => {}) as typeof oldFetchNextPage) : oldFetchNextPage;
+  const fetchNextPage = isError
+    ? ((() => {}) as typeof originalFetchNextPage)
+    : originalFetchNextPage;
 
   const flatData = data ? data.pages.flatMap(({ data }) => data) : [];
   const isEmpty = data?.pages[0].data.length === 0;

@@ -1,7 +1,7 @@
 import type { QueryClient, QueryFunctionContext } from "@tanstack/react-query";
 import { useInfiniteQuery } from "@tanstack/react-query";
 
-import { api, CORE_QUERY_KEY } from "../core";
+import { api } from "../core";
 
 const PAGE_SIZE = 20;
 
@@ -13,7 +13,12 @@ const PAGE_SIZE = 20;
  * isEmpty - 밈 검색 결과가 없는 경우 true
  */
 export const useGetMemesByTag = (tag: string) => {
-  const { data, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
+  const {
+    data,
+    isFetchingNextPage,
+    isError,
+    fetchNextPage: originalFetchNextPage,
+  } = useInfiniteQuery(
     useGetMemesByTag.queryKey(tag),
     ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
@@ -28,6 +33,9 @@ export const useGetMemesByTag = (tag: string) => {
     },
   );
 
+  const fetchNextPage = isError
+    ? ((() => {}) as typeof originalFetchNextPage)
+    : originalFetchNextPage;
   const memes = data?.pages.flatMap(({ memes }) => memes) || [];
   const totalCount = data?.pages[0].totalCount;
   const isEmpty = !memes.length;
@@ -35,8 +43,7 @@ export const useGetMemesByTag = (tag: string) => {
   return { data: memes, totalCount, isEmpty, isFetchingNextPage, fetchNextPage };
 };
 
-useGetMemesByTag.queryKey = (tag: string) =>
-  [CORE_QUERY_KEY.infiniteMemeList, "getMemesByTag", tag] as const;
+useGetMemesByTag.queryKey = (tag: string) => ["getMemesByTag", tag] as const;
 
 useGetMemesByTag.fetchInfiniteQuery = (tag: string, queryClient: QueryClient) =>
   queryClient.fetchInfiniteQuery(useGetMemesByTag.queryKey(tag), ({ pageParam = 0 }) =>

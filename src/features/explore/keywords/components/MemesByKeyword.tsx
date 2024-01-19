@@ -2,15 +2,15 @@ import { useGetMemesByKeyword } from "@/api/search";
 import { EmptyMemesView, InfiniteMemeList } from "@/features/common";
 
 interface Props {
-  searchQuery: string;
+  keyword: string;
 }
-export const MemesByKeyword = ({ searchQuery }: Props) => {
+export const MemesByKeyword = ({ keyword }: Props) => {
   const {
     data: memeList,
     isFetchingNextPage,
     isEmpty,
     fetchNextPage,
-  } = useGetMemesByKeyword(searchQuery);
+  } = useGetMemesByKeyword(keyword);
 
   if (isEmpty) {
     return <EmptyMemesView />;

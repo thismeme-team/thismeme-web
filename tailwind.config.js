@@ -21,21 +21,6 @@ module.exports = {
       maxWidth: PX0_300,
       minHeight: PX0_300,
       colors: {
-        /**
-         * ################################
-         * @deprecated
-         */
-        "light-gray-10": "#f6f6f6",
-        "light-gray-20": "#eeeeee",
-        "light-gray-30": "#d9d9d9",
-        "gray-10": "#c4c4c4",
-        "gray-20": "#666666",
-        "dark-gray-10": "#383838",
-        "dark-gray-20": "#242424",
-        /**
-         * ################################
-         */
-
         gray: {
           100: "#f3f4f8",
           200: "#eaebf1",

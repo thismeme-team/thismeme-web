@@ -1,6 +1,6 @@
 import type { QueryFunctionContext } from "@tanstack/react-query";
 
-import { api, CORE_QUERY_KEY, useCoreInfiniteQuery } from "../core";
+import { api, useCoreInfiniteQuery } from "../core";
 
 const PAGE_SIZE = 10;
 
@@ -35,4 +35,4 @@ export const useGetMemesByCollectionId = (collectionId: number) => {
 };
 
 useGetMemesByCollectionId.queryKey = (collectionId: number | null) =>
-  [CORE_QUERY_KEY.infiniteMemeList, "getMemesByCollectionId", collectionId] as const;
+  ["getMemesByCollectionId", collectionId] as const;

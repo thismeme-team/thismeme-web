@@ -1,5 +1,6 @@
+import { MasonryInfiniteGrid } from "@egjs/react-infinitegrid";
+
 import { useGetMemesByCollectionId } from "@/api/meme";
-import { Masonry } from "@/common/components/Masonry";
 import { MemeItem } from "@/features/common";
 
 interface Props {
@@ -34,10 +35,10 @@ export const SummarizedCollection = ({ collectionId }: Props) => {
    * 마이페이지인지 아닌지 판단하는 hook을 만들고 MemeActionSheet 에서 호출
    */
   return (
-    <Masonry columns={2} spacing={9}>
+    <MasonryInfiniteGrid className="w-full" gap={9}>
       {memeList.map((meme) => (
         <MemeItem key={meme.memeId} meme={meme} />
       ))}
-    </Masonry>
+    </MasonryInfiniteGrid>
   );
 };

@@ -10,18 +10,18 @@ import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
 import { MemesByKeyword } from "@/features/explore/keywords/components";
 
 interface Props {
-  searchQuery: string;
+  keyword: string;
 }
 
-const ExploreByKeywordPage: NextPage<Props> = ({ searchQuery }) => {
+const ExploreByKeywordPage: NextPage<Props> = ({ keyword }) => {
   return (
     <>
-      <NextSeo title={`'${searchQuery}' 밈`} {...metadata} />
+      <NextSeo title={`'${keyword}' 밈`} {...metadata} />
 
-      <ExplorePageNavigation title={searchQuery} />
+      <ExplorePageNavigation title={keyword} />
       <PullToRefresh>
         <SSRSuspense fallback={<MemeListSkeleton />}>
-          <MemesByKeyword searchQuery={searchQuery} />
+          <MemesByKeyword keyword={keyword} />
         </SSRSuspense>
       </PullToRefresh>
     </>
@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   }
   return {
     props: {
-      searchQuery: query.q,
+      keyword: query.q,
     },
   };
 };

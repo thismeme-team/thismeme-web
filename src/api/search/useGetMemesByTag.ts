@@ -13,7 +13,12 @@ const PAGE_SIZE = 20;
  * isEmpty - 밈 검색 결과가 없는 경우 true
  */
 export const useGetMemesByTag = (tag: string) => {
-  const { data, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
+  const {
+    data,
+    isFetchingNextPage,
+    isError,
+    fetchNextPage: originalFetchNextPage,
+  } = useInfiniteQuery(
     useGetMemesByTag.queryKey(tag),
     ({ pageParam = 0 }: QueryFunctionContext) =>
       api.search.getMemesByTag({ keyword: tag, offset: pageParam, limit: PAGE_SIZE }),
@@ -28,6 +33,9 @@ export const useGetMemesByTag = (tag: string) => {
     },
   );
 
+  const fetchNextPage = isError
+    ? ((() => {}) as typeof originalFetchNextPage)
+    : originalFetchNextPage;
   const memes = data?.pages.flatMap(({ memes }) => memes) || [];
   const totalCount = data?.pages[0].totalCount;
   const isEmpty = !memes.length;

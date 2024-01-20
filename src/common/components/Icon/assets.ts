@@ -8,7 +8,6 @@ export { default as delete } from "/public/icon/delete.svg";
 export { default as delete2 } from "/public/icon/delete2.svg";
 export { default as delete3 } from "/public/icon/delete3.svg";
 export { default as download } from "/public/icon/download.svg";
-export { default as google } from "/public/icon/google.svg";
 export { default as instagram } from "/public/icon/instagram-logo.svg";
 export { default as kakao } from "/public/icon/kakao.svg";
 export { default as kakao2 } from "/public/icon/kakao2.svg";

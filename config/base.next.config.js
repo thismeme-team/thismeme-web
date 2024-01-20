@@ -3,7 +3,7 @@ const IS_PROD = process.env.NODE_ENV === "production";
 
 // The folders containing files importing twin.macro
 const path = require("path");
-const includedDirs = [path.resolve(__dirname, "./src")];
+const includedDirs = [path.resolve(__dirname, "../src")];
 
 module.exports = {
   reactStrictMode: true,

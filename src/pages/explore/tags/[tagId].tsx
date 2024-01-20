@@ -42,7 +42,6 @@ const ExploreByTagPage: NextPage<Props> = ({ tagName, tagId }) => {
       <SSRSuspense fallback={<></>}>
         <TagBookmarkButton tagId={tagId} />
       </SSRSuspense>
-      {/* <TagBookmarkButton tagId={tagId} /> */}
     </>
   );
 };
@@ -67,13 +66,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   try {
     const { name: tagName } = await useGetTagInfo.fetchQuery(Number(tagId), queryClient);
 
-    // NOTE: tag name 이 api request 값이기 때문에 waterfall 한 fetching 이 필요합니다
-    // await useGetMemesByTag.fetchInfiniteQuery(tagName, queryClient);
-
     return {
       props: {
-        // NOTE: useInfiniteQuery 사용 시 queryCache에 undefined 프로퍼티가 있으므로 에러 방지를 위해 직렬화/역직렬화가 필요합니다
-        // hydrateState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
         tagName: tagName,
         tagId: Number(tagId),
       },

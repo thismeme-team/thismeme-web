@@ -1,7 +1,6 @@
-import { dehydrate, QueryClient } from "@tanstack/react-query";
+import { QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 
-import { useGetMemesByTag } from "@/api/search";
 import { useGetTagInfo } from "@/api/tag";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
@@ -9,7 +8,7 @@ import { PullToRefresh } from "@/common/components/PullToRefresh";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
 import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
-import { MemesByTag, TagBookmarkButton, Thumbnail } from "@/features/explore/tags/components";
+import { MemesByTagsContainer, TagBookmarkButton } from "@/features/explore/tags/components";
 
 interface Props {
   tagName: string;
@@ -35,8 +34,7 @@ const ExploreByTagPage: NextPage<Props> = ({ tagName, tagId }) => {
 
       <PullToRefresh>
         <SSRSuspense fallback={<MemeListSkeleton />}>
-          <Thumbnail tag={tagName} />
-          <MemesByTag tagName={tagName} />
+          <MemesByTagsContainer tag={tagName} />
         </SSRSuspense>
       </PullToRefresh>
       <SSRSuspense fallback={<></>}>

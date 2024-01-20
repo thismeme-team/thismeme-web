@@ -7,11 +7,10 @@ interface Props {
   sortBy: MemeListType;
 }
 export const CommonMemeList = ({ sortBy }: Props) => {
-  const { data: memeList, isFetchingNextPage, fetchNextPage } = useGetMemesBySort(sortBy);
+  const { data: memeList, fetchNextPage } = useGetMemesBySort(sortBy);
 
   return (
     <InfiniteMemeList
-      loading={isFetchingNextPage}
       memeList={memeList}
       onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
     />

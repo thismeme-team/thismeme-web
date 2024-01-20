@@ -5,7 +5,6 @@ import type { Meme } from "@/types";
 
 interface InfiniteMemeListProps {
   memeList: Meme[];
-  loading?: boolean;
   onRequestAppend: () => void;
 }
 

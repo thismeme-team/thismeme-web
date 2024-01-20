@@ -6,6 +6,11 @@
 const { withSentryConfig } = require("@sentry/nextjs");
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
+const withBundleAnalyzer = require("@next/bundle-analyzer")({
+  enabled: process.env.ANALYZE === "true",
+});
+
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const path = require("path");
 const IS_DEV = process.env.NODE_ENV === "development";
 const IS_PROD = process.env.NODE_ENV === "production";
@@ -100,4 +105,4 @@ const nextConfig = withPWA({
   },
 });
 
-module.exports = withSentryConfig(nextConfig, { silent: true });
+module.exports = withBundleAnalyzer(withSentryConfig(nextConfig, { silent: true }));

@@ -5,7 +5,7 @@ const IS_PROD = process.env.NODE_ENV === "production";
 const path = require("path");
 const includedDirs = [path.resolve(__dirname, "../src")];
 
-module.exports = {
+module.exports = () => ({
   reactStrictMode: true,
   swcMinify: true,
   webpack: (config, options) => {
@@ -83,4 +83,4 @@ module.exports = {
     // for more information.
     hideSourceMaps: IS_PROD,
   },
-};
+});

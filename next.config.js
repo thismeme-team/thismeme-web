@@ -17,7 +17,7 @@ const { withSentryConfig } = require("@sentry/nextjs");
 
 const baseConfig = require("./config/base.next.config.js");
 /** @type {import("next").NextConfig} */
-module.exports = extend(() => baseConfig).withPlugins([
+module.exports = extend(baseConfig).withPlugins([
   [withPWA],
   [withBundleAnalyzer],
   [withSentryConfig, { silent: true }],

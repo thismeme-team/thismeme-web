@@ -13558,6 +13558,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-compose-plugins@npm:^2.2.1":
+  version: 2.2.1
+  resolution: "next-compose-plugins@npm:2.2.1"
+  checksum: 771762fda2b12b81daf10431cbb494816cff96be02b44009692c6c0eefbacd62cbf51ddb93af8d3380ec00254c6a95d64d10f744d4b9ddadefc21efee7dc69fc
+  languageName: node
+  linkType: hard
+
 "next-pwa@npm:^5.6.0":
   version: 5.6.0
   resolution: "next-pwa@npm:5.6.0"
@@ -19076,6 +19083,7 @@ __metadata:
     msw: ^0.49.1
     msw-storybook-addon: ^1.6.3
     next: 13.0.5
+    next-compose-plugins: ^2.2.1
     next-pwa: ^5.6.0
     next-sitemap: ^3.1.49
     postcss: ^8.4.19

@@ -1,4 +1,5 @@
 import { useRouter } from "next/router";
+import * as React from "react";
 
 import { useGetMemesByTag } from "@/api/search";
 import { Photo } from "@/common/components/Photo";
@@ -17,11 +18,11 @@ export const MemesByTagsContainer = ({ tag }: Props) => {
   }
   return (
     <>
+      <Thumbnail image={memeList?.[0].image.images[0].imageUrl} totalCount={totalCount as number} />
       <InfiniteMemeList
         memeList={memeList}
         onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
       />
-      <Thumbnail image={memeList?.[0].image.images[0].imageUrl} totalCount={totalCount as number} />
     </>
   );
 };
@@ -30,7 +31,7 @@ interface ThumbnailProps {
   image: string;
   totalCount: number;
 }
-const Thumbnail = ({ image, totalCount }: ThumbnailProps) => {
+const Thumbnail = React.memo(function Thumbnail({ image, totalCount }: ThumbnailProps) {
   const router = useRouter();
   const clipboard = useClipboard();
   const toast = useToast();
@@ -58,4 +59,4 @@ const Thumbnail = ({ image, totalCount }: ThumbnailProps) => {
       </div>
     </div>
   );
-};
+});

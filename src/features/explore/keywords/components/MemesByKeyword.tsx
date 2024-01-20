@@ -5,12 +5,7 @@ interface Props {
   keyword: string;
 }
 export const MemesByKeyword = ({ keyword }: Props) => {
-  const {
-    data: memeList,
-    isFetchingNextPage,
-    isEmpty,
-    fetchNextPage,
-  } = useGetMemesByKeyword(keyword);
+  const { data: memeList, isEmpty, fetchNextPage } = useGetMemesByKeyword(keyword);
 
   if (isEmpty) {
     return <EmptyMemesView />;
@@ -18,7 +13,6 @@ export const MemesByKeyword = ({ keyword }: Props) => {
 
   return (
     <InfiniteMemeList
-      loading={isFetchingNextPage}
       memeList={memeList}
       onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
     />

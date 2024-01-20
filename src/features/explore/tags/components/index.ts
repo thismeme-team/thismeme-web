@@ -1,3 +1,2 @@
-export * from "./MemesByTag";
+export * from "./MemesByTagsContainer";
 export * from "./TagBookmarkButton";
-export * from "./Thumbnail";

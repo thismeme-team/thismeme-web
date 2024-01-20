@@ -43,6 +43,7 @@ export const SearchHeader = ({ searchValue, isBack = true }: Props) => {
         )}
 
         <SearchInput
+          readOnly
           className="ga-search-bar-click"
           inputMode="none"
           isDelete={false}

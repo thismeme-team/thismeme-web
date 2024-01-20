@@ -6,11 +6,7 @@ interface Props {
 }
 
 export const Collection = ({ collectionId }: Props) => {
-  const {
-    data: memeList,
-    isFetchingNextPage,
-    fetchNextPage,
-  } = useGetMemesByCollectionId(collectionId);
+  const { data: memeList, fetchNextPage } = useGetMemesByCollectionId(collectionId);
 
   /**
    * TODO
@@ -25,7 +21,6 @@ export const Collection = ({ collectionId }: Props) => {
    */
   return (
     <InfiniteMemeList
-      loading={isFetchingNextPage}
       memeList={memeList}
       onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
     />

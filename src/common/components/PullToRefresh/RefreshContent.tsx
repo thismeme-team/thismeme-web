@@ -1,4 +1,6 @@
-import lottie from "lottie-web";
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
+import lottie from "lottie-web/build/player/lottie_light.min.js";
 import { useEffect, useRef } from "react";
 
 import refresh from "./refresh.json";

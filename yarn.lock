@@ -18082,6 +18082,85 @@ __metadata:
   languageName: node
   linkType: hard
 
+"thismeme-web@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "thismeme-web@workspace:."
+  dependencies:
+    "@babel/core": ^7.20.5
+    "@babel/plugin-syntax-typescript": ^7.20.0
+    "@babel/preset-react": ^7.18.6
+    "@egjs/react-infinitegrid": ^4.11.0
+    "@emotion/css": ^11.10.5
+    "@emotion/react": ^11.10.5
+    "@emotion/serialize": ^1.1.1
+    "@emotion/server": ^11.10.0
+    "@emotion/styled": ^11.10.5
+    "@next/bundle-analyzer": ^14.1.0
+    "@radix-ui/react-accordion": ^1.0.1
+    "@sentry/nextjs": ^7.44.0
+    "@storybook/addon-actions": ^6.5.13
+    "@storybook/addon-essentials": ^6.5.13
+    "@storybook/addon-interactions": ^6.5.13
+    "@storybook/addon-links": ^6.5.13
+    "@storybook/addon-postcss": ^2.0.0
+    "@storybook/addon-viewport": ^6.5.13
+    "@storybook/builder-webpack5": ^6.5.13
+    "@storybook/manager-webpack5": ^6.5.13
+    "@storybook/react": ^6.5.13
+    "@storybook/testing-library": ^0.0.13
+    "@svgr/webpack": ^6.5.1
+    "@tailwindcss/line-clamp": ^0.4.2
+    "@tanstack/eslint-plugin-query": ^4.15.1
+    "@tanstack/react-query": ^4.19.1
+    "@tanstack/react-query-devtools": ^4.19.1
+    "@types/kakao-js-sdk": ^1.39.1
+    "@types/node": 18.11.9
+    "@types/react": latest
+    "@types/react-dom": latest
+    "@types/react-transition-group": ^4.4.5
+    "@typescript-eslint/eslint-plugin": ^5.45.0
+    "@typescript-eslint/parser": ^5.45.0
+    "@use-gesture/react": ^10.2.24
+    "@zag-js/react": ^0.22.0
+    "@zag-js/tags-input": ^0.22.0
+    autoprefixer: ^10.4.13
+    axios: ^1.2.0
+    babel-loader: ^8.3.0
+    babel-plugin-macros: ^3.1.0
+    babel-plugin-twin: ^1.1.0
+    chromatic: ^6.11.4
+    eslint: 8.22.0
+    eslint-config-next: latest
+    eslint-config-prettier: ^8.5.0
+    eslint-import-resolver-typescript: ^3.5.2
+    eslint-plugin-import: ^2.26.0
+    eslint-plugin-jsx-a11y: ^6.6.1
+    eslint-plugin-prettier: ^4.2.1
+    eslint-plugin-simple-import-sort: ^8.0.0
+    eslint-plugin-storybook: ^0.6.7
+    husky: ^8.0.2
+    lint-staged: ^13.0.4
+    lottie-web: ^5.10.2
+    msw: ^0.49.1
+    msw-storybook-addon: ^1.6.3
+    next: latest
+    next-compose-plugins: ^2.2.1
+    next-pwa: ^5.6.0
+    postcss: ^8.4.19
+    prettier: ^2.8.0
+    prettier-plugin-tailwindcss: ^0.2.0
+    react: latest
+    react-dom: latest
+    react-error-boundary: ^3.1.4
+    react-transition-group: ^4.4.5
+    storybook-addon-next-router: ^4.0.2
+    tailwindcss: ^3.2.4
+    twin.macro: ^3.1.0
+    typescript: 4.9.3
+    util: ^0.12.5
+  languageName: unknown
+  linkType: soft
+
 "through2@npm:^2.0.0":
   version: 2.0.5
   resolution: "through2@npm:2.0.5"
@@ -19802,85 +19881,6 @@ __metadata:
   checksum: 91316062324a93f9cb547469092392e7d004ff8f70c40fecb420f042a4870b2181557350da56c92f07bd44b8f7a252b0be26e6ade1f548e1f4351bdd01c9d3c7
   languageName: node
   linkType: hard
-
-"yapp-21st@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "yapp-21st@workspace:."
-  dependencies:
-    "@babel/core": ^7.20.5
-    "@babel/plugin-syntax-typescript": ^7.20.0
-    "@babel/preset-react": ^7.18.6
-    "@egjs/react-infinitegrid": ^4.11.0
-    "@emotion/css": ^11.10.5
-    "@emotion/react": ^11.10.5
-    "@emotion/serialize": ^1.1.1
-    "@emotion/server": ^11.10.0
-    "@emotion/styled": ^11.10.5
-    "@next/bundle-analyzer": ^14.1.0
-    "@radix-ui/react-accordion": ^1.0.1
-    "@sentry/nextjs": ^7.44.0
-    "@storybook/addon-actions": ^6.5.13
-    "@storybook/addon-essentials": ^6.5.13
-    "@storybook/addon-interactions": ^6.5.13
-    "@storybook/addon-links": ^6.5.13
-    "@storybook/addon-postcss": ^2.0.0
-    "@storybook/addon-viewport": ^6.5.13
-    "@storybook/builder-webpack5": ^6.5.13
-    "@storybook/manager-webpack5": ^6.5.13
-    "@storybook/react": ^6.5.13
-    "@storybook/testing-library": ^0.0.13
-    "@svgr/webpack": ^6.5.1
-    "@tailwindcss/line-clamp": ^0.4.2
-    "@tanstack/eslint-plugin-query": ^4.15.1
-    "@tanstack/react-query": ^4.19.1
-    "@tanstack/react-query-devtools": ^4.19.1
-    "@types/kakao-js-sdk": ^1.39.1
-    "@types/node": 18.11.9
-    "@types/react": latest
-    "@types/react-dom": latest
-    "@types/react-transition-group": ^4.4.5
-    "@typescript-eslint/eslint-plugin": ^5.45.0
-    "@typescript-eslint/parser": ^5.45.0
-    "@use-gesture/react": ^10.2.24
-    "@zag-js/react": ^0.22.0
-    "@zag-js/tags-input": ^0.22.0
-    autoprefixer: ^10.4.13
-    axios: ^1.2.0
-    babel-loader: ^8.3.0
-    babel-plugin-macros: ^3.1.0
-    babel-plugin-twin: ^1.1.0
-    chromatic: ^6.11.4
-    eslint: 8.22.0
-    eslint-config-next: latest
-    eslint-config-prettier: ^8.5.0
-    eslint-import-resolver-typescript: ^3.5.2
-    eslint-plugin-import: ^2.26.0
-    eslint-plugin-jsx-a11y: ^6.6.1
-    eslint-plugin-prettier: ^4.2.1
-    eslint-plugin-simple-import-sort: ^8.0.0
-    eslint-plugin-storybook: ^0.6.7
-    husky: ^8.0.2
-    lint-staged: ^13.0.4
-    lottie-web: ^5.10.2
-    msw: ^0.49.1
-    msw-storybook-addon: ^1.6.3
-    next: latest
-    next-compose-plugins: ^2.2.1
-    next-pwa: ^5.6.0
-    postcss: ^8.4.19
-    prettier: ^2.8.0
-    prettier-plugin-tailwindcss: ^0.2.0
-    react: latest
-    react-dom: latest
-    react-error-boundary: ^3.1.4
-    react-transition-group: ^4.4.5
-    storybook-addon-next-router: ^4.0.2
-    tailwindcss: ^3.2.4
-    twin.macro: ^3.1.0
-    typescript: 4.9.3
-    util: ^0.12.5
-  languageName: unknown
-  linkType: soft
 
 "yargs-parser@npm:^20.2.2, yargs-parser@npm:^20.2.9":
   version: 20.2.9

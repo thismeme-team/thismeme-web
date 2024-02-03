@@ -31,7 +31,6 @@
     "@sentry/nextjs": "^7.44.0",
     "@tanstack/react-query": "^4.19.1",
     "@use-gesture/react": "^10.2.24",
-    "@vercel/og": "^0.5.3",
     "@zag-js/react": "^0.22.0",
     "@zag-js/tags-input": "^0.22.0",
     "axios": "^1.2.0",

@@ -38,7 +38,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@emotion/server", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:11.10.0"],\
             ["@emotion/styled", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:11.10.5"],\
             ["@next/bundle-analyzer", "npm:14.1.0"],\
-            ["@next/font", "npm:13.0.5"],\
             ["@radix-ui/react-accordion", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:1.0.1"],\
             ["@sentry/nextjs", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:7.44.0"],\
             ["@storybook/addon-actions", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:6.5.13"],\
@@ -6261,15 +6260,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
-      ["@next/font", [\
-        ["npm:13.0.5", {\
-          "packageLocation": "./.yarn/cache/@next-font-npm-13.0.5-c3f4c50033-12304ac4a5.zip/node_modules/@next/font/",\
-          "packageDependencies": [\
-            ["@next/font", "npm:13.0.5"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
       ["@next/swc-darwin-arm64", [\
         ["npm:14.1.0", {\
           "packageLocation": "./.yarn/unplugged/@next-swc-darwin-arm64-npm-14.1.0-6d433a23a7/node_modules/@next/swc-darwin-arm64/",\
@@ -10362,16 +10352,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["@types/react", [\
-        ["npm:18.0.25", {\
-          "packageLocation": "./.yarn/cache/@types-react-npm-18.0.25-0d729c976f-231d658c45.zip/node_modules/@types/react/",\
-          "packageDependencies": [\
-            ["@types/react", "npm:18.0.25"],\
-            ["@types/prop-types", "npm:15.7.5"],\
-            ["@types/scheduler", "npm:0.16.2"],\
-            ["csstype", "npm:3.1.1"]\
-          ],\
-          "linkType": "HARD"\
-        }],\
         ["npm:18.2.52", {\
           "packageLocation": "./.yarn/cache/@types-react-npm-18.2.52-4939767618-4abc9bd638.zip/node_modules/@types/react/",\
           "packageDependencies": [\
@@ -10388,7 +10368,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-react-dom-npm-18.2.18-b316a8af22-8e3da404c9.zip/node_modules/@types/react-dom/",\
           "packageDependencies": [\
             ["@types/react-dom", "npm:18.2.18"],\
-            ["@types/react", "npm:18.0.25"]\
+            ["@types/react", "npm:18.2.52"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -10398,7 +10378,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/@types-react-transition-group-npm-4.4.5-8f92107b07-265f1c7406.zip/node_modules/@types/react-transition-group/",\
           "packageDependencies": [\
             ["@types/react-transition-group", "npm:4.4.5"],\
-            ["@types/react", "npm:18.0.25"]\
+            ["@types/react", "npm:18.2.52"]\
           ],\
           "linkType": "HARD"\
         }]\
@@ -28029,7 +28009,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["@emotion/server", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:11.10.0"],\
             ["@emotion/styled", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:11.10.5"],\
             ["@next/bundle-analyzer", "npm:14.1.0"],\
-            ["@next/font", "npm:13.0.5"],\
             ["@radix-ui/react-accordion", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:1.0.1"],\
             ["@sentry/nextjs", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:7.44.0"],\
             ["@storybook/addon-actions", "virtual:1efb7fe2099bed4120fcc4f39a0c22325b69ada92fc21796c27552c271c245ad70f9ac625ace3d0f903bd6cf322956fda9e646154a3ae6dc5809e9838f04e833#npm:6.5.13"],\

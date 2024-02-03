@@ -2471,13 +2471,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@next/font@npm:13.0.5":
-  version: 13.0.5
-  resolution: "@next/font@npm:13.0.5"
-  checksum: 12304ac4a52be437f02a472a00e2183fc4dd49ca9b4583a2abde5249686c246346348d47231e74258659ccf54c8bca349811aec0d894c3e8824592316e78740c
-  languageName: node
-  linkType: hard
-
 "@next/swc-darwin-arm64@npm:14.1.0":
   version: 14.1.0
   resolution: "@next/swc-darwin-arm64@npm:14.1.0"
@@ -5147,18 +5140,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:*":
-  version: 18.0.25
-  resolution: "@types/react@npm:18.0.25"
-  dependencies:
-    "@types/prop-types": "*"
-    "@types/scheduler": "*"
-    csstype: ^3.0.2
-  checksum: 231d658c45abdef044a716b4502774f1585d8336d73b2f5bd68f181acbfc874b7a457686ecd29b415b43ed0922c309bab7e2cf96832d188a3f4f1b02f2af760a
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:latest":
+"@types/react@npm:*, @types/react@npm:latest":
   version: 18.2.52
   resolution: "@types/react@npm:18.2.52"
   dependencies:
@@ -20012,7 +19994,6 @@ __metadata:
     "@emotion/server": ^11.10.0
     "@emotion/styled": ^11.10.5
     "@next/bundle-analyzer": ^14.1.0
-    "@next/font": 13.0.5
     "@radix-ui/react-accordion": ^1.0.1
     "@sentry/nextjs": ^7.44.0
     "@storybook/addon-actions": ^6.5.13

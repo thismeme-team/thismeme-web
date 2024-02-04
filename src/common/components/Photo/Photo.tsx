@@ -25,7 +25,6 @@ export const Photo = ({
   width,
   height,
   fallbackSrc = fallback,
-  ...rest
 }: Props) => {
   /**
    * FIX
@@ -56,7 +55,6 @@ export const Photo = ({
         src={isFailLoading ? fallbackSrc : src}
         style={{ objectFit: "cover" }}
         onError={setIsFailLoading}
-        {...rest}
       />
     </div>
   );

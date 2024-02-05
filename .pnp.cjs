@@ -24458,25 +24458,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["signal-exit", "npm:3.0.7"]\
           ],\
           "linkType": "HARD"\
-        }],\
-        ["npm:4.1.0", {\
-          "packageLocation": "./.yarn/cache/signal-exit-npm-4.1.0-61fb957687-64c757b498.zip/node_modules/signal-exit/",\
-          "packageDependencies": [\
-            ["signal-exit", "npm:4.1.0"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["sirv", [\
-        ["npm:2.0.4", {\
-          "packageLocation": "./.yarn/cache/sirv-npm-2.0.4-cace6fe955-6853384a51.zip/node_modules/sirv/",\
-          "packageDependencies": [\
-            ["sirv", "npm:2.0.4"],\
-            ["@polka/url", "npm:1.0.0-next.24"],\
-            ["mrmime", "npm:2.0.0"],\
-            ["totalist", "npm:3.0.1"]\
-          ],\
-          "linkType": "HARD"\
         }]\
       ]],\
       ["sisteransi", [\
@@ -27081,65 +27062,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             "@types/webpack-command",\
             "webpack-cli",\
             "webpack-command"\
-          ],\
-          "linkType": "HARD"\
-        }],\
-        ["virtual:e9bcfe09919042a2e8657ba0586b3a0bea4fe4421aa886052e6b8a84a8a841d4db139cb1de6e789096c5cd11b0fa2dcfa3032f602375c6ff529ca3e6fd5a2c56#npm:5.75.0", {\
-          "packageLocation": "./.yarn/__virtual__/webpack-virtual-8401eb3701/0/cache/webpack-npm-5.75.0-ebca50e2e7-2bcc5f3c19.zip/node_modules/webpack/",\
-          "packageDependencies": [\
-            ["webpack", "virtual:e9bcfe09919042a2e8657ba0586b3a0bea4fe4421aa886052e6b8a84a8a841d4db139cb1de6e789096c5cd11b0fa2dcfa3032f602375c6ff529ca3e6fd5a2c56#npm:5.75.0"],\
-            ["@types/eslint-scope", "npm:3.7.4"],\
-            ["@types/estree", "npm:0.0.51"],\
-            ["@types/webpack-cli", null],\
-            ["@webassemblyjs/ast", "npm:1.11.1"],\
-            ["@webassemblyjs/wasm-edit", "npm:1.11.1"],\
-            ["@webassemblyjs/wasm-parser", "npm:1.11.1"],\
-            ["acorn", "npm:8.8.1"],\
-            ["acorn-import-assertions", "virtual:8401eb3701ccecccd958c0763d4cead61240eac4f20471eebc8c55922a272857103368aa4b1fda037d180de3f3739ffd2d530c0ebc70f1bc12b794d4e202d91f#npm:1.8.0"],\
-            ["browserslist", "npm:4.21.4"],\
-            ["chrome-trace-event", "npm:1.0.3"],\
-            ["enhanced-resolve", "npm:5.12.0"],\
-            ["es-module-lexer", "npm:0.9.3"],\
-            ["eslint-scope", "npm:5.1.1"],\
-            ["events", "npm:3.3.0"],\
-            ["glob-to-regexp", "npm:0.4.1"],\
-            ["graceful-fs", "npm:4.2.10"],\
-            ["json-parse-even-better-errors", "npm:2.3.1"],\
-            ["loader-runner", "npm:4.3.0"],\
-            ["mime-types", "npm:2.1.35"],\
-            ["neo-async", "npm:2.6.2"],\
-            ["schema-utils", "npm:3.1.1"],\
-            ["tapable", "npm:2.2.1"],\
-            ["terser-webpack-plugin", "virtual:e9bcfe09919042a2e8657ba0586b3a0bea4fe4421aa886052e6b8a84a8a841d4db139cb1de6e789096c5cd11b0fa2dcfa3032f602375c6ff529ca3e6fd5a2c56#npm:5.3.6"],\
-            ["watchpack", "npm:2.4.0"],\
-            ["webpack-cli", null],\
-            ["webpack-sources", "npm:3.2.3"]\
-          ],\
-          "packagePeers": [\
-            "@types/webpack-cli",\
-            "webpack-cli"\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["webpack-bundle-analyzer", [\
-        ["npm:4.10.1", {\
-          "packageLocation": "./.yarn/cache/webpack-bundle-analyzer-npm-4.10.1-57768ac46c-77f48f10a4.zip/node_modules/webpack-bundle-analyzer/",\
-          "packageDependencies": [\
-            ["webpack-bundle-analyzer", "npm:4.10.1"],\
-            ["@discoveryjs/json-ext", "npm:0.5.7"],\
-            ["acorn", "npm:8.11.3"],\
-            ["acorn-walk", "npm:8.3.2"],\
-            ["commander", "npm:7.2.0"],\
-            ["debounce", "npm:1.2.1"],\
-            ["escape-string-regexp", "npm:4.0.0"],\
-            ["gzip-size", "npm:6.0.0"],\
-            ["html-escaper", "npm:2.0.2"],\
-            ["is-plain-object", "npm:5.0.0"],\
-            ["opener", "npm:1.5.2"],\
-            ["picocolors", "npm:1.0.0"],\
-            ["sirv", "npm:2.0.4"],\
-            ["ws", "virtual:57768ac46c56f84ed2602a325a7058b7cd8bcbeca704995d8ca8dce47055cb63fd910c635e0fd2cb7ae48b70755c7adf2c18a98e9f57a1f1c8d707383a5fed10#npm:7.5.9"]\
           ],\
           "linkType": "HARD"\
         }]\

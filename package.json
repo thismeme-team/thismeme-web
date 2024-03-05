@@ -33,6 +33,7 @@
     "@zag-js/react": "^0.22.0",
     "@zag-js/tags-input": "^0.22.0",
     "axios": "^1.2.0",
+    "firebase": "^10.8.1",
     "lottie-web": "^5.10.2",
     "next": "latest",
     "next-compose-plugins": "^2.2.1",

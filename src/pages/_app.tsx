@@ -13,7 +13,7 @@ import { Layout } from "@/common/components/Layout";
 import { SignUpModal, SignUpModalProvider } from "@/common/components/Modal";
 import { ToastContainer, ToastProvider } from "@/common/components/Toast";
 import { OverlayProvider, RouteTrackingProvider, useAnalytics } from "@/common/hooks";
-import { GoogleTagManagerScript, GTagScript } from "@/common/libs";
+import { createFirebaseApp, GoogleTagManagerScript, GTagScript } from "@/common/libs";
 import { PATH } from "@/common/utils";
 import { TagCategoryProvider } from "@/features/common";
 
@@ -32,6 +32,10 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
   }, [router]);
 
   useAnalytics();
+
+  useEffect(() => {
+    createFirebaseApp();
+  }, []);
 
   return (
     <>

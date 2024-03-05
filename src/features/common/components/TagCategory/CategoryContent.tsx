@@ -1,6 +1,6 @@
 import { Content, Header, Item, Root, Trigger } from "@radix-ui/react-accordion";
 import { useRouter } from "next/router";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 
 import { useGetCategoryWithTag } from "@/api/tag";
 import { Icon } from "@/common/components/Icon";
@@ -23,9 +23,10 @@ const gtmTrigger: { [key: string]: string } = {
 
 export const CategoryContent = () => {
   const router = useRouter();
+  const [categoryId, setCategoryId] = useState("북마크");
 
   const [, setIsOpenTagCategory] = useTagCategoryContext();
-  const { data } = useGetCategoryWithTag({
+  const { data: categories } = useGetCategoryWithTag({
     select: ({ mainCategories, mainTags }) => {
       const restItem = mainCategories.map((maincategory) => ({
         name: maincategory.name,
@@ -45,24 +46,34 @@ export const CategoryContent = () => {
   };
 
   return (
-    <Root collapsible className="w-full min-w-300" defaultValue="북마크" type="single">
+    <Root
+      collapsible
+      className="w-full min-w-300"
+      type="single"
+      value={categoryId}
+      onValueChange={(value) => setCategoryId(value)}
+    >
       <FavoriteCategory />
-      {data?.map((item) => (
-        <Fragment key={item.id}>
-          <CategoryTitle title={item.name} />
-          <Item value={item.id}>
+      {categories?.map((category) => (
+        <Fragment key={category.id}>
+          <CategoryTitle title={category.name} />
+          <Item value={category.id}>
             <Header className="py-4">
               <Trigger
                 className={`${
-                  gtmTrigger[item.name]
+                  gtmTrigger[category.name]
                 } flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180`}
               >
-                <Photo className="h-24 w-24 p-2" loading="eager" src={item.icon} />
+                <Photo className="h-24 w-24 p-2" loading="eager" src={category.icon} />
                 <span className="flex-grow text-left text-16-semibold-140">
-                  {item.mainTags.length ? (
-                    <SlotCategory name={item.name} tags={item.mainTags} />
+                  {category.mainTags.length ? (
+                    <SlotCategory
+                      name={category.name}
+                      open={categoryId === category.id}
+                      tags={category.mainTags}
+                    />
                   ) : (
-                    item.name
+                    category.name
                   )}
                 </span>
                 <span className="flex h-40 w-40 items-center justify-center rounded-full hover:bg-gray-100">
@@ -77,7 +88,7 @@ export const CategoryContent = () => {
             </Header>
             <Content className="overflow-hidden data-[state=open]:animate-slide-down data-[state=closed]:animate-slide-up">
               <ul className="flex flex-col pr-16 font-suit text-16-semibold-140">
-                {item.categories.map((category) => (
+                {category.categories.map((category) => (
                   <Fragment key={category.categoryId}>
                     <div className="py-8 pl-4 text-gray-600">{category.name}</div>
                     {category.tags.map((tag) => (

@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo } from "react";
 import { css } from "twin.macro";
 
 import type { Tag } from "@/infra/api/tags/types";
@@ -15,35 +15,16 @@ const ANIMATION_DURATION = 1000;
 interface Props {
   tags: Pick<Tag, "tagId" | "name">[];
   name: string;
+  open: boolean;
 }
 
-export const SlotCategory = ({ tags, name }: Props) => {
-  const animationTags = [...tags, tags[0]];
-  const ref = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const parent = ref.current?.closest("[data-state]") as HTMLElement;
-
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "data-state") {
-          const mutatedParent = mutation.target as HTMLElement;
-          const currentState = mutatedParent.dataset.state;
-          setIsOpen(currentState === "open");
-        }
-      });
-    });
-
-    observer.observe(parent, { attributes: true });
-    return () => observer.disconnect();
-  }, []);
-
+export const SlotCategory = ({ tags, name, open }: Props) => {
+  const animationTags = useMemo(() => [...tags, tags[0]], [tags]);
   const slider = useMemo(() => getSliderStyle(tags.length), [tags]);
 
   return (
-    <div className="flex" ref={ref}>
-      <div className={`flex ${isOpen ? "absolute opacity-0" : ""}`}>
+    <div className="flex">
+      <div className={`flex ${open ? "absolute opacity-0" : ""}`}>
         <div className="h-22 w-fit overflow-hidden text-16-semibold-140">
           <span
             css={css`
@@ -62,7 +43,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
         </div>
       </div>
 
-      {isOpen ? name : categoryName[name]}
+      {open ? name : categoryName[name]}
     </div>
   );
 };

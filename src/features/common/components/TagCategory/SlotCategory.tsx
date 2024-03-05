@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/react";
-import { useEffect, useRef, useState } from "react";
+import { useMemo } from "react";
 import { css } from "twin.macro";
 
 import type { Tag } from "@/infra/api/tags/types";
@@ -15,55 +15,27 @@ const ANIMATION_DURATION = 1000;
 interface Props {
   tags: Pick<Tag, "tagId" | "name">[];
   name: string;
+  open: boolean;
 }
 
-export const SlotCategory = ({ tags, name }: Props) => {
-  const animationTags = [...tags, tags[0]];
-  const ref = useRef<HTMLDivElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
-
-  useEffect(() => {
-    const parent = ref.current?.closest("[data-state]") as HTMLElement;
-
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        if (mutation.attributeName === "data-state") {
-          const mutatedParent = mutation.target as HTMLElement;
-          const currentState = mutatedParent.dataset.state;
-          setIsOpen(currentState === "open");
-        }
-      });
-    });
-
-    observer.observe(parent, { attributes: true });
-    return () => observer.disconnect();
-  }, []);
-
-  const offset = 100 / tags.length;
-  const rotate = keyframes(
-    tags
-      .map(
-        (tag, idx) =>
-          `${offset * (idx + 0.5)}% {transform: translateY(-${offset * (idx + 1)}%);} 
-          ${offset * (idx + 1)}% {transform: translateY(-${offset * (idx + 1)}%);}`,
-      )
-      .join(""),
-  );
+export const SlotCategory = ({ tags, name, open }: Props) => {
+  const animationTags = useMemo(() => [...tags, tags[0]], [tags]);
+  const slider = useMemo(() => getSliderStyle(tags.length), [tags]);
 
   return (
-    <div className="flex" ref={ref}>
-      <div className={`flex ${isOpen ? "absolute opacity-0" : ""}`}>
+    <div className="flex">
+      <div className={`flex ${open ? "absolute opacity-0" : ""}`}>
         <div className="h-22 w-fit overflow-hidden text-16-semibold-140">
           <span
             css={css`
               height: ${tags.length * 100}%;
-              animation: ${rotate} ${ANIMATION_DURATION * tags.length}ms linear infinite;
+              animation: ${slider} ${ANIMATION_DURATION * tags.length}ms linear infinite;
               display: flex;
               flex-direction: column;
             `}
           >
-            {animationTags.map((tag) => (
-              <div className="h-22" key={tag.tagId}>
+            {animationTags.map((tag, index) => (
+              <div className="h-22" key={`${tag.tagId}-${index}`}>
                 {tag.name}
               </div>
             ))}
@@ -71,7 +43,19 @@ export const SlotCategory = ({ tags, name }: Props) => {
         </div>
       </div>
 
-      {isOpen ? name : categoryName[name]}
+      {open ? name : categoryName[name]}
     </div>
   );
 };
+
+function getSliderStyle(length: number) {
+  const offset = 100 / length;
+  return keyframes(
+    Array.from(Array(length))
+      .map(
+        (_, idx) => `${offset * (idx + 0.5)}% {transform: translateY(-${offset * (idx + 1)}%);} 
+          ${offset * (idx + 1)}% {transform: translateY(-${offset * (idx + 1)}%);}`,
+      )
+      .join(""),
+  );
+}

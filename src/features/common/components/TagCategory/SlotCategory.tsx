@@ -1,5 +1,5 @@
 import { keyframes } from "@emotion/react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { css } from "twin.macro";
 
 import type { Tag } from "@/infra/api/tags/types";
@@ -39,16 +39,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
     return () => observer.disconnect();
   }, []);
 
-  const offset = 100 / tags.length;
-  const rotate = keyframes(
-    tags
-      .map(
-        (tag, idx) =>
-          `${offset * (idx + 0.5)}% {transform: translateY(-${offset * (idx + 1)}%);} 
-          ${offset * (idx + 1)}% {transform: translateY(-${offset * (idx + 1)}%);}`,
-      )
-      .join(""),
-  );
+  const slider = useMemo(() => getSliderStyle(tags.length), [tags]);
 
   return (
     <div className="flex" ref={ref}>
@@ -57,7 +48,7 @@ export const SlotCategory = ({ tags, name }: Props) => {
           <span
             css={css`
               height: ${tags.length * 100}%;
-              animation: ${rotate} ${ANIMATION_DURATION * tags.length}ms linear infinite;
+              animation: ${slider} ${ANIMATION_DURATION * tags.length}ms linear infinite;
               display: flex;
               flex-direction: column;
             `}
@@ -75,3 +66,15 @@ export const SlotCategory = ({ tags, name }: Props) => {
     </div>
   );
 };
+
+function getSliderStyle(length: number) {
+  const offset = 100 / length;
+  return keyframes(
+    Array.from(Array(length))
+      .map(
+        (_, idx) => `${offset * (idx + 0.5)}% {transform: translateY(-${offset * (idx + 1)}%);} 
+          ${offset * (idx + 1)}% {transform: translateY(-${offset * (idx + 1)}%);}`,
+      )
+      .join(""),
+  );
+}

@@ -62,8 +62,8 @@ export const SlotCategory = ({ tags, name }: Props) => {
               flex-direction: column;
             `}
           >
-            {animationTags.map((tag) => (
-              <div className="h-22" key={tag.tagId}>
+            {animationTags.map((tag, index) => (
+              <div className="h-22" key={`${tag.tagId}-${index}`}>
                 {tag.name}
               </div>
             ))}

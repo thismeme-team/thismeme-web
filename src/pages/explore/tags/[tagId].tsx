@@ -1,5 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
+import { useRouter } from "next/router";
 
 import { useGetTagInfo } from "@/api/tag";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
@@ -16,6 +17,15 @@ interface Props {
 }
 
 const ExploreByTagPage: NextPage<Props> = ({ tagName, tagId }) => {
+  const { isFallback, asPath } = useRouter();
+  const queryString = asPath.split("?")[1];
+  const params = new URLSearchParams(queryString);
+
+  if (isFallback) {
+    const tagName = params.get("q");
+    return <ExplorePageNavigation title={`${tagName ? `#${tagName}` : ""}`} />;
+  }
+
   return (
     <>
       <NextSeo
@@ -48,7 +58,7 @@ const ExploreByTagPage: NextPage<Props> = ({ tagName, tagId }) => {
 export const getStaticPaths: GetStaticPaths = () => {
   return {
     paths: [],
-    fallback: "blocking",
+    fallback: true,
   };
 };
 

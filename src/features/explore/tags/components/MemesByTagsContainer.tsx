@@ -12,7 +12,6 @@ interface Props {
 }
 export const MemesByTagsContainer = ({ tag }: Props) => {
   const { data: memeList, totalCount, isEmpty, fetchNextPage } = useGetMemesByTag(tag);
-  console.log(memeList);
 
   if (isEmpty) {
     return <EmptyMemesView />;

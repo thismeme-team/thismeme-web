@@ -7,7 +7,7 @@ import { NextSeo } from "@/common/components/NextSeo";
 import { PullToRefresh } from "@/common/components/PullToRefresh";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
-import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
+import { canonicalUrl, DEFAULT_DESCRIPTION, PATH, SITE_NAME } from "@/common/utils";
 import { MemesByTagsContainer, TagBookmarkButton } from "@/features/explore/tags/components";
 
 interface Props {
@@ -19,6 +19,7 @@ const ExploreByTagPage: NextPage<Props> = ({ tagName, tagId }) => {
   return (
     <>
       <NextSeo
+        canonical={`${canonicalUrl}${PATH.getExploreByTagPath(tagId, tagName)}`}
         description={DEFAULT_DESCRIPTION}
         title={`'${tagName}' 밈`}
         openGraph={{

@@ -9,7 +9,7 @@ import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { MemeListSkeleton, Skeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
-import { SITE_NAME } from "@/common/utils";
+import { canonicalUrl, SITE_NAME } from "@/common/utils";
 import { useMoveMemeDetail } from "@/features/common";
 import {
   MemeCTAList,
@@ -31,6 +31,7 @@ const MemeDetailPage: NextPage<Props> = ({ id, meme: { name, description, image 
   return (
     <>
       <NextSeo
+        canonical={`${canonicalUrl}/${id}`}
         description={description}
         title={name}
         openGraph={{

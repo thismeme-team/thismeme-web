@@ -14,11 +14,15 @@ const TAG_DELAY = 1500;
 export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show, close } = useToast();
   const { validate, isLoading } = useAuth();
-  const { data: tagInfo } = useGetTagInfo(tagId, { enabled: !isLoading });
+  const { data: tagInfo, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
 
   const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation, onCancel } = useDeleteFavoriteTag(TAG_DELAY);
   const [, setIsOpenTagCategory] = useTagCategoryContext();
+
+  if (!isFetchedAfterMount || !tagInfo) {
+    return null;
+  }
 
   const handleSaveBookmark = () => {
     saveMutation(

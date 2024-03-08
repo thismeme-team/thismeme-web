@@ -1,13 +1,13 @@
-import { QueryClient } from "@tanstack/react-query";
+import { dehydrate, QueryClient } from "@tanstack/react-query";
 import type { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
+import { Suspense } from "react";
 
 import { useGetTagInfo } from "@/api/tag";
 import { ExplorePageNavigation } from "@/common/components/Navigation";
 import { NextSeo } from "@/common/components/NextSeo";
 import { PullToRefresh } from "@/common/components/PullToRefresh";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
-import { SSRSuspense } from "@/common/components/Suspense";
 import { canonicalUrl, DEFAULT_DESCRIPTION, PATH, SITE_NAME } from "@/common/utils";
 import { MemesByTagsContainer, TagBookmarkButton } from "@/features/explore/tags/components";
 
@@ -44,13 +44,13 @@ const ExploreByTagPage: NextPage<Props> = ({ tagName, tagId }) => {
       <ExplorePageNavigation title={`#${tagName}`} />
 
       <PullToRefresh>
-        <SSRSuspense fallback={<MemeListSkeleton />}>
+        <Suspense fallback={<MemeListSkeleton />}>
           <MemesByTagsContainer tag={tagName} />
-        </SSRSuspense>
+        </Suspense>
       </PullToRefresh>
-      <SSRSuspense fallback={<></>}>
+      <Suspense>
         <TagBookmarkButton tagId={tagId} />
-      </SSRSuspense>
+      </Suspense>
     </>
   );
 };
@@ -77,6 +77,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     return {
       props: {
+        hydrateState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
         tagName: tagName,
         tagId: Number(tagId),
       },

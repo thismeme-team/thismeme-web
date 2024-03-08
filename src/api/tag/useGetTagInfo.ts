@@ -9,7 +9,7 @@ export const useGetTagInfo = (
   return useSuspendedQuery({
     queryKey: useGetTagInfo.queryKey(tagId),
     queryFn: () => useGetTagInfo.queryFn(tagId),
-    staleTime: 0,
+    staleTime: Infinity,
     ...options,
   });
 };

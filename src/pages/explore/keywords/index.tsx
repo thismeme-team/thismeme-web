@@ -6,7 +6,7 @@ import { NextSeo } from "@/common/components/NextSeo";
 import { PullToRefresh } from "@/common/components/PullToRefresh";
 import { MemeListSkeleton } from "@/common/components/Skeleton";
 import { SSRSuspense } from "@/common/components/Suspense";
-import { DEFAULT_DESCRIPTION, SITE_NAME } from "@/common/utils";
+import { canonicalUrl, DEFAULT_DESCRIPTION, PATH, SITE_NAME } from "@/common/utils";
 import { MemesByKeyword } from "@/features/explore/keywords/components";
 
 interface Props {
@@ -16,7 +16,11 @@ interface Props {
 const ExploreByKeywordPage: NextPage<Props> = ({ keyword }) => {
   return (
     <>
-      <NextSeo title={`'${keyword}' 밈`} {...metadata} />
+      <NextSeo
+        canonical={`${canonicalUrl}${PATH.getExploreByKeywordPath(keyword)}`}
+        title={`'${keyword}' 밈`}
+        {...metadata}
+      />
 
       <ExplorePageNavigation title={keyword} />
       <PullToRefresh>

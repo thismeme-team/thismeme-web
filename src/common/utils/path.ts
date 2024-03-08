@@ -18,7 +18,7 @@ export const PATH = {
   getExploreByTagPath: (tagId: number, tagName?: string) => {
     if (!tagName) return `/explore/tags/${tagId}`;
 
-    const encodedValue = encodeURIComponent(`#${tagName}`);
+    const encodedValue = encodeURIComponent(tagName);
     return `/explore/tags/${tagId}?q=${encodedValue}`;
   },
 

@@ -14,17 +14,15 @@ const TAG_DELAY = 1500;
 export const TagBookmarkButton = ({ tagId }: Props) => {
   const { show, close } = useToast();
   const { validate, isLoading } = useAuth();
-  const { data, isFetchedAfterMount } = useGetTagInfo(tagId, { enabled: !isLoading });
+  const { data: tagInfo } = useGetTagInfo(tagId, { enabled: !isLoading });
 
   const { mutate: saveMutation } = usePostFavoriteTag();
   const { mutate: deleteMutation, onCancel } = useDeleteFavoriteTag(TAG_DELAY);
   const [, setIsOpenTagCategory] = useTagCategoryContext();
 
-  if (!isFetchedAfterMount || !data) return null;
-  const { isFav } = data;
   const handleSaveBookmark = () => {
     saveMutation(
-      { tagId: tagId, name: data.name },
+      { tagId: tagId, name: tagInfo.name },
       {
         onSuccess: () =>
           show(
@@ -72,14 +70,14 @@ export const TagBookmarkButton = ({ tagId }: Props) => {
     });
   };
 
-  const handleClick = isFav ? handleDeleteBookmark : handleSaveBookmark;
+  const handleClick = tagInfo.isFav ? handleDeleteBookmark : handleSaveBookmark;
 
   return (
     <div className="fixed bottom-32 left-[50%] translate-x-[-50%] text-center">
       <Button
         id="bookmark"
         className={`ga-search-result-tag-bookmark-click ${
-          isFav
+          tagInfo.isFav
             ? "bg-gray-200 text-gray-600 shadow-[0_0_20px_rgba(38,37,40,0.2)] active:bg-gray-300 active:text-gray-700"
             : "bg-gray-800 text-white active:bg-black active:text-white"
         } ${animation} flex h-53 w-143 justify-between rounded-50 px-24 py-16 text-14-semibold-140`}

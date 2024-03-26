@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 const IS_DEV = process.env.NODE_ENV === "development";
 
-const { withPlugins, extend } = require("next-compose-plugins");
+const { extend } = require("next-compose-plugins");
 const withPWA = require("next-pwa")({
   dest: "public",
   disable: IS_DEV,

@@ -5,13 +5,11 @@ import { useEffect, useState } from "react";
 /**
  * NOTE
  * ComponentProps<typeof Image> 으로 타입 선언하면
- * storybook jsdoc parse 오류 발생
- * - interface 내부에 @deprecated 어노테이션이 있으면 문제 생기는 듯 보임
+ * storybook jsdoc parse 오류 발생. interface 내부에 @deprecated 어노테이션이 있으면 문제 생기는 듯 보임
+ * storybook v7으로 업그레이드 시 문제 발생하는지 확인해야 함
  */
-interface Props extends Omit<ComponentProps<"img">, "placeholder"> {
+interface Props extends ComponentProps<typeof Image> {
   fallbackSrc?: string;
-  priority?: boolean;
-  unoptimized?: boolean;
 }
 const base64Blur =
   "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAQAAAAnOwc2AAAAEUlEQVR42mO8/Z8BAzAOZUEAQ+ESj6kXXm0AAAAASUVORK5CYII=";
@@ -19,12 +17,13 @@ const base64Blur =
 const fallback = "/img/fallbackImage.png";
 
 export const Photo = ({
-  src = "",
-  alt = "thumbnail",
+  src,
   className = "",
   width,
   height,
   fallbackSrc = fallback,
+  alt,
+  ...props
 }: Props) => {
   /**
    * FIX
@@ -55,6 +54,7 @@ export const Photo = ({
         src={isFailLoading ? fallbackSrc : src}
         style={{ objectFit: "cover" }}
         onError={setIsFailLoading}
+        {...props}
       />
     </div>
   );

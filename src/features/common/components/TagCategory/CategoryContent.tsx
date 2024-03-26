@@ -64,7 +64,12 @@ export const CategoryContent = () => {
                   gtmTrigger[category.name]
                 } flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180`}
               >
-                <Photo className="h-24 w-24 p-2" loading="eager" src={category.icon} />
+                <Photo
+                  alt={category.name}
+                  className="h-24 w-24 p-2"
+                  loading="eager"
+                  src={category.icon}
+                />
                 <span className="flex-grow text-left text-16-semibold-140">
                   {category.mainTags.length ? (
                     <SlotCategory

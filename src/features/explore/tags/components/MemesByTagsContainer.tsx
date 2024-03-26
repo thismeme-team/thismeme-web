@@ -18,7 +18,11 @@ export const MemesByTagsContainer = ({ tag }: Props) => {
   }
   return (
     <>
-      <Thumbnail image={memeList?.[0].image.images[0].imageUrl} totalCount={totalCount as number} />
+      <Thumbnail
+        image={memeList?.[0].image.images[0].imageUrl}
+        tag={tag}
+        totalCount={totalCount as number}
+      />
       <InfiniteMemeList
         memeList={memeList}
         onRequestAppend={() => fetchNextPage({ cancelRefetch: false })}
@@ -29,9 +33,10 @@ export const MemesByTagsContainer = ({ tag }: Props) => {
 
 interface ThumbnailProps {
   image: string;
+  tag: string;
   totalCount: number;
 }
-const Thumbnail = React.memo(function Thumbnail({ image, totalCount }: ThumbnailProps) {
+const Thumbnail = React.memo(function Thumbnail({ image, tag, totalCount }: ThumbnailProps) {
   const router = useRouter();
   const clipboard = useClipboard();
   const toast = useToast();
@@ -40,7 +45,7 @@ const Thumbnail = React.memo(function Thumbnail({ image, totalCount }: Thumbnail
 
   return (
     <div className="flex gap-16 px-22 pt-16 pb-24">
-      <Photo className="h-80 w-80 rounded-full" src={image} />
+      <Photo alt={`${tag} 밈 썸네일`} className="h-80 w-80 rounded-full" src={image} />
       <div className="flex flex-1 flex-col items-center justify-center gap-2">
         <span className="text-14-semibold-140 text-gray-900">{totalCount}개 밈</span>
         <button

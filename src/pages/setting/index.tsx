@@ -23,7 +23,7 @@ const SettingPage = () => {
           </div>
           <div className="flex h-64 justify-between py-16">
             <span className="text-22-bold-140">문의하기</span>
-            <Photo className="h-32 w-32" src="/img/fallbackImage.png" />
+            <Photo alt="폴백 이미지" className="h-32 w-32" src="/img/fallbackImage.png" />
           </div>
         </section>
         <section className="mb-28 flex flex-wrap justify-center">

@@ -17,7 +17,11 @@ export const LoginSideBarContent = (props: LoginSideBarContentProps) => {
     <>
       <div className="w-full rounded-24 bg-gray-100 px-16 pt-16 pb-24">
         <Link className="flex items-center gap-12" href="/mypage">
-          <Photo className="h-50 w-50 rounded-20" src={user?.imageUrl} />
+          <Photo
+            alt={`${user?.name || ""}의 프로필 이미지`}
+            className="h-50 w-50 rounded-20"
+            src={user?.imageUrl || ""}
+          />
           <span className="grow text-left text-18-bold-140 text-gray-900">{user?.name}</span>
           <Icon name="setting" />
         </Link>

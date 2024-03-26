@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 
 import { Photo } from "../Photo";
 
-interface Props extends ComponentProps<typeof Photo> {
+interface Props extends Omit<ComponentProps<typeof Photo>, "alt" | "src" | "sizes"> {
   images?: { name: string; src: string }[];
 }
 const randomImages = [

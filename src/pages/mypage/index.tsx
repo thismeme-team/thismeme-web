@@ -19,7 +19,11 @@ const MyPage = () => {
     <>
       <MyPageNavigation />
       <div className="flex flex-col items-center justify-center py-40 font-suit">
-        <Photo className="h-100 w-100 rounded-full" src={user.imageUrl} />
+        <Photo
+          alt={`${user.name || ""}의 프로필 이미지`}
+          className="h-100 w-100 rounded-full"
+          src={user.imageUrl}
+        />
         <span className="mt-4 text-22-bold-140">
           {isLoading ? <Skeleton animation="wave" width={70} /> : user.name}
         </span>

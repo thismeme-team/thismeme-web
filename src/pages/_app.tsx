@@ -1,5 +1,7 @@
 import "@/styles/globals.css";
 
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import { useRouter } from "next/router";
@@ -64,6 +66,8 @@ const App = ({ Component, pageProps }: AppProps<DefaultPageProps>) => {
                       <ToastContainer />
                       <SignUpModal />
                       <Component {...pageProps} />
+                      <Analytics />
+                      <SpeedInsights />
                     </QueryErrorBoundary>
                   </OverlayProvider>
                 </Layout>

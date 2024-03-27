@@ -16,6 +16,7 @@ export const LogoutSideBarContent = (props: LogoutSideBarContentProps) => {
       <button className="w-full rounded-24 bg-gray-100 px-16 pt-16 pb-24" onClick={validate()}>
         <div className="flex items-center gap-12">
           <Photo
+            unoptimized
             alt="기본 프로필 이미지"
             className="h-50 w-50 rounded-20"
             sizes="50px"

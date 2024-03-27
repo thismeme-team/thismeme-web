@@ -1,3 +1,4 @@
+import { cloudinaryLoader } from "config/cloudinary-loader";
 import Link from "next/link";
 import { css } from "twin.macro";
 
@@ -22,6 +23,7 @@ const MyPage = () => {
         <Photo
           alt={`${user.name || ""}의 프로필 이미지`}
           className="h-100 w-100 rounded-full"
+          loader={cloudinaryLoader}
           sizes="100px"
           src={user.imageUrl}
         />

@@ -1,3 +1,4 @@
+import { cloudinaryLoader } from "config/cloudinary-loader";
 import { useRouter } from "next/router";
 import * as React from "react";
 
@@ -49,6 +50,7 @@ const Thumbnail = React.memo(function Thumbnail({ image, tag, totalCount }: Thum
         priority
         alt={`${tag} 밈 썸네일`}
         className="h-80 w-80 rounded-full"
+        loader={cloudinaryLoader}
         sizes="80px"
         src={image}
       />

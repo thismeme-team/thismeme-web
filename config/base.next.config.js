@@ -62,12 +62,6 @@ module.exports = () => ({
     return config;
   },
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
     // Link: https://fe-developers.kakaoent.com/2022/220714-next-image/
     deviceSizes: [440],
     imageSizes: [100, 200],

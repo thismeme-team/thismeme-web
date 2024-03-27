@@ -2,7 +2,7 @@
 
 import type { ImageLoaderProps } from "next/image";
 
-const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME;
+const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "";
 
 export function cloudinaryLoader({ src, width, quality }: ImageLoaderProps) {
   const rawTransformations = ["f_auto", "c_limit", `w_${width}`, `q_${quality || "auto"}`];
@@ -18,7 +18,9 @@ export function cloudinaryLoader({ src, width, quality }: ImageLoaderProps) {
     isAbsolute = true;
   }
 
-  return isAbsolute
-    ? `https://res.cloudinary.com/${cloudName}/image/fetch/${rawTransformations.join(",")}/${href}`
-    : src;
+  const cldUrl = `https://res.cloudinary.com/${cloudName}/image/fetch/${rawTransformations.join(
+    ",",
+  )}/${href}`;
+
+  return isAbsolute ? cldUrl : src;
 }

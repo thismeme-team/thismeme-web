@@ -1,3 +1,4 @@
+import { cloudinaryLoader } from "config/cloudinary-loader";
 import type { HTMLAttributes } from "react";
 
 import { Photo } from "@/common/components/Photo";
@@ -18,6 +19,7 @@ export const SearchPopularItem = ({ name, imageSrc, ...rest }: Props) => {
         alt={name}
         // NOTE: Photo의 기본 className과 충돌나서 css props로 작성
         css={{ position: "absolute", inset: 0, filter: "brightness(.5)" }}
+        loader={cloudinaryLoader}
         loading="eager"
         sizes="100px"
         src={imageSrc}

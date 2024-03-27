@@ -1,3 +1,4 @@
+import { cloudinaryLoader } from "config/cloudinary-loader";
 import { memo } from "react";
 
 import { Icon } from "@/common/components/Icon";
@@ -8,7 +9,7 @@ import { MemeActionSheet, useMoveMemeDetail } from "@/features/common";
 import type { Meme } from "@/types";
 
 interface Props {
-  meme: Meme;
+  meme: Meme & { priority?: boolean };
   onClick?: (id: number) => void;
 }
 
@@ -32,7 +33,8 @@ export const MemeItem = memo(({ meme, onClick }: Props) => {
           className="rounded-16"
           draggable={false}
           height={image.images[0]?.imageHeight}
-          sizes="100px"
+          loader={cloudinaryLoader}
+          sizes="200px"
           src={image.images[0]?.imageUrl}
           unoptimized={isEncodingError(image.images[0]?.imageUrl)}
           width={image.images[0]?.imageWidth}

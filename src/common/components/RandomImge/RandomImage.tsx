@@ -2,7 +2,7 @@ import type { ComponentProps } from "react";
 
 import { Photo } from "../Photo";
 
-interface Props extends ComponentProps<typeof Photo> {
+interface Props extends Omit<ComponentProps<typeof Photo>, "alt" | "src" | "sizes"> {
   images?: { name: string; src: string }[];
 }
 const randomImages = [
@@ -33,5 +33,13 @@ const randomImages = [
 ];
 export const RandomImage = ({ images = randomImages, className = "" }: Props) => {
   const randomImage = images[Math.floor(Math.random() * images.length)];
-  return <Photo alt={randomImage.name} className={className} sizes="32px" src={randomImage.src} />;
+  return (
+    <Photo
+      unoptimized
+      alt={randomImage.name}
+      className={className}
+      sizes="32px"
+      src={randomImage.src}
+    />
+  );
 };

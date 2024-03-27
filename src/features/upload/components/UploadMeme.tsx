@@ -32,7 +32,7 @@ export const UploadMeme = ({ src, isFocus }: Props) => {
           setHeight(h);
         }}
       >
-        <Photo className="mx-16 rounded-16" src={src} />
+        <Photo unoptimized alt="업로드 이미지" className="mx-16 rounded-16" src={src} />
         <UploadMemeData
           className="max-h-[100rem] overflow-hidden transition-[max-height] duration-500 ease-in-out group-[:not(:focus-within)]:max-h-0"
           css={{ maxHeight: height / 10 + "rem" }}

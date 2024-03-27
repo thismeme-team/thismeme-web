@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const IS_PROD = process.env.NODE_ENV === "production";
+const isProd = process.env.NODE_ENV === "production";
+const cloudName = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME || "";
 
 // The folders containing files importing twin.macro
 const path = require("path");
@@ -62,16 +63,10 @@ module.exports = () => ({
     return config;
   },
   images: {
-    unoptimized: true,
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "**",
-      },
-    ],
+    unoptimized: !isProd || !cloudName,
     // Link: https://fe-developers.kakaoent.com/2022/220714-next-image/
-    imageSizes: [64, 256],
-    deviceSizes: [512],
+    deviceSizes: [440],
+    imageSizes: [100, 200],
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   sentry: {
@@ -81,6 +76,6 @@ module.exports = () => ({
     // https://webpack.js.org/configuration/devtool/ and
     // https://docs.sentry.io/platforms/javascript/guides/nextjs/manual-setup/#use-hidden-source-map
     // for more information.
-    hideSourceMaps: IS_PROD,
+    hideSourceMaps: isProd,
   },
 });

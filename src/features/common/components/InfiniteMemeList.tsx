@@ -4,7 +4,7 @@ import { MemeItem } from "@/features/common";
 import type { Meme } from "@/types";
 
 interface InfiniteMemeListProps {
-  memeList: Meme[];
+  memeList: (Meme & { priority?: boolean })[];
   onRequestAppend: () => void;
 }
 

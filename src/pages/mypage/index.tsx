@@ -22,6 +22,7 @@ const MyPage = () => {
         <Photo
           alt={`${user.name || ""}의 프로필 이미지`}
           className="h-100 w-100 rounded-full"
+          sizes="100px"
           src={user.imageUrl}
         />
         <span className="mt-4 text-22-bold-140">

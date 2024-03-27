@@ -45,7 +45,13 @@ const Thumbnail = React.memo(function Thumbnail({ image, tag, totalCount }: Thum
 
   return (
     <div className="flex gap-16 px-22 pt-16 pb-24">
-      <Photo alt={`${tag} 밈 썸네일`} className="h-80 w-80 rounded-full" src={image} />
+      <Photo
+        priority
+        alt={`${tag} 밈 썸네일`}
+        className="h-80 w-80 rounded-full"
+        sizes="80px"
+        src={image}
+      />
       <div className="flex flex-1 flex-col items-center justify-center gap-2">
         <span className="text-14-semibold-140 text-gray-900">{totalCount}개 밈</span>
         <button

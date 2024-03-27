@@ -65,6 +65,7 @@ export const CategoryContent = () => {
                 } flex w-full items-center justify-between gap-8 rounded-full px-4 py-12 text-16-semibold-140 [&>span>#chevronDown]:data-[state=open]:rotate-180`}
               >
                 <Photo
+                  unoptimized
                   alt={category.name}
                   className="h-24 w-24 p-2"
                   loading="eager"

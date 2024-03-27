@@ -15,7 +15,12 @@ export const LogoutSideBarContent = (props: LogoutSideBarContentProps) => {
     <>
       <button className="w-full rounded-24 bg-gray-100 px-16 pt-16 pb-24" onClick={validate()}>
         <div className="flex items-center gap-12">
-          <Photo alt="기본 프로필 이미지" className="h-50 w-50 rounded-20" src={defaultAvatarUrl} />
+          <Photo
+            alt="기본 프로필 이미지"
+            className="h-50 w-50 rounded-20"
+            sizes="50px"
+            src={defaultAvatarUrl}
+          />
           <span className="grow text-left text-18-bold-140 text-gray-900">{defaultName}</span>
           <Icon name="setting" />
         </div>

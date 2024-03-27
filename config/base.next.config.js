@@ -62,7 +62,6 @@ module.exports = () => ({
     return config;
   },
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
@@ -70,8 +69,8 @@ module.exports = () => ({
       },
     ],
     // Link: https://fe-developers.kakaoent.com/2022/220714-next-image/
-    imageSizes: [64, 256],
-    deviceSizes: [512],
+    deviceSizes: [440],
+    imageSizes: [100, 200],
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   sentry: {

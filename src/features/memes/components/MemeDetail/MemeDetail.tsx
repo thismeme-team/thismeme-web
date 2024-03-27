@@ -34,10 +34,10 @@ export const MemeDetail = ({ id }: Props) => {
         >
           <Photo
             priority
+            unoptimized
             alt={name}
             className="max-h-[70vh] min-h-[25vh] w-full rounded-15"
             height={imageHeight}
-            sizes="200px"
             src={imageUrl}
             width={imageWidth}
           />
